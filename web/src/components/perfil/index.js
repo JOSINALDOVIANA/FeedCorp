@@ -25,7 +25,7 @@ useEffect(()=>{
        }
        }
 },[])
-  return (<div></div>);
+  return (<div>{values.user.nome}</div>);
 }
 
 export default Perfil;

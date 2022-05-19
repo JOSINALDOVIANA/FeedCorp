@@ -1,14 +1,6 @@
 import knex from "knex";
+import conexao from "../../database/connection.js";
 
-const conexao= knex({
-    client: 'mysql',
-    connection: {
-     
-      user : 'root',
-      password : '',
-      database : 'avdenterprise'
-    }
-  });
 export default {
 
     async Login(req,res){
@@ -16,14 +8,17 @@ export default {
             
             try {
               
-              const user = await conexao("user").select("*").where({email,password}).first();
+              const user = await conexao("adm").select("*").where({email,password}).first();
               
               if (user) {
-               const permisao = await conexao("permissao").join("cat_per","permissao.idpermissao","=","cat_per.per_id").where("cat_per.cat_id",user.categ_id)
-                .select("permissao.descri");
+               const permisao = await conexao("permissao")
+               .join("users_perm","permissao.idpermissao","=","users_perm.per_id").where("users_perm.cat",user.cat)
+                .select("permissao.*");
+                
                 let p=[];
-                permisao.forEach(i=>(p.push(i.descri)));
+                permisao.forEach(i=>(p.push(i)));
                 res.json({...user,...{permissoes:p}});
+                
                
               }else{
                 res.json({login:false});

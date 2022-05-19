@@ -62,7 +62,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     
     try {
-      let d = await api.post("/login", { "email": data.get("email"), "password": data.get("password") });
+      let d = await api.post("adm/login", { "email": data.get("email"), "password": data.get("password") });
       if (d.data.login == false) {
         alert("erro ao logar, tente novamente!!")
       } else {
