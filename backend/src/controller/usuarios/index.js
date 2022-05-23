@@ -8,7 +8,7 @@ export default {
             
             try {
               
-              const user = await conexao("adm").select("*").where({email,password}).first();
+              const user = await conexao("usuarios").select("*").where({email,password}).first();
               
               if (user) {
                const permisao = await conexao("permissao")

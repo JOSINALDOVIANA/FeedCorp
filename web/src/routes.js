@@ -1,6 +1,8 @@
 import React,{ createContext, useContext,useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { createTheme, ThemeProvider, useTheme } from "@mui/material";
+// import { createTheme, ThemeProvider, useTheme } from '@material-ui/core';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles'
+
 import Telainicial from "./App";
 import Login from './components/login';
 import Perfil from './components/perfil';
@@ -43,7 +45,7 @@ function Rotas() {
                     mode,
                 },
                 avd:{
-                    color:"#e02140"
+                    appbar:"#15133C"
                 }
 
             }),

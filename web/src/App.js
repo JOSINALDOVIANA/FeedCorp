@@ -1,23 +1,34 @@
-
-import './App.css';
-import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import ResponsiveAppBar from './components/appbar';
-function App() {
-  
- 
- 
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
+
+export default function ButtonAppBar() {
+  const navegar = useNavigate();
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <ResponsiveAppBar/>
-      <Container sx={{marginTop:"3px"}} fixed>
-        <Box sx={{ flexGrow: 1, height: '100vh' }} />
-      </Container>
-    </React.Fragment>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            News
+          </Typography>
+          <Button onClick={()=>navegar("/login")} color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
-
-export default App;

@@ -1,15 +1,15 @@
 import  express  from  'express';
 
-import adm from './controller/adm/index.js';
-import gestor from './controller/gestor/index.js';
+import user from './controller/usuarios/index.js';
+;
 
 
   
 const routes=express.Router();
 
 
-routes.post('/adm/login',adm.Login);
-routes.post('/gestor/login',gestor.Login);
+routes.post('/login',user.Login);
+
  
 //TOP OF THE QUALITY
 //JOSINALDO DO DO!!
