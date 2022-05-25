@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
 import api from "../../api.js";
 import { useNavigate } from 'react-router-dom';
 import { UseDados } from '../../routes.js';
+import { border } from '@mui/system';
 
 
 function Copyright(props) {
@@ -82,7 +83,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container  component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -100,6 +101,7 @@ export default function SignIn() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              sx={{color:"#e02140"}}
               margin="normal"
               required
               fullWidth
@@ -110,6 +112,7 @@ export default function SignIn() {
               autoFocus
             />
             <TextField
+              
               margin="normal"
               required
               fullWidth
