@@ -8,11 +8,11 @@ export default {
             
             try {
               
-              const user1 = await conexao("amd").select("*").where({email,password}).first();
+              const user1 = await conexao("adm").select("*").where({email,password}).first();
               
               if (user1) {
                const permisao = await conexao("permissoes")
-               .join("amd_com_permissoes","permissoes.idper","=","amd_com_permissoes.permissoes_idper").where("amd_com_permissoes.amd_idadm",user1.idadm)
+               .join("adm_com_permissoes","permissoes.idper","=","adm_com_permissoes.permissoes_idper").where("adm_com_permissoes.adm_idadm",user1.idadm)
                 .select("permissoes.*");
                 
                 let p=[];

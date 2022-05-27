@@ -81,20 +81,20 @@ const navegar=useNavigate();
     setOpen(false);
   };
 
-  React.useEffect(()=>{
-    if(values.user){
-             return
-         }
-         else{
-         if(localStorage.getItem("values")){
-          const valores= localStorage.getItem("values");
-          const valores2=JSON.parse(valores);
-          setValues(valores2);       
-         }else{
-             navegar("/");
-         }
-         }
-  },[])
+  // React.useEffect(()=>{
+  //   if(values.user){
+  //            return
+  //        }
+  //        else{
+  //        if(localStorage.getItem("values")){
+  //         const valores= localStorage.getItem("values");
+  //         const valores2=JSON.parse(valores);
+  //         setValues(valores2);       
+  //        }else{
+  //            navegar("/");
+  //        }
+  //        }
+  // },[])
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -170,7 +170,7 @@ const navegar=useNavigate();
         <DrawerHeader />
         
         <Typography paragraph>
-          usuário logado : {values.user.nome}
+          {/* usuário logado : {values.user.nome} */}
 
         </Typography>
       </Main>
