@@ -4,8 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles'
 
 import Telainicial from "./App";
-import Login from './components/login';
-import Perfil from './components/perfil';
+import Login from './pages/login';
+import Test from './components/test/index.js'
+import Perfil from './pages/perfil';
 export const usuarioContext = createContext();
 export const ColorModeContext = createContext({ toggleColorMode: () => { } });
 
@@ -60,6 +61,7 @@ function Rotas() {
                             <Routes>
                                 <Route path="/" element={<Telainicial />} />
                                 <Route path="/login" element={<Login/>} />
+                                <Route path="/test" element={<Test/>} />                               
                                 <Route path="/perfil" element={<Perfil/>} />
                             </Routes>
                         </BrowserRouter>

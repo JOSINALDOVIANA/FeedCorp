@@ -6,7 +6,7 @@ export const development = {
     host: `127.0.0.1`,
     user: 'root',
     password:'',    
-     database: 'avdenterprise',
+     database: 'opclient',
   },
   migrations: {
     directory: './src/database/migrations'

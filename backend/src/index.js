@@ -16,6 +16,10 @@ const log = fs.createWriteStream(
 )
 
 const App = express();
+App.use(function (req, res, next) {
+   // console.log('Time:', Date.now());
+    next();
+  });
 App.use(express.json());
 App.use(cors());
 morganBody(App,{noColors:true,stream:log})
@@ -48,5 +52,5 @@ App.use(routes);
 var port = process.env.PORT || 3002;
 
 App.listen(port, () => {
-    console.log(`servidor rodando na porta: ${port}`);
+    //console.log(`servidor rodando na porta: ${port}`);
 });

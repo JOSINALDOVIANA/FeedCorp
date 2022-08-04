@@ -1,0 +1,17 @@
+.subitems{
+    width:100%; 
+    padding :10px ;
+  }
+        .items:hover{
+          background:#36D98D ;
+          color: #fff;
+          cursor: pointer;
+          
+        }
+      
+        .subitems:hover{  
+          
+          cursor:pointer ;
+          color:#fff
+  
+        }

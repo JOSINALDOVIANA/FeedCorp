@@ -1,34 +1,27 @@
 import  express  from  'express';
-
-import user from './controller/usuarios/index.js';
-import avpr from "./controller/funçooes/avpr/index.js"
-import adm from "./controller/adm/index.js";
-import gestor from './controller/gestor/index.js';
-import unidades from './controller/funçooes/unidades/index.js';
-import colaborador from './controller/colaborador/index.js';
+import avpr from "./controller/evaluation_by_results/index.js"
+import user from "./controller/usuarios/index.js";
+import unidades from './controller/unidades/index.js';
+import permissoes from './controller/permissoes/index.js';
+import multer from 'multer';
+import multerconfig from "./config/multer.js";
+import images from "./controller/images/imagecontrol.js";
 const routes=express.Router();
 
-// rota para login de todos
-routes.post('/login',user.Login);
+// usuarios
+routes.post('/user/login',user.login);
+routes.post('/user/create',user.create);
+routes.put('/user/update',user.update);
+routes.get("/user/listAll",user.listAll);
 
 
+//----------------------------unidades-----------------------
+routes.post("/unit/create",unidades.create)
+routes.get("/unit/consult",unidades.consult)// consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores na unidade
+// routes.get("/unit/consult2",unidades.consult2)
 
-
-//rotas para o adm
-routes.post("/adm",adm.Cad);
-routes.delete("/adm",adm.Del);
-
-//rotas para o gestor
-routes.post("/gestor",gestor.Cad);
-
-//rotas para o colaborador
-routes.post("/col",colaborador.create);
-routes.get("/col_gestor",colaborador.get_col_gestor);
-routes.get("/col_adm",colaborador.get_col_adm);
-routes.get("/col_und",colaborador.get_col_und);
-
-//----------------------------udidades-----------------------
-routes.post("/unidades",unidades.criate)//criar
+//----------------------------permissoes--------------------
+routes.post("/permission/create",permissoes.create)//criar
 
 
 // ----------------------rotas de avaliação por resultados-----------------
@@ -54,10 +47,14 @@ routes.get("/avpr/metas",avpr.get_metas_avpr);//podera ser usado por adm/gestor/
 routes.get("/avpr/resultados",avpr.get_result_col);
 
 
-//rtorna quantos col ja responderam
+//retorna quantos colaboradores ja responderam
 routes.get("/avpr/quantidade",avpr.get_QT_responderam_avpr);
 
 
+//fotos ou images
+routes.post('/images/salvar', multer(multerconfig).single('file'),images.salvar);
+routes.delete('/images/deletar',images.deletar);
+routes.get("/images/listar",images.listar)
 
 
 
