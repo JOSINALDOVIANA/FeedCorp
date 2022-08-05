@@ -15,7 +15,7 @@ const routes=express.Router();
 */
 
 
-
+/*################################################ USUARIO ########################################*/
 
 routes.post('/user/login',user.login);//obs:get nao recebe dados via body do navegador
 routes.post('/user/insert',user.insert);//cria usuario na tabela "users"
@@ -29,32 +29,44 @@ routes.put('/user/update/user_unit',user.updateUser_unit); // atualiza em "user_
 routes.post('/user/insert/user_unit',user.insertUser_unit); // inserir dados  em "user_unit"
 routes.put('/user/update/user_ebr',user.updateUser_ebr); // atualiza em "user_ebr"
 routes.post('/user/insert/user_ebr',user.insertUser_ebr); // inserir dados em "user_ebr"
+/*################################################################################################*/
 
 
-
-//----------------------------unidades-----------------------
+/*################################################ UNIDADES ######################################*/
 
 //cria unidades na tabela "units"
 routes.post("/unit/create",unidades.create);
 
-// consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores tem na unidade
-// a consulta a qual unidade o usuario pertence ja é carregada no login no objeto:unit
-//se os parametros exigidos nao existirem retona todas as unidades cadastradas sem parametros de filtro
-routes.get("/unit/consult",unidades.consult);
 
-//deleta uma unidade
+//deleta uma unidade na tabela "units"
 routes.delete("/unit/delete",unidades.delete);
 
-//atualiza uma unidade
+//atualiza uma unidade na tabela "units"
 routes.put("/unit/update",unidades.update);
-// atualiza a tabela "unit_ebr"
-routes.put("/unit/update/unit_ebr",unidades.updateEbr);
-routes.post("/unit/insert/unit_ebr",unidades.updateEbr);
+
+                               /*------rotas especiais------*/
+
+// consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores tem na unidade
+// a unidade do usuario  ja é carregada no login no objeto:unit
+//se os parametros exigidos nao existirem retona todas as unidades cadastradas sem parametros de filtro
+routes.get("/unit/consult",unidades.consult);
+routes.put("/unit/update/unit_ebr",unidades.updateUnit_ebr);// atualiza a tabela "unit_ebr"
+routes.post("/unit/insert/unit_ebr",unidades.insertUnit_ebr);// inserir na tabela "unit_ebr"
+
+/*###################################################################################################*/
 
 
-//----------------------------permissoes--------------------
+
+
+
+
+/*################################################ PERMISSIONS ######################################*/
+
 routes.post("/permission/create",permissoes.create)//criar
+routes.put("/permission/update",permissoes.update)//criar
+routes.delete("/permission/delete",permissoes.delete)//criar
 
+/*###################################################################################################*/
 
 // ----------------------rotas de avaliação por resultados-----------------
 
