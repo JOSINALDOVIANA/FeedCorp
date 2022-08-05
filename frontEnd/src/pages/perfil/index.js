@@ -1,38 +1,102 @@
-import { Accordion, AccordionDetails, AccordionSummary, Avatar, Badge, Container, Divider, Grid, Icon, Modal, Paper, Typography, useTheme } from '@mui/material';
-import { Box, display } from '@mui/system';
-import React, { useEffect, useState } from 'react';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import AddchartIcon from '@mui/icons-material/Addchart';
-import MessageIcon from '@mui/icons-material/Message';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import FolderIcon from '@mui/icons-material/Folder';
-import "./style.css";
-import { UseDados } from '../../routes';
-import Grafico from './grafico.js';
 import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { UseDados } from '../../routes';
+import api from '../../api';
+import "./style.css";
+
+import Grafico from './grafico.js';
 import ModalFoto from "../../components/Fotos/CarregarFotos.js";
 import fileSize from 'filesize';
-import api from '../../api';
 import Unidades from '../../components/unidades/index.js';
-const AvatarModalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  outlineStyle: 'none',
-  width: 600,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 20,
-  p: 4,
-};
-const cores = ["#7757F9", "#31859D", "#2A76AB", "#FD7549"];
 
-function Users() {
+import { styled, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MuiDrawer from '@mui/material/Drawer';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
+const drawerWidth = 240;
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  }),
+);
+
+export default function Users() {
   const navegar = useNavigate();
   const dadosrota=useLocation();  
   const [page, setPage] = useState("inicio");
@@ -44,7 +108,6 @@ function Users() {
   useEffect(() => {
 
     if (isEmpty(values)) {
-
       // if (localStorage.getItem("values")) {
       //   const valores = localStorage.getItem("values");
       //   const valores2 = JSON.parse(valores);
@@ -54,17 +117,12 @@ function Users() {
       //   navegar("/");
       // }
 
-      
       if (isEmpty(dadosrota.state)||!dadosrota.state) {
         navegar("/login");
       }
       setValues(dadosrota.state);
     }
-
-    
   }, []);
-
-
 
   // -----------------------MODAL UPLOAD FOTO-----------------------------
   const [ImagensCarregadas, setImagens] = React.useState([]);
@@ -183,487 +241,125 @@ function Users() {
   };
   // ----------------------------------FIM MODAL FOTO------------------------------
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Container maxWidth="xl" sx={{
-      position: "relative",
-      background: "#FFFFFF",
-      display: "flex",
-      justifyContent: "space-around",
-
-    }}>
-      {/* box lateral esquerdo */}
-      <Paper elevation={0} component="div" sx={{
-
-        width: "256px",
-        height: "1024px",
-        left: "0px",
-        top: "0px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        // background: "yellow"
-
-      }}>
-        {/* div=> icon e OpClient */}
-        <Box component="div" sx={{
-
-          width: "151px",
-          height: "32.56px",
-          marginTop: "10px",
-          // background: "#e02141",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-
-        }}>
-
-          <Avatar sx={{
-
-            width: "30px",
-            height: "32.56px",
-
-
-          }}
-            alt="OpClient"
-            src="https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"
-          ></Avatar>
-
-          <Typography sx={{
-
-            width: "108px",
-            height: "28.28px",
-
-
-            fontFamily: 'Roboto',
-            fontStyle: "normal",
-            fontWeight: 700,
-            fontSize: "26px",
-            lineHeight: "33px",
-
-            color: " #333333"
-          }}>OpClient</Typography>
-        </Box>
-        {/* div=> items */}
-        <Box component="div" sx={{
-          width: "251px",
-          height: "952px",
-          paddingTop: "10px"
-        }}>
-
-          {/* Inicio */}
-          <Box onClick={(e) => setPage(`inicio`) } component="div" className="items" sx={{
-
-            width: "100%",
-            height: "37.17px",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "center"
-          }}>
-            <Icon>
-              <ApartmentIcon></ApartmentIcon>
-            </Icon>
-            <Typography>
-              Início
-            </Typography>
-
-          </Box>
-          {/* Unidades */}
-
-          <Box onClick={() => { setPage("unidades") }} component="div" className="items" sx={{
-
-            width: "100%",
-            height: "37.17px",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "center"
-          }}>
-            <Icon>
-              <ApartmentIcon></ApartmentIcon>
-            </Icon>
-            <Typography>
-              Unidades
-            </Typography>
-
-          </Box>
-
-          {/* Avaliações */}
-
-          <Box onClick={() => { setPage("avaliacoes") }} component="div" className="items" sx={{
-
-            width: "100%",
-            height: "auto",
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center"
-          }}>
-
-            <Accordion sx={{ background: "transparent" }} elevation={0}>
-              <AccordionSummary sx={{ flexDirection: "row-reverse", justifyContent: "space-between", marginLeft: "25px" }}
-                expandIcon={<Icon>
-                  <ContentPasteSearchIcon></ContentPasteSearchIcon>
-                </Icon>}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography sx={{ marginLeft: "45px" }}>Avaliações</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Box sx={{ display: "flex", justifyContent: "space-around" }} component="div" className='subitems'>
-                  <Icon sx={{ marginRight: "5px" }}>
-                    <WorkOutlineIcon sx={{ color: "#000" }}></WorkOutlineIcon>
-                  </Icon>
-                  <Typography>Aval. por Resultados</Typography>
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-
-
-          </Box>
-
-          {/* Ferramentas */}
-
-          <Box onClick={() => { setPage("ferramentas") }} component="div" className="items" sx={{
-
-            width: "100%",
-            height: "auto",
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center"
-          }}>
-
-            <Accordion sx={{ background: "transparent" }} elevation={0}>
-              <AccordionSummary sx={{ flexDirection: "row-reverse", justifyContent: "space-between", marginLeft: "15px" }}
-                expandIcon={<Icon>
-                  <AddchartIcon></AddchartIcon>
-                </Icon>}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography sx={{ marginLeft: "45px" }}>Ferramentas</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Box sx={{ display: "flex", justifyContent: "space-around" }} component="div" className='subitems'>
-                  <Icon sx={{ marginRight: "5px" }}>
-                    <WorkOutlineIcon sx={{ color: "#000" }}></WorkOutlineIcon>
-                  </Icon>
-                  <Typography>OKR</Typography>
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-
-
-          </Box>
-
-
-          {/* mensagens */}
-          <Box onClick={() => { setPage("mensagens") }} component="div" className="items" sx={{
-
-            width: "100%",
-            height: "37.17px",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "center"
-          }}>
-            <Icon>
-              <MessageIcon></MessageIcon>
-            </Icon>
-            <Typography>
-              Mensagens
-            </Typography>
-
-          </Box>
-          {/* configurações */}
-          <Box onClick={() => { setPage("configurações") }} component="div" className="items" sx={{
-
-            width: "100%",
-            height: "37.17px",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            paddingLeft: "10px"
-          }}>
-            <Icon>
-              <SettingsIcon />
-            </Icon>
-            <Typography>
-              Configurações
-            </Typography>
-
-          </Box>
-          {/* Sair */}
-          <Box component="div" className="items" sx={{
-
-            width: "100%",
-            height: "37.17px",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-
-          }}
-            onClick={() => {
-              localStorage.clear();
-              setValues({});
-              navegar("/login")
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
             }}
           >
-            <Icon>
-              <LogoutIcon />
-            </Icon>
-            <Typography>
-              Sair
-            </Typography>
-
-          </Box>
-
-        </Box>
-
-      </Paper>
-
-      {/* Restante */}
-      <Box
-        sx={{
-          // background:"#e02141",
-
-          width: "100%",
-          height: "1024px",
-          display: "flex",
-          flexDirection: "column",
-
-        }}>
-        {/* cabeçalho */}
-        <Paper
-          component="div"
-          sx={{
-
-            width: "99%",
-            height: "68px",
-            margin: theme.spacing(1),
-            // background: "#e02141"
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 1,
-            border: 0,
-            // borderBottom:"solid 1px #000",
-            // boxShadow: "0 0 0.5em #3F9142",
-
-          }}
-          elevation={0}
-        >
-
-          <Typography
-            sx={{
-              fontFamily: 'Roboto',
-              fontStyle: "normal",
-              fontWeight: 600,
-              fontSize: "34px",
-              lineHeight: "40px",
-            }}>
-
-            {values.user?.permissions[0].description.toUpperCase()}
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Mini variant drawer
           </Typography>
-          <Box
-            component="div"
-            sx={{
-              width: "auto",
-              height: "100%",
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-
-            }}
-
-          >
-            <Badge sx={{ marginRight: theme.spacing(3), cursor: "pointer" }} badgeContent={17} color="error">
-              <NotificationsIcon />
-            </Badge>
-            <Avatar
-              onClick={handleOpenF}
-              alt={`${values.user?.dados.name}`}
-              src={values.user?.dados.image.url}
-              sx={{ marginRight: theme.spacing(2), cursor: "pointer" }}
-            ></Avatar>
-
-            <Typography>{values.user?.dados.name.toUpperCase()}</Typography>
-          </Box>
-
-
-        </Paper>
-
-        {/* fim cabeçalho */}
-
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
         <Divider />
-
-        {/* inicio do grid - unidades */}
-        {((page == "inicio") && (values.user?.permissions[0].description=="administrador")) &&
-          <Box
-
-            sx={{
-              marginTop: 1,
-              marginBottom: 1,
-              width: "auto",
-              height: "220px",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              gap: 1,
-              flexFlow: "wrap",
-              overflow: "auto"
-
-
-            }}
-          >
-            {isEmpty(values)?null:values.user?.units?.map((e, index) => {
-              // Esta função JavaScript sempre retorna um número aleatório entre min (incluído) e max (excluído):
-              
-              
-              return (
-                <Paper
-                  key={e.description}
+        <List>
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
                   sx={{
-                    height: 200,
-                    width: 150,
-                    backgroundColor: cores[Math.floor(Math.random() * (cores.length - 0) + 0)],
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
                   }}
                 >
-                  <FolderIcon sx={{
-                    color: "#fff",
-                    width: "40px",
-                    height: "31.43px",
-                  }}></FolderIcon>
-                  <Paper
-                    component="div"
-                    elevation={0}
-                    sx={{
-                      width: "132px",
-                      height: "88px",
-                      left: "68px",
-                      top: "74px",
-                      background: "transparent",
-                      border: 0
-
-
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        fontFamily: 'Roboto',
-                        fontStyle: "normal",
-                        fontWeight: 700,
-                        fontSize: "64px",
-                        lineHeight: "75px",
-                        textAlign: "center",
-                        color: " #FFFFFF",
-                      }}
-                    >
-                      {e.cols}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: 'Roboto',
-                        fontStyle: "normal",
-                        fontHeight: 700,
-                        fontSize: "20px",
-                        lineHeight: "23px",
-                        textAlign: "center",
-                        color: "#FFFFFF",
-
-                      }}
-                    >
-                      Colaboradores
-                    </Typography>
-                  </Paper>
-                  <Typography
-                    sx={{
-                      fontFamily: 'Roboto',
-                      fontStyle: "normal",
-                      fontWeight: 200,
-                      fontSize: "16px",
-                      lineHeight: "19px",
-                      textAlign: "center",
-
-                      color: "#FFFFFF",
-                    }}
-                  >
-                    {e.description.toUpperCase()}
-                  </Typography>
-                </Paper>
-              )
-            })}
-
-
-
-
-
-
-
-
-
-          </Box>
-        }
-
-
-        {/* fim do grid */}
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
         <Divider />
-
-        {/* grafico */}
-
-        {((page == "inicio") && (values.user?.permissions[0].description=="administrador")) &&
-          <Paper
-            sx={{
-              marginTop: theme.spacing(1),
-              width: "auto",
-              height: "522.5px",
-              left: "274px",
-              top: "434px",
-              background: "#FFFFFF",
-              border: "1px solid #F2F2F2",
-              borderRadius: "14px",
-              padding: theme.spacing(2),
-              display: "flex",
-              alignItems: "centrer",
-              justifyContent: "center",
-              flexDirection: "column",
-              overflow: "scroll"
-            }}
-          >
-
-            <Grafico />
-          </Paper>
-        }
-        {page == "unidades" &&
-          <Unidades />
-        }
-
-
-
+        <List>
+          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <Typography paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
+          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
+          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
+          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
+          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
+          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+          sapien faucibus et molestie ac.
+        </Typography>
+        <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+        </Typography>
       </Box>
-
-      {/* -----------------------MODAL FOTO--------------------------------- */}
-      <Modal
-        // open={openF}
-        // onClose={handleCloseF}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={AvatarModalStyle}>
-          {
-            /* 1 - envio as imagens ImagensCarregadas e os dados do proprietario
-            2 - envio tambem funções para atualizar estes dados */
-          }
-          <ModalFoto ImagensCarregadas={ImagensCarregadas} setImagens={setImagens} />
-        </Box>
-      </Modal>
-      {/* ----------------------------FIM MODAL FOTO----------------------- */}
-
-    </Container >);
+    </Box>
+  );
 }
-
-export default Users;
