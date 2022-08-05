@@ -1,4 +1,3 @@
-
 import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { UseDados } from '../../routes';
@@ -10,8 +9,17 @@ import ModalFoto from "../../components/Fotos/CarregarFotos.js";
 import fileSize from 'filesize';
 import Unidades from '../../components/unidades/index.js';
 
+import { Accordion, 
+  AccordionDetails, 
+  AccordionSummary, 
+ } from '@mui/material';
+
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Badge from '@mui/material/Badge';
+import Icon from '@mui/material/Icon';
+import Paper from '@mui/material/Paper';
+import Avatar from '@mui/material/Avatar';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -29,6 +37,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import MessageIcon from '@mui/icons-material/Message';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import FolderIcon from '@mui/icons-material/Folder';
 
 const drawerWidth = 240;
 
@@ -97,9 +115,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+const cores = ["#7757F9", "#31859D", "#2A76AB", "#FD7549"];
+
 export default function Users() {
   const navegar = useNavigate();
-  const dadosrota=useLocation();  
+  const dadosrota = useLocation();
   const [page, setPage] = useState("inicio");
   const [values, setValues] = UseDados();
   const theme = useTheme();
@@ -118,7 +138,7 @@ export default function Users() {
       //   navegar("/");
       // }
 
-      if (isEmpty(dadosrota.state)||!dadosrota.state) {
+      if (isEmpty(dadosrota.state) || !dadosrota.state) {
         navegar("/login");
       }
       setValues(dadosrota.state);
@@ -137,7 +157,7 @@ export default function Users() {
     }
     return JSON.stringify(obj) === JSON.stringify({});
   }
- 
+
   //ao abrir o modal
   const handleOpenF = () => {
     // estou carregando os dados da imagem atual do perfil
@@ -176,7 +196,7 @@ export default function Users() {
   const handleCloseF = async () => {
     // estou verificando se ha dois imagens em ImagensCarregadas
     if (ImagensCarregadas.length >= 1) {
-        // console.log(ImagensCarregadas)
+      // console.log(ImagensCarregadas)
       try {
 
         if (ImagensCarregadas.length > 1) {
@@ -187,8 +207,8 @@ export default function Users() {
           } else {
             let userdados = values.user.dados;
             userdados.id_image = ImagensCarregadas[1].id;
-           
-            await api.put("/update", {...userdados,...{permissions:[values.user.permissions[0].id]},...{passwordantigo:userdados.password}});
+
+            await api.put("/update", { ...userdados, ...{ permissions: [values.user.permissions[0].id] }, ...{ passwordantigo: userdados.password } });
             let d = values;
             d.user.dados = userdados;
             d.user.dados.image = ImagensCarregadas[1];
@@ -204,10 +224,10 @@ export default function Users() {
         else {
           let userdados = values;
           userdados.user.dados.id_image = ImagensCarregadas[0].id;
-          userdados.user.dados.image=ImagensCarregadas[0];
+          userdados.user.dados.image = ImagensCarregadas[0];
           const up = {
             ...userdados.user.dados,
-            ...{ passwordantigo: userdados.user.dados.password},
+            ...{ passwordantigo: userdados.user.dados.password },
             ...{ permissions: [values.user.permissions[0].id] }
           }
 
@@ -257,6 +277,7 @@ export default function Users() {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -269,11 +290,45 @@ export default function Users() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+            {values.user?.permissions[0].description.toUpperCase()}
           </Typography>
+
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}>
+
+            <Badge sx={{ 
+              marginRight: theme.spacing(3), 
+              cursor: "pointer", 
+              alignSelf: 'center' }} 
+              badgeContent={17} 
+              color="error"
+              >
+              <NotificationsIcon />
+            </Badge>
+
+            <Avatar
+              onClick={handleOpenF}
+              alt={`${values.user?.dados.name}`}
+              src={values.user?.dados.image.url}
+              sx={{ marginRight: theme.spacing(2), cursor: "pointer" }}
+            ></Avatar>
+
+            <Typography sx={{
+              display: 'flex',
+              alignSelf: 'center'
+            }}>
+              {values.user?.dados.name.toUpperCase()}
+            </Typography>
+          </Box>
+
         </Toolbar>
       </AppBar>
+
+            {/* MENU LATERAL */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -281,32 +336,86 @@ export default function Users() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
+
+            {/* ÍNICIO */}
+        <ListItem onClick={(e) => setPage(`inicio`)} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Início
+          </ListItemText>
+
+        </ListItem>
+
+            {/* UNIDADES */}
+        <ListItem onClick={() => { setPage("unidades") }} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Unidades
+          </ListItemText>
+        </ListItem>
+
+      
+<ListItem onClick={() => { setPage("avaliacoes") }} component="div" className="items" 
+ sx={{
+  minHeight: 48,
+  justifyContent: open ? 'initial' : 'center',
+  px: 2.5,
+}}>
+
+          <Accordion sx={{ minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5, }} elevation={0}>
+              <AccordionSummary sx={{ flexDirection: "row-reverse", justifyContent: "space-between",}}
+                expandIcon={<Icon>
+                  <ContentPasteSearchIcon></ContentPasteSearchIcon>
+                </Icon>}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
+                <Typography sx={{ marginLeft: "45px" }}>Avaliações</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{ display: "flex", justifyContent: "space-around" }} component="div" className='subitems'>
+                  <Icon sx={{ minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',}}>
+                    <WorkOutlineIcon sx={{ color: "#000" }}></WorkOutlineIcon>
+                  </Icon>
+                  <Typography>Aval. por Resultados</Typography>
+                </Box>
+              </AccordionDetails>
+            </Accordion>
+
             </ListItem>
-          ))}
-        </List>
+
+
         <Divider />
-        <List>
+
+        {/* <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
@@ -329,37 +438,179 @@ export default function Users() {
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        {/* Restante */}
+        <Box
+          sx={{
+            background: "#e02141",
+            width: "100%",
+            height: "1024px",
+            display: "flex",
+            flexDirection: "column",
+
+          }}>
+
+          <Divider />
+
+          {/* inicio do grid - unidades */}
+          {((page == "inicio") && (values.user?.permissions[0].description == "administrador")) &&
+            <Box
+
+              sx={{
+                marginTop: 1,
+                marginBottom: 1,
+                width: "auto",
+                height: "220px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-around",
+                gap: 1,
+                flexFlow: "wrap",
+                overflow: "auto"
+              }}
+            >
+              {isEmpty(values) ? null : values.user?.units?.map((e, index) => {
+                // Esta função JavaScript sempre retorna um número aleatório entre min (incluído) e max (excluído):
+
+
+                return (
+                  <Paper
+                    key={e.description}
+                    sx={{
+                      height: 200,
+                      width: 150,
+                      backgroundColor: cores[Math.floor(Math.random() * (cores.length - 0) + 0)],
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "space-around",
+
+                    }}
+                  >
+                    <FolderIcon sx={{
+                      color: "#fff",
+                      width: "40px",
+                      height: "31.43px",
+                    }}></FolderIcon>
+                    <Paper
+                      component="div"
+                      elevation={0}
+                      sx={{
+                        width: "132px",
+                        height: "88px",
+                        left: "68px",
+                        top: "74px",
+                        background: "transparent",
+                        border: 0
+
+
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: 'Roboto',
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          fontSize: "64px",
+                          lineHeight: "75px",
+                          textAlign: "center",
+                          color: " #FFFFFF",
+                        }}
+                      >
+                        {e.cols}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: 'Roboto',
+                          fontStyle: "normal",
+                          fontHeight: 700,
+                          fontSize: "20px",
+                          lineHeight: "23px",
+                          textAlign: "center",
+                          color: "#FFFFFF",
+
+                        }}
+                      >
+                        Colaboradores
+                      </Typography>
+                    </Paper>
+                    <Typography
+                      sx={{
+                        fontFamily: 'Roboto',
+                        fontStyle: "normal",
+                        fontWeight: 200,
+                        fontSize: "16px",
+                        lineHeight: "19px",
+                        textAlign: "center",
+
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {e.description.toUpperCase()}
+                    </Typography>
+                  </Paper>
+                )
+              })}
+
+            </Box>
+          }
+          {/* fim do grid */}
+
+          <Divider />
+
+          {/* grafico */}
+
+          {((page == "inicio") && (values.user?.permissions[0].description == "administrador")) &&
+            <Paper
+              sx={{
+                marginTop: theme.spacing(1),
+                width: "auto",
+                height: "522.5px",
+                left: "274px",
+                top: "434px",
+                background: "#FFFFFF",
+                border: "1px solid #F2F2F2",
+                borderRadius: "14px",
+                padding: theme.spacing(2),
+                display: "flex",
+                alignItems: "centrer",
+                justifyContent: "center",
+                flexDirection: "column",
+                overflow: "scroll"
+              }}
+            >
+
+              <Grafico />
+            </Paper>
+          }
+          {page == "unidades" &&
+            <Unidades />
+          }
+
+
+
+        </Box>
+
+        {/* -----------------------MODAL FOTO--------------------------------- */}
+        {/* <Modal
+        // open={openF}
+        // onClose={handleCloseF}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={AvatarModalStyle}>
+          {
+            1 - envio as imagens ImagensCarregadas e os dados do proprietario
+            2 - envio tambem funções para atualizar estes dados
+          }
+          <ModalFoto ImagensCarregadas={ImagensCarregadas} setImagens={setImagens} />
+        </Box>
+      </Modal> */}
+        {/* ----------------------------FIM MODAL FOTO----------------------- */}
       </Box>
     </Box>
   );

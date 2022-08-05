@@ -33,6 +33,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FolderIcon from '@mui/icons-material/Folder';
 
+//PRECISA PRO AVATAR
 const AvatarModalStyle = {
   position: 'absolute',
   top: '50%',
