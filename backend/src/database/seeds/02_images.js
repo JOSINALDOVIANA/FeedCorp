@@ -18,11 +18,17 @@ export async function seed(knex) {
      key: "edf6ab66ce61e281a80485126401799f-teste2.png",
      url: "https://imagensjosinaldo.s3.amazonaws.com/edf6ab66ce61e281a80485126401799f-teste2.png"
     },
-    {id:"6770fa37cbcb424a8979725e-teste3.png",
+    {id:"66ed707ee37be5b8a0974901-teste3.png",
      name:"teste3.png",
      size:81822, 
-     key: "0dc71b2b8bdce6b2677cff63fdff1e4a-teste3.png",
-     url: "https://imagensjosinaldo.s3.amazonaws.com/0dc71b2b8bdce6b2677cff63fdff1e4a-teste3.png"
+     key: "5edd4b73de8ab399eb29e52428a1bd64-teste3.png",
+     url: "https://imagensjosinaldo.s3.amazonaws.com/5edd4b73de8ab399eb29e52428a1bd64-teste3.png"
+    },
+    {id:"95686a01ae5211fbec86cb54-opclient_logo.png",
+     name:"opclient_logo.png",
+     size:1904, 
+     key: "fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png",
+     url: "https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"
     },
     
   ]);

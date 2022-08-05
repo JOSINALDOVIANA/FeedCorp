@@ -226,7 +226,7 @@ function Users() {
 
           }}
             alt="OpClient"
-            src="https://imagensjosinaldo.s3.amazonaws.com/7b5ed4ee4d02cc8617e4d2eaa538ec7b-opclient.png"
+            src="https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"
           ></Avatar>
 
           <Typography sx={{
@@ -648,8 +648,8 @@ function Users() {
 
       {/* -----------------------MODAL FOTO--------------------------------- */}
       <Modal
-        open={openF}
-        onClose={handleCloseF}
+        // open={openF}
+        // onClose={handleCloseF}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

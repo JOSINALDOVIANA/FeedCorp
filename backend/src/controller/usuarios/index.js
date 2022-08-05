@@ -111,19 +111,19 @@ export default {
 
             }
 
-            if (!!dados && dados.password === password) { //verifico se dados nao esta vazio e se a senha bate com a recebida na rota
-                //carrego as permissoes deste usuario
-                const perm = await conexao("user_permission").join("permissions", "user_permission.id_permission", "=", "permissions.id").where({ "user_permission.id_user": dados.id });
-                //carregando a unidade do usuario
-                const unit = await conexao("user_unit").join("units", "user_unit.id_unit", "=", "units.id").where({ "user_unit.id_user": dados.id })
-                // respondendo a requisição 
-                return res.json({ dados, ...{ "permissions": perm }, ...{ unit } });
-
-
-
-            }
-            else { // se dados estiver vazio ou senha nao for igual ele responde
+            if (!dados) { //verifico se dados  esta vazio 
                 return res.json({ status: false, message: "vefique os dados e tente novamente" });
+            }
+            else { 
+                if (!!dados && dados.password === password) {
+                    //carrego as permissoes deste usuario
+                    const perm = await conexao("user_permission").join("permissions", "user_permission.id_permission", "=", "permissions.id").where({ "user_permission.id_user": dados.id });
+                    //carregando a unidade do usuario
+                    const unit = await conexao("user_unit").join("units", "user_unit.id_unit", "=", "units.id").where({ "user_unit.id_user": dados.id })
+                    // respondendo a requisição 
+                    return res.json({ status:true,...{dados, ...{ "permissions": perm }, ...{ unit }} });
+                }
+            return res.json({ status: false, message: "vefique os dados e tente novamente" });
             }
         } catch (error) {
 

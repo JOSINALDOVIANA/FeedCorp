@@ -59,24 +59,25 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(permanecer)
+    
               let obt = {};
               e.target["e-mail"].value.indexOf("@") > 0 ?
                 obt = { email: e.target["e-mail"].value, password: e.target["password"].value } :
                 obt = { nameuser: e.target["e-mail"].value, password: e.target["password"].value };
               const dados = await api.post("/user/login", obt);
-              if (!!dados.data?.status) {
+              console.log(dados)
+              if (!dados.data.status) {
                 alert(dados.data.message)
               }else{
               let d={...dados.data.dados,...image?{image}:null};
               let units=await api.get(`/unit/consult?id_user=${d.id}`);
-              // setValues({ user: {dados:d,permissions:dados.data.permissions,units:units.data} } );
+              
               if (permanecer) {
                 localStorage.setItem("values", JSON.stringify({ user: {dados:d,permissions:dados.data.permissions,units:units.data,unit:dados.data.unit} }))
               }
             
               
-              navegar("/perfil",{state:{ user: {dados:d,permissions:dados.data.permissions,units:units.data,unit:dados.data.unit} }});
+               navegar("/perfil",{state:{ user: {dados:d,permissions:dados.data.permissions,units:units.data,unit:dados.data.unit} }});
               }
               
   };
