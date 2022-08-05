@@ -65,7 +65,7 @@ export default function SignIn() {
                 obt = { email: e.target["e-mail"].value, password: e.target["password"].value } :
                 obt = { nameuser: e.target["e-mail"].value, password: e.target["password"].value };
               const dados = await api.post("/user/login", obt);
-              console.log(dados)
+              
               if (!dados.data.status) {
                 alert(dados.data.message)
               }else{

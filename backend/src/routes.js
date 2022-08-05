@@ -8,17 +8,49 @@ import multerconfig from "./config/multer.js";
 import images from "./controller/images/imagecontrol.js";
 const routes=express.Router();
 
-// usuarios
-routes.post('/user/login',user.login);
-routes.post('/user/create',user.create);
-routes.put('/user/update',user.update);
-routes.get("/user/listAll",user.listAll);
+ /*
+ obs: tabela "string_string" não precisão de rotas delete
+ pois elas são tabelas de relacionamento e uma vez excluido o id da tabela origem
+ o cascateamento tambem apaga o registro nelas
+*/
+
+
+
+
+routes.post('/user/login',user.login);//obs:get nao recebe dados via body do navegador
+routes.post('/user/insert',user.insert);//cria usuario na tabela "users"
+routes.put('/user/update',user.update); // so atualiza dados na tabela "users", nao envolve outras tabelas
+routes.delete('/user/delete',user.delete);//deleta usuario na tabela "users"
+
+                      /*------rotas especiais------*/
+routes.put('/user/update/user_permission',user.updateUser_permission); // atualiza em "user_permission"
+routes.post('/user/insert/user_permission',user.insertUser_permission); // inserir dados em "user_permission"
+routes.put('/user/update/user_unit',user.updateUser_unit); // atualiza em "user_unit"
+routes.post('/user/insert/user_unit',user.insertUser_unit); // inserir dados  em "user_unit"
+routes.put('/user/update/user_ebr',user.updateUser_ebr); // atualiza em "user_ebr"
+routes.post('/user/insert/user_ebr',user.insertUser_ebr); // inserir dados em "user_ebr"
+
 
 
 //----------------------------unidades-----------------------
-routes.post("/unit/create",unidades.create)
-routes.get("/unit/consult",unidades.consult)// consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores na unidade
-// routes.get("/unit/consult2",unidades.consult2)
+
+//cria unidades na tabela "units"
+routes.post("/unit/create",unidades.create);
+
+// consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores tem na unidade
+// a consulta a qual unidade o usuario pertence ja é carregada no login no objeto:unit
+//se os parametros exigidos nao existirem retona todas as unidades cadastradas sem parametros de filtro
+routes.get("/unit/consult",unidades.consult);
+
+//deleta uma unidade
+routes.delete("/unit/delete",unidades.delete);
+
+//atualiza uma unidade
+routes.put("/unit/update",unidades.update);
+// atualiza a tabela "unit_ebr"
+routes.put("/unit/update/unit_ebr",unidades.updateEbr);
+routes.post("/unit/insert/unit_ebr",unidades.updateEbr);
+
 
 //----------------------------permissoes--------------------
 routes.post("/permission/create",permissoes.create)//criar

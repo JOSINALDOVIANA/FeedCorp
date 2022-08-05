@@ -2,8 +2,8 @@
 import conexao from '../../database/connection.js';
 
 export default {
-    async create(req, res) {
-        const { name, nameuser, id_image = null, email, password, permissions, id_unit = false } = req.body;
+    async insert(req, res) {
+        const { name, nameuser, id_image = null, email, password,permissions=[], id_unit = false } = req.body;
 
         try {
             await conexao.transaction(async trx => {
@@ -24,6 +24,75 @@ export default {
             return res.json({
                 status: false,
                 "message": error.sqlMessage
+            })
+        }
+    },
+    async insertUser_permission(req, res) {
+        const { permissions=[],id_user } = req.body;
+
+        try {
+            await conexao.transaction(async trx => {
+                
+
+                const perm_serial = permissions.map(item => ({ id_user, "id_permission": item }));
+                await trx("user_permission").insert(perm_serial);
+
+                
+
+                return res.json({ status: true });
+            })
+
+        } catch (error) {
+
+            return res.json({
+                status: false,
+                "message": "error insertUser_permission"
+            })
+        }
+    },
+    async insertUser_ebr(req, res) {
+        const { id_ebr,id_user } = req.body;
+
+        try {
+            await conexao.transaction(async trx => {
+                
+
+                
+                await trx("user_ebr").insert({id_ebr,id_user});
+
+                
+
+                return res.json({ status: true });
+            })
+
+        } catch (error) {
+
+            return res.json({
+                status: false,
+                "message": "error insertUser_ebr"
+            })
+        }
+    },
+    async insertUser_unit(req, res) {
+        const { units=[],id_user } = req.body;
+
+        try {
+            await conexao.transaction(async trx => {
+                
+
+                const units_serial = units.map(item => ({ id_user, "id_unit": item }));
+                await trx("user_unit").insert(units_serial);
+
+                
+
+                return res.json({ status: true });
+            })
+
+        } catch (error) {
+
+            return res.json({
+                status: false,
+                "message": "error insertUser_unit"
             })
         }
     },
@@ -56,8 +125,8 @@ export default {
             id_image = null,
             password,
             passwordantigo,
-            permissions = [],
-            id_unit = false,
+            // permissions = [],
+            // id_unit = false,
 
         } = req.body;
 
@@ -75,12 +144,12 @@ export default {
                         id_image,
                     }).where({ id });
 
-                    await trx("user_permission").delete().where({ "id_user": id });
-                    const perm_serial = permissions.map(item => ({ "id_user": id, "id_permission": item }));
+                    // await trx("user_permission").delete().where({ "id_user": id });
+                    // const perm_serial = permissions.map(item => ({ "id_user": id, "id_permission": item }));
 
-                    await trx("user_permission").insert(perm_serial);
+                    // await trx("user_permission").insert(perm_serial);
 
-                    !id_unit ? null : await trx("user_unit").insert({ "id_user": id, id_unit });
+                    // !id_unit ? null : await trx("user_unit").insert({ "id_user": id, id_unit });
 
                     res.json({ status: true })
                 } else {
@@ -95,10 +164,60 @@ export default {
         }
 
     },
+    async updateUser_permission(req, res, next) {
+        const {
+            id,
+            id_user,
+            id_permission,
+            } = req.body;
+        try {
+            await conexao.transaction(async trx => {
+                   const up= await trx("user_permission").update({id_user,id_permission}).where({id});
+                    res.json({ status: true , message:`aterado`})
+            })
+        } catch (error) {
+            res.json({ status: false, message: "error updateUser_permission" })
+        }
+
+    },
+    async updateUser_unit(req, res, next) {
+        const {
+            id,
+            id_user,
+            id_unit,
+            } = req.body;
+        try {
+            await conexao.transaction(async trx => {
+                   const up= await trx("user_unit").update({id_unit,id_user}).where({id});
+                    res.json({ status: true , message:`aterado`})
+            })
+
+        } catch (error) {
+            res.json({ status: false, message: "error updateUser_unit" })
+        }
+
+    },
+    async updateUser_ebr(req, res, next) {
+        const {
+            id,
+            id_user,
+            id_ebr,
+            } = req.body;
+
+        try {
+            await conexao.transaction(async trx => {
+                   const up= await trx("user_ebr").update({id_ebr,id_user}).where({id});
+                    res.json({ status: true , message:`aterado`})
+            })
+
+        } catch (error) {
+            res.json({ status: false, message: "error updateUser_ebr" })
+        }
+
+    },
     async login(req, res) {
         //observe se houver error ele retorna um status false
         let dados;
-
         try { //inicio try
             const { email = false, nameuser = false, password } = req.body; // dados vindos na rota
             if (!email) { //se não vier email ele usa nameuser
