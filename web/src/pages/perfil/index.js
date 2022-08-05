@@ -10,7 +10,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FolderIcon from '@mui/icons-material/Folder';
-import "./stayle.css";
+import "./style.css";
 import { UseDados } from '../../routes';
 import Grafico from './grafico.js';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -648,8 +648,8 @@ function Users() {
 
       {/* -----------------------MODAL FOTO--------------------------------- */}
       <Modal
-        // open={openF}
-        // onClose={handleCloseF}
+        open={openF}
+        onClose={handleCloseF}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
