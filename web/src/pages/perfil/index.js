@@ -648,8 +648,8 @@ function Users() {
 
       {/* -----------------------MODAL FOTO--------------------------------- */}
       <Modal
-        open={openF}
-        onClose={handleCloseF}
+        // open={openF}
+        // onClose={handleCloseF}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
