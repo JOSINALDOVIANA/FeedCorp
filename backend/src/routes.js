@@ -63,8 +63,8 @@ routes.post("/unit/insert/unit_ebr",unidades.insertUnit_ebr);// inserir na tabel
 /*################################################ PERMISSIONS ######################################*/
 
 routes.post("/permission/create",permissoes.create)//criar
-routes.put("/permission/update",permissoes.update)//criar
-routes.delete("/permission/delete",permissoes.delete)//criar
+//routes.put("/permission/update",permissoes.update)//criar
+//routes.delete("/permission/delete",permissoes.delete)//criar
 
 /*###################################################################################################*/
 
