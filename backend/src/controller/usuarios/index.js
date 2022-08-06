@@ -32,7 +32,11 @@ export default {
 
         try {
             await conexao.transaction(async trx => {
-                
+                const permid=await trx("user_permission").where({id_user});
+
+                if(permid){
+                  return  res.redirect(`http://localhost:${process.env.PORT}/user/update/user_permission?id_user=${id_user}&id_permission=${permissions[0]}`);
+                }
 
                 const perm_serial = permissions.map(item => ({ id_user, "id_permission": item }));
                 await trx("user_permission").insert(perm_serial);
@@ -43,7 +47,7 @@ export default {
             })
 
         } catch (error) {
-
+            console.log(error)
             return res.json({
                 status: false,
                 "message": "error insertUser_permission"
@@ -112,7 +116,7 @@ export default {
 
         } catch (error) {
             // console.log(error);
-            res.json({ error: true, message: error.sqlMessage })
+            res.json({ status: false, message: "error user=>delete" })
         }
     },
 
@@ -165,15 +169,14 @@ export default {
 
     },
     async updateUser_permission(req, res, next) {
-        const {
-            id,
+        const {            
             id_user,
             id_permission,
-            } = req.body;
+            } = req.query;
         try {
             await conexao.transaction(async trx => {
-                    await trx("user_permission").update({id_user,id_permission}).where({id});
-                    res.json({ status: true , message:`aterado`})
+                    await trx("user_permission").update({id_permission}).where({id_user});
+                    res.json({ status: true , message:`aterado`});
             })
         } catch (error) {
             res.json({ status: false, message: "error updateUser_permission" })
@@ -220,16 +223,35 @@ export default {
             
             id_user,
            
-            } = req.body;
+            } = req.query;
 
         try {
             await conexao.transaction(async trx => {
-                   const up= await trx("user_ebr").where({id_user}).join("evaluation_by_results",'evaluation_by_results.id','=','user_ebr.id_ebr');
+                   const up= await trx("user_ebr").where({id_user}).join("evaluation_by_results",'evaluation_by_results.id','=','user_ebr.id_ebr').select("evaluation_by_results.*");
                     res.json({ status: true , dados:up})
             })
 
         } catch (error) {
             res.json({ status: false, message: "error getUser_ebr" })
+        }
+
+    },
+    async getUser_unit(req, res, next) {
+        const {
+            
+            id_user,
+           
+            } = req.query;
+
+        try {
+            await conexao.transaction(async trx => {
+                const unit = await conexao("user_unit").join("units", "user_unit.id_unit", "=", "units.id").where({ "user_unit.id_user": id_user }).select("units.*")
+                    res.json({ status: true , unit})
+            })
+
+        } catch (error) {
+            console.log(error)
+            res.json({ status: false, message: "error getUser_unit" })
         }
 
     },
@@ -254,16 +276,20 @@ export default {
             else { 
                 if (!!dados && dados.password === password) {
                     //carrego as permissoes deste usuario
-                    const perm = await conexao("user_permission").join("permissions", "user_permission.id_permission", "=", "permissions.id").where({ "user_permission.id_user": dados.id });
+                    const perm = await conexao("user_permission").join("permissions", "user_permission.id_permission", "=", "permissions.id").where({ "user_permission.id_user": dados.id }).select("permissions.id","permissions.description");
                     //carregando a unidade do usuario
-                    const unit = await conexao("user_unit").join("units", "user_unit.id_unit", "=", "units.id").where({ "user_unit.id_user": dados.id })
+                    const unit = await conexao("user_unit")
+                    .join("units", "user_unit.id_unit", "=", "units.id")
+                    .where({ "user_unit.id_user": dados.id })
+                    .select("units.id","units.description");
                     // respondendo a requisição 
                     return res.json({ status:true,...{dados, ...{ "permissions": perm }, ...{ unit }} });
+                    
                 }
             return res.json({ status: false, message: "vefique os dados e tente novamente" });
             }
         } catch (error) {
-
+            console.log(error)
             return res.json({
                 status: false,
                 mensagem: "error server"

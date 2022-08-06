@@ -66,6 +66,18 @@ export default {
             res.json({status:false, erro:"error avpr_=>updateEbr_results"});
         }
     },
+    async getEbr_results(req,res){
+        const {id_ebr_items,id_user,id_ebr}=req.query;
+
+        try {
+             const ebr_results =  await conexao("ebr_results").where({id_ebr,id_ebr_items,id_user}).select("ebr_results.answer");
+            res.json({"status":true,"message":"atualizado"});
+            
+        } catch (error) {
+           
+            res.json({status:false, erro:"error avpr_=>updateEbr_results"});
+        }
+    },
     async insertEbr_items(req,res){
         const {id_ebr,goal,indicator}=req.body;
 
@@ -83,7 +95,7 @@ export default {
         const {id,goal,indicator}=req.body;
 
         try {
-             const ebr_results =  await conexao("ebr_items").update({goal,indicator}).where({id})
+              await conexao("ebr_items").update({goal,indicator}).where({id})
             res.json({"status":true,"message":"atualizado"});
             
         } catch (error) {
@@ -91,8 +103,20 @@ export default {
             res.json({status:false, erro:"error avpr_=>updateEbr_items"});
         }
     },
+    async getEbr_items(req,res){
+        const {id_ebr}=req.query;
+
+        try {
+             const ebr_items =  await conexao("ebr_items").select("ebr_items.indicator","ebr_items.goal").where({id_ebr})
+            res.json({"status":true,ebr_items});
+            
+        } catch (error) {
+           
+            res.json({status:false, erro:"error avpr_=>getEbr_items"});
+        }
+    },
     async get_avpr_Col(req,res){
-        const {col_idcol}=req.body;
+        const {col_idcol}=req.query;
 
         try {
             const avprs=await conexao("apr_com_col")
@@ -106,7 +130,7 @@ export default {
         }
     },
     async get_metas_avpr(req,res){
-        const {id_tb_apr}=req.body;
+        const {id_tb_apr}=req.query;
 
         try {
             

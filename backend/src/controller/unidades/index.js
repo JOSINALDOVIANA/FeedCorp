@@ -29,11 +29,11 @@ export default {
     },
     async getUnit_ebr(req, resp) {
 
-        const {id_unit} = req.body;
+        const {id_unit} = req.query;
 
         
         try {
-           const dados= await conexao("unit_ebr").where({id_unit}).join("evaluation_by_results","evaluation_by_results.id","=","unit_ebr.id_ebr");
+           const dados= await conexao("unit_ebr").where({id_unit}).join("evaluation_by_results","evaluation_by_results.id","=","unit_ebr.id_ebr").select("evaluation_by_results.*");
             resp.json({ status: true,dados });
         } catch (error) {
 
@@ -62,17 +62,21 @@ export default {
         }
     },
     
-    async consult(req, res) {
+    async createdOfUser(req, res) {
         const { id_user = false } = req.query; // id_user=int
         // se nao vier id_user vai ser retonado todas
         try {
             if (!id_user) { await conexao("units").select("*").then(r => res.json(r)) }
             else {
 
-                const units = await conexao("units").select("*").where({ id_user });
+                const units = await conexao("units").select("units.id","units.description").where({ id_user });
                 let units_serialised = [];
+
+                // for (const unit of units) {
+                    
+                // }
                 for (let i = 0; i < units.length; i++) {
-                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user")
+                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.*")
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
                     units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
                 }

@@ -5,7 +5,7 @@
  export function up(knex) {
     return  knex.schema.createTable('user_permission', function (table) {
         table.increments('id');        
-        table.integer("id_user").unsigned().notNullable();
+        table.integer("id_user").unsigned().notNullable().unique();
         table.integer("id_permission").unsigned().notNullable();
         table.foreign("id_user").references("id").inTable("users").onDelete("cascade");   
         table.foreign("id_permission").references("id").inTable("permissions").onDelete("cascade");   
