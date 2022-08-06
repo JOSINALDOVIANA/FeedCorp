@@ -31,25 +31,28 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
+import HomeIcon from '@mui/icons-material/Home';
 import ApartmentIcon from '@mui/icons-material/Apartment';
+import ArticleIcon from '@mui/icons-material/Article';
+import QuizIcon from '@mui/icons-material/Quiz';
+import ChatIcon from '@mui/icons-material/Chat';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AddchartIcon from '@mui/icons-material/Addchart';
-import MessageIcon from '@mui/icons-material/Message';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import FolderIcon from '@mui/icons-material/Folder';
 
-const drawerWidth = 240;
+import FolderIcon from '@mui/icons-material/Folder';
+import AdbIcon from '@mui/icons-material/Adb';
+
+const drawerWidth = 220;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -127,18 +130,18 @@ export default function Users() {
   const [coresSelected, setCores] = React.useState([]);
   console.log(dadosrota.state)
   // carrega os dados do usuario logado
+
   useEffect(() => {
 
     if (isEmpty(values)) {
+
       // if (localStorage.getItem("values")) {
       //   const valores = localStorage.getItem("values");
       //   const valores2 = JSON.parse(valores);
       //   setValues(a=>({...a,...valores2}));
-
       // } else {
       //   navegar("/");
       // }
-
       if (isEmpty(dadosrota.state) || !dadosrota.state) {
         navegar("/login");
       }
@@ -219,7 +222,6 @@ export default function Users() {
 
             alert("imagem anterior apagada!");
 
-
           }
         }
         else {
@@ -242,21 +244,11 @@ export default function Users() {
           setImagens([]);
         }
 
-
-
-
-
-
       } catch (error) {
         // console.log(error)
         alert("Erro ao trocar sua imagem")// caso de algum error por segurança não sera mostrado no console
 
       }
-
-
-
-
-
     }
 
     setOpenF(false);
@@ -276,20 +268,21 @@ export default function Users() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      {/* BARRA SUPERIOR */}
       <AppBar position="fixed" open={open}>
         <Toolbar>
 
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={open ? handleDrawerClose : handleDrawerOpen}
             edge="start"
             sx={{
               marginRight: 5,
-              ...(open && { display: 'none' }),
+              // ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            {open ? < ChevronLeftIcon /> : <MenuIcon />}
           </IconButton>
 
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
@@ -332,16 +325,35 @@ export default function Users() {
 
       {/* MENU LATERAL */}
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader sx={{ display: 'flex', justifyContent: 'center' }}>
+        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            OPCLIENT
+          </Typography>
+          {/* <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+          </IconButton> */}
         </DrawerHeader>
 
-        <Divider />
+        {/* <Divider /> */}
 
         {/* ÍNICIO */}
-        <ListItem onClick={(e) => setPage(`inicio`)} component="div" className="items"
+        <ListItem onClick={() => { setPage("inicio") }} component="div" className="items"
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
@@ -353,7 +365,7 @@ export default function Users() {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            <ApartmentIcon />
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
             Início
@@ -383,7 +395,7 @@ export default function Users() {
           </ListItemText>
 
         </ListItem>
-
+            {/* AVALIAÇOES */}
         <ListItem onClick={() => { setPage("avaliacoes") }} component="div" className="items"
           sx={{
             minHeight: 48,
@@ -397,7 +409,7 @@ export default function Users() {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            <ApartmentIcon />
+            <ArticleIcon />
           </ListItemIcon>
 
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
@@ -405,7 +417,7 @@ export default function Users() {
           </ListItemText>
 
         </ListItem>
-
+            {/* FERRAMENTAS */}
         <ListItem onClick={() => { setPage("ferramentas") }} component="div" className="items"
           sx={{
             minHeight: 48,
@@ -419,7 +431,7 @@ export default function Users() {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            <ApartmentIcon />
+            <QuizIcon />
           </ListItemIcon>
 
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
@@ -427,7 +439,7 @@ export default function Users() {
           </ListItemText>
 
         </ListItem>
-
+            {/* MENSAGENS */}
         <ListItem onClick={() => { setPage("mensagens") }} component="div" className="items"
           sx={{
             minHeight: 48,
@@ -441,7 +453,7 @@ export default function Users() {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            <ApartmentIcon />
+            <ChatIcon />
           </ListItemIcon>
 
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
@@ -449,7 +461,7 @@ export default function Users() {
           </ListItemText>
 
         </ListItem>
-
+            {/* CONFIGURAÇÕES */}
         <ListItem onClick={() => { setPage("configurações") }} component="div" className="items"
           sx={{
             minHeight: 48,
@@ -463,7 +475,7 @@ export default function Users() {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            <ApartmentIcon />
+            <SettingsIcon />
           </ListItemIcon>
 
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
@@ -490,7 +502,7 @@ export default function Users() {
               mr: open ? 3 : 'auto',
               justifyContent: 'center',
             }}>
-            <ApartmentIcon />
+            <LogoutIcon />
           </ListItemIcon>
 
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
@@ -566,19 +578,19 @@ export default function Users() {
             </ListItem>
           ))}
         </List> */}
+
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, pl: 2 }}>
-        <DrawerHeader />
+      <Box component="main" sx={{ flexGrow: 1, pl: 1, pr:1 }}>
+        <DrawerHeader/>
         {/* Restante */}
         <Box
           sx={{
-            //background: "#e02141",
+            background: "#e02141",
             width: "100%",
-            height: "1024px",
             display: "flex",
             flexDirection: "column",
-
+            p: 1
           }}>
 
           <Divider />
