@@ -414,7 +414,7 @@ function Users() {
             onClick={() => {
               localStorage.clear();
               setValues({});
-              navegar("/a.js")
+              navegar("/login")
             }}
           >
             <Icon>
