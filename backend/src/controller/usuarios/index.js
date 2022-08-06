@@ -172,7 +172,7 @@ export default {
             } = req.body;
         try {
             await conexao.transaction(async trx => {
-                   const up= await trx("user_permission").update({id_user,id_permission}).where({id});
+                    await trx("user_permission").update({id_user,id_permission}).where({id});
                     res.json({ status: true , message:`aterado`})
             })
         } catch (error) {
@@ -188,7 +188,7 @@ export default {
             } = req.body;
         try {
             await conexao.transaction(async trx => {
-                   const up= await trx("user_unit").update({id_unit,id_user}).where({id});
+                   await trx("user_unit").update({id_unit,id_user}).where({id});
                     res.json({ status: true , message:`aterado`})
             })
 
@@ -206,12 +206,30 @@ export default {
 
         try {
             await conexao.transaction(async trx => {
-                   const up= await trx("user_ebr").update({id_ebr,id_user}).where({id});
+                    await trx("user_ebr").update({id_ebr,id_user}).where({id});
                     res.json({ status: true , message:`aterado`})
             })
 
         } catch (error) {
             res.json({ status: false, message: "error updateUser_ebr" })
+        }
+
+    },
+    async getUser_ebr(req, res, next) {
+        const {
+            
+            id_user,
+           
+            } = req.body;
+
+        try {
+            await conexao.transaction(async trx => {
+                   const up= await trx("user_ebr").where({id_user}).join("evaluation_by_results",'evaluation_by_results.id','=','user_ebr.id_ebr');
+                    res.json({ status: true , dados:up})
+            })
+
+        } catch (error) {
+            res.json({ status: false, message: "error getUser_ebr" })
         }
 
     },

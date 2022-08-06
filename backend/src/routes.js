@@ -9,9 +9,10 @@ import images from "./controller/images/imagecontrol.js";
 const routes=express.Router();
 
  /*
- obs: tabela "string_string" não precisão de rotas delete
+ obs_01: tabela "string_string" não precisão de rotas delete
  pois elas são tabelas de relacionamento e uma vez excluido o id da tabela origem
- o cascateamento tambem apaga o registro nelas
+ o cascateamento tambem apaga o registro nelas.
+ obs_02:permisoes do usuario é consultada no login assim como a unidade que esta alocado
 */
 
 
@@ -28,6 +29,7 @@ routes.post('/user/insert/user_permission',user.insertUser_permission); // inser
 routes.put('/user/update/user_unit',user.updateUser_unit); // atualiza em "user_unit"
 routes.post('/user/insert/user_unit',user.insertUser_unit); // inserir dados  em "user_unit"
 routes.put('/user/update/user_ebr',user.updateUser_ebr); // atualiza em "user_ebr"
+routes.put('/user/get/user_ebr',user.getUser_ebr); // retona qual avaliação por resultado existe para o usuario"
 routes.post('/user/insert/user_ebr',user.insertUser_ebr); // inserir dados em "user_ebr"
 /*################################################################################################*/
 
@@ -52,6 +54,7 @@ routes.put("/unit/update",unidades.update);
 routes.get("/unit/consult",unidades.consult);
 routes.put("/unit/update/unit_ebr",unidades.updateUnit_ebr);// atualiza a tabela "unit_ebr"
 routes.post("/unit/insert/unit_ebr",unidades.insertUnit_ebr);// inserir na tabela "unit_ebr"
+routes.get("/unit/get/unit_ebr",unidades.getUnit_ebr);// retona quais avpr por unidade
 
 /*###################################################################################################*/
 
@@ -63,19 +66,28 @@ routes.post("/unit/insert/unit_ebr",unidades.insertUnit_ebr);// inserir na tabel
 /*################################################ PERMISSIONS ######################################*/
 
 routes.post("/permission/create",permissoes.create)//criar
-//routes.put("/permission/update",permissoes.update)//criar
-//routes.delete("/permission/delete",permissoes.delete)//criar
+routes.put("/permission/update",permissoes.update)//criar
+routes.delete("/permission/delete",permissoes.delete)//criar
 
 /*###################################################################################################*/
 
-// ----------------------rotas de avaliação por resultados-----------------
+
+
+/*################################################ AV. POR RESULTADOS ######################################*/
 
 
 
-routes.get("/avpr/gestor",avpr.get_gest_avpr);//retorna quais avalições por resultado o gestor criou
-routes.post("/avpr/gestor",avpr.post_avpr_gestor);//rota para criação 
+routes.post("/avpr/insert",avpr.insert);//cria na tabela "evaluation_by_results"
+routes.put("/avpr/update",avpr.update);//atualiza  a tabela "evaluation_by_results"
+routes.put("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results"
 
+                                             /*------rotas especiais------*/
 
+routes.post("/avpr/insert/ebr_results",avpr.insertEbr_results)// inserir valores na tabela "ebr_results"
+routes.put("/avpr/update/ebr_results",avpr.updateEbr_results)// atualiza valores na tabela "ebr_results"
+routes.post("/avpr/insert/ebr_items",avpr.insertEbr_items)// inserir valores na tabela "ebr_items"
+routes.put("/avpr/update/ebr_items",avpr.updateEbr_items)// atualiza valores na tabela "ebr_items"
+/*#########################################################################################################*/
 
 
 

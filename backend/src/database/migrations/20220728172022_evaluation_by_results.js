@@ -6,11 +6,9 @@
     return  knex.schema.createTable('evaluation_by_results', function (table) {
         table.increments('id');  
         table.string('title').notNullable();
-        table.boolean('status').defaultTo('true');
-        table.integer("id_user").unsigned().notNullable();
-        
-        table.foreign("id_user").references("id").inTable("users").onDelete("cascade");   
-         
+        // table.boolean('status').defaultTo('true');
+        table.integer("id_user").unsigned().notNullable();        
+        table.foreign("id_user").references("id").inTable("users").onDelete("cascade");         
         table.timestamp('updated_at',{ precision: 0 },{ useTz: true }).defaultTo(knex.fn.now(0));
       })
 };

@@ -27,6 +27,19 @@ export default {
             resp.json({ status: false, message: "error: unit-create" });
         }
     },
+    async getUnit_ebr(req, resp) {
+
+        const {id_unit} = req.body;
+
+        
+        try {
+           const dados= await conexao("unit_ebr").where({id_unit}).join("evaluation_by_results","evaluation_by_results.id","=","unit_ebr.id_ebr");
+            resp.json({ status: true,dados });
+        } catch (error) {
+
+            resp.json({ status: false, message: "error: unit->getUnit_ebr" });
+        }
+    },
    
     async update(req, resp) {
 

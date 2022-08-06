@@ -14,5 +14,31 @@ export default {
           //  console.log(error);
             res.json({status:false,mensagem:"error server"});
         }
-    }
+    },
+    async update(req,res,next){
+        const {description,id}=req.body;
+
+        try {
+           
+            conexao("permissions").update({description}).where({id});
+          
+            res.json({status:true,message:"permisão atualizada"});
+        } catch (error) {
+          //  console.log(error);
+            res.json({status:false,mensagem:"error permissions=>update"});
+        }
+    },
+    async delete(req,res,next){
+        const {id}=req.body;
+
+        try {
+           
+            conexao("permissions").delete().where({id});
+          
+            res.json({status:true,message:"permisão apagada"});
+        } catch (error) {
+         
+            res.json({status:false,mensagem:"error permissions=>delete"});
+        }
+    },
 }
