@@ -384,8 +384,123 @@ export default function Users() {
 
         </ListItem>
 
-        <Accordion 
-        onClick={() => { setPage("unidades") }} 
+        <ListItem onClick={() => { setPage("avaliacoes") }} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Avaliações
+          </ListItemText>
+
+        </ListItem>
+
+        <ListItem onClick={() => { setPage("ferramentas") }} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Ferramentas
+          </ListItemText>
+
+        </ListItem>
+
+        <ListItem onClick={() => { setPage("mensagens") }} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Mensagens
+          </ListItemText>
+
+        </ListItem>
+
+        <ListItem onClick={() => { setPage("configurações") }} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Configurações
+          </ListItemText>
+
+        </ListItem>
+
+        <ListItem
+          onClick={() => {
+            localStorage.clear();
+            setValues({});
+            navegar("/login")
+          }} component="div" className="items"
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}>
+
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+            <ApartmentIcon />
+          </ListItemIcon>
+
+          <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+            Sair
+          </ListItemText>
+
+        </ListItem>
+
+        {/* <Accordion 
+        onClick={() => { setPage("avaliacoes") }} 
         component="div" 
         className="items" 
         // disabled = {!open} 
@@ -410,7 +525,7 @@ export default function Users() {
             </ListItemIcon>
 
             <ListItemText sx={{ opacity: open ? 1 : 0 }}>
-              Unidades
+              Avaliações
             </ListItemText>
           </AccordionSummary>
 
@@ -423,56 +538,7 @@ export default function Users() {
               aaaaa
             </ListItemText>
           </AccordionDetails>
-        </Accordion>
-
-
-
-        {/* <Accordion onClick={() => { setPage("avaliacoes") }}
-          sx={{
-            minHeight: 48,
-            justifyContent: open ? 'initial' : 'center',
-  
-          }}
-          elevation={0}
-        >
-
-          <AccordionSummary
-            sx={{
-              flexDirection: "row-reverse",
-              justifyContent: "space-between",
-            }}
-          
-          
-            >
-            <Icon 
-             sx={{
-              minWidth: 0,
-              mr: open ? 3 : 'auto',
-              justifyContent: 'center',
-            }}>
-              <ContentPasteSearchIcon></ContentPasteSearchIcon>
-            </Icon>
-            <Typography sx={{ opacity: open ? 1 : 0 }}>Avaliações</Typography>
-          </AccordionSummary>
-
-          <AccordionDetails sx={{ display: "flex", minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center', }} component="div" className='subitems'>
-     
-              <Icon sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}>
-                <WorkOutlineIcon sx={{ color: "#000" }}></WorkOutlineIcon>
-              </Icon>
-              <Typography sx={{ opacity: open ? 1 : 0 }}>Aval. por Resultados</Typography>
-         
-          </AccordionDetails>
         </Accordion> */}
-
-
-
 
         <Divider />
 
@@ -502,8 +568,8 @@ export default function Users() {
         </List> */}
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, pl: 2}}>
-      <DrawerHeader />
+      <Box component="main" sx={{ flexGrow: 1, pl: 2 }}>
+        <DrawerHeader />
         {/* Restante */}
         <Box
           sx={{
