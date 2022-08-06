@@ -9,10 +9,11 @@ import ModalFoto from "../../components/Fotos/CarregarFotos.js";
 import fileSize from 'filesize';
 import Unidades from '../../components/unidades/index.js';
 
-import { Accordion, 
-  AccordionDetails, 
-  AccordionSummary, 
- } from '@mui/material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+} from '@mui/material';
 
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -300,13 +301,14 @@ export default function Users() {
             justifyContent: 'flex-end',
           }}>
 
-            <Badge sx={{ 
-              marginRight: theme.spacing(3), 
-              cursor: "pointer", 
-              alignSelf: 'center' }} 
-              badgeContent={17} 
+            <Badge sx={{
+              marginRight: theme.spacing(3),
+              cursor: "pointer",
+              alignSelf: 'center'
+            }}
+              badgeContent={17}
               color="error"
-              >
+            >
               <NotificationsIcon />
             </Badge>
 
@@ -328,16 +330,17 @@ export default function Users() {
         </Toolbar>
       </AppBar>
 
-            {/* MENU LATERAL */}
+      {/* MENU LATERAL */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
 
-            {/* ÍNICIO */}
+        {/* ÍNICIO */}
         <ListItem onClick={(e) => setPage(`inicio`)} component="div" className="items"
           sx={{
             minHeight: 48,
@@ -358,13 +361,14 @@ export default function Users() {
 
         </ListItem>
 
-            {/* UNIDADES */}
+        {/* UNIDADES */}
         <ListItem onClick={() => { setPage("unidades") }} component="div" className="items"
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
             px: 2.5,
           }}>
+
           <ListItemIcon
             sx={{
               minWidth: 0,
@@ -373,44 +377,101 @@ export default function Users() {
             }}>
             <ApartmentIcon />
           </ListItemIcon>
+
           <ListItemText sx={{ opacity: open ? 1 : 0 }}>
             Unidades
           </ListItemText>
+
         </ListItem>
 
-      
-<ListItem onClick={() => { setPage("avaliacoes") }} component="div" className="items" 
- sx={{
-  minHeight: 48,
-  justifyContent: open ? 'initial' : 'center',
-  px: 2.5,
-}}>
+        <Accordion 
+        onClick={() => { setPage("unidades") }} 
+        component="div" 
+        className="items" 
+        // disabled = {!open} 
+        expanded = {open ? setOpen : false}>
+          <AccordionSummary
+              
+            sx={{
+              flexDirection: "row-reverse",
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                ml: open ? 'auto' : 8,
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}>
+              <ApartmentIcon />
+            </ListItemIcon>
 
-          <Accordion sx={{ minHeight: 48,
+            <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+              Unidades
+            </ListItemText>
+          </AccordionSummary>
+
+          <AccordionDetails
+          sx={{
+            ...(!open && { display: 'none' }),
+            opacity: open ? 1 : 0
+          }}>
+            <ListItemText>
+              aaaaa
+            </ListItemText>
+          </AccordionDetails>
+        </Accordion>
+
+
+
+        {/* <Accordion onClick={() => { setPage("avaliacoes") }}
+          sx={{
+            minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
-            px: 2.5, }} elevation={0}>
-              <AccordionSummary sx={{ flexDirection: "row-reverse", justifyContent: "space-between",}}
-                expandIcon={<Icon>
-                  <ContentPasteSearchIcon></ContentPasteSearchIcon>
-                </Icon>}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography sx={{ marginLeft: "45px" }}>Avaliações</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Box sx={{ display: "flex", justifyContent: "space-around" }} component="div" className='subitems'>
-                  <Icon sx={{ minWidth: 0,
-              mr: open ? 3 : 'auto',
-              justifyContent: 'center',}}>
-                    <WorkOutlineIcon sx={{ color: "#000" }}></WorkOutlineIcon>
-                  </Icon>
-                  <Typography>Aval. por Resultados</Typography>
-                </Box>
-              </AccordionDetails>
-            </Accordion>
+  
+          }}
+          elevation={0}
+        >
 
-            </ListItem>
+          <AccordionSummary
+            sx={{
+              flexDirection: "row-reverse",
+              justifyContent: "space-between",
+            }}
+          
+          
+            >
+            <Icon 
+             sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}>
+              <ContentPasteSearchIcon></ContentPasteSearchIcon>
+            </Icon>
+            <Typography sx={{ opacity: open ? 1 : 0 }}>Avaliações</Typography>
+          </AccordionSummary>
+
+          <AccordionDetails sx={{ display: "flex", minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center', }} component="div" className='subitems'>
+     
+              <Icon sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}>
+                <WorkOutlineIcon sx={{ color: "#000" }}></WorkOutlineIcon>
+              </Icon>
+              <Typography sx={{ opacity: open ? 1 : 0 }}>Aval. por Resultados</Typography>
+         
+          </AccordionDetails>
+        </Accordion> */}
+
+
 
 
         <Divider />
@@ -441,11 +502,12 @@ export default function Users() {
         </List> */}
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, pl: 2}}>
+      <DrawerHeader />
         {/* Restante */}
         <Box
           sx={{
-            background: "#e02141",
+            //background: "#e02141",
             width: "100%",
             height: "1024px",
             display: "flex",
