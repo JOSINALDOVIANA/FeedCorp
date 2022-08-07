@@ -45,14 +45,10 @@ routes.get('/user/get/user_unit',user.getUser_unit); // retorna qual unidade do 
 
 //cria unidades na tabela "units"
 routes.post("/unit/create",unidades.create);
-
-
 //deleta uma unidade na tabela "units"
 routes.delete("/unit/delete",unidades.delete);
-
 //atualiza uma unidade na tabela "units"
 routes.put("/unit/update",unidades.update);
-
 //redireciona e retorna qual a unidade do  usuario
 routes.get("/unit/get/user_unit",(req,res)=>{
     res.redirect(`http://localhost:${process.env.PORT}/user/get/user_unit?id_user=${req.query.id_user}`);
@@ -109,27 +105,12 @@ routes.get("/avpr/get/ebr_items",avpr.getEbr_items)// busca o items de cada aval
 
 
 
-routes.get("/avpr/col",avpr.get_avpr_Col);//retorna quais avaliações por resultado foram linkadas para o colaborador
-routes.post("/avpr/col",avpr.post_avpr_col);//salva as respostas
 
-//retorna as metas e indicadores da av. por resultados 
-// exige "id_tb_apr" que é o "id" da av. por resultados pego na rota "/avpr/col" 
-routes.get("/avpr/metas",avpr.get_metas_avpr);//podera ser usado por adm/gestor/col
-
-// vai retornar os resultados 
-// {"id_tb_metas":3,"col_idcol":1} exige o id da tabela metas e do colaborador
-routes.get("/avpr/resultados",avpr.get_result_col);
-
-
-//retorna quantos colaboradores ja responderam
-routes.get("/avpr/quantidade",avpr.get_QT_responderam_avpr);
-
-
-//fotos ou images
+/*################################################ IMAGES ######################################*/
 routes.post('/images/salvar', multer(multerconfig).single('file'),images.salvar);
 routes.delete('/images/deletar',images.deletar);
 routes.get("/images/listar",images.listar)
-
+/*#########################################################################################################*/
 
 
 
