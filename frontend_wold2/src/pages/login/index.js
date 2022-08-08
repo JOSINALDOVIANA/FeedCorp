@@ -44,7 +44,7 @@ export default function SignIn() {
           status=r.data.status;
         }
       });
-      
+      console.log(permissions)
        if (status) {
         
         await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r=>{image=r.data});
@@ -55,7 +55,7 @@ export default function SignIn() {
           localStorage.setItem("values", JSON.stringify({ dadosUser,image, permissions, units, unit }))
         }
 
-         await   navegar("/perfil", { state: {dadosUser,image,permissions, units, unit} });
+        await   navegar("/perfil", { state: {dadosUser,image,permissions, units, unit} });
        }
       
 
