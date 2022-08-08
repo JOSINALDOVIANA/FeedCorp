@@ -1,19 +1,10 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import {AppBar, Box, Toolbar, Typography, Button, IconButton} from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
-import useStyles  from './styles';
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
+import useStyles from './styles';
+import DrawerHeader from './pages/components/DrawerHeader';
 
 export default function App() {
   const navegar = useNavigate();
@@ -21,6 +12,7 @@ export default function App() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+
       <AppBar position="absolute">
         <Toolbar className={classes.root}>
           {/* <IconButton
@@ -37,11 +29,13 @@ export default function App() {
             OPCLIENT
           </Typography>
 
-          <Button onClick={()=>navegar("/login")} color="inherit">Login</Button>
+          <Button onClick={() => navegar("/login")} color="inherit">Login</Button>
+
         </Toolbar>
       </AppBar>
-    <DrawerHeader/>
+      <DrawerHeader />
       <h1>OLÁ PESSOAS</h1>
+
     </Box>
   );
 }
