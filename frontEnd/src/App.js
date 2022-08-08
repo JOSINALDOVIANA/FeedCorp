@@ -2,162 +2,69 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import {useNavigate} from 'react-router-dom'
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { styled } from '@mui/material/styles';
 
-const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const navegar=useNavigate()
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+import { useNavigate } from 'react-router-dom'
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+export default function App() {
+  const navegar = useNavigate();
 
   return (
-    <AppBar  position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="absolute">
+        <Toolbar>
+
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            OPCLIENT
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-            
-                <MenuItem  onClick={()=>{navegar('/login')}}>
-                  <Typography textAlign="center">Login</Typography>
-                </MenuItem>
-             
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-           
-              <Button
-                
-                onClick={()=>{navegar('/login')}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Login
-              </Button>
-           
-          </Box>
+          <Button onClick={() => { navegar('/login') }} color="inherit">
+            Login
+          </Button>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
         </Toolbar>
-      </Container>
-    </AppBar>
-  );
-};
-export default ResponsiveAppBar;
+      </AppBar>
 
+      <DrawerHeader />
+      
+      <Typography paragraph>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+        enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
+        imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
+        Convallis convallis tellus id interdum velit laoreet id donec ultrices.
+        Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
+        nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
+        leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
+        feugiat vivamus at augue. At augue eget arcu dictum varius duis at
+        consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
+        sapien faucibus et molestie ac.
+      </Typography>
+      <Typography paragraph>
+        Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+        eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+        neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+        tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+        sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+        tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+        gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+        et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+        tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+        eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+        posuere sollicitudin aliquam ultrices sagittis orci a.
+      </Typography>
+    </Box>
+  );
+}
