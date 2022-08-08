@@ -5,7 +5,7 @@ export const development = {
   connection: {
     host: `127.0.0.1`,
     user: 'root',
-    password:'',    
+    password:'123456789',    
      database: 'opclient',
   },
   migrations: {

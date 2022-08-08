@@ -20,83 +20,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { UseDados } from '../../routes';
 import{ useLocation } from 'react-router-dom';
-import { AppBar,Drawer,DrawerHeader } from './styled';
-
-// const drawerWidth = 240;
-
-// export const DrawerHeader = styled('div')(({ theme }) => ({
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'flex-end',
-//     padding: theme.spacing(0, 1),
-//     // necessary for content to be below app bar
-//     ...theme.mixins.toolbar,
-//   }));
-
-// export const AppBar = styled(MuiAppBar, {
-//     shouldForwardProp: (prop) => prop !== 'open',
-//   })(({ theme, open }) => ({
-//     zIndex: theme.zIndex.drawer + 1,
-//     transition: theme.transitions.create(['width', 'margin'], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.leavingScreen,
-//     }),
-//     ...(open && {
-//       marginLeft: drawerWidth,
-//       width: `calc(100% - ${drawerWidth}px)`,
-//       transition: theme.transitions.create(['width', 'margin'], {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.enteringScreen,
-//       }),
-//     }),
-//   }));
-
-//   export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-//     ({ theme, open }) => ({
-//       width: drawerWidth,
-//       flexShrink: 0,
-//       whiteSpace: 'nowrap',
-//       boxSizing: 'border-box',
-//       ...(open && {
-//         ...openedMixin(theme),
-//         '& .MuiDrawer-paper': openedMixin(theme),
-//       }),
-//       ...(!open && {
-//         ...closedMixin(theme),
-//         '& .MuiDrawer-paper': closedMixin(theme),
-//       }),
-//     }),
-//   );
-
-//   const openedMixin = (theme) => ({
-//     width: drawerWidth,
-//     transition: theme.transitions.create('width', {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//     overflowX: 'hidden',
-//   });
-  
-//   const closedMixin = (theme) => ({
-//     transition: theme.transitions.create('width', {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.leavingScreen,
-//     }),
-//     overflowX: 'hidden',
-//     width: `calc(${theme.spacing(7)} + 1px)`,
-//     [theme.breakpoints.up('sm')]: {
-//       width: `calc(${theme.spacing(8)} + 1px)`,
-//     },
-//   });
+import { AppBar, Drawer, DrawerHeader } from './styled';
 
 
-
-
-
-
-
-
-export default function MiniDrawer() {
+export default function Perfil() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [values,setValues]=UseDados();
@@ -143,7 +70,7 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -159,41 +86,27 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                 {index === 0 ? <InboxIcon /> : null}
+                 {index === 1 ? <MailIcon /> : null}
+                 {index === 2 ? <MailIcon /> : null}
+                 {index === 3 ? <MailIcon /> : null}
+                 {index === 4 ? <MailIcon /> : null}
+                 {index === 5 ? <MailIcon /> : null}
+                 {index === 6 ? <MailIcon /> : null}
+                
                 </ListItemIcon>
+
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+      
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
@@ -221,6 +134,7 @@ export default function MiniDrawer() {
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
+
       </Box>
     </Box>
   );
