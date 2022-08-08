@@ -129,8 +129,7 @@ export default {
             id_image = null,
             password,
             passwordantigo,
-            // permissions = [],
-            // id_unit = false,
+           
 
         } = req.body;
 
@@ -148,13 +147,7 @@ export default {
                         id_image,
                     }).where({ id });
 
-                    // await trx("user_permission").delete().where({ "id_user": id });
-                    // const perm_serial = permissions.map(item => ({ "id_user": id, "id_permission": item }));
-
-                    // await trx("user_permission").insert(perm_serial);
-
-                    // !id_unit ? null : await trx("user_unit").insert({ "id_user": id, id_unit });
-
+                    
                     res.json({ status: true })
                 } else {
 

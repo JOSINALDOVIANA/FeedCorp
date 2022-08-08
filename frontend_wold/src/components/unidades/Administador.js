@@ -8,7 +8,7 @@ const Administador = () => {
 const [values,setValues]=UseDados();
 
   return (
-    values.user?.units?.map(und=>(<ul key={und.id}>
+    values?.units?.map(und=>(<ul key={und.id}>
       {und.description}
       {und.Colaboradores?.map(col=>(<li key={col.id}>{col.name}</li>))}
       </ul>))
