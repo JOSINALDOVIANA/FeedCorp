@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -18,19 +18,39 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import Paper from '@mui/material/Paper';
+import FolderIcon from '@mui/icons-material/Folder';
 import { UseDados } from '../../routes';
-import{ useLocation } from 'react-router-dom';
-import { AppBar, Drawer, DrawerHeader } from './styled';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AppBar, Drawer, DrawerHeader } from './styles';
 
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+  return JSON.stringify(obj) === JSON.stringify({});
+}
+
+const cores = ["#7757F9", "#31859D", "#2A76AB", "#FD7549"];
 
 export default function Perfil() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [values,setValues]=UseDados();
-  const rota=useLocation();
-  React.useEffect(()=>{
+  const [page, setPage] = useState("Início");
+  const [values, setValues] = UseDados();
+  const navegar = useNavigate();
+  const {state}= useLocation();
+  const rota = useLocation();
+  React.useEffect(() => {
+    if (isEmpty(values) && !!state) {
+      navegar("/login");
+
+    }
+
     setValues(rota.state)
-  },[])
+  }, [])
   console.log(values)
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -71,7 +91,9 @@ export default function Perfil() {
         <Divider />
         <List>
           {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItem key={text} disablePadding sx={{ display: 'block' }}
+              onClick={() => {text == "Sair" ? navegar("/login"): setPage(text) }}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -86,14 +108,14 @@ export default function Perfil() {
                     justifyContent: 'center',
                   }}
                 >
-                 {index === 0 ? <InboxIcon /> : null}
-                 {index === 1 ? <MailIcon /> : null}
-                 {index === 2 ? <MailIcon /> : null}
-                 {index === 3 ? <MailIcon /> : null}
-                 {index === 4 ? <MailIcon /> : null}
-                 {index === 5 ? <MailIcon /> : null}
-                 {index === 6 ? <MailIcon /> : null}
-                
+                  {index === 0 ? <InboxIcon /> : null}
+                  {index === 1 ? <MailIcon /> : null}
+                  {index === 2 ? <MailIcon /> : null}
+                  {index === 3 ? <MailIcon /> : null}
+                  {index === 4 ? <MailIcon /> : null}
+                  {index === 5 ? <MailIcon /> : null}
+                  {index === 6 ? <MailIcon /> : null}
+
                 </ListItemIcon>
 
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
@@ -101,40 +123,179 @@ export default function Perfil() {
             </ListItem>
           ))}
         </List>
-      
+
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, pl: 1, pr: 1 }}>
         <DrawerHeader />
+        {/* Restante */}
+        <Box
+          sx={{
+            background: "#e02141",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            p: 1
+          }}>
 
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+          <Divider />
 
+          {/* inicio do grid - unidades */}
+          {((page == "Início") && (values?.permissions[0]?.description == "administrador")) &&
+            <Box
+
+              sx={{
+                marginTop: 1,
+                marginBottom: 1,
+                width: "auto",
+                height: "220px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-around",
+                gap: 1,
+                flexFlow: "wrap",
+                overflow: "auto"
+              }}
+            >
+              {isEmpty(values) ? null : values?.units?.map((e, index) => {
+                // Esta função JavaScript sempre retorna um número aleatório entre min (incluído) e max (excluído):
+
+
+                return (
+                  <Paper
+                    key={e.description}
+                    sx={{
+                      height: 200,
+                      width: 150,
+                      backgroundColor: cores[Math.floor(Math.random() * (cores.length - 0) + 0)],
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "space-around",
+
+                    }}
+                  >
+                    <FolderIcon sx={{
+                      color: "#fff",
+                      width: "40px",
+                      height: "31.43px",
+                    }}></FolderIcon>
+                    <Paper
+                      component="div"
+                      elevation={0}
+                      sx={{
+                        width: "132px",
+                        height: "88px",
+                        left: "68px",
+                        top: "74px",
+                        background: "transparent",
+                        border: 0
+
+
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: 'Roboto',
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          fontSize: "64px",
+                          lineHeight: "75px",
+                          textAlign: "center",
+                          color: " #FFFFFF",
+                        }}
+                      >
+                        {e.cols}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: 'Roboto',
+                          fontStyle: "normal",
+                          fontHeight: 700,
+                          fontSize: "20px",
+                          lineHeight: "23px",
+                          textAlign: "center",
+                          color: "#FFFFFF",
+
+                        }}
+                      >
+                        Colaboradores
+                      </Typography>
+                    </Paper>
+                    <Typography
+                      sx={{
+                        fontFamily: 'Roboto',
+                        fontStyle: "normal",
+                        fontWeight: 200,
+                        fontSize: "16px",
+                        lineHeight: "19px",
+                        textAlign: "center",
+
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {e.description.toUpperCase()}
+                    </Typography>
+                  </Paper>
+                )
+              })}
+
+            </Box>
+          }
+          {/* fim do grid */}
+
+          <Divider />
+
+          {/* grafico */}
+
+          {((page == "Início") && (values?.permissions[0].description == "administrador")) &&
+            <Paper
+              sx={{
+                marginTop: theme.spacing(1),
+                width: "auto",
+                height: "522.5px",
+                left: "274px",
+                top: "434px",
+                background: "#FFFFFF",
+                border: "1px solid #F2F2F2",
+                borderRadius: "14px",
+                padding: theme.spacing(2),
+                display: "flex",
+                alignItems: "centrer",
+                justifyContent: "center",
+                flexDirection: "column",
+                overflow: "scroll"
+              }}
+            >
+
+              {/* <Grafico /> */}
+            </Paper>
+          }
+          {page == "Unidades" &&
+           <Paper></Paper>
+          }
+
+
+
+        </Box>
+
+        {/* -----------------------MODAL FOTO--------------------------------- */}
+        {/* <Modal
+        // open={openF}
+        // onClose={handleCloseF}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={AvatarModalStyle}>
+          {
+            1 - envio as imagens ImagensCarregadas e os dados do proprietario
+            2 - envio tambem funções para atualizar estes dados
+          }
+          <ModalFoto ImagensCarregadas={ImagensCarregadas} setImagens={setImagens} />
+        </Box>
+      </Modal> */}
+        {/* ----------------------------FIM MODAL FOTO----------------------- */}
       </Box>
     </Box>
   );
