@@ -2,7 +2,7 @@
  export function up(knex) {
     return  knex.schema.createTable('keys', function (table) {
         table.increments('id');                  
-        table.integer("id_okr").unsigned();        
+        table.integer("id_okr").unsigned().notNullable();        
         table.integer("id_user").unsigned();        
         table.foreign("id_okr").references("id").inTable("okrs").onDelete("cascade"); 
         table.foreign("id_user").references("id").inTable("users"); 

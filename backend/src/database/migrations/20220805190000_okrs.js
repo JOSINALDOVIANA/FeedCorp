@@ -2,7 +2,7 @@
  export function up(knex) {
     return  knex.schema.createTable('okrs', function (table) {
         table.increments('id');
-        table.integer("id_user").unsigned();           
+        table.integer("id_user").unsigned().notNullable();           
         table.foreign("id_user").references("id").inTable("users").onDelete("cascade");
         table.string("objective").notNullable();
         table.boolean("status").defaultTo(false);             
