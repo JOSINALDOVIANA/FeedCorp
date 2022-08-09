@@ -40,7 +40,7 @@ export default function Perfil() {
   React.useEffect(() => {
     setValues(rota.state)
   }, [])
-  console.log(values)
+  // console.log(values)
 
 
   return (
@@ -94,8 +94,9 @@ export default function Perfil() {
 
         <List>
           {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
-            <ListItem
-              onClick={() => {
+            <ListItem 
+              onClick={(e) => {
+
                 if (text == "Sair") {
                   localStorage.clear();
                   navegar('/login');
@@ -104,7 +105,11 @@ export default function Perfil() {
               }}
               key={text}
               disablePadding
-              sx={{ display: 'block' }}
+              sx={{ 
+                display: 'block',
+                "& :hover":{background:"#36D98D"},
+                 
+              }}
             >
               <ListItemButton
                 sx={{
@@ -112,6 +117,7 @@ export default function Perfil() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                selected={page==text?true:false}
               >
                 <ListItemIcon
                   sx={{
@@ -130,7 +136,9 @@ export default function Perfil() {
 
                 </ListItemIcon>
 
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={text}
+                 sx={{ opacity: open ? 1 : 0 }} 
+                 />
 
               </ListItemButton>
             </ListItem>

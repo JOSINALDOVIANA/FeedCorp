@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, Typography } from '@mui/material'
+import { Avatar, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography, useTheme } from '@mui/material'
 import api from '../../api';
 export default function SignIn() {
 
   const [permanecer, setPerm] = React.useState(false);
-
+ const theme=useTheme();
   const navegar = useNavigate();
 
   React.useEffect(() => {
@@ -59,14 +59,16 @@ export default function SignIn() {
 
   return (
 
-    <Container component="main" maxWidth="xs">
+    <Container sx={{ margin:0,padding:0,background:theme.opclient["03"],display:"flex",width:"100vw",height:"100vh",justifyContent:"center",alignItems:"center"}} maxWidth="100%">
 
       <Box
         sx={{
+         
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          width:"70%"
         }}
       >
         <Avatar src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"} sx={{ m: 1 }} />
@@ -75,8 +77,17 @@ export default function SignIn() {
           Login
         </Typography>
 
-        <Box component="form" onSubmit={(e) => { handleSubmit(e) }} noValidate sx={{ mt: 1 }}>
-          <input
+        <Box component="form" onSubmit={(e) => { handleSubmit(e) }} noValidate sx={{ 
+          mt: 1,
+          // background:theme.opclient["02"],
+          display:"flex",
+          flexDirection:'column',
+          justifyContent:'center',
+          width:"40%"
+         
+          }}>
+          <TextField
+            style={{marginBottom:theme.spacing(1)}}
             margin="normal"
             required
             id="email"
@@ -86,7 +97,7 @@ export default function SignIn() {
             autoFocus
           />
 
-          <input
+          <TextField
             margin="normal"
             required
 

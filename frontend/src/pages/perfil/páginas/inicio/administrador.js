@@ -5,7 +5,7 @@ import { UseDados } from '../../../../routes';
 
 function Administrador() {
   const [values,setValues]=UseDados();
-  console.log(values)
+  // console.log(values)
   return(
     <h1>{values?.permissions?.description}</h1>
   );
