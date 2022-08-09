@@ -40,7 +40,7 @@ export default function Perfil() {
   React.useEffect(() => {
     setValues(rota.state)
   }, [])
-  // console.log(values)
+  console.log(values)
 
 
   return (
