@@ -45,17 +45,13 @@ function Rotas() {
         () =>
             createTheme({
                 palette: {
-                    mode,
+                    white: "#f4f4f2 ",
+                    gray: "#d4cdc5 ",
+                    black: "#191013",
+                    darkGreen: '#2e946f',
+                    lightGreen: '#54ca93',
+                    cian: "#11998e"
                 },
-                opclient: {
-                    "01": "#d4cdc5 ",
-                    "02": "#5b88a5 ",
-                    "03": "#f4f4f2 ",
-                    "04": "#eb9064",
-                    "05": "#191013 ",
-                }
-
-
             }),
         [mode],
     );

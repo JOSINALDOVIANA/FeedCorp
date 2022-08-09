@@ -17,7 +17,7 @@ export const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
   })(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    background:theme.opclient["04"],
+    background:theme.palette.cian,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

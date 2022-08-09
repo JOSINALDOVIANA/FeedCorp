@@ -1,11 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography, useTheme } from '@mui/material'
+import { Avatar, Box, Checkbox, Grid, Typography, useTheme, Container } from '@mui/material'
+import { MuiBox, MuiButton, MuiLink, MuiTextField, MuiFormControlLabel } from './styles';
 import api from '../../api';
 export default function SignIn() {
 
   const [permanecer, setPerm] = React.useState(false);
- const theme=useTheme();
+  const theme = useTheme();
   const navegar = useNavigate();
 
   React.useEffect(() => {
@@ -59,37 +60,22 @@ export default function SignIn() {
 
   return (
 
-    <Container sx={{ margin:0,padding:0,background:theme.opclient["03"],display:"flex",width:"100vw",height:"100vh",justifyContent:"center",alignItems:"center"}} maxWidth="100%">
+    <Container component='main' maxWidth="xs">
 
-      <Box
-        sx={{
-         
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width:"70%"
-        }}
-      >
-        <Avatar src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"} sx={{ m: 1 }} />
+      <MuiBox>
+        <Avatar src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"}
+          sx={{ m: 1 }}
+        />
 
         <Typography component="h1" variant="h5" color='inherit'>
           Login
         </Typography>
 
-        <Box component="form" onSubmit={(e) => { handleSubmit(e) }} noValidate sx={{ 
-          mt: 1,
-          // background:theme.opclient["02"],
-          display:"flex",
-          flexDirection:'column',
-          justifyContent:'center',
-          width:"40%"
-         
-          }}>
-          <TextField
-            style={{marginBottom:theme.spacing(1)}}
+        <Box component="form" onSubmit={(e) => { handleSubmit(e) }} noValidate sx={{ mt: 1 }}>
+          <MuiTextField
             margin="normal"
             required
+            fullWidth
             id="email"
             label="E-mail"
             name="e-mail"
@@ -97,10 +83,10 @@ export default function SignIn() {
             autoFocus
           />
 
-          <TextField
+          <MuiTextField
             margin="normal"
             required
-
+            fullWidth
             name="password"
             label="Senha"
             type="password"
@@ -108,38 +94,38 @@ export default function SignIn() {
             autoComplete="current-password"
           />
 
-          <FormControlLabel
+          <MuiFormControlLabel
             control={<Checkbox onChange={() => setPerm(a => !a)} value="remember" />}
             label="Manter-me conectado"
           />
 
-          <Button
+          <MuiButton
             type="submit"
             variant="contained"
-
+            fullWidth
             sx={{ mt: 3, mb: 2 }}
           >
             Entrar
-          </Button>
+          </MuiButton>
 
-          <Grid container>
+          <MuiBox>
 
-            <Grid item xs>
-              <Link href='#'>
-                Esqueci-me a senha
-              </Link>
-            </Grid>
+            
+              <MuiLink href='#'>
+                Esqueceu sua senha?
+              </MuiLink>
+           
 
-            <Grid item>
-              <Link >
-                Cadastre-se
-              </Link>
-            </Grid>
+        
+              <MuiLink sx={{mt:2}}>
+                Ainda não tem conta? Cadastre-se
+              </MuiLink>
+       
 
-          </Grid>
+          </MuiBox>
 
         </Box>
-      </Box>
+      </MuiBox>
 
 
 

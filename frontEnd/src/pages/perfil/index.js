@@ -4,7 +4,7 @@ import { UseDados } from '../../routes';
 import {
   Box, Toolbar, List,
   CssBaseline, Typography, Divider, IconButton,
-  ListItem, ListItemButton, ListItemIcon, ListItemText
+  ListItem, ListItemButton, ListItemIcon, ListItemText, Avatar
 } from '@mui/material';
 
 // import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -62,18 +62,29 @@ export default function Perfil() {
             {open ? <ChevronLeftIcon /> : <MenuIcon />}
           </IconButton>
 
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+          <Box flexGrow='1'></Box>
+
+          <Avatar
+            sx={{
+              mr: theme.spacing(1),
+              cursor: 'pointer'
+            }}
+            alt={`${values?.dados?.name}`}
+            src={values?.image?.dados.url}
+          >
+          </Avatar>
+          <Typography>
+            {values?.dadosUser?.name.toUpperCase()}
           </Typography>
 
         </Toolbar>
       </AppBar>
       {/* BARRA LATERAL */}
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader sx={{display: 'flex', justifyContent: 'center'}}>
-          <MenuIcon/>
+        <DrawerHeader sx={{ display: 'flex', justifyContent: 'center' }}>
+          <MenuIcon />
           <Typography
-            variant="h5"
+            variant="h7"
             noWrap
             onClick={() => {
               navegar('/')
@@ -83,18 +94,18 @@ export default function Perfil() {
               cursor: 'pointer',
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            FeedCorporate
           </Typography>
         </DrawerHeader>
 
         <List>
           {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
-            <ListItem 
+            <ListItem
               onClick={(e) => {
 
                 if (text == "Sair") {
@@ -105,10 +116,10 @@ export default function Perfil() {
               }}
               key={text}
               disablePadding
-              sx={{ 
+              sx={{
                 display: 'block',
-                "& :hover":{background:"#36D98D"},
-                 
+                "& :hover": { background: "#36D98D" },
+
               }}
             >
               <ListItemButton
@@ -117,7 +128,7 @@ export default function Perfil() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                selected={page==text?true:false}
+                selected={page == text ? true : false}
               >
                 <ListItemIcon
                   sx={{
@@ -137,8 +148,8 @@ export default function Perfil() {
                 </ListItemIcon>
 
                 <ListItemText primary={text}
-                 sx={{ opacity: open ? 1 : 0 }} 
-                 />
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
 
               </ListItemButton>
             </ListItem>
