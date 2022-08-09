@@ -36,7 +36,7 @@ export default function SignIn() {
         alert(r.data.message)
       } else {
         dadosUser = r.data.dados;
-        permissions = r.data.permissions;
+        permissions = r.data.permissions[0];
         unit = r.data.unit;
         status = r.data.status;
       }

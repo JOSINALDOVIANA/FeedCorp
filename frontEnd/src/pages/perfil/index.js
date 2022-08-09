@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import {useNavigate} from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -26,7 +26,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import Inicio from './páginas/inicio';
-
+import Ferramentas from './páginas/ferramentas/index.js';
 import { UseDados } from '../../routes';
 import { useLocation } from 'react-router-dom';
 import { AppBar, Drawer, DrawerHeader } from './styles';
@@ -37,7 +37,7 @@ export default function Perfil() {
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = UseDados();
   const [page, setPage] = React.useState("Início");
-
+const navegar=useNavigate();
   const rota = useLocation();
   React.useEffect(() => {
     setValues(rota.state)
@@ -53,7 +53,7 @@ export default function Perfil() {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -64,7 +64,7 @@ export default function Perfil() {
             }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
@@ -79,7 +79,13 @@ export default function Perfil() {
         <Divider />
         <List>
           {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItem onClick={()=>{
+              if (text=="Sair") {
+                localStorage.clear();
+                navegar('/login');
+              }
+              setPage(text);
+            }} key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -117,6 +123,7 @@ export default function Perfil() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {page === "Início" && <Inicio />}
+        {page == "Ferramentas" && <Ferramentas/>}
       </Box>
     </Box>
   );
