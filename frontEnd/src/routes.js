@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles'
 
 import Telainicial from "./App";
 import Login from './pages/login';
+import Cadastro from './pages/cadastro'
 // import Test from './components/test/index.js'
 import Perfil from './pages/perfil';
 export const usuarioContext = createContext();
@@ -64,6 +65,7 @@ function Rotas() {
                         <Routes>
                             <Route path="/" element={<Telainicial />} />
                             <Route path="/login" element={<Login/>} />
+                            <Route path='/cadastro' element={<Cadastro/>}/>
                                 {/* <Route path="/test" element={<Test/>} />                                */}
                                 <Route path="/perfil" element={<Perfil/>} />
                         </Routes>

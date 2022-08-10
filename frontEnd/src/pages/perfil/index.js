@@ -64,6 +64,9 @@ export default function Perfil() {
 
           <Box flexGrow='1'></Box>
 
+          <Typography>
+            {values?.dadosUser?.name.toUpperCase()}
+          </Typography>
           <Avatar
             sx={{
               mr: theme.spacing(1),
@@ -73,9 +76,6 @@ export default function Perfil() {
             src={values?.image?.dados.url}
           >
           </Avatar>
-          <Typography>
-            {values?.dadosUser?.name.toUpperCase()}
-          </Typography>
 
         </Toolbar>
       </AppBar>
