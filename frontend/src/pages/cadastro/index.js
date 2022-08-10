@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
 
 export default function Cadastro(){
