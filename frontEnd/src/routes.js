@@ -64,10 +64,10 @@ function Rotas() {
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<Telainicial />} />
-                            <Route path="/login" element={<Login/>} />
-                            <Route path='/cadastro' element={<Cadastro/>}/>
-                                {/* <Route path="/test" element={<Test/>} />                                */}
-                                <Route path="/perfil" element={<Perfil/>} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path='/cadastro' element={<Cadastro />} />
+                            <Route path="/perfil" element={<Perfil />} />
+                            {/* <Route path="/test" element={<Test/>} />                                */}
                         </Routes>
                     </BrowserRouter>
                 </UserContextProvider>

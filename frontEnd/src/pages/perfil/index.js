@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { UseDados } from '../../routes';
 import {
   Box, Toolbar, List,
-  CssBaseline, Typography, Divider, IconButton,
+  CssBaseline, Typography, Divider, IconButton, Badge,
   ListItem, ListItemButton, ListItemIcon, ListItemText, Avatar
 } from '@mui/material';
 
@@ -17,6 +17,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import NotificationsIcon from '@mui/icons-material/Notifications'
 
 import { styled, useTheme } from '@mui/material/styles';
 import { AppBar, Drawer, DrawerHeader } from './styles';
@@ -64,12 +65,24 @@ export default function Perfil() {
 
           <Box flexGrow='1'></Box>
 
+          <Badge sx={{
+            marginRight: theme.spacing(3),
+            cursor: "pointer",
+            alignSelf: 'center'
+          }}
+            badgeContent={17}
+            color="error"
+          >
+            <NotificationsIcon />
+          </Badge>
+
           <Typography>
             {values?.dadosUser?.name.toUpperCase()}
           </Typography>
+
           <Avatar
             sx={{
-              mr: theme.spacing(1),
+              ml: theme.spacing(2),
               cursor: 'pointer'
             }}
             alt={`${values?.dados?.name}`}
@@ -79,8 +92,11 @@ export default function Perfil() {
 
         </Toolbar>
       </AppBar>
+
       {/* BARRA LATERAL */}
       <Drawer variant="permanent" open={open}>
+
+        {/* LOGO */}
         <DrawerHeader sx={{ display: 'flex', justifyContent: 'center' }}>
           <MenuIcon />
           <Typography
@@ -92,51 +108,41 @@ export default function Perfil() {
             sx={{
               //display: { xs: 'none', md: 'flex' },
               cursor: 'pointer',
-              fontFamily: 'monospace',
+              fontFamily: 'roboto',
               fontWeight: 700,
+              fontSize: 25,
               letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            FeedCorporate
+            FeedCorp.
           </Typography>
         </DrawerHeader>
 
-        <List>
+        {/* ITENS */}
+        <List
+          sx={{
+            display: 'block',
+            "& :hover": { background: "#36D98D" },
+          }}
+        >
           {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
-            <ListItem
-              onClick={(e) => {
 
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={(e) => {
                 if (text == "Sair") {
                   localStorage.clear();
                   navegar('/login');
                 }
                 setPage(text);
               }}
-              key={text}
-              disablePadding
-              sx={{
-                display: 'block',
-                "& :hover": { background: "#36D98D" },
-
-              }}
             >
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-                selected={page == text ? true : false}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
+              <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
+
+                <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
                   {index === 0 ? <HomeIcon /> : null}
                   {index === 1 ? <ApartmentIcon /> : null}
                   {index === 2 ? <ArticleIcon /> : null}
@@ -144,16 +150,14 @@ export default function Perfil() {
                   {index === 4 ? <ChatIcon /> : null}
                   {index === 5 ? <SettingsIcon /> : null}
                   {index === 6 ? <LogoutIcon /> : null}
-
                 </ListItemIcon>
 
-                <ListItemText primary={text}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
 
               </ListItemButton>
             </ListItem>
           ))}
+
         </List>
 
       </Drawer>
@@ -165,6 +169,7 @@ export default function Perfil() {
         {page === "Início" && <Inicio />}
         {page == "Ferramentas" && <Ferramentas />}
       </Box>
+
     </Box>
   );
 }
