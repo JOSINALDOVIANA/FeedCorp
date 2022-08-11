@@ -10,6 +10,6 @@
 
   await knex('evaluation_by_results').del()
   await knex('evaluation_by_results').insert([
-    { id_user: users[users.length-1].id,status:true,title:'Atendimento'},        
+    { id_user: users[users.length-1].id,title:'Atendimento'},        
   ]);
 };
