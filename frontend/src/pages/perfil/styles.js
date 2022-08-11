@@ -2,7 +2,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 
-const drawerWidth = 240;
+const drawerWidth = 215;
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',

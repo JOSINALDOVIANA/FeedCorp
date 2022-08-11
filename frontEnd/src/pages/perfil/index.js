@@ -121,15 +121,13 @@ export default function Perfil() {
         </DrawerHeader>
 
         {/* ITENS */}
-        <List
-          sx={{
-            display: 'block',
-            "& :hover": { background: "#36D98D" },
-          }}
-        >
-          {['Início', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
+        <List>
+          {['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
 
             <ListItem
+            // sx={{
+            //   "& :hover": { background: theme.palette.lightGreen},
+            // }}
               key={text}
               disablePadding
               onClick={(e) => {
@@ -152,7 +150,9 @@ export default function Perfil() {
                   {index === 6 ? <LogoutIcon /> : null}
                 </ListItemIcon>
 
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText sx={{opacity: open ? 1 : 0}}>
+                {text}
+                </ListItemText>
 
               </ListItemButton>
             </ListItem>
@@ -166,7 +166,7 @@ export default function Perfil() {
       {/* PÁGINAS */}
       <Box component="main" sx={{ flexGrow: 1, pl: 3, pr: 1 }}>
         <DrawerHeader />
-        {page === "Início" && <Inicio />}
+        {page === "Meu Painel" && <Inicio />}
         {page == "Ferramentas" && <Ferramentas />}
       </Box>
 

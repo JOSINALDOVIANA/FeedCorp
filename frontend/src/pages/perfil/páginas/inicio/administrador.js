@@ -1,13 +1,24 @@
 import React from 'react';
 import { UseDados } from '../../../../routes';
 
-// import { Container } from './styles';
+import { Box, Button, Divider, Paper } from '@mui/material';
+import { FeedBox, MuiBox } from './styles';
 
 function Administrador() {
   const [values,setValues]=UseDados();
   // console.log(values)
   return(
-    <h1>{values?.permissions?.description}</h1>
+
+    <MuiBox>
+
+      <FeedBox>
+      <Button variant='outlined'>Enviar Feedback</Button>
+      </FeedBox>
+      <Divider/>
+      <h1>{values?.permissions?.description}</h1>
+      
+    </MuiBox>
+
   );
 }
 
