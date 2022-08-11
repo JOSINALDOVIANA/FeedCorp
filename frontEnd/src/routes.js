@@ -48,10 +48,25 @@ function Rotas() {
                 palette: {
                     white: "#f4f4f2 ",
                     gray: "#d4cdc5 ",
+                    lightGray: "#F5F5F5 ",
                     black: "#191013",
+                    black2: '#252525',
+                    blueMarine: '#031634',
                     darkGreen: '#2e946f',
                     lightGreen: '#54ca93',
-                    cian: "#11998e"
+                    cian: "#11998e",
+                    darkCian: '##036564',
+                    teal: '#033649',
+                    purple: '#6930C3',
+                    lightBege: '##e8ddcb',
+                    bege: '##cdb380',
+
+                    card1: '#3AB4F2',
+                    card2: '#FBCB0A',
+                    card3: '#FEB139',
+                    card4: '#D9534F',
+
+
                 },
             }),
         [mode],

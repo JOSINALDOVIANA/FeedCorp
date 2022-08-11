@@ -47,7 +47,7 @@ export default function Perfil() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" elevation={2} open={open}>
         {/* BARRA SUPERIOR */}
         <Toolbar>
           <IconButton
@@ -125,9 +125,9 @@ export default function Perfil() {
           {['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
 
             <ListItem
-            // sx={{
-            //   "& :hover": { background: theme.palette.lightGreen},
-            // }}
+              // sx={{
+              //   "& :hover": { background: theme.palette.lightGreen},
+              // }}
               key={text}
               disablePadding
               onClick={(e) => {
@@ -150,9 +150,7 @@ export default function Perfil() {
                   {index === 6 ? <LogoutIcon /> : null}
                 </ListItemIcon>
 
-                <ListItemText sx={{opacity: open ? 1 : 0}}>
-                {text}
-                </ListItemText>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }}/>
 
               </ListItemButton>
             </ListItem>
@@ -164,7 +162,7 @@ export default function Perfil() {
 
 
       {/* PÁGINAS */}
-      <Box component="main" sx={{ flexGrow: 1, pl: 3, pr: 1 }}>
+      <Box component="main" sx={{ flexGrow: 1, pl: 3, pr: 1, background: theme.palette.lightGray }}>
         <DrawerHeader />
         {page === "Meu Painel" && <Inicio />}
         {page == "Ferramentas" && <Ferramentas />}
