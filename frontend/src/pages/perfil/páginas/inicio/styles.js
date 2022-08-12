@@ -11,7 +11,7 @@ export const MuiBox = styled('div')(({ theme }) => ({
 export const FeedBox = styled('div')(({ theme }) => ({
     marginBottom: 5,
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',    
 }))
 
 export const FeedPaper = styled(Paper)(({theme}) => ({

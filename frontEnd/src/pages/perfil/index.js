@@ -33,17 +33,23 @@ export default function Perfil() {
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
+  const [valor, setValor] = React.useState();
   const [values, setValues] = UseDados();
   const [page, setPage] = React.useState("Início");
   const navegar = useNavigate();
   const rota = useLocation();
 
   React.useEffect(() => {
-    setValues(rota.state)
+    setValues(rota.state);
+    setValor(rota.state)
   }, [])
-  console.log(values)
-
-
+  // console.log(values)
+const items={
+  "administrador":['Meu Painel', 'Corporação', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
+  "gestor":['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
+  "colaborador":['Meu Painel', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
+}
+console.log(items[`${valor?.permissions?.description}`])
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -98,7 +104,7 @@ export default function Perfil() {
 
         {/* LOGO */}
         <DrawerHeader sx={{ display: 'flex', justifyContent: 'center' }}>
-          <MenuIcon />
+        <Avatar src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"} />
           <Typography
             variant="h7"
             noWrap
@@ -122,7 +128,7 @@ export default function Perfil() {
 
         {/* ITENS */}
         <List>
-          {['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'].map((text, index) => (
+          {items[`${valor?.permissions?.description}`]?.map((text, index) => (
 
             <ListItem
               // sx={{
