@@ -43,13 +43,13 @@ export default function Perfil() {
     setValues(rota.state);
     setValor(rota.state)
   }, [])
-  // console.log(values)
+
 const items={
   "administrador":['Meu Painel', 'Corporação', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
   "gestor":['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
   "colaborador":['Meu Painel', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
 }
-console.log(items[`${valor?.permissions?.description}`])
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
