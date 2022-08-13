@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'
-import { UseDados } from '../../routes';
+import { UseDados, usuarioContext } from '../../routes';
 import {
   Box, Toolbar, List,
   CssBaseline, Typography, Divider, IconButton, Badge,
@@ -33,15 +33,14 @@ export default function Perfil() {
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
-  const [valor, setValor] = React.useState();
-  const [values, setValues] = UseDados();
-  const [page, setPage] = React.useState("Início");
+  
+  const {values, setValues} = React.useContext(usuarioContext);
+  const [page, setPage] = React.useState("Meu Painel");
   const navegar = useNavigate();
   const rota = useLocation();
 
   React.useEffect(() => {
-    setValues(rota.state);
-    setValor(rota.state)
+    setValues(rota.state);    
   }, [])
 
 const items={
@@ -49,7 +48,7 @@ const items={
   "gestor":['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
   "colaborador":['Meu Painel', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
 }
-
+console.log(values)
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -128,7 +127,7 @@ const items={
 
         {/* ITENS */}
         <List>
-          {items[`${valor?.permissions?.description}`]?.map((text, index) => (
+          {items[`${values?.permissions?.description}`]?.map((text, index) => (
 
             <ListItem
               // sx={{
