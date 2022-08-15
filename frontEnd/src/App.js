@@ -29,7 +29,7 @@ export default function App() {
             OPCLIENT
           </Typography>
 
-          <Button onClick={() => { navegar('/login/54896456554') }} color="inherit">
+          <Button onClick={() => { navegar('/login') }} color="inherit">
             Login
           </Button>
 
