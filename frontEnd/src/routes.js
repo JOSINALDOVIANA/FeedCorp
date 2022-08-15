@@ -58,8 +58,8 @@ function Rotas() {
                     darkCian: '##036564',
                     teal: '#033649',
                     purple: '#6930C3',
-                    lightBege: '##e8ddcb',
-                    bege: '##cdb380',
+                    lightBege: '#e8ddcb',
+                    bege: '#cdb380',
 
                     card1: '#3AB4F2',
                     card2: '#FBCB0A',

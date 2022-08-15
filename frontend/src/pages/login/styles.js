@@ -53,7 +53,7 @@ export const MuiTextField = styled(TextField)(({ theme }) => ({
 export const MuiLink = styled(Link)(({ theme }) => ({
     textDecoration: 'none',
     cursor: 'pointer',
-
+   fontFamily: 'roboto',
     color: theme.palette.black,
     '&:hover': {
         color: theme.palette.black,
