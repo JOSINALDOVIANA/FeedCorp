@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { usuarioContext } from '../../../../routes';
 
-// import { Container } from './styles';
+
 
 function Ferramentas() {
-  return (<h1>Ferramentas</h1>);
+  const {values,setValues}=useContext(usuarioContext);
+  return (<h1>Ferramentas-{values.permissions.description}</h1>);
 }
 
 export default Ferramentas;

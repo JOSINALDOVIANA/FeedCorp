@@ -6,15 +6,16 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js",
-    "migrateRun":"npx  knex migrate:latest",
-    "migrateRoolBack":"npx knex migrate:rollback",
-    "seedRun":"npx knex seed:run"
+    "migrateRun": "npx  knex migrate:latest",
+    "migrateRoolBack": "npx knex migrate:rollback",
+    "seedRun": "npx knex seed:run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1156.0",
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",

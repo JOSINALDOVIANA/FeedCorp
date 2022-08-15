@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Avatar, Box, Checkbox, Grid, Typography, useTheme, Container } from '@mui/material'
 import { MuiBox, MuiButton, MuiLink, MuiTextField, MuiFormControlLabel } from './styles';
 import api from '../../api';
@@ -8,7 +8,7 @@ export default function SignIn() {
   const [permanecer, setPerm] = React.useState(false);
   const theme = useTheme();
   const navegar = useNavigate();
-
+ 
   React.useEffect(() => {
     if (localStorage.getItem("values")) {
       const valores = localStorage.getItem("values");
