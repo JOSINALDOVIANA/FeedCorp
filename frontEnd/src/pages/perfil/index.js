@@ -33,22 +33,23 @@ export default function Perfil() {
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
-  
-  const {values, setValues} = React.useContext(usuarioContext);
+
+  const { values, setValues } = React.useContext(usuarioContext);
   const [page, setPage] = React.useState("Meu Painel");
   const navegar = useNavigate();
   const rota = useLocation();
 
   React.useEffect(() => {
-    setValues(rota.state);    
+    setValues(rota.state);
   }, [])
 
-const items={
-  "administrador":['Meu Painel', 'Corporação', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
-  "gestor":['Meu Painel', 'Unidades', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
-  "colaborador":['Meu Painel', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
-}
-console.log(values)
+  const items = {
+    "administrador": ['Meu Painel', 'Corporação', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
+    "gestor": ['Meu Painel', 'Minha Unidade', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
+    "colaborador": ['Meu Painel', 'Feedbacks', 'Meu desempenho', 'Mensagens', 'Configurações', 'Sair'],
+  }
+  console.log(values)
+  console.log(items['gestor'])
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -103,7 +104,7 @@ console.log(values)
 
         {/* LOGO */}
         <DrawerHeader sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Avatar src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"} />
+          <Avatar src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"} />
           <Typography
             variant="h7"
             noWrap
@@ -145,17 +146,42 @@ console.log(values)
             >
               <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
 
-                <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
-                  {index === 0 ? <HomeIcon /> : null}
-                  {index === 1 ? <ApartmentIcon /> : null}
-                  {index === 2 ? <ArticleIcon /> : null}
-                  {index === 3 ? <QuizIcon /> : null}
-                  {index === 4 ? <ChatIcon /> : null}
-                  {index === 5 ? <SettingsIcon /> : null}
-                  {index === 6 ? <LogoutIcon /> : null}
-                </ListItemIcon>
+                {
+                items[values?.permissions?.description] == items['administrador']?
+                  <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
+                    {index === 0 ? <HomeIcon /> : null}
+                    {index === 1 ? <ApartmentIcon /> : null}
+                    {index === 2 ? <ArticleIcon /> : null}
+                    {index === 3 ? <QuizIcon /> : null}
+                    {index === 4 ? <ChatIcon /> : null}
+                    {index === 5 ? <SettingsIcon /> : null}
+                    {index === 6 ? <LogoutIcon /> : null}
+                  </ListItemIcon>
+                  : 
+                  items[values?.permissions?.description] == items['gestor']?
+                  <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
+                    {index === 0 ? <HomeIcon /> : null}
+                    {index === 1 ? <ApartmentIcon /> : null}
+                    {index === 2 ? <ArticleIcon /> : null}
+                    {index === 3 ? <QuizIcon /> : null}
+                    {index === 4 ? <ChatIcon /> : null}
+                    {index === 5 ? <SettingsIcon /> : null}
+                    {index === 6 ? <LogoutIcon /> : null}
+                  </ListItemIcon> 
+                  : 
+                  items[values?.permissions?.description] == items['colaborador']?
+                  <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
+                    {index === 0 ? <HomeIcon /> : null}
+                    {index === 1 ? <ArticleIcon /> : null}
+                    {index === 2 ? <QuizIcon /> : null}
+                    {index === 3 ? <ChatIcon /> : null}
+                    {index === 4 ? <SettingsIcon /> : null}
+                    {index === 5 ? <LogoutIcon /> : null}
+                  </ListItemIcon>
+                  : null
+                  }
 
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }}/>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
 
               </ListItemButton>
             </ListItem>
