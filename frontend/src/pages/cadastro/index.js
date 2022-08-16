@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Grid, TextField, Typography, Button, Link } from '@mui/material'
+import { Box, Grid, TextField, Typography, Button, Link, Paper } from '@mui/material'
 import { MainSignUpBox, SignUpWallpaper, SignUpBox, SignUpLink, campoGrid } from './styles'
-
+import { MuiTextField, MuiButton } from '../login/styles';
 import { useNavigate } from 'react-router-dom';
 
 export default function Cadastro() {
@@ -10,11 +10,11 @@ export default function Cadastro() {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <SignUpWallpaper>
+            <SignUpWallpaper item>
                 {/* <h1>Wallpapper</h1> */}
             </SignUpWallpaper>
 
-            <SignUpBox>
+            <SignUpBox component={Paper} elevation={6} square>
 
                 <Box sx={{display: 'flex', alignSelf: 'flex-end', m: 2, position: 'fixed', top: 0}}>
                     <Typography mr={1}>Possui Conta?</Typography>
@@ -31,35 +31,25 @@ export default function Cadastro() {
                 <Box component="form"
                     //noValidate
                     //onSubmit={handleSubmit} 
-                    sx={{ m: '20px 50px 10px 50px' }}>
+                    sx={{ m: '20px 60px 10px 60px' }}>
 
                     <Grid container spacing={2}>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
+                        <Grid item xs={12} sm={12}>
+                            <MuiTextField
                                 autoComplete="given-name"
-                                name="firstName"
+                                name="name"
                                 required
                                 fullWidth
-                                id="firstName"
-                                label="First Name"
+                                id="name"
+                                label="Nome Completo"
                                 autoFocus
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="family-name"
-                            />
-                        </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
+                        <Grid item xs={12} sm={12}>
+                            <MuiTextField
                                 required
                                 fullWidth
                                 id="email"
@@ -69,8 +59,18 @@ export default function Cadastro() {
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
+                        <Grid item xs={12} sm={6}>
+                            <MuiTextField
+                                required
+                                fullWidth
+                                id="username"
+                                label="Nome de usuário"
+                                name="username"
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                            <MuiTextField
                                 required
                                 fullWidth
                                 name="password"
@@ -91,13 +91,13 @@ export default function Cadastro() {
                     </Grid>
                     
                     <Grid container justifyContent='flex-end'>
-                        <Button
+                        <MuiButton
                             type="submit"
                             variant="contained"
                             sx={{ mt: 3, mb: 2, alignSelf: 'flex-end' }}
                         >
                             Cadastrar
-                        </Button>
+                        </MuiButton>
                     </Grid>
                     {/* <Grid container justifyContent="flex-end">
                         <Grid item>

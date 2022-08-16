@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Link } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 
 
 // export const MainSignUpBox = styled(Box)(({ theme }) => ({
@@ -7,15 +7,18 @@ import { Box, Link } from '@mui/material';
 // }))
 
 export const SignUpWallpaper = styled(Box)(({ theme }) => ({
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     height: '100vh',
-    width: '60%',
-    background: theme.palette.cian,
+    width: '100%',
     [theme.breakpoints.down('md')]: {
         display: 'none'
     }
 }))
 
-export const SignUpBox = styled(Box)(({ theme }) => ({
+export const SignUpBox = styled(Grid)(({ theme }) => ({
     height: '100vh',
     width: '100%',
     display: 'flex',
