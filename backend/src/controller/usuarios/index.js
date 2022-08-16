@@ -30,6 +30,10 @@ export default {
                 if (!permissions) {
                     const perm_serial = permissions.map(item => ({ "id_user": user[0], "id_permission": item }));
                     await trx("user_permission").insert(perm_serial);
+                }else{
+                    
+                  const perm= await trx("permissions").where({"description":"administrador"}).first();
+                  await trx("user_permission").insert({ "id_user": user[0], "id_permission": perm.id });
                 }
 
                 !id_unit ? null : await trx("user_unit").insert({ id_user: user[0], id_unit });
@@ -297,10 +301,12 @@ export default {
                         .where({ "user_unit.id_user": dados.id })
                         .select("units.id", "units.description");
                     //carregando a empresa
-                    const company=await conexao("companies").where({"id":dados.id_company});
-                    
+                    let company=await conexao("companies").where({"id":dados.id_company}).first();
+                     company.state=await conexao("states").where({"id":company.id_state}).first();
+                     company.city=await conexao("cities").where({"id":company.id_city}).first();
+                     company.country=await conexao("countries").where({"id":company.id_country}).first();
                     // respondendo a requisição 
-                    return res.json({ status: true, ...{ dados, ...{permissions}, ...{unit},... {company}  } });
+                    return res.json({ status: true, ... {dadosUser:dados}, ...{permissions}, ...{unit},... {company}  } );
 
                 }
                 return res.json({ status: false, message: "vefique os dados e tente novamente" });

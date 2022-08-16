@@ -32,14 +32,16 @@ export default function SignIn() {
     let status;
     let image;
     let units;
+    let company;
     await api.post("/user/login", obt).then(r => {
       if (!r.data.status) {
         alert(r.data.message)
       } else {
-        dadosUser = r.data.dados;
+        dadosUser = r.data.dadosUser;
         permissions = r.data.permissions[0];
         unit = r.data.unit;
         status = r.data.status;
+        company=r.data.company;
       }
     });
 
@@ -53,7 +55,7 @@ export default function SignIn() {
         localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
       }
 
-      await navegar("/perfil", { state: { dadosUser, image, permissions, units, unit } });
+      await navegar("/perfil", { state: { dadosUser, image, permissions, units, unit,company } });
     }
 
   };

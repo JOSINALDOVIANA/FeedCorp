@@ -42,14 +42,13 @@ export default function Perfil() {
   React.useEffect(() => {
     setValues(rota.state);
   }, [])
-
+console.log(values)
   const items = {
     "administrador": ['Meu Painel', 'Corporação', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
     "gestor": ['Meu Painel', 'Minha Unidade', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
     "colaborador": ['Meu Painel', 'Feedbacks', 'Meu desempenho', 'Mensagens', 'Configurações', 'Sair'],
   }
-  console.log(values)
-  console.log(items['gestor'])
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />

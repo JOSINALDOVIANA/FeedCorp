@@ -4,9 +4,11 @@ import { Box, Grid, TextField, Typography, Button, Link, Paper } from '@mui/mate
 import { MainSignUpBox, SignUpWallpaper, SignUpBox, SignUpLink, campoGrid } from './styles'
 import { MuiTextField, MuiButton } from '../login/styles';
 import { useNavigate } from 'react-router-dom';
+import { usuarioContext } from '../../routes';
 
 export default function Cadastro() {
     const navegar = useNavigate();
+    const {values,setValues}=React.useContext(usuarioContext);
 
     return (
         <Box sx={{ display: 'flex' }}>

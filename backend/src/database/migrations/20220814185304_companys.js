@@ -8,6 +8,8 @@
         table.foreign("id_country").references("id").inTable("countries").onDelete("set null");
         table.integer("id_city").unsigned();           
         table.foreign("id_city").references("id").inTable("cities").onDelete("set null");
+        table.integer("id_plan").unsigned();           
+        table.foreign("id_plan").references("id").inTable("plans").onDelete("set null");
         table.string("namefantasy").notNullable();
         table.string("cnpj").notNullable();
         table.string("postcard").notNullable();

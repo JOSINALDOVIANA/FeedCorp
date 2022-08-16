@@ -10,6 +10,7 @@
        id_country:pais[0].id,
        id_state:estado[0].id,
        id_city:city[0].id,
+       id_plan:null,
        namefantasy:"SEBRAE",
        cnpj:"02215489863",
        postcard:"68909818",
