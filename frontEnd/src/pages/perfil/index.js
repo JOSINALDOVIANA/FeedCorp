@@ -146,7 +146,7 @@ console.log(values)
               <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
 
                 {
-                items[values?.permissions?.description] == items['administrador']?
+                values?.permissions?.description=="administrador"?
                   <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
                     {index === 0 ? <HomeIcon /> : null}
                     {index === 1 ? <ApartmentIcon /> : null}
@@ -157,7 +157,7 @@ console.log(values)
                     {index === 6 ? <LogoutIcon /> : null}
                   </ListItemIcon>
                   : 
-                  items[values?.permissions?.description] == items['gestor']?
+                  values?.permissions?.description=="gestor"?
                   <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
                     {index === 0 ? <HomeIcon /> : null}
                     {index === 1 ? <ApartmentIcon /> : null}
@@ -168,7 +168,7 @@ console.log(values)
                     {index === 6 ? <LogoutIcon /> : null}
                   </ListItemIcon> 
                   : 
-                  items[values?.permissions?.description] == items['colaborador']?
+                  values?.permissions?.description=="colaborador"?
                   <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}>
                     {index === 0 ? <HomeIcon /> : null}
                     {index === 1 ? <ArticleIcon /> : null}

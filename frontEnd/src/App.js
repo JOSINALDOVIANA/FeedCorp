@@ -22,10 +22,10 @@ export default function App() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="absolute">
-        <Toolbar>
-
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      <AppBar position="absolute" sx={{height: '100px', justifyContent: 'center', display: 'flex'}}>
+        <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <div></div>
+          <Typography variant="h6" component="div">
             OPCLIENT
           </Typography>
 
