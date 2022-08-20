@@ -64,7 +64,7 @@ export default function App() {
 
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
             <Button sx={{ color: theme.palette.cian }}>
-              Preço
+              Preços
             </Button>
             <Button sx={{ color: theme.palette.cian }}>
               Quem Somos
