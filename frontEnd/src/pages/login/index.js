@@ -119,9 +119,9 @@ export default function SignIn() {
            
 
         
-              <MuiLink sx={{mt:2}} onClick={()=>{ navegar('/cadastro')}}>
+              {/* <MuiLink sx={{mt:2}} onClick={()=>{ navegar('/cadastro')}}>
                 Ainda não tem conta? Cadastre-se
-              </MuiLink>
+              </MuiLink> */}
        
 
           </MuiBox>

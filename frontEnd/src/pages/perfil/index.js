@@ -22,7 +22,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import { styled, useTheme } from '@mui/material/styles';
 import { AppBar, Drawer, DrawerHeader } from './styles';
 
-import Inicio from './páginas/inicio';
+import Inicio from './páginas/users';
 import Ferramentas from './páginas/ferramentas/index.js';
 
 

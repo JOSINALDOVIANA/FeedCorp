@@ -46,7 +46,8 @@ function Rotas() {
         () =>
             createTheme({
                 palette: {
-                    white: "#f4f4f2 ",
+                    white: '#ffffff',
+                    white2: "#f4f4f2",
                     gray: "#d4cdc5 ",
                     lightGray: "#F5F5F5 ",
                     black: "#191013",
