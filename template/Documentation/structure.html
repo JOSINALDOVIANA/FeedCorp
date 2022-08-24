@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta data -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Spruha - React Admin  & Dashboard Template"
+    />
+    <meta name="author" content="Spruko Technologies Private Limited" />
+    <meta
+      name="keywords"
+      content="Admin , dashboard, backend, flat, no-jquery, Ui, crm, Admin  template, responsive , React-Bootstrap, clean, scss, modern, minimal, panel, React-Bootstrap Admin  dashboard, multi dashboard, react-bootstrap, Admin  dashboard "
+    />
+    <!-- Title -->
+    <!-- Title -->
+    <title>Spruha - React-18 Admin & Dashboard Template</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon" />
+    <link
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="assets/plugins/iconfonts/icons.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <!---Internal  Prism css-->
+    <link href="assets/plugins/prism/prism.css" rel="stylesheet" />
+    <link href="assets/plugins/treeview-prism/prism.css" rel="stylesheet" />
+    <link
+      href="assets/plugins/treeview-prism/prism-treeview.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+  </head>
+
+  <body class="theme-blush">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+      <div class="loader">
+        <div class="preloader">
+          <div class="spinner-layer pl-blush">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Page Loader -->
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+
+    <!-- #Top Bar -->
+    <section>
+      <!-- Left Sidebar -->
+      <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="admin-image">
+          <img src="assets/images/logo-white.png" alt="" />
+        </div>
+        <!-- Menu -->
+        <div class="menu main-sidebar">
+          <ul class="list" id="documenter_nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"
+                ><i class="fe fe-airplay sidemenu-icon"></i
+                ><span class="sidemenu-label">Introduction</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gettingStrated.html"
+                ><i class="fe fe-download sidemenu-icon"></i>
+                <span class="sidemenu-label">Getting Started</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="folder-structure.html"
+                ><i class="fe fe-folder sidemenu-icon"></i
+                ><span class="sidemenu-label">Folder structure</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="layouts.html"
+                ><i class="fe fe-layout sidemenu-icon"></i
+                ><span class="sidemenu-label">Layouts</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="faqs.html"
+                ><i class="fe fe-help-circle sidemenu-icon"></i
+                ><span class="sidemenu-label me-5 fw-bold">Faqs</span>
+                <i
+                  class="fa fa-star float-right sidemenu-icon-2 text-warning ms-5"
+                ></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="router.html"
+                ><i class="fe fe-grid sidemenu-icon"></i>
+                <span class="sidemenu-label me-5 fw-bold">Router</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gulp.html"
+                ><i class="fe fe-settings sidemenu-icon"></i
+                ><span class="sidemenu-label">Gulp</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect waves-block" href="structure.html"
+                ><i class="fe fe-codepen sidemenu-icon"></i>
+                <span class="sidemenu-label">Structure</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="plugins.html"
+                ><i class="fe fe-droplet sidemenu-icon"></i
+                ><span class="sidemenu-label">Plugins</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="file-generate.html"
+                ><i class="fe fe-file-plus sidemenu-icon"></i>
+                <span class="sidemenu-label">File Generate</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="theme.html"
+                ><i class="fe fe-layers sidemenu-icon"></i>
+                <span class="sidemenu-label">Theme Style</span></a
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- #Menu -->
+      </aside>
+      <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content mt-4 home">
+      <div class="container-fluid">
+        <div class="block-header mt-3 ml-3">
+          <h1>Spruha – React Admin & Dashboard Template</h1>
+        </div>
+        <div class="">
+          <div class="alert alert-info">
+            <button
+              type="button"
+              class="btn-close"
+              data-dismiss="alert"
+              aria-hidden="true"
+            >
+              ×
+            </button>
+            <strong>Note:-</strong>
+            <hr class="message-inner-separator" />
+            <p>
+              Please refer <b class="text-primary fs-6">Faq's </b>page in
+              documentation itself for queries like customization like color
+              ,rtl ,dark style..etc.
+            </p>
+          </div>
+        </div>
+        <div class="row clearfix">
+          <div class="col-sm-12 col-lg-12 col-xl-9 page-section">
+            <div class="card" id="folder-structure">
+              <div class="body pb-0">
+                <h5 class="mt-0">Folder Structure</h5>
+              </div>
+
+              <pre
+                class="bg-transparent p-0 m-0"
+              ><code class="language-treeview bg-transparent pt-0 pb-0 folder-structure1 tab-size-0">Spruha/
+├── node_modules
+├── public/
+|   ├── favicon.ico
+|   ├── index.html
+|   ├── manifest.json
+|   └── roobt.txt
+├── src/
+|   ├── assets
+|   |   ├── css
+|   |   ├── Color
+|   |   ├── images
+|   |   ├── iconfonts
+|   |   ├── plugins
+|   |   ├── scss
+|   |   └── switcher
+|   ├── components
+|   ├── data
+|   └── layouts
+|       ├── BacktoTop
+|       ├── Header
+|       ├── Footer
+|       ├── Loader
+|       ├── RightSide
+|       ├── Sidebar
+|       └── Switcher
+├── index.js
+├── index.scss
+├── logo.svg
+├── reportWebVitals.js
+├── setupTests.js
+├── .gitignore
+├── generate-react-cli.json
+├── gulpfile.js
+├── package.json
+├── README.md
+└── yarn.lock
+
+					</code></pre>
+
+              <div class="card-body pt-0">
+                <div class="table-responsive">
+                  <table class="table table-striped border mb-0 component-item">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>File</th>
+                        <th>Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td>node_modules</td>
+                        <td>
+                          Node.js creates this folder and puts all third party
+                          modules listed in package.json inside of it.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>favicon.ico</td>
+                        <td>
+                          Every site wants to look good on the bookmark bar. Get
+                          started with your very own React icon.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>index.html</td>
+                        <td>
+                          The main HTML page that is served when someone visits
+                          your site. Most of the time you'll never need to edit
+                          it. The CLI automatically adds all js and css files
+                          when building your app so you never need to add any
+                          <code>&lt;script&gt;</code> or
+                          <code>&lt;link&gt;</code> tags here manually.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>manifest.json</td>
+                        <td>
+                          Manifest is provide information about an application
+                          in a JSON text file the manifest is to install web
+                          applications to your device, provide user with quick
+                          access and a good experience
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>roobts.txt</td>
+                        <td>
+                          Different browsers have different levels of support of
+                          the web standards. Polyfills help normalize those
+                          differences. You should be pretty safe with core-js
+                          and zone.js, but be sure to check out the Browser
+                          Support guide for more information.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>index.js</td>
+                        <td>
+                          Routing basically means navigating between pages. You
+                          have seen many sites with links that direct you to a
+                          new page. This can be achieved using routing.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>index.scss</td>
+                        <td>Global Sss/Scss code.</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>reportWebVitals.js</td>
+                        <td>
+                          Create React App includes a built-in tool for
+                          measuring the real life performance of your app
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>app.js</td>
+                        <td>
+                          Defines AppModule, the root module that tells React
+                          how to assemble the application. Right now it declares
+                          only the AppComponent. Soon there will be more
+                          components to declare.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>assets</td>
+                        <td>
+                          A folder where you can put images, css, json data
+                          anything else to be copied wholesale when you build
+                          your application.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>styles.scss</td>
+                        <td>
+                          Your global styles go here. Most of the time you'll
+                          want to have local styles in your components for
+                          easier maintenance, but styles that affect all of your
+                          app need to be in a central place.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>.gitignore</td>
+                        <td>
+                          Git configuration to make sure autogenerated files are
+                          not commited to source control.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td>package.json</td>
+                        <td>
+                          npm configuration listing the third party packages
+                          your project uses. You can also add your own custom
+                          scripts here.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>generate-react-cli.json</td>
+                        <td>
+                          The easiest way to create a component is with the
+                          React CLI. You can also create a component manually.
+                          By useing generate-react-cli.json
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>README.md</td>
+                        <td>
+                          Basic documentation for your project, pre-filled with
+                          CLI command information. Make sure to enhance it with
+                          project documentation so that anyone checking out the
+                          repo can build your app!
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-12 d-none d-xl-block custom-leftnav">
+            <div class="main-content-left-components">
+              <div class="card custom-card">
+                <div class="card-body component-item">
+                  <div
+                    class="collapse navbar-collapse justify-content-end"
+                    id="main-menu"
+                  >
+                    <ul class="navbar-nav">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#folder-structure"
+                          >Folder structure</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer opened -->
+      <div class="main-footer ht-40">
+        <div class="pd-t-0-f ht-100p">
+          <span
+            >Copyright © <span id="year"></span>
+            <a href="javascript:void(0)">Spruha</a>. Designed with
+            <span class="fa fa-heart text-danger"></span> by
+            <a href="javascript:void(0)"> Spruko </a> All rights reserved.</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="color-bg">
+      <div class="sidebar__toggle" data-toggle="sidebar">
+        <a class="open-toggle" href="javascript:void(0);"
+          ><i class="fe fe-menu"></i
+        ></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="nav-item mr-8">
+          <a
+            class="btn btn-primary"
+            href="https://1.envato.market/RA3qN"
+            target="_blank"
+            ><i class="icon-help2"></i> Buy Now</a
+          >
+        </li>
+        <li class="nav-item mr-8">
+          <a class="btn btn-success" href="https://1.envato.market/MGEaN"
+            ><i class="icon-bag3"></i> Portfolio</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="btn btn-info mr-3"
+            href="https://spruko.com/licenses.html"
+            target="_blank"
+            ><i class="icon-bag3"></i> Licenses</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="assets/bundles/libscripts.bundle.js"></script>
+    <!-- Lib Scripts Plugin Js -->
+    <script src="assets/bundles/vendorscripts.bundle.js"></script>
+    <!-- Lib Scripts Plugin Js -->
+    <script src="assets/bundles/mainscripts.bundle.js"></script>
+    <!-- Custom Js -->
+
+    <!-- Internal Prism js-->
+    <script src="assets/plugins/prism/prism.js"></script>
+
+    <!-- Treeview js-->
+    <script src="assets/plugins/treeview-prism/prism.js"></script>
+    <script src="assets/plugins/treeview-prism/prism-treeview.js"></script>
+
+    <!-- Perfectscroll js-->
+    <script src="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/p-scroll.js"></script>
+
+    <!-- Custom js-->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/menuspy.min.js.js"></script>
+
+    <script>
+      var elm = document.querySelector("#main-menu");
+      var ms = new MenuSpy(elm);
+
+      (function () {
+        if (typeof self === "undefined" || !self.Prism || !self.document) {
+          return;
+        }
+
+        /**
+         * Class name for <pre> which is activating the plugin
+         * @type {String}
+         */
+        var PLUGIN_CLASS = "line-numbers";
+
+        /**
+         * Resizes line numbers spans according to height of line of code
+         * @param  {Element} element <pre> element
+         */
+        var _resizeElement = function (element) {
+          var codeStyles = getStyles(element);
+          var whiteSpace = codeStyles["white-space"];
+
+          if (whiteSpace === "pre-wrap" || whiteSpace === "pre-line") {
+            var codeElement = element.querySelector("code");
+            var lineNumbersWrapper =
+              element.querySelector(".line-numbers-rows");
+            var lineNumberSizer = element.querySelector(".line-numbers-sizer");
+            var codeLines = element.textContent.split("\n");
+
+            if (!lineNumberSizer) {
+              lineNumberSizer = document.createElement("span");
+              lineNumberSizer.className = "line-numbers-sizer";
+
+              codeElement.appendChild(lineNumberSizer);
+            }
+
+            lineNumberSizer.style.display = "block";
+
+            codeLines.forEach(function (line, lineNumber) {
+              lineNumberSizer.textContent = line || "\n";
+              var lineSize = lineNumberSizer.getBoundingClientRect().height;
+              lineNumbersWrapper.children[lineNumber].style.height =
+                lineSize + "px";
+            });
+
+            lineNumberSizer.textContent = "";
+            lineNumberSizer.style.display = "none";
+          }
+        };
+
+        /**
+         * Returns style declarations for the element
+         * @param {Element} element
+         */
+        var getStyles = function (element) {
+          if (!element) {
+            return null;
+          }
+
+          return window.getComputedStyle
+            ? getComputedStyle(element)
+            : element.currentStyle || null;
+        };
+
+        window.addEventListener("resize", function () {
+          Array.prototype.forEach.call(
+            document.querySelectorAll("pre." + PLUGIN_CLASS),
+            _resizeElement
+          );
+        });
+
+        Prism.hooks.add("complete", function (env) {
+          if (!env.code) {
+            return;
+          }
+
+          // works only for <code> wrapped inside <pre> (not inline)
+          var pre = env.element.parentNode;
+          // Original regex check for class, leaving it here
+          // for its redundancy check
+          var clsReg = /\s*\bline-numbers\b\s*/;
+          // New regex check for opt-out class
+          var clsRegB = /\s*\bno-line-numbers\b\s*/;
+
+          if (env.element.querySelector(".line-numbers-rows")) {
+            // Abort if line numbers already exists
+            return;
+          }
+
+          // Added to facilitate opting out
+          if (clsRegB.test(pre.className)) {
+            // Respect the opt-out
+            return;
+          }
+
+          if (clsReg.test(env.element.className)) {
+            // Remove the class "line-numbers" from the <code>
+            env.element.className = env.element.className.replace(clsReg, " ");
+          }
+          if (!clsReg.test(pre.className)) {
+            // Add the class "line-numbers" to the <pre>
+            pre.className += " line-numbers";
+          }
+
+          var match = env.code.match(/\n(?!$)/g);
+          var linesNum = match ? match.length + 1 : 1;
+          var lineNumbersWrapper;
+
+          var lines = new Array(linesNum + 1);
+          lines = lines.join("<span></span>");
+
+          lineNumbersWrapper = document.createElement("span");
+          lineNumbersWrapper.setAttribute("aria-hidden", "true");
+          lineNumbersWrapper.className = "line-numbers-rows";
+          lineNumbersWrapper.innerHTML = lines;
+
+          if (pre.hasAttribute("data-start")) {
+            pre.style.counterReset =
+              "linenumber " +
+              (parseInt(pre.getAttribute("data-start"), 10) - 1);
+          }
+
+          env.element.appendChild(lineNumbersWrapper);
+
+          _resizeElement(pre);
+        });
+      })();
+    </script>
+  </body>
+</html>

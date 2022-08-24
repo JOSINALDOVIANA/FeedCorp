@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta data -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Spruha -  React Admin  & Dashboard Template"
+    />
+    <meta name="author" content="Spruko Technologies Private Limited" />
+    <meta
+      name="keywords"
+      content="Admin , dashboard, backend, flat, no-jquery, Ui, crm, Admin  template, responsive , React-Bootstrap, clean, scss, modern, minimal, panel, React-Bootstrap Admin  dashboard, multi dashboard, react-bootstrap, Admin  dashboard "
+    />
+    <!-- Title -->
+    <title>Spruha - React-18 Admin & Dashboard Template</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon" />
+    <link
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="assets/plugins/iconfonts/icons.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <!---Internal  Prism css-->
+    <link href="assets/plugins/prism/prism.css" rel="stylesheet" />
+    <link href="assets/plugins/treeview-prism/prism.css" rel="stylesheet" />
+    <link
+      href="assets/plugins/treeview-prism/prism-treeview.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+  </head>
+
+  <body class="theme-blush">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+      <div class="loader">
+        <div class="preloader">
+          <div class="spinner-layer pl-blush">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Page Loader -->
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+
+    <!-- Sidebarover lay -->
+    <div class="sidebar-overlay" data-toggle="sidebar"></div>
+
+    <!-- #Top Bar -->
+    <section>
+      <!-- Left Sidebar -->
+      <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="admin-image">
+          <img src="assets/images/logo-white.png" alt="" />
+        </div>
+        <!-- Menu -->
+        <div class="menu main-sidebar">
+          <ul class="list" id="documenter_nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"
+                ><i class="fe fe-airplay sidemenu-icon"></i
+                ><span class="sidemenu-label">Introduction</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gettingStrated.html"
+                ><i class="fe fe-download sidemenu-icon"></i>
+                <span class="sidemenu-label">Getting Started</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="folder-structure.html"
+                ><i class="fe fe-folder sidemenu-icon"></i
+                ><span class="sidemenu-label">Folder structure</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="layouts.html"
+                ><i class="fe fe-layout sidemenu-icon"></i
+                ><span class="sidemenu-label">Layouts</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="faqs.html"
+                ><i class="fe fe-help-circle sidemenu-icon"></i
+                ><span class="sidemenu-label me-5 fw-bold">Faqs</span>
+                <i
+                  class="fa fa-star float-right sidemenu-icon-2 text-warning ms-5"
+                ></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="router.html"
+                ><i class="fe fe-grid sidemenu-icon"></i>
+                <span class="sidemenu-label me-5 fw-bold">Router</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gulp.html"
+                ><i class="fe fe-settings sidemenu-icon"></i
+                ><span class="sidemenu-label">Gulp</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect waves-block" href="structure.html"
+                ><i class="fe fe-codepen sidemenu-icon"></i>
+                <span class="sidemenu-label">Structure</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="plugins.html"
+                ><i class="fe fe-droplet sidemenu-icon"></i
+                ><span class="sidemenu-label">Plugins</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="file-generate.html"
+                ><i class="fe fe-file-plus sidemenu-icon"></i>
+                <span class="sidemenu-label">File Generate</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="theme.html"
+                ><i class="fe fe-layers sidemenu-icon"></i>
+                <span class="sidemenu-label">Theme Style</span></a
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- #Menu -->
+      </aside>
+      <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content mt-4 home">
+      <div class="container-fluid content-height">
+        <div class="row clearfix">
+          <div class="col-sm-12">
+            <div class="">
+              <h3>
+                <span class="text-primary">Spruha</span> - React-18 Admin
+                Dashboard Template
+              </h3>
+              <div class="card" id="faqs">
+                <div class="card-body">
+                  <div class="header">
+                    <h2>Used Plugins & Reference Links</h2>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered mt-4">
+                      <thead>
+                        <tr>
+                          <th>Plugin</th>
+                          <th>Version</th>
+                          <th>URL</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>React</td>
+                          <td>18.2.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-bootstrap</td>
+                          <td>2.4.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-bootstrap"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-bootstrap</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-apexcharts</td>
+                          <td>1.4.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-apexcharts"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-apexcharts</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Rect-c3js</td>
+                          <td>0.1.20</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-c3js"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-c3js</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-chartjs-2</td>
+                          <td>4.3.1</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-chartjs-2"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-chartjs-2</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-countdown</td>
+                          <td>2.3.2</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-countdown"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-countdown</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-countup</td>
+                          <td>6.3.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-countup"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-countup</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-custom-scrollbars</td>
+                          <td>4.2.1</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-custom-scrollbars"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-custom-scrollbars</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-data-table-component</td>
+                          <td>7.5.2</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-data-table-component"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-data-table-component</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-data-table-component-extensions</td>
+                          <td>1.6.0</td>
+                          <td>
+                            <a
+                              href="react-data-table-component-extensions"
+                              target="_blank"
+                              >react-data-table-component-extensions</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-datepicker</td>
+                          <td>4.8.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-datepicker"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-datepicker</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-day-picker</td>
+                          <td>8.0.7</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-day-picker"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-day-picker</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React Draft Wysiwyg</td>
+                          <td>1.14.7</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-draft-wysiwyg"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-draft-wysiwyg</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-dropzone</td>
+                          <td>14.2.2</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-dropzone"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-dropzone</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-intl-tel-input</td>
+                          <td>8.2.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-intl-tel-input"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-intl-tel-input</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-leaflet</td>
+                          <td>4.0.1</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-leaflet"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-leaflet</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-lightgallery</td>
+                          <td>0.9.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-lightgallery"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-lightgallery</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-maskinput</td>
+                          <td>3.2.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-maskinput"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-maskinput</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-multi-select-component</td>
+                          <td>4.2.9</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-multi-select-component"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-multi-select-component</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-multiple-select-dropdown-lite</td>
+                          <td>2.0.5</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-multiple-select-dropdown-lite"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-multiple-select-dropdown-lite</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-nvd3</td>
+                          <td>0.5.7</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-nvd3t"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-nvd3t</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-perfect-scrollbar,</td>
+                          <td>1.5.8"</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-perfect-scrollbar"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-perfect-scrollbar</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-quilljs</td>
+                          <td>1.3.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-quilljs"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-quilljs</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>React-rating</td>
+                          <td>2.0.5</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-rating"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-rating</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-searchable-dropdown</td>
+                          <td>2.0.3</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-searchable-dropdown"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-searchable-dropdown</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-router-dom</td>
+                          <td>: 6.3.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-router-dom"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-router-dom</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-select</td>
+                          <td>5.4.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-select"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-select</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-simple-maps</td>
+                          <td>2.3.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-simple-maps"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-simple-maps</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-slick</td>
+                          <td>0.29.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-slick"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-slick</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-step-progress</td>
+                          <td>1.0.3</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-step-progress"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-step-progress</a
+                            >
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td>react-stepzilla</td>
+                          <td>7.0.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-stepzilla"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-stepzilla</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-tag-input-component</td>
+                          <td>1.0.7</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-tag-input-component"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-tag-input-component</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>react-toastify</td>
+                          <td>9.0.5</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/react-toastify"
+                              target="_blank"
+                              >https://www.npmjs.com/package/react-toastify</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>yup</td>
+                          <td>0.32.11</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/yup"
+                              target="_blank"
+                              >https://www.npmjs.com/package/yup</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sweetalert2</td>
+                          <td>11.4.19</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/sweetalert2"
+                              target="_blank"
+                              >https://www.npmjs.com/package/sweetalert2</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>chart.js</td>
+                          <td>3.8.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/chart.js?activeTab=readme"
+                              target="_blank"
+                              >https://www.npmjs.com/package/chart.js?activeTab=readme</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>deni-react-treeview</td>
+                          <td>1.1.11</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/deni-react-treeview"
+                              target="_blank"
+                              >https://www.npmjs.com/package/deni-react-treeview</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Material-ui</td>
+
+                          <td>4.12.4</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/@material-ui/core"
+                              target="_blank"
+                              >https://www.npmjs.com/package/@material-ui/core</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Material-ui-dropzone</td>
+
+                          <td>3.5.0</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/material-ui-dropzone"
+                              target="_blank"
+                              >https://www.npmjs.com/package/material-ui-dropzone</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>echarts-for-react</td>
+
+                          <td>4.12.4</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/echarts-for-react"
+                              target="_blank"
+                              >https://www.npmjs.com/package/echarts-for-react</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>formik</td>
+
+                          <td>2.2.9</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/formik"
+                              target="_blank"
+                              >https://www.npmjs.com/package/formik</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>rc-color-picker</td>
+
+                          <td>1.2.6</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/rc-color-picker"
+                              target="_blank"
+                              >https://www.npmjs.com/package/rc-color-picker</a
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>@simonwep/pickr</td>
+
+                          <td>1.8.2</td>
+                          <td>
+                            <a
+                              href="https://www.npmjs.com/package/@simonwep/pickr"
+                              target="_blank"
+                              >https://www.npmjs.com/package/@simonwep/pickr</a
+                            >
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="color-bg">
+      <div class="sidebar__toggle" data-toggle="sidebar">
+        <a class="open-toggle" href="javascript:void(0);"
+          ><i class="fe fe-menu"></i
+        ></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="nav-item mr-8">
+          <a
+            class="btn btn-primary"
+            href="https://1.envato.market/RA3qN"
+            target="_blank"
+            ><i class="icon-help2"></i> Buy Now</a
+          >
+        </li>
+        <li class="nav-item mr-8">
+          <a class="btn btn-success" href="https://1.envato.market/MGEaN"
+            ><i class="icon-bag3"></i> Portfolio</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="btn btn-info mr-3"
+            href="https://spruko.com/licenses.html"
+            target="_blank"
+            ><i class="icon-bag3"></i> Licenses</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="assets/bundles/libscripts.bundle.js"></script>
+    <!-- Lib Scripts Plugin Js -->
+    <script src="assets/bundles/morphingsearchscripts.bundle.js"></script>
+    <!-- morphing search Js -->
+    <script src="assets/bundles/vendorscripts.bundle.js"></script>
+    <!-- Lib Scripts Plugin Js -->
+    <script src="assets/bundles/mainscripts.bundle.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/bundles/morphingscripts.bundle.js"></script>
+    <!-- morphing search page js -->
+
+    <!-- Internal Prism js-->
+    <script src="assets/plugins/prism/prism.js"></script>
+
+    <!-- Treeview js-->
+    <script src="assets/plugins/treeview-prism/prism.js"></script>
+    <script src="assets/plugins/treeview-prism/prism-treeview.js"></script>
+
+    <!-- Perfectscroll js-->
+    <script src="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/p-scroll.js"></script>
+
+    <!-- Custom js-->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/menuspy.min.js.js"></script>
+  </body>
+</html>

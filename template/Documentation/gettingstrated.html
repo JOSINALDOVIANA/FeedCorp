@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta data -->
+  <meta charset="UTF-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Spruha -  React Admin  & Dashboard Template">
+  <meta name="author" content="Spruko Technologies Private Limited">
+  <meta name="keywords"
+    content="Admin , dashboard, backend, flat, no-jquery, Ui, crm, Admin  template, responsive , React-Bootstrap, clean, scss, modern, minimal, panel, React-Bootstrap Admin  dashboard, multi dashboard, react-bootstrap, Admin  dashboard ">
+  <!-- Title -->
+  <!-- Title -->
+  <title>Spruha - React-18 Admin & Dashboard Template</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+  <link href="assets/plugins/iconfonts/icons.css" rel="stylesheet" />
+  <!-- Custom Css -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!---Internal  Prism css-->
+  <link href="assets/plugins/prism/prism.css" rel="stylesheet">
+  <link href="assets/plugins/treeview-prism/prism.css" rel="stylesheet">
+  <link href="assets/plugins/treeview-prism/prism-treeview.css" rel="stylesheet">
+  <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-blush">
+  <!-- Page Loader -->
+  <div class="page-loader-wrapper">
+    <div class="loader">
+      <div class="preloader">
+        <div class="spinner-layer pl-blush">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #END# Page Loader -->
+
+  <!-- Overlay For Sidebars -->
+  <div class="overlay"></div>
+  <!-- #END# Overlay For Sidebars -->
+
+
+  <!-- #Top Bar -->
+  <section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="admin-image"> <img src="assets/images/logo-white.png" alt=""> </div>
+      <!-- Menu -->
+      <div class="menu main-sidebar">
+        <ul class="list" id="documenter_nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="fe fe-airplay sidemenu-icon"></i><span
+                class="sidemenu-label">Introduction</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gettingStrated.html"><i class="fe fe-download sidemenu-icon"></i>
+              <span class="sidemenu-label">Getting Started</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="folder-structure.html"><i class="fe fe-folder sidemenu-icon"></i><span
+                class="sidemenu-label">Folder structure</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="layouts.html"><i class="fe fe-layout sidemenu-icon"></i><span
+                class="sidemenu-label">Layouts</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="faqs.html"><i class="fe fe-help-circle sidemenu-icon"></i><span
+                class="sidemenu-label me-5 fw-bold">Faqs</span>
+              <i class="fa fa-star float-right sidemenu-icon-2 text-warning ms-5"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="router.html"><i class="fe fe-grid sidemenu-icon"></i>
+              <span class="sidemenu-label me-5 fw-bold">Router</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gulp.html"><i class="fe fe-settings sidemenu-icon"></i><span
+                class="sidemenu-label">Gulp</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-block" href="structure.html"><i
+                class="fe fe-codepen sidemenu-icon"></i>
+              <span class="sidemenu-label">Structure</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="plugins.html"><i class="fe fe-droplet sidemenu-icon"></i><span
+                class="sidemenu-label">Plugins</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="file-generate.html"><i class="fe fe-file-plus sidemenu-icon"></i>
+              <span class="sidemenu-label">File Generate</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="theme.html"><i class="fe fe-layers sidemenu-icon"></i>
+              <span class="sidemenu-label">Theme Style</span></a>
+          </li>
+        </ul>
+      </div>
+      <!-- #Menu -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+  </section>
+
+  <section class="content home">
+    <div class="container-fluid">
+      <div class="block-header mt-3 ml-3">
+        <h3>Spruha– React-18 Admin & Dashboard Template</h3>
+      </div>
+      <div class="">
+        <div class="alert alert-info">
+          <button type="button" class="btn-close" data-dismiss="alert" aria-hidden="true">
+            ×
+          </button>
+          <strong>Note:-</strong>
+          <hr class="message-inner-separator" />
+          <p>
+            Please refer <a href="faqs.html"><code class="text-dark"> Faq's</code></a> page in documentation
+            itself for queries and customization like Colors, RTL, Dark
+            style..etc.
+          </p>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-sm-9">
+          <div class="row clearfix">
+            <div class="col-sm-12">
+              <div class="card section">
+                <div class="body">
+                  <h5 class="mt-0 mb-2">Introduction to the React</h5>
+                  <hr>
+                  <p>
+                    Welcome to React..!
+                    <br>
+                    React is an application design framework and development platform for creating
+                    efficient and sophisticated single-page apps. It helps you to build modern
+                    applications for the Desktop, Web and Mobile.
+
+                  </p>
+                </div>
+              </div>
+
+              <div class="card section" id="Gettingstart">
+                <div class="body">
+                  <h5 class="mt-0 mb-2">Getting Started</h5>
+                  <hr>
+                  <h6>Setting up the local environment and workspace</h6>
+                  <p>
+                    This guide explains how to set up your environment for React development using
+                    the React tool. It includes information about prerequisites, installing
+                    this, creating an initial workspace and starter app, and running that app
+                    locally to verify your setup.
+                    <br><br>
+                    For getting started an React Application you needs 2 things as Prerequisites.
+                  </p>
+                  <h6>Prerequisites</h6>
+                  <p>
+                    To use the React Framework, you should be familiar with the following:
+                  <ul class="documenter-list">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JS</li>
+                  </ul>
+                  Knowledge of Modern JS is helpful.
+                  <br>
+                  To install React on your local System, you need the following:
+                  </p>
+                  <h6>Node.js</h6>
+                  <p>
+                    React requires a current, active LTS (long term support) or maintenance LTS
+                    (long term support) version of Node.js.
+                    <br><br>
+                    Download latest version of node.js from <a href="https://nodejs.org/en/">nodejs.org</a>.
+                    <br>
+                    Install Node.js using downloaded file.
+                    <br>
+                    To check your node version, run node -v in a terminal/console window (cmd)
+                  </p>
+
+                  <h6>Npm package Manager</h6>
+                  <p>
+                    The React and React applications depend on npm packages for
+                    many features and functions. <br>
+                    To download and install npm packages, you need an <a href="https://www.npmjs.com/">npm package
+                      manager</a>. <br>
+                    This guide uses the npm client command line interface, which is installed with
+                    Node.js by default.
+                    To check that you have the npm client installed, run npm -v in a
+                    terminal/console window (cmd)
+                    <br>
+                  <p>
+                    It sets up your development environment so that you can use the latest JavaScript features,
+                    provides a nice developer experience, and optimizes your app for production.
+                    You’ll need to have Node >= 14.0.0 and npm >= 5.6 on your machine. To create a project, run:
+                  </p>
+                  For better understanding React we suggest you once go through official
+                  documentation of React from <a href="https://reactjs.org/docs/getting-started.html">React
+                    Documentation</a>
+                  </p>
+
+                </div>
+              </div>
+
+              <div class="card section" id="Setup">
+                <div class="body">
+                  <h5 class="mt-0 mb-2">React Setup</h5>
+                  <hr>
+
+                  <h6>Create a workspace and initial application</h6>
+
+                  <p>
+                    You develop apps in the context of an React workspace. <br>
+                    To create a new workspace and initial starter app:
+                  <ol>
+                    <li>Run the command React new and provide the name filename as my-app, as
+                      shown below</li>
+<pre class="language-html">
+<code class="language-html">npx create-react-app my-app</code>
+
+// If you want to create an single-page project in React js, you need to install the necessary React as below</pre>
+
+
+                    <li>The npx new command prompts you for the information about features to
+                      include
+                      in the initial app. Accept the defaults by pressing the Enter or Return key.
+                    </li>
+                  </ol>
+
+                  <p>
+                    The React installs the necessary React npm packages and other
+                    dependencies. This can take a few minutes. This creates a new workspaces and
+                    a simple Welcome app, ready to run.
+                  </p>
+                  <h6>Run the application</h6>
+
+                  <p>
+                    The React includes a server, so that you can build and serve your app
+                    locally.
+                  </p>
+                  <ol>
+                    <li>Navigate to the workspace folder, such as my-app.</li>
+                    <li>Run the following commands:</li>
+                  </ol>
+                  <pre class="language-html">
+<code class="language-html">cd my-app
+ npm start</code>
+                                     </pre>
+                  <p>
+                    The yarn or npm serve command launches the server, watches your files, and rebuilds the
+                    app as you make changes to those files.
+                    The <code>start</code> just Option automatically opens your
+                    browser to http://localhost:3000/.
+                  </p>
+
+                </div>
+              </div>
+
+              <div class="card section" id="sashSetup">
+                <div class="body">
+                  <h5 class="mt-0 mb-2">SpruhaSetup</h5>
+                  <hr>
+                  <p>If you have already download and install node.js and React then ignore
+                    prerequisites.</p>
+
+                  <h6>Prerequisites</h6>
+                  <h6>Node.js</h6>
+                  <p>
+                    Download latest version of node.js from
+                    <a href="https://nodejs.org/en/">nodejs.org</a>.
+                    <br>
+                    Install Node.js using downloaded file.
+                    <br>
+                    To check your node version, run node -v in a terminal/console window (cmd)
+                  </p>
+                  <h6>React </h6>
+                  <p>To install the React using npm, open a terminal/console window and run the
+                    following command.
+                  <pre class="language-html">
+<code class="language-html">npm install react</code>
+      (or)
+<code class="language-html">yarn install react</code>
+</pre>
+                  <h6>Setup an SpruhaTemplate by</h6>
+                  <ol>
+                    <li>Download the Spruharar/zip file.</li>
+                    <li>Extract it and then go in to Folder here you will see a React Folders
+                    </li>
+                    <li>For Example, Here I'm Choosing React-file</li>
+                    <li>Here, I'm Choosing React-file.</li>
+                    <li>Now from a terminal window, navigate to the directory containing your
+                      application</li>
+                    <pre><code>sash/React-file></code></pre>
+                    <li>You can import all dependency by installing npm command</li>
+                    <pre class="language-html">
+<code class="language-html">npm install</code>
+    (or)
+<code class="language-html">yarn install</code></pre>
+                    <li>Now you are in stage to successfully run Spruhausing below command:</li>
+                    <pre class="language-html">
+<code class="language-html">npm run start</code>
+    (or)
+<code class="language-html">yarn start</code>
+                </pre>
+
+                    Once you serve your application by default it will take their default port using
+                    http://localhost:3000/
+                  </ol>
+                  <h6 class="mt-0 mb-2">Note</h6>
+                  <ol>
+                    <pre><code class="language-html">npm install</code></pre>
+                    <p>If your are using npm install, You have to delete the
+                    <pre><code class="language-html">yarn-lock file</code></pre>
+                    </p>
+                    <p>(or)</p>
+                    <pre><code class="language-html">yarn install</code></pre>
+                    <p>If your are using yarn install, You have to delete the
+                    <pre><code class="language-html">package-lock.json file</code></pre>
+                    </p>
+                    <p>we have to use only one file example: (for yarn yarn-lock) & (for npm package-lock.json) file
+                    </p>
+                  </ol>
+                  <h6>Build Application</h6>
+                  Build your application for host on server using below command:
+                  <pre class="language-html">
+<code class="language-html">yarn build</code>
+   (or)
+<code class="language-html">npm run build</code></pre>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-12 d-none d-xl-block custom-leftnav">
+          <div class="main-content-left-components">
+            <div class="card custom-card">
+              <div class="card-body component-item">
+                <div class="collapse  navbar-collapse justify-content-end" id="main-menu">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#AngularIntroduction">Introduction to React</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#Gettingstart">Getting Started</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#Setup">React Setup</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#sashSetup">SpruhaSetup</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer opened -->
+    <div class="main-footer ht-40">
+      <div class="pd-t-0-f ht-100p">
+        <span>Copyright © <span id="year"></span> <a href="#">Sash</a>. Designed with <span
+            class="fa fa-heart text-danger"></span> by <a href="#"> Spruko </a> All rights reserved.</span>
+      </div>
+    </div>
+    <!-- Footer closed -->
+
+  </section>
+  <div class="color-bg">
+    <div class="sidebar__toggle" data-toggle="sidebar">
+      <a class="open-toggle" href="javascript:void(0);"><i class="fe fe-menu"></i></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="nav-item mr-8"><a class="btn btn-primary " href="https://1.envato.market/RA3qN" target="_blank"><i
+            class="icon-help2"></i> Buy Now</a></li>
+      <li class="nav-item mr-8"><a class="btn btn-success" href="https://1.envato.market/MGEaN"><i
+            class="icon-bag3"></i> Portfolio</a></li>
+      <li class="nav-item"><a class="btn btn-info mr-3" href="https://spruko.com/licenses.html" target="_blank"><i
+            class="icon-bag3"></i> Licenses</a></li>
+    </ul>
+  </div>
+
+  <!-- Jquery Core Js -->
+  <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+  <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+  <script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+
+  <!-- Internal Prism js-->
+  <script src="assets/plugins/prism/prism.js"></script>
+
+  <!-- Treeview js-->
+  <script src="assets/plugins/treeview-prism/prism.js"></script>
+  <script src="assets/plugins/treeview-prism/prism-treeview.js"></script>
+
+  <!-- Perfectscroll js-->
+  <script src="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <script src="assets/plugins/perfect-scrollbar/p-scroll.js"></script>
+
+  <!-- Custom js-->
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/menuspy.min.js.js"></script>
+
+  <script>
+    var elm = document.querySelector('#main-menu');
+    var ms = new MenuSpy(elm);
+
+    (function () {
+
+      if (typeof self === 'undefined' || !self.Prism || !self.document) {
+        return;
+      }
+
+      /**
+       * Class name for <pre> which is activating the plugin
+       * @type {String}
+       */
+      var PLUGIN_CLASS = 'line-numbers';
+
+      /**
+       * Resizes line numbers spans according to height of line of code
+       * @param  {Element} element <pre> element
+       */
+      var _resizeElement = function (element) {
+        var codeStyles = getStyles(element);
+        var whiteSpace = codeStyles['white-space'];
+
+        if (whiteSpace === 'pre-wrap' || whiteSpace === 'pre-line') {
+          var codeElement = element.querySelector('code');
+          var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
+          var lineNumberSizer = element.querySelector('.line-numbers-sizer');
+          var codeLines = element.textContent.split('\n');
+
+          if (!lineNumberSizer) {
+            lineNumberSizer = document.createElement('span');
+            lineNumberSizer.className = 'line-numbers-sizer';
+
+            codeElement.appendChild(lineNumberSizer);
+          }
+
+          lineNumberSizer.style.display = 'block';
+
+          codeLines.forEach(function (line, lineNumber) {
+            lineNumberSizer.textContent = line || '\n';
+            var lineSize = lineNumberSizer.getBoundingClientRect().height;
+            lineNumbersWrapper.children[lineNumber].style.height = lineSize + 'px';
+          });
+
+          lineNumberSizer.textContent = '';
+          lineNumberSizer.style.display = 'none';
+        }
+      };
+
+      /**
+       * Returns style declarations for the element
+       * @param {Element} element
+       */
+      var getStyles = function (element) {
+        if (!element) {
+          return null;
+        }
+
+        return window.getComputedStyle ? getComputedStyle(element) : (element.currentStyle || null);
+      };
+
+      window.addEventListener('resize', function () {
+        Array.prototype.forEach.call(document.querySelectorAll('pre.' + PLUGIN_CLASS), _resizeElement);
+      });
+
+      Prism.hooks.add('complete', function (env) {
+        if (!env.code) {
+          return;
+        }
+
+        // works only for <code> wrapped inside <pre> (not inline)
+        var pre = env.element.parentNode;
+        // Original regex check for class, leaving it here
+        // for its redundancy check
+        var clsReg = /\s*\bline-numbers\b\s*/;
+        // New regex check for opt-out class
+        var clsRegB = /\s*\bno-line-numbers\b\s*/;
+
+        if (env.element.querySelector(".line-numbers-rows")) {
+          // Abort if line numbers already exists
+          return;
+        }
+
+        // Added to facilitate opting out
+        if (clsRegB.test(pre.className)) {
+          // Respect the opt-out
+          return;
+        }
+
+        if (clsReg.test(env.element.className)) {
+          // Remove the class "line-numbers" from the <code>
+          env.element.className = env.element.className.replace(clsReg, ' ');
+        }
+        if (!clsReg.test(pre.className)) {
+          // Add the class "line-numbers" to the <pre>
+          pre.className += ' line-numbers';
+        }
+
+        var match = env.code.match(/\n(?!$)/g);
+        var linesNum = match ? match.length + 1 : 1;
+        var lineNumbersWrapper;
+
+        var lines = new Array(linesNum + 1);
+        lines = lines.join('<span></span>');
+
+        lineNumbersWrapper = document.createElement('span');
+        lineNumbersWrapper.setAttribute('aria-hidden', 'true');
+        lineNumbersWrapper.className = 'line-numbers-rows';
+        lineNumbersWrapper.innerHTML = lines;
+
+        if (pre.hasAttribute('data-start')) {
+          pre.style.counterReset = 'linenumber ' + (parseInt(pre.getAttribute('data-start'), 10) - 1);
+        }
+
+        env.element.appendChild(lineNumbersWrapper);
+
+        _resizeElement(pre);
+      });
+
+    }());
+  </script>
+
+</body>
+
+</html>
