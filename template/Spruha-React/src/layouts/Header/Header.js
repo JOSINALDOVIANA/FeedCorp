@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import {
   Dropdown,
   Container,
@@ -8,6 +8,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { usuarioContext } from "../..";
 import Selectoptions from "../../data/Header/headerdata";
 // FuScreen-start
 function Fullscreen() {
@@ -36,6 +37,8 @@ function Fullscreen() {
 }
 // FullScreen-end
 function Header() {
+  const {values,setValues}=useContext(usuarioContext);
+  console.log(values)
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");
     document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
@@ -347,14 +350,14 @@ function Header() {
                       <span className="main-img-user mx-1">
                         <img
                           alt="avatar"
-                          src={require("../../assets/img/users/1.jpg")}
+                          src={values?.image?.dados?.url||require("../../assets/img/users/1.jpg")}
                         />
                       </span>
                     </Dropdown.Toggle>
                     <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
                         <h6 className="main-notification-title">
-                          Sonia Taylor
+                          {values?.dadosUser?.name}
                         </h6>
                         <p className="main-notification-text">Web Designer</p>
                       </div>

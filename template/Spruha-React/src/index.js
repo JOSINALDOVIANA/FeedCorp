@@ -1,10 +1,12 @@
-import { Login } from "@mui/icons-material";
+
 import React, { Fragment,createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
+
 // Dashboard
+const Teste = React.lazy(() => import("./components/teste"));
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const Dashboard = React.lazy(() => import("./components/Dashboard/Dashboard"))
 const App = React.lazy(() => import("./components/app"));
@@ -156,13 +158,38 @@ const Root = () => {
       <UserContextProvider>
       <BrowserRouter>
        
+          <React.Suspense fallback={<Loader />}>
           <Routes>          
-           
-            <Route path={`${process.env.PUBLIC_URL}/`} element={<Landingpageapp />} />
+            
+
+            <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
             <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
+            <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
+            <Route index element={<Dashboard />} />
+              <Route>
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard`}
+                  element={<Dashboard />}
+                />
+              </Route>
+              
+              <Route>
+                <Route
+                      path={`${process.env.PUBLIC_URL}/teste`}
+                      element={<Teste />}
+                    />
+
+                    {/* criar novas rotas */}
+              </Route>
+              
+            </Route>
             {/* ........................................Errorpage............................................... */}
             <Route path="*" element={<Error404 />} />
+
+            {/* ----------------------------------------ROTAS----------------------------------------------------- */}
+            
           </Routes>
+          </React.Suspense>
         
       </BrowserRouter>
       </UserContextProvider>

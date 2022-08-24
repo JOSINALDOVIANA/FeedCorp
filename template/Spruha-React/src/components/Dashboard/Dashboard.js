@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Breadcrumb, BreadcrumbItem, Dropdown, ProgressBar, Row, Col, Table, Card, Container, Button, } from "react-bootstrap";
 import user1 from "../../assets/img/users/1.jpg";
 import user2 from "../../assets/img/users/2.jpg";
@@ -22,7 +22,9 @@ import * as dashboardmain from "../../data/Dashboard/dashboardmain";
 import CircularProgress from "@mui/material/CircularProgress";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { usuarioContext } from "../..";
+import { constant } from "lodash";
 
 const TASKS = [
   {
@@ -75,6 +77,17 @@ const TASKS = [
   },
 ];
 function Dashboard() {
+  const rotadados=useLocation();
+  const navegar=useNavigate()
+  const {values,setValues}=useContext(usuarioContext);
+  useEffect(()=>{
+    if(rotadados.state){
+      setValues(rotadados.state)
+    }else{
+      navegar(`${process.env.PUBLIC_URL}/home`);
+    }
+
+  },[])
   return (
     <Fragment>
       {/* <!-- Page Header --> */}

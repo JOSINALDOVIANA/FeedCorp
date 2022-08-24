@@ -146,9 +146,9 @@ const Landingpage = () => {
                   alt="logo" />
                 <div className="main-header-center">
                   <div className="responsive-logo">
-                    <Link to={`${process.env.PUBLIC_URL}/Dashboard`}><img src={require("../../assets/img/brand/logo.png")} className="mobile-logo"
+                    <Link to={`${process.env.PUBLIC_URL}/`}><img src={require("../../assets/img/brand/logo.png")} className="mobile-logo"
                       alt="lo/o" /></Link>
-                    <Link to={`${process.env.PUBLIC_URL}/Dashboard`}><img src={require("../../assets/img/brand/logo-light.png")} className="mobile-logo-dark"
+                    <Link to={`${process.env.PUBLIC_URL}/`}><img src={require("../../assets/img/brand/logo-light.png")} className="mobile-logo-dark"
                       alt="logo" /></Link>
                   </div>
                 </div>
@@ -163,10 +163,10 @@ const Landingpage = () => {
                       <div className="d-flex order-lg-2 ms-auto">
                         <div className="header-nav-right p-3">
                           <Link to="#" className="btn ripple btn-min w-sm btn-outline-primary me-2"
-                            target="_blank">New User
+                            target="_blank">Cadastrar
                           </Link>
                           <Link to={`${process.env.PUBLIC_URL}/login`}   className="btn ripple btn-min w-sm btn-primary me-2"
-                            >Login
+                            >Entrar
                           </Link>
                         </div>
                       </div>
@@ -175,6 +175,7 @@ const Landingpage = () => {
                 </div>
               </Container>
             </Navbar>
+
             <div className="landing-top-header overflow-hidden">
               <div className="top sticky">
                 <div className="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
@@ -185,7 +186,7 @@ const Landingpage = () => {
 
 
                       <div className="navbar main-sidemenu px-0">
-                        <Link className="main-logo" to={`${process.env.PUBLIC_URL}/Dashboard`}>
+                        <Link className="main-logo" to={`${process.env.PUBLIC_URL}/`}>
                           <img src={require("../../assets/img/brand/logo.png")} className="header-brand-img desktop-logo"
                             alt="logo" />
                           <img src={require("../../assets/img/brand/logo-light.png")}
@@ -208,10 +209,10 @@ const Landingpage = () => {
                         </svg></div>
                         <div className="header-nav-right d-none d-lg-block">
                           <Link to="#" className="btn ripple btn-min w-sm btn-secondary me-2"
-                            target="_blank">New User
+                            target="_blank">Cadastrar
                           </Link>
                           <Link to={`${process.env.PUBLIC_URL}/login`} className="btn ripple btn-min w-sm btn-info me-2"
-                            target="_blank">Login
+                            target="_blank">Entrar
                           </Link>
                         </div>
   </div>
@@ -223,8 +224,8 @@ const Landingpage = () => {
                 <Container className="px-sm-0">
                   <Row>
                     <Col xl={6} lg={6} className="animation-zidex pos-relative">
-                      <h4 className="fw-semibold mt-7">Manage Your Business</h4>
-                      <h1 className="text-start fw-bold">We Help to Build Your Dream Project with Spruha !</h1>
+                      <h4 className="fw-semibold mt-7">Gerencie seu negócio</h4>
+                      <h1 className="text-start fw-bold">Nós te ajudamos a avaliar o desepenho da sua empresa!</h1>
                       <h6 className="pb-3">
                         Spruha - Now you can use this admin template to design stunning dashboards
                         that will wow your target viewers or users to no end. To create a good and
@@ -234,11 +235,11 @@ const Landingpage = () => {
 
                       <Link to="https://themeforest.net/item/dashlead-bootstrap-5-admin-dashboard-template/35183671"
                         target="_blank" className="btn ripple btn-min w-lg mb-3 me-2 btn-light"><i
-                          className="fe fe-play me-2"></i> Get Started
+                          className="fe fe-play me-2"></i> Começar
                       </Link>
                       <Link to="https://themeforest.net/user/spruko/portfolio"
                         className="btn ripple btn-min w-lg btn-outline-light mb-3 me-2"><i
-                          className="fe fe-eye me-2"></i> Discover More
+                          className="fe fe-eye me-2"></i> Descubra mais
                       </Link>
                     </Col>
                     <Col xl={6} lg={6} className="my-auto">
@@ -253,7 +254,7 @@ const Landingpage = () => {
                 <div className="sptb section bg-white" id="Features">
                   <Container>
                     <Row>
-                      <h4 className="text-center fw-semibold landing-card-header">Features</h4>
+                      <h4 className="text-center fw-semibold landing-card-header">Recursos</h4>
                       <span className="landing-title"></span>
                       <h2 className="fw-semibold text-center">Spruha Main Features</h2>
                       <p className="text-default mb-5 text-center">The Spruha admin template comes with
@@ -573,10 +574,10 @@ const Landingpage = () => {
                     </Row>
                   </Container>
                 </div>
-                <div className="section bg-landing working-section pb-0" id="About">
+                <div className="section bg-landing working-section pb-0" id="Sobre">
                   <Container>
                     <Row>
-                      <h4 className="text-center fw-semibold landing-card-header">Our Mission</h4>
+                      <h4 className="text-center fw-semibold landing-card-header">Nossa Missão</h4>
                       <span className="landing-title"></span>
                       <div className="text-center">
                         <h2 className="text-center fw-semibold">Our mission is to make work meaningful.
@@ -2866,7 +2867,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                     <Container>
                       <Row>
                         <Card className=" bg-transparent mb-0">
-                          <h4 className="text-center fw-semibold text-white landing-card-header">Features</h4>
+                          <h4 className="text-center fw-semibold text-white landing-card-header">Recursos</h4>
                           <span className="landing-title"></span>
                           <div className="demo-screen-skin code-quality" id="dependencies">
                             <div className="text-center p-0">
@@ -3626,7 +3627,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                               <h4 className="text-center fw-semibold">Testimonials </h4>
                               <span className="landing-title"></span>
                               <h2 className="text-center fw-semibold text-white mb-5">What People Are
-                                Saying About Our Product.</h2>
+                                Saying Sobre Our Product.</h2>
                               <div className="testimonial-carousel">
                                 <Slicksiderwithdata />
                               </div>
@@ -3825,7 +3826,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                       <div className="top-footer">
                         <Row>
                           <Col lg={4} sm={12} md={12} className="reveal revealleft">
-                            <h6>About</h6>
+                            <h6>Sobre</h6>
                             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
                               doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
                               veritatis et quasi architecto beatae vitae dicta sunt
@@ -3849,12 +3850,12 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                           <Col lg={2} sm={6} md={4} className=" reveal revealleft">
                             <h6>Information</h6>
                             <ul className="mb-5 mb-lg-0 ps-0">
-                              <li><Link to="#">Our Team</Link></li>
-                              <li><Link to="#">Contact US</Link></li>
-                              <li><Link to="#">About</Link></li>
-                              <li><Link to="#">Services</Link></li>
+                              <li><Link to="#">Nosso time</Link></li>
+                              <li><Link to="#">Contate-nos</Link></li>
+                              <li><Link to="#">Sobre</Link></li>
+                              <li><Link to="#">Serviços</Link></li>
                               <li><Link to="#">Blog</Link></li>
-                              <li><Link to="#">Terms and Services</Link></li>
+                              <li><Link to="#">Termos e Serviços</Link></li>
                             </ul>
                           </Col>
                           <Col lg={4} sm={12} md={4} className="reveal revealleft">

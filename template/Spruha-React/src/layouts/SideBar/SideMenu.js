@@ -25,6 +25,13 @@ export const MENUITEMS = [
 						title: 'Dashboard'
 					},
 					{
+						path: `${process.env.PUBLIC_URL}/teste`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Teste'
+					},
+					{
 						path: `${process.env.PUBLIC_URL}/crytocurrencies/market`,
 						type: 'link',
 						active: false,

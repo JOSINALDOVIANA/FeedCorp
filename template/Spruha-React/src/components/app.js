@@ -1,11 +1,12 @@
-import React, { Fragment,  } from "react";
+import React, { Fragment, useContext, useEffect,  } from "react";
 import Header from "../layouts/Header/Header";
 import Sidebar from "../layouts/SideBar/SideBar";
 import Footer from "../layouts/Footer/Footer";
 import Switcher from "../layouts/Switcher/Switcher";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Rightside from "../layouts/Rightside/Rightside";
 import { Backtotop1 } from "../layouts/Backtotop/Backtotop";
+import { usuarioContext } from "..";
 const App = () => {
   document.querySelector("body").classList.remove("error-1");
   document.querySelector("body").classList.remove("app", "sidebar-mini", "landing-page", "horizontalmenu")
@@ -17,6 +18,8 @@ const App = () => {
     document.querySelector(".demo_changer").style.right = "-270px";
 
   };
+ 
+  
   return (
     <Fragment >
       <div className="horizontalMenucontainer">
@@ -24,15 +27,20 @@ const App = () => {
         <div className="page">
           <Header />
           <Sidebar />
+
           <div className="main-content side-content">
             <div className="main-container container-fluid" onClick={() => remove()}>
               <div className="inner-body" >
+
                 <Outlet />
+
               </div>
             </div>
           </div>
+
           <Rightside />
         </div>
+
         <Backtotop1 />
         <Footer />
       </div>

@@ -1,9 +1,66 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Card, Container, Form } from "react-bootstrap";
 import * as Customswitcherdata from "../../../data/Switcherdata/Customswitcherdata";
-const Signin = () => (
-  <Fragment>
+import api from "../../../api";
+const Signin = () => {
+  const [permanecer, setPerm] = React.useState(false);
+  
+  const navegar = useNavigate();
+ 
+  React.useEffect(() => {
+    if (localStorage.getItem("values")) {
+      const valores = localStorage.getItem("values");
+      const valores2 = JSON.parse(valores);
+
+      navegar(`${process.env.PUBLIC_URL}/`, { state: valores2 });
+    }
+
+  }, [])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let obt = {};
+    e.target["e-mail"].value.indexOf("@") > 0 ?
+      obt = { email: e.target["e-mail"].value, password: e.target["password"].value } :
+      obt = { nameuser: e.target["e-mail"].value, password: e.target["password"].value };
+    let dadosUser;
+    let permissions;
+    let unit;
+    let status;
+    let image;
+    let units;
+    let company;
+    await api.post("/user/login", obt).then(r => {
+      if (!r.data.status) {
+        alert(r.data.message)
+      } else {
+        dadosUser = r.data.dadosUser;
+        permissions = r.data.permissions[0];
+        unit = r.data.unit;
+        status = r.data.status;
+        company=r.data.company;
+      }
+    });
+
+    if (status) {
+
+      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data });
+
+
+      await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
+      if (permanecer) {
+        localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
+      }
+
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company } });
+    }
+
+  };
+
+  return(
+    <Fragment>
     {/* <!-- Row --> */}
     <div className="page main-signin-wrapper"
     >
@@ -55,7 +112,7 @@ const Signin = () => (
                         alt="logo"
                       />
                       <div className="clearfix"></div>
-                      <Form>
+                      <Form onSubmit={(e)=>{handleSubmit(e)}}>
                         <h5 className="text-start mb-2">
                           Signin to Your Account
                         </h5>
@@ -68,6 +125,7 @@ const Signin = () => (
                           <Form.Control
                             placeholder="Enter your email"
                             type="Email"
+                            name="e-mail"
                           />
                         </Form.Group>
                         <Form.Group
@@ -78,9 +136,10 @@ const Signin = () => (
                           <Form.Control
                             placeholder="Enter your password"
                             type="password"
+                            name="password"
                           />
                         </Form.Group>
-                        <button className="btn ripple btn-main-primary btn-block mt-2">
+                        <button type="submit"  className="btn ripple btn-main-primary btn-block mt-2">
                           Sign In
                         </button>
                       </Form>
@@ -110,7 +169,9 @@ const Signin = () => (
 
     {/* <!-- End Row --> */}
   </Fragment>
-);
+  )
+
+};
 
 Signin.propTypes = {};
 
