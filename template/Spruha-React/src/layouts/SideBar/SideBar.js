@@ -8,8 +8,8 @@ import { usuarioContext } from "../..";
 let history = [];
 const SideBar = () => {
   let location = useLocation();
-  const navegar=useNavigate();
-  const {values,setValues}=useContext(usuarioContext);
+  const navegar = useNavigate();
+  const { values, setValues } = useContext(usuarioContext);
   const [menuitems, setMenuitems] = useState(MENUITEMS);
   // initial loading
   useEffect(() => {
@@ -207,6 +207,7 @@ const SideBar = () => {
       >
         <div className="main-menu main-sidebar main-sidebar-sticky side-menu">
           <div className="main-container-1 active main-sidebar-header">
+
             <Scrollbars
               options={{ removeTrackXWhenNotUsed: true }}
               className="hor-scroll"
@@ -252,7 +253,7 @@ const SideBar = () => {
                 <div className="slide-left " id="slide-left">
                   <i className="fe fe-chevron-left"></i>
                 </div>
-                
+
                 <ul className="menu-nav nav" style={{ marginLeft: "0px" }}>
 
                   {menuitems.map((Item, itemi) => (
@@ -263,14 +264,15 @@ const SideBar = () => {
                       <li className="nav-header">
                         <span className="nav-label">{Item.menutitle}</span>
                       </li>
-                      
+
                       {Item.Items.map((menuItem, i) => (
+
                         <li
-                          className={`nav-item ${
-                            menuItem.selected ? "active" : ""
-                          }`}
+                          className={`nav-item ${menuItem.selected ? "active" : ""}`}
                           key={i}
                         >
+
+                          {/* Itens que ficam dentro dos títulos sidebar */}
                           {menuItem.type === "sub" ? (
                             <a
                               href="javascript"
@@ -311,16 +313,16 @@ const SideBar = () => {
                           ) : (
                             ""
                           )}
-
+                          
+                            {/* ITENS QUE NÃO POSSUEM SUBITENS */}
                           {menuItem.type === "link" ? (
                             // preciso que personalize este button
                             <span
-                              style={{cursor:'pointer'}}
-                              onClick={()=>{navegar(`${menuItem.path}/`,{state:values})}}
-                              className={`nav-link ${
-                                menuItem.selected ? " active" : ""
-                              }`}
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => { navegar(`${menuItem.path}/`, { state: values }) }}
+                              className={`nav-link ${menuItem.selected ? "active" : ""}`}
                             >
+
                               <span className="shape1"></span>
                               <span className="shape2"></span>
                               <i
@@ -328,6 +330,7 @@ const SideBar = () => {
                               >
                               </i>
 
+                              {/* ITEM TITULO */}
                               <span className="sidemenu-label">
                                 {menuItem.title}
                               </span>
@@ -337,29 +340,27 @@ const SideBar = () => {
                                   {menuItem.badgetxt}
                                 </label>
                               ) : ("")}
+
                             </span>
-                          ) : (
-                            ""
-                          )}
-                          
+                          ) : ("")}
+
+                          {/* SUBITENS DOS ITENS */}
                           {menuItem.children ? (
                             <ul
-                              className={`nav-sub ${
-                                menuItem.active ? "open" : ""
-                              }`}
+                              className={`nav-sub ${menuItem.active ? "open" : ""}`}
                               style={
                                 menuItem.active
                                   ? { display: "block" }
                                   : { display: "none" }
                               }
                             >
+
                               {menuItem.children.map((childrenItem, index) => {
                                 return (
                                   <li
                                     key={index}
-                                    className={`nav-sub-item ${
-                                      childrenItem.selected ? "active show" : ""
-                                    }`}
+                                    className={`nav-sub-item ${childrenItem.selected ? "active show" : ""
+                                      }`}
                                   >
                                     {childrenItem.type === "sub" ? (
                                       <a
@@ -382,9 +383,8 @@ const SideBar = () => {
                                           ></i>
                                         )}
                                       </a>
-                                    ) : (
-                                      ""
-                                    )}
+                                    )
+                                      : ("")}
 
                                     {childrenItem.type === "link" ? (
                                       <NavLink
@@ -396,6 +396,7 @@ const SideBar = () => {
                                     ) : (
                                       ""
                                     )}
+
                                     {childrenItem.children ? (
                                       <ul
                                         className="sub-nav-sub"
@@ -405,18 +406,19 @@ const SideBar = () => {
                                             : { display: "none" }
                                         }
                                       >
+                                        {/* SUBITENS DOS SUBITENS MAP */}
                                         {childrenItem.children.map(
                                           (childrenSubItem, key) => (
                                             <li
-                                              className={`nav-sub-item ${
-                                                childrenSubItem.selected
-                                                  ? " active"
-                                                  : ""
-                                              }`}
+                                              className={`nav-sub-item ${childrenSubItem.selected
+                                                ? " active"
+                                                : ""
+                                                }`}
                                               key={key}
                                             >
+                                              {/* SUBITENS DOS SUBITENS */}
                                               {childrenSubItem.type ===
-                                              "link" ? (
+                                                "link" ? (
                                                 <NavLink
                                                   to={
                                                     childrenSubItem.path + "/"
@@ -428,9 +430,9 @@ const SideBar = () => {
                                               ) : (
                                                 ""
                                               )}
-
+                                                {/* NÃO IDENTIFIQUEI */}
                                               {childrenSubItem.type ===
-                                              "sub" ? (
+                                                "sub" ? (
                                                 <Link
                                                   to="#"
                                                   className="nav-sub-item"
@@ -453,28 +455,34 @@ const SideBar = () => {
                                               ) : (
                                                 ""
                                               )}
+
                                             </li>
                                           )
+                                          
                                         )}
+
                                       </ul>
-                                    ) : (
-                                      ""
-                                    )}
+                                    )
+                                      : ("")}
+
                                   </li>
                                 );
                               })}
                             </ul>
-                          ) : (
-                            ""
-                          )}
+                          )
+                            : ("")}
+
                         </li>
                       ))}
+
                     </Fragment>
                   ))}
                 </ul>
+
                 <div className="slide-right" id="slide-right">
                   <i className="fe fe-chevron-right"></i>
                 </div>
+
               </div>
             </Scrollbars>
           </div>

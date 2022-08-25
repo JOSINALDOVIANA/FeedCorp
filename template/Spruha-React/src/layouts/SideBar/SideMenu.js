@@ -3,12 +3,12 @@ export const MENUITEMS = [
 		menutitle: 'INÍCIO',
 		Items: [
 			{
-				path: `${process.env.PUBLIC_URL}`,
+				title: 'INÍCIO',
 				icon: 'ti-home',
 				type: 'link',
 				active: false,
 				selected: false,
-				title: 'INÍCIO'
+				path: `${process.env.PUBLIC_URL}/dashboard`,
 			},
 			{
 				title: 'AVALIAÇÕES',
@@ -16,7 +16,7 @@ export const MENUITEMS = [
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}`
+				path: `${process.env.PUBLIC_URL}/ecommerce/dashboard`
 				// children: [
 				// 	{
 				// 		path: `${process.env.PUBLIC_URL}/crytocurrencies/dashboard`,
