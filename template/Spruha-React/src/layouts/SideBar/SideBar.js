@@ -1,12 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { MENUITEMS } from "./SideMenu";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import { horizontalmenusticky } from "../../data/Switcherdata/Switcherdata";
 import { useLocation } from "react-router-dom";
+import { usuarioContext } from "../..";
 let history = [];
 const SideBar = () => {
   let location = useLocation();
+  const navegar=useNavigate();
+  const {values,setValues}=useContext(usuarioContext);
   const [menuitems, setMenuitems] = useState(MENUITEMS);
   // initial loading
   useEffect(() => {
@@ -209,7 +212,7 @@ const SideBar = () => {
               className="hor-scroll"
               style={{ position: "absolute" }}
             >
-              <div className="sidemenu-logo">
+              {/* <div className="sidemenu-logo">
                 <Link
                   className="main-logo"
                   to={`${process.env.PUBLIC_URL}/dashboard/ `}
@@ -237,7 +240,7 @@ const SideBar = () => {
                     alt={"logo-4"}
                   />
                 </Link>
-              </div>
+              </div> */}
               <div
                 className="main-body-1 main-sidebar-body"
                 onMouseOver={() => Onhover()}
@@ -301,8 +304,10 @@ const SideBar = () => {
                           )}
 
                           {menuItem.type === "link" ? (
-                            <NavLink
-                              to={menuItem.path + "/"}
+                            // preciso que personalize este button
+                            <span
+                              style={{cursor:'pointer'}}
+                              onClick={()=>{navegar(`${menuItem.path}/`,{state:values})}}
                               className={`nav-link ${
                                 menuItem.selected ? " active" : ""
                               }`}
@@ -322,7 +327,7 @@ const SideBar = () => {
                               ) : (
                                 ""
                               )}
-                            </NavLink>
+                            </span>
                           ) : (
                             ""
                           )}

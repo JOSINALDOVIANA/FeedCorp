@@ -119,9 +119,7 @@ const Landingpage = () => {
   const Sidebartoggled = () => {
     document.querySelector(".landing-page").classList.toggle("sidenav-toggled");
   }
-  const {values,setValues}=useContext(usuarioContext);
-  const navegar=useNavigate()
-  console.log(values)
+  
 
   return (
     <Fragment>
@@ -165,8 +163,12 @@ const Landingpage = () => {
                           <Link to="#" className="btn ripple btn-min w-sm btn-outline-primary me-2"
                             target="_blank">Cadastrar
                           </Link>
-                          <Link to={`${process.env.PUBLIC_URL}/login`}   className="btn ripple btn-min w-sm btn-primary me-2"
-                            >Entrar
+                          <Link 
+                          to={`${process.env.PUBLIC_URL}/login`}   
+                          className="btn ripple btn-min w-sm btn-primary me-2"
+                          target="_self"
+                            >
+                              Entrar
                           </Link>
                         </div>
                       </div>
@@ -212,7 +214,7 @@ const Landingpage = () => {
                             target="_blank">Cadastrar
                           </Link>
                           <Link to={`${process.env.PUBLIC_URL}/login`} className="btn ripple btn-min w-sm btn-info me-2"
-                            target="_blank">Entrar
+                            target="_self">Entrar
                           </Link>
                         </div>
   </div>

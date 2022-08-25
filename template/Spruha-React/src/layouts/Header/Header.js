@@ -38,7 +38,7 @@ function Fullscreen() {
 // FullScreen-end
 function Header() {
   const {values,setValues}=useContext(usuarioContext);
-  console.log(values)
+  
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");
     document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
