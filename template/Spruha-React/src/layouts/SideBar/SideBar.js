@@ -212,6 +212,7 @@ const SideBar = () => {
               className="hor-scroll"
               style={{ position: "absolute" }}
             >
+              {/* LOGO QUE FICA NO SIDEBAR */}
               {/* <div className="sidemenu-logo">
                 <Link
                   className="main-logo"
@@ -241,20 +242,28 @@ const SideBar = () => {
                   />
                 </Link>
               </div> */}
+
               <div
                 className="main-body-1 main-sidebar-body"
                 onMouseOver={() => Onhover()}
                 onMouseOut={() => Outhover()}
               >
+
                 <div className="slide-left " id="slide-left">
                   <i className="fe fe-chevron-left"></i>
                 </div>
+                
                 <ul className="menu-nav nav" style={{ marginLeft: "0px" }}>
+
                   {menuitems.map((Item, itemi) => (
+
                     <Fragment key={itemi + Math.random() * 100}>
+
+                      {/* TÍtulo que separa os itens sidebar */}
                       <li className="nav-header">
                         <span className="nav-label">{Item.menutitle}</span>
                       </li>
+                      
                       {Item.Items.map((menuItem, i) => (
                         <li
                           className={`nav-item ${
@@ -316,21 +325,23 @@ const SideBar = () => {
                               <span className="shape2"></span>
                               <i
                                 className={`${menuItem.icon} ${menuIcontype} menu-icon`}
-                              ></i>
+                              >
+                              </i>
+
                               <span className="sidemenu-label">
                                 {menuItem.title}
                               </span>
+
                               {menuItem.badge ? (
                                 <label className={menuItem.badge}>
                                   {menuItem.badgetxt}
                                 </label>
-                              ) : (
-                                ""
-                              )}
+                              ) : ("")}
                             </span>
                           ) : (
                             ""
                           )}
+                          
                           {menuItem.children ? (
                             <ul
                               className={`nav-sub ${
