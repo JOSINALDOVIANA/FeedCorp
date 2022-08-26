@@ -5,6 +5,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { horizontalmenusticky } from "../../data/Switcherdata/Switcherdata";
 import { useLocation } from "react-router-dom";
 import { usuarioContext } from "../..";
+
 let history = [];
 const SideBar = () => {
   let location = useLocation();
@@ -108,6 +109,7 @@ const SideBar = () => {
       });
     }
   }
+
   function toggleSidemenu(item) {
     if (
       !document.body.classList.contains("horizontalmenu-hover") ||
@@ -154,6 +156,7 @@ const SideBar = () => {
       setMenuitems((arr) => [...arr]);
     }
   }
+
   function clearMenuActive() {
     MENUITEMS.filter((mainlevel) => {
       if (mainlevel.Items) {
@@ -190,6 +193,7 @@ const SideBar = () => {
         document.querySelector(".main-body").classList.add("main-sidebar-open");
     }
   }
+  
   function Outhover() {
     if (document.querySelector(".main-body")) {
       document

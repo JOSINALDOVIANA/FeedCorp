@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { usuarioContext } from "../..";
 import Selectoptions from "../../data/Header/headerdata";
+
 // FuScreen-start
 function Fullscreen() {
   if (
@@ -69,6 +70,7 @@ function Header() {
   const Darkmode = () => {
     document.querySelector("body").classList.toggle("dark-theme");
   };
+
   return (
     <Fragment>
       <Navbar
@@ -146,6 +148,8 @@ function Header() {
                 id="navbarSupportedContent-4"
               >
                 <div className="d-flex order-lg-2 align-items-center ms-auto">
+
+                  {/* PESQUISA */}
                   {/* <Dropdown className="header-search">
                     <Dropdown.Toggle variant="default" className="px-0">
                       <i className="fe fe-search header-icons fs-18 px-2 lh-5"></i>
@@ -165,6 +169,8 @@ function Header() {
                       </InputGroup>
                     </Dropdown.Menu>
                   </Dropdown> */}
+
+                  {/* MODO ESCURO */}
                   <Dropdown className="dropdown d-flex main-header-theme">
                     <Nav.Link
                       className="nav-link icon layout-setting"
@@ -178,7 +184,9 @@ function Header() {
                       </span>
                     </Nav.Link>
                   </Dropdown>
-                  <Dropdown className=" main-header-notification flag-dropdown">
+
+                  {/* MUDANÇA DE IDIOMA */}
+                  {/* <Dropdown className=" main-header-notification flag-dropdown">
                     <Dropdown.Toggle
                       className="nav-link icon country-Flag "
                       variant="default"
@@ -257,7 +265,9 @@ function Header() {
                         </div>
                       </Dropdown.Item>
                     </Dropdown.Menu>
-                  </Dropdown>
+                  </Dropdown> */}
+
+                  {/* MODO FULLSCREEN */}
                   <div className="d-md-flex">
                     <div
                       className="nav-link icon full-screen-link"
@@ -267,6 +277,8 @@ function Header() {
                       <i className="fe fe-minimize fullscreen-button exit-fullscreen header-icons"></i>
                     </div>
                   </div>
+
+                  {/* NOTIFICAÇÕES */}
                   <Dropdown className=" main-header-notification">
                     <Dropdown.Toggle
                       className="nav-link icon"
@@ -276,6 +288,7 @@ function Header() {
                       <i className="fe fe-bell header-icons"></i>
                       <span className="badge bg-danger nav-link-badge">4</span>
                     </Dropdown.Toggle>
+                    {/* NOTIFICAÇÕES TELA FLUTUANTE */}
                     <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
                         <p className="main-notification-text">
@@ -336,6 +349,7 @@ function Header() {
                       </div>
                     </Dropdown.Menu>
                   </Dropdown>
+                    {/* CHAT */}
                   <div className="main-header-notification">
                     <Link  
                       className="icon nav-link"
@@ -345,6 +359,8 @@ function Header() {
                       <span className="badge bg-success nav-link-badge">6</span>
                     </Link>
                   </div>
+
+                    {/* PERFIL AVATAR */}
                   <Dropdown className="main-profile-menu">
                     <Dropdown.Toggle className="d-flex p-0" variant="default">
                       <span className="main-img-user mx-1">
@@ -354,6 +370,7 @@ function Header() {
                         />
                       </span>
                     </Dropdown.Toggle>
+                    {/* PERFIL AVATAR tela flutuante */}
                     <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
                         <h6 className="main-notification-title">
@@ -394,6 +411,7 @@ function Header() {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
+                    {/* CONFIGURAÇÕES */}
                   <div className="d-md-flex header-settings">
                     <Nav.Link
                       href="#"
@@ -403,13 +421,16 @@ function Header() {
                       <i className="fe fe-align-right header-icons"></i>
                     </Nav.Link>
                   </div>
+
                 </div>
               </Navbar.Collapse>
+                  {/* CONFIGURAÇÕES LAYOUT */}
               <div className="d-flex header-setting-icon demo-icon fa-spin">
                 <Nav.Link className="nav-link icon" onClick={Swicherbutton}>
                   <i className="fe fe-settings settings-icon "></i>
                 </Nav.Link>
               </div>
+              
             </div>
           </div>
         </Container>
