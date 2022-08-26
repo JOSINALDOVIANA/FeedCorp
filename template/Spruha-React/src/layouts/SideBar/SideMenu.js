@@ -12,11 +12,11 @@ export const MENUITEMS = [
 			},
 			{
 				title: 'AVALIAÇÕES',
-				icon: 'ti-wallet',
+				icon: 'bi-book-half',
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/ecommerce/dashboard`
+				path: `${process.env.PUBLIC_URL}/avaliacoes`
 				// children: [
 				// 	{
 				// 		path: `${process.env.PUBLIC_URL}/crytocurrencies/dashboard`,
@@ -65,7 +65,7 @@ export const MENUITEMS = [
 			},
 			{
 				title: 'FERRAMENTAS',
-				icon: 'ti-shopping-cart-full',
+				icon: 'bi-diagram-3',
 				type: 'link',
 				active: false,
 				selected: false,
