@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import user3 from "../../../assets/img/users/3.jpg";
 import user4 from "../../../assets/img/users/4.jpg";
 import user5 from "../../../assets/img/users/5.jpg";
@@ -14,7 +14,8 @@ import { Line } from "react-chartjs-2";
 import ReactApexChart from "react-apexcharts";
 import * as edashboard from "../../../data/Ecommerce/E-dashboard/edashboard";
 import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { usuarioContext } from "../../..";
 
 const ProductsDetails =
   [
@@ -25,26 +26,41 @@ const ProductsDetails =
     { Productid: "#C529", Productname: png19, Producttext: "Apple iPhone", Productcost: "$11,987", Total: "938", Status: "Limited", Statustext: "primary", },
   ];
 function ECDashboard() {
+
+  const rotadados=useLocation();
+  // console.log(rotadados.state);
+  const navegar=useNavigate()
+  const {values,setValues}=useContext(usuarioContext);
+  useEffect(()=>{
+    if(rotadados.state){
+      setValues(rotadados.state)
+    }else{
+      navegar(`${process.env.PUBLIC_URL}/home`);
+    }
+
+  },[])
+  
   const [content, setContent] = useState("");
   return (
     <Fragment>
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">
-            Welcome To Dashboard
+            Bem vindo a FeedCorp
           </h2>
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <Breadcrumb.Item href="#">
               Ecommerce
             </Breadcrumb.Item>
             <Breadcrumb.Item active>
               Dashboard
             </Breadcrumb.Item>
-          </Breadcrumb>
+          </Breadcrumb> */}
         </div>
+        
         <div className="d-flex">
           <div className="justify-content-center">
-            <Button
+            {/* <Button
               type="button"
               variant="white"
               className=" btn-icon-text my-2 me-2"
@@ -57,91 +73,99 @@ function ECDashboard() {
               className=" btn-icon-text my-2 me-2"
             >
               <i className="fe fe-filter me-2"></i> Filter
-            </Button>
+            </Button> */}
             <Button
               type="button"
               variant="primary"
               className=" my-2 btn-icon-text"
             >
-              <i className="fe fe-download-cloud me-2"></i> Download Report
+              <i className="fe fe-download-cloud me-2"></i> Enviar Feedback
             </Button>
+
           </div>
         </div>
       </div>
 
       <Row className="row-sm">
+
         <Col sm={12} md={6} lg={6} xl={3}>
           <Card className="custom-card">
             <Card.Body>
               <div className="card-order ">
                 <label className="main-content-label mb-3 pt-1">
-                  New Users
+                  Feedbacks Recebidos
                 </label>
                 <h2 className="text-end card-item-icon card-icon">
-                  <i className="mdi mdi-account-multiple icon-size float-start text-primary"></i>
-                  <span className="font-weight-bold">3,672</span>
+                  {/* ICONE */}
+                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  {/* VALOR VARIAVEL */}
+                  <span className="font-weight-bold">6</span>
                 </h2>
-                <p className="mb-0 mt-4 text-muted">
+                {/* <p className="mb-0 mt-4 text-muted">
                   Monthly users<span className="float-end">50%</span>
-                </p>
+                </p> */}
               </div>
             </Card.Body>
           </Card>
         </Col>
+
         <Col sm={12} md={6} lg={6} xl={3}>
           <Card className="custom-card">
             <Card.Body>
               <div className="card-order">
                 <label className="main-content-label mb-3 pt-1">
-                  Total tax
+                  Feedbacks feitos
                 </label>
                 <h2 className="text-end">
-                  <i className="mdi mdi-cube icon-size float-start text-primary"></i>
-                  <span className="font-weight-bold">$89,265</span>
+                  <i className="bi-pencil-fill icon-size float-start text-primary"></i>
+                  <span className="font-weight-bold">25</span>
                 </h2>
-                <p className="mb-0 mt-4 text-muted">
+                {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Income<span className="float-end">$7,893</span>
-                </p>
+                </p> */}
               </div>
             </Card.Body>
           </Card>
         </Col>
+
         <Col sm={12} md={6} lg={6} xl={3}>
           <Card className="custom-card">
             <Card.Body>
               <div className="card-order">
                 <label className="main-content-label mb-3 pt-1">
-                  Total Profit
+                  Objetivos
                 </label>
                 <h2 className="text-end">
-                  <i className="icon-size mdi mdi-poll-box   float-start text-primary"></i>
-                  <span className="font-weight-bold">$23,987</span>
+                  <i className="bi-check2-circle icon-size float-start text-primary"></i>
+                  <span className="font-weight-bold">10</span>
                 </h2>
-                <p className="mb-0 mt-4 text-muted">
+                {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Profit<span className="float-end">$4,678</span>
-                </p>
+                </p> */}
               </div>
             </Card.Body>
           </Card>
         </Col>
+
         <Col sm={12} md={6} lg={6} xl={3}>
           <Card className="custom-card">
             <Card.Body>
               <div className="card-order">
                 <label className="main-content-label mb-3 pt-1">
-                  Total Sales
+                  Pesquisas
                 </label>
                 <h2 className="text-end">
-                  <i className="mdi mdi-cart icon-size float-start text-primary"></i>
-                  <span className="font-weight-bold">46,486</span>
+                  <i className="bi-clipboard2-data-fill icon-size float-start text-primary"></i>
+                  <span className="font-weight-bold">4</span>
                 </h2>
-                <p className="mb-0 mt-4 text-muted">
+                {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Sales<span className="float-end">3,756</span>
-                </p>
+                </p> */}
               </div>
             </Card.Body>
           </Card>
         </Col>
+
       </Row>
 
       <Row className="row-sm">
@@ -149,12 +173,10 @@ function ECDashboard() {
           <Card className="custom-card">
             <Card.Header className=" border-bottom-0">
               <label className="main-content-label my-auto pt-2">
-                Revenue Overview
+                Desempenho
               </label>
               <span className="d-block tx-12 mb-0 mt-1 text-muted">
-                An Overview. Revenue is the total amount of income generated by
-                the sale of goods or services related to the company's primary
-                operations.
+                Um gráfico que mostra o desempenho geral da empresa.
               </span>
             </Card.Header>
             <Card.Body>
@@ -169,6 +191,7 @@ function ECDashboard() {
             </Card.Body>
           </Card>
         </Col>
+
         <Col xxl={3} xl={6} md={12} lg={12}>
           <Card className="custom-card">
             <Card.Header className="border-bottom-0 pb-0">
@@ -212,6 +235,7 @@ function ECDashboard() {
             </Card.Body>
           </Card>
         </Col>
+
         <Col xxl={3} xl={6} md={12} sm={12}>
           <Card className="custom-card">
             <Card.Header className="pb-0 border-bottom-0 ">
@@ -296,7 +320,9 @@ function ECDashboard() {
             </Card.Body>
           </Card>
         </Col>
+    
       </Row>
+      
       <Row className="row-sm">
         <Col xxl={3} xl={6} md={12} lg={6}>
           <Card className="custom-card">
@@ -365,6 +391,7 @@ function ECDashboard() {
             </div>
           </Card>
         </Col>
+        
         <Col xxl={3} xl={6} md={12} lg={6}>
           <Card className="custom-card">
             <Card.Header className="border-bottom-0 pb-1">
@@ -447,6 +474,7 @@ function ECDashboard() {
             </Card.Body>
           </Card>
         </Col>
+        {/* MAPA */}
         <div className="col-xxl-6 col-xl-12 col-md-12 col-lg-12">
           <Card className="custom-card top-inquiries overflow-hidden">
             <Card.Header className=" border-bottom-0">
@@ -516,6 +544,7 @@ function ECDashboard() {
             </Card.Body>
           </Card>
         </div>
+
         <Col md={12} xl={8}>
           <Card className=" custom-card overflow-hidden">
             <Card.Header className="border-bottom-0 d-flex">
@@ -599,6 +628,7 @@ function ECDashboard() {
             </Card.Body>
           </Card >
         </Col >
+
         <Col xl={4} md={12} sm={12}>
           <Card className="custom-card">
             <Card.Header className=" border-bottom-0">
@@ -702,6 +732,7 @@ function ECDashboard() {
           </Card>
         </Col>
       </Row >
+
     </Fragment >
   );
 }

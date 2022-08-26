@@ -121,7 +121,7 @@ function Header() {
                 />
               </Link>
             </div>
-            <InputGroup>
+            {/* <InputGroup>
               <Selectoptions />
               <Form.Control
                 type="search"
@@ -131,7 +131,7 @@ function Header() {
               <InputGroup.Text className="btn search-btn">
                 <i className="fe fe-search"></i>
               </InputGroup.Text>
-            </InputGroup>
+            </InputGroup> */}
           </div>
           <div className="main-header-right">
             <Navbar.Toggle
@@ -146,7 +146,7 @@ function Header() {
                 id="navbarSupportedContent-4"
               >
                 <div className="d-flex order-lg-2 align-items-center ms-auto">
-                  <Dropdown className="header-search">
+                  {/* <Dropdown className="header-search">
                     <Dropdown.Toggle variant="default" className="px-0">
                       <i className="fe fe-search header-icons fs-18 px-2 lh-5"></i>
                     </Dropdown.Toggle>
@@ -164,7 +164,7 @@ function Header() {
                         </InputGroup.Text>
                       </InputGroup>
                     </Dropdown.Menu>
-                  </Dropdown>
+                  </Dropdown> */}
                   <Dropdown className="dropdown d-flex main-header-theme">
                     <Nav.Link
                       className="nav-link icon layout-setting"

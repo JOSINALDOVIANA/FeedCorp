@@ -165,29 +165,27 @@ const Root = () => {
             <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
             <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
             <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
-            <Route index element={<Dashboard />} />
+            <Route index element={<ECDashboard />} />
 
               <Route>
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard`}
-                  element={<Dashboard />}
+                  element={<ECDashboard />}
                 />
               </Route>
 
               <Route>
                 <Route
                   path={`${process.env.PUBLIC_URL}/ecommerce/dashboard`}
-                  element={<ECDashboard />}
+                  element={<Dashboard />}
                 />
               </Route>
               
               <Route>
                 <Route
-                      path={`${process.env.PUBLIC_URL}/teste`}
+                      path={`${process.env.PUBLIC_URL}/ferramentas`}
                       element={<Teste />}
                     />
-
-                    {/* criar novas rotas */}
               </Route>
               
             </Route>

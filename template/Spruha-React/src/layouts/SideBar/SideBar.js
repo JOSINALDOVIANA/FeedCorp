@@ -261,9 +261,9 @@ const SideBar = () => {
                     <Fragment key={itemi + Math.random() * 100}>
 
                       {/* TÍtulo que separa os itens sidebar */}
-                      <li className="nav-header">
+                      {/* <li className="nav-header">
                         <span className="nav-label">{Item.menutitle}</span>
-                      </li>
+                      </li> */}
 
                       {Item.Items.map((menuItem, i) => (
 

@@ -69,7 +69,7 @@ export const MENUITEMS = [
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/teste`
+				path: `${process.env.PUBLIC_URL}/ferramentas`
 				// children: [
 				// 	{
 				// 		path: `${process.env.PUBLIC_URL}/ecommerce/ecdashboard`,
