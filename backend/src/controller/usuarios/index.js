@@ -3,20 +3,25 @@ import conexao from '../../database/connection.js';
 import isEmpty from '../../isEmpty.js';
 export default {
     async insert(req, res) {
-        const {
+        let {
             name,
             nameuser,
             id_image = null,
             email,
             password,
-            permissions = [],
+            id_permission=false,
             id_unit = null,
             id_company = null,
-            id_creator = null
+            id_creator = null,
         } = req.body;
 
         try {
             await conexao.transaction(async trx => {
+                if(!id_permission){
+                    const permission=await trx("permissions").where({"description":"administrador"});
+                    id_permission=permission[0].id
+
+                }
                 const user = await trx("users").insert({
                     name,
                     nameuser,
@@ -24,17 +29,12 @@ export default {
                     id_image,
                     password,
                     id_company,
-                    id_creator
+                    id_creator,
+                    id_permission
                 });
 
-                if (!permissions) {
-                    const perm_serial = permissions.map(item => ({ "id_user": user[0], "id_permission": item }));
-                    await trx("user_permission").insert(perm_serial);
-                }else{
-                    
-                  const perm= await trx("permissions").where({"description":"administrador"}).first();
-                  await trx("user_permission").insert({ "id_user": user[0], "id_permission": perm.id });
-                }
+                
+
 
                 !id_unit ? null : await trx("user_unit").insert({ id_user: user[0], id_unit });
 
@@ -49,34 +49,7 @@ export default {
             })
         }
     },
-    async insertUser_permission(req, res) {
-        const { permissions = [], id_user } = req.body;
-
-        try {
-            await conexao.transaction(async trx => {
-                const permid = await trx("user_permission").where({ id_user });
-
-
-                if (permid.length > 0) {
-                    return res.redirect(`http://localhost:${process.env.PORT}/user/update/user_permission?id_user=${id_user}&id_permission=${permissions[0]}`);
-                }
-
-                const perm_serial = permissions.map(item => ({ id_user, "id_permission": item }));
-                await trx("user_permission").insert(perm_serial);
-
-
-
-                return res.json({ status: true });
-            })
-
-        } catch (error) {
-            console.log(error)
-            return res.json({
-                status: false,
-                "message": "error insertUser_permission"
-            })
-        }
-    },
+   
     async insertUser_ebr(req, res) {
         const { id_ebr, id_user } = req.body;
 
@@ -126,7 +99,7 @@ export default {
     async delete(req, res) {
         const { password, id, email } = req.body;
         const dados = await conexao("users").where({ id, email }).first();
-        console.log(dados)
+        
         try {
             if (!isEmpty(dados) && dados.password == password) {
                 await conexao("users").del().where({ id, password })
@@ -152,15 +125,15 @@ export default {
             id_image = null,
             password,
             passwordantigo,
-
             id_company = null,
-            id_creator = null
+            id_creator = null,
+            id_permission=null,
         } = req.body;
 
         try {
             await conexao.transaction(async trx => {
                 const dadosantigos = await trx("users").where({ id }).first();
-
+                console.log(dadosantigos)
                 if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
                     await trx("users").update({
                         name,
@@ -169,7 +142,8 @@ export default {
                         password,
                         id_image,
                         id_company,
-                        id_creator
+                        id_creator,
+                        id_permission
                     }).where({ id });
 
 
@@ -181,26 +155,12 @@ export default {
             })
 
         } catch (error) {
-
+            console.log(error)
             return res.json({ status: false, message: error })
         }
 
     },
-    async updateUser_permission(req, res, next) {
-        const {
-            id_user,
-            id_permission,
-        } = req.query;
-        try {
-            await conexao.transaction(async trx => {
-                await trx("user_permission").update({ id_permission }).where({ id_user });
-                res.json({ status: true, message: `aterado` });
-            })
-        } catch (error) {
-            res.json({ status: false, message: "error updateUser_permission" })
-        }
-
-    },
+    
     async updateUser_unit(req, res, next) {
         const {
             id,
@@ -294,17 +254,19 @@ export default {
             else {
                 if (!!dados && dados.password === password) {
                     //carrego as permissoes deste usuario
-                    const permissions = await conexao("user_permission").join("permissions", "user_permission.id_permission", "=", "permissions.id").where({ "user_permission.id_user": dados.id }).select("permissions.id", "permissions.description");
+                    const permissions = await conexao("permissions").where({ id: dados.id_permission }).select("permissions.description");
                     //carregando a unidade do usuario
                     const unit = await conexao("user_unit")
                         .join("units", "user_unit.id_unit", "=", "units.id")
                         .where({ "user_unit.id_user": dados.id })
                         .select("units.id", "units.description");
                     //carregando a empresa
-                    let company=await conexao("companies").where({"id":dados.id_company}).first();
-                     company.state=await conexao("states").where({"id":company.id_state}).first();
-                     company.city=await conexao("cities").where({"id":company.id_city}).first();
-                     company.country=await conexao("countries").where({"id":company.id_country}).first();
+                    let company=await conexao("companies").where({"id":dados.id_company});
+                     if(!company){
+                     company[0].state=await conexao("states").where({"id":company.id_state}).first();
+                     company[0].city=await conexao("cities").where({"id":company.id_city}).first();
+                     company[0].country=await conexao("countries").where({"id":company.id_country}).first();
+                     }
                     // respondendo a requisição 
                     return res.json({ status: true, ... {dadosUser:dados}, ...{permissions}, ...{unit},... {company}  } );
 
@@ -320,14 +282,5 @@ export default {
         }
 
     },
-    async listAll(req, res) {
-        try {
-            await conexao.transaction(async trx => {
-                return res.json(await trx("users"));
-            })
-        } catch (error) {
-            console.log(error)
-            return res.json({ error: true })
-        }
-    }
+
 }

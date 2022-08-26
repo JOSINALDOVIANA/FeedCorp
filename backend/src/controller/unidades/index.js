@@ -13,33 +13,7 @@ export default {
 
             resp.json({ status: false, message: "error: unit-create" });
         }
-    },
-    async insertUnit_ebr(req, resp) {
-
-        const {id_unit,id_ebr} = req.body;
-
-        
-        try {
-            const id=await conexao("unit_ebr").insert({id_ebr,id_unit})
-            resp.json({ status: true, id });
-        } catch (error) {
-
-            resp.json({ status: false, message: "error: unit-create" });
-        }
-    },
-    async getUnit_ebr(req, resp) {
-
-        const {id_unit} = req.query;
-
-        
-        try {
-           const dados= await conexao("unit_ebr").where({id_unit}).join("evaluation_by_results","evaluation_by_results.id","=","unit_ebr.id_ebr").select("evaluation_by_results.*");
-            resp.json({ status: true,dados });
-        } catch (error) {
-
-            resp.json({ status: false, message: "error: unit->getUnit_ebr" });
-        }
-    },
+    }, 
    
     async update(req, resp) {
 
@@ -51,18 +25,9 @@ export default {
             resp.json({ status: false, message: "error: unit-update" });
         }
     },
-    async updateUnit_ebr(req, resp) {
 
-        const { id,id_unit, id_ebr } = req.body;        
-        try {
-            await conexao("unit_ebr").update({id_ebr,id_unit}).where({id})
-            resp.json({ status: true, message: "dados alterados" });
-        } catch (error) {
-            resp.json({ status: false, message: "error: unit-update" });
-        }
-    },
     
-    async createdOfUser(req, res) {
+    async getUnitCreateUser(req, res) {
         const { id_user = false } = req.query; // id_user=int
         // se nao vier id_user vai ser retonado todas
         try {
