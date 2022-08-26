@@ -391,7 +391,7 @@ function ECDashboard() {
             </div>
           </Card>
         </Col>
-        
+
         <Col xxl={3} xl={6} md={12} lg={6}>
           <Card className="custom-card">
             <Card.Header className="border-bottom-0 pb-1">
