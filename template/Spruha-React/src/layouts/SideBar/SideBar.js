@@ -399,12 +399,13 @@ const SideBar = () => {
                                     : ("")}
 
                                   {childrenItem.type === "link" ? (
-                                    <NavLink
-                                      to={childrenItem.path + "/"}
+                                    <span
+                                      onClick={()=>{navegar(`${childrenItem.path}/`,{state:values})}}
                                       className="nav-sub-link"
+                                    style={{cursor:"pointer"}}
                                     >
                                       {childrenItem.title}
-                                    </NavLink>
+                                    </span>
                                   ) : (
                                     ""
                                   )}

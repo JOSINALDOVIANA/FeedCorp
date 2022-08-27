@@ -80,14 +80,13 @@ function Header() {
       >
         <Container fluid className="main-container container-fluid">
           <div className="main-header-left">
-            <Link
-              to="#"
+            <span
               className="main-header-menu-icon"
               id="mainSidebarToggle"
               onClick={() => headerToggleButton()}
             >
               <span></span>
-            </Link>
+            </span>
             <div className="hor-logo">
               <Link
                 to={`${process.env.PUBLIC_URL}/dashboard/`}
@@ -106,6 +105,7 @@ function Header() {
               </Link>
             </div>
           </div>
+
           <div className="main-header-center">
             <div className="responsive-logo">
               <Link to={`${process.env.PUBLIC_URL}/dashboard/`}>
@@ -135,6 +135,7 @@ function Header() {
               </InputGroup.Text>
             </InputGroup> */}
           </div>
+          
           <div className="main-header-right">
             <Navbar.Toggle
               aria-controls="navbarSupportedContent-4"
@@ -389,26 +390,31 @@ function Header() {
                       >
                         <i className="fe fe-edit"></i> Edit Profile
                       </Dropdown.Item>
+
                       <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
                       >
                         <i className="fe fe-settings"></i> Account Settings
                       </Dropdown.Item>
+
                       <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
                       >
-                        <i className="fe fe-settings"></i> Support
+                        <i className="fe fe-settings"></i> Suporte
                       </Dropdown.Item>
+
                       <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
                       >
-                        <i className="fe fe-compass"></i> Activity
+                        <i className="fe fe-compass"></i> Atividades
                       </Dropdown.Item>
+
                       <Dropdown.Item
-                        href={`${process.env.PUBLIC_URL}/custompages/signin`}
+                        href={`${process.env.PUBLIC_URL}/login`}
                       >
-                        <i className="fe fe-power"></i> Sign Out
+                        <i className="fe fe-power"></i> Sair
                       </Dropdown.Item>
+
                     </Dropdown.Menu>
                   </Dropdown>
                     {/* CONFIGURAÇÕES */}

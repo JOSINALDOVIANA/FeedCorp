@@ -7,6 +7,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Rightside from "../layouts/Rightside/Rightside";
 import { Backtotop1 } from "../layouts/Backtotop/Backtotop";
 import { usuarioContext } from "..";
+
 const App = () => {
   document.querySelector("body").classList.remove("error-1");
   document.querySelector("body").classList.remove("app", "sidebar-mini", "landing-page", "horizontalmenu")
@@ -18,15 +19,20 @@ const App = () => {
     document.querySelector(".demo_changer").style.right = "-270px";
 
   };
+
+  // PADRAO - VAI PARA TODAS AS OUTRAS PÁGINAS
   const dadosrota=useLocation();
   const navegar=useNavigate()
   const { values, setValues } = useContext(usuarioContext);
+  
   useEffect(()=>{
     if(!dadosrota.state){
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
     setValues(dadosrota.state);
-  },[values])
+    
+  },[dadosrota.state])
+  console.log(values)
 
   return (
     <Fragment >

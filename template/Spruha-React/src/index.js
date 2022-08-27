@@ -174,9 +174,10 @@ const Root = () => {
                 />
               </Route>
 
+
               <Route>
                 <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacoes`}
+                  path={`${process.env.PUBLIC_URL}/avaliacoes/resultados`}
                   element={<Teste />}
                 />
               </Route>

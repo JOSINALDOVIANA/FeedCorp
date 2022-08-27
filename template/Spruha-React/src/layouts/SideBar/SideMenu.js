@@ -7,8 +7,8 @@ export const MENUITEMS = [
 				title: 'Meu Painel',
 				icon: 'ti-home',
 				type: 'link',
-				active: false,
-				selected: false,
+				active: true,
+				selected: true,
 				path: `${process.env.PUBLIC_URL}/dashboard`,
 			},
 			{
@@ -22,19 +22,18 @@ export const MENUITEMS = [
 			{
 				title: 'Desempenho',
 				icon: 'bi-book-half',
-				type: 'link',
+				type: 'sub',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/avaliacoes`
-				// children: [
-				// 	{
-				// 		path: `${process.env.PUBLIC_URL}/crytocurrencies/dashboard`,
-				// 		type: 'link',
-				// 		active: false,
-				// 		selected: false,
-				// 		title: 'Dashboard'
-				// 	},
-				// ]
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/avaliacoes/resultados`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'AV. POR RESULTADOS'
+					},
+				]
 			},
 			{
 				title: 'Engajamento',
@@ -44,6 +43,7 @@ export const MENUITEMS = [
 				selected: false,
 				path: `${process.env.PUBLIC_URL}/`,
 			},
+			
 		]
 	},
 	
