@@ -1,5 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { MENUITEMS } from "./SideMenu";
+import { MENUITEMS2 } from "./SideMenu";
+import { MENUITEMS3 } from "./SideMenu";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import { horizontalmenusticky } from "../../data/Switcherdata/Switcherdata";
@@ -11,7 +13,14 @@ const SideBar = () => {
   let location = useLocation();
   const navegar = useNavigate();
   const { values, setValues } = useContext(usuarioContext);
-  const [menuitems, setMenuitems] = useState(MENUITEMS);
+  const [menuitems, setMenuitems] = useState([]);
+
+ 
+  useEffect(() => {
+    if (values?.permissions?.description == "administrador") { setMenuitems(MENUITEMS) }
+    if (values?.permissions?.description == "gestor") { setMenuitems(MENUITEMS2) }
+    if (values?.permissions?.description == "colaborador") { setMenuitems(MENUITEMS3) }
+  }, [values]);
   // initial loading
   useEffect(() => {
     history.push(location.pathname); // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history
@@ -38,6 +47,8 @@ const SideBar = () => {
       clearMenuActive();
     }
   }, []);
+  
+  
   // every chnage this effect calls
   let menuIcontype;
   if (document.querySelector("body").classList.contains("horizontalmenu")) {
@@ -193,7 +204,7 @@ const SideBar = () => {
         document.querySelector(".main-body").classList.add("main-sidebar-open");
     }
   }
-  
+
   function Outhover() {
     if (document.querySelector(".main-body")) {
       document
@@ -259,228 +270,227 @@ const SideBar = () => {
                 </div>
 
                 <ul className="menu-nav nav" style={{ marginLeft: "0px" }}>
+                  {menuitems.map((Item, itemi) => (<Fragment key={itemi + Math.random() * 100}>
 
-                  {menuitems.map((Item, itemi) => (
+                    {/* TÍtulo que separa os itens sidebar */}
+                    {/* <li className="nav-header">
+<span className="nav-label">{Item.menutitle}</span>
+</li> */}
 
-                    <Fragment key={itemi + Math.random() * 100}>
+                    {Item.Items.map((menuItem, i) => (
 
-                      {/* TÍtulo que separa os itens sidebar */}
-                      {/* <li className="nav-header">
-                        <span className="nav-label">{Item.menutitle}</span>
-                      </li> */}
+                      <li
+                        className={`nav-item ${menuItem.selected ? "active" : ""}`}
+                        key={i}
+                      >
 
-                      {Item.Items.map((menuItem, i) => (
-
-                        <li
-                          className={`nav-item ${menuItem.selected ? "active" : ""}`}
-                          key={i}
-                        >
-
-                          {/* Itens que ficam dentro dos títulos sidebar */}
-                          {menuItem.type === "sub" ? (
-                            <a
-                              href="javascript"
-                              className={`nav-link with-sub`}
-                              onClick={(event) => {
-                                event.preventDefault();
-                                toggleSidemenu(menuItem);
-                              }}
-                            >
-                              <span className="shape1"></span>
-                              <span className="shape2"></span>
-                              <i
-                                className={`${menuItem.icon} ${menuIcontype} menu-icon`}
-                              ></i>
-                              <span className="sidemenu-label">
-                                {menuItem.title}
-                                {menuItem.active}
-                              </span>
-                              {menuItem.badge ? (
-                                <label className={menuItem.badge}>
-                                  {menuItem.badgetxt}
-                                </label>
-                              ) : (
-                                ""
-                              )}
-                              <div className="according-menu">
-                                {menuItem.active ? (
-                                  <i
-                                    className={`${menuItem.background} fa angle fa-angle-down `}
-                                  ></i>
-                                ) : (
-                                  <i
-                                    className={`${menuItem.background} fa angle fa-angle-right `}
-                                  ></i>
-                                )}
-                              </div>
-                            </a>
-                          ) : (
-                            ""
-                          )}
-                          
-                            {/* ITENS QUE NÃO POSSUEM SUBITENS */}
-                          {menuItem.type === "link" ? (
-                            // preciso que personalize este button
-                            <span
-                              style={{ cursor: 'pointer' }}
-                              onClick={() => { navegar(`${menuItem.path}/`, { state: values }) }}
-                              className={`nav-link ${menuItem.selected ? "active" : ""}`}
-                            >
-
-                              <span className="shape1"></span>
-                              <span className="shape2"></span>
-                              <i
-                                className={`${menuItem.icon} ${menuIcontype} menu-icon`}
-                              >
-                              </i>
-
-                              {/* ITEM TITULO */}
-                              <span className="sidemenu-label">
-                                {menuItem.title}
-                              </span>
-
-                              {menuItem.badge ? (
-                                <label className={menuItem.badge}>
-                                  {menuItem.badgetxt}
-                                </label>
-                              ) : ("")}
-
+                        {/* Itens que ficam dentro dos títulos sidebar */}
+                        {menuItem.type === "sub" ? (
+                          <a
+                            href="javascript"
+                            className={`nav-link with-sub`}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              toggleSidemenu(menuItem);
+                            }}
+                          >
+                            <span className="shape1"></span>
+                            <span className="shape2"></span>
+                            <i
+                              className={`${menuItem.icon} ${menuIcontype} menu-icon`}
+                            ></i>
+                            <span className="sidemenu-label">
+                              {menuItem.title}
+                              {menuItem.active}
                             </span>
-                          ) : ("")}
+                            {menuItem.badge ? (
+                              <label className={menuItem.badge}>
+                                {menuItem.badgetxt}
+                              </label>
+                            ) : (
+                              ""
+                            )}
+                            <div className="according-menu">
+                              {menuItem.active ? (
+                                <i
+                                  className={`${menuItem.background} fa angle fa-angle-down `}
+                                ></i>
+                              ) : (
+                                <i
+                                  className={`${menuItem.background} fa angle fa-angle-right `}
+                                ></i>
+                              )}
+                            </div>
+                          </a>
+                        ) : (
+                          ""
+                        )}
 
-                          {/* SUBITENS DOS ITENS */}
-                          {menuItem.children ? (
-                            <ul
-                              className={`nav-sub ${menuItem.active ? "open" : ""}`}
-                              style={
-                                menuItem.active
-                                  ? { display: "block" }
-                                  : { display: "none" }
-                              }
+                        {/* ITENS QUE NÃO POSSUEM SUBITENS */}
+                        {menuItem.type === "link" ? (
+                          // preciso que personalize este button
+                          <span
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => { navegar(`${menuItem.path}/`, { state: values }) }}
+                            className={`nav-link ${menuItem.selected ? "active" : ""}`}
+                          >
+
+                            <span className="shape1"></span>
+                            <span className="shape2"></span>
+                            <i
+                              className={`${menuItem.icon} ${menuIcontype} menu-icon`}
                             >
+                            </i>
 
-                              {menuItem.children.map((childrenItem, index) => {
-                                return (
-                                  <li
-                                    key={index}
-                                    className={`nav-sub-item ${childrenItem.selected ? "active show" : ""
-                                      }`}
-                                  >
-                                    {childrenItem.type === "sub" ? (
-                                      <a
-                                        href="javascript"
-                                        className="nav-sub-link sub-with-sub"
-                                        onClick={(event) => {
-                                          event.preventDefault();
-                                          toggleSidemenu(childrenItem);
-                                        }}
-                                      >
-                                        <span className="sidemenu-label">
-                                          {childrenItem.title}
-                                          {childrenItem.active}
-                                        </span>
-                                        {childrenItem.active ? (
-                                          <i className="angle fa fa-angle-down"></i>
-                                        ) : (
-                                          <i
-                                            className={`${menuItem.background} fa angle fa-angle-right `}
-                                          ></i>
-                                        )}
-                                      </a>
-                                    )
-                                      : ("")}
+                            {/* ITEM TITULO */}
+                            <span className="sidemenu-label">
+                              {menuItem.title}
+                            </span>
 
-                                    {childrenItem.type === "link" ? (
-                                      <NavLink
-                                        to={childrenItem.path + "/"}
-                                        className="nav-sub-link"
-                                      >
+                            {menuItem.badge ? (
+                              <label className={menuItem.badge}>
+                                {menuItem.badgetxt}
+                              </label>
+                            ) : ("")}
+
+                          </span>
+                        ) : ("")}
+
+                        {/* SUBITENS DOS ITENS */}
+                        {menuItem.children ? (
+                          <ul
+                            className={`nav-sub ${menuItem.active ? "open" : ""}`}
+                            style={
+                              menuItem.active
+                                ? { display: "block" }
+                                : { display: "none" }
+                            }
+                          >
+
+                            {menuItem.children.map((childrenItem, index) => {
+                              return (
+                                <li
+                                  key={index}
+                                  className={`nav-sub-item ${childrenItem.selected ? "active show" : ""
+                                    }`}
+                                >
+                                  {childrenItem.type === "sub" ? (
+                                    <a
+                                      href="javascript"
+                                      className="nav-sub-link sub-with-sub"
+                                      onClick={(event) => {
+                                        event.preventDefault();
+                                        toggleSidemenu(childrenItem);
+                                      }}
+                                    >
+                                      <span className="sidemenu-label">
                                         {childrenItem.title}
-                                      </NavLink>
-                                    ) : (
-                                      ""
-                                    )}
+                                        {childrenItem.active}
+                                      </span>
+                                      {childrenItem.active ? (
+                                        <i className="angle fa fa-angle-down"></i>
+                                      ) : (
+                                        <i
+                                          className={`${menuItem.background} fa angle fa-angle-right `}
+                                        ></i>
+                                      )}
+                                    </a>
+                                  )
+                                    : ("")}
 
-                                    {childrenItem.children ? (
-                                      <ul
-                                        className="sub-nav-sub"
-                                        style={
-                                          childrenItem.active
-                                            ? { display: "block" }
-                                            : { display: "none" }
-                                        }
-                                      >
-                                        {/* SUBITENS DOS SUBITENS MAP */}
-                                        {childrenItem.children.map(
-                                          (childrenSubItem, key) => (
-                                            <li
-                                              className={`nav-sub-item ${childrenSubItem.selected
-                                                ? " active"
-                                                : ""
-                                                }`}
-                                              key={key}
-                                            >
-                                              {/* SUBITENS DOS SUBITENS */}
-                                              {childrenSubItem.type ===
-                                                "link" ? (
-                                                <NavLink
-                                                  to={
-                                                    childrenSubItem.path + "/"
-                                                  }
-                                                  className="nav-sub-link"
-                                                >
+                                  {childrenItem.type === "link" ? (
+                                    <NavLink
+                                      to={childrenItem.path + "/"}
+                                      className="nav-sub-link"
+                                    >
+                                      {childrenItem.title}
+                                    </NavLink>
+                                  ) : (
+                                    ""
+                                  )}
+
+                                  {childrenItem.children ? (
+                                    <ul
+                                      className="sub-nav-sub"
+                                      style={
+                                        childrenItem.active
+                                          ? { display: "block" }
+                                          : { display: "none" }
+                                      }
+                                    >
+                                      {/* SUBITENS DOS SUBITENS MAP */}
+                                      {childrenItem.children.map(
+                                        (childrenSubItem, key) => (
+                                          <li
+                                            className={`nav-sub-item ${childrenSubItem.selected
+                                              ? " active"
+                                              : ""
+                                              }`}
+                                            key={key}
+                                          >
+                                            {/* SUBITENS DOS SUBITENS */}
+                                            {childrenSubItem.type ===
+                                              "link" ? (
+                                              <NavLink
+                                                to={
+                                                  childrenSubItem.path + "/"
+                                                }
+                                                className="nav-sub-link"
+                                              >
+                                                {childrenSubItem.title}
+                                              </NavLink>
+                                            ) : (
+                                              ""
+                                            )}
+                                            {/* NÃO IDENTIFIQUEI */}
+                                            {childrenSubItem.type ===
+                                              "sub" ? (
+                                              <Link
+                                                to="#"
+                                                className="nav-sub-item"
+                                                onClick={(event) => {
+                                                  event.preventDefault();
+                                                  toggleSidemenu(
+                                                    childrenSubItem
+                                                  );
+                                                }}
+                                              >
+                                                <span className="sidemenu-label">
                                                   {childrenSubItem.title}
-                                                </NavLink>
-                                              ) : (
-                                                ""
-                                              )}
-                                                {/* NÃO IDENTIFIQUEI */}
-                                              {childrenSubItem.type ===
-                                                "sub" ? (
-                                                <Link
-                                                  to="#"
-                                                  className="nav-sub-item"
-                                                  onClick={(event) => {
-                                                    event.preventDefault();
-                                                    toggleSidemenu(
-                                                      childrenSubItem
-                                                    );
-                                                  }}
-                                                >
-                                                  <span className="sidemenu-label">
-                                                    {childrenSubItem.title}
-                                                  </span>
-                                                  {childrenSubItem.active ? (
-                                                    <i className="fa fa-angle-down"></i>
-                                                  ) : (
-                                                    <i className="fa fa-angle-right"></i>
-                                                  )}
-                                                </Link>
-                                              ) : (
-                                                ""
-                                              )}
+                                                </span>
+                                                {childrenSubItem.active ? (
+                                                  <i className="fa fa-angle-down"></i>
+                                                ) : (
+                                                  <i className="fa fa-angle-right"></i>
+                                                )}
+                                              </Link>
+                                            ) : (
+                                              ""
+                                            )}
 
-                                            </li>
-                                          )
-                                          
-                                        )}
+                                          </li>
+                                        )
 
-                                      </ul>
-                                    )
-                                      : ("")}
+                                      )}
 
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          )
-                            : ("")}
+                                    </ul>
+                                  )
+                                    : ("")}
 
-                        </li>
-                      ))}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        )
+                          : ("")}
 
-                    </Fragment>
-                  ))}
+                      </li>
+                    ))}
+
+                  </Fragment>))}
+
+
+
                 </ul>
 
                 <div className="slide-right" id="slide-right">

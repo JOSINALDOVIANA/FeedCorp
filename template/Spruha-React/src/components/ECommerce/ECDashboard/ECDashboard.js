@@ -27,18 +27,10 @@ const ProductsDetails =
   ];
 function ECDashboard() {
 
-  const rotadados=useLocation();
-  // console.log(rotadados.state);
+  
   const navegar=useNavigate()
   const {values,setValues}=useContext(usuarioContext);
-  useEffect(()=>{
-    if(rotadados.state){
-      setValues(rotadados.state)
-    }else{
-      //navegar(`${process.env.PUBLIC_URL}/home`);
-    }
-
-  },[])
+  
   
   const [content, setContent] = useState("");
   return (

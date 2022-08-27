@@ -3,7 +3,7 @@ import Header from "../layouts/Header/Header";
 import Sidebar from "../layouts/SideBar/SideBar";
 import Footer from "../layouts/Footer/Footer";
 import Switcher from "../layouts/Switcher/Switcher";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Rightside from "../layouts/Rightside/Rightside";
 import { Backtotop1 } from "../layouts/Backtotop/Backtotop";
 import { usuarioContext } from "..";
@@ -18,15 +18,23 @@ const App = () => {
     document.querySelector(".demo_changer").style.right = "-270px";
 
   };
- 
-  
+  const dadosrota=useLocation();
+  const navegar=useNavigate()
+  const { values, setValues } = useContext(usuarioContext);
+  useEffect(()=>{
+    if(!dadosrota.state){
+      navegar(`${process.env.PUBLIC_URL}/home`)
+    }
+    setValues(dadosrota.state);
+  },[values])
+
   return (
     <Fragment >
       <div className="horizontalMenucontainer">
         <Switcher />
         <div className="page">
           <Header />
-          <Sidebar />
+          <Sidebar values={values} />
 
           <div className="main-content side-content">
             <div className="main-container container-fluid" onClick={() => remove()}>

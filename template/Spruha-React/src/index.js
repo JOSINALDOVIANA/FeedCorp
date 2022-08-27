@@ -144,7 +144,7 @@ const LazyCryptoDashboard = React.lazy(() => import("./components/Cryptocurrenci
 export const usuarioContext = createContext();
 const Root = () => {
   function UserContextProvider({ children }) {
-    const [values, setValues] = React.useState({nome:"josinaldo"});
+    const [values, setValues] = React.useState();
 
     return (
         <usuarioContext.Provider value={{ values, setValues }}>

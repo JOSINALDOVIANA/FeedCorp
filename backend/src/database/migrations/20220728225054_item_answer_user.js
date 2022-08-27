@@ -7,10 +7,10 @@
         table.increments('id');  
         table.string('answer').notNullable();
 
-        table.integer('id_items').notNullable().unsigned();
+        table.integer('id_item').notNullable().unsigned();
         table.integer("id_user").unsigned();
        
-        table.foreign("id_items").references("id").inTable("items").onDelete("cascade");
+        table.foreign("id_item").references("id").inTable("items").onDelete("cascade");
         table.foreign("id_user").references("id").inTable("users").onDelete("set null");            
         table.timestamp('updated_at',{ precision: 0 },{ useTz: true }).defaultTo(knex.fn.now(0));
       })

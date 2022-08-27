@@ -105,6 +105,18 @@ export default {
             res.json({status:false, erro:"error avpr_=>getEbr_items"});
         }
     },
+    async setAnswer(req,res){
+        const {id_user,}=req.query;
+
+        try {
+             const ebr_items =  await conexao("ebr_items").select("ebr_items.indicator","ebr_items.goal").where({id_ebr})
+            res.json({"status":true,ebr_items});
+            
+        } catch (error) {
+           
+            res.json({status:false, erro:"error avpr_=>getEbr_items"});
+        }
+    },
 
 
 

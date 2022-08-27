@@ -97,6 +97,8 @@ routes.post("/avpr/insert/items",avpr.insertItems)// inserir valores na tabela "
 routes.put("/avpr/update/items",avpr.updateItems)// atualiza valores na tabela "items"
 routes.get("/avpr/get/items",avpr.getItems)// busca o items de cada avaliação exige "id_ebr"
 
+routes.post("/avpr/insert/resposta",avpr.insertItems)// inserir valores na tabela "items"
+
 
 /*#########################################################################################################*/
 
