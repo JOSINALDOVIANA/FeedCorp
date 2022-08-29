@@ -32,7 +32,7 @@ const App = () => {
     setValues(dadosrota.state);
     
   },[dadosrota.state])
-  console.log(values)
+  // console.log(values)
 
   return (
     <Fragment >

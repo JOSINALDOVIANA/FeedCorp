@@ -27,7 +27,7 @@ export const MENUITEMS = [
 				selected: false,
 				children: [
 					{
-						path: `${process.env.PUBLIC_URL}/avaliacoes/resultados`,
+						path: `${process.env.PUBLIC_URL}/avr`,
 						type: 'link',
 						active: false,
 						selected: false,
