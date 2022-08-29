@@ -10,7 +10,8 @@
         table.integer("id_ebr").unsigned().notNullable();
         table.string("und");        
         table.boolean("max").defaultTo(false);        
-        table.boolean("min").defaultTo(false);        
+        table.boolean("min").defaultTo(false);
+        table.dateTime('validity',{precision:6}).notNullable();        
                
         table.foreign("id_ebr").references("id").inTable("evaluation_by_results").onDelete("cascade");           
         table.timestamp('updated_at',{ precision: 0 },{ useTz: true }).defaultTo(knex.fn.now(0));

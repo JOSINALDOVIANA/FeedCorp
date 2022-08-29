@@ -6,6 +6,8 @@ import permissoes from './controller/permissoes/index.js';
 import multer from 'multer';
 import multerconfig from "./config/multer.js";
 import images from "./controller/images/imagecontrol.js";
+import company from './controller/company/index.js';
+import plans from './controller/plans/index.js';
 const routes=express.Router();
 
  /*
@@ -81,9 +83,6 @@ routes.get("/permission/get",permissoes.get)//devolve as permissoes por user se 
 
 
 /*################################################ AV. POR RESULTADOS ######################################*/
-
-
-
 routes.post("/avpr/insert",avpr.insert);//cria na tabela "evaluation_by_results"
 routes.put("/avpr/update",avpr.update);//atualiza  a tabela "evaluation_by_results" exige "id"
 routes.put("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results" exige "id"
@@ -111,11 +110,20 @@ routes.delete('/images/deletar',images.deletar);
 routes.get("/images/listar",images.listar)
 /*#########################################################################################################*/
 
+/*################################################ company ######################################*/
+routes.post('/company/insert',company.Insert);
+routes.delete('/company/delete',company.Delete);
+routes.get("/company/get",company.Get);
+routes.put("/company/update",company.Update);
+/*#########################################################################################################*/
 
 
 
-
-
-
+/*################################################ planos ######################################*/
+routes.post('/plans/insert',plans.ModuleInsert);
+routes.delete('/company/delete',company.Delete);
+routes.get("/company/get",company.Get);
+routes.put("/company/update",company.Update);
+/*#########################################################################################################*/
 
 export default routes;
