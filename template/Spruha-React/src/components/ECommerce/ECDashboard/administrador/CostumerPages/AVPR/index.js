@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../..";
+import { usuarioContext } from "../../../../../..";
+
 
 // import { Container } from './styles';
 

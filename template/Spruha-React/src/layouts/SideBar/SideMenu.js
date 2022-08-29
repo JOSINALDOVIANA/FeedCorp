@@ -1,7 +1,6 @@
 export const MENUITEMS = [
-	// ITEM 1
 	{
-		menutitle: 'ADM',
+		menutitle: 'Administrador',
 		Items: [
 			{
 				title: 'Meu Painel',
@@ -17,7 +16,7 @@ export const MENUITEMS = [
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/`,
+				path: `${process.env.PUBLIC_URL}/corporacao`,
 			},
 			{
 				title: 'Desempenho',
@@ -31,17 +30,62 @@ export const MENUITEMS = [
 						type: 'link',
 						active: false,
 						selected: false,
-						title: 'AV. POR RESULTADOS'
+						title: 'OKR'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/avr`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Avaliação por resultados'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/avr`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Avaliação de desempenho'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/avr`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Escalas Gráficas'
 					},
 				]
 			},
 			{
 				title: 'Engajamento',
 				icon: 'ti-home',
+				type: 'sub',
+				active: false,
+				selected: false,
+				//path: `${process.env.PUBLIC_URL}/`,
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/avr`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Clima Pulso'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/avr`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Pesquisas Internas'
+					},
+				]
+			},
+			{
+				title: 'Relatórios',
+				icon: 'ti-home',
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/`,
+				//path: `${process.env.PUBLIC_URL}/`,
 			},
 			
 		]
@@ -50,9 +94,8 @@ export const MENUITEMS = [
 ];
 
 export const MENUITEMS2 = [
-		// ITEM 2
 	{
-		menutitle: 'GESTOR',
+		menutitle: 'Gestor',
 		Items: [
 			{
 				title: 'Meu Painel',
@@ -68,7 +111,7 @@ export const MENUITEMS2 = [
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/`,
+				//path: `${process.env.PUBLIC_URL}/`,
 			},
 			{
 				title: 'Desempenho',
@@ -93,14 +136,13 @@ export const MENUITEMS2 = [
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/`,
+				//path: `${process.env.PUBLIC_URL}/`,
 			},
 		]
 	},
 ];
 
 export const MENUITEMS3 = [
-	// ITEM 3
 	{
 		menutitle: 'COLABORADOR',
 		Items: [
@@ -113,7 +155,7 @@ export const MENUITEMS3 = [
 				path: `${process.env.PUBLIC_URL}/dashboard`,
 			},
 			{
-				title: 'Desempenho',
+				title: 'Minha Unidade',
 				icon: 'bi-book-half',
 				type: 'link',
 				active: false,
@@ -129,14 +171,7 @@ export const MENUITEMS3 = [
 				// 	},
 				// ]
 			},
-			{
-				title: 'Engajamento',
-				icon: 'ti-home',
-				type: 'link',
-				active: false,
-				selected: false,
-				path: `${process.env.PUBLIC_URL}/`,
-			},
+			
 		]
 	},
 	
