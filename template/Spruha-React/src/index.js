@@ -8,12 +8,18 @@ import FeedRecebidos from "./components/ECommerce/ECDashboard/tabelaCards/FeedRe
 import FeedFeitos from "./components/ECommerce/ECDashboard/tabelaCards/FeedFeitos"
 import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
 import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
+
+import ClimaTabela from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaTabelaRealizados"
+import CriarClima from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"
+
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
 
 // Dashboard
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp"))
+const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/ClimaPulso"))
+
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR"));
 const Criar = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Criar"));
 //LandingPage
@@ -176,10 +182,6 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
                 <Route index element={<ECDashboard />} />
 
-                {/* <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/dashboard`} element={<ECDashboard />}/>
-                </Route> */}
-
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/dashboard`} element={<ECDashboard />} >
                     <Route index element={<Fragment />} />
@@ -208,6 +210,24 @@ const Root = () => {
 
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
+                </Route>
+
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/climapulso`} element={<ClimaPulso />} >
+                    <Route index element={<Fragment />} />
+                    <Route>
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/climapulso/realizados`}
+                        element={<ClimaTabela />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/climapulso/criar`}
+                        element={<CriarClima />}
+                      />
+
+                    </Route>
+
+                  </Route>
                 </Route>
 
                 <Route>

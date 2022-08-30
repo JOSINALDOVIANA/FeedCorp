@@ -21,7 +21,7 @@ export const Linechart = {
 
     },
     title: {
-      display: true,
+      display: false,
       text: "Chart.js Line Chart",
 
     },
@@ -32,12 +32,11 @@ export const Linechart = {
   },
 };
 export const linechartdata = {
-  labels: ["Sun", "Mon",
-    "Tue", "Wed", "Thu", "Fri", "Sat"],
+  labels: ["Jan", "Fev", "Mar", "Abril", "Maio", "Jun", "Jul", "Ago.", "Set", "Out", "Nov", "Dez"],
   datasets: [
     {
-      label: "Profits",
-      data: [20, 420, 210, 354, 580, 320, 480],
+      label: "Clima",
+      data: [30, 150, 65, 160, 70, 130, 70, 120, 70, 130, 70, 120],
       borderWidth: 2,
       backgroundColor: "transparent",
       borderColor: "#6259ca",
@@ -96,18 +95,18 @@ export const Barchart2 = {
   },
 };
 export const barchart2data = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+  labels: ["Jan", "Fev", "Mar", "Abril", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
   datasets: [
     {
-      label: "Data1",
-      data: [65, 59, 80, 81, 56, 55, 40],
+      label: "Ativos",
+      data: [65, 59, 80, 81, 56, 55, 40, 81, 56, 55, 40, 20],
       borderColor: "#6259ca",
       borderWidth: "0",
       backgroundColor: "#6259ca",
     },
     {
-      label: "Data2",
-      data: [28, 48, 40, 19, 86, 27, 90],
+      label: "Concluídos",
+      data: [28, 48, 40, 19, 86, 27, 90, 48, 40, 19, 86, 10],
       borderColor: "#53caed",
       borderWidth: "0",
       backgroundColor: "#53caed",

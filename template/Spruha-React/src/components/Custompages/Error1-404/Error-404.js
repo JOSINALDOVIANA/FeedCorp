@@ -1,7 +1,17 @@
-import React, { Fragment } from "react";
-import { Col, Container, } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { Fragment, useContext, useEffect } from "react";
+import { Col, Container, Button } from "react-bootstrap";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { usuarioContext } from "../../..";
 const Error404 = () => {
+
+  const dadosrota = useLocation();
+  const location = useLocation();
+  const navegar = useNavigate();
+  const { values, setValues } = useContext(usuarioContext);
+  useEffect(() => {
+    setValues(dadosrota.state)
+  }, [dadosrota])
+
   document.querySelector("body").classList.add("error-1");
   return (
     <Fragment>
@@ -15,17 +25,24 @@ const Error404 = () => {
                   <h1 className="tx-140 mb-0">404</h1>
                 </Col>
                 <Col lg={12}>
-                  <h1>Oops.The Page you are looking for doesn't exit..</h1>
+                  <h1>Oops. A página que você procura não existe</h1>
                   <h6 className="tx-15 mt-3 mb-4 text-white-50">
-                    You may have mistyped the address or the page may have moved.
-                    Try searching below.
+                    Você pode ter digitado incorretamente o endereço ou a página pode ter sido movida.
                   </h6>
-                  <Link
-                    to={`${process.env.PUBLIC_URL}/dashboard/`}
+                  {/* <Link
+                    to={`${process.env.PUBLIC_URL}/`}
                     className="btn ripple btn-success text-center mb-2"
                   >
                     Back to Home
-                  </Link>
+                  </Link> */}
+                  <Button
+                    variant="btn-success"
+                    type="button"
+                    className="btn ripple btn-success text-center mb-2"
+                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/`, { state: values }) }}
+                  >
+                    Voltar
+                  </Button>
                 </Col>
               </div>
             </div>

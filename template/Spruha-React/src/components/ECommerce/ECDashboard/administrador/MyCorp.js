@@ -63,7 +63,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -90,7 +90,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -117,7 +117,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -144,7 +144,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -171,7 +171,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -198,7 +198,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -225,7 +225,7 @@ function MinhaCorporacao() {
                 <div className="d-flex ms-auto float-end">
                 <h2 className="text-end card-item-icon card-icon">
                   {/* ICONE */}
-                  <i className="bi-person-hearts icon-size float-start text-primary"></i>
+                  <i className="bi-people-fill icon-size float-start text-primary"></i>
                 </h2>
                 </div>
 
@@ -235,7 +235,7 @@ function MinhaCorporacao() {
         </Col>
       
       </Row>
-
+        {/* GRÁFICO EM BARRA */}
       <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">
           <Card.Body>
@@ -256,14 +256,14 @@ function MinhaCorporacao() {
           </Card.Body>
         </Card>
       </Col>
-
+        {/* GRÁFICO EM LINHA */}
       <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">
           <Card.Body className="card-body">
             <div>
               <h6 className="main-content-label mb-1">Clima organizacional</h6>
               <p className="text-muted  card-sub-title">
-                Gráfico que mostra o clima da corporação ao longo do tempo
+                Clima da corporação ao longo do ano
               </p>
             </div>
             <div className="chartjs-wrapper-demo">

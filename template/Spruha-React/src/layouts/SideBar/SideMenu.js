@@ -61,22 +61,21 @@ export const MENUITEMS = [
 				type: 'sub',
 				active: false,
 				selected: false,
-				//path: `${process.env.PUBLIC_URL}/`,
 				children: [
 					{
-						path: `${process.env.PUBLIC_URL}/avr`,
+						path: `${process.env.PUBLIC_URL}/climapulso`,
 						type: 'link',
 						active: false,
 						selected: false,
 						title: 'Clima Pulso'
 					},
-					{
-						path: `${process.env.PUBLIC_URL}/avr`,
-						type: 'link',
-						active: false,
-						selected: false,
-						title: 'Pesquisas Internas'
-					},
+					// {
+					// 	path: `${process.env.PUBLIC_URL}/avr`,
+					// 	type: 'link',
+					// 	active: false,
+					// 	selected: false,
+					// 	title: 'Pesquisas Internas'
+					// },
 				]
 			},
 			{
