@@ -42,12 +42,13 @@ export const Dashboard1 = {
   },
 };
 export const dashboard1 = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  labels: ["Jan", "Fev", "Mar", "Abril", "Maio", "Jun", "Jul", "Ago.", "Set", "Out", "Nov", "Dez"],
 
   datasets: [
+    // LINHA TRANSPARENTE
     {
-      label: "Order",
-      data: [30, 150, 65, 160, 70, 130, 70, 120],
+      label: "Ano Anterior",
+      data: [30, 150, 65, 160, 70, 130, 70, 120, 70, 130, 70, 120],
       borderWidth: 3,
       backgroundColor: "transparent",
       borderColor: "rgba(183, 179, 220,0.5)",
@@ -57,9 +58,10 @@ export const dashboard1 = {
       fill: true,
       tension: 0.4,
     },
+    // LINHA ROXA
     {
-      label: "Sale",
-      data: [50, 90, 210, 90, 150, 75, 200, 70],
+      label: "Esse ano",
+      data: [50, 90, 210, 90, 150, 75, 200, 70, 90, 210, 90, 150],
       borderWidth: 3,
       backgroundColor: "transparent",
       borderColor: "#6259ca",
