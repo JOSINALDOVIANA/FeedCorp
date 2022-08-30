@@ -66,7 +66,7 @@ export default {
             })
 
         } catch (error) {
-
+             console.log(error)
             return res.json({
                 status: false,
                 "message": "error insertUser_ebr"
@@ -89,7 +89,7 @@ export default {
             })
 
         } catch (error) {
-
+            console.log(error)
             return res.json({
                 status: false,
                 "message": "error insertUser_unit"

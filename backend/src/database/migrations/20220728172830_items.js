@@ -8,7 +8,7 @@
         table.string('indicator').notNullable();
         table.string('goal').notNullable();
         table.integer("id_ebr").unsigned().notNullable();
-        table.string("und");        
+            
         table.boolean("max").defaultTo(false);        
         table.boolean("min").defaultTo(false);
         table.dateTime('validity',{precision:6}).notNullable();

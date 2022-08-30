@@ -30,32 +30,24 @@ routes.delete('/user/delete',user.delete);//deleta usuario na tabela "users"
 
 
 
+// ----------user_ebr---------------
+routes.put('/user_ebr/update',user.updateUser_ebr); // atualiza em "user_ebr"
+routes.post('/user_ebr/insert',user.insertUser_ebr); // inserir dados em "user_ebr"
+routes.get('/user_ebr/get',user.getUser_ebr); // retona qual avaliação por resultado existe para o usuario"
 
-routes.put('/user/update/user_ebr',user.updateUser_ebr); // atualiza em "user_ebr"
-routes.post('/user/insert/user_ebr',user.insertUser_ebr); // inserir dados em "user_ebr"
-routes.get('/user/get/user_ebr',user.getUser_ebr); // retona qual avaliação por resultado existe para o usuario"
-
-routes.post('/user/insert/user_unit',user.insertUser_unit); // inserir dados  em "user_unit"
-routes.put('/user/update/user_unit',user.updateUser_unit); // atualiza em "user_unit"
-routes.get('/user/get/user_unit',user.getUser_unit); // retorna qual unidade do usuario
+// --------------user_unit-------------------
+routes.post('/user_unit/insert',user.insertUser_unit); // inserir dados  em "user_unit"
+routes.put('/user_unit/update',user.updateUser_unit); // atualiza em "user_unit"
+routes.get('/user_unit/get',user.getUser_unit); // retorna qual unidade do usuario
 /*################################################################################################*/
 
 
 /*################################################ UNIDADES ######################################*/
 
-//cria unidades na tabela "units"
-routes.post("/unit/create",unidades.create);
-//deleta uma unidade na tabela "units"
-routes.delete("/unit/delete",unidades.delete);
-//atualiza uma unidade na tabela "units"
-routes.put("/unit/update",unidades.update);
-//redireciona e retorna qual a unidade do  usuario
-routes.get("/unit/get/user_unit",(req,res)=>{
-    res.redirect(`http://localhost:${process.env.PORT}/user/get/user_unit?id_user=${req.query.id_user}`);
-});
-
-                               /*------rotas especiais------*/
-
+// -------unit---------
+routes.post("/unit/insert",unidades.create);//cria unidades na tabela "units"
+routes.delete("/unit/delete",unidades.delete);//deleta uma unidade na tabela "units"
+routes.put("/unit/update",unidades.update);//atualiza uma unidade na tabela "units"
 // consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores tem na unidade
 // a unidade do usuario  ja é carregada no login no objeto:unit
 //se os parametros exigidos nao existirem retona todas as unidades cadastradas sem parametros de filtro
@@ -72,7 +64,7 @@ routes.get("/unit/consult",unidades.getUnitCreateUser);
 
 /*################################################ PERMISSIONS ######################################*/
 
-routes.post("/permission/create",permissoes.create)//criar
+routes.post("/permission/insert",permissoes.create)//criar
 routes.put("/permission/update",permissoes.update)//atualizar
 routes.delete("/permission/delete",permissoes.delete)//deletar
 routes.get("/permission/get",permissoes.get)//devolve as permissoes por user se "id_user" nao existir retorna todas
@@ -83,18 +75,17 @@ routes.get("/permission/get",permissoes.get)//devolve as permissoes por user se 
 
 
 /*################################################ AV. POR RESULTADOS ######################################*/
+// ------evaluation_by_results----
 routes.post("/avpr/insert",avpr.insert);//cria na tabela "evaluation_by_results"
 routes.put("/avpr/update",avpr.update);//atualiza  a tabela "evaluation_by_results" exige "id"
 routes.put("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results" exige "id"
-routes.put("/avpr/getone",avpr.getEspecific);//retorna uma avaliação especifica exige o "id" da avaliação
-routes.put("/avpr/gettwu",avpr.getCreateAll);//retorna todas as avaliações criadas pelo usuario exige "id_user"
+routes.get("/avpr/getone",avpr.getEspecific);//retorna uma avaliação especifica exige o "id" da avaliação
+routes.get("/avpr/gettwu",avpr.getCreateAll);//retorna todas as avaliações criadas pelo usuario exige "id_user"
 
-
-                                             /*------rotas especiais------*/
-
-routes.post("/avpr/insert/items",avpr.insertItems)// inserir valores na tabela "items"
-routes.put("/avpr/update/items",avpr.updateItems)// atualiza valores na tabela "items"
-routes.get("/avpr/get/items",avpr.getItems)// busca o items de cada avaliação exige "id_ebr"
+// ------items-------
+routes.post("/items/insert",avpr.insertItems)// inserir valores na tabela "items"
+routes.put("/items/update",avpr.updateItems)// atualiza valores na tabela "items"
+routes.get("/items/get",avpr.getItems)// busca o items de cada avaliação exige "id_ebr"
 
 routes.post("/avpr/insert/resposta",avpr.insertItems)// inserir valores na tabela "items"
 
