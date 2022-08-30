@@ -124,7 +124,9 @@ export default {
              for (let key in plans) {
                  
                 console.log(key)
-                 const modules=await  trx("module_plan").where({id_plan:plans[key].id}).join("modules","module_plan.id_module","=","modules.id").select("modules.*")
+                 const modules=await  trx("module_plan").where({id_plan:plans[key].id})
+                 .join("modules","module_plan.id_module","=","modules.id")
+                 .select("modules.*")
                  p.push({...plans[key],modules});
                  
              }
@@ -176,6 +178,55 @@ export default {
         try {
             await conexao.transaction(async (trx)=>{
              const module=await  trx("module_plan").where({id})
+             return res.json({status:true,module})
+            })
+        } catch (error) {
+            return res,json({status:false,mensage:error})
+        }
+    },
+    async Company_ModuleInsert(req,res){
+        const {id_module,id_company}=req.body
+
+        try {
+            await conexao.transaction(async (trx)=>{
+             const id=await  trx("company_module").insert({id_company,id_module})
+             return res.json({status:true,mensage:"inserido"})
+            })
+        } catch (error) {
+            return res,json({status:false,mensage:error})
+        }
+    },
+    async Company_ModuleUpdate(req,res){
+        const {id,id_company,id_module}=req.body
+
+        try {
+            await conexao.transaction(async (trx)=>{
+             await  trx("company_module").update({id_company,id_module}).where({id})
+             return res.json({status:true,mensagem:"atualizado"})
+            })
+        } catch (error) {
+            return res,json({status:false,mensage:error})
+        }
+    },
+    async Company_ModuleDelete(req,res){
+        const {id}=req.body
+
+        try {
+            await conexao.transaction(async (trx)=>{
+             await  trx("company_module").del().where({id})
+             return res.json({status:true,mensagem:"deletado"})
+            })
+        } catch (error) {
+            return res,json({status:false,mensage:error})
+        }
+    },
+    async Company_ModuleGet(req,res){
+        const {id_company}=req.query
+
+        try {
+            await conexao.transaction(async (trx)=>{
+             const module=await  (await trx("company_module").where({id_company}))
+             .join("modules","company_module.id_module",'=',"modules.id")
              return res.json({status:true,module})
             })
         } catch (error) {

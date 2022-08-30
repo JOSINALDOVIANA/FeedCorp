@@ -11,16 +11,16 @@
   await knex('units').del();
   await knex('units').insert([
     { 
-     description:"UMC",id_user:users[userstam-1].id    
+     description:"Unidade de Market e Comunicação",id_user:users[userstam-1].id,initials:"UMC"   
     },
     { 
-     description:"UTIC",id_user:users[userstam-2].id
+     description:"Unidade de Tecnologia da Informação e Comunicação",id_user:users[userstam-2].id,initials:"UTIC"
     },
     { 
-     description:"UAC",id_user:users[userstam-3].id
+     description:"Unidade de Assessoria e Comunicação",id_user:users[userstam-3].id,initials:"UAC"
     },
     { 
-     description:"UCC",id_user:users[userstam-1].id 
+     description:"Unidade de Controle e Contabilidade",id_user:users[userstam-1].id,initials:"UCC" 
     },
     
     

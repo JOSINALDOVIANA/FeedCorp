@@ -140,6 +140,12 @@ routes.delete('/plan_module/delete',plans.Plan_ModuleDelete);
 routes.get('/plan_module/get',plans.Plan_ModuleGet);
 routes.put('/plan_module/update',plans.Plan_ModuleUpdate);
 
+// ----company_module----
+routes.post('/company_module/insert',plans.Company_ModuleInsert);
+routes.delete('/company_module/delete',plans.Company_ModuleDelete);
+routes.get('/company_module/get',plans.Company_ModuleGet);
+routes.put('/company_module/update',plans.Company_ModuleUpdate);
+
 
 
 
