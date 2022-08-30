@@ -119,11 +119,30 @@ routes.put("/company/update",company.Update);
 
 
 
-/*################################################ planos ######################################*/
-routes.post('/plans/insert',plans.ModuleInsert);
-routes.delete('/company/delete',company.Delete);
-routes.get("/company/get",company.Get);
-routes.put("/company/update",company.Update);
+/*################################################ planos e modulos######################################*/
+// ----modules----
+routes.post('/module/insert',plans.ModuleInsert);
+routes.delete('/module/delete',plans.ModuleDelete);
+routes.get('/module/get',plans.ModuleGet);
+routes.put('/module/update',plans.ModuleUpdate);
+routes.get('/module/getAll',plans.ModuleGetAll);
+
+// ----plans----
+routes.post('/plans/insert',plans.PlansInsert);
+routes.delete('/plans/delete',plans.PlansDelete);
+routes.get('/plans/get',plans.PlansGet);
+routes.get('/plans/getAll',plans.PlansGetAll);
+routes.put('/plans/update',plans.PlansUpdate);
+
+// ----plan_modules----
+routes.post('/plan_module/insert',plans.Plan_ModuleInsert);
+routes.delete('/plan_module/delete',plans.Plan_ModuleDelete);
+routes.get('/plan_module/get',plans.Plan_ModuleGet);
+routes.put('/plan_module/update',plans.Plan_ModuleUpdate);
+
+
+
+
 /*#########################################################################################################*/
 
 export default routes;
