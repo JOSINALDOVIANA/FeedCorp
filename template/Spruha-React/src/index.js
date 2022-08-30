@@ -3,10 +3,16 @@ import React, { Fragment, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Responder from "./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Responder";
+
+import FeedRecebidos from "./components/ECommerce/ECDashboard/tabelaCards/FeedRecebidos"
+import FeedFeitos from "./components/ECommerce/ECDashboard/tabelaCards/FeedFeitos"
+import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
+import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
 
-// Dashboard ADMINITRADOR
+// Dashboard
+const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp"))
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR"));
 const Criar = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Criar"));
@@ -61,7 +67,6 @@ const App = React.lazy(() => import("./components/app"));
 // const Account = React.lazy(() => import("./components/ECommerce/Account/Account"))
 // const ECCart = React.lazy(() => import("./components/ECommerce/ECCart/ECCart"))
 // const Checkout = React.lazy(() => import("./components/ECommerce/Checkout/Checkout"))
-const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 // const Order = React.lazy(() => import("./components/ECommerce/Orders/Orders"))
 // const Productdeatils = React.lazy(() => import("./components/ECommerce/Productdeatils/Productdeatils"))
 // const Products = React.lazy(() => import("./components/ECommerce/Products/Products"))
@@ -167,30 +172,56 @@ const Root = () => {
 
               <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
               <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
-              
+
               <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
                 <Route index element={<ECDashboard />} />
 
-                <Route>
+                {/* <Route>
                   <Route path={`${process.env.PUBLIC_URL}/dashboard`} element={<ECDashboard />}/>
+                </Route> */}
+
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/dashboard`} element={<ECDashboard />} >
+                    <Route index element={<Fragment />} />
+                    <Route>
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/dashboard/recebidos`}
+                        element={<FeedRecebidos />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/dashboard/feitos`}
+                        element={<FeedFeitos />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/dashboard/objetivos`}
+                        element={<Objetivos />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/dashboard/pesquisas`}
+                        element={<Pesquisas />}
+                      />
+
+                    </Route>
+
+                  </Route>
                 </Route>
 
                 <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />}/>
+                  <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
                 </Route>
 
                 <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/avr/`} element={<Avpr/>} >
-                    <Route index element={<Fragment/>} />
-                      <Route>
-                        <Route
-                          path={`${process.env.PUBLIC_URL}/avr/responder`}
-                          element={<Responder/>}
-                        />
-                        <Route
-                          path={`${process.env.PUBLIC_URL}/avr/criar`}
-                          element={<Criar/>}
-                        />
+                  <Route path={`${process.env.PUBLIC_URL}/avr/`} element={<Avpr />} >
+                    <Route index element={<Fragment />} />
+                    <Route>
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/avr/responder`}
+                        element={<Responder />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/avr/criar`}
+                        element={<Criar />}
+                      />
                     </Route>
 
                   </Route>
@@ -202,14 +233,14 @@ const Root = () => {
                     element={<Teste />}
                   />
                 </Route> */}
- 
+
               </Route>
 
               {/* ........................................Errorpage............................................... */}
               <Route path="*" element={<Error404 />} />
             </Routes>
 
-        
+
           </React.Suspense>
 
         </BrowserRouter>

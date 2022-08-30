@@ -15,7 +15,7 @@ const SideBar = () => {
   const { values, setValues } = useContext(usuarioContext);
   const [menuitems, setMenuitems] = useState([]);
 
- 
+
   useEffect(() => {
     if (values?.permissions?.description == "administrador") { setMenuitems(MENUITEMS) }
     if (values?.permissions?.description == "gestor") { setMenuitems(MENUITEMS2) }
@@ -47,8 +47,8 @@ const SideBar = () => {
       clearMenuActive();
     }
   }, []);
-  
-  
+
+
   // every chnage this effect calls
   let menuIcontype;
   if (document.querySelector("body").classList.contains("horizontalmenu")) {
@@ -273,9 +273,9 @@ const SideBar = () => {
                   {menuitems.map((Item, itemi) => (<Fragment key={itemi + Math.random() * 100}>
 
                     {/* TÍtulo que separa os itens sidebar */}
-                    {/* <li className="nav-header">
-<span className="nav-label">{Item.menutitle}</span>
-</li> */}
+                    <li className="nav-header">
+                      <span className="nav-label">{Item.menutitle}</span>
+                    </li>
 
                     {Item.Items.map((menuItem, i) => (
 
@@ -400,9 +400,9 @@ const SideBar = () => {
 
                                   {childrenItem.type === "link" ? (
                                     <span
-                                      onClick={()=>{navegar(`${childrenItem.path}/`,{state:values})}}
+                                      onClick={() => { navegar(`${childrenItem.path}/`, { state: values }) }}
                                       className="nav-sub-link"
-                                    style={{cursor:"pointer"}}
+                                      style={{ cursor: "pointer" }}
                                     >
                                       {childrenItem.title}
                                     </span>
