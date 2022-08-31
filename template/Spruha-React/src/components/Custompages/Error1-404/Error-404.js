@@ -26,7 +26,7 @@ const Error404 = () => {
                 </Col>
                 <Col lg={12}>
                   <h1>Oops. A página que você procura não existe</h1>
-                  <h6 className="tx-15 mt-3 mb-4 text-white-50">
+                  <h6 className="tx-15 mt-3 mb-4 text-white">
                     Você pode ter digitado incorretamente o endereço ou a página pode ter sido movida.
                   </h6>
                   {/* <Link

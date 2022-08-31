@@ -78,7 +78,7 @@ const Signin = () => {
                 xl={5}
                 className="d-none d-lg-block text-center bg-primary details"
               >
-                <div className="mt-5 pt-4 p-2 pos-absolute">
+                <div className="mt-5 pt-5 p-2 pos-relative">
                   <img
                     src={require("../../../assets/img/brand/logo-light.png")}
                     className="header-brand-img mb-4"
@@ -90,11 +90,10 @@ const Signin = () => {
                     className="ht-100 mb-0"
                     alt="user"
                   /> */}
-                  <h5 className="mt-4 text-white">Create Your Account</h5>
-                  <span className="tx-white-6 tx-13 mb-5 mt-xl-0">
-                    Signup to create, discover and connect with the global
-                    community
-                  </span>
+                  <h5 className="mt-4 text-white">Junte-se a sua comunidade!</h5>
+                  {/* <span className="tx-white tx-13 mb-5 mt-xl-0">
+                    Engaje-se com seu trabalho!
+                  </span> */}
                 </div>
               </Col>
               <Col lg={6} xl={7} xs={12} sm={12} className="login_form ">
@@ -116,10 +115,10 @@ const Signin = () => {
                         <h5 className="text-start mb-2">
                           Entre em sua conta!
                         </h5>
-                        <p className="mb-4 text-muted tx-13 ms-0 text-start">
+                        {/* <p className="mb-4 text-muted tx-13 ms-0 text-start">
                           Signin to create, discover and connect with the global
                           community
-                        </p>
+                        </p> */}
                         <Form.Group className="text-start form-group" controlId="formEmail">
                           <Form.Label>Email</Form.Label>
                           <Form.Control
