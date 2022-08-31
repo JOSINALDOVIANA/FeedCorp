@@ -25,12 +25,12 @@ export default {
           
             res.json({status:true,message:"permissão atualizada"});
         } catch (error) {
-          //  console.log(error);
+           console.log(error);
             res.json({status:false,mensagem:"error permissions=>update"});
         }
     },
     async delete(req,res,next){
-        const {id}=req.body;
+        const {id}=req.query;
 
         try {
            
@@ -43,18 +43,17 @@ export default {
         }
     },
     async get(req,res,next){        
-        const {id_user=false}=req.query;
+        const {id=false}=req.query;
         try {
            let permissions
-            !id_user?permissions=await conexao("permissions"):
-            permissions=await conexao("user_permission")
-            .join("permissions","user_permission.id_permission",'=','permissions.id')
-            .where({"user_permission.id_user":id_user})
+            !id?permissions=await conexao("permissions"):
+            permissions=await conexao("permissions")
+            .where({id})
             .select("permissions.id","permissions.description");
           
             res.json({status:true,permissions});
         } catch (error) {
-         
+         console.log(error)
             res.json({status:false,mensagem:"error permissions=>getPermissions"});
         }
     },

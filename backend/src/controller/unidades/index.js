@@ -1,11 +1,11 @@
 import conexao from '../../database/connection.js';
 
 export default {
-    async create(req, resp) {
+    async Insert(req, resp) {
 
         const { units, id_user } = req.body; //units=[string,string], id_user=int
 
-        const unit_serial = units.map(description => ({ description, id_user }));
+        const unit_serial = units.map(unit => ({ description:unit.description,initials:unit.initials, id_user }));
         try {
             await conexao("units").insert(unit_serial)
             resp.json({ status: true, message: "dados salvos" });
@@ -55,9 +55,9 @@ export default {
    
    
     async delete(req, res) {
-        const { id_user, id_unit } = req.body;
+        const { id_user, id } = req.body;
         try {
-            const del = await conexao("units").del().where({ id_user, "id": id_unit });
+            const del = await conexao("units").del().where({ id_user, id });
 
             return res.json({ status: true, message: "unidade apagada" });
         } catch (error) {

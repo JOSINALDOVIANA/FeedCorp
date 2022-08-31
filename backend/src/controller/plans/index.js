@@ -105,9 +105,13 @@ export default {
 
             await conexao.transaction(async (trx)=>{
              let plan=await trx("plans").where({id:id_plan}).first();
-             const modules=await  trx("module_plan").where({id_plan}).join("modules","module_plan.id_module","=","modules.id").select("modules.*")
-             plan={...plan,modules}
-             return res.json({status:true,plan})
+             let modules;
+             if(!!plan){
+                modules=await  trx("module_plan").where({id_plan}).join("modules","module_plan.id_module","=","modules.id").select("modules.*")
+                plan={...plan,modules}
+                return res.json({status:true,plan})
+             }
+             return res.json({status:false,mensage:"plano inexistente"})
             })
         } catch (error) {
             return res,json({status:false,mensage:error})

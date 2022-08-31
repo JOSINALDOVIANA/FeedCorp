@@ -129,6 +129,39 @@ export default {
             res.json({status:false, erro:"error avpr_=>getEbr_items"});
         }
     },
+    async insertItem_Answer_User(req,res){
+        const {id_user,id_item,answer}=req.body;
+
+        try {
+           const id=await conexao("item_answer_user").insert({id_user,id_item,answer});
+           return res.json({status:true,mensage:"inserido"});
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"erro avpr=>insertItem_Answer_User"});
+        }
+    },
+    async updateItem_Answer_User(req,res){
+        const {id,id_user,id_item,answer}=req.body;
+
+        try {
+           await conexao("item_answer_user").update({id_user,id_item,answer}).where({id});
+           return res.json({status:true,mensage:"atualizado"});
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"erro avpr=>updateItem_Answer_User"});
+        }
+    },
+    async getItem_Answer_User(req,res){
+        const {id}=req.body;
+
+        try {
+           
+           return res.json({status:true,resposta:await conexao("item_answer_user").where({id})});
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"erro avpr=>updateItem_Answer_User"});
+        }
+    },
 
 
 

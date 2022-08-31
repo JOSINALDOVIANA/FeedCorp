@@ -45,7 +45,7 @@ routes.get('/user_unit/get',user.getUser_unit); // retorna qual unidade do usuar
 /*################################################ UNIDADES ######################################*/
 
 // -------unit---------
-routes.post("/unit/insert",unidades.create);//cria unidades na tabela "units"
+routes.post("/unit/insert",unidades.Insert);//cria unidades na tabela "units"
 routes.delete("/unit/delete",unidades.delete);//deleta uma unidade na tabela "units"
 routes.put("/unit/update",unidades.update);//atualiza uma unidade na tabela "units"
 // consulta quais unidades o usuario criou tambem ja devolve quantos e quais colaboradores tem na unidade
@@ -87,9 +87,11 @@ routes.post("/items/insert",avpr.insertItems)// inserir valores na tabela "items
 routes.put("/items/update",avpr.updateItems)// atualiza valores na tabela "items"
 routes.get("/items/get",avpr.getItems)// busca o items de cada avaliação exige "id_ebr"
 
-routes.post("/avpr/insert/resposta",avpr.insertItems)// inserir valores na tabela "items"
 
-
+// ------item_answer_user-----
+routes.post("/item_answer_user/insert",avpr.insertItem_Answer_User)// inserir valores na tabela "items"
+routes.put("/item_answer_user/update",avpr.updateItem_Answer_User)// atualiza valores na tabela "items"
+routes.get("/item_answer_user/get",avpr.getItem_Answer_User)// busca o items de cada avaliação exige "id_ebr"
 /*#########################################################################################################*/
 
 
@@ -101,16 +103,16 @@ routes.delete('/images/deletar',images.deletar);
 routes.get("/images/listar",images.listar)
 /*#########################################################################################################*/
 
-/*################################################ company ######################################*/
+
+
+
+/*################################################ company, planos e modulos######################################*/
+// ----company-----
 routes.post('/company/insert',company.Insert);
 routes.delete('/company/delete',company.Delete);
 routes.get("/company/get",company.Get);
 routes.put("/company/update",company.Update);
-/*#########################################################################################################*/
 
-
-
-/*################################################ planos e modulos######################################*/
 // ----modules----
 routes.post('/module/insert',plans.ModuleInsert);
 routes.delete('/module/delete',plans.ModuleDelete);
