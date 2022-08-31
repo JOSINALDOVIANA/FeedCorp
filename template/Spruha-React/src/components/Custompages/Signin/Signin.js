@@ -85,11 +85,11 @@ const Signin = () => {
                     alt="logo-light"
                   />
                   <div className="clearfix"></div>
-                  <img
+                  {/* <img
                     src={require("../../../assets/img/svgs/user.svg").default}
                     className="ht-100 mb-0"
                     alt="user"
-                  />
+                  /> */}
                   <h5 className="mt-4 text-white">Create Your Account</h5>
                   <span className="tx-white-6 tx-13 mb-5 mt-xl-0">
                     Signup to create, discover and connect with the global
@@ -114,7 +114,7 @@ const Signin = () => {
                       <div className="clearfix"></div>
                       <Form onSubmit={(e)=>{handleSubmit(e)}}>
                         <h5 className="text-start mb-2">
-                          Signin to Your Account
+                          Entre em sua conta!
                         </h5>
                         <p className="mb-4 text-muted tx-13 ms-0 text-start">
                           Signin to create, discover and connect with the global
@@ -123,7 +123,7 @@ const Signin = () => {
                         <Form.Group className="text-start form-group" controlId="formEmail">
                           <Form.Label>Email</Form.Label>
                           <Form.Control
-                            placeholder="Enter your email"
+                            placeholder="Digite seu email"
                             type="Email"
                             name="e-mail"
                           />
@@ -132,29 +132,29 @@ const Signin = () => {
                           className="text-start form-group"
                           controlId="formpassword"
                         >
-                          <Form.Label>Password</Form.Label>
+                          <Form.Label>Senha</Form.Label>
                           <Form.Control
-                            placeholder="Enter your password"
+                            placeholder="Digite sua senha"
                             type="password"
                             name="password"
                           />
                         </Form.Group>
                         <button type="submit"  className="btn ripple btn-main-primary btn-block mt-2">
-                          Sign In
+                          Entrar
                         </button>
                       </Form>
                       <div className="text-start mt-5 ms-0">
                         <div className="mb-1">
                           <Link
-                            to={`${process.env.PUBLIC_URL}/custompages/forgotpassword/`}
-                          > Forgot password ? 
+                            to={`${process.env.PUBLIC_URL}/esqueceuasenha`}
+                          > Esqueceu a senha? 
                           </Link>
                         </div>
                         <div>
-                          Don't have an account?
+                          Não possui conta? Faça um orçamento
                           <Link
-                            to={`${process.env.PUBLIC_URL}/custompages/signup/`}
-                          > Resgister Here</Link>
+                            to={`${process.env.PUBLIC_URL}/cadastrar`}
+                          > aqui</Link>
                         </div>
                       </div>
                     </Card.Body>

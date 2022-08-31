@@ -229,7 +229,7 @@ const SideBar = () => {
               style={{ position: "absolute" }}
             >
               {/* LOGO QUE FICA NO SIDEBAR */}
-              {/* <div className="sidemenu-logo">
+              <div className="sidemenu-logo">
                 <Link
                   className="main-logo"
                   to={`${process.env.PUBLIC_URL}/dashboard/ `}
@@ -257,7 +257,7 @@ const SideBar = () => {
                     alt={"logo-4"}
                   />
                 </Link>
-              </div> */}
+              </div>
 
               <div
                 className="main-body-1 main-sidebar-body"

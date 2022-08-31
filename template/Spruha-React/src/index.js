@@ -147,10 +147,10 @@ const App = React.lazy(() => import("./components/app"));
 // const Error505 = React.lazy(() => import("./components/Custompages/Error-505/Error-505"))
 const Error404 = React.lazy(() => import("./components/Custompages/Error1-404/Error-404"))
 const Signin = React.lazy(() => import("./components/Custompages/Signin/Signin"))
-// const Signup = React.lazy(() => import("./components/Custompages/Signup/Signup"))
+const Signup = React.lazy(() => import("./components/Custompages/Signup/Signup"))
 // const Lockscreen = React.lazy(() => import("./components/Custompages/Lockscreen/Lockscreen"))
-// const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
-// const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
+const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
+const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
 // const AddProduct = React.lazy(() => import("./components/ECommerce/AddProduct/Addproduct"))
 // const Custompage = React.lazy(() => import("./components/Custompage"))
 // const Underconstructionpage = React.lazy(() => import("./components/UnderConstruction"))
@@ -178,6 +178,8 @@ const Root = () => {
 
               <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
               <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
+              <Route path={`${process.env.PUBLIC_URL}/cadastrar`} element={<Signup />} />
+              <Route path={`${process.env.PUBLIC_URL}/esqueceuasenha`} element={<Forgotpassword />} />
 
               <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
                 <Route index element={<ECDashboard />} />

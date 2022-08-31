@@ -185,29 +185,31 @@ function ECDashboard() {
       {/* FRAGMENTO QUE ABRE AO CLICAR NO CARD */}
       <Outlet />
 
-      {/* GRAFICO */}
-      <Col xxl={6} xl={12} lg={12} md={12}>
-        <Card className="custom-card">
-          <Card.Header className=" border-bottom-0">
-            <label className="main-content-label my-auto pt-2">
-              Desempenho da empresa
-            </label>
-            <span className="d-block tx-12 mb-0 mt-1 text-muted">
-              Gráfico de desempenho geral da corporação.
-            </span>
-          </Card.Header>
-          <Card.Body>
-            <div className="chart-wrapper">
-              <Line
-                options={edashboard.Dashboard1}
-                data={edashboard.dashboard1}
-                className="barchart"
-                height="270"
-              />
-            </div>
-          </Card.Body>
-        </Card>
-      </Col>
+      <Row className="row-sm">
+        {/* GRAFICO */}
+        <Col xxl={12} xl={12} lg={12} md={12}>
+          <Card className="custom-card">
+            <Card.Header className=" border-bottom-0">
+              <label className="main-content-label my-auto pt-2">
+                Desempenho da empresa
+              </label>
+              <span className="d-block tx-12 mb-0 mt-1 text-muted">
+                Gráfico de desempenho geral da corporação.
+              </span>
+            </Card.Header>
+            <Card.Body>
+              <div className="chart-wrapper">
+                <Line
+                  options={edashboard.Dashboard1}
+                  data={edashboard.dashboard1}
+                  className="barchart"
+                  height="270"
+                />
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
 
 
     </Fragment >
