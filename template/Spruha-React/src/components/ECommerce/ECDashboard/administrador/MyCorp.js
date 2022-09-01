@@ -12,18 +12,18 @@ ChartJS.register(...registerables);
 function MinhaCorporacao() {
 
 
-  const dadosrota=useLocation();
-  const navegar=useNavigate()
+  const dadosrota = useLocation();
+  const navegar = useNavigate()
   const { values, setValues } = useContext(usuarioContext);
-  
-  useEffect(()=>{
-    if(!dadosrota.state){
+
+  useEffect(() => {
+    if (!dadosrota.state) {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
     setValues(dadosrota.state);
-    
-  },[dadosrota])
-  
+
+  }, [dadosrota])
+
   return (
     <Fragment>
 
@@ -61,50 +61,52 @@ function MinhaCorporacao() {
       </div>
 
       <Row className="row-sm">
-       
-            {values?.units.map(unit=>(
-            <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
-            <Card  className="custom-card">
+
+        {values?.units.map(unit => (
+          <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
+            <Card className="custom-card">
               <Card.Body className="">
                 <h5 className="tx-14">Unidade</h5>
-  
-                <div className="d-flex">
+
+                <div className="d-flex justify-content-between">
                   <div className="volume">
-                    <h4 className="mb-2">{unit.initials}
-                    <span className="text-muted tx-12">{unit.cols}</span>
+                    <h4 className="mb-2">
+                      {unit.initials}
                     </h4>
-                    <div className="d-flex text-muted tx-13">
-                      {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
-                      {unit.description}
-                    </div>
+
                   </div>
-                  <div className="d-flex ms-auto float-end">
-                  <h2 className="text-end card-item-icon card-icon">
+
+                  <h2 className="d-flex flex-row">
+                    <span className="font-weight-bold px-1 text-primary">{unit.cols}</span>
                     {/* ICONE */}
                     <i className="bi-people-fill icon-size float-start text-primary"></i>
                   </h2>
-                  </div>
-  
+
+                </div>
+                
+                <div className="d-flex text-muted tx-13">
+                  {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
+                  {unit.description}
                 </div>
               </Card.Body>
             </Card>
           </Col>
-            ))}
+        ))}
 
-        
 
-       
 
-      
 
-       
 
-      
 
-       
-      
+
+
+
+
+
+
+
       </Row>
-        {/* GRÁFICO EM BARRA */}
+      {/* GRÁFICO EM BARRA */}
       <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">
           <Card.Body>
@@ -125,7 +127,7 @@ function MinhaCorporacao() {
           </Card.Body>
         </Card>
       </Col>
-        {/* GRÁFICO EM LINHA */}
+      {/* GRÁFICO EM LINHA */}
       <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">
           <Card.Body className="card-body">
