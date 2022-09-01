@@ -17,9 +17,9 @@ const SideBar = () => {
 
 
   useEffect(() => {
-    if (values?.permissions?.description == "administrador") { setMenuitems(MENUITEMS) }
-    if (values?.permissions?.description == "gestor") { setMenuitems(MENUITEMS2) }
-    if (values?.permissions?.description == "colaborador") { setMenuitems(MENUITEMS3) }
+    if (values?.permissions == "administrador") { setMenuitems(MENUITEMS) }
+    if (values?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
+    if (values?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
   }, [values]);
   // initial loading
   useEffect(() => {

@@ -36,17 +36,18 @@ const Signin = () => {
       if (!r.data.status) {
         alert(r.data.message)
       } else {
-        dadosUser = r.data.dadosUser;
-        permissions = r.data.permissions[0];
-        unit = r.data.unit;
-        status = r.data.status;
-        company=r.data.company;
+        dadosUser = r.data?.dadosUser;
+        permissions = r.data?.permissions[0].description;
+        unit = r.data?.unit[0];
+        status = r.data?.status;
+        company=r.data?.company[0];       
       }
     });
-
+     company= await api(`/company/get?id=${company.id}`);
+     company=company.data.company;
     if (status) {
 
-      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data });
+      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });
 
 
       await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });

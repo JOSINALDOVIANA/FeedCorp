@@ -1,13 +1,29 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import * as chart from "../../../../data/Chart/chart";
 import * as marketcap from "../../../../data/Cryptodashboard/Marketcap/marketcap";
 import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
 import { Bar, Pie, Radar, Line, Doughnut, PolarArea } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
+import { useLocation, useNavigate } from "react-router-dom";
+import { usuarioContext } from "../../../..";
 ChartJS.register(...registerables);
 
 
 function MinhaCorporacao() {
+
+
+  const dadosrota=useLocation();
+  const navegar=useNavigate()
+  const { values, setValues } = useContext(usuarioContext);
+  
+  useEffect(()=>{
+    if(!dadosrota.state){
+      navegar(`${process.env.PUBLIC_URL}/home`)
+    }
+    setValues(dadosrota.state);
+    
+  },[dadosrota])
+  
   return (
     <Fragment>
 
@@ -45,194 +61,47 @@ function MinhaCorporacao() {
       </div>
 
       <Row className="row-sm">
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
-
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
+       
+            {values?.units.map(unit=>(
+            <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
+            <Card  className="custom-card">
+              <Card.Body className="">
+                <h5 className="tx-14">Unidade</h5>
+  
+                <div className="d-flex">
+                  <div className="volume">
+                    <h4 className="mb-2">{unit.initials}
+                    <span className="text-muted tx-12">{unit.cols}</span>
+                    </h4>
+                    <div className="d-flex text-muted tx-13">
+                      {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
+                      {unit.description}
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
-
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
-
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
+                  <div className="d-flex ms-auto float-end">
+                  <h2 className="text-end card-item-icon card-icon">
+                    {/* ICONE */}
+                    <i className="bi-people-fill icon-size float-start text-primary"></i>
+                  </h2>
                   </div>
+  
                 </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+            ))}
 
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
+        
 
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
+       
 
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
-                  </div>
-                </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
+      
 
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
+       
 
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
+      
 
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
-                  </div>
-                </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
-
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
-
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
-                  </div>
-                </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
-
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
-
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
-                  </div>
-                </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
-
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={3} xl={3} xxl={3} md={6} >
-          <Card className="custom-card">
-            <Card.Body className="">
-              <h5 className="tx-14">Unidade</h5>
-
-              <div className="d-flex">
-                <div className="volume">
-                  <h4 className="mb-2">UTIC
-                  {/* <span className="text-muted tx-12">$29.42</span> */}
-                  </h4>
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">-0.22%</span> */}
-                    Unidade de Tecnologia da Informação
-                  </div>
-                </div>
-                <div className="d-flex ms-auto float-end">
-                <h2 className="text-end card-item-icon card-icon">
-                  {/* ICONE */}
-                  <i className="bi-people-fill icon-size float-start text-primary"></i>
-                </h2>
-                </div>
-
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
+       
       
       </Row>
         {/* GRÁFICO EM BARRA */}

@@ -61,13 +61,22 @@ export default {
                 country= await trx("countries").where({id:company.id_country}).first();
                 state= await trx("states").where({id:company.id_state}).first();
                 plan=await trx("plans").where({id:company.id_plan});
+                plan=plan[0];
                 modules_plan=await trx("module_plan").where({id_plan:company.id_plan})
                .join("modules","module_plan.id_module",'=','modules.id')
-               .select("modules.*"); 
+               .select("modules.*");
+               let modules_plan_serial={};
+               for (const iterator of modules_plan) {
+                modules_plan_serial={...modules_plan_serial, [`${iterator.module}`]:{id:iterator.id,value:iterator.value}}
+               }
                module_solos= await trx("company_module").where({id_company:company.id})
                .join("modules","company_module.id_module",'=','modules.id')
                .select("modules.*");
-               company={... company,city,country,state,plan,modules:[...modules_plan,...module_solos]}
+               let module_solos_serial={};
+               for (const iterator of module_solos) {
+                module_solos_serial={...module_solos_serial, [`${iterator.module}`]:{id:iterator.id,value:iterator.value}}
+               }
+               company={... company,city,country,state,plan,modules:{...modules_plan_serial,...module_solos_serial}}
                return res.json({startus:true,company})
                }
                return res.json({startus:false,mensage:"companhia não localizada"})

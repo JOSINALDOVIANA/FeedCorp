@@ -367,7 +367,7 @@ function Header() {
                       <span className="main-img-user mx-1">
                         <img
                           alt="avatar"
-                          src={values?.image?.dados?.url||require("../../assets/img/users/1.jpg")}
+                          src={values?.image.url||require("../../assets/img/users/1.jpg")}
                         />
                       </span>
                     </Dropdown.Toggle>

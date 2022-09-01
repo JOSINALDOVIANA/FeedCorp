@@ -34,7 +34,7 @@ export default {
             if (!id_user) { await conexao("units").select("*").then(r => res.json(r)) }
             else {
 
-                const units = await conexao("units").select("units.id","units.description").where({ id_user });
+                const units = await conexao("units").select("units.id","units.description","units.initials").where({ id_user });
                 let units_serialised = [];
 
                 // for (const unit of units) {
