@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-import { Basicdatatable } from "../../../../data/Cryptodashboard/Transcationdetails/FeedFeitosDataTabelas";
+import { Basicdatatable } from "../../../../data/Cryptodashboard/Transcationdetails/FeedFeitosDataTabela";
 
 
 // import { Container } from './styles';
@@ -25,7 +25,7 @@ const FeedFeitos = () => {
 
         <Row className=" row-sm">
           <Col md={12} lg={12} xl={12}>
-            <Card className=" custom-card transcation-crypto">
+            <Card className=" custom-card">
 
               <div className="card-header border-bottom-0 d-flex justify-content-between">
 
