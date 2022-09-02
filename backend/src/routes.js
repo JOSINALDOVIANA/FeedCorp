@@ -22,6 +22,7 @@ const routes=express.Router();
 
 routes.post('/user/login',user.login);//obs:get nao recebe dados via body do navegador
 routes.post('/user/insert',user.insert);//cria usuario na tabela "users"
+routes.get('/user/getAll',user.GetAll);
 routes.put('/user/update',user.update); // so atualiza dados na tabela "users", nao envolve outras tabelas
 routes.delete('/user/delete',user.delete);//deleta usuario na tabela "users"
 
@@ -52,6 +53,7 @@ routes.put("/unit/update",unidades.update);//atualiza uma unidade na tabela "uni
 // a unidade do usuario  ja é carregada no login no objeto:unit
 //se os parametros exigidos nao existirem retona todas as unidades cadastradas sem parametros de filtro
 routes.get("/unit/consult",unidades.getUnitCreateUser);
+routes.get("/unit/getAll",unidades.getAll); // retorna todas as unidades que existe
 
 
 
@@ -81,11 +83,13 @@ routes.put("/avpr/update",avpr.update);//atualiza  a tabela "evaluation_by_resul
 routes.put("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results" exige "id"
 routes.get("/avpr/getone",avpr.getEspecific);//retorna uma avaliação especifica exige o "id" da avaliação
 routes.get("/avpr/gettwu",avpr.getCreateAll);//retorna todas as avaliações criadas pelo usuario exige "id_user"
+routes.get("/avpr/getAll",avpr.getAll);//retorna todas as avaliações 
 
 // ------items-------
 routes.post("/items/insert",avpr.insertItems)// inserir valores na tabela "items"
 routes.put("/items/update",avpr.updateItems)// atualiza valores na tabela "items"
-routes.get("/items/get",avpr.getItems)// busca o items de cada avaliação exige "id_ebr"
+routes.get("/items/get",avpr.getItems)// busca os items de cada avaliação exige "id_ebr"
+routes.get("/items/delete",avpr.getItems)// busca os items de cada avaliação exige "id_ebr"
 
 
 // ------item_answer_user-----

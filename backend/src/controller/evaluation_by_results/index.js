@@ -79,42 +79,67 @@ export default {
             res.json({status:false, erro:"error avpr_=>getCreateAll"});
         }
     },
-
-    async insertItems(req,res){
-        const {id_ebr,goal,indicator}=req.body;
+    async getAll(req,res){
+       
 
         try {
-             const ebr_items =  await conexao("ebr_results").insert({id_ebr,goal,indicator});      
+                
             
-            res.json({"status":true,"ebr_items_id":ebr_items});
+            res.json({"status":true,"avaliações":await conexao("evaluation_by_results")});
             
         } catch (error) {
-           
+           console.log(error)
+            res.json({status:false, erro:"error avpr_=>getCreateAll"});
+        }
+    },
+
+    async insertItems(req,res){
+        const {id_ebr,goal,indicator,max=null,min=null,validity=new Date(),id_physicalUnity=null}=req.body;
+
+        try {
+             const ebr_items =  await conexao("items").insert({id_ebr,goal,indicator,max,min,validity,id_physicalUnity});      
+            
+            res.json({"status":true,"items":ebr_items});
+            
+        } catch (error) {
+           console.log(error)
             res.json({status:false, erro:"error avpr_=>insertEbr_items"});
         }
     },
     async updateItems(req,res){
-        const {id,goal,indicator}=req.body;
+        const {id,id_ebr,goal,indicator,max=null,min=null,validity=new Date(),id_physicalUnity=null}=req.body;
 
         try {
-              await conexao("ebr_items").update({goal,indicator}).where({id})
+              await conexao("items").update({goal,indicator,id_ebr,max,min,validity,id_physicalUnity}).where({id})
             res.json({"status":true,"message":"atualizado"});
             
         } catch (error) {
            
-            res.json({status:false, erro:"error avpr_=>updateEbr_items"});
+            res.json({status:false, erro:"error avpr_=>updateitems"});
         }
     },
     async getItems(req,res){
         const {id_ebr}=req.query;
 
         try {
-             const ebr_items =  await conexao("ebr_items").select("ebr_items.indicator","ebr_items.goal").where({id_ebr})
+             const ebr_items =  await conexao("items").select("items.*").where({id_ebr})
             res.json({"status":true,ebr_items});
             
         } catch (error) {
            
-            res.json({status:false, erro:"error avpr_=>getEbr_items"});
+            res.json({status:false, erro:"error avpr_=>getitems"});
+        }
+    },
+    async deleteItems(req,res){
+        const {id}=req.query;
+
+        try {
+             await conexao("items").del().where({id})
+            res.json({"status":true,mensage:"apagado"});
+            
+        } catch (error) {
+           
+            res.json({status:false, erro:"error avpr_=>delete_items"});
         }
     },
     async setAnswer(req,res){

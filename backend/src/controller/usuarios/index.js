@@ -49,6 +49,23 @@ export default {
             })
         }
     },
+    async GetAll(req, res) {
+        
+
+        try {
+            
+
+                return res.json({ status: true, Users: await conexao("users")});
+            
+
+        } catch (error) {
+            console.log(error)
+            return res.json({
+                status: false,
+                "message": error.sqlMessage
+            })
+        }
+    },
    
     async insertUser_ebr(req, res) {
         const { id_ebr, id_user } = req.body;
@@ -98,10 +115,11 @@ export default {
     },
     async delete(req, res) {
         const { password, id, email } = req.body;
-        const dados = await conexao("users").where({ id, email }).first();
         
+        const dados = await conexao("users").where({ id, email }).first();
+        console.log(dados)
         try {
-            if (!isEmpty(dados) && dados.password == password) {
+            if ((!dados||!isEmpty(dados)) && dados.password == password) {
                 await conexao("users").del().where({ id, password })
                 res.json({ status: true });
             }
@@ -111,7 +129,7 @@ export default {
 
 
         } catch (error) {
-            // console.log(error);
+            console.log(error);
             res.json({ status: false, message: "error user=>delete" })
         }
     },
@@ -205,11 +223,12 @@ export default {
 
         try {
             await conexao.transaction(async trx => {
-                const up = await trx("user_ebr").where({ id_user }).join("evaluation_by_results", 'evaluation_by_results.id', '=', 'user_ebr.id_ebr').select("evaluation_by_results.*");
+                const up = await trx("user_ebr").where({"user_ebr.id_user":id_user}).join("evaluation_by_results", 'evaluation_by_results.id', '=', 'user_ebr.id_ebr').select("evaluation_by_results.*");
                 res.json({ status: true, dados: up })
             })
 
         } catch (error) {
+            console.log(error)
             res.json({ status: false, message: "error getUser_ebr" })
         }
 

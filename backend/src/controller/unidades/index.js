@@ -52,6 +52,17 @@ export default {
             res.json({ error: true, message: error.sqlMessage });
         }
     },
+    async getAll(req, res) {
+        
+       
+        try {            
+
+                res.json({status:true,units:await conexao("units")})
+            }
+         catch (error) {
+            res.json({ error: true, message: error.sqlMessage });
+        }
+    },
    
    
     async delete(req, res) {
