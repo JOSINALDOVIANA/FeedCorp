@@ -1,17 +1,17 @@
 export const links = [
     {
         id: 1,
-        text: 'Home',
+        text: 'Início',
         url: '#home',
     },
     {
         id: 2,
-        text: 'Features',
+        text: 'Recursos',
         url: '#Features',
     },
     {
         id: 3,
-        text: 'About',
+        text: 'Sobre',
         url: '#About',
     },
     {
@@ -26,12 +26,12 @@ export const links = [
     },
     {
         id: 6,
-        text: 'Clients',
+        text: 'Clientes',
         url: '#Clients',
     },
     {
         id: 7,
-        text: 'Contact',
+        text: 'Contato',
         url: '#Contact',
     },
 ]

@@ -1,4 +1,4 @@
-import { Fragment, useState,useContext } from "react";
+import { Fragment, useState, useContext } from "react";
 import icon from '../../assets/img/brand/icon.png';
 import iconlight from '../../assets/img/brand/icon-light.png';
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Button, Card, Col, Container, Form, Nav, Navbar, Row, Tab } from "react
 import { Slicksider, Slicksiderwithdata } from "../../data/Landingpagedata/landingpagedata";
 import Navbar1 from "../../data/Landingpagedata/Navbar";
 import { usuarioContext } from "../..";
-import{useNavigate}from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const Landingpage = () => {
   let [isFirstCollapsed, setisFirstCollapsed] = useState(false);
   let [is2Collapsed, setis2Collapsed] = useState(false);
@@ -119,7 +119,7 @@ const Landingpage = () => {
   const Sidebartoggled = () => {
     document.querySelector(".landing-page").classList.toggle("sidenav-toggled");
   }
-  
+
 
   return (
     <Fragment>
@@ -163,12 +163,12 @@ const Landingpage = () => {
                           <Link to="#" className="btn ripple btn-min w-sm btn-outline-primary me-2"
                             target="_blank">Cadastrar
                           </Link>
-                          <Link 
-                          to={`${process.env.PUBLIC_URL}/login`}   
-                          className="btn ripple btn-min w-sm btn-primary me-2"
-                          target="_self"
-                            >
-                              Entrar
+                          <Link
+                            to={`${process.env.PUBLIC_URL}/login`}
+                            className="btn ripple btn-min w-sm btn-primary me-2"
+                            target="_self"
+                          >
+                            Entrar
                           </Link>
                         </div>
                       </div>
@@ -217,7 +217,7 @@ const Landingpage = () => {
                             target="_self">Entrar
                           </Link>
                         </div>
-  </div>
+                      </div>
                     </Row>
                   </Container>
                 </div>
