@@ -226,8 +226,8 @@ const Landingpage = () => {
                 <Container className="px-sm-0">
                   <Row>
                     <Col xl={6} lg={6} className="animation-zidex pos-relative">
-                      <h4 className="fw-semibold mt-7">Gerencie seu negócio</h4>
-                      <h1 className="text-start fw-bold">Nós te ajudamos a avaliar o desepenho da sua empresa!</h1>
+                      <h4 className="fw-semibold mt-7">Avalie seu negócio</h4>
+                      <h1 className="text-start fw-bold">Nós te ajudamos a analisar o desempenho da sua empresa!</h1>
                       <h6 className="pb-3">
                         Spruha - Now you can use this admin template to design stunning dashboards
                         that will wow your target viewers or users to no end. To create a good and
