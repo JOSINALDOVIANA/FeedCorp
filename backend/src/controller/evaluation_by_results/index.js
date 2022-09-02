@@ -93,6 +93,7 @@ export default {
         }
     },
 
+
     async insertItems(req,res){
         const {id_ebr,goal,indicator,max=null,min=null,validity=new Date(),id_physicalUnity=null}=req.body;
 
@@ -139,21 +140,11 @@ export default {
             
         } catch (error) {
            
-            res.json({status:false, erro:"error avpr_=>delete_items"});
+            res.json({status:false, erro:"error avpr_=>deleteItems"});
         }
     },
-    async setAnswer(req,res){
-        const {id_user,}=req.query;
 
-        try {
-             const ebr_items =  await conexao("ebr_items").select("ebr_items.indicator","ebr_items.goal").where({id_ebr})
-            res.json({"status":true,ebr_items});
-            
-        } catch (error) {
-           
-            res.json({status:false, erro:"error avpr_=>getEbr_items"});
-        }
-    },
+  
     async insertItem_Answer_User(req,res){
         const {id_user,id_item,answer}=req.body;
 
@@ -177,14 +168,25 @@ export default {
         }
     },
     async getItem_Answer_User(req,res){
+        const {id=false,id_user=false,id_item=false}=req.query;
+
+        try {
+           const respostas= !id?!id_user?await conexao("item_answer_user").where({id_item}):await conexao("item_answer_user").where({id_user}):await conexao("item_answer_user").where({id})
+           return res.json({status:true,respostas});
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"erro avpr=>getItem_Answer_User"});
+        }
+    },
+    async deleteItem_Answer_User(req,res){
         const {id}=req.body;
 
         try {
-           
-           return res.json({status:true,resposta:await conexao("item_answer_user").where({id})});
+           await conexao("item_answer_user").del().where({id})
+           return res.json({status:true,mensage:"deletado"});
         } catch (error) {
             console.log(error)
-            return res.json({status:false,mensage:"erro avpr=>updateItem_Answer_User"});
+            return res.json({status:false,mensage:"erro avpr=>deleteItem_Answer_User"});
         }
     },
 

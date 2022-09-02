@@ -8,6 +8,7 @@ import multerconfig from "./config/multer.js";
 import images from "./controller/images/imagecontrol.js";
 import company from './controller/company/index.js';
 import plans from './controller/plans/index.js';
+import physicalUnity from './controller/physicalUnity/index.js';
 const routes=express.Router();
 
  /*
@@ -22,14 +23,9 @@ const routes=express.Router();
 
 routes.post('/user/login',user.login);//obs:get nao recebe dados via body do navegador
 routes.post('/user/insert',user.insert);//cria usuario na tabela "users"
-routes.get('/user/getAll',user.GetAll);
+routes.get('/user/getAll',user.GetAll);//retorna todos os usuarios
 routes.put('/user/update',user.update); // so atualiza dados na tabela "users", nao envolve outras tabelas
 routes.delete('/user/delete',user.delete);//deleta usuario na tabela "users"
-
-                      /*------rotas especiais------*/
-
-
-
 
 // ----------user_ebr---------------
 routes.put('/user_ebr/update',user.updateUser_ebr); // atualiza em "user_ebr"
@@ -55,11 +51,14 @@ routes.put("/unit/update",unidades.update);//atualiza uma unidade na tabela "uni
 routes.get("/unit/consult",unidades.getUnitCreateUser);
 routes.get("/unit/getAll",unidades.getAll); // retorna todas as unidades que existe
 
-
+// ------physicalUnity-----
 
 /*###################################################################################################*/
 
-
+routes.post("/physicalUnity/insert",physicalUnity.insert)
+routes.get("/physicalUnity/get",physicalUnity.get)
+routes.delete("/physicalUnity/delete",physicalUnity.delete)
+routes.put("/physicalUnity/update",physicalUnity.update)
 
 
 
@@ -81,7 +80,7 @@ routes.get("/permission/get",permissoes.get)//devolve as permissoes por user se 
 routes.post("/avpr/insert",avpr.insert);//cria na tabela "evaluation_by_results"
 routes.put("/avpr/update",avpr.update);//atualiza  a tabela "evaluation_by_results" exige "id"
 routes.put("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results" exige "id"
-routes.get("/avpr/getone",avpr.getEspecific);//retorna uma avaliação especifica exige o "id" da avaliação
+routes.get("/avpr/getone",avpr.getEspecific);//retorna uma avaliação especifica juntamente com as respostas e usuarios que reponderam, exige o "id" da avaliação
 routes.get("/avpr/gettwu",avpr.getCreateAll);//retorna todas as avaliações criadas pelo usuario exige "id_user"
 routes.get("/avpr/getAll",avpr.getAll);//retorna todas as avaliações 
 
@@ -89,13 +88,17 @@ routes.get("/avpr/getAll",avpr.getAll);//retorna todas as avaliações
 routes.post("/items/insert",avpr.insertItems)// inserir valores na tabela "items"
 routes.put("/items/update",avpr.updateItems)// atualiza valores na tabela "items"
 routes.get("/items/get",avpr.getItems)// busca os items de cada avaliação exige "id_ebr"
-routes.get("/items/delete",avpr.getItems)// busca os items de cada avaliação exige "id_ebr"
+routes.get("/items/delete",avpr.deleteItems)// apaga um items
 
 
 // ------item_answer_user-----
-routes.post("/item_answer_user/insert",avpr.insertItem_Answer_User)// inserir valores na tabela "items"
-routes.put("/item_answer_user/update",avpr.updateItem_Answer_User)// atualiza valores na tabela "items"
-routes.get("/item_answer_user/get",avpr.getItem_Answer_User)// busca o items de cada avaliação exige "id_ebr"
+routes.post("/item_answer_user/insert",avpr.insertItem_Answer_User)// inserir valores na tabela "item_answer_user"
+routes.put("/item_answer_user/update",avpr.updateItem_Answer_User)// atualiza valores na tabela "item_answer_user", exige id
+routes.get("/item_answer_user/get",avpr.getItem_Answer_User)// busca valores na tabela "item_answer_user" exigencias descrita abaixo
+                                                                //  "id_user"=traz todas as respostas de um usuario,
+                                                                // "id_item"= traz todas as respostas para este item 
+                                                                // id = traz resposta ferente ao id retorna um unico registro
+routes.delete("/item_answer_user/delete",avpr.deleteItem_Answer_User)// deleta uma resposta na tabela "item_answer_user", exige "id"
 /*#########################################################################################################*/
 
 
