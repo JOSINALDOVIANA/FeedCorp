@@ -2,27 +2,30 @@
 import React, { Fragment, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Responder from "./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Responder";
-
+import "./index.scss";
+import Loader from "./layouts/Loader/Loader";
+//INÍCIO
 import FeedRecebidos from "./components/ECommerce/ECDashboard/tabelaCards/FeedRecebidos"
 import FeedFeitos from "./components/ECommerce/ECDashboard/tabelaCards/FeedFeitos"
 import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
 import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
+//OKR
+const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/Okr"))
+const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
+//CLIMA PULSO
+const TabelaClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaTabelaRealizados"))
+const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
+const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"))
 
-import ClimaTabela from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaTabelaRealizados"
-import CriarClima from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"
-import ConfigurarClima from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"
-
-import "./index.scss";
-import Loader from "./layouts/Loader/Loader";
 
 // Dashboard
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp"))
-const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/ClimaPulso"))
+const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR"));
 const Criar = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Criar"));
+const Responder = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Responder"))
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const App = React.lazy(() => import("./components/app"));
@@ -81,7 +84,7 @@ const App = React.lazy(() => import("./components/app"));
 // Elements
 // const Alerts = React.lazy(() => import("./components/Elements/Alerts/Alerts"))
 // const Avatars = React.lazy(() => import("./components/Elements/Avatars/Avatars"))
-const LazyAccordions = React.lazy(() => import("./components/Elements/Accordions/Accordions"));
+//const LazyAccordions = React.lazy(() => import("./components/Elements/Accordions/Accordions"));
 // const Badges = React.lazy(() => import("./components/Elements/Badges/Badges"))
 // const Breadcrumbs = React.lazy(() => import("./components/Elements/Breadcrumbs/Breadcrumbs"))
 // const Buttons = React.lazy(() => import("./components/Elements/Buttons/Buttons"))
@@ -216,22 +219,13 @@ const Root = () => {
                 </Route>
 
                 <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/climapulso`} element={<ClimaPulso />} >
+                  <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
                     <Route index element={<Fragment />} />
                     <Route>
                       <Route
-                        path={`${process.env.PUBLIC_URL}/climapulso/realizados`}
-                        element={<LazyAccordions />}
+                        path={`${process.env.PUBLIC_URL}/okr/criar_okr`}
+                        element={<CriarOkr />}
                       />
-                      <Route
-                        path={`${process.env.PUBLIC_URL}/climapulso/criar`}
-                        element={<CriarClima />}
-                      />
-                      <Route
-                        path={`${process.env.PUBLIC_URL}/climapulso/configuracoes`}
-                        element={<ConfigurarClima/>}
-                      />
-
                     </Route>
 
                   </Route>
@@ -253,6 +247,29 @@ const Root = () => {
 
                   </Route>
                 </Route>
+
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/climapulso`} element={<ClimaPulso />} >
+                    <Route index element={<Fragment />} />
+                    <Route>
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/climapulso/realizados`}
+                        element={<TabelaClima />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/climapulso/criar`}
+                        element={<CriarClima />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/climapulso/configuracoes`}
+                        element={<ConfigurarClima />}
+                      />
+
+                    </Route>
+
+                  </Route>
+                </Route>
+
 
                 {/* <Route>
                   <Route

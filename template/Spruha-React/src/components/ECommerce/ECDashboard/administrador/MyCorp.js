@@ -93,19 +93,8 @@ function MinhaCorporacao() {
           </Col>
         ))}
 
-
-
-
-
-
-
-
-
-
-
-
-
       </Row>
+      
       {/* GRÁFICO EM BARRA */}
       <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">

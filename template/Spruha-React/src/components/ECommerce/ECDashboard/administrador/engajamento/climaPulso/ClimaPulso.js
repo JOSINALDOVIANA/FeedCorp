@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Breadcrumb, Button, Col, Row, Card } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from '../../../..';
+import { usuarioContext } from '../../../../../..';
 const ClimaPulso = () => {
 
   const dadosrota = useLocation();

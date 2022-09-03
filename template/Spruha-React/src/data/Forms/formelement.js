@@ -269,6 +269,8 @@ export const Datepicker = () => {
       className="form-control"
       selected={startDate}
       onChange={(date) => setStartDate(date)}
+      //FORMATO DATA
+      dateFormat="dd/MM/yyyy"
     />
   );
 };
