@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { Breadcrumb, Button, Col, Row, Card } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { usuarioContext } from "../../../../../..";
 
@@ -34,7 +34,7 @@ const Okr = () => {
               className="my-2 me-2 btn-icon-text"
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/criar_okr`, { state: values }) }}
             >
-              <i className="bi bi-clipboard-plus me-2"></i> 
+              <i className="bi bi-clipboard-plus me-2"></i>
               Novo
             </Button>
           </div>
@@ -55,13 +55,11 @@ const Okr = () => {
               <Card className="custom-card"
                 style={{ cursor: 'pointer' }}
               >
-                <Card.Body className="">
-                  <h5 className="tx-14">Unidade</h5>
-
+                <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
                     <div className="volume">
                       <h4 className="mb-2">
-                        {unit.initials}
+                        Nome do Objetivo
                       </h4>
 
                     </div>
@@ -74,10 +72,16 @@ const Okr = () => {
 
                   </div>
 
-                  <div className="d-flex text-muted tx-13">
-                    {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
-                    {unit.description}
+                  <div className="progress progress-sm mb-1">
+                    <ProgressBar
+                      className=" wd-100p"
+                      striped
+                      variant="primary"
+                      now={60}
+                      role="progressbar"
+                    ></ProgressBar>
                   </div>
+
                 </Card.Body>
               </Card>
             </Col>
