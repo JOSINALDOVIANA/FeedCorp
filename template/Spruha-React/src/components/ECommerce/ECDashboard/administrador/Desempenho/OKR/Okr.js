@@ -54,6 +54,9 @@ const Okr = () => {
             <Col key={unit.id} lg={12} xl={12} xxl={12} md={6} >
               <Card className="custom-card"
                 style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: values })
+                }}
               >
                 <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
@@ -69,17 +72,22 @@ const Okr = () => {
                       {/* ICONE */}
                       <i className="bi-people-fill icon-size float-start text-primary"></i>
                     </h2>
-
                   </div>
 
-                  <div className="progress progress-sm mb-1">
-                    <ProgressBar
-                      className=" wd-100p"
-                      striped
-                      variant="primary"
-                      now={60}
-                      role="progressbar"
-                    ></ProgressBar>
+                  <div className="main-traffic-detail-item">
+                    <div>
+                      <span>Progresso</span> <span>40%</span>
+                    </div>
+                    <div className="progress progress-sm mb-1">
+                      <ProgressBar
+                        animated={true}
+                        className=" wd-100p"
+                        striped
+                        variant="primary"
+                        now={60}
+                        role="progressbar"
+                      ></ProgressBar>
+                    </div>
                   </div>
 
                 </Card.Body>

@@ -12,6 +12,7 @@ import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
 //OKR
 const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/Okr"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
+const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/ProgressoOKR"))
 //CLIMA PULSO
 const TabelaClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaTabelaRealizados"))
 const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
@@ -217,20 +218,25 @@ const Root = () => {
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
                 </Route>
-
+{/* ------------------------------OKR------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
                     <Route index element={<Fragment />} />
                     <Route>
+
                       <Route
                         path={`${process.env.PUBLIC_URL}/okr/criar_okr`}
                         element={<CriarOkr />}
                       />
-                    </Route>
 
+                    </Route>
                   </Route>
                 </Route>
 
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/okr/progresso`} element={<ProgressoOKR />} />
+                </Route>
+{/* ------------------------------AVR------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/avr/`} element={<Avpr />} >
                     <Route index element={<Fragment />} />
@@ -247,7 +253,7 @@ const Root = () => {
 
                   </Route>
                 </Route>
-
+{/* ------------------------------CLIMA PULSO------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/climapulso`} element={<ClimaPulso />} >
                     <Route index element={<Fragment />} />
