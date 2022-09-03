@@ -11,6 +11,7 @@ import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
 
 import ClimaTabela from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaTabelaRealizados"
 import CriarClima from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"
+import ConfigurarClima from "./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"
 
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
@@ -57,7 +58,7 @@ const App = React.lazy(() => import("./components/app"));
 // const Blogpost = React.lazy(() => import("./components/Apps/Blog/Blogpost/Blogpost"))
 // const Rsmmaps = React.lazy(() => import("./components/Apps/Maps/Rsmmaps/Rsmmaps"));
 // const Reactbasicables = React.lazy(() => import("./components/Apps/Tables/Reactbasictables/Reacrbasictables"));
-// const Reactdatatables = React.lazy(() => import("./components/Apps/Tables/Reactdatatables/Reactdatatables"));
+//const Reactdatatables = React.lazy(() => import("./components/Apps/Tables/Reactdatatables/Reactdatatables"));
 // Charts
 // const ChartJs = React.lazy(() => import("./components/Charts/ChartJs/ChartJs"))
 // const Echart = React.lazy(() => import("./components/Charts/Echart/Echart"))
@@ -80,7 +81,7 @@ const App = React.lazy(() => import("./components/app"));
 // Elements
 // const Alerts = React.lazy(() => import("./components/Elements/Alerts/Alerts"))
 // const Avatars = React.lazy(() => import("./components/Elements/Avatars/Avatars"))
-// const LazyAccordions = React.lazy(() => import("./components/Elements/Accordions/Accordions"));
+const LazyAccordions = React.lazy(() => import("./components/Elements/Accordions/Accordions"));
 // const Badges = React.lazy(() => import("./components/Elements/Badges/Badges"))
 // const Breadcrumbs = React.lazy(() => import("./components/Elements/Breadcrumbs/Breadcrumbs"))
 // const Buttons = React.lazy(() => import("./components/Elements/Buttons/Buttons"))
@@ -220,11 +221,15 @@ const Root = () => {
                     <Route>
                       <Route
                         path={`${process.env.PUBLIC_URL}/climapulso/realizados`}
-                        element={<ClimaTabela />}
+                        element={<LazyAccordions />}
                       />
                       <Route
                         path={`${process.env.PUBLIC_URL}/climapulso/criar`}
                         element={<CriarClima />}
+                      />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/climapulso/configuracoes`}
+                        element={<ConfigurarClima/>}
                       />
 
                     </Route>

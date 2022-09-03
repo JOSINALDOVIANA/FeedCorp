@@ -39,10 +39,19 @@ const ClimaPulso = () => {
             <Button
               variant="primary"
               type="button"
-              className="my-2 btn-icon-text"
+              className="my-2 me-2 btn-icon-text"
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i> Criar
+            </Button>
+
+            <Button
+              variant="primary"
+              type="button"
+              className="my-2 btn-icon-text"
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
+            >
+              <i className="bi bi-gear-fill"/>
             </Button>
           </div>
         </div>

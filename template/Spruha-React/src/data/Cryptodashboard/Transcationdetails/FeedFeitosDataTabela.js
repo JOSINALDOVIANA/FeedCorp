@@ -13,12 +13,12 @@ export function Basicdatatable() {
                 <div>
                     {row.destinatario}
                 </div>,
-            sortable: true
+            sortable: false
         },
         {
             name: "Unidade",
             selector: row => [row.unidade],
-            sortable: true,
+            sortable: false,
             cell: row =>
                 <div>
                     {row.unidade}
@@ -39,7 +39,7 @@ export function Basicdatatable() {
         {
             name: "Comentário",
             selector: row => [row.comentario],
-            sortable: true,
+            sortable: false,
             cell: row =>
                 <div className='font-weight-bold'>
                     {row.comentario}
@@ -52,10 +52,10 @@ export function Basicdatatable() {
     let data1 = [
         {
 
-            destinatario: "a",
-            unidade: 'a',
-            data: 'a',
-            comentario: 'a'
+            destinatario: "Victor",
+            unidade: 'UTIC',
+            data: '32/08/2022',
+            comentario: 'Muito bom'
 
         },
        
