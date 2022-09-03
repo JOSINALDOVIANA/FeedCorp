@@ -9,6 +9,7 @@ import images from "./controller/images/imagecontrol.js";
 import company from './controller/company/index.js';
 import plans from './controller/plans/index.js';
 import physicalUnity from './controller/physicalUnity/index.js';
+import location from './controller/location/index.js';
 const routes=express.Router();
 
  /*
@@ -146,9 +147,23 @@ routes.delete('/company_module/delete',plans.Company_ModuleDelete);
 routes.get('/company_module/get',plans.Company_ModuleGet);
 routes.put('/company_module/update',plans.Company_ModuleUpdate);
 
-
-
-
 /*#########################################################################################################*/
+
+// ----- country -----
+routes.post("/country/insert",location.insertCountry)
+routes.delete("/country/delete",location.deleteCountry)
+routes.put("/country/update",location.updateCountry)
+routes.get("/country/get",location.getCountry)
+// ----- state -----
+routes.post("/state/insert",location.insertState)
+routes.delete("/state/delete",location.deleteState)
+routes.put("/state/update",location.updateState)
+routes.get("/state/get",location.getState)
+// ----- city -----
+routes.post("/city/insert",location.insertCity)
+routes.delete("/city/delete",location.deleteCity)
+routes.put("/city/update",location.updateCity)
+routes.get("/city/get",location.getCity)
+/*################################################ localização######################################*/
 
 export default routes;

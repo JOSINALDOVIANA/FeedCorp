@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>location</title>
+</head>
+
+<body>
+    <span>#####################################################################</span>
+    <form disabled id="country/insert">
+        <p>digite o nome do pais que deseja cadastrar</p>
+        <div>
+            <input type="text" name="pais">
+
+        </div>
+
+        <button disabled id="submit" type="submit">cadastrar</button>
+        
+    </form>
+    <span>#####################################################################</span>
+
+    <form id="country/update">
+        <p>atualizar um pais</p>
+        <div>
+            <div id="countries"></div>
+            <input type="text" name="paisupdate">
+
+        </div>
+
+        <button id="submit" type="submit">atualizar</button>
+
+    </form>
+    
+    <span>#####################################################################</span>
+    <form id="state/update">
+        <p>atualizar um estado</p>
+
+        <div>
+            <label>selecione o pais</label>
+            <div id="paisesupdate"></div>
+            <label>selecione o estado</label>
+            <div id="states"></div>
+            <label>digite o nome do estado</label>
+            <input type="text" name="stateupdatename">
+            <label>digite as iniciais</label>
+            <input type="text" name="stateupdateinitials">
+
+        </div>
+
+        <button id="submit" type="submit">atualizar</button>
+
+    </form>
+
+    <span>#####################################################################</span>
+    <form id="state/insert">
+        <p>cadastrar um estado</p>
+        <div>
+            
+            <label>selecione o pais</label>
+            <div id="paisesinsert"></div>
+            
+            <label>digite o nome do novo estado</label>
+            <input type="text" name="statename">
+            <label>iniciais do estado</label>
+            <input type="text" name="stateinitials">
+            
+        </div>
+        
+        <button id="submit" type="submit">cadastrar</button>
+        
+    </form>
+    <span>#####################################################################</span>
+    
+    
+</body>
+
+</html>
+<script>
+
+
+
+    //carrega os paises
+    axios.get("http://localhost:3001/country/get").then(r => {
+        document.getElementById("countries").innerHTML += `
+      
+      <select  name="select">
+  ${r.data.country.map(item => (
+            `
+    <option value=${item.id}>${item.country}</option>
+    `
+        ))}
+  
+</select>
+
+      `;
+      document.getElementById("paisesinsert").innerHTML += `
+      
+      <select  name="select">
+  ${r.data.country.map(item => (
+            `
+    <option value=${item.id}>${item.country}</option>
+    `
+        ))}
+  
+</select>
+
+      `;
+      document.getElementById("paisesupdate").innerHTML += `
+      
+      <select  name="selectupdate">
+  ${r.data.country.map(item => (
+            `
+    <option value=${item.id}>${item.country}</option>
+    `
+        ))}
+  
+</select>
+
+      `
+    });
+    
+    //form iserir pais
+    document.getElementById('country/insert').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/country/insert", { country: e.target['pais'].value }).then(r => {
+            console.log(r.data)
+        })
+    })
+    //form atualizar pais
+    document.getElementById("country/update").addEventListener('submit', e => {
+        e.preventDefault();
+        // console.log(e.target['select'].value)
+        axios.put("http://localhost:3001/country/update", { id: e.target['select'].value, country: e.target['paisupdate'].value }).then(r => {
+            console.log(r.data)
+        })
+    })
+
+    //carrega os estados
+    axios.get("http://localhost:3001/state/get").then(r => {
+        document.getElementById("states").innerHTML += `
+      
+      <select  name="select">
+  ${r.data.state.map(item => (
+            `
+    <option value=${item.id}>${item.state}</option>
+    `
+        ))}
+  
+</select>
+
+      `
+    })
+
+ //form iserir estado
+ document.getElementById('state/insert').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/state/insert", {id_country:e.target['select'].value, initials:e.target['stateinitials'].value,state: e.target['statename'].value }).then(r => {
+            console.log(r.data)
+        })
+    })
+    //form atualizar estado
+    document.getElementById("state/update").addEventListener('submit', e => {
+        e.preventDefault();
+        // console.log(e.target['select'].value)
+        axios.put("http://localhost:3001/state/update", { id: e.target['select'].value, state: e.target['stateupdatename'].value,initials:e.target['stateupdateinitials'].value,id_country:e.target['selectupdate'].value }).then(r => {
+            console.log(r.data)
+        })
+    })
+
+
+
+
+</script>

@@ -1,5 +1,5 @@
 import conexao from "../../database/connection.js";
-import { up } from "../../database/migrations/20220728170813_units.js";
+
 
 export default {
 
