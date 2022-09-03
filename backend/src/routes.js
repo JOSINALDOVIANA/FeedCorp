@@ -10,6 +10,7 @@ import company from './controller/company/index.js';
 import plans from './controller/plans/index.js';
 import physicalUnity from './controller/physicalUnity/index.js';
 import location from './controller/location/index.js';
+import okr from './controller/okr/index.js';
 const routes=express.Router();
 
  /*
@@ -149,6 +150,8 @@ routes.put('/company_module/update',plans.Company_ModuleUpdate);
 
 /*#########################################################################################################*/
 
+
+/*################################################ localização######################################*/
 // ----- country -----
 routes.post("/country/insert",location.insertCountry)
 routes.delete("/country/delete",location.deleteCountry)
@@ -164,6 +167,16 @@ routes.post("/city/insert",location.insertCity)
 routes.delete("/city/delete",location.deleteCity)
 routes.put("/city/update",location.updateCity)
 routes.get("/city/get",location.getCity)
-/*################################################ localização######################################*/
+/*#########################################################################################################*/
+
+/*################################################OKRS,keys######################################*/
+
+routes.post("/okrs/insert",okr.Insert)
+routes.put("/okrs/update",okr.update)
+routes.get("/okrs/getOne",okr.getOne)// exige "id" se nao houver id todos os okrs cadastrados, com id trara keys e responsaveis por eles
+routes.get("/okrs/getTwu",okr.getTwu)// exige "id_user" todos os okrs cadastrados por este usuario 
+routes.delete("/okrs/delete",okr.delete)
+
+/*#########################################################################################################*/
 
 export default routes;

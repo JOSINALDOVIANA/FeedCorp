@@ -6,6 +6,7 @@
         table.foreign("id_user").references("id").inTable("users").onDelete("cascade");
         table.string("objective").notNullable();
         table.double("progress");
+        table.datetime('validity', { precision: 6 }).defaultTo(knex.fn.now(6));
         table.timestamp('updated_at',{ precision: 0 },{ useTz: true }).defaultTo(knex.fn.now(0));
       })
 };
