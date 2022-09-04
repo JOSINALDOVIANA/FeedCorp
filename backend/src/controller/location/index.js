@@ -72,10 +72,13 @@ export default {
         }
     },
     async getState(req,res){
-        const {id}=req.query;
+        const {id,id_country}=req.query;
         try {
-            const state=!id?await conexao("states"):await conexao("states").where({id});
-            return res.json({status:true,state})
+            if(!!id_country){
+                return res.json({status:true,states:await conexao("states").where({id_country})})
+            }
+            const states=!id?await conexao("states"):await conexao("states").where({id});
+            return res.json({status:true,states})
         } catch (error) {
             console.log(error);
             return res.json({status:false,mensage:"erro getState"})
@@ -102,9 +105,10 @@ export default {
         }
     },
     async updateCity(req,res){
-        const {id,city,id_state}=req.body;
+        const {id,city,updated_at,id_state}=req.body;
+        console.log(req.body)
         try {
-            await conexao("cities").update({city}).where({id});
+            await conexao("cities").update({city,updated_at,id_state}).where({id});
             return res.json({status:true,mensage:"atualizado"})
         } catch (error) {
             console.log(error);
@@ -112,10 +116,13 @@ export default {
         }
     },
     async getCity(req,res){
-        const {id}=req.query;
+        const {id,id_state}=req.query;
         try {
-            const city=!id?await conexao("cities"):await conexao("cities").where({id});
-            return res.json({status:true,city})
+            if(!!id_state){
+                return res.json({status:true,cities:await conexao("cities").where({id_state})})
+            }
+            const cities=!id?await conexao("cities"):await conexao("cities").where({id});
+            return res.json({status:true,cities})
         } catch (error) {
             console.log(error);
             return res.json({status:false,mensage:"erro getCity"})

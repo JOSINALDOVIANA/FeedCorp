@@ -59,11 +59,11 @@ export default{
         try {
             if(!!id){
             const okr =await conexao('okrs').where({id}).first();
-            let keys=await conexao("keys").where({id_okr:okr.id});
+            let keys=await conexao("keys").where({id_okr:okr.id}).join("users","users.id","=","keys.id_user").select("keys.*","users.name" );
             
-            for (const index in keys) {
-                keys[index]={...keys[index],user:await conexao("users").where({id:keys[index].id_user}).select("users.name")};
-            }
+            // for (const index in keys) {
+            //     keys[index]={...keys[index],user:await conexao("users").where({id:keys[index].id_user}).select("users.name")};
+            // }
             return res.json({status:true,okr:{...okr,keys}})
            }else{
 

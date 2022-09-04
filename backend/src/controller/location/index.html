@@ -6,171 +6,285 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>location</title>
 </head>
 
 <body>
-    <span>#####################################################################</span>
-    <form disabled id="country/insert">
-        <p>digite o nome do pais que deseja cadastrar</p>
-        <div>
-            <input type="text" name="pais">
+    <div class="grid-container">
+        <div class="grid-item">
+            <form id="createpais">
+                <h1>Cadastrar País</h1>
 
+                <label>digite o pais: </label><input name="createpais" type="text">
+
+                <button type="submit">cadastrar</button>
+            </form>
         </div>
 
-        <button disabled id="submit" type="submit">cadastrar</button>
-        
-    </form>
-    <span>#####################################################################</span>
-
-    <form id="country/update">
-        <p>atualizar um pais</p>
-        <div>
-            <div id="countries"></div>
-            <input type="text" name="paisupdate">
-
+        <div style="display: flex;align-items: center;justify-content: center; flex-direction: column;"
+            class="grid-item">
+            <h1>Atualizar país</h1>
+            <form style="display: flex;align-items: center;justify-content: center; flex-direction: column;gap: 5px;"
+                id="paisupdate">
+                <div>
+                    <label>selecione o País</label>
+                    <select name="selectupdate" class="select">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>digite o pais: </label><input name="paisupdate" type="text" />
+                    <button type="submit">atualizar</button>
+                </div>
+            </form>
         </div>
 
-        <button id="submit" type="submit">atualizar</button>
-
-    </form>
-    
-    <span>#####################################################################</span>
-    <form id="state/update">
-        <p>atualizar um estado</p>
-
-        <div>
-            <label>selecione o pais</label>
-            <div id="paisesupdate"></div>
-            <label>selecione o estado</label>
-            <div id="states"></div>
-            <label>digite o nome do estado</label>
-            <input type="text" name="stateupdatename">
-            <label>digite as iniciais</label>
-            <input type="text" name="stateupdateinitials">
-
+        <div class="grid-item"
+            style="display: flex;align-items: center;justify-content: center; flex-direction: column;">
+            <h1>Cadastrar estado</h1>
+            <form style="display: flex;align-items: center;justify-content: center; flex-direction: column;gap: 5px;"
+                id="createstate">
+                <div>
+                    <label>selecione o País</label>
+                    <select name="selectcreate" class="select">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>digite o estado: </label><input name="createstate" type="text" />
+                    <!-- <button type="submit">Cadastrar</button> -->
+                </div>
+                <div>
+                    <label>digite as siglas: </label><input name="initials" type="text" />
+                    <button type="submit">Cadastrar</button>
+                </div>
+            </form>
         </div>
 
-        <button id="submit" type="submit">atualizar</button>
 
-    </form>
-
-    <span>#####################################################################</span>
-    <form id="state/insert">
-        <p>cadastrar um estado</p>
-        <div>
-            
-            <label>selecione o pais</label>
-            <div id="paisesinsert"></div>
-            
-            <label>digite o nome do novo estado</label>
-            <input type="text" name="statename">
-            <label>iniciais do estado</label>
-            <input type="text" name="stateinitials">
-            
+        <div class="grid-item"
+            style="display: flex;align-items: center;justify-content: center; flex-direction: column;">
+            <h1>Atualizar estado</h1>
+            <form style="display: flex;align-items: center;justify-content: center; flex-direction: column;gap: 5px;"
+                id="updatestate">
+                <div>
+                    <label>selecione o País</label>
+                    <select name="selecupdatepais" class="select">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>selecione o estado</label>
+                    <select name="selectupdatestate" class="selectstate">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>digite o estado: </label><input name="updatestate" type="text" />
+                    <!-- <button type="submit">Cadastrar</button> -->
+                </div>
+                <div>
+                    <label>digite as siglas: </label><input name="initials" type="text" />
+                    <button type="submit">Atualizar</button>
+                </div>
+            </form>
         </div>
-        
-        <button id="submit" type="submit">cadastrar</button>
-        
-    </form>
-    <span>#####################################################################</span>
-    
-    
+
+
+        <div class="grid-item"
+            style="display: flex;align-items: center;justify-content: center; flex-direction: column;">
+
+            <h1>Criar Cidade</h1>
+            <form style="display: flex;align-items: center;justify-content: center; flex-direction: column;gap: 5px;"
+                id="createcity">
+
+                <div>
+                    <label>selecione o País</label>
+                    <select name="selectcreate" class="select">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>selecione o estado</label>
+                    <select name="selectcreatestate" class="selectstate">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>digite o nome da cidade: </label><input name="createcity" type="text" />
+                    <button type="submit">Cadastrar</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="grid-item"
+            style="display: flex;align-items: center;justify-content: center; flex-direction: column;">
+            <h1>Atualizar Cidade</h1>
+            <form style="display: flex;align-items: center;justify-content: center; flex-direction: column;gap: 5px;"
+                id="updatecity">
+
+                <div>
+                    <label>selecione o País</label>
+                    <select name="selectpais" class="select">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>selecione o estado</label>
+                    <select name="selectstate" class="selectstate">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>selecione a Cidade</label>
+                    <select name="selectcity" class="selectcity">
+                        <option value="default">nenhum</option>
+                    </select>
+                </div>
+                <div>
+                    <label>digite o nome da cidade: </label>
+                    <input name="createcity" type="text" />
+                    <button type="submit">Atualizar</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>
+    </div>
+
 </body>
 
 </html>
 <script>
 
-
-
-    //carrega os paises
-    axios.get("http://localhost:3001/country/get").then(r => {
-        document.getElementById("countries").innerHTML += `
-      
-      <select  name="select">
-  ${r.data.country.map(item => (
-            `
-    <option value=${item.id}>${item.country}</option>
-    `
-        ))}
-  
-</select>
-
-      `;
-      document.getElementById("paisesinsert").innerHTML += `
-      
-      <select  name="select">
-  ${r.data.country.map(item => (
-            `
-    <option value=${item.id}>${item.country}</option>
-    `
-        ))}
-  
-</select>
-
-      `;
-      document.getElementById("paisesupdate").innerHTML += `
-      
-      <select  name="selectupdate">
-  ${r.data.country.map(item => (
-            `
-    <option value=${item.id}>${item.country}</option>
-    `
-        ))}
-  
-</select>
-
-      `
-    });
-    
-    //form iserir pais
-    document.getElementById('country/insert').addEventListener('submit', async (e) => {
+    //atualizar cidade
+    document.getElementById('updatecity').addEventListener('submit', async e => {
         e.preventDefault();
-        axios.post("http://localhost:3001/country/insert", { country: e.target['pais'].value }).then(r => {
-            console.log(r.data)
+        axios.put("http://localhost:3001/city/update", { id_state: e.target['selectstate'].value, city: e.target['createcity'].value, id_country:e.target['selectpais'].value,id:e.target['selectcity'].value }).then(r => {
+            console.log(r.data.status);
+            carregapaises();
+        })
+    })
+
+    //inerir cidade
+    document.getElementById('createcity').addEventListener('submit', async e => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/city/insert", { id_state: e.target['selectcreatestate'].value, city: e.target['createcity'].value }).then(r => {
+            console.log(r.data.status);
+            carregapaises();
+        })
+    })
+
+
+    //form iserir pais
+    document.getElementById('createpais').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/country/insert", { country: e.target['createpais'].value }).then(r => {
+            console.log(r.data.status);
+            carregapaises();
         })
     })
     //form atualizar pais
-    document.getElementById("country/update").addEventListener('submit', e => {
+    document.getElementById("paisupdate").addEventListener('submit', e => {
         e.preventDefault();
         // console.log(e.target['select'].value)
-        axios.put("http://localhost:3001/country/update", { id: e.target['select'].value, country: e.target['paisupdate'].value }).then(r => {
-            console.log(r.data)
+        axios.put("http://localhost:3001/country/update", { id: e.target['selectupdate'].value, country: e.target['paisupdate'].value }).then(r => {
+            console.log(r.data.status);
+            carregapaises();
         })
     })
 
-    //carrega os estados
-    axios.get("http://localhost:3001/state/get").then(r => {
-        document.getElementById("states").innerHTML += `
-      
-      <select  name="select">
-  ${r.data.state.map(item => (
-            `
-    <option value=${item.id}>${item.state}</option>
-    `
-        ))}
-  
-</select>
 
-      `
-    })
 
- //form iserir estado
- document.getElementById('state/insert').addEventListener('submit', async (e) => {
+    //form iserir estado
+    document.getElementById('createstate').addEventListener('submit', async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/state/insert", {id_country:e.target['select'].value, initials:e.target['stateinitials'].value,state: e.target['statename'].value }).then(r => {
-            console.log(r.data)
+        axios.post("http://localhost:3001/state/insert", { id_country: e.target['selectcreate'].value, initials: e.target['initials'].value, state: e.target['createstate'].value }).then(r => {
+            carregapaises()
         })
     })
     //form atualizar estado
-    document.getElementById("state/update").addEventListener('submit', e => {
+    document.getElementById("updatestate").addEventListener('submit', e => {
         e.preventDefault();
         // console.log(e.target['select'].value)
-        axios.put("http://localhost:3001/state/update", { id: e.target['select'].value, state: e.target['stateupdatename'].value,initials:e.target['stateupdateinitials'].value,id_country:e.target['selectupdate'].value }).then(r => {
+        axios.put("http://localhost:3001/state/update", { id: e.target['selectupdatestate'].value, state: e.target['updatestate'].value, initials: e.target['initials'].value, id_country: e.target['selecupdatepais'].value }).then(r => {
             console.log(r.data)
+            carregapaises()
         })
     })
 
+
+    carregapaises()// carregando os paises
+
+
+    function carregapaises() {
+        axios.get("http://localhost:3001/country/get").then(r => {
+            let country = document.querySelectorAll(".select");
+
+            for (let index = 0; index < country.length; index++) {
+                country[index].addEventListener("change", e => selectpais(e))
+                country[index].innerHTML =
+                    `
+           ${r.data.country.map(item => (
+                        `<option class='op'  value=${item.id}>${item.country}</option>`
+                    ))}
+          `
+
+            }
+        });
+       
+    }
+
+    async function selectpais(e) {
+        e.preventDefault();
+        let op = document.querySelectorAll(".op");
+        for (let index = 0; index < op.length; index++) {
+            if (op[index].value == e.target.value) {
+                op[index].setAttribute("selected", true)
+            }
+        }
+
+        let estados = await axios.get(`http://localhost:3001/state/get?id_country=${e.target.value}`);
+        estados = estados.data.states;
+        let states = document.querySelectorAll(".selectstate");
+        for (let index = 0; index < states.length; index++) {
+            states[index].addEventListener("change", e => selectState(e))
+            states[index].innerHTML =
+                `
+           ${estados.map(item => (
+                    `<option class='op'  value=${item.id}>${item.state}</option>`
+                ))}
+          `
+
+        }
+    }
+    async function selectState(e) {
+        e.preventDefault();
+        let op = document.querySelectorAll(".op");
+        for (let index = 0; index < op.length; index++) {
+            if (op[index].value == e.target.value) {
+                op[index].setAttribute("selected", true)
+            }
+        }
+        let cidades = await axios.get(`http://localhost:3001/city/get?id_state=${e.target.value}`);
+        cidades = cidades.data.cities;
+        let cities = document.querySelectorAll(".selectcity");
+        for (let index = 0; index < cities.length; index++) {
+            // cities[index].addEventListener("change", e => selectState(e))
+            cities[index].innerHTML =
+                `
+           ${cidades.map(item => (
+                    `<option class='op'  value=${item.id}>${item.city}</option>`
+                ))}
+          `
+
+        }
+
+    }
 
 
 
