@@ -9,20 +9,31 @@ import { DropzoneAreaBase, DropzoneArea, DropzoneDialog } from "material-ui-drop
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { AttachFile, Audiotrack, Description, PictureAsPdf, Theaters } from "@material-ui/icons";
-export const Singleselect = () => {
+
+export const SingleselectUnidade = () => {
   const objectArray = [
-    { value: "Firefox", label: "firefox" },
-    { value: "Chrome", label: "chrome " },
-    { value: "Safari", label: "safari" },
-    { value: "Operate", label: "operate" },
-    { value: " Internet Explore", label: "internet explore " },
+    { value: "UMC", label: "UMC" },
+    { value: "UTIC", label: "UTIC " },
   ];
   return (
     <div>
-      <Multiselect classNamePrefix="Select2" options={objectArray} singleSelect displayValue="key" placeholder="Selecione" />
+      <Multiselect classNamePrefix="Select2" options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
     </div>
   );
 };
+
+export const SingleselectPessoa = () => {
+    const objectArray = [
+      { value: "Marcus", label: "Marcus" },
+      { value: "Josinaldo", label: "Josinaldo " },
+    ];
+    return (
+      <div>
+        <Multiselect classNamePrefix="Select2" options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
+      </div>
+    );
+  };
+  
 // multiple
 const animatedComponents = makeAnimated();
 const options = [

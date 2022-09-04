@@ -9,6 +9,7 @@ import FeedRecebidos from "./components/ECommerce/ECDashboard/tabelaCards/FeedRe
 import FeedFeitos from "./components/ECommerce/ECDashboard/tabelaCards/FeedFeitos"
 import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
 import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
+const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CriarFeedback"))
 //OKR
 const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/Okr"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
@@ -211,10 +212,13 @@ const Root = () => {
                       />
 
                     </Route>
-
                   </Route>
                 </Route>
 
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
+                </Route>
+{/* ------------------------------CORPORAÇÃO------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
                 </Route>

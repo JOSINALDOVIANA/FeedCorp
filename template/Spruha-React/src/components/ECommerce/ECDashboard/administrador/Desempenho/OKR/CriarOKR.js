@@ -2,12 +2,13 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
+import {SingleselectUnidade, SingleselectPessoa} from "./FormDataOKR";
 import { usuarioContext } from "../../../../../..";
 
 
 // import { Container } from './styles';
 
-const Criar = () => {
+const CriarOKR = () => {
   const dadosrota = useLocation();
   const location = useLocation();
   const navegar = useNavigate();
@@ -45,10 +46,10 @@ const Criar = () => {
                 <input type="text" className="form-control" placeholder="Objetivo" />
               </FormGroup>
 
-              <FormGroup className="form-group">
+              {/* <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Descrição</Form.Label>
                 <textarea className="form-control" />
-              </FormGroup>
+              </FormGroup> */}
 
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Validade</Form.Label>
@@ -73,7 +74,7 @@ const Criar = () => {
 
               <div className="input-group">
                 <input
-                  type="text"
+                  type="select"
                   className="form-control border-end-0 browse-file"
                   placeholder="Chave"
                   required
@@ -110,23 +111,30 @@ const Criar = () => {
                 </div>
               </div>
 
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control border-end-0 browse-file"
-                  placeholder="Pesquisar pessoa"
-                  required
-                />
-                <label className="input-group-btn">
-                  <span className="btn btn-primary">
+              <div className="page-header">
+
+                <Col lg={4} xl={4} xxl={4} md={12} className="my-1">
+                  <SingleselectUnidade />
+                </Col>
+                <Col lg={4} xl={4} xxl={4} md={12} className="my-1">
+                  <SingleselectPessoa />
+                </Col>
+
+
+
+                <div className="d-flex justify-content-end mx-3">
+
+                  <Button
+                    variant="primary"
+                    type="button"
+                    className="my-2 btn"
+
+                  >
                     Adicionar
-                    <input
-                      // type="file"
-                      style={{ display: "none" }}
-                      multiple=""
-                    />
-                  </span>
-                </label>
+                  </Button>
+                </div>
+
+
               </div>
 
 
@@ -139,4 +147,4 @@ const Criar = () => {
   );
 }
 
-export default Criar;
+export default CriarOKR;
