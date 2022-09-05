@@ -19,6 +19,7 @@ export default{
                     objective,id:id_okr[0],id_user,progress,validity,keys:keys_serial
                 }})
             }
+            return res.json({status:true, okr:{ objective,id:id_okr[0],id_user,progress,validity }})
              })
         } catch (error) {
             console.log(error);
@@ -61,9 +62,7 @@ export default{
             const okr =await conexao('okrs').where({id}).first();
             let keys=await conexao("keys").where({id_okr:okr.id}).join("users","users.id","=","keys.id_user").select("keys.*","users.name" );
             
-            // for (const index in keys) {
-            //     keys[index]={...keys[index],user:await conexao("users").where({id:keys[index].id_user}).select("users.name")};
-            // }
+            
             return res.json({status:true,okr:{...okr,keys}})
            }else{
 
@@ -104,5 +103,103 @@ export default{
             console.log(error);
             return res.json({status:false,mensage:"error okr=>delete"})
         }
-    }
+    },
+    async keysInsert(req,res){
+        
+        // keys=[{description,id_okr,id_user,statu=0}...]
+         const {keys}=req.body;
+        try {
+             await conexao.transaction(async trx=>{
+                await trx("keys").insert(keys);
+            
+            
+
+                return res.json({status:true,mensage:"salvos"})
+            
+             })
+        } catch (error) {
+            console.log(error);
+            return res.json({status:false,mensage:"erro keys=>insert"})
+        }
+    },
+    async keysupdate(req,res){
+         // keys=[{id,description,id_okr,id_user,statu=0}...]
+         const {keys}=req.body;
+       
+        try {
+             await conexao.transaction(async trx=>{
+                for (const index in keys) {
+                    const {id,description,id_okr,id_user,status=0}=keys[index]
+                    await trx("keys").update({description,id_okr,id_user,status}).where({id});
+                }
+            
+           return res.json({status:true,mensage:"atualizados"})
+             })
+        } catch (error) {
+            console.log(error);
+            return res.json({status:false,mensage:"erro keys=>update"})
+        }
+    },
+    async keysgetOne(req,res){
+        
+        const {id,id_okr,id_user}=req.query;
+        
+        try {
+            if(!!id){
+            const key =await conexao('keys').where({"keys.id":id}).join("users","users.id","=","keys.id_user").select("keys.*","users.name").where('status',"<",100).first();
+            if(!!key){
+                return res.json({status:true,key})
+            }       
+            return res.json({status:true,mensage:"key com id não localizada"})
+           }
+            if(!!id_okr){
+            const key =await conexao('keys').where({"keys.id_okr":id_okr}).join("users","users.id","=","keys.id_user").select("keys.*","users.name").where('status',"<",100).first();
+            if(!!key){
+                return res.json({status:true,key})
+            }       
+            return res.json({status:true,mensage:"key com id_okr não localizada"})
+           }
+            if(!!id_user){
+            const key =await conexao('keys').where({"keys.id_user":id_user}).join("users","users.id","=","keys.id_user").select("keys.*","users.name").where('status',"<",100).first();
+            if(!!key){
+                return res.json({status:true,key})
+            }       
+            return res.json({status:true,mensage:"key com id_user não localizada"})
+           }
+
+               return res.json({status:true,mensage:"enviar id, id_okr ou id_user"})
+           
+        } catch (error) {
+            console.log(error);
+            return res.json({status:false,mensage:"erro key=>getOne"})
+        }
+    },
+    async keysgetTwu(req,res){
+        
+        const {id_okr}=req.query;
+        
+        try {
+            if(!!id_okr){
+            let keys =await conexao('keys').where({id_okr}).join("users","users.id","=","keys.id_user").select("users.name","keys.*");
+            
+           
+            
+            
+            return res.json({status:true,keys})
+           }
+        } catch (error) {
+            console.log(error);
+            return res.json({status:false,mensage:"erro okr=>getTwu"})
+        }
+    },
+    async keysdelete(req,res){
+        const {id}=req.query;
+        try {
+            await conexao("okrs").del().where({id})
+            return res.json({status:true,mensage:"apagado"})
+        } catch (error) {
+            console.log(error);
+            return res.json({status:false,mensage:"error okr=>delete"})
+        }
+    },
 }

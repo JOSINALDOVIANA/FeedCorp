@@ -9,6 +9,8 @@
         table.string('initials').notNullable();
         table.integer("id_user").unsigned();        
         table.foreign("id_user").references("id").inTable("users").onDelete("cascade");         
+        table.integer("id_company").unsigned();        
+        table.foreign("id_comapny").references("id").inTable("companies").onDelete("cascade");         
         table.timestamp('updated_at',{ precision: 0 },{ useTz: true }).defaultTo(knex.fn.now(0));
       })
 };

@@ -170,12 +170,18 @@ routes.get("/city/get",location.getCity)
 /*#########################################################################################################*/
 
 /*################################################OKRS,keys######################################*/
-
+// ----okrs----
 routes.post("/okrs/insert",okr.Insert)
 routes.put("/okrs/update",okr.update)
-routes.get("/okrs/getOne",okr.getOne)// exige "id" se nao houver id todos os okrs cadastrados, com id trara keys e responsaveis por eles
+routes.get("/okrs/getOne",okr.getOne)// exige "id" se nao houver id retorna todos os okrs cadastrados, com id trara keys e responsaveis por eles
 routes.get("/okrs/getTwu",okr.getTwu)// exige "id_user" todos os okrs cadastrados por este usuario 
 routes.delete("/okrs/delete",okr.delete)
+//-------keys-------
+routes.post("/keys/insert",okr.keysInsert)
+routes.put("/keys/update",okr.keysupdate)
+routes.get("/keys/getOne",okr.keysgetOne)// exige "id" se nao houver id retorna todos os keys cadastrados, com id trara keys e responsaveis por eles
+routes.get("/keys/getTwu",okr.keysgetTwu)// exige "id_user" todos os keys cadastrados por este usuario 
+routes.delete("/keys/delete",okr.keysdelete)
 
 /*#########################################################################################################*/
 
