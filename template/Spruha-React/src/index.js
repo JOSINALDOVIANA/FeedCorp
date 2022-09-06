@@ -9,7 +9,7 @@ import FeedRecebidos from "./components/ECommerce/ECDashboard/tabelaCards/FeedRe
 import FeedFeitos from "./components/ECommerce/ECDashboard/tabelaCards/FeedFeitos"
 import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
 import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
-const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CriarFeedback"))
+const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard/CriarFeedback"))
 //OKR
 const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/Okr"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
@@ -25,9 +25,9 @@ const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp"))
 const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 
-const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR"));
-const Criar = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Criar"));
-const Responder = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/CostumerPages/AVPR/Responder"))
+const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR"));
+const Criar = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/Criar"));
+const Responder = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/Responder"))
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const App = React.lazy(() => import("./components/app"));

@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, ListGroup, Breadcrumb } from "react-bootstrap";
-import { SingleselectUnidade, SingleselectPessoa } from "./Desempenho/OKR/FormDataOKR";
-import { usuarioContext } from "../../../..";
+import { SingleselectUnidade, SingleselectPessoa } from "./administrador/Desempenho/OKR/FormDataOKR";
+import { usuarioContext } from "../../..";
 
 
 
@@ -47,7 +47,7 @@ const CriarFeed = () => {
                   Enviar
                 </Button>
                 <Button onClick={() => {
-                  navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: values })
+                  navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
                 }}
                   variant="danger"
                 >

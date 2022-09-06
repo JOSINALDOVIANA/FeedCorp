@@ -18,7 +18,7 @@ const Okr = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">OKR</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">OKR - Objective Key Result</h2>
           <Breadcrumb>
             <Breadcrumb.Item href="#">Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item active>OKR</Breadcrumb.Item>
@@ -32,7 +32,7 @@ const Okr = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/criar_okr`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/criar_okr/`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i>
               Novo

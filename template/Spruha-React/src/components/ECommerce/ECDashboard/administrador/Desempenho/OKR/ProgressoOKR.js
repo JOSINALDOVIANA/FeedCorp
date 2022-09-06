@@ -40,10 +40,9 @@ const Okr = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-
+              //onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
             >
-              <i className="bi bi-clipboard-plus me-2"></i>
-              Salvar Alterações
+              Voltar
             </Button>
 
           </div>
@@ -71,9 +70,33 @@ const Okr = () => {
           </Card.Header>
 
           <Card.Body>
-            <Row
+
+            <Divider className="mb-1" />
+            <div className="d-flex justify-content-between align-items-center mt-3">
+              <span className="font-weight-bold">Chave 1</span>
+              <Col sm={8} className="col-4 my-auto">
+                <ProgressBar
+                  variant="info"
+                  className="progress ht-6 my-auto"
+                  now={50}
+                ></ProgressBar>
+                <span className="tx-13">
+                  <b>50%</b>
+                </span>
+              </Col>
+              <div className="d-flex align-items-center mb-2">
+                <img
+                  alt="avatar"
+                  className="rounded-circle avatar mx-1"
+                  src={user1}
+                />
+                <span>Nome</span>
+              </div>
+            </div>
+            <Divider className="mt-1" />
+            {/* <Row
               // style={{ cursor: 'pointer' }}
-              className="mt-2"
+              className="mt-3"
             // onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
             >
               <Col sm={5} className="main-content-label">
@@ -93,9 +116,8 @@ const Okr = () => {
                   </span>
                 </div>
               </Col>
-            </Row>
+            </Row> */}
 
-            <Divider className="mt-2" />
             {/* NÃO MEXE */}
             {/* <div class="d-flex justify-content-between mt-3 mx-2">
               <span>SubChave 1</span>
@@ -120,9 +142,9 @@ const Okr = () => {
 
             <Divider className="mt-2 mb-4" /> */}
 
-            
 
-            
+
+
 
           </Card.Body>
         </Card>

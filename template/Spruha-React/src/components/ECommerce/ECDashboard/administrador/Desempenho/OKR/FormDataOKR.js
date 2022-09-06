@@ -33,7 +33,7 @@ export const SingleselectPessoa = () => {
       </div>
     );
   };
-  
+// -----------------------------------------------------------------------
 // multiple
 const animatedComponents = makeAnimated();
 const options = [

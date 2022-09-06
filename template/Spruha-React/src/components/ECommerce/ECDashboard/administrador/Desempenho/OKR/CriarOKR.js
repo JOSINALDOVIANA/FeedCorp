@@ -32,7 +32,7 @@ const CriarOKR = () => {
                   Criar
                 </Button>
                 <Button onClick={() => {
-                  navegar(`${process.env.PUBLIC_URL}/okr`, { state: values })
+                  navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
                 }}
                   variant="danger"
                 >
