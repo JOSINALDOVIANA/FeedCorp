@@ -3,23 +3,28 @@ import conexao from "../../database/connection.js";
 
 export default {
     async ModuleInsert(req,res){
-        const {module,value}=req.body
-
+        // modules=[{module,value}...]
+        let {modules}=req.body
+       
         try {
             await conexao.transaction(async (trx)=>{
-             const id=await  trx("modules").insert({module,value})
-             return res.json({status:true,dados:{id:id[0],module,value}})
+             const id=await  trx("modules").insert(modules)
+             return res.json({status:true,mensage:"inseridos"})
             })
         } catch (error) {
             return res,json({status:false,mensage:error})
         }
     },
     async ModuleUpdate(req,res){
-        const {id,module,value}=req.body
-
+        // modules=[{id,module,value}...]
+       let {modules}=req.body
+       
         try {
             await conexao.transaction(async (trx)=>{
-             await  trx("modules").update({module,value}).where({id})
+             for (const iterator of modules) {
+                const {module,value}=iterator;
+                await  trx("modules").update({module,value}).where({"id":iterator.id})
+             }
              return res.json({status:true,mensagem:"atualizado"})
             })
         } catch (error) {

@@ -30,7 +30,7 @@ export default{
         let data=new Date();
         data.setDate(data.getDate()+15);
         const {id,objective,id_user,progress=0,validity=data,keys}=req.body;
-        //keys=[{description,id_okr=obrigatorio,id_user,status}...]
+        //keys=[{id,description,id_okr=obrigatorio,id_user,status}...]
         //validity=new date()
         try {
              await conexao.transaction(async trx=>{
@@ -84,11 +84,11 @@ export default{
             for (const index in okrs) {
                 let keys= await conexao("keys").where({id_okr:okrs[index].id}).join("users","keys.id_user","=","users.id").select("keys.*","users.name");
                 okrs[index]={...okrs[index],keys};
-            }
-            
-            
+            }           
             return res.json({status:true,okrs})
-           }
+        }
+        return res.json({status:true,okrs:await conexao("okrs")});
+
         } catch (error) {
             console.log(error);
             return res.json({status:false,mensage:"erro okr=>getTwu"})
@@ -203,3 +203,7 @@ export default{
         }
     },
 }
+
+    
+
+   

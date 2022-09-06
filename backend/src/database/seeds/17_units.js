@@ -24,7 +24,10 @@
      id_company:company[0].id
     },
     { 
-     description:"Unidade de Assessoria e Comunicação",id_user:users[userstam-3].id,initials:"UAC"
+     description:"Unidade de Assessoria e Comunicação",
+     id_user:users[userstam-3].id,
+     initials:"UAC",
+     id_company:company[0].id
     },
     { 
      description:"Unidade de Controle e Contabilidade",

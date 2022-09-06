@@ -10,5 +10,10 @@ export function up(knex) {
 };
 
 export function down(knex) {
-  return knex.schema.dropTableIfExists("");
+  return knex.schema.alterTable("users",function(table){
+    table.dropForeign("id_creator")
+    table.dropForeign("id_permission")
+    table.dropForeign("id_company")
+    table.dropColumns(["id_creator","id_permission","id_company"]);
+  })
 };
