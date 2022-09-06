@@ -40,7 +40,7 @@ const Okr = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              //onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
             >
               Voltar
             </Button>
