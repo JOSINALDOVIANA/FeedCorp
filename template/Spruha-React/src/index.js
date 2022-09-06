@@ -191,7 +191,7 @@ const Root = () => {
                 <Route index element={<ECDashboard />} />
 
                 <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/dashboard`} element={<ECDashboard />} >
+                  <Route path={`${process.env.PUBLIC_URL}/dashboard/`} element={<ECDashboard />} >
                     <Route index element={<Fragment />} />
                     <Route>
                       <Route

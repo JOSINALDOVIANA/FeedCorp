@@ -79,7 +79,7 @@ export default {
                company={... company,city,country,state,plan,modules:{...modules_plan_serial,...module_solos_serial}}
                return res.json({startus:true,company})
                }
-               return res.json({startus:false,mensage:"companhia não localizada"})
+               return res.json({status:false,company:await conexao("companies")})
 
             })
         } catch (error) {

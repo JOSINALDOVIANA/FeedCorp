@@ -151,7 +151,7 @@ export default {
         try {
             await conexao.transaction(async trx => {
                 const dadosantigos = await trx("users").where({ id }).first();
-                console.log(dadosantigos)
+                console.log(req.body)
                 if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
                     await trx("users").update({
                         name,

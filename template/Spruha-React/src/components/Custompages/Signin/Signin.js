@@ -29,33 +29,35 @@ const Signin = () => {
     let permissions;
     let unit;
     let status;
-    let image;
+    let image={};
     let units;
-    let company;
+    let company=[];
+    let okrscriados=[];
     await api.post("/user/login", obt).then(r => {
       if (!r.data.status) {
         alert(r.data.message)
       } else {
         dadosUser = r.data?.dadosUser;
-        permissions = r.data?.permissions[0].description;
+        permissions = r.data?.permissions[0]?.description;
         unit = r.data?.unit[0];
         status = r.data?.status;
-        company=r.data?.company[0];       
+        company=r.data?.company[0];    
+        // console.log(r.data)   
       }
     });
-     company= await api(`/company/get?id=${company.id}`);
-     company=company.data.company;
+   
+    if(!!company){
+      company= await api(`/company/get?id=${company.id}`);
+      company=company.data.company;
+    }
     if (status) {
 
-      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });
-
-
-      await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
+      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });      await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
       if (permanecer) {
         localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
       }
-
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company } });
+      await  api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(r=>{okrscriados=r?.data?.okrs})
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company,okrscriados } });
     }
 
   };

@@ -16,7 +16,7 @@ import * as edashboard from "../../../data/Ecommerce/E-dashboard/edashboard";
 import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown } from "react-bootstrap";
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
 import { usuarioContext } from "../../..";
-
+import api from "../../../api";
 // const ProductsDetails =
 //   [
 //     { Productid: "#C234", Productname: png14, Producttext: "Regular Backpack", Productcost: "$14,500", Total: "2,977", Status: "Available", Statustext: "primary", },
@@ -27,12 +27,18 @@ import { usuarioContext } from "../../..";
 //   ];
 function ECDashboard() {
 
-
+  const dadosrota = useLocation();
   const navegar = useNavigate()
   const { values, setValues } = useContext(usuarioContext);
+  const [okrsativos, setOkrsativos] = useState(['']);
+
+  useEffect(() => {
+    setValues(dadosrota.state);
+    setOkrsativos(dadosrota.state.okrscriados.map(item=>(item.progress<100?item:false)))
+  }, [dadosrota.state]);
 
 
-  const [content, setContent] = useState("");
+
   return (
     <Fragment>
       <div className="page-header">
@@ -70,7 +76,7 @@ function ECDashboard() {
               type="button"
               variant="primary"
               className=" my-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/novo_feedback`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/novo_feedback/`, { state: values }) }}
             >
               <i className="fe fe-download-cloud me-2"></i>
               Enviar Feedback
@@ -147,7 +153,7 @@ function ECDashboard() {
                   {/* ICONE */}
                   <i className="bi-check2-circle icon-size float-start text-primary"></i>
                   {/* VALOR VARIAVEL */}
-                  <span className="font-weight-bold">10</span>
+                  <span className="font-weight-bold">{okrsativos.length}</span>
                 </h2>
                 {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Profit<span className="float-end">$4,678</span>
