@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect,  } from "react";
+import React, { Fragment, useContext, useEffect, useState,  } from "react";
 import Header from "../layouts/Header/Header";
 import Sidebar from "../layouts/SideBar/SideBar";
 import Footer from "../layouts/Footer/Footer";
@@ -23,7 +23,7 @@ const App = () => {
   // PADRAO - VAI PARA TODAS AS OUTRAS PÁGINAS
   const dadosrota=useLocation();
   const navegar=useNavigate()
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({})
   
   useEffect(()=>{
     if(!dadosrota.state){
@@ -32,15 +32,15 @@ const App = () => {
     setValues(dadosrota.state);
     
   },[dadosrota.state])
-  console.log(values)
+
 
   return (
     <Fragment >
       <div className="horizontalMenucontainer">
         <Switcher />
         <div className="page">
-          <Header />
-          <Sidebar values={values} />
+          <Header  />
+          <Sidebar />
 
           <div className="main-content side-content">
             <div className="main-container container-fluid" onClick={() => remove()}>

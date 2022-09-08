@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<title>Document</title>
+</head>
+
+<body>
+
+     <div class="form-floating">
+        <select class="form-select" id="selectusers" aria-label="selecione um usuário">      
+        </select>
+        <label for="floatingSelect">selecione um Usuário</label>
+      </div>
+     <div class="form-floating">
+        <select class="form-select" id="selectOkrs" aria-label="OKRS">      
+        </select>
+        <label for="floatingSelect">OKRs</label>
+      </div>
+      
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+<script>
+ async   function carregarusers(){
+
+    axios.get("http://localhost:3001/user/getAll").then(r=>{
+    let selectusers=document.getElementById('selectusers');
+    let option=r.data.Users.map(user=>(`<option value=${user.id}>${user.name}</option>`));
+    selectusers.innerHTML=option;
+    selectusers.addEventListener('change',e=>{
+      carregarOkrs(e.target.value);
+    //   carregarAvpr(e.target.value);
+    })
+    });
+ }
+
+ async function carregarOkrs(id){
+    axios.get(`http://localhost:3001/okrs/getTwu?id_user=${id}`).then(r=>{
+        let selectokrs=document.getElementById('selectOkrs');
+        let option=r.data.okrs.map(okr=>(`<option value=${okr.id}>${okr.objective}</option>`));
+        selectOkrs.innerHTML=option;
+    })
+ }
+carregarusers();
+
+</script>
+
+</html>

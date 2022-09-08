@@ -11,6 +11,7 @@ import plans from './controller/plans/index.js';
 import physicalUnity from './controller/physicalUnity/index.js';
 import location from './controller/location/index.js';
 import okr from './controller/okr/index.js';
+import feedbacks from './controller/feedbacks/index.js';
 const routes=express.Router();
 
  /*
@@ -185,4 +186,31 @@ routes.delete("/keys/delete",okr.keysdelete)
 
 /*#########################################################################################################*/
 
+/*################################################feedbacks######################################*/
+// ------feedbacks-----
+routes.post("/feedback/insert",feedbacks.insert);
+routes.put("/feedback/update",feedbacks.update);
+routes.get("/feedback/get",feedbacks.get);
+routes.delete("/feedback/delete",feedbacks.delete);
+
+// -------typesfeedbacks----
+routes.post("/typesfeedbacks/insert",feedbacks.typesInsert);
+routes.get("/typesfeedbacks/get",feedbacks.typesGet);
+routes.put("/typesfeedbacks/update",feedbacks.typesUpdate);
+routes.delete("/typesfeedbacks/delete",feedbacks.typesDelete);
+
+// ----answers----
+routes.post('/answers/insert',feedbacks.answersInsert);
+routes.get('/answers/get',feedbacks.answersGet);
+routes.put('/answers/update',feedbacks.answersUpdate);
+routes.delete('/answers/delete',feedbacks.answersDelete);
+
+// ----feedbacks_answer-----
+routes.post("/feedback_answer/insert",feedbacks.FA_Insert);
+routes.get("/feedback_answer/get",feedbacks.FA_Get);
+routes.put("/feedback_answer/update",feedbacks.FA_Update);
+routes.delete("/feedback_answer/delete",feedbacks.FA_Delete);
+
+
+/*#########################################################################################################*/
 export default routes;

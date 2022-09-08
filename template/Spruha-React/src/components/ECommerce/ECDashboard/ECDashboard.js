@@ -29,12 +29,12 @@ function ECDashboard() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const { values, setValues } = useContext(usuarioContext);
-  const [okrsativos, setOkrsativos] = useState(['']);
+  const [ values, setValues ] = useState({});
+ 
 
   useEffect(() => {
     setValues(dadosrota.state);
-    setOkrsativos(dadosrota.state.okrscriados.map(item=>(item.progress<100?item:false)))
+   
   }, [dadosrota.state]);
 
 
@@ -153,7 +153,7 @@ function ECDashboard() {
                   {/* ICONE */}
                   <i className="bi-check2-circle icon-size float-start text-primary"></i>
                   {/* VALOR VARIAVEL */}
-                  <span className="font-weight-bold">{okrsativos.length}</span>
+                  <span className="font-weight-bold">{values?.okrscriados?.map(item=>(item.progress<100?item:false)).length}</span>
                 </h2>
                 {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Profit<span className="float-end">$4,678</span>

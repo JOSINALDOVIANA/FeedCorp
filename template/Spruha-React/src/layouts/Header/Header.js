@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import {
   Dropdown,
   Container,
@@ -7,7 +7,7 @@ import {
   Navbar,
   InputGroup,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { usuarioContext } from "../..";
 import Selectoptions from "../../data/Header/headerdata";
 
@@ -38,8 +38,11 @@ function Fullscreen() {
 }
 // FullScreen-end
 function Header() {
-  const {values,setValues}=useContext(usuarioContext);
-  
+  const dadosrota=useLocation();
+  const [values,setValues]=useState({});
+  useEffect(()=>{
+    setValues(dadosrota.state)
+  },[dadosrota.state])
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");
     document.querySelector(".sidebar-right").classList.toggle("sidebar-open");

@@ -12,15 +12,16 @@ let history = [];
 const SideBar = () => {
   let location = useLocation();
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({});
   const [menuitems, setMenuitems] = useState([]);
 
 
   useEffect(() => {
-    if (values?.permissions == "administrador") { setMenuitems(MENUITEMS) }
-    if (values?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
-    if (values?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
-  }, [values]);
+    if (location?.state?.permissions == "administrador") { setMenuitems(MENUITEMS) }
+    if (location?.state?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
+    if (location?.state?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
+    setValues(location.state)
+  }, [location.state]);
   // initial loading
   useEffect(() => {
     history.push(location.pathname); // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history

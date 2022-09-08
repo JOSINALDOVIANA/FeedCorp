@@ -9,7 +9,7 @@ export async function seed(knex) {
     { 
       name:"josinaldo viana",
       nameuser:"VianaNaldo",
-      email:"admin03@opclient.com",	
+      email:"gestor@gmail.com",	
       password:123456,
       id_image:images[imagesTam-1].id,
       id_company:null,
@@ -19,7 +19,7 @@ export async function seed(knex) {
     { 
       name:"marcus vinicius",
       nameuser:"ViniciusMarcus",
-      email:"admin02@opclient.com",	
+      email:"colaborador@gmail.com",	
       password:123456, 
       id_image:images[imagesTam-2].id,
       id_company:null,
@@ -29,7 +29,7 @@ export async function seed(knex) {
     { 
       name:"victor melo",
       nameuser:"MeloVictor",
-      email:"admin01@opclient.com",	
+      email:"admin@gmail.com",	
       password:123456,
       id_image:images[imagesTam-3].id,
       id_company:null,
