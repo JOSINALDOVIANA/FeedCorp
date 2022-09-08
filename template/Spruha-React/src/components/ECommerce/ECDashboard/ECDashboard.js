@@ -17,6 +17,7 @@ import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Drop
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
 import { usuarioContext } from "../../..";
 import api from "../../../api";
+import { any } from "prop-types";
 // const ProductsDetails =
 //   [
 //     { Productid: "#C234", Productname: png14, Producttext: "Regular Backpack", Productcost: "$14,500", Total: "2,977", Status: "Available", Statustext: "primary", },
@@ -33,9 +34,43 @@ function ECDashboard() {
  
 
   useEffect(() => {
+    
     setValues(dadosrota.state);
+      
+    if(dadosrota.state.permissions=="administrador"){
+      api.get(`/feedback/get?id_company=${dadosrota.state.company?.id}`).then(r=>{
+       
+        
+       setValues(a=>({...a,receivedfeedbacksCompany:r.data.feedbacks}))
+      })      
+      }
+
+    if(dadosrota.state.permissions=="gestor"){
+      api.get(`/feedback/get?id_unity=${dadosrota.state.unit?.id}`).then(r=>{
+        
+        
+        setValues(a=>({...a,receivedfeedbacksUnit:r.data.feedbacks}))
+        
+      })      
+      }
+
+    if(dadosrota.state.permissions=="colaborador"){
+      api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{
+       
+        
+        setValues(a=>({...a,receivedfeedbacksUser:r.data.feedbacks}))
+        
+      })      
+      }
+
+      api.get(`/feedback/get?id_user=${dadosrota.state.dadosUser?.id}`).then(r=>{
+       
+        
+       setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
+      })
    
   }, [dadosrota.state]);
+  // console.log(values)
 
 
 
@@ -103,7 +138,9 @@ function ECDashboard() {
                   {/* ICONE */}
                   <i className="bi-person-hearts icon-size float-start text-primary"></i>
                   {/* VALOR VARIAVEL */}
-                  <span className="font-weight-bold">6</span>
+                  {values?.permissions=="administrador" && <span className="font-weight-bold">{values?.receivedfeedbacksCompany?.length}</span>}
+                  {values?.permissions=="colaborador" && <span className="font-weight-bold">{values?.receivedfeedbacksUser?.length}</span>}
+                  {values?.permissions=="gestor" && <span className="font-weight-bold">{values?.receivedfeedbacksUnit?.length}</span>}
                 </h2>
                 {/* <p className="mb-0 mt-4 text-muted">
                   Monthly users<span className="float-end">50%</span>
@@ -128,7 +165,7 @@ function ECDashboard() {
                   {/* ICONE */}
                   <i className="bi-pencil-fill icon-size float-start text-primary"></i>
                   {/* VALOR VARIAVEL */}
-                  <span className="font-weight-bold">25</span>
+                  <span className="font-weight-bold">{values?.sendfeedbacks?.length}</span>
                 </h2>
                 {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Income<span className="float-end">$7,893</span>

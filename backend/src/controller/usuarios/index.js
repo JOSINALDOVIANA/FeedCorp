@@ -50,10 +50,12 @@ export default {
         }
     },
     async GetAll(req, res) {
-        
+        const {id=false}=req.query;
 
         try {
-            
+            if(id){
+                return res.json({ status: true, Users: await conexao("users").where({id})});
+            }
 
                 return res.json({ status: true, Users: await conexao("users")});
             

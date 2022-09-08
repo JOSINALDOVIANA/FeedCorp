@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
@@ -8,13 +8,13 @@ import { Basicdatatable } from "../../../../data/Cryptodashboard/Transcationdeta
 
 const FeedRecebidos = () => {
 
-  const dadosrota = useLocation();
+  
   const location = useLocation();
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({});
   useEffect(() => {
-    setValues(dadosrota.state)
-  }, [dadosrota])
+    setValues(location.state)
+  }, [location.state])
 
   return (
     <Fragment>
