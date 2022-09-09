@@ -1,27 +1,46 @@
 import { Divider } from "@mui/material";
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { usuarioContext } from "../../../../../..";
+import api from "../../../../../../api";
 
 import user1 from "../../../../../../assets/img/users/1.jpg";
 
 const Okr = () => {
 
   const dadosrota = useLocation();
-  const location = useLocation();
+
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+
+  const [values, setValues] = useState({});
+ 
   useEffect(() => {
-    setValues(dadosrota.state)
-  }, [dadosrota])
+    
+    let v=dadosrota.state;
+    let keys=v.okrselect.keys.map(key=>{
+        let user=[];
+        api.get(`/user/getAll?id=${key.id_user}`).then(r=>{
+          // console.log(r)
+          user.push(r.data.Users[0])
+        })
+        return {...key,user}
+    });
+    v.okrselect.keys=keys;
+    setValues(v);
+
+  }, [dadosrota.state]);
+  
+
+  
+  
 
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Nome do Objetivo</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">{values?.okrselect?.objective}</h2>
 
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
@@ -68,33 +87,57 @@ const Okr = () => {
               </span>
             </div>
           </Card.Header>
-
           <Card.Body>
 
-            <Divider className="mb-1" />
-            <div className="d-flex justify-content-between align-items-center mt-3">
-              <span className="font-weight-bold">Chave 1</span>
-              <Col sm={8} className="col-4 my-auto">
-                <ProgressBar
-                  variant="info"
-                  className="progress ht-6 my-auto"
-                  now={50}
-                ></ProgressBar>
-                <span className="tx-13">
-                  <b>50%</b>
-                </span>
-              </Col>
-              <div className="d-flex align-items-center mb-2">
-                <img
-                  alt="avatar"
-                  className="rounded-circle avatar mx-1"
-                  src={user1}
-                />
-                <span>Nome</span>
+            {values?.okrselect?.keys?.map(chave => (
+              <div>
+                <Divider className="mb-1" />
+                <div className="d-flex justify-content-between align-items-center mt-3">
+                  <span className="font-weight-bold">{chave.description}</span>
+                  <Col sm={8} className="col-4 my-auto">
+                    <ProgressBar
+                      variant="info"
+                      className="progress ht-6 my-auto"
+                      now={chave.status}
+                    ></ProgressBar>
+                    <span className="tx-13">
+                      <b>{chave.status + "%"}</b>
+                    </span>
+                  </Col>
+                  <div className="d-flex align-items-center mb-2">
+                    <img
+                      alt="avatar"
+                      className="rounded-circle avatar mx-1"
+                      src={chave?.user[0]?.url}
+                    />
+                    <div>
+                      <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
+                       {chave?.user[0]?.name}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <Divider className="mt-1" />
               </div>
-            </div>
-            <Divider className="mt-1" />
-            {/* <Row
+            ))}
+
+          </Card.Body>
+
+        </Card>
+      </Col>
+    </Fragment>
+  )
+};
+
+Okr.propTypes = {};
+
+Okr.defaultProps = {};
+
+export default Okr;
+
+
+
+{/* <Row
               // style={{ cursor: 'pointer' }}
               className="mt-3"
             // onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
@@ -118,8 +161,8 @@ const Okr = () => {
               </Col>
             </Row> */}
 
-            {/* NÃO MEXE */}
-            {/* <div class="d-flex justify-content-between mt-3 mx-2">
+{/* NÃO MEXE */ }
+{/* <div class="d-flex justify-content-between mt-3 mx-2">
               <span>SubChave 1</span>
               <Col sm={6} className="col-4 my-auto">
                 <ProgressBar
@@ -141,20 +184,3 @@ const Okr = () => {
             </div>
 
             <Divider className="mt-2 mb-4" /> */}
-
-
-
-
-
-          </Card.Body>
-        </Card>
-      </Col>
-    </Fragment>
-  )
-};
-
-Okr.propTypes = {};
-
-Okr.defaultProps = {};
-
-export default Okr;

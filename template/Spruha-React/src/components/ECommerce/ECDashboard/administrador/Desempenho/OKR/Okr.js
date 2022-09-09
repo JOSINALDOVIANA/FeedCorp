@@ -1,18 +1,17 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { usuarioContext } from "../../../../../..";
 
 const Okr = () => {
 
-  const dadosrota = useLocation();
-  const location = useLocation();
+  const dadosrota = useLocation(); 
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({});
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota])
-
+// console.log(values)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -50,25 +49,25 @@ const Okr = () => {
         <h2 className="main-content-title tx-20 mx-2">Ativos</h2>
         <Row className="row-sm">
 
-          {values?.units.map(unit => (
-            <Col key={unit.id} lg={12} xl={12} xxl={12} md={6} >
+          {values?.okrscriados?.map(okr => (
+            <Col key={okr.id} lg={12} xl={12} xxl={12} md={6} >
               <Card className="custom-card"
                 style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: values })
+                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: {...values,...{okrselect:okr}}})
                 }}
               >
                 <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
                     <div className="volume">
                       <h4 className="mb-2">
-                        Nome do Objetivo
+                        {okr.objective}
                       </h4>
 
                     </div>
 
                     <h2 className="d-flex flex-row">
-                      <span className="font-weight-bold px-1 text-primary">{unit.cols}</span>
+                      <span className="font-weight-bold px-1 text-primary">{okr.keys.length}</span>
                       {/* ICONE */}
                       <i className="bi-people-fill icon-size float-start text-primary"></i>
                     </h2>
@@ -76,7 +75,7 @@ const Okr = () => {
 
                   <div className="main-traffic-detail-item">
                     <div>
-                      <span>Progresso</span> <span>40%</span>
+                      <span>Progresso</span> <span>{okr.progress}</span>
                     </div>
                     <div className="progress progress-sm mb-1">
                       <ProgressBar
@@ -84,7 +83,7 @@ const Okr = () => {
                         className=" wd-100p"
                         striped
                         variant="primary"
-                        now={60}
+                        now={okr.progress}
                         role="progressbar"
                       ></ProgressBar>
                     </div>

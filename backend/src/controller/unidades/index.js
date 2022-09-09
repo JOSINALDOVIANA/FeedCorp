@@ -54,13 +54,17 @@ export default {
     },
     async getAll(req, res) {
         
-       
+       const {id=false}=req.query
         try {            
-
-                res.json({status:true,units:await conexao("units")})
+                if(id){
+                  return  res.json({status:true,units:await conexao("units").where({id})})
+                    
+                }
+               return res.json({status:true,units:await conexao("units")})
             }
          catch (error) {
-            res.json({ error: true, message: error.sqlMessage });
+            console.log(error)
+           return  res.json({ error: true, message: error.sqlMessage });
         }
     },
    

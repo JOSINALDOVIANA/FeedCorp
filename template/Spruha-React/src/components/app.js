@@ -39,8 +39,8 @@ const App = () => {
       <div className="horizontalMenucontainer">
         <Switcher />
         <div className="page">
-          <Header  />
-          <Sidebar />
+          <Header values={values} />
+          <Sidebar values={values} />
 
           <div className="main-content side-content">
             <div className="main-container container-fluid" onClick={() => remove()}>

@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-import { Basicdatatable } from "../../../../data/Cryptodashboard/Transcationdetails/FeedRecebidosDataTabela";
+import { Basicdatatable } from "./dataTabelas/FeedRecebidosDataTabela";
 
 // import { Container } from './styles';
 
@@ -45,7 +45,7 @@ const FeedRecebidos = () => {
 
               <Card.Body className="card-body">
 
-                <Basicdatatable />
+                <Basicdatatable values={values} />
 
               </Card.Body>
             </Card>

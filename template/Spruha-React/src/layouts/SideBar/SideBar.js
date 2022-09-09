@@ -9,19 +9,19 @@ import { useLocation } from "react-router-dom";
 import { usuarioContext } from "../..";
 
 let history = [];
-const SideBar = () => {
+const SideBar = ({values}) => {
   let location = useLocation();
   const navegar = useNavigate();
-  const [ values, setValues ] = useState({});
+ 
   const [menuitems, setMenuitems] = useState([]);
 
 
   useEffect(() => {
-    if (location?.state?.permissions == "administrador") { setMenuitems(MENUITEMS) }
-    if (location?.state?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
-    if (location?.state?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
-    setValues(location.state)
-  }, [location.state]);
+    if (values?.permissions == "administrador") { setMenuitems(MENUITEMS) }
+    if (values?.state?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
+    if (values?.state?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
+    
+  }, [values]);
   // initial loading
   useEffect(() => {
     history.push(location.pathname); // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history

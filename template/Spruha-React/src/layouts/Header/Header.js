@@ -37,12 +37,8 @@ function Fullscreen() {
   }
 }
 // FullScreen-end
-function Header() {
-  const dadosrota=useLocation();
-  const [values,setValues]=useState({});
-  useEffect(()=>{
-    setValues(dadosrota.state)
-  },[dadosrota.state])
+function Header({ values }) {
+
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");
     document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
@@ -79,7 +75,7 @@ function Header() {
       <Navbar
         expand="lg"
         className="main-header side-header sticky"
-        // style={{ marginBottom: "-64px" }}
+      // style={{ marginBottom: "-64px" }}
       >
         <Container fluid className="main-container container-fluid">
           <div className="main-header-left">
@@ -138,7 +134,7 @@ function Header() {
               </InputGroup.Text>
             </InputGroup> */}
           </div>
-          
+
           <div className="main-header-right">
             <Navbar.Toggle
               aria-controls="navbarSupportedContent-4"
@@ -353,9 +349,9 @@ function Header() {
                       </div>
                     </Dropdown.Menu>
                   </Dropdown>
-                    {/* CHAT */}
+                  {/* CHAT */}
                   <div className="main-header-notification">
-                    <Link  
+                    <Link
                       className="icon nav-link"
                       to={`${process.env.PUBLIC_URL}/advanceUI/chat/`}
                     >
@@ -364,13 +360,13 @@ function Header() {
                     </Link>
                   </div>
 
-                    {/* PERFIL AVATAR */}
+                  {/* PERFIL AVATAR */}
                   <Dropdown className="main-profile-menu">
                     <Dropdown.Toggle className="d-flex p-0" variant="default">
                       <span className="main-img-user mx-1">
                         <img
                           alt="avatar"
-                          src={values?.image?.url||require("../../assets/img/users/1.jpg")}
+                          src={values?.image?.url || require("../../assets/img/users/1.jpg")}
                         />
                       </span>
                     </Dropdown.Toggle>
@@ -420,7 +416,7 @@ function Header() {
 
                     </Dropdown.Menu>
                   </Dropdown>
-                    {/* CONFIGURAÇÕES */}
+                  {/* CONFIGURAÇÕES */}
                   <div className="d-md-flex header-settings">
                     <Nav.Link
                       href="#"
@@ -433,13 +429,13 @@ function Header() {
 
                 </div>
               </Navbar.Collapse>
-                  {/* CONFIGURAÇÕES LAYOUT */}
+              {/* CONFIGURAÇÕES LAYOUT */}
               <div className="d-flex header-setting-icon demo-icon fa-spin">
                 <Nav.Link className="nav-link icon" onClick={Swicherbutton}>
                   <i className="fe fe-settings settings-icon "></i>
                 </Nav.Link>
               </div>
-              
+
             </div>
           </div>
         </Container>

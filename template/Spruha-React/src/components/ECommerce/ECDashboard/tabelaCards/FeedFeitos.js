@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-import { Basicdatatable } from "../../../../data/Cryptodashboard/Transcationdetails/FeedFeitosDataTabela";
+import { Basicdatatable } from "./dataTabelas/FeedFeitosDataTabela";
 
 
 // import { Container } from './styles';
@@ -10,12 +10,12 @@ import { Basicdatatable } from "../../../../data/Cryptodashboard/Transcationdeta
 const FeedFeitos = () => {
 
   const dadosrota = useLocation();
-  const location = useLocation();
+
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [values, setValues] = useState({})
   useEffect(() => {
     setValues(dadosrota.state)
-  }, [dadosrota])
+  }, [dadosrota.state])
 
   return (
     <Fragment>
@@ -39,15 +39,14 @@ const FeedFeitos = () => {
                     className="btn-icon-text"
                     onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: values }) }}
                   >
-                    <i className="fe fe-x me-2"></i>
-                    Fechar
+                    <i className="fe fe-x"></i>
                   </Button>
                 </div>
               </div>
 
               <Card.Body className="card-body">
 
-                <Basicdatatable />
+                <Basicdatatable values={values} />
 
               </Card.Body>
             </Card>

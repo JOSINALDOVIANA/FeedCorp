@@ -54,7 +54,7 @@ export default {
 
         try {
             if(id){
-                return res.json({ status: true, Users: await conexao("users").where({id})});
+                return res.json({ status: true, Users: await conexao("users").where({"users.id":id}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
             }
 
                 return res.json({ status: true, Users: await conexao("users")});
