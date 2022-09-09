@@ -17,19 +17,12 @@ const Okr = () => {
  
   useEffect(() => {
     
-    let v=dadosrota.state;
-    let keys=v.okrselect.keys.map(key=>{
-        let user=[];
-        api.get(`/user/getAll?id=${key.id_user}`).then(r=>{
-          // console.log(r)
-          user.push(r.data.Users[0])
-        })
-        return {...key,user}
-    });
-    v.okrselect.keys=keys;
-    setValues(v);
+    
+    setValues(dadosrota.state);
 
   }, [dadosrota.state]);
+
+  // console.log(values)
   
 
   
@@ -90,7 +83,7 @@ const Okr = () => {
           <Card.Body>
 
             {values?.okrselect?.keys?.map(chave => (
-              <div>
+              <div key={chave.id}>
                 <Divider className="mb-1" />
                 <div className="d-flex justify-content-between align-items-center mt-3">
                   <span className="font-weight-bold">{chave.description}</span>

@@ -2,16 +2,39 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { usuarioContext } from "../../../../../..";
+import api from "../../../../../../api";
 
 const Okr = () => {
 
-  const dadosrota = useLocation(); 
+  const dadosrota = useLocation();
   const navegar = useNavigate();
-  const [ values, setValues ] = useState({});
+  const [values, setValues] = useState({});
   useEffect(() => {
-    setValues(dadosrota.state)
-  }, [dadosrota])
-// console.log(values)
+    setValues(dadosrota.state);
+    carregarUsersKeys(dadosrota.state)
+  }, [dadosrota.state]);
+
+function carregarUsersKeys(valores){
+  let okrs=valores.okrscriados;
+  let okrs_serial=okrs.map(okr=>{
+   
+   let keys= okr.keys.map(key=>{
+    let user=[];
+      api.get(`/user/getAll?id=${key.id_user}`).then(r=>{
+       user.push({...r.data.Users[0]})
+      })
+      return {...key,user}
+    });
+    return {...okr,keys}
+  });
+  
+  // console.log(okrs_serial)
+  setValues(a=>({...a,okrscriados:okrs_serial}))
+}
+//  console.log(values)
+  
+
+
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -53,8 +76,9 @@ const Okr = () => {
             <Col key={okr.id} lg={12} xl={12} xxl={12} md={6} >
               <Card className="custom-card"
                 style={{ cursor: 'pointer' }}
-                onClick={() => {
-                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: {...values,...{okrselect:okr}}})
+                onClick={async () => {
+                  
+                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">
