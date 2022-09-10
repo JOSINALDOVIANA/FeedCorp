@@ -99,10 +99,10 @@ const CriarOKR = () => {
 
               <div className="page-header">
 
-                <Col lg={3} xl={3} xxl={3} md={12} className="my-1">
+                <Col lg={4} xl={4} xxl={4} md={12} className="my-1">
                   <input
-                    type="select"
-                    className="form-control border-end-0 browse-file"
+                    type="text"
+                    className="form-control"
                     placeholder="Key Result"
                     required
                   />
@@ -132,7 +132,7 @@ const CriarOKR = () => {
                   className="d-flex justify-content-betwween align-items-center"
                 >
                   <div className="ms-2 me-auto">Nome da chave bla bla bla bla</div>
-                  
+
                   <div className="d-flex align-items-center mb-2 me-4">
                     <img
                       alt="avatar"
@@ -150,9 +150,9 @@ const CriarOKR = () => {
                   </div>
 
                   <div className="me-2">
-                  <i  style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
+                    <i style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
                   </div>
-                  
+
                 </ListGroup.Item>
 
               </ListGroup>

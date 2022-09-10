@@ -33,26 +33,33 @@ export const MENUITEMS = [
 						title: 'OKR'
 					},
 					{
-						path: `${process.env.PUBLIC_URL}/avr`,
+						path: `${process.env.PUBLIC_URL}/avaliacao_por_resultado`,
 						type: 'link',
 						active: false,
 						selected: false,
 						title: 'Avaliação por resultados'
 					},
 					{
-						path: `${process.env.PUBLIC_URL}/avr`,
+						path: `${process.env.PUBLIC_URL}/`,
 						type: 'link',
 						active: false,
 						selected: false,
 						title: 'Avaliação de desempenho'
 					},
 					{
-						path: `${process.env.PUBLIC_URL}/avr`,
+						path: `${process.env.PUBLIC_URL}/reuniao1:1`,
 						type: 'link',
 						active: false,
 						selected: false,
-						title: 'Escalas Gráficas'
+						title: 'Reunião 1:1'
 					},
+					// {
+					// 	path: `${process.env.PUBLIC_URL}/avr`,
+					// 	type: 'link',
+					// 	active: false,
+					// 	selected: false,
+					// 	title: 'Escalas Gráficas'
+					// },
 				]
 			},
 			{

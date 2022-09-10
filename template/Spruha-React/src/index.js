@@ -11,7 +11,7 @@ import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
 import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
 const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard/CriarFeedback"))
 //OKR
-const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/Okr"))
+const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
 const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/ProgressoOKR"))
 //CLIMA PULSO
@@ -26,7 +26,7 @@ const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDash
 const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR"));
-const Criar = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/Criar"));
+const CriarAvpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/CriarAvpr"));
 const Responder = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/Responder"))
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
@@ -242,16 +242,16 @@ const Root = () => {
                 </Route>
 {/* ------------------------------AVR------------------------------------------ */}
                 <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/avr/`} element={<Avpr />} >
+                  <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
                     <Route index element={<Fragment />} />
                     <Route>
                       <Route
-                        path={`${process.env.PUBLIC_URL}/avr/responder`}
+                        path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/responder`}
                         element={<Responder />}
                       />
                       <Route
-                        path={`${process.env.PUBLIC_URL}/avr/criar`}
-                        element={<Criar />}
+                        path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
+                        element={<CriarAvpr />}
                       />
                     </Route>
 

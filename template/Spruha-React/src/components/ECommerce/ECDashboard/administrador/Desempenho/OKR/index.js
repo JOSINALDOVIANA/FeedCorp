@@ -14,25 +14,25 @@ const Okr = () => {
     carregarUsersKeys(dadosrota.state)
   }, [dadosrota.state]);
 
-function carregarUsersKeys(valores){
-  let okrs=valores.okrscriados;
-  let okrs_serial=okrs.map(okr=>{
-   
-   let keys= okr.keys.map(key=>{
-    let user=[];
-      api.get(`/user/getAll?id=${key.id_user}`).then(r=>{
-       user.push({...r.data.Users[0]})
-      })
-      return {...key,user}
+  function carregarUsersKeys(valores) {
+    let okrs = valores.okrscriados;
+    let okrs_serial = okrs.map(okr => {
+
+      let keys = okr.keys.map(key => {
+        let user = [];
+        api.get(`/user/getAll?id=${key.id_user}`).then(r => {
+          user.push({ ...r.data.Users[0] })
+        })
+        return { ...key, user }
+      });
+      return { ...okr, keys }
     });
-    return {...okr,keys}
-  });
-  
-  // console.log(okrs_serial)
-  setValues(a=>({...a,okrscriados:okrs_serial}))
-}
-//  console.log(values)
-  
+
+    // console.log(okrs_serial)
+    setValues(a => ({ ...a, okrscriados: okrs_serial }))
+  }
+  //  console.log(values)
+
 
 
   return (
@@ -77,17 +77,19 @@ function carregarUsersKeys(valores){
               <Card className="custom-card"
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
-                  
-                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
+
+                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect: okr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
-                    <div className="volume">
-                      <h4 className="mb-2">
+                    <div className="d-flex flex-column align-items-start">
+                      <h4 className="mb-1">
                         {okr.objective}
                       </h4>
-
+                      {/* <h6 className="tx-13 tx-inverse tx-semibold mg-b-0 mb-2">
+                        Criado por {okr.id_user}
+                      </h6> */}
                     </div>
 
                     <h2 className="d-flex flex-row">
@@ -117,7 +119,7 @@ function carregarUsersKeys(valores){
               </Card>
             </Col>
           ))}
-
+  
         </Row>
       </div>
     </Fragment>
