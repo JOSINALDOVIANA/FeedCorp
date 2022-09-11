@@ -77,7 +77,7 @@ const CriarAvpr = () => {
               <Grid>
 
                 <Row className="my-1">
-                  <Col lg={12} xl={12} xxl={12} md={12} className="my-1">
+                  <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="my-1">
                     <input
                       type="text"
                       className="form-control"
@@ -85,7 +85,7 @@ const CriarAvpr = () => {
                       required
                     />
                   </Col>
-                  <Col lg={12} xl={12} xxl={12} md={12} className="my-1">
+                  <Col xs={12} md={12} lg={6} xl={6} xxl={6} className="my-1">
                     <input
                       type="text"
                       className="form-control"
@@ -110,15 +110,31 @@ const CriarAvpr = () => {
 
                 <ListGroup.Item action
                   as="li"
-                  className="d-flex justify-content-betwween align-items-center"
+
                 >
-                  <div className="ms-2 me-auto">Nome do indicador</div>
 
-                  <div className="ms-2 me-auto">Nome da meta</div>
+                  <Grid>
+                    <Row>
 
-                  <div className="me-2">
-                    <i style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                  </div>
+                      <Col xs={4} md={4} lg={4} xl={4} xxl={4}>
+                        <spam>Nome do indicador</spam>
+                      </Col>
+
+                      <Col xs={4} md={4} lg={4} xl={4} xxl={4} className="d-flex justify-content-end">
+                        <spam>Nome da meta</spam>
+                      </Col>
+
+                      <Col xs={4} md={4} lg={4} xl={4} xxl={4} className="d-flex justify-content-end align-items-center">
+                        <div>
+                          <i style={{ cursor: 'pointer' }} className="ti ti-trash me-3"></i>
+                        </div>
+                      </Col>
+
+                    </Row>
+                  </Grid>
+
+
+
 
                 </ListGroup.Item>
 

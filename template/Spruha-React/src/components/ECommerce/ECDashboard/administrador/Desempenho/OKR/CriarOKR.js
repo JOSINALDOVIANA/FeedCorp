@@ -6,6 +6,7 @@ import { SingleselectUnidade, SingleselectPessoa } from "./FormDataOKR";
 import { usuarioContext } from "../../../../../..";
 
 import user1 from "../../../../../../assets/img/users/1.jpg";
+import { Grid } from "@mui/material";
 // import { Container } from './styles';
 
 const CriarOKR = () => {
@@ -97,24 +98,26 @@ const CriarOKR = () => {
                 </div>
               </div>
 
-              <div className="page-header">
+              <Grid>
 
-                <Col lg={4} xl={4} xxl={4} md={12} className="my-1">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Key Result"
-                    required
-                  />
-                </Col>
-                <Col lg={3} xl={3} xxl={3} md={12} className="my-1">
-                  <SingleselectUnidade />
-                </Col>
-                <Col lg={3} xl={3} xxl={3} md={12} className="my-1">
-                  <SingleselectPessoa />
-                </Col>
+                <Row>
+                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Key Result"
+                      required
+                    />
+                  </Col>
+                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
+                    <SingleselectUnidade />
+                  </Col>
+                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
+                    <SingleselectPessoa />
+                  </Col>
+                </Row>
 
-                <div className="d-flex justify-content-end mx-3">
+                <div className="d-flex justify-content-end">
                   <Button
                     variant="primary"
                     type="button"
@@ -124,7 +127,7 @@ const CriarOKR = () => {
                   </Button>
                 </div>
 
-              </div>
+              </Grid>
               <ListGroup>
 
                 <ListGroup.Item action
