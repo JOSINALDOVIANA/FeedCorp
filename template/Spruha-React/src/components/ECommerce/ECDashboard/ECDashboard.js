@@ -35,7 +35,10 @@ function ECDashboard() {
 
   useEffect(() => {
     
-    setValues(dadosrota.state);
+    if(!dadosrota){
+      navegar("/");
+    }else{
+      setValues(dadosrota.state);
       
     if(dadosrota.state.permissions=="administrador"){
       api.get(`/feedback/get?id_company=${dadosrota.state.company?.id}`).then(r=>{
@@ -68,6 +71,7 @@ function ECDashboard() {
         
        setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
       })
+    }
    
   }, [dadosrota.state]);
   // console.log(values)
