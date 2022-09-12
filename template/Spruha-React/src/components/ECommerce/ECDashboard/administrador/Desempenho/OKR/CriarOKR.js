@@ -61,32 +61,8 @@ const CriarOKR = () => {
                     <i className="fe fe-calendar lh--9 op-6"></i>
                   </Button>
                   <formelement.Datepicker />
-                </InputGroup>
+                </InputGroup>-
               </FormGroup>
-
-              {/* <div className="page-header">
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Chaves</h2>
-                  <spam className="d-flex text-muted tx-13">
-                    Crie Chaves para o seu objetivo
-                  </spam>
-                </div>
-              </div> */}
-
-              {/* <div className="input-group">
-
-                <label className="input-group-btn">
-                  <span className="btn btn-primary">
-                    Adicionar
-                    <input
-                      // type="file"
-                      style={{ display: "none" }}
-                      multiple=""
-                    />
-                  </span>
-                </label>
-              </div> */}
-
 
 
               <div className="page-header">
@@ -130,31 +106,40 @@ const CriarOKR = () => {
               </Grid>
               <ListGroup>
 
-                <ListGroup.Item action
-                  as="li"
-                  className="d-flex justify-content-betwween align-items-center"
-                >
-                  <div className="ms-2 me-auto">Nome da chave bla bla bla bla</div>
+                <ListGroup.Item action as="li">
+                  <Grid>
+                    <Row>
+                      <Col xs={4} md={4} lg={4} xl={4} xxl={4} className="d-flex align-items-center">
+                        <spam>Nome da chave bla bla bla bla</spam>
+                      </Col>
 
-                  <div className="d-flex align-items-center mb-2 me-4">
-                    <img
-                      alt="avatar"
-                      className="wd-30 rounded-circle mg-r-15"
-                      src={user1}
-                    />
-                    <div>
-                      <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                        Marcus Silva
-                      </h6>
-                      <span className="d-block tx-11 text-muted">
-                        Premium Topper
-                      </span>
-                    </div>
-                  </div>
+                      <Col xs={7} md={7} lg={7} xl={7} xxl={7} className="d-flex justify-content-end">
+                        <div className="d-flex align-items-center">
+                          <img
+                            alt="avatar"
+                            className="wd-30 rounded-circle mg-r-15"
+                            src={user1}
+                          />
+                          <div>
+                            <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
+                              Marcus Silva
+                            </h6>
+                            <span className="d-block tx-11 text-muted">
+                              Analista
+                            </span>
+                          </div>
+                        </div>
 
-                  <div className="me-2">
-                    <i style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                  </div>
+                      </Col>
+                      <Col xs={1} md={1} lg={1} xl={1} xxl={1} className="d-flex justify-content-end align-items-center">
+                        <div>
+                          <i style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
+                        </div>
+                      </Col>
+
+
+                    </Row>
+                  </Grid>
 
                 </ListGroup.Item>
 
