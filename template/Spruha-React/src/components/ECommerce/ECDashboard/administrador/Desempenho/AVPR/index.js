@@ -78,10 +78,11 @@ const AvPorResultados = () => {
             lg={4} xl={4} xxl={4} md={6} >
             <Card className="custom-card"
               style={{ cursor: 'pointer' }}
-            // onClick={async () => {
+              // onClick={async () => {
 
-            //   navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
-            // }}
+              //   navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
+              // }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`, { state: values }) }}
             >
               <Card.Body className="iconfont text-center">
                 <div className="d-flex justify-content-between">
@@ -99,7 +100,7 @@ const AvPorResultados = () => {
                   </div>
 
                   <h2 className="d-flex flex-row">
-                    
+
                     <i className="bi-bar-chart-fill icon-size float-start text-primary"></i>
                   </h2>
                 </div>

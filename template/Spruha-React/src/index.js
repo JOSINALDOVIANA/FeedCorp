@@ -27,7 +27,7 @@ const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/a
 
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR"));
 const CriarAvpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/CriarAvpr"));
-const Responder = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/Responder"))
+const ProgressoAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/ProgressoAVPR"))
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const App = React.lazy(() => import("./components/app"));
@@ -218,11 +218,11 @@ const Root = () => {
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
                 </Route>
-{/* ------------------------------CORPORAÇÃO------------------------------------------ */}
+                {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
                 </Route>
-{/* ------------------------------OKR------------------------------------------ */}
+                {/* ------------------------------OKR------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
                     <Route index element={<Fragment />} />
@@ -240,15 +240,12 @@ const Root = () => {
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/okr/progresso`} element={<ProgressoOKR />} />
                 </Route>
-{/* ------------------------------AVR------------------------------------------ */}
+                {/* ------------------------------AVR------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
                     <Route index element={<Fragment />} />
+                    
                     <Route>
-                      <Route
-                        path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/responder`}
-                        element={<Responder />}
-                      />
                       <Route
                         path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
                         element={<CriarAvpr />}
@@ -257,7 +254,11 @@ const Root = () => {
 
                   </Route>
                 </Route>
-{/* ------------------------------CLIMA PULSO------------------------------------------ */}
+                <Route
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`}
+                  element={<ProgressoAVPR />}
+                />
+                {/* ------------------------------CLIMA PULSO------------------------------------------ */}
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/climapulso`} element={<ClimaPulso />} >
                     <Route index element={<Fragment />} />

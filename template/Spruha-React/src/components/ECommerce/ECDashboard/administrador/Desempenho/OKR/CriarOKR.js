@@ -71,30 +71,6 @@ const CriarOKR = () => {
                 </InputGroup>
               </FormGroup>
 
-              {/* <div className="page-header">
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Chaves</h2>
-                  <spam className="d-flex text-muted tx-13">
-                    Crie Chaves para o seu objetivo
-                  </spam>
-                </div>
-              </div> */}
-
-              {/* <div className="input-group">
-
-                <label className="input-group-btn">
-                  <span className="btn btn-primary">
-                    Adicionar
-                    <input
-                      // type="file"
-                      style={{ display: "none" }}
-                      multiple=""
-                    />
-                  </span>
-                </label>
-              </div> */}
-
-
 
               <div className="page-header">
                 <div>
