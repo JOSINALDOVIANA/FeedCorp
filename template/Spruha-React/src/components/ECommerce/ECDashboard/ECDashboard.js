@@ -35,9 +35,9 @@ function ECDashboard() {
 
   useEffect(() => {
     
-    if(!dadosrota){
-      navegar("/");
-    }else{
+    if(!!dadosrota){
+
+      
       setValues(dadosrota.state);
       
     if(dadosrota.state.permissions=="administrador"){
@@ -71,6 +71,8 @@ function ECDashboard() {
         
        setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
       })
+    }else{
+      navegar("/");
     }
    
   }, [dadosrota.state]);

@@ -41,7 +41,7 @@ export default {
                     
                 // }
                 for (let i = 0; i < units.length; i++) {
-                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id","users.id_image","users.name")
+                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id","users.id_image","users.email","users.name")
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
                     units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
                 }

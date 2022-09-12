@@ -262,13 +262,13 @@ export const Datetimepicker = () => {
 };
 
 // Date-picker
-export const Datepicker = () => {
+export const Datepicker = ({setOkr}) => {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <DatePicker
       className="form-control"
       selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      onChange={(date) => {setStartDate(date);setOkr(a=>({...a,validity:date}))}}
       //FORMATO DATA
       dateFormat="dd/MM/yyyy"
     />

@@ -52,7 +52,8 @@ const Signin = () => {
     }
     if (status) {
 
-      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });      await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
+      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });     
+      await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
       if (permanecer) {
         localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
       }

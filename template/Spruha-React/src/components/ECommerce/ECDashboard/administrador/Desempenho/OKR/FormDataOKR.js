@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import makeAnimated from "react-select/animated";
 import Select from "react-select";
@@ -10,31 +10,43 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { AttachFile, Audiotrack, Description, PictureAsPdf, Theaters } from "@material-ui/icons";
 
-export const SingleselectUnidade = () => {
-  const objectArray = [
-    { value: "UMC", label: "UMC" },
-    { value: "UTIC", label: "UTIC " },
-  ];
+export const SingleselectUnidade = ({units,setOkr}) => {
+  // console.log(units)
+  const objectArray = units?.map(und=>({value:und.id,label:und.initials}))
+  // [
+  //   { value: "UMC", label: "UMC" },
+  //   { value: "UTIC", label: "UTIC " },
+  // ];
   return (
     <div>
-      <Multiselect classNamePrefix="Select2" options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
+      <Multiselect classNamePrefix="Select2" onChange={(e)=>{setOkr(a=>({...a,unit:units.filter(und=>und.id==e.value)}))}} options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
     </div>
   );
 };
 
-export const SingleselectPessoa = () => {
-    const objectArray = [
-      { value: "Marcus", label: "Marcus" },
-      { value: "Josinaldo", label: "Josinaldo " },
-    ];
+export const SingleselectPessoa = ({unit_select,setOkr}) => {
+    const [unit,setUnit]=useState({});
+    useEffect(()=>{
+      if(!!unit_select){
+        setUnit(unit_select[0])
+      }
+    },[unit_select])
+   
+    const objectArray = unit?.Colaboradores?.map(col=>({value:col.id,label:col.name}))
+    // [
+    //     { value: "Marcus", label: "Marcus" },
+    //     { value: "Josinaldo", label: "Josinaldo " },
+    //   ];
+      
     return (
       <div>
-        <Multiselect classNamePrefix="Select2" options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
+        <Multiselect classNamePrefix="Select2" onChange={(e)=>{setOkr(a=>({...a,user:unit.Colaboradores.filter(col=>col.id==e.value)}))}} options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
       </div>
     );
   };
 // -----------------------------------------------------------------------
 // multiple
+
 const animatedComponents = makeAnimated();
 const options = [
   { value: "Firefox", label: "firefox" },

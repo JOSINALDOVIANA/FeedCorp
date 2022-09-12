@@ -1,22 +1,29 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge } from "react-bootstrap";
+import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Image } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataOKR";
-import { usuarioContext } from "../../../../../..";
+
 
 import user1 from "../../../../../../assets/img/users/1.jpg";
 import { Grid } from "@mui/material";
+import Okr from ".";
+import api from "../../../../../../api";
+
 // import { Container } from './styles';
 
 const CriarOKR = () => {
   const dadosrota = useLocation();
-  const location = useLocation();
+
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [values, setValues] = useState({})
+  const [okr, setOkr] = useState({})
   useEffect(() => {
     setValues(dadosrota.state)
+    setOkr(a=>({...a,keys:[]}))
   }, [dadosrota])
+  // console.log(values)
+  console.log(okr)
   return (
     <Fragment>
 
@@ -44,7 +51,7 @@ const CriarOKR = () => {
             <Card.Body>
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Nome do Objetivo</Form.Label>
-                <input type="text" className="form-control" placeholder="Objetivo" />
+                <input onChange={(e) => { setOkr(a => ({ ...a, objective: e.target.value })) }} value={Okr.objective} type="text" className="form-control" placeholder="Objetivo" />
               </FormGroup>
 
               {/* <FormGroup className="form-group">
@@ -60,7 +67,7 @@ const CriarOKR = () => {
                     variant="light" type="button">
                     <i className="fe fe-calendar lh--9 op-6"></i>
                   </Button>
-                  <formelement.Datepicker />
+                  <formelement.Datepicker setOkr={setOkr} />
                 </InputGroup>
               </FormGroup>
 
@@ -98,22 +105,24 @@ const CriarOKR = () => {
                 </div>
               </div>
 
-              <Grid>
+              <Grid id="keys">
 
-                <Row>
+                <Row >
                   <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
                     <input
+
                       type="text"
-                      className="form-control"
+                      className="form-control input-description"
                       placeholder="Key Result"
-                      required
+                      value={okr?.description}
+                      onChange={(e) => { setOkr(a => ({ ...a, description: e.target.value })) }}
                     />
                   </Col>
-                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
-                    <SingleselectUnidade />
+                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1 ">
+                    <SingleselectUnidade className="select-unit" units={values.units} setOkr={setOkr} />
                   </Col>
-                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
-                    <SingleselectPessoa />
+                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1 ">
+                    <SingleselectPessoa className="select-user" unit_select={okr.unit} setOkr={setOkr} />
                   </Col>
                 </Row>
 
@@ -122,6 +131,22 @@ const CriarOKR = () => {
                     variant="primary"
                     type="button"
                     className="my-2 btn"
+
+                    onClick={async () => {
+                      let user=okr.user[0];
+                      // console.log(user);
+                     await  api.get(`/images/listar?email=${user.email}`).then(r=>{user.image=r.data.dados});
+
+                      setOkr(a=>({...a,keys:[...a.keys,
+                        {
+                          description:a.description,
+                          id_user:user.id,
+                          status:0,
+                          id_okr:null,
+                          user
+                        }]}))
+                      setOkr(a=>({...a,description:"",unit:[],user:[],validity:""}))
+                    }}
                   >
                     Adicionar
                   </Button>
@@ -130,33 +155,43 @@ const CriarOKR = () => {
               </Grid>
               <ListGroup>
 
-                <ListGroup.Item action
-                  as="li"
-                  className="d-flex justify-content-betwween align-items-center"
-                >
-                  <div className="ms-2 me-auto">Nome da chave bla bla bla bla</div>
+               {okr?.keys?.map((key,index)=>(
+                <ListGroup.Item key={index} action
+                as="li"
+                className="d-flex justify-content-betwween align-items-center"
+              >
+                <div className="ms-2 me-auto">{key.description}</div>
 
-                  <div className="d-flex align-items-center mb-2 me-4">
-                    <img
-                      alt="avatar"
-                      className="wd-30 rounded-circle mg-r-15"
-                      src={user1}
-                    />
-                    <div>
-                      <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                        Marcus Silva
-                      </h6>
-                      <span className="d-block tx-11 text-muted">
-                        Premium Topper
-                      </span>
-                    </div>
+                <div className="d-flex align-items-center mb-2 me-4">
+                  <Image
+                    alt="avatar"
+                    className="wd-30 rounded-circle mg-r-15"
+                    src={key?.user.image.url}
+                  />
+                  <div>
+                    <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
+                      {key.user.name}
+                    </h6>
+                    {/* <span className="d-block tx-11 text-muted">
+                      ()
+                    </span> */}
                   </div>
+                </div>
 
-                  <div className="me-2">
-                    <i style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                  </div>
+                <div className="me-2">
+                  <i onClick={(index)=>{
+                    let keys=[]
+                    for (const i in okr.keys) {
+                        if(i==index){
+                          keys.push(okr.keys[i]);
+                        }
+                    }
+                    setOkr(a=>({...a,keys:keys}))
+                  }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
+                </div>
 
-                </ListGroup.Item>
+              </ListGroup.Item>
+               ))}
 
               </ListGroup>
 

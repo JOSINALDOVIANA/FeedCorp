@@ -15,11 +15,11 @@ const SideBar = ({values}) => {
  
   const [menuitems, setMenuitems] = useState([]);
 
-
+// console.log(menuitems)
   useEffect(() => {
     if (values?.permissions == "administrador") { setMenuitems(MENUITEMS) }
-    if (values?.state?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
-    if (values?.state?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
+    if (values?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
+    if (values?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
     
   }, [values]);
   // initial loading
