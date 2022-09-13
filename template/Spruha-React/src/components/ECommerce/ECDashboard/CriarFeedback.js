@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, ListGroup, Breadcrumb } from "react-bootstrap";
 import { SingleselectUnidade, SingleselectPessoa } from "./administrador/Desempenho/OKR/FormDataOKR";
@@ -10,12 +10,13 @@ import { usuarioContext } from "../../..";
 
 const CriarFeed = () => {
   const dadosrota = useLocation();
-  const location = useLocation();
+  
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({})
   useEffect(() => {
     setValues(dadosrota.state)
-  }, [dadosrota])
+  }, [dadosrota]);
+  console.log(values)
   return (
     <Fragment>
 

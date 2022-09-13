@@ -12,12 +12,13 @@ export function Basicdatatable({ values }) {
 
     let [data, setData] = useState([])
     useEffect(() => {
-        setData(datafiltro())
+        let dados=datafiltro()
+        setData(dados)
     }, [values])
 
- 
+ console.log(data)
 
-    function datafiltro() {
+   function datafiltro() {
         let v = [];
         if (values?.permissions == "administrador") {
             for (const item of values?.receivedfeedbacksCompany) {
@@ -25,14 +26,19 @@ export function Basicdatatable({ values }) {
 
                 if (item.anonymous == 1) {
                     valores.nome = "Anônimo";
-                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                   api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     let dat = new Date(item.updated_at);
                     valores.data = `${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`;
                     valores.comentario = item.feedback
                 } else {
-                    !!item.id_user ?
-                        api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-                        api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                    if (!!item.name) {
+                          valores.nome=item.name;                      
+                    }else{
+
+                        !!item.id_user ?
+                         api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
+                    }
+                     api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
 
                     let dat = new Date(item.updated_at);
                     valores.data = `${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`;
@@ -49,17 +55,23 @@ export function Basicdatatable({ values }) {
                 if (item.anonymous == 1) {
                     valores.nome = "Anônimo";
                     let dat = new Date(item.updated_at);
-                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                   api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     valores.data = `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} /  ${dat.getFullYear()}`;
                     valores.comentario = item.feedback;
                 } else {
-                    !!item.id_user ?
+                    if (!!item.name) {
+                        valores.nome=item.name ;     
+                    }else{
+
+                        !!item.id_user ?
                         api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                    }
+                     api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     let dat = new Date(item.updated_at);
                     valores.data = `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} /  ${dat.getFullYear()}`;
                     valores.comentario = item.feedback;
                 }
+
                 v.push(valores)
             }
 
@@ -76,9 +88,15 @@ export function Basicdatatable({ values }) {
                     valores.data = `${dat.getDate()} / ${dat.getMonth() + 1} /  ${dat.getFullYear()}`;
                     valores.comentario = item.feedback;
                 } else {
-                    !!item.id_user ?
-                        api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-                        api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                    if (!!item.name) {
+                        valores.nome=item.name ;     
+                    }else{
+
+                        !!item.id_user ?
+                       api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
+                    }
+                    
+                       api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     let dat = new Date(item.updated_at);
                     valores.data = `${dat.getDate()} / ${dat.getMonth() + 1} /  ${dat.getFullYear()}`;
                     valores.comentario = item.feedback;
