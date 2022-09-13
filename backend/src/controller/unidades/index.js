@@ -28,26 +28,36 @@ export default {
 
     
     async getUnitCreateUser(req, res) {
-        const { id_user = false } = req.query; // id_user=int
+        const { id_user = false,id_company=false } = req.query; // id_user=int
         // se nao vier id_user vai ser retonado todas
         try {
-            if (!id_user) { await conexao("units").select("*").then(r => res.json(r)) }
-            else {
-
+            if (id_user) { 
                 const units = await conexao("units").select("units.id","units.description","units.initials").where({ id_user });
                 let units_serialised = [];
 
-                // for (const unit of units) {
-                    
-                // }
+               
                 for (let i = 0; i < units.length; i++) {
                     const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id","users.id_image","users.email","users.name")
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
                     units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
                 }
 
-                res.json(units_serialised)
+              return  res.json(units_serialised)
             }
+            if(id_company){
+                const units = await conexao("units").select("units.id","units.description","units.initials").where({ id_company });
+                let units_serialised = [];
+
+               
+                for (let i = 0; i < units.length; i++) {
+                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id","users.id_image","users.email","users.name")
+                    const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
+                    units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
+                }
+
+              return  res.json(units_serialised)
+            }        
+            return res.json({status:true,units:await conexao('units')})
         } catch (error) {
             res.json({ error: true, message: error.sqlMessage });
         }

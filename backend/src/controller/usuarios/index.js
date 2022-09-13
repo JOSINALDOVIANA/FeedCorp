@@ -50,11 +50,14 @@ export default {
         }
     },
     async GetAll(req, res) {
-        const {id=false}=req.query;
+        const {id=false,id_company=false}=req.query;
 
         try {
             if(id){
                 return res.json({ status: true, Users: await conexao("users").where({"users.id":id}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
+            }
+            if(id_company){
+                return res.json({ status: true, Users: await conexao("users").where({"users.id_company":id_company}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
             }
 
                 return res.json({ status: true, Users: await conexao("users")});

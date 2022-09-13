@@ -9,22 +9,25 @@ export function Basicdatatable({ values }) {
     let [data, setData] = useState([])
     useEffect(() => {
 
-        let v = values?.sendfeedbacks?.map(item => {
+     async   function caregarFeedbacks(sendfeedbacks){
+            for (const iterator of sendfeedbacks) {
+                const destinatario=await api.get(`/user/getAll?id=${iterator.id_direction}`);
+                const unidade=await api.get(`/unit/getAll?id=${iterator.id_unity}`);
+                let dat = new Date(iterator.updated_at);
+                setData(a=>([
+                    ...a,{
+                    destinatário:destinatario.data.Users[0].name,
+                    name:values.dadosUser.name,
+                    unidade:unidade.data.units[0]?.initials,
+                    comentario:iterator.feedback,
+                    data:`${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`
 
-            let valores = {};
-           
-                valores.nome = values.dadosUser.name;
-                api.get(`/user/getAll?id=${item.id_direction}`).then(r => { valores.destinatário = r.data.Users[0]?.name });
-                api.get(`/unit/getAll?id=${item.id_unity}`).then(r => { valores.unidade = r.data.units[0]?.initials });
-                let dat = new Date(item.updated_at);
-                valores.data = `${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`;
-                valores.comentario = item.feedback;
-               
-            return valores
-
-        })
-       
-        setData(v)
+                }]))
+            }
+        }
+        
+    caregarFeedbacks(values?.sendfeedbacks)
+      console.log(data)
     }, [values])
 
 

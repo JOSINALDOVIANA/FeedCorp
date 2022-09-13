@@ -8,15 +8,16 @@ export default{
         feedback, //obrigatorio
         id_company, //obrigatorio
         id_direction=null,
-        id_type,//obrigatorio
+        id_type=1,
         updated_at=new Date(),
-        anonymous=false
+        anonymous=false,
+        name,
       }=req.body;
       try {
-        const id= await conexao("feedbacks").insert({id_user,id_unity,feedback,id_company,id_direction,id_type,updated_at,anonymous});
+        const id= await conexao("feedbacks").insert({name,id_user,id_unity,feedback,id_company,id_direction,id_type,updated_at,anonymous});
         return res.json({
             status:true,
-            feedback:{id_user,id_unity,feedback,id_company,id_direction,id_type,updated_at,id:id[0]}
+            feedback:{name,id_user,id_unity,feedback,id_company,id_direction,id_type,updated_at,id:id[0]}
         })
       } catch (error) {
         console.log(error)
@@ -119,11 +120,14 @@ export default{
           }
     },
     async typesGet(req,res){
-          let {id}=req.query
+          let {id=false}=req.query
           try {
-           
-           const type=await conexao("typesfeedbacks").where({id});
-            return res.json({status:true,type});
+           if(id){
+
+             const type=await conexao("typesfeedbacks").where({id});
+             return res.json({status:true,type});
+           }
+           return res.json({status:true,types:await conexao('typesfeedbacks')})
           } catch (error) {
             console.error(error)
             return res.json({status:false,mensage:"error types=>get"})
