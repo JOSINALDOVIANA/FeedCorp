@@ -1,11 +1,9 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Image } from "react-bootstrap";
+import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataOKR";
 
-
-import user1 from "../../../../../../assets/img/users/1.jpg";
 import { Grid } from "@mui/material";
 import Okr from ".";
 import api from "../../../../../../api";

@@ -66,9 +66,9 @@ const CriarFeed = () => {
               <div className="page-header">
                 <div>
                   <h2 className="main-content-title tx-24 mg-b-5">Destinatário</h2>
-                  <spam className="d-flex text-muted tx-13">
+                  <span className="d-flex text-muted tx-13">
                     Escolha pra quem você quer mandar este feedback
-                  </spam>
+                  </span>
                 </div>
               </div>
 
