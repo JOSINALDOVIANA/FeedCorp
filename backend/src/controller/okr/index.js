@@ -2,17 +2,26 @@ import conexao from "../../database/connection.js";
 
 export default {
     async Insert(req, res) {
-        let data = new Date();
-        data.setDate(data.getDate() + 15);
-        const { objective, id_user, progress = 0, validity = data, keys } = req.body;
+       
+       
+        let { objective, id_user, progress = 0, validity, keys } = req.body;
+        validity=new Date(validity);
         //keys=[{description,id_okr=null,id_user,status}...]
         //validity=new date()
+        console.log(req.body)
+        console.log(validity)
         try {
             await conexao.transaction(async trx => {
                 const id_okr = await trx("okrs").insert({ objective, id_user, progress, validity });
 
                 if (!!keys) {
-                    let keys_serial = keys.map(key => ({ ...key, id_okr: id_okr[0] }));
+                    let keys_serial = keys.map(key => ({ 
+                        id_okr: id_okr[0],
+                        description:key.description,
+                        id_user:key.id_user,
+                        status:key.status
+                    
+                    }));
                     await trx("keys").insert(keys_serial);
 
                     return res.json({
@@ -23,6 +32,7 @@ export default {
                 }
                 return res.json({ status: true, okr: { objective, id: id_okr[0], id_user, progress, validity } })
             })
+            // return res.json({status:true})
         } catch (error) {
             console.log(error);
             return res.json({ status: false, mensage: "erro okr=>insert" })

@@ -20,17 +20,17 @@ App.use(function (req, res, next) {
    // console.log('Time:', Date.now());
     next();
   });
-App.use(express.json());
-App.use(cors());
-morganBody(App,{noColors:true,stream:log})
-App.use('/files',express.static(path.resolve(__dirname,'..','tmp','uploads')))
-
-// App.use(cors({ exposedHeaders: ['Total_lojas_cliente', 'Total_categorias',
-//  'Total_criticas_loja', 'Total_categorias','login','update_prop','login_loja','FeedbackTotais','sugestoesTotais',
-// 'PNETotais'] }));
-
-
-App.use(routes);
+  App.use(cors());
+  // morganBody(App,{noColors:true,stream:log})
+  // App.use('/files',express.static(path.resolve(__dirname,'..','tmp','uploads')))
+  
+  // App.use(cors({ exposedHeaders: ['Total_lojas_cliente', 'Total_categorias',
+  //  'Total_criticas_loja', 'Total_categorias','login','update_prop','login_loja','FeedbackTotais','sugestoesTotais',
+  // 'PNETotais'] }));
+  
+  
+  App.use(express.json());
+  App.use(routes);
 // App.use((req,res,next)=>{
 //     const error = new Error('você esta tentando acessar um recurso inexistente.');
 //     error.status=404;

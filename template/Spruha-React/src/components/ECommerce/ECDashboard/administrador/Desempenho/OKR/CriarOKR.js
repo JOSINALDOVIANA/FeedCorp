@@ -20,10 +20,10 @@ const CriarOKR = () => {
   const [okr, setOkr] = useState({})
   useEffect(() => {
     setValues(dadosrota.state)
-    setOkr(a=>({...a,keys:[]}))
+    setOkr(a=>({...a,keys:[],id_user:dadosrota.state.dadosUser.id}))
   }, [dadosrota])
   // console.log(values)
-  console.log(okr)
+  // console.log(okr)
   return (
     <Fragment>
 
@@ -36,7 +36,26 @@ const CriarOKR = () => {
               <div>
                 <Button to="#"
                   variant="info"
-                  className="btn me-1">
+                  className="btn me-1"
+                  onClick={async (e)=>{
+                   
+                   
+                    await api.post(`/okrs/insert`,{
+                      process:0,
+                      keys:okr.keys,
+                      objective:okr.objective,
+                      id_user:okr.id_user,
+                      validity:okr.validity
+                    }).then(r=>{
+                      let okrscriados=values.okrscriados;
+                      if(r.data.status){
+                        okrscriados.push(okr)
+                        setValues(a=>({...a,okrscriados:okrscriados}));
+                        navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                      }
+                    })
+                  }}
+                  >
                   Criar
                 </Button>
                 <Button onClick={() => {
@@ -121,7 +140,7 @@ const CriarOKR = () => {
                           id_okr:null,
                           user
                         }]}))
-                      setOkr(a=>({...a,description:"",unit:[],user:[],validity:""}))
+                      setOkr(a=>({...a,description:"",unit:[],user:[]}))
                     }}
                   >
                     Adicionar

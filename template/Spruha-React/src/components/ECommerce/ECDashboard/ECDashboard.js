@@ -35,7 +35,7 @@ function ECDashboard() {
 
   useEffect(() => {
     
-    if(!!dadosrota){
+    if(!!dadosrota.state){
 
       
       setValues(dadosrota.state);
