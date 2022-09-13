@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataOKR";
+// import {MyVerticallyCenteredModal} from "./modalmethods";
 
 import { Grid } from "@mui/material";
 import Okr from ".";
@@ -18,7 +19,7 @@ const CriarOKR = () => {
   const [okr, setOkr] = useState({})
   useEffect(() => {
     setValues(dadosrota.state)
-    setOkr(a=>({...a,keys:[],id_user:dadosrota.state.dadosUser.id}))
+    setOkr(a => ({ ...a, keys: [], id_user: dadosrota.state.dadosUser.id }))
   }, [dadosrota])
   // console.log(values)
   // console.log(okr)
@@ -35,25 +36,26 @@ const CriarOKR = () => {
                 <Button to="#"
                   variant="info"
                   className="btn me-1"
-                  onClick={async (e)=>{
-                   
-                   
-                    await api.post(`/okrs/insert`,{
-                      process:0,
-                      keys:okr.keys,
-                      objective:okr.objective,
-                      id_user:okr.id_user,
-                      validity:okr.validity
-                    }).then(r=>{
-                      let okrscriados=values.okrscriados;
-                      if(r.data.status){
+                  onClick={async (e) => {
+
+
+                    await api.post(`/okrs/insert`, {
+                      process: 0,
+                      keys: okr.keys,
+                      objective: okr.objective,
+                      id_user: okr.id_user,
+                      validity: okr.validity
+                    }).then(r => {
+                      let okrscriados = values.okrscriados;
+                      if (r.data.status) {
                         okrscriados.push(okr)
-                        setValues(a=>({...a,okrscriados:okrscriados}));
+                        setValues(a => ({ ...a, okrscriados: okrscriados }));
                         navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                        // {{<MyVerticallyCenteredModal />}}
                       }
                     })
                   }}
-                  >
+                >
                   Criar
                 </Button>
                 <Button onClick={() => {
@@ -88,22 +90,20 @@ const CriarOKR = () => {
                 </InputGroup>
               </FormGroup>
 
-
-              <div className="page-header">
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Key Results</h2>
-                  <spam className="d-flex text-muted tx-13">
-                    Escolha os integrantes e suas respectivas chaves
-                  </spam>
-                </div>
-              </div>
-
               <Grid id="keys">
 
                 <Row >
-                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1">
-                    <input
+                  <Col>
+                    <div className="page-header">
+                      <div>
+                        <h2 className="main-content-title tx-24 mg-b-5">Key Results</h2>
+                        <spam className="d-flex text-muted tx-13">
+                         Adicione o nome da sua Key result
+                        </spam>
+                      </div>
+                    </div>
 
+                    <input
                       type="text"
                       className="form-control input-description"
                       placeholder="Key Result"
@@ -111,12 +111,35 @@ const CriarOKR = () => {
                       onChange={(e) => { setOkr(a => ({ ...a, description: e.target.value })) }}
                     />
                   </Col>
-                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1 ">
+
+                  <Col>
+                    <div className="page-header">
+                      <div>
+                        <h2 className="main-content-title tx-24 mg-b-5">Unidade</h2>
+                        <spam className="d-flex text-muted tx-13">
+                          Escolha a unidade onde o colaborador se encontra
+                        </spam>
+                      </div>
+                    </div>
+
                     <SingleselectUnidade className="select-unit" units={values.units} setOkr={setOkr} />
+
                   </Col>
-                  <Col xs={12} md={12} lg={4} xl={4} xxl={4} className="my-1 ">
+
+                  <Col>
+                    <div className="page-header">
+                      <div>
+                        <h2 className="main-content-title tx-24 mg-b-5">Integrantes</h2>
+                        <spam className="d-flex text-muted tx-13">
+                          Escolha o integrante para essa Key
+                        </spam>
+                      </div>
+                    </div>
+
                     <SingleselectPessoa className="select-user" unit_select={okr.unit} setOkr={setOkr} />
+
                   </Col>
+
                 </Row>
 
                 <div className="d-flex justify-content-end">
@@ -126,19 +149,21 @@ const CriarOKR = () => {
                     className="my-2 btn"
 
                     onClick={async () => {
-                      let user=okr.user[0];
+                      let user = okr.user[0];
                       // console.log(user);
-                     await  api.get(`/images/listar?email=${user.email}`).then(r=>{user.image=r.data.dados});
+                      await api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
 
-                      setOkr(a=>({...a,keys:[...a.keys,
+                      setOkr(a => ({
+                        ...a, keys: [...a.keys,
                         {
-                          description:a.description,
-                          id_user:user.id,
-                          status:0,
-                          id_okr:null,
+                          description: a.description,
+                          id_user: user.id,
+                          status: 0,
+                          id_okr: null,
                           user
-                        }]}))
-                      setOkr(a=>({...a,description:"",unit:[],user:[]}))
+                        }]
+                      }))
+                      setOkr(a => ({ ...a, description: "", unit: [], user: [] }))
                     }}
                   >
                     Adicionar
@@ -148,43 +173,43 @@ const CriarOKR = () => {
               </Grid>
               <ListGroup>
 
-               {okr?.keys?.map((key,index)=>(
-                <ListGroup.Item key={index} action
-                as="li"
-                className="d-flex justify-content-betwween align-items-center"
-              >
-                <div className="ms-2 me-auto">{key.description}</div>
+                {okr?.keys?.map((key, index) => (
+                  <ListGroup.Item key={index} action
+                    as="li"
+                    className="d-flex justify-content-betwween align-items-center"
+                  >
+                    <div className="ms-2 me-auto">{key.description}</div>
 
-                <div className="d-flex align-items-center mb-2 me-4">
-                  <Image
-                    alt="avatar"
-                    className="wd-30 rounded-circle mg-r-15"
-                    src={key?.user.image.url}
-                  />
-                  <div>
-                    <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                      {key.user.name}
-                    </h6>
-                    {/* <span className="d-block tx-11 text-muted">
+                    <div className="d-flex align-items-center mb-2 me-4">
+                      <Image
+                        alt="avatar"
+                        className="wd-30 rounded-circle mg-r-15"
+                        src={key?.user.image.url}
+                      />
+                      <div>
+                        <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
+                          {key.user.name}
+                        </h6>
+                        {/* <span className="d-block tx-11 text-muted">
                       ()
                     </span> */}
-                  </div>
-                </div>
+                      </div>
+                    </div>
 
-                <div className="me-2">
-                  <i onClick={(index)=>{
-                    let keys=[]
-                    for (const i in okr.keys) {
-                        if(i==index){
-                          keys.push(okr.keys[i]);
+                    <div className="me-2">
+                      <i onClick={(index) => {
+                        let keys = []
+                        for (const i in okr.keys) {
+                          if (i == index) {
+                            keys.push(okr.keys[i]);
+                          }
                         }
-                    }
-                    setOkr(a=>({...a,keys:keys}))
-                  }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                </div>
+                        setOkr(a => ({ ...a, keys: keys }))
+                      }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
+                    </div>
 
-              </ListGroup.Item>
-               ))}
+                  </ListGroup.Item>
+                ))}
 
               </ListGroup>
 

@@ -7,6 +7,7 @@ import api from "../../../api";
 import { SelectUsers } from "./tabelaCards/dataTabelas/SelectUser";
 import { SelectUnit } from "./tabelaCards/dataTabelas/SelectUnit";
 import { SelecTypes } from "./tabelaCards/dataTabelas/SelectTypes";
+import { Grid } from "@mui/material";
 
 
 
@@ -72,8 +73,74 @@ const CriarFeed = () => {
         <Col lg={12} md={12}>
           <Card className="custom-card">
 
+            <Card.Body>
+              <FormGroup className="form-group">
+                <Form.Label className="tx-medium">Descrição do Feedback</Form.Label>
+                <textarea
+                  onChange={(e) => { setFeedback(a => ({ ...a, feedback: e.target.value })) }} value={feedback.feedback}
+                  rows="5"
+                  className="form-control"
+                />
+              </FormGroup>
+
+              <Form.Check 
+              type="checkbox"
+              label="Feedback Anônimo?"
+              />
+
+
+              {/* ----------------------------------------------------------------------- */}
+              <Grid>
+                <Row>
+                  <Col>
+                    <div className="page-header">
+                      <div>
+                        <h2 className="main-content-title tx-20 mg-b-5">Unidade</h2>
+                        <span className="d-flex text-muted tx-13">
+                          Escolha uma unidade
+                        </span>
+                      </div>
+                    </div>
+
+                    <SelectUnit units={feedback.units} setFeedback={setFeedback} />
+
+                  </Col>
+                  {/* ------------------------------------------------------------------ */}
+                  <Col>
+                    <div className="page-header">
+                      <div>
+                        <h2 className="main-content-title tx-20 mg-b-5">Destinatário</h2>
+                        <span className="d-flex text-muted tx-13">
+                          Escolha para quem você quer mandar este feedback
+                        </span>
+                      </div>
+                    </div>
+
+                    <SelectUsers users={feedback.users} setFeedback={setFeedback} />
+
+                  </Col>
+                  {/* ----------------------------------------------------------------------- */}
+                  <Col>
+                    <div className="page-header">
+                      <div>
+                        <h2 className="main-content-title tx-20 mg-b-5">Categoria</h2>
+                        <span className="d-flex text-muted tx-13">
+                          Escolha uma categoria para seu Feedback
+                        </span>
+                      </div>
+                    </div>
+
+                    <SelecTypes values={values} setFeedback={setFeedback} />
+
+                  </Col>
+
+                </Row>
+              </Grid>
+
+            </Card.Body>
+
             <div className="page-header mx-4">
-              <h2 className="main-content-title tx-24 mg-b-5">Feedback</h2>
+              <h2 className="main-content-title tx-24 mg-b-5"></h2>
               <div>
                 <Button to="#"
                   variant="info"
@@ -98,70 +165,6 @@ const CriarFeed = () => {
                 </Button>
               </div>
             </div>
-            <Card.Body>
-              <FormGroup className="form-group">
-                <Form.Label className="tx-medium">Descrição</Form.Label>
-                <textarea onChange={(e) => { setFeedback(a => ({ ...a, feedback: e.target.value })) }} value={feedback.feedback} maxLength={255} className="form-control" />
-              </FormGroup>
-
-              {/* ----------------------------------------------------------------------- */}
-              <div className="page-header">
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Unidade</h2>
-                  <span className="d-flex text-muted tx-13">
-                    Escolha uma unidade
-                  </span>
-                </div>
-              </div>
-
-              <div className="page-header">
-
-                <Col lg={12} xl={12} xxl={12} md={12} className="my-1">
-                  <SelectUnit units={feedback.units} setFeedback={setFeedback} />
-                </Col>
-
-              </div>
-              {/* ------------------------------------------------------------------ */}
-
-              <div className="page-header">
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Destinatário</h2>
-                  <span className="d-flex text-muted tx-13">
-                    Escolha para quem você quer mandar este feedback
-                  </span>
-                </div>
-              </div>
-
-              <div className="page-header">
-
-                <Col lg={12} xl={12} xxl={12} md={12} className="my-1">
-                  <SelectUsers users={feedback.users} setFeedback={setFeedback} />
-                </Col>
-
-              </div>
-              {/* ------------------------------------------------------------------ */}
-              {/* ----------------------------------------------------------------------- */}
-              <div className="page-header">
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Categoria</h2>
-                  <span className="d-flex text-muted tx-13">
-                    Escolha uma categoria para seu Feedback
-                  </span>
-                </div>
-              </div>
-
-              <div className="page-header">
-
-                <Col lg={12} xl={12} xxl={12} md={12} className="my-1">
-                  <SelecTypes values={values} setFeedback={setFeedback} />
-                </Col>
-
-              </div>
-              {/* ------------------------------------------------------------------ */}
-
-
-
-            </Card.Body>
           </Card>
         </Col>
       </Row>

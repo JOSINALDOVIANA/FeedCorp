@@ -73,7 +73,7 @@ const Okr = () => {
         <Row className="row-sm">
 
           {values?.okrscriados?.map(okr => (
-            <Col key={okr.id} lg={12} xl={12} xxl={12} md={6} >
+            <Col key={okr.id} lg={6} xl={6} xxl={6} md={6} >
               <Card className="custom-card"
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
@@ -119,7 +119,7 @@ const Okr = () => {
               </Card>
             </Col>
           ))}
-  
+
         </Row>
       </div>
     </Fragment>
