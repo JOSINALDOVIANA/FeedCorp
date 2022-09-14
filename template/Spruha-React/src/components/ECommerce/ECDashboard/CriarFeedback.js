@@ -17,39 +17,45 @@ const CriarFeed = () => {
   const dadosrota = useLocation();
 
   const navegar = useNavigate();
-  const [values, setValues] = useState({})
-  const [feedback, setFeedback] = useState({})
+  const [values, setValues] = useState({});
+  const [feedback, setFeedback] = useState({});
+  const [recarregar, setRecarregar] = useState(false);
+
   useEffect(() => {
     setValues(dadosrota.state);
 
-    function carregarUsers() {
+    // function carregarUsers() {
 
-      api.get(`/user/getAll?id_company=${dadosrota?.state?.company.id}`).then(r => {
-        // console.log(dadosrota.state)
-        setFeedback(a => ({
-          ...a,
-          users: r.data.Users,
-          id_company: dadosrota.state.company?.id,
-          id_user: dadosrota.state.dadosUser?.id,
-          name: dadosrota.state.dadosUser.name
-        }));
-      });
+    //   api.get(`/user/getAll?id_company=${dadosrota?.state?.company.id}`).then(r => {
+    //     // console.log(dadosrota.state)
+    //     setFeedback(a => ({
+    //       ...a,
+    //       // users: r.data.Users,
+          
+    //     }));
+    //   });
 
 
-    }
+    // }
     function carregarUnits() {
       api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
-        setFeedback(a => ({ ...a, units: r.data }))
+        setFeedback(a => ({ 
+          ...a, 
+          units: r.data ,
+          id_company: dadosrota.state.company?.id,
+          id_user: dadosrota.state.dadosUser?.id,
+          name: dadosrota.state.dadosUser.name,
+        }))
       })
     }
-    carregarUsers()
+    // carregarUsers()
     carregarUnits()
-  }, [dadosrota.state]);
+  }, [dadosrota.state,recarregar]);
 
 
 
   // console.log(values)
-  // console.log(feedback)
+  console.log(feedback)
 
   return (
     <Fragment>
@@ -86,6 +92,7 @@ const CriarFeed = () => {
               <Form.Check 
               type="checkbox"
               label="Feedback Anônimo?"
+              onChange={(e)=>{setFeedback(a=>({...a,anonymous:e.target.checked}))}}
               />
 
 
@@ -148,10 +155,12 @@ const CriarFeed = () => {
                   onClick={async () => {
                     const { data } = await api.post(`/feedback/insert`, { ...feedback })
                     if (data?.status) {
-                      alert("agrademos sua colaboração!!")
+                      alert("agrademos sua colaboração!!");
+                      setValues(a=>({...a,sendfeedbacks:[...a.sendfeedbacks,{...feedback}]}))
                       navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
+
                     }
-                    console.log(data)
+                    
                   }}
                 >
                   Enviar

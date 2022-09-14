@@ -18,7 +18,8 @@ export const SelectUnit = ({units,setFeedback}) => {
     <div>
       <Multiselect classNamePrefix="Select2" onChange={(e)=>{
         setFeedback(a=>({...a,unitSelect:(units.filter(unit=>unit.id==e.value))[0]}));
-        setFeedback(a=>({...a,id_unit:e.value}));
+        setFeedback(a=>({...a,id_unity:e.value,users:a.unitSelect.Colaboradores}));
+        
     }} options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
     </div>
   );

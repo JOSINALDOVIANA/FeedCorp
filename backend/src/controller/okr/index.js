@@ -39,10 +39,13 @@ export default {
         }
     },
     async update(req, res) {
-
-        const { id, objective, id_user, progress = 0, validity = new Date(), keys, concluded = null } = req.body;
+        console.log("chegou aqui");
+        let { id, objective, id_user, progress = 0, validity, keys, concluded = false } = req.body;
         //keys=[{id,description,id_okr=obrigatorio,id_user,status}...]
-        //validity=new date()
+        if(concluded){
+            concluded=new Date();
+        }
+        validity=new Date(validity);
         try {
             await conexao.transaction(async trx => {
                 await trx("okrs").update({ objective, id_user, progress, validity, concluded }).where({ id });

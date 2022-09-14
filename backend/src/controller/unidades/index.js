@@ -28,7 +28,7 @@ export default {
 
     
     async getUnitCreateUser(req, res) {
-        const { id_user = false,id_company=false } = req.query; // id_user=int
+        const { id_user = false,id_company=false} = req.query; // id_user=int
         // se nao vier id_user vai ser retonado todas
         try {
             if (id_user) { 

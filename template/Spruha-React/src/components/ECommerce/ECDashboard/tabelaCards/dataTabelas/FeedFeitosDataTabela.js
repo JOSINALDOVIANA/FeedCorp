@@ -11,8 +11,8 @@ export function Basicdatatable({ values }) {
 
      async   function caregarFeedbacks(sendfeedbacks){
             for (const iterator of sendfeedbacks) {
-                const destinatario=await api.get(`/user/getAll?id=${iterator.id_direction}`);
-                const unidade=await api.get(`/unit/getAll?id=${iterator.id_unity}`);
+                const destinatario=await api.get(`/user/getAll?id=${iterator?.id_direction}`);
+                const unidade=await api.get(`/unit/getAll?id=${iterator?.id_unity}`);
                 let dat = new Date(iterator.updated_at);
                 setData(a=>([
                     ...a,{
@@ -27,9 +27,9 @@ export function Basicdatatable({ values }) {
         }
         
     caregarFeedbacks(values?.sendfeedbacks)
-      console.log(data)
-    }, [values])
+}, [values])
 
+  console.log(data)
 
 
     const columns = [

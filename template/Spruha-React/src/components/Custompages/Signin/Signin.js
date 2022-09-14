@@ -57,7 +57,25 @@ const Signin = () => {
       if (permanecer) {
         localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
       }
-      await  api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(r=>{okrscriados=r?.data?.okrs})
+      await  api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(async r=>{
+        let okrs=r?.data?.okrs;
+        // let k=[].length
+        for (const index1 in okrs) {
+          let process=0
+          for (const index2 in okrs[index1].keys) {
+            process=process+okrs[index1].keys[index2].status;
+          }
+          let keys=okrs[index1].keys
+          okrs[index1].progress=process/keys.length
+          // console.log(keys.length)
+          if(okrs[index1].progress==100){
+            okrs[index1].concluded=true
+          }
+          await api.put(`/okrs/update`,{...okrs[index1]});
+        }
+        okrscriados=okrs;
+        console.log(okrscriados)
+      })
       await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company,okrscriados } });
     }
 

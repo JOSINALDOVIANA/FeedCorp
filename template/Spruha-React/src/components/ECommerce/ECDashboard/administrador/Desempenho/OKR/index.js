@@ -101,7 +101,7 @@ const Okr = () => {
 
                   <div className="main-traffic-detail-item">
                     <div>
-                      <span>Progresso</span> <span>{okr.progress}</span>
+                      <span>Progresso</span> <span>{okr.progress}%</span>
                     </div>
                     <div className="progress progress-sm mb-1">
                       <ProgressBar
