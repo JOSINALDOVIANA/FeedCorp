@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Card, Container, Form } from "react-bootstrap";
-import * as Customswitcherdata from "../../../data/Switcherdata/Customswitcherdata";
-import api from "../../../api";
+import * as Customswitcherdata from "../../../../../data/Switcherdata/Customswitcherdata";
+import api from "../../../../../api";
 const Signin = () => {
   const [permanecer, setPerm] = React.useState(false);
   
@@ -103,13 +103,13 @@ const Signin = () => {
               >
                 <div className="mt-5 pt-5 p-2 pos-relative">
                   <img
-                    src={require("../../../assets/img/brand/logo-light.png")}
+                    src={require("../../../../../assets/img/brand/logo-light.png")}
                     className="header-brand-img mb-4"
                     alt="logo-light"
                   />
                   <div className="clearfix"></div>
                   {/* <img
-                    src={require("../../../assets/img/svgs/user.svg").default}
+                    src={require("../../../../../assets/img/svgs/user.svg").default}
                     className="ht-100 mb-0"
                     alt="user"
                   /> */}
@@ -124,12 +124,12 @@ const Signin = () => {
                   <Row className="row-sm">
                     <Card.Body className="mt-2 mb-2">
                       <img
-                        src={require("../../../assets/img/brand/logo.png")}
+                        src={require("../../../../../assets/img/brand/logo.png")}
                         className=" d-lg-none header-brand-img text-start float-start mb-4 auth-light-logo"
                         alt="logo"
                       />
                       <img
-                        src={require("../../../assets/img/brand/logo-light.png")}
+                        src={require("../../../../../assets/img/brand/logo-light.png")}
                         className=" d-lg-none header-brand-img text-start float-start mb-4 auth-dark-logo"
                         alt="logo"
                       />

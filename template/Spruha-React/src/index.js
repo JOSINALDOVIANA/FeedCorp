@@ -152,8 +152,9 @@ const App = React.lazy(() => import("./components/app"));
 // coustom pages
 // const Error505 = React.lazy(() => import("./components/Custompages/Error-505/Error-505"))
 const Error404 = React.lazy(() => import("./components/Custompages/Error1-404/Error-404"))
-const Signin = React.lazy(() => import("./components/Custompages/Signin/Signin"))
-const Signup = React.lazy(() => import("./components/Custompages/Signup/Signup"))
+const Signin = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signin/Signin"))
+const Signup = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signup/Signup"))
+const Profile = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/profile/Profile"))
 // const Lockscreen = React.lazy(() => import("./components/Custompages/Lockscreen/Lockscreen"))
 const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
 const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
@@ -184,11 +185,15 @@ const Root = () => {
 
               <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
               <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
-              <Route path={`${process.env.PUBLIC_URL}/cadastrar`} element={<Signup />} />
+              <Route path={`${process.env.PUBLIC_URL}/cadastro`} element={<Signup />} />
               <Route path={`${process.env.PUBLIC_URL}/esqueceuasenha`} element={<Forgotpassword />} />
 
               <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
                 <Route index element={<ECDashboard />} />
+
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/perfil`} element={<Profile />} />
+                </Route>
 
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/dashboard/`} element={<ECDashboard />} >
@@ -214,6 +219,7 @@ const Root = () => {
                     </Route>
                   </Route>
                 </Route>
+
 
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />

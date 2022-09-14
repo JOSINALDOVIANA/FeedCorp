@@ -279,7 +279,7 @@ function Header({ values }) {
                   </div>
 
                   {/* NOTIFICAÇÕES */}
-                  <Dropdown className=" main-header-notification">
+                  {/* <Dropdown className=" main-header-notification">
                     <Dropdown.Toggle
                       className="nav-link icon"
                       href="#"
@@ -287,9 +287,10 @@ function Header({ values }) {
                     >
                       <i className="fe fe-bell header-icons"></i>
                       <span className="badge bg-danger nav-link-badge">4</span>
-                    </Dropdown.Toggle>
+                    </Dropdown.Toggle> */}
+
                     {/* NOTIFICAÇÕES TELA FLUTUANTE */}
-                    <Dropdown.Menu style={{ margin: "0px" }}>
+                    {/* <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
                         <p className="main-notification-text">
                           You have 1 unread notification
@@ -348,9 +349,10 @@ function Header({ values }) {
                         <Link to="#">View All Notifications</Link>
                       </div>
                     </Dropdown.Menu>
-                  </Dropdown>
+                  </Dropdown> */}
+                  
                   {/* CHAT */}
-                  <div className="main-header-notification">
+                  {/* <div className="main-header-notification">
                     <Link
                       className="icon nav-link"
                       to={`${process.env.PUBLIC_URL}/advanceUI/chat/`}
@@ -358,7 +360,7 @@ function Header({ values }) {
                       <i className="fe fe-message-square header-icons"></i>
                       <span className="badge bg-success nav-link-badge">6</span>
                     </Link>
-                  </div>
+                  </div> */}
 
                   {/* PERFIL AVATAR */}
                   <Dropdown className="main-profile-menu">
@@ -374,27 +376,28 @@ function Header({ values }) {
                     <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
                         <h6 className="main-notification-title">
-                          {values?.dadosUser?.name}
+                          {values?.dadosUser?.name.toUpperCase()}
+                          
                         </h6>
-                        <p className="main-notification-text">Web Designer</p>
+                        <p className="main-notification-text">Cargo aqui</p>
                       </div>
                       <Dropdown.Item
                         className="border-top"
+                        href={`${process.env.PUBLIC_URL}/perfil/`}
+                      >
+                        <i className="fe fe-user"></i> Meu Perfil
+                      </Dropdown.Item>
+                      {/* <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
                       >
-                        <i className="fe fe-user"></i> My Profile
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        href={`${process.env.PUBLIC_URL}/pages/profile`}
-                      >
-                        <i className="fe fe-edit"></i> Edit Profile
-                      </Dropdown.Item>
+                        <i className="fe fe-edit"></i> Editar Perfil
+                      </Dropdown.Item> */}
 
-                      <Dropdown.Item
+                      {/* <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
                       >
                         <i className="fe fe-settings"></i> Account Settings
-                      </Dropdown.Item>
+                      </Dropdown.Item> */}
 
                       <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
@@ -402,11 +405,11 @@ function Header({ values }) {
                         <i className="fe fe-settings"></i> Suporte
                       </Dropdown.Item>
 
-                      <Dropdown.Item
+                      {/* <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/pages/profile`}
                       >
                         <i className="fe fe-compass"></i> Atividades
-                      </Dropdown.Item>
+                      </Dropdown.Item> */}
 
                       <Dropdown.Item
                         href={`${process.env.PUBLIC_URL}/login`}
@@ -416,8 +419,9 @@ function Header({ values }) {
 
                     </Dropdown.Menu>
                   </Dropdown>
-                  {/* CONFIGURAÇÕES */}
-                  <div className="d-md-flex header-settings">
+
+                  {/* LISTA TO DO */}
+                  {/* <div className="d-md-flex header-settings">
                     <Nav.Link
                       href="#"
                       className="nav-link icon"
@@ -425,10 +429,11 @@ function Header({ values }) {
                     >
                       <i className="fe fe-align-right header-icons"></i>
                     </Nav.Link>
-                  </div>
+                  </div> */}
 
                 </div>
               </Navbar.Collapse>
+
               {/* CONFIGURAÇÕES LAYOUT */}
               <div className="d-flex header-setting-icon demo-icon fa-spin">
                 <Nav.Link className="nav-link icon" onClick={Swicherbutton}>
