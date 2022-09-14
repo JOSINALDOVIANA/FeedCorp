@@ -7,7 +7,7 @@ import {
   Navbar,
   InputGroup,
 } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../..";
 import Selectoptions from "../../data/Header/headerdata";
 
@@ -38,7 +38,8 @@ function Fullscreen() {
 }
 // FullScreen-end
 function Header({ values }) {
-
+  const navegar = useNavigate()
+  
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");
     document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
@@ -383,7 +384,7 @@ function Header({ values }) {
                       </div>
                       <Dropdown.Item
                         className="border-top"
-                        href={`${process.env.PUBLIC_URL}/perfil/`}
+                        onClick={() => {navegar(`${process.env.PUBLIC_URL}/perfil`, {state: values})}}
                       >
                         <i className="fe fe-user"></i> Meu Perfil
                       </Dropdown.Item>

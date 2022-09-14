@@ -1,23 +1,25 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import * as gallery from "../../../../../data/Pages/gallery";
 import { Link } from "react-router-dom";
 import { Tab, Nav, Dropdown, Form, Button, Col, Breadcrumb, Row, FormGroup, Card } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../../..";
+
 
 function Profile() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({});
 
   useEffect(() => {
-    if (!dadosrota.state) {
+    if (dadosrota.state) {
+      setValues(dadosrota.state);
+    }else{
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
-    setValues(dadosrota.state);
 
   }, [dadosrota])
+  console.log(values)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
