@@ -1,20 +1,21 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
+import api from "../../../../api";
 
 // import { Container } from './styles';
 
 const FeedRecebidos = () => {
 
     const dadosrota = useLocation();
-    const location = useLocation();
+    
     const navegar = useNavigate();
-    const { values, setValues } = useContext(usuarioContext);
+    const [ values, setValues ] = useState({});
     useEffect(() => {
         setValues(dadosrota.state)
     }, [dadosrota])
-
+   
     return (
         <Fragment>
 

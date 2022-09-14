@@ -3,14 +3,16 @@ import conexao from '../../database/connection.js';
 export default {
 
     async insert(req,res){
-        const {id_user,title,validity,items}=req.body;
-
+        let {id_user,title,validity=false,items}=req.body;
+        if(validity){
+            validity=new Date(validity)
+        }else{validity=null}
         try {
-             const avpr =  await conexao("evaluation_by_results").insert({title,id_user,validity}) ;      
-             let items_serial=items.map((item)=>({...item,validity,id_ebr:avpr[0]}));
+             const ebr =  await conexao("evaluation_by_results").insert({title,id_user,validity}) ;      
+             let items_serial=items.map((item)=>({...item,validity,id_ebr:ebr[0]}));
              await conexao("items").insert(items_serial)
             
-            res.json({"status":true,"avprID":avpr});
+            res.json({"status":true,"avpr":{id:ebr[0],id_user,title,validity,items:items_serial}});
             
         } catch (error) {
            console.log(error)
@@ -58,7 +60,7 @@ export default {
                     .select("item_answer_user.answer","users.name");
                     items_serial.push({...items[key],resposta,und});
                 }
-                avaliação={...avaliação,perguntas:items_serial}
+                avaliação={...avaliação,items:items_serial}
             res.json({"status":true,"avaliação":avaliação});
             
         } catch (error) {
