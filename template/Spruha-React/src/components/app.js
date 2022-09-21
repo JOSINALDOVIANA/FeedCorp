@@ -33,7 +33,7 @@ const App = () => {
     
   },[dadosrota.state])
 
-
+console.log(values)
   return (
     <Fragment >
       <div className="horizontalMenucontainer">

@@ -55,6 +55,7 @@ export default {
                let plan;
                let modules_plan;          
                let module_solos;
+               let users=[];
 
                if (!!company) {
                 city= await trx("cities").where({id:company.id_city}).first();
@@ -76,7 +77,18 @@ export default {
                for (const iterator of module_solos) {
                 module_solos_serial={...module_solos_serial, [`${iterator.module}`]:{id:iterator.id,value:iterator.value}}
                }
-               company={... company,city,country,state,plan,modules:{...modules_plan_serial,...module_solos_serial}}
+
+               let units =await trx("units").where({id_company:company.id});
+                   for (const iterator of units) {
+                    const r= await   trx('user_unit').where({"user_unit.id_unit":iterator.id}).join("users","users.id","=","user_unit.id_user").select("users.*");
+                    for (const iterator of r) {
+                        const r2 = await trx("images").where({id:iterator.id_image}).select("images.url");
+                        users.push({...iterator,...r2[0]});
+
+                    }
+                   }
+                //    console.log(users)
+               company={... company,city,country,state,plan,modules:{...modules_plan_serial,...module_solos_serial},users}
                return res.json({startus:true,company})
                }
                return res.json({status:false,company:await conexao("companies")})

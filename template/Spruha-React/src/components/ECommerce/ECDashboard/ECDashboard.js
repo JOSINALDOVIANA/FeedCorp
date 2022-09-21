@@ -41,19 +41,20 @@ function ECDashboard() {
       setValues(dadosrota.state);
       
     if(dadosrota.state.permissions=="administrador"){
-      api.get(`/feedback/get?id_company=${dadosrota.state.company?.id}`).then(r=>{
-       
-        
+      api.get(`/feedback/get?id_company=${dadosrota.state.company?.id}`).then(r=>{       
        setValues(a=>({...a,receivedfeedbacksCompany:r.data.feedbacks}))
-      })      
+      });     
+      api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{       
+       setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}))
+      });     
       }
 
     if(dadosrota.state.permissions=="gestor"){
-      api.get(`/feedback/get?id_unity=${dadosrota.state.unit?.id}`).then(r=>{
-        
-        
-        setValues(a=>({...a,receivedfeedbacksUnit:r.data.feedbacks}))
-        
+      api.get(`/feedback/get?id_unity=${dadosrota.state.unit?.id}`).then(r=>{       
+        setValues(a=>({...a,receivedfeedbacksUnit:r.data.feedbacks}));        
+      })      
+      api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{       
+        setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}));        
       })      
       }
 
@@ -76,7 +77,7 @@ function ECDashboard() {
     }
    
   }, [dadosrota.state]);
-  // console.log(values)
+  console.log(values)
 
 
 
