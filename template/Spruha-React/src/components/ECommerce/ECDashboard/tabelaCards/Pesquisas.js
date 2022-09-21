@@ -6,7 +6,7 @@ import api from "../../../../api";
 
 // import { Container } from './styles';
 
-const FeedRecebidos = () => {
+export default  () => {
 
   const dadosrota = useLocation();
 
@@ -33,7 +33,12 @@ const FeedRecebidos = () => {
     })
 
   }, [dadosrota])
-  // console.log(values)
+  function formatData(data){
+   const dat=new Date(data);
+   const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
   return (
     <Fragment>
 
@@ -78,7 +83,7 @@ const FeedRecebidos = () => {
                      
                       
                       <td className="text-center">{avpr.title}</td>
-                      <td className="text-center">{avpr.updated_at}</td>
+                      <td className="text-center">{formatData(avpr.updated_at)}</td>
                       <td className="text-center">
                         <Link to="#" className={`text-${""}`}>
                           algo
@@ -96,4 +101,3 @@ const FeedRecebidos = () => {
   );
 }
 
-export default FeedRecebidos;

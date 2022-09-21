@@ -2,14 +2,13 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import {
   Dropdown,
   Container,
-  Form,
+ 
   Nav,
   Navbar,
-  InputGroup,
+  
 } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../..";
-import Selectoptions from "../../data/Header/headerdata";
+import { Link, useNavigate } from "react-router-dom";
+
 
 // FuScreen-start
 function Fullscreen() {

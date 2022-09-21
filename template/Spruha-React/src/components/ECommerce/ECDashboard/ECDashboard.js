@@ -77,7 +77,7 @@ function ECDashboard() {
     }
    
   }, [dadosrota.state]);
-  console.log(values)
+  // console.log(values)
 
 
 

@@ -1,11 +1,8 @@
 import { Divider } from "@mui/material";
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumb, Button, Col, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from "../../../../../..";
-import api from "../../../../../../api";
 
-import user1 from "../../../../../../assets/img/users/1.jpg";
 
 const Okr = () => {
 
@@ -91,8 +88,13 @@ const Okr = () => {
                     <ProgressBar
                       variant="info"
                       className="progress ht-6 my-auto"
+                      animated={true}
+                      min={0}
+                      max={100}
                       now={chave.status}
-                    ></ProgressBar>
+                    >
+                      
+                    </ProgressBar>
                     <span className="tx-13">
                       <b>{chave.status + "%"}</b>
                     </span>
