@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { Breadcrumb, Button, Col, Row, Card } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { usuarioContext } from '../../../../../..';
 const ClimaPulso = () => {
@@ -31,9 +31,9 @@ const ClimaPulso = () => {
               variant="white"
               type="button"
               className=" btn-icon-text my-2 me-2"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/realizados`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
             >
-              <i className="bi bi-clipboard2-data me-2"></i> Realizados
+              <i className="bi bi-clipboard2-data me-2"></i> Lista
             </Button>
 
             <Button
@@ -51,7 +51,7 @@ const ClimaPulso = () => {
               className="my-2 btn-icon-text"
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
             >
-              <i className="bi bi-gear-fill"/>
+              <i className="bi bi-gear-fill" />
             </Button>
           </div>
         </div>
@@ -59,9 +59,69 @@ const ClimaPulso = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-      {/* <!-- Row --> */}
-      <Outlet />
-      {/* <!-- End Row --> */}
+
+      <div className="card custom-card">
+
+        <div className="card-header border-bottom-0 d-flex justify-content-between">
+
+          <label className="main-content-label my-auto pt-2">Lista de pesquisas de Clima Pulso</label>
+
+
+          {/* <div className="d-flex align-items-center">
+            <Button
+              type="button"
+              variant="primary"
+              className="btn-icon-text"
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso`, { state: values }) }}
+            >
+              <i className="fe fe-x me-2"></i>
+              Fechar
+            </Button>
+          </div> */}
+        </div>
+
+        <div className="card-body pt-2 pb-0">
+          <div className="table-responsive tasks">
+            <Table className="table card-table table-vcenter text-nowrap border" borderless>
+              <thead>
+                <tr>
+                  <th className="wd-lg-10p text-center">Destinatário</th>
+                  <th className="wd-lg-20p text-center">Unidade</th>
+                  {/* <th className="wd-lg-20p text-center">Change</th>
+                                    <th className="wd-lg-20p text-center">Date</th> */}
+                  <th className="wd-lg-40p text-center">Seu comentário</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* {TRADINGACTIVITIES.map((list, index) => (
+                    <tr key={index} data-index={index}>
+                      <td className="text-center">{list.id}</td>
+                      <td className="coin_icon d-flex">
+                        <div className="cryp-icon bg-primary me-2">
+                          <i className={`cf cf-${list.icon} text-center`} />
+                        </div>
+                        <span className=" my-auto text-center">
+                          {list.name} <b>{list.title}</b>
+                        </span>
+                      </td>
+                      <td className="text-center">{list.price}</td>
+                      <td className="text-center">
+                        <span className={`text-${list.changeStatus} `}>{list.change}</span>
+                      </td>
+                      <td className="text-center">{list.date}</td>
+                      <td className="text-center">
+                        <Link to="#" className={`text-${list.status}`}>
+                          {list.statusText}
+                        </Link>
+                      </td>
+                    </tr>
+                  ))} */}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </div>
+
     </Fragment>
   )
 };

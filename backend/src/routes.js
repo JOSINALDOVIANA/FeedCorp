@@ -212,5 +212,50 @@ routes.put("/feedback_answer/update",feedbacks.FA_Update);
 routes.delete("/feedback_answer/delete",feedbacks.FA_Delete);
 
 
+
 /*#########################################################################################################*/
+
+/*################################################ pulse ######################################*/
+// ------Pulses-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
+// ------pulse_question-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
+// ------pulse_unity-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
+// ------pulse_user-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
+// ------pulse_company-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
+// ------answer_user-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
+// ------BDQuestion-----
+// routes.post("/pulses/insert",pulses.insert);
+// routes.put("/pulses/update",pulses.update);
+// routes.get("/pulses/get",pulses.get);
+// routes.delete("/pulses/delete",pulses.delete);
+
 export default routes;

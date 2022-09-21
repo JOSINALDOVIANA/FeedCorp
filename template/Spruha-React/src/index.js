@@ -5,17 +5,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
 //INÍCIO
-import FeedRecebidos from "./components/ECommerce/ECDashboard/tabelaCards/FeedRecebidos"
-import FeedFeitos from "./components/ECommerce/ECDashboard/tabelaCards/FeedFeitos"
-import Objetivos from "./components/ECommerce/ECDashboard/tabelaCards/Objetivos"
-import Pesquisas from "./components/ECommerce/ECDashboard/tabelaCards/Pesquisas"
+import FeedRecebidos from "./components/ECommerce/ECDashboard/Cards/FeedRecebidos"
+import FeedFeitos from "./components/ECommerce/ECDashboard/Cards/FeedFeitos"
+import Objetivos from "./components/ECommerce/ECDashboard/Cards/Objetivos"
+import Pesquisas from "./components/ECommerce/ECDashboard/Cards/Pesquisas"
 const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard/CriarFeedback"))
 //OKR
 const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
 const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/ProgressoOKR"))
 //CLIMA PULSO
-const TabelaClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaTabelaRealizados"))
+const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
 const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"))
 
@@ -23,8 +23,8 @@ const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashbo
 // Dashboard
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp"))
-const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
-
+const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
+//AVPR
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR"));
 const CriarAvpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/CriarAvpr"));
 const ProgressoAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/ProgressoAVPR"))
@@ -250,7 +250,7 @@ const Root = () => {
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
                     <Route index element={<Fragment />} />
-                    
+
                     <Route>
                       <Route
                         path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
@@ -266,25 +266,21 @@ const Root = () => {
                 />
                 {/* ------------------------------CLIMA PULSO------------------------------------------ */}
                 <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/climapulso`} element={<ClimaPulso />} >
-                    <Route index element={<Fragment />} />
-                    <Route>
-                      <Route
-                        path={`${process.env.PUBLIC_URL}/climapulso/realizados`}
-                        element={<TabelaClima />}
-                      />
-                      <Route
-                        path={`${process.env.PUBLIC_URL}/climapulso/criar`}
-                        element={<CriarClima />}
-                      />
-                      <Route
-                        path={`${process.env.PUBLIC_URL}/climapulso/configuracoes`}
-                        element={<ConfigurarClima />}
-                      />
-
-                    </Route>
-
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso`}
+                    element={<ClimaPulso />} >
                   </Route>
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso/criar/`}
+                    element={<CriarClima />}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso/configuracoes/`}
+                    element={<ConfigurarClima />}
+                  />
+
                 </Route>
 
 
@@ -294,6 +290,52 @@ const Root = () => {
                     element={<Teste />}
                   />
                 </Route> */}
+
+              </Route>
+
+              {/* ........................................GESTOR............................................... */}
+              <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
+                {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
+                </Route>
+                {/* ------------------------------OKR------------------------------------------ */}
+                {/* <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
+                    <Route index element={<Fragment />} />
+                    <Route>
+
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/okr/criar_okr`}
+                        element={<CriarOkr />}
+                      />
+
+                    </Route>
+                  </Route>
+                </Route>
+
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/okr/progresso`} element={<ProgressoOKR />} />
+                </Route> */}
+                {/* ------------------------------AVR------------------------------------------ */}
+                {/* <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
+                    <Route index element={<Fragment />} />
+
+                    <Route>
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
+                        element={<CriarAvpr />}
+                      />
+                    </Route>
+
+                  </Route>
+                </Route>
+                <Route
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`}
+                  element={<ProgressoAVPR />}
+                /> */}
+
 
               </Route>
 

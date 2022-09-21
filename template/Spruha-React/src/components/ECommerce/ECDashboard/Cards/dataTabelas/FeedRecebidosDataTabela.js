@@ -15,8 +15,13 @@ export function Basicdatatable({ values }) {
         let dados=datafiltro()
         setData(dados)
     }, [values])
-
- console.log(data)
+    function formatData(data){
+        const dat=new Date(data);
+        const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
+         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+       }
+//  console.log(data)
 
    function datafiltro() {
         let v = [];
@@ -27,8 +32,8 @@ export function Basicdatatable({ values }) {
                 if (item.anonymous == 1) {
                     valores.nome = "Anônimo";
                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    let dat = new Date(item.updated_at);
-                    valores.data = `${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`;
+                    
+                    valores.data = formatData(item.updated_at);
                     valores.comentario = item.feedback
                 } else {
                     if (!!item.name) {
@@ -40,8 +45,8 @@ export function Basicdatatable({ values }) {
                     }
                      api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
 
-                    let dat = new Date(item.updated_at);
-                    valores.data = `${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`;
+                   
+                    valores.data = formatData(item.updated_at);
                     valores.comentario = item.feedback
                 }
                 v.push(valores)
@@ -54,9 +59,9 @@ export function Basicdatatable({ values }) {
                 let valores = {};
                 if (item.anonymous == 1) {
                     valores.nome = "Anônimo";
-                    let dat = new Date(item.updated_at);
-                   api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    valores.data = `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} /  ${dat.getFullYear()}`;
+                    
+                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                    valores.data = formatData(item.updated_at);
                     valores.comentario = item.feedback;
                 } else {
                     if (!!item.name) {
@@ -67,8 +72,8 @@ export function Basicdatatable({ values }) {
                         api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
                     }
                      api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    let dat = new Date(item.updated_at);
-                    valores.data = `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} /  ${dat.getFullYear()}`;
+                    
+                    valores.data = formatData(item.updated_at);
                     valores.comentario = item.feedback;
                 }
 
@@ -84,8 +89,8 @@ export function Basicdatatable({ values }) {
                     // console.log("entrou aqui")
                     valores.nome = "Anônimo";
                     api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    let dat = new Date(item.updated_at);
-                    valores.data = `${dat.getDate()} / ${dat.getMonth() + 1} /  ${dat.getFullYear()}`;
+                    
+                    valores.data = formatData(item.updated_at);
                     valores.comentario = item.feedback;
                 } else {
                     if (!!item.name) {
@@ -97,8 +102,8 @@ export function Basicdatatable({ values }) {
                     }
                     
                        api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    let dat = new Date(item.updated_at);
-                    valores.data = `${dat.getDate()} / ${dat.getMonth() + 1} /  ${dat.getFullYear()}`;
+                    
+                    valores.data = formatData(item.updated_at);
                     valores.comentario = item.feedback;
                 }
                 v.push(valores);

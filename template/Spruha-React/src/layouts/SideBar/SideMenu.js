@@ -117,7 +117,7 @@ export const MENUITEMS2 = [
 				type: 'link',
 				active: false,
 				selected: false,
-				//path: `${process.env.PUBLIC_URL}/`,
+				path: `${process.env.PUBLIC_URL}/minha_unidade`,
 			},
 			{
 				title: 'Desempenho',

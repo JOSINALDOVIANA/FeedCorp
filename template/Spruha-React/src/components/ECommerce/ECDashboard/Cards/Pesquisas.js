@@ -56,8 +56,7 @@ export default  () => {
               className="btn-icon-text"
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: values }) }}
             >
-              <i className="fe fe-x me-2"></i>
-              Fechar
+              <i className="fe fe-x"></i>
             </Button>
           </div>
         </div>
@@ -79,8 +78,6 @@ export default  () => {
                 {avprcreate.map((avpr, index) => (
                     <tr key={index} data-index={index}>
                       {/* <td className="text-center">{avpr.id}</td> */}
-                      
-                     
                       
                       <td className="text-center">{avpr.title}</td>
                       <td className="text-center">{formatData(avpr.updated_at)}</td>

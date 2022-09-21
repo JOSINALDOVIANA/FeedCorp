@@ -37,8 +37,7 @@ const FeedRecebidos = () => {
                     className="btn-icon-text"
                     onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: values }) }}
                   >
-                    <i className="fe fe-x me-2"></i>
-                    Fechar
+                    <i className="fe fe-x"></i>
                   </Button>
                 </div>
               </div>

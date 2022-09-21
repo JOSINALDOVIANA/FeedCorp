@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Row, Card } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { usuarioContext } from '../../../../../..';
-const CriarClimaPulso = () => {
+const ClimaPulso = () => {
 
   const dadosrota = useLocation();
   const location = useLocation();
@@ -17,14 +17,10 @@ const CriarClimaPulso = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Criar Clima Pulso</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">Clima Pulso</h2>
           <Breadcrumb>
-            <Breadcrumb.Item>Engajamento</Breadcrumb.Item>
-            <Breadcrumb.Item 
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}>
-              Clima Pulso
-            </Breadcrumb.Item>
-            <Breadcrumb.Item active>Criar Clima Pulso</Breadcrumb.Item>
+            <Breadcrumb.Item href="#">Engajamento</Breadcrumb.Item>
+            <Breadcrumb.Item active>Clima Pulso</Breadcrumb.Item>
           </Breadcrumb>
         </div>
 
@@ -35,9 +31,9 @@ const CriarClimaPulso = () => {
               variant="white"
               type="button"
               className=" btn-icon-text my-2 me-2"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/realizados`, { state: values }) }}
             >
-              <i className="bi bi-clipboard2-data me-2"></i> Lista
+              <i className="bi bi-clipboard2-data me-2"></i> Realizados
             </Button>
 
             <Button
@@ -55,7 +51,7 @@ const CriarClimaPulso = () => {
               className="my-2 btn-icon-text"
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
             >
-              <i className="bi bi-gear-fill" />
+              <i className="bi bi-gear-fill"/>
             </Button>
           </div>
         </div>
@@ -63,13 +59,15 @@ const CriarClimaPulso = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-    
+      {/* <!-- Row --> */}
+      <Outlet />
+      {/* <!-- End Row --> */}
     </Fragment>
   )
 };
 
-CriarClimaPulso.propTypes = {};
+ClimaPulso.propTypes = {};
 
-CriarClimaPulso.defaultProps = {};
+ClimaPulso.defaultProps = {};
 
-export default CriarClimaPulso;
+export default ClimaPulso;

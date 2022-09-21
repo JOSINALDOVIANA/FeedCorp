@@ -130,7 +130,7 @@ function ECDashboard() {
 
       <Row className="row-sm">
 
-        <Col sm={12} md={6} lg={6} xl={3}>
+        <Col sm={12} md={6} lg={6} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/recebidos`, { state: values }) }}
@@ -157,7 +157,7 @@ function ECDashboard() {
           </Card>
         </Col>
 
-        <Col sm={12} md={6} lg={6} xl={3}>
+        <Col sm={12} md={6} lg={6} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/feitos`, { state: values }) }}
@@ -166,7 +166,7 @@ function ECDashboard() {
               <div className="card-order">
                 {/* TITULO */}
                 <label className="main-content-label mb-3 pt-1" style={{ cursor: 'pointer' }}>
-                  Feedbacks feitos
+                  Feedbacks Enviados
                 </label>
                 <h2 className="text-end">
                   {/* ICONE */}
@@ -182,7 +182,7 @@ function ECDashboard() {
           </Card>
         </Col>
 
-        <Col sm={12} md={6} lg={6} xl={3}>
+        <Col sm={12} md={12} lg={12} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
@@ -207,30 +207,28 @@ function ECDashboard() {
           </Card>
         </Col>
 
-        <Col sm={12} md={6} lg={6} xl={3}>
+        {/* <Col sm={12} md={6} lg={6} xl={3}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/pesquisas`, { state: values }) }}
           >
             <Card.Body>
               <div className="card-order">
-                {/* TITULO */}
+                
                 <label className="main-content-label mb-3 pt-1" style={{ cursor: 'pointer' }}>
                   Pesquisas
                 </label>
                 <h2 className="text-end">
-                  {/* ICONE */}
+                  
                   <i className="bi-clipboard2-data-fill icon-size float-start text-primary"></i>
-                  {/* VALOR VARIAVEL */}
+                  
                   <span className="font-weight-bold">4</span>
                 </h2>
-                {/* <p className="mb-0 mt-4 text-muted">
-                  Monthly Sales<span className="float-end">3,756</span>
-                </p> */}
+               
               </div>
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
 
       </Row>
       {/* FRAGMENTO QUE ABRE AO CLICAR NO CARD */}

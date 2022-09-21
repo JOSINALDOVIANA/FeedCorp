@@ -9,18 +9,20 @@ export function Basicdatatable({ values }) {
     let [data, setData] = useState([])
     useEffect(() => {
 
+    setData([])
+    
      async   function caregarFeedbacks(sendfeedbacks){
             for (const iterator of sendfeedbacks) {
                 const destinatario=await api.get(`/user/getAll?id=${iterator?.id_direction}`);
                 const unidade=await api.get(`/unit/getAll?id=${iterator?.id_unity}`);
-                let dat = new Date(iterator.updated_at);
+               
                 setData(a=>([
                     ...a,{
                     destinatário:destinatario.data.Users[0].name,
                     name:values.dadosUser.name,
                     unidade:unidade.data.units[0]?.initials,
                     comentario:iterator.feedback,
-                    data:`${dat.getDate()}/${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1}/${dat.getFullYear()}`
+                    data:formatData(iterator.updated_at)
 
                 }]))
             }
@@ -29,7 +31,13 @@ export function Basicdatatable({ values }) {
     caregarFeedbacks(values?.sendfeedbacks)
 }, [values])
 
-  console.log(data)
+//   console.log(data)
+function formatData(data){
+    const dat=new Date(data);
+    const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
+     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+   }
 
 
     const columns = [

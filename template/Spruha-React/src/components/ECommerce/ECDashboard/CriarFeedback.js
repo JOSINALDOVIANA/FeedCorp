@@ -4,9 +4,9 @@ import { Button, Card, Col, FormGroup, Row, Form, ListGroup, Breadcrumb } from "
 
 
 import api from "../../../api";
-import { SelectUsers } from "./tabelaCards/dataTabelas/SelectUser";
-import { SelectUnit } from "./tabelaCards/dataTabelas/SelectUnit";
-import { SelecTypes } from "./tabelaCards/dataTabelas/SelectTypes";
+import { SelectUsers } from "./Cards/dataTabelas/SelectUser";
+import { SelectUnit } from "./Cards/dataTabelas/SelectUnit";
+import { SelecTypes } from "./Cards/dataTabelas/SelectTypes";
 import { Grid } from "@mui/material";
 
 

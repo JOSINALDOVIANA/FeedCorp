@@ -134,7 +134,7 @@ export default{
           }
     },
     async answersGet(req,res){
-          let {id=false,id_user=false}=req.query
+          let {id=false,id_user=false,id_feedback=false}=req.query
           try {
             let respostas;
             if(id){
