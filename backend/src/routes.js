@@ -12,6 +12,8 @@ import physicalUnity from './controller/physicalUnity/index.js';
 import location from './controller/location/index.js';
 import okr from './controller/okr/index.js';
 import feedbacks from './controller/feedbacks/index.js';
+import questions from './controller/questions/index.js';
+import pulses from './controller/pulses/index.js';
 const routes=express.Router();
 
  /*
@@ -217,9 +219,9 @@ routes.delete("/feedback_answer/delete",feedbacks.FA_Delete);
 
 /*################################################ pulse ######################################*/
 // ------Pulses-----
-// routes.post("/pulses/insert",pulses.insert);
+routes.post("/pulses/insert",pulses.Insert);
 // routes.put("/pulses/update",pulses.update);
-// routes.get("/pulses/get",pulses.get);
+routes.get("/pulses/get",pulses.Get);
 // routes.delete("/pulses/delete",pulses.delete);
 
 // ------pulse_question-----
@@ -253,9 +255,9 @@ routes.delete("/feedback_answer/delete",feedbacks.FA_Delete);
 // routes.delete("/pulses/delete",pulses.delete);
 
 // ------BDQuestion-----
-// routes.post("/pulses/insert",pulses.insert);
-// routes.put("/pulses/update",pulses.update);
-// routes.get("/pulses/get",pulses.get);
-// routes.delete("/pulses/delete",pulses.delete);
+routes.post("/pulses/questions/insert",questions.Insert);
+routes.put("/pulses/questions/update",questions.Update);
+routes.get("/pulses/questions/get",questions.Get);
+routes.delete("/pulses/questions/delete",questions.Delete);
 
 export default routes;

@@ -87,12 +87,12 @@ const Signin = () => {
     {/* <!-- Row --> */}
     <div className="page main-signin-wrapper"
     >
-      <div className="d-flex header-setting-icon demo-icon fa-spin" onClick={() => Customswitcherdata.Swicherbutton()}>
+      <div className="d-flex header-setting-icon demo-icon fa-spin" >
         <Link className="nav-link icon" to="#" >
           <i className="fe fe-settings settings-icon "></i>
         </Link>
       </div>
-      <Row className="signpages text-center" onClick={() => Customswitcherdata.remove()}>
+      <Row className="signpages text-center" >
         <Col md={12}>
           <Card>
             <Row className="row-sm">

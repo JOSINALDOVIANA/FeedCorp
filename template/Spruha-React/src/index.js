@@ -156,7 +156,7 @@ const Signin = React.lazy(() => import("./components/ECommerce/ECDashboard/Custo
 const Signup = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signup/Signup"))
 const Profile = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/profile/Profile"))
 // const Lockscreen = React.lazy(() => import("./components/Custompages/Lockscreen/Lockscreen"))
-const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
+// const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
 const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
 // const AddProduct = React.lazy(() => import("./components/ECommerce/AddProduct/Addproduct"))
 // const Custompage = React.lazy(() => import("./components/Custompage"))
