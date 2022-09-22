@@ -186,7 +186,7 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
               <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
               <Route path={`${process.env.PUBLIC_URL}/cadastro`} element={<Signup />} />
-              <Route path={`${process.env.PUBLIC_URL}/esqueceuasenha`} element={<Forgotpassword />} />
+              <Route path={`${process.env.PUBLIC_URL}/esqueceu_senha`} element={<Forgotpassword />} />
 
               <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
                 <Route index element={<ECDashboard />} />

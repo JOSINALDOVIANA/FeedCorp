@@ -5,9 +5,9 @@ import * as Customswitcherdata from "../../../../../data/Switcherdata/Customswit
 import api from "../../../../../api";
 const Signin = () => {
   const [permanecer, setPerm] = React.useState(false);
-  
+
   const navegar = useNavigate();
- 
+
   React.useEffect(() => {
     if (localStorage.getItem("values")) {
       const valores = localStorage.getItem("values");
@@ -29,10 +29,10 @@ const Signin = () => {
     let permissions;
     let unit;
     let status;
-    let image={};
+    let image = {};
     let units;
-    let company=[];
-    let okrscriados=[];
+    let company = [];
+    let okrscriados = [];
     await api.post("/user/login", obt).then(r => {
       if (!r.data.status) {
         alert(r.data.message)
@@ -41,156 +41,137 @@ const Signin = () => {
         permissions = r.data?.permissions[0]?.description;
         unit = r.data?.unit[0];
         status = r.data?.status;
-        company=r.data?.company[0];    
+        company = r.data?.company[0];
         // console.log(r.data)   
       }
     });
-   
-    if(!!company){
-      company= await api(`/company/get?id=${company.id}`);
-      company=company.data.company;
+
+    if (!!company) {
+      company = await api(`/company/get?id=${company.id}`);
+      company = company.data.company;
     }
     if (status) {
 
-      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });     
+      await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });
       await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
       if (permanecer) {
         localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
       }
-      await  api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(async r=>{
-        let okrs=r?.data?.okrs;
+      await api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(async r => {
+        let okrs = r?.data?.okrs;
         // let k=[].length
         for (const index1 in okrs) {
-          let process=0
+          let process = 0
           for (const index2 in okrs[index1].keys) {
-            process=process+okrs[index1].keys[index2].status;
+            process = process + okrs[index1].keys[index2].status;
           }
-          let keys=okrs[index1].keys
-          okrs[index1].progress=process/keys.length
+          let keys = okrs[index1].keys
+          okrs[index1].progress = process / keys.length
           // console.log(keys.length)
-          if(okrs[index1].progress==100){
-            okrs[index1].concluded=true
+          if (okrs[index1].progress == 100) {
+            okrs[index1].concluded = true
           }
-          await api.put(`/okrs/update`,{...okrs[index1]});
+          await api.put(`/okrs/update`, { ...okrs[index1] });
         }
-        okrscriados=okrs;
+        okrscriados = okrs;
         console.log(okrscriados)
       })
       console.log("aqui")
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company,okrscriados } });
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados } });
     }
 
   };
 
-  return(
+  return (
     <Fragment>
-    {/* <!-- Row --> */}
-    <div className="page main-signin-wrapper"
-    >
-      <div className="d-flex header-setting-icon demo-icon fa-spin" onClick={() => Customswitcherdata.Swicherbutton()}>
-        <Link className="nav-link icon" to="#" >
-          <i className="fe fe-settings settings-icon "></i>
-        </Link>
-      </div>
-      <Row className="signpages text-center" onClick={() => Customswitcherdata.remove()}>
-        <Col md={12}>
-          <Card>
-            <Row className="row-sm">
-              <Col
-                lg={6}
-                xl={5}
-                className="d-none d-lg-block text-center bg-primary details"
-              >
-                <div className="mt-5 pt-5 p-2 pos-relative">
-                  <img
-                    src={require("../../../../../assets/img/brand/logo-light.png")}
-                    className="header-brand-img mb-4"
-                    alt="logo-light"
-                  />
-                  <div className="clearfix"></div>
-                  {/* <img
-                    src={require("../../../../../assets/img/svgs/user.svg").default}
-                    className="ht-100 mb-0"
-                    alt="user"
-                  /> */}
-                  <h5 className="mt-4 text-white">Junte-se a sua comunidade!</h5>
-                  {/* <span className="tx-white tx-13 mb-5 mt-xl-0">
+      {/* <!-- Row --> */}
+      <div className="page main-signin-wrapper">
+
+        <div className="d-flex header-setting-icon demo-icon fa-spin" onClick={() => Customswitcherdata.Swicherbutton()}>
+          <Link className="nav-link icon" to="#" >
+            <i className="fe fe-settings settings-icon "></i>
+          </Link>
+        </div>
+        {/* <Row className="signpages text-center" onClick={() => Customswitcherdata.remove()}> */}
+        <div className="d-flex justify-content-center">
+
+          <Card border="primary" style={{ width: '35rem', height: '31rem' }}>
+
+            <Card.Header className="d-flex justify-content-center mt-3 pt-3 p-3">
+
+              <img
+                src={require("../../../../../assets/img/brand/logo.png")}
+                className="header-brand-img mb-2"
+                alt="logo"
+              />
+              {/* <div className="clearfix"></div>
+            <h5 className="mt-4 text-white">Junte-se a sua comunidade!</h5>
+            <span className="tx-white tx-13 mb-5 mt-xl-0">
                     Engaje-se com seu trabalho!
                   </span> */}
-                </div>
-              </Col>
-              <Col lg={6} xl={7} xs={12} sm={12} className="login_form ">
-                <Container fluid>
-                  <Row className="row-sm">
-                    <Card.Body className="mt-2 mb-2">
-                      <img
-                        src={require("../../../../../assets/img/brand/logo.png")}
-                        className=" d-lg-none header-brand-img text-start float-start mb-4 auth-light-logo"
-                        alt="logo"
-                      />
-                      <img
-                        src={require("../../../../../assets/img/brand/logo-light.png")}
-                        className=" d-lg-none header-brand-img text-start float-start mb-4 auth-dark-logo"
-                        alt="logo"
-                      />
-                      <div className="clearfix"></div>
-                      <Form onSubmit={(e)=>{handleSubmit(e)}}>
-                        <h5 className="text-start mb-2">
-                          Entre em sua conta!
-                        </h5>
-                        {/* <p className="mb-4 text-muted tx-13 ms-0 text-start">
-                          Signin to create, discover and connect with the global
-                          community
-                        </p> */}
-                        <Form.Group className="text-start form-group" controlId="formEmail">
-                          <Form.Label>Email</Form.Label>
-                          <Form.Control
-                            placeholder="Digite seu email"
-                            type="Email"
-                            name="e-mail"
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          className="text-start form-group"
-                          controlId="formpassword"
-                        >
-                          <Form.Label>Senha</Form.Label>
-                          <Form.Control
-                            placeholder="Digite sua senha"
-                            type="password"
-                            name="password"
-                          />
-                        </Form.Group>
-                        <button type="submit"  className="btn ripple btn-main-primary btn-block mt-2">
-                          Entrar
-                        </button>
-                      </Form>
-                      <div className="text-start mt-5 ms-0">
-                        <div className="mb-1">
-                          <Link
-                            to={`${process.env.PUBLIC_URL}/esqueceuasenha`}
-                          > Esqueceu a senha? 
-                          </Link>
-                        </div>
-                        <div>
-                          Não possui conta? Faça um orçamento
-                          <Link
-                            to={`${process.env.PUBLIC_URL}/cadastrar`}
-                          > aqui</Link>
-                        </div>
-                      </div>
-                    </Card.Body>
-                  </Row>
-                </Container>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-    </div>
 
-    {/* <!-- End Row --> */}
-  </Fragment>
+            </Card.Header>
+
+            <Card.Body>
+
+              <div className="clearfix"></div>
+              <Form onSubmit={(e) => { handleSubmit(e) }}>
+                <h5 className="text-start mb-2">
+                  Entre em sua conta!
+                </h5>
+
+                <Form.Group className="text-start form-group" controlId="formEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    placeholder="Digite seu email"
+                    type="Email"
+                    name="e-mail"
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  className="text-start form-group"
+                  controlId="formpassword"
+                >
+                  <Form.Label>Senha</Form.Label>
+                  <Form.Control
+                    placeholder="Digite sua senha"
+                    type="password"
+                    name="password"
+                  />
+                </Form.Group>
+
+                <button type="submit" className="btn ripple btn-main-primary btn-block mt-2">
+                  Entrar
+                </button>
+
+              </Form>
+
+            </Card.Body>
+            
+            <Card.Footer>
+              <div className="mb-1">
+                <Link
+                  to={`${process.env.PUBLIC_URL}/esqueceu_senha`}
+                > Esqueceu a senha?
+                </Link>
+              </div>
+              <div>
+                Não possui conta? Faça um orçamento
+                <Link
+                  to={`${process.env.PUBLIC_URL}/cadastrar`}
+                > aqui</Link>
+              </div>
+            </Card.Footer>
+
+
+          </Card>
+        </div>
+
+      </div>
+
+      {/* <!-- End Row --> */}
+    </Fragment>
   )
 
 };
