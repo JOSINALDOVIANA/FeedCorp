@@ -15,29 +15,23 @@ const Signup = () => (
           <Card>
             <Row className="row-sm">
               <Col
-                lg={6}
-                xl={5}
-                className="d-none d-lg-block text-center bg-primary details"
+                className="text-center bg-primary"
               >
-                <div className="mt-5 pt-5 p-2 pos-absolute">
+                <div className="mt-5 pt-5 p-2">
                   <img
                     src={require("../../../../../assets/img/brand/logo-light.png")}
                     className="header-brand-img mb-4"
                     alt="logo"
                   />
-                  <div className="clearfix"></div>
-                  <img
-                    src={require("../../../../../assets/img/svgs/user.svg").default}
-                    className="ht-100 mb-0"
-                    alt="user"
-                  />
-                  <h5 className="mt-4 text-white">Create Your Account</h5>
+                                 
+                  <h5 className="mt-4 text-white">Solicite um orçamento</h5>
+                  
                   <span className="tx-white-6 tx-13 mb-5 mt-xl-0">
-                    Signup to create, discover and connect with the global
-                    community
+                   Gratuito e sem compromisso
                   </span>
                 </div>
               </Col>
+
               <Col lg={6} xl={7} xs={12} sm={12} className=" login_form ">
                 <Container fluid>
                   <Row className=" row-sm">
@@ -53,45 +47,51 @@ const Signup = () => (
                         alt="logo"
                       />
                       <div className="clearfix"></div>
-                      <h5 className="text-start mb-2">Signup for Free</h5>
+                      <h5 className="text-start mb-2">Preencha o formulário abaixo</h5>
                       <p className="mb-4 text-muted tx-13 ms-0 text-start">
-                        It's free to signup and only takes a minute.
+                        Para Administradores/Gestores RH que precisam otimizar o desempenho de sua empresa
                       </p>
                       <Form>
                         <Form.Group className="text-start form-group" controlId="fromName">
-                          <Form.Label>Name</Form.Label>
+                          <Form.Label>Nome</Form.Label>
                           <Form.Control
-                            placeholder="Enter your Name"
+                            placeholder="Digite seu nome"
                             type="text"
                           />
                         </Form.Group>
+
                         <Form.Group className="text-start form-group" controlId="formEmail">
                           <Form.Label>Email</Form.Label>
                           <Form.Control
-                            placeholder="Enter your email"
+                            placeholder="Digite seu email"
                             type="email"
                           />
                         </Form.Group>
+
                         <Form.Group
                           className="text-start form-group"
-                          controlId="formpassword"
+                          controlId="formCorporation"
                         >
-                          <Form.Label>Password</Form.Label>
+                          <Form.Label>Corporação</Form.Label>
                           <Form.Control
-                            placeholder="Enter your password"
-                            type="password"
+                            placeholder="Digite o nome de sua corporação"
+                            type="text"
                           />
                         </Form.Group>
 
+                        <p className="mb-4 text-muted tx-13 ms-0 text-start">
+                        Ao informar meus dados, eu aceito a Política de Privacidade
+                      </p>
+
                         <button className="btn ripple btn-main-primary btn-block mt-2">
-                          Create Account
+                          Solicitar Orçamento
                         </button>
                       </Form>
                       <div className="text-start mt-5 ms-0">
                         <p className="mb-0">
-                          Already have an account?
+                          Já possui conta com a gente?
                           <Link
-                            to={`${process.env.PUBLIC_URL}/custompages/signin`}> SignIn
+                            to={`${process.env.PUBLIC_URL}/login`}> login
                           </Link>
                         </p>
                       </div>

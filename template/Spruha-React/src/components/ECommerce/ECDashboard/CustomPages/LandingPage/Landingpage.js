@@ -218,7 +218,7 @@ const Landingpage = () => {
                             target="_blank">Cadastrar
                           </Link>
                           <Link to={`${process.env.PUBLIC_URL}/login`} className="btn ripple btn-min w-sm btn-info me-2"
-                            target="_self">Entrar
+                            target="self">Entrar
                           </Link>
                         </div>
                       </div>

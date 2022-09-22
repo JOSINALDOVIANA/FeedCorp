@@ -88,9 +88,9 @@ const Signin = () => {
       <div className="page main-signin-wrapper">
 
         <div className="d-flex header-setting-icon demo-icon fa-spin" onClick={() => Customswitcherdata.Swicherbutton()}>
-          <Link className="nav-link icon" to="#" >
+          {/* <Link className="nav-link icon" to="#" >
             <i className="fe fe-settings settings-icon "></i>
-          </Link>
+          </Link> */}
         </div>
         {/* <Row className="signpages text-center" onClick={() => Customswitcherdata.remove()}> */}
         <div className="d-flex justify-content-center">
