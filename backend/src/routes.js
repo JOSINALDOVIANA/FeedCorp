@@ -222,7 +222,7 @@ routes.delete("/feedback_answer/delete",feedbacks.FA_Delete);
 routes.post("/pulses/insert",pulses.Insert);
 // routes.put("/pulses/update",pulses.update);
 routes.get("/pulses/get",pulses.Get);
-// routes.delete("/pulses/delete",pulses.delete);
+routes.delete("/pulses/delete",pulses.Delete);
 
 // ------pulse_question-----
 // routes.post("/pulses/insert",pulses.insert);
@@ -249,7 +249,7 @@ routes.get("/pulses/get",pulses.Get);
 // routes.delete("/pulses/delete",pulses.delete);
 
 // ------answer_user-----
-// routes.post("/pulses/insert",pulses.insert);
+routes.post("/pulses/answer_user/insert",pulses.answer_userInsert);
 // routes.put("/pulses/update",pulses.update);
 // routes.get("/pulses/get",pulses.get);
 // routes.delete("/pulses/delete",pulses.delete);
@@ -259,5 +259,9 @@ routes.post("/pulses/questions/insert",questions.Insert);
 routes.put("/pulses/questions/update",questions.Update);
 routes.get("/pulses/questions/get",questions.Get);
 routes.delete("/pulses/questions/delete",questions.Delete);
+
+//---------category_question------
+routes.post("/questions/category_question/insert",questions.categoryQuestionInsert);
+routes.get("/questions/category_question/get",questions.categoryQuestionGet);
 
 export default routes;

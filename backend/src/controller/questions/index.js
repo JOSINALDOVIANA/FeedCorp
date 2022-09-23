@@ -12,7 +12,7 @@ export default{
     async Insert(req,res){
         let {questions}=req.body;
         try {
-            questions=questions.map(question=>({question}));
+            // questions=questions.map(question=>({question}));
          await conexao("bdquestions").insert(questions);
             return res.json({status:true,mensage:"dados inseridos"})
         } catch (error) {
@@ -46,6 +46,32 @@ export default{
         } catch (error) {
             console.log(error)
             return res.json({status:false,mensage:"erro questions=>delete"})
+        }
+    },
+    async categoryQuestionInsert(req,res){
+        let {categories}=req.body;
+        try {
+           categories=categories.map(category=>({category}))
+           await conexao("categoryquestion").insert(categories);
+            
+            return res.json({status:true,mensage:"dados salvos"})
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"erro questions.categoryquestion=>delete"})
+        }
+    },
+    async categoryQuestionGet(req,res){
+        let {id=false}=req.query;
+        try {
+           if (!!id) {
+            return res.json({status:true,categories:await conexao("categoryquestion").where({id})})
+           }
+         return res.json({status:true,categories:await conexao("categoryquestion")})
+            
+            
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"erro questions.categoryquestionget=>delete"})
         }
     },
 }

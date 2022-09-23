@@ -1,7 +1,8 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Row, Card, Table, Form } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from '../../../../../..';
+import { usuarioContext } from '../../../../../..' 
+
 const CriarClimaPulso = () => {
 
   const dadosrota = useLocation();
@@ -17,11 +18,11 @@ const CriarClimaPulso = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Criar Clima Pulso</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">NoCriarlCma puPso</h2>
           <Breadcrumb>
             <Breadcrumb.Item>Engajamento</Breadcrumb.Item>
-            <Breadcrumb.Item 
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}>
+            <Breadcrumb.Item
+               onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}>
               Clima Pulso
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Criar Clima Pulso</Breadcrumb.Item>
@@ -63,13 +64,26 @@ const CriarClimaPulso = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-    
-    </Fragment>
+
+      <Row className="row-sm">
+        <Col lg={12} md={12}>
+          <Card className="custom-card">
+           <Card.Body>
+             <Form.Check
+              type="checkbox"
+              label="Enviar para todos os colaboradores?"
+            // onChange={}
+            />
+           </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+        </Fragment>
   )
 };
 
-CriarClimaPulso.propTypes = {};
 
-CriarClimaPulso.defaultProps = {};
+
 
 export default CriarClimaPulso;

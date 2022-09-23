@@ -74,14 +74,26 @@ export default{
           pulsesDirectUser=pulsesDirectUser.filter((este, i) => pulsesDirectUser.indexOf(este) === i);//tirando duplicatas
 
           for (const index in pulsesCreateUser) {
+            let mediapulse=0;
+            let totalpulse=0;
             let questions=await conexao("pulse_question").where({"id_pulse":pulsesCreateUser[index].id});
             for (let index2 in questions) {
                 let users_resp=await conexao("answer_user").where({"answer_user.id_question":questions[index2].id})
                 .join("users","users.id","=","answer_user.id_user").join("images","users.id_image","=","images.id")
                 .select("users.*","images.url","answer_user.status","answer_user.answer");
-                questions[index2]={...questions[index2],users_resp}; 
+                let total=0;
+                let media=0;
+                if(users_resp.length>0){
+                  for (const iterator of users_resp) {
+                    total=total+iterator.answer;
+                  }
+                  media=total/users_resp.length
+                }
+                questions[index2]={...questions[index2],users_resp,media};
+                totalpulse=total+media; 
             }
-            pulsesCreateUser[index]={...pulsesCreateUser[index],questions}
+            mediapulse=totalpulse/questions.length;
+            pulsesCreateUser[index]={...pulsesCreateUser[index],questions,media:mediapulse}
           }
 
           for (const index in pulsesDirectUser) {
@@ -95,7 +107,7 @@ export default{
           }
 
          
-            return res.json({pulsesCreateUser,pulsesDirectUser});           
+            return res.json({status:true,pulsesCreateUser,pulsesDirectUser});           
          }
 
          if(!!id_company){
@@ -111,7 +123,7 @@ export default{
             }
             pulsesCompany[index]={...pulsesCompany[index],questions}
           }
-            return res.json({pulsesCompany});           
+            return res.json({status:true,pulsesCompany});           
          }
 
          if(!!id_unit){
@@ -128,16 +140,40 @@ export default{
             }
             pulsesUnit[index]={...pulsesUnit[index],questions}
           }
-            return res.json({pulsesUnit});           
+            return res.json({status:true,pulsesUnit});           
          }         
          
        
 
-        return res.json({status:false,mensage:"DADOS NAO LOCALIZADOS"})
+        return res.json({status:false,pulses:await conexao("pulses")})
         } catch (error) {
             console.log(error)
-            return res.json({status:false,mensage:"error pulses=>insert"})
+            return res.json({status:false,mensage:"error pulses=>get"})
         }
     },
+    async Delete(req,res){
+        let {id}=req.query;
+        try { 
+          await conexao("pulses").del().where({id})      
+
+         return res.json({status:true,mensage:"apagado"})
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"error pulses=>delete"})
+        }
+    },
+    async answer_userInsert(req,res){
+        let {id_user,resp}=req.body;
+        try { 
+          resp=resp.map(({id_question,answer})=>({id_user,id_question,answer}));
+          await conexao("answer_user").insert(resp)      
+
+         return res.json({status:true,answer:resp})
+        } catch (error) {
+            console.log(error)
+            return res.json({status:false,mensage:"error pulses.answer_user=>insert"})
+        }
+    },
+
 
 }

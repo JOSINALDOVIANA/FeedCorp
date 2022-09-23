@@ -67,6 +67,7 @@ const CriarOKR = () => {
                 </Button>
               </div>
             </div>
+
             <Card.Body>
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Nome do Objetivo</Form.Label>
