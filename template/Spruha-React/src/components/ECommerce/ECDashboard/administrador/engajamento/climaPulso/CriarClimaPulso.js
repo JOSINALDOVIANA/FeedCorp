@@ -18,19 +18,19 @@ const CriarClimaPulso = () => {
 
   useEffect(() => {
     setValues(dadosrota.state)
-
+    
 
     api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
       setPulse(a => ({
         ...a,
         id_company: dadosrota.state.company.id,
         id_user: dadosrota.state.dadosUser.id,
-        unitSelect: [],
+        unitSelect: false,
         checked: true,
         company: false,
         questions: []
       }))
-      setUnits(a => ([...a, ...r.data]))
+      setUnits(a => ([...r.data]))
 
       api.get(`questions/category_question/get`).then(r => {
         setPulse(a => ({ ...a, categorias: r.data.categories }))
@@ -40,7 +40,7 @@ const CriarClimaPulso = () => {
 
 
   }, [dadosrota.state])
-  // console.log(pulse)
+  console.log(values)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -114,7 +114,7 @@ const CriarClimaPulso = () => {
                     type="checkbox"
                     onChange={(e) => {
                       if (e.target.checked) {
-                        setPulse(a => ({ ...a, company: values.company.id, checked: false }))
+                        setPulse(a => ({ ...a, company: values.company.id, checked: false, unitSelect: false}))
 
                       } else {
                         setPulse(a => ({ ...a, company: false, checked: true }))
@@ -182,12 +182,24 @@ const CriarClimaPulso = () => {
 
                 <Button onClick={() => {
                   let obj={}
+                  obj.title=pulse.title
+                  obj.id_user=pulse.id_user
+                  obj.id_company=pulse.id_company
                   obj.questions=pulse.questions.map(item=>(item.question))
-                  console.log(obj)
-                  console.log(pulse)
+                  
                   if(!!pulse.company){
-                    console.log("entrou")
+                    obj.company=pulse.company                    
                   }
+                  if(!!pulse.unitSelect){
+                    obj.units=pulse.unitSelect.map(item=>(item.id));
+                  }
+
+                  api.post("pulses/insert",{...obj}).then(r=>{
+                    console.log(values)
+                    setValues(a=>({...a,pulsesCreate:[...a.pulsesCreate,r.data.pulse]}));
+                  });
+
+
                 }}>
                   Criar Pesquisa
                 </Button>

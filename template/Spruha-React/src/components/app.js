@@ -31,6 +31,7 @@ const App = () => {
     }
     setValues(dadosrota.state);
     
+    
   },[dadosrota.state])
 
 // console.log(values)

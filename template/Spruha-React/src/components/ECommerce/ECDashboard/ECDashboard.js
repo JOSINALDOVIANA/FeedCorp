@@ -39,6 +39,7 @@ function ECDashboard() {
 
       
       setValues(dadosrota.state);
+     
       
     if(dadosrota.state.permissions=="administrador"){
       api.get(`/feedback/get?id_company=${dadosrota.state.company?.id}`).then(r=>{       

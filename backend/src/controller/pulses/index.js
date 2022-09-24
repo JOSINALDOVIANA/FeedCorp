@@ -26,7 +26,7 @@ export default{
          }
 
           return res.json({status:true,pulse:{
-            id_user,id_company,title,questions,users,company,units
+            id,id_user,id_company,title,questions,users,company,units
           }})
         } catch (error) {
             console.log(error)
