@@ -41,10 +41,10 @@ const Okr = () => {
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">OKR - Objective Key Result</h2>
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <Breadcrumb.Item href="#">Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item active>OKR</Breadcrumb.Item>
-          </Breadcrumb>
+          </Breadcrumb> */}
         </div>
 
         <div className="d-flex">
