@@ -3,7 +3,7 @@ import { Row, Col, Card, Accordion, Form, FormGroup, Collapse, Breadcrumb, Butto
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../../../..";
 import {Grid, Divider} from "@mui/material";
-import { SelectDBQuestions } from "../../../Cards/dataTabelas/SelectDBQuestions"
+import { SelectDBQuestions } from "../../../Cards/dataTabelas/Selects/SelectDBQuestions"
 
 // import { Container } from './styles';
 

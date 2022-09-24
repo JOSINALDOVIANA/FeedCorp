@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge } from "react-bootstrap";
+import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Breadcrumb } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataAVPR";
 import { usuarioContext } from "../../../../../..";
@@ -20,13 +20,36 @@ const CriarAvpr = () => {
 
   return (
     <Fragment>
+      {/* <!-- Page Header --> */}
+      <div className="page-header">
+        <div>
+          <h2 className="main-content-title tx-24 mg-b-5">Criar avaliação por resultado</h2>
+          <Breadcrumb>
+            <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
+            <Breadcrumb.Item
+              onClick={() => {
+                navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+              }}
+            >Avaliação por Resultados
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Criar AvPR</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
+
+      </div>
+      {/* <!-- End Page Header --> */}
 
       <Row className="row-sm">
         <Col lg={12} md={12}>
           <Card className="custom-card">
 
             <div className="page-header mx-4">
-              <h2 className="main-content-title tx-24 mg-b-5">Nova avaliação</h2>
+              <div>
+                <h2 className="main-content-title tx-24 mg-b-5">Nova avaliação</h2>
+                <spam className="d-flex text-muted tx-13">
+                  Crie uma nova avaliação por resultados
+                </spam>
+              </div>
               <div>
                 <Button to="#"
                   variant="info"

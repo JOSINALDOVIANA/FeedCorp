@@ -1,1963 +1,650 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import * as gallery from "../../../../../data/Pages/gallery";
+import { Row, Col, Tab, Nav, Breadcrumb, Card, Button, ListGroup, Form, Table } from "react-bootstrap";
+import Searchable from "react-searchable-dropdown";
 import { Link } from "react-router-dom";
-import { Tab, Nav, Dropdown, Form, Button, Col, Breadcrumb, Row, FormGroup, Card } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
 
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Profile() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const [ values, setValues ] = useState({});
+  const [values, setValues] = useState({});
 
   useEffect(() => {
     if (dadosrota.state) {
       setValues(dadosrota.state);
-    }else{
+    } else {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
 
   }, [dadosrota])
   console.log(values)
+
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Profile</h2>
-          <Breadcrumb>
-            <Breadcrumb.Item href="#"> Pages </Breadcrumb.Item>
-            <Breadcrumb.Item active >  Profile  </Breadcrumb.Item>
+          <h2 className="main-content-title tx-24 mg-b-5">Account</h2>
+          <Breadcrumb >
+            <Breadcrumb.Item href="#" >
+              Ecommerce
+            </Breadcrumb.Item>
+            <Breadcrumb.Item >
+              Account
+            </Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <div className="d-flex">
           <div className="justify-content-center">
-            <Button variant="white"
+            <Button
+              variant="white"
               type="button"
               className="btn-icon-text my-2 me-2"
             >
               <i className="fe fe-download me-2"></i> Import
             </Button>
-            <Button variant="white"
+            <Button
+              variant="white"
               type="button"
               className="btn-icon-text my-2 me-2"
             >
               <i className="fe fe-filter me-2"></i> Filter
             </Button>
-            <Button variant="primary" type="button" className="my-2 btn-icon-text">
+            <Button
+              variant="primary"
+              type="button"
+              className=" my-2 btn-icon-text"
+            >
               <i className="fe fe-download-cloud me-2"></i> Download Report
             </Button>
           </div>
         </div>
       </div>
       {/* <!-- End Page Header --> */}
-
-      <Tab.Container
-        id="center-tabs-example"
-        defaultActiveKey="first"
-        className="bg-gray-100"
-      >
-        <Row className="square">
-          <div lg={12} md={12}>
-            <Card className="custom-card">
-              <Card.Body>
-                <div className="panel profile-cover">
-                  <div className="profile-cover__img">
-                    <img  src={values?.image?.url || require("../../../../../assets/img/users/1.jpg")} alt="img" />
-                    <h3 className="h3"> {values?.dadosUser?.name.toUpperCase()}</h3>
+      {/* <!-- Row --> */}
+      <Tab.Container defaultActiveKey="orders">
+        <Row className="row row-sm">
+          <Col xl={3} lg={12} md={12} >
+            <Card className=" custom-card">
+              <Card.Header>
+                <h3 className="main-content-Form.Label">My Account</h3>
+              </Card.Header>
+              <Card.Body className=" text-center item-user">
+                <div className="profile-pic">
+                  <div className="profile-pic-img">
+                    <span
+                      className="bg-success dots"
+                      title="online"
+                    ></span>
+                    <img 
+                    //src={user1} 
+                    className="rounded-circle" alt="user" />
                   </div>
-                  <div className="btn-list btn-profile">
-                    <Button variant="danger" className="btn btn-rounded ">
-                      <i className="fa fa-plus me-2"></i>
-                      <span>Follow</span>
-                    </Button>
-                    <Button variant="success" className="btn btn-rounded">
-                      <i className="fa fa-comment me-2"></i>
-                      <span>Message</span>
-                    </Button>
-                  </div>
-                  <div className="profile-cover__action bg-img"></div>
-                  <div className="profile-cover__info">
-                    <ul className="nav">
-                      <li>
-                        <strong>26</strong>Projects
-                      </li>
-                      <li>
-                        <strong>33</strong>Followers
-                      </li>
-                      <li>
-                        <strong>136</strong>Following
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="profile-tab tab-menu-heading">
-                    <Nav variant="pills" className="p-3 bg-primary-transparent">
-                      <Nav.Item>
-                        <Nav.Link eventKey="first">About</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="editprofile">Edit Profile </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="timeline">Timeline</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="gallery">Gallery</Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="friends">Friends </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="accountsetting">
-                          Account Settings
-                        </Nav.Link>
-                      </Nav.Item>
-                    </Nav>
+                  <div className="text-dark">
+                    <h5 className="mt-3 mb-0 font-weight-semibold">
+                      {values?.dadosUser.name}
+                    </h5>
                   </div>
                 </div>
               </Card.Body>
+              <Nav variant="pills" className="item1-links flex-column mb-0">
+                <Nav.Item as="li">
+                  <Nav.Link eventKey="orders" role="tablist">
+                    <i className="ti-user icon1"></i> My orders
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link eventKey="myaddress">
+                    <i className="ti-save-alt icon1"></i> My Address
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link eventKey="trackorder">
+                    <i className="ti-truck icon1"></i> Track Order
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link eventKey="whishlist">
+                    <i className="ti-heart icon1"></i> Wishlist
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link eventKey="wallet">
+                    <i className="ti-wallet icon1"></i> Wallet
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link eventKey="profile">
+                    <i className="ti-credit-card icon1"></i> My Profile
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link href={`${process.env.PUBLIC_URL}/custompages/signup`} >
+                    <i className="ti-power-off icon1"></i> Logout
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
             </Card>
-
-          </div>
-        </Row>
-        <Row className="row-sm">
-          <Col md={12} lg={12}>
-            <div className="card custom-card main-content-body-profile">
-              <Tab.Content>
-                <Tab.Pane eventKey="first">
-                  <div lg={12} md={12}>
-                    <Card className="custom-card main-content-body-profile">
-                      <div className="tab-content">
-                        <div className="main-content-body tab-pane p-sm-4 p-0 border-top-0 active">
-                          <div className=" p-0 border p-0 rounded-10">
-                            <div className="p-4">
-                              <h4 className="tx-15 text-uppercase mb-3">
-                                BIOdata
-                              </h4>
-                              <p className="m-b-5">
-                                Hi I'm Petey Cruiser,has been the industry's
-                                standard dummy text ever since the 1500s, when
-                                an unknown printer took Link galley of type.
-                                Donec pede justo, fringilla vel, aliquet nec,
-                                vulputate eget, arcu. In enim justo, rhoncus
-                                ut, imperdiet a, venenatis vitae, justo.
-                                Nullam dictum felis eu pede mollis pretium.
-                                Integer tincidunt.Cras dapibus. Vivamus
-                                elementum semper nisi. Aenean vulputate
-                                eleifend tellus. Aenean leo ligula, porttitor
-                                eu, consequat vitae, eleifend ac, enim.
-                              </p>
-                              <div className="m-t-30">
-                                <h4 className="tx-15 text-uppercase mt-3">
-                                  Experience
-                                </h4>
-                                <div className=" p-t-10">
-                                  <h5 className="text-primary m-b-5 tx-14">
-                                    Lead designer / Developer
-                                  </h5>
-                                  <p className="">websitename.com</p>
-                                  <p>
-                                    <b>2010-2015</b>
-                                  </p>
-                                  <p className="text-muted tx-13 m-b-0">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an
-                                    unknown printer took a galley of type and
-                                    scrambled it to make a type specimen book.
-                                  </p>
-                                </div>
-
-                                <Card.Body className="px-0">
-                                  <h5 className="text-primary m-b-5 tx-14">
-                                    Senior Graphic Designer
-                                  </h5>
-                                  <p className="">coderthemes.com</p>
-                                  <p>
-                                    <b>2007-2009</b>
-                                  </p>
-                                  <p className="text-muted tx-13 mb-0">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an
-                                    unknown printer took a galley of type and
-                                    scrambled it to make a type specimen book.
-                                  </p>
-                                </Card.Body>
-                              </div>
-                            </div>
-                            <div className="border-top"></div>
-                            <div className="p-4">
-                              <Form.Label className="main-content-label tx-13 mg-b-20">
-                                Contact
-                              </Form.Label>
-                              <div className="d-sm-flex">
-                                <div className="mg-sm-r-20 mg-b-10">
-                                  <div className="main-profile-contact-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-primary-transparent text-primary">
-                                        <i className="icon ion-md-phone-portrait"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>Mobile</span>
-                                        <div> +245 354 654 </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="mg-sm-r-20 mg-b-10">
-                                  <div className="main-profile-contact-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-success-transparent text-success">
-                                        <i className="icon ion-logo-slack"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>Slack</span>
-                                        <div> @spruko.w </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="">
-                                  <div className="main-profile-contact-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-info-transparent text-info">
-                                        <i className="icon ion-md-locate"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>Current Address</span>
-                                        <div> San Francisco, CA </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="border-top"></div>
-                            <div className="p-3 p-sm-4">
-                              <Form.Label className="main-content-label tx-13 mg-b-20">
-                                Social
-                              </Form.Label>
-                              <div className="d-xl-flex">
-                                <div className="mg-md-r-20 mg-b-10">
-                                  <div className="main-profile-social-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-primary-transparent text-primary">
-                                        <i className="icon ion-logo-github"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>Github</span>
-                                        <Link to="#">github.com/spruko</Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="mg-md-r-20 mg-b-10">
-                                  <div className="main-profile-social-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-success-transparent text-success">
-                                        <i className="icon ion-logo-twitter"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>Twitter</span>
-                                        <Link to="#">
-                                          twitter.com/spruko.me
-                                        </Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="mg-md-r-20 mg-b-10">
-                                  <div className="main-profile-social-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-info-transparent text-info">
-                                        <i className="icon ion-logo-linkedin"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>Linkedin</span>
-                                        <Link to="#">
-                                          linkedin.com/in/spruko
-                                        </Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="mg-md-r-20 mg-b-10">
-                                  <div className="main-profile-social-list">
-                                    <div className="media">
-                                      <div className="media-icon bg-danger-transparent text-danger">
-                                        <i className="icon ion-md-link"></i>
-                                      </div>
-                                      <div className="media-body">
-                                        <span>My Portfolio</span>
-                                        <Link to="#">spruko.com/</Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                </Tab.Pane>
-                <Tab.Pane eventKey="editprofile">
-                  <div
-                    className="main-content-body tab-pane p-sm-4 p-0 border-top-0"
+          </Col>
+          <Col xl={9} lg={12} md={12}>
+            <Card className="custom-card">
+              <Card.Body>
+                <Tab.Content className="tab-content">
+                  <Tab.Pane
+                    eventKey="orders"
+                    className="tab-pane "
+                    id="orders"
+                    role="tabpanel"
                   >
-                    <div className="card-body border">
-                      <div className="mb-4 main-content-label">
-                        Personal Information
-                      </div>
-                      <Form className="form-horizontal">
-                        <div className="mb-4 main-content-label">Name</div>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >User Name</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="User Name"
-                                defaultValue="Mack Adamia"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >First Name</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="First Name"
-                                defaultValue="Mack Adamia"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className="row-sm">
-                            <Col md={3}>
-                              <Form.Label >last Name</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="Last Name"
-                                defaultValue="Mack Adamia"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className="row-sm">
-                            <Col md={3}>
-                              <Form.Label >Nick Name</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="Nick Name"
-                                defaultValue="Spruha"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >
-                                Designation
-                              </Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="Designation"
-                                defaultValue="Web Designer"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <div className="mb-4 main-content-label">
-                          Contact Info
-                        </div>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >
-                                Email<i>(required)</i>
-                              </Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="Email"
-                                defaultValue="info@Spruha.in"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Website</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="Website"
-                                defaultValue="@spruko.w"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Phone</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="phone number"
-                                defaultValue="+245 354 654"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Address</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                label="Comments"
-                                as="textarea"
-                                name="example-textarea-input"
-                                rows="2"
-                                placeholder="Address"
-                                defaultValue="San Francisco, CA"
-                              ></Form.Control>
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <div className="mb-4 main-content-label">
-                          Social Info
-                        </div>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Twitter</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="twitter"
-                                defaultValue="twitter.com/spruko.me"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Facebook</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="facebook"
-                                defaultValue="https://www.facebook.com/Spruha"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Google+</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="google"
-                                defaultValue="spruko.com"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className="row-sm">
-                            <Col md={3}>
-                              <Form.Label >Linked in</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="linkedin"
-                                defaultValue="linkedin.com/in/spruko"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Github</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="github"
-                                defaultValue="github.com/sprukos"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <div className="mb-4 main-content-label">
-                          About Yourself
-                        </div>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >
-                                Biographical Info
-                              </Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                name="example-textarea-input"
-                                rows="4"
-                                as="textarea"
-                                label="pleasure rationally encounter but because pursue consequences that are extremely painful.occur in which toil and pain can procure him some great pleasure.."
-                                placeholder=""
-                              ></Form.Control>
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <div className="mb-4 main-content-label">
-                          Email Preferences
-                        </div>
-                        <FormGroup className="mb-0">
-                          <Row className="row-sm">
-                            <Col md={3}>
-                              <Form.Label >
-                                Verified User
-                              </Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <div className="form-controls-stacked">
-                                <Form.Label className="mg-b-10-f">
-                                  <Form.Check type="checkbox"
-                                    defaultChecked
-                                    label="Accept to receive post or page
-                            notification emails"/>
-
-                                </Form.Label>
-                                <Form.Label>
-                                  <Form.Check type="checkbox" label="Accept to receive post or page
-                            notification emails"
-                                  />
-
-                                </Form.Label>
-                              </div>
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                      </Form>
+                    <div className="d-flex mb-4">
+                      <Form.Label className="main-content-Form.Label my-auto">
+                        All orders
+                      </Form.Label>
+                      <h6 className="mb-0 ms-auto">
+                        <Button
+                          variant="success" className="float-end">
+                          <i className=""></i>Invoice
+                        </Button>
+                      </h6>
                     </div>
-                  </div>
-                </Tab.Pane>
-                <Tab.Pane eventKey="timeline">
-                  <div className="main-content-body tab-pane border-top-0">
-                    <div className="border p-4">
-                      <div className="main-content-body main-content-body-profile">
-                        <div className="main-profile-body p-0">
-                          <Row className=" row-sm">
-                            <div className="col-12">
-                              <Card className=" mg-b-20 border">
-                                <Card.Header className="p-4">
-                                  <div className="media">
-                                    <div className="media-user me-2">
-                                      <div className="main-img-user avatar-md">
-                                        <img alt="user6" className="rounded-circle" src={require("../../../../../assets/img/users/2.jpg")} />
-                                      </div>
-                                    </div>
-                                    <div className="media-body">
-                                      <h6 className="mb-0 mg-t-2 ms-2">
-                                        Pechon
-                                      </h6>
-                                      <span className="text-primary ms-2">
-                                        just now
-                                      </span>
-                                    </div>
-                                    <div className="ms-auto">
-                                      <Dropdown className="dropdown">
-                                        <Dropdown.Toggle
-                                          className="new option-dots2"
-                                          variant="default"
-                                        >
-                                          <i className="fas fa-ellipsis-v"></i>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu className="dropdown-menu-end" style={{ marginTop: "0px" }}>
-                                          <Dropdown.Item href="#">
-                                            Edit Post
-                                          </Dropdown.Item>
-                                          <Dropdown.Item href="#">
-                                            Delete Post
-                                          </Dropdown.Item>
-                                          <Dropdown.Item href="#">
-                                            Personal Settings
-                                          </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                      </Dropdown>
-                                    </div>
-                                  </div>
-                                </Card.Header>
-                                <Card.Body>
-                                  <p className="mg-t-0">
-                                    There are many variations of passages of
-                                    Lorem Ipsum available, but the majority
-                                    have suffered alteration in some form, by
-                                    injected humour, or randomised words which
-                                    don't look even slightly believable.
-                                  </p>
-                                  <Row className=" row-sm">
-                                    <div className="col">
-                                      <img alt="img" className="wd-200 m-2" src={require("../../../../../assets/img/media/3.jpg")} />
-                                      <img alt="img" className="wd-200 m-2" src={require("../../../../../assets/img/media/11.jpg")} />
-                                    </div>
-                                  </Row>
-                                  <div className="media mg-t-15 profile-footer">
-                                    <div className="media-user me-2">
-                                      <div className="demo-avatar-group">
-                                        <div className="demo-avatar-group main-avatar-list-stacked">
-                                          <div className="main-img-user">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/12.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-img-user">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/12.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-img-user online">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/5.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-img-user">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/6.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-avatar">
-                                            +23
-                                          </div>
-                                        </div>
-                                        {/* <!-- demo-avatar-group --> */}
-                                      </div>
-                                    </div>
-                                    <div className="media-body">
-                                      <h6 className="mb-0 mg-t-10">
-                                        28 people like your photo
-                                      </h6>
-                                    </div>
-                                    <div className="ms-auto">
-                                      <div className="dropdown">
-                                        <Link to="#" className="new" >
-                                          <i className="far fa-heart me-3"></i>
-                                        </Link>
-                                        <Link to="#" className="new">
-                                          <i className="far fa-comment me-3"></i>
-                                        </Link>
-                                        <Link to="#" className="new">
-                                          <i className="far fa-share-square"></i>
-                                        </Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Card.Body>
-                              </Card>
-                              <Card className=" mg-b-20 border">
-                                <Card.Header className="p-4">
-                                  <div className="media">
-                                    <div className="media-user me-2">
-                                      <div className="main-img-user avatar-md">
-                                        <img alt="user6" className="rounded-circle" src={require("../../../../../assets/img/users/6.jpg")} />
-                                      </div>
-                                    </div>
-                                    <div className="media-body">
-                                      <h6 className="mb-0 mg-t-2 ms-2">
-                                        Mintrona Pechon Pechon
-                                      </h6>
-                                      <span className="text-primary ms-2">
-                                        just now
-                                      </span>
-                                    </div>
-                                    <div className="ms-auto">
-                                      <Dropdown className="dropdown">
-                                        <Dropdown.Toggle
-                                          className="new option-dots2"
-                                          variant="default"
-                                        >
-                                          <i className="fas fa-ellipsis-v"></i>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu className="dropdown-menu-end" style={{ marginTop: "0px" }}>
-                                          <Dropdown.Item href="#">
-                                            Edit Post
-                                          </Dropdown.Item>
-                                          <Dropdown.Item href="#">
-                                            Delete Post
-                                          </Dropdown.Item>
-                                          <Dropdown.Item href="#">
-                                            Personal Settings
-                                          </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                      </Dropdown>
-                                    </div>
-                                  </div>
-                                </Card.Header>
-                                <Card.Body>
-                                  <p className="mg-t-0">
-                                    There are many variations of passages of
-                                    Lorem Ipsum available, but the majority
-                                    have suffered alteration in some form, by
-                                    injected humour, or randomised words which
-                                    don't look even slightly believable.
-                                  </p>
-                                  <Row className=" row-sm">
-                                    <div className="col">
-                                      <img alt="img" className="wd-200 m-2" src={require("../../../../../assets/img/media/2.jpg")} />
-                                      <img alt="img" className="wd-200 m-2" src={require("../../../../../assets/img/media/12.jpg")} />
-                                    </div>
-                                  </Row>
-                                  <div className="media mg-t-15 profile-footer">
-                                    <div className="media-user me-2">
-                                      <div className="demo-avatar-group">
-                                        <div className="demo-avatar-group main-avatar-list-stacked">
-                                          <div className="main-img-user">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/12.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-img-user">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/12.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-img-user online">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/5.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-img-user">
-                                            <img
-                                              alt="img"
-                                              className="rounded-circle"
-                                              src={require("../../../../../assets/img/users/6.jpg")}
-                                            />
-                                          </div>
-                                          <div className="main-avatar">
-                                            +23
-                                          </div>
-                                        </div>
-                                        {/* <!-- demo-avatar-group --> */}
-                                      </div>
-                                    </div>
-                                    <div className="media-body">
-                                      <h6 className="mb-0 mg-t-10">
-                                        28 people like your photo
-                                      </h6>
-                                    </div>
-                                    <div className="ms-auto">
-                                      <div className="dropdown">
-                                        <Link to="#" className="new">
-                                          <i className="far fa-heart me-3"></i>
-                                        </Link>
-                                        <Link to="#" className="new">
-                                          <i className="far fa-comment me-3"></i>
-                                        </Link>
-                                        <Link to="#" className="new">
-                                          <i className="far fa-share-square"></i>
-                                        </Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Card.Body>
-                              </Card>
-                              <Card className="border">
-                                <Card.Header className="p-4">
-                                  <div className="media">
-                                    <div className="media-user me-2">
-                                      <div className="main-img-user avatar-md"><img alt="user2" className="rounded-circle" src={require("../../../../../assets/img/users/2.jpg")} /></div>
-                                    </div>
-                                    <div className="media-body">
-                                      <h6 className="mb-0 ms-2 mg-t-3">Mintrona Pechon Pechon</h6><span className="text-muted ms-2">Sep 26 2019, 10:14am</span> </div>
-                                    <div className="ms-auto">
-                                      <Dropdown>
-                                        <Dropdown.Toggle className="new option-dots2" variant="default">
-                                          <i className="fas fa-ellipsis-v"></i></Dropdown.Toggle>
-                                        <Dropdown.Menu className="dropdown-menu-end" style={{ marginTop: "0px" }}>
-                                          <Dropdown.Item href="#">Edit Post</Dropdown.Item>
-                                          <Dropdown.Item href="#">Delete Post</Dropdown.Item>
-                                          <Dropdown.Item href="#">Personal Settings</Dropdown.Item> </Dropdown.Menu>
-                                      </Dropdown>
-                                    </div>
-                                  </div>
-                                </Card.Header>
-                                <Card.Body className="h-100">
-                                  <p className="mg-t-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                                  <Row className="row row-sm">
-                                    <div className="col">
-                                      <img alt="img" className="wd-200 m-2" src={require("../../../../../assets/img/media/4.jpg")} />
-                                      <img alt="img" className="wd-200 m-2" src={require("../../../../../assets/img/media/7.jpg")} /> </div>
-                                  </Row>
-                                  <div className="media mg-t-15 profile-footer">
-                                    <div className="media-user me-2">
-                                      <div className="demo-avatar-group">
-                                        <div className="demo-avatar-group main-avatar-list-stacked">
-                                          <div className="main-img-user online"><img alt="user11" className="rounded-circle" src={require("../../../../../assets/img/users/11.jpg")} /></div>
-                                          <div className="main-img-user"><img alt="user12" className="rounded-circle" src={require("../../../../../assets/img/users/12.jpg")} /></div>
-                                          <div className="main-img-user"><img alt="user4" className="rounded-circle" src={require("../../../../../assets/img/users/4.jpg")} /></div>
-                                          <div className="main-img-user online"><img alt="user5" className="rounded-circle" src={require("../../../../../assets/img/users/5.jpg")} /></div>
-                                          <div className="main-avatar"> +23 </div>
-                                        </div>
+                    <div className="table-responsive">
+                      <Table className="table border text-md-nowrap text-nowrap">
+                        <thead className="border-bottom">
+                          <tr>
+                            <th>#</th>
+                            <th>Photo</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th className="text-end">Total</th>
+                          </tr>
+                        </thead>
 
-                                      </div>
-
-                                    </div>
-                                    <div className="media-body">
-                                      <h6 className="mb-0 mg-t-10">28 people like your photo</h6> </div>
-                                    <div className="ms-auto">
-                                      <div className="dropdown">
-                                        <Link to="#" className="new" >
-                                          <i className="far fa-heart me-3"></i></Link>
-                                        <Link to="#" className="new" >
-                                          <i className="far fa-comment me-3"></i></Link>
-                                        <Link to="#" className="new">
-                                          <i className="far fa-share-square"></i></Link>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Card.Body>
-                              </Card>
-                            </div>
-                          </Row>
-                        </div>
-                      </div>
+                      </Table>
                     </div>
-                  </div>
-                </Tab.Pane>
-                <Tab.Pane eventKey="gallery">
-                  <div
-                  // className="main-content-body p-4 border tab-pane border-top-0"
+                  </Tab.Pane>
+                  <Tab.Pane
+                    eventKey="myaddress"
+                    className="tab-pane "
+                    id="myaddres"
+                    role="tabpanel"
                   >
-                    <div className="card-body border">
-                      <div className="demo-gallery">
-                        <gallery.Gallery2 />
-                      </div>
-                    </div>
-                  </div>
-                </Tab.Pane>
-                <Tab.Pane eventKey="friends" className="main-content-body tab-pane border-top-0">
-                  <div className="card-body border pd-b-10">
-                    <Row className=" row-sm">
-                      <Col sm={12} md={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className="text-end">
-                                <Dropdown.Toggle to="#" variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className=" dropdown-menu-end" style={{ marginTop: "0px" }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                    Message
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img
-                                  alt="avatar"
-                                  className="rounded-circle"
-                                  src={require("../../../../../assets/img/users/4.jpg")}
-                                />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className=" mb-1 mt-3 main-content-label">
-                                Socrates Itumay
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              Project Manager
+                    <Button
+                      variant="variant"
+                      type="button"
+                      className="btn btn-round btn-success mb-3"
+                    >
+                      <i className="fe fe-plus-circle  me-2"></i>Add New Address
+                    </Button>
+                    <Row className="row">
+                      <Col lg={12} xl={6}>
+                        <Card className="card custom-card border mb-xl-0">
+                          <Card.Header className=" pb-3">
+                            <h6 className="mb-0">
+                              <i className="ti-home me-2 d-inline-block"></i>Default Address
+                            </h6>
+                          </Card.Header>
+                          <Card.Body>
+                            <p>+91 08023310451</p>
+                            <p>
+                              3-15/10/403 Newark, Street no 5, Next To Pizza
+                              Hut, Bangalore, Karnataka, 560003, India.
                             </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
+                            <p className="mb-0">soniataylor344@example.com</p>
+                          </Card.Body>
+                          <Card.Footer>
+                            <Row className="row">
+                              <div className="col-6">
+                                <Button
+                                  variant="primary"
+                                  type="button"
+                                  className="btn btn-block  mb-1"
+                                >
+                                  <i className="ti ti-pencil"></i>
+                                </Button>
+                              </div>
+                              <div className="col-6">
+                                <Button
+                                  variant="outline-primary"
+                                  type="button"
+                                  className="btn btn-block  mb-1"
+                                >
+                                  <i className="ti ti-trash"></i>
+                                </Button>
+                              </div>
+                            </Row>
+                          </Card.Footer>
                         </Card>
                       </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className="dropdown text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className="dropdown-menu-end " style={{ marginTop: "0px" }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                    Message
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="# ">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="# ">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img
-                                  alt="avatar"
-                                  className="rounded-circle"
-                                  src={require("../../../../../assets/img/users/3.jpg")}
-                                />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className="mb-1 mt-3  main-content-label">
-                                Reynante Labares
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              Web Designer
+                      <Col lg={12} xl={6}>
+                        <Card className="custom-card border mb-0">
+                          <Card.Header className=" pb-3">
+                            <h6 className="mb-0">
+                              <i className="ti-home me-2 d-inline-block"></i>Office Address
+                            </h6>
+                          </Card.Header>
+                          <Card.Body>
+                            <p>+91 02228346362</p>
+                            <p>
+                              2-15A-12 , Steriling Chambers, S Radhakrishnana
+                              Marg, J B Nagar, Andheri (west), Mumbai ,
+                              Maharashtra
                             </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
-                        </Card>
-                      </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className=" text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className=" dropdown-menu-end " style={{ marginTop: "0px" }}>
-                                  <Dropdown.Item href="# ">
-                                    <i className="fe fe-message-square me-2"></i>
-                                    Message
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="# ">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-                                  <Dropdown.Item to="# ">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img
-                                  alt="avatar"
-                                  className="rounded-circle"
-                                  src={require("../../../../../assets/img/users/4.jpg")}
-                                />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className="mb-1 mt-3 main-content-label">
-                                Owen Bongcaras
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              App Developer
-                            </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
-                        </Card>
-                      </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className=" text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className="dropdown-menu-end" style={{ MarginTop: '0px' }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                    Message
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img
-                                  alt="avatar"
-                                  className="rounded-circle"
-                                  src={require("../../../../../assets/img/users/7.jpg")}
-                                />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className="mb-1 mt-3 main-content-label">
-                                Stephen Metcalfe
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              Administrator
-                            </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
-                        </Card>
-                      </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className=" text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className=" dropdown-menu-end" style={{ MarginTop: '0px' }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                    Message
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img alt="avatar" className="rounded-circle" src={require("../../../../../assets/img/users/2.jpg")} />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className=" mb-1 mt-3 main-content-label">
-                                Socrates Itumay
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              Project Manager
-                            </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
-                        </Card>
-                      </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className="dropdown text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className=" dropdown-menu-end " style={{ MarginTop: '0px' }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img src={require("../../../../../assets/img/users/1.jpg")} alt="img" />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className="mb-1 mt-3  main-content-label">
-                                Reynante Labares
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              Web Designer
-                            </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
-                        </Card>
-                      </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className="text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className=" dropdown-menu-end" style={{ MarginTop: '0px' }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                    Message
-                                  </Dropdown.Item>
-
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img
-                                  alt="avatar"
-                                  className="rounded-circle"
-                                  src={require("../../../../../assets/img/users/4.jpg")}
-                                />
-                              </Link>
-                            </div>
-
-                            <Link to="#">
-                              <h5 className="mb-1 mt-3 main-content-label">
-                                Owen Bongcaras
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              App Developer
-                            </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
-                        </Card>
-                      </Col>
-                      <Col sm={12} md={6} lg={6} xl={3}>
-                        <Card className="custom-card border">
-                          <div className=" text-center">
-                            <div className="user-lock text-center">
-                              <Dropdown className=" text-end">
-                                <Dropdown.Toggle variant="default">
-                                  <i className="fe fe-more-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu className=" dropdown-menu-end " style={{ MarginTop: '0px' }}>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-message-square me-2"></i>
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-edit-2 me-2"></i> Edit
-                                  </Dropdown.Item>
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-eye me-2"></i> View
-                                  </Dropdown.Item>
-
-                                  <Dropdown.Item href="#">
-                                    <i className="fe fe-trash-2 me-2"></i>
-                                    Delete
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                              <Link to="#">
-                                <img
-                                  alt="avatar"
-                                  className="rounded-circle"
-                                  src={require("../../../../../assets/img/users/9.jpg")}
-                                />
-                              </Link>
-                            </div>
-                            <Link to="#">
-                              <h5 className="mb-1 mt-3 main-content-label">
-                                Stephen Metcalfe
-                              </h5>
-                            </Link>
-                            <p className="mb-2 mt-1 tx-inverse">
-                              Administrator
-                            </p>
-                            <p className="text-muted text-center mt-1">
-                              Lorem Ipsum is not simply popular belief
-                              Contrary.
-                            </p>
-                          </div>
+                            <p className="mb-0">john54@gmail.com</p>
+                          </Card.Body>
+                          <Card.Footer>
+                            <Row className="row">
+                              <div className="col-6">
+                                <Button
+                                  variant="primary"
+                                  type="button"
+                                  className="btn btn-block  mb-1"
+                                >
+                                  <i className="ti ti-pencil"></i>
+                                </Button>
+                              </div>
+                              <div className="col-6">
+                                <Button
+                                  variant="outline-primary"
+                                  type="button"
+                                  className="btn btn-block btn-outline-primary mb-1"
+                                >
+                                  <i className="ti ti-trash"></i>
+                                </Button>
+                              </div>
+                            </Row>
+                          </Card.Footer>
                         </Card>
                       </Col>
                     </Row>
-                  </div>
-                  {/* </div> */}
-                </Tab.Pane>
-                <Tab.Pane eventKey="accountsetting">
-                  <div
-                    className="main-content-body tab-pane p-sm-4 p-0 border-top-0"
+                  </Tab.Pane>
+                  <Tab.Pane
+                    eventKey="trackorder"
+                    className="tab-pane "
+                    id="trackorder"
+                    role="tabpanel"
                   >
-                    <div className="card-body border" data-select2-id="12">
-                      <Form className="form-horizontal" data-select2-id="11">
-                        <div className="mb-4 main-content-label">Account</div>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >User Name</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="User Name"
-                                defaultValue="Sonia Taylor"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3}>
-                              <Form.Label >Email</Form.Label>
-                            </Col>
-                            <Col md={9}>
-                              <Form.Control
-                                type="text"
-                                placeholder="Email"
-                                defaultValue="info@SoniaTaylor.in"
-                              />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup data-select2-id="108" className="form-group">
-                          <div className="row" data-select2-id="107">
-                            <Col md={3}>
-                              <Form.Label >Language</Form.Label>
-                            </Col>
-                            <div className="col-md-9" data-select2-id="106">
-                              <select
-                                className="form-control select2"
-                                data-select2-id="5"
-                                tabIndex="-1"
-                                aria-hidden="true"
-                              >
-                                <option data-select2-id="33">
-                                  Us English
-                                </option>
-                                <option data-select2-id="109">Arabic</option>
-                                <option data-select2-id="110">Korean</option>
-                              </select>
-                            </div>
-                          </div>
-                        </FormGroup>
-                        <FormGroup data-select2-id="10" className="form-group">
-                          <div className="row" data-select2-id="9">
-                            <Col md={3}>
-                              <Form.Label >Timezone</Form.Label>
-                            </Col>
-                            <div className="col-md-9" data-select2-id="8">
-                              <select
-                                className="form-control select2"
-                                data-select2-id="4"
-                                tabIndex="-1"
-                                aria-hidden="true"
-                              >
-                                <option
-                                  defaultValue="Pacific/Midway"
-                                  data-select2-id="6"
-                                >
-                                  (GMT-11:00) Midway Island, Samoa
-                                </option>
-                                <option
-                                  defaultValue="America/Adak"
-                                  data-select2-id="16"
-                                >
-                                  (GMT-10:00) Hawaii-Aleutian
-                                </option>
-                                <option
-                                  defaultValue="Etc/GMT+10"
-                                  data-select2-id="17"
-                                >
-                                  (GMT-10:00) Hawaii
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Marquesas"
-                                  data-select2-id="18"
-                                >
-                                  (GMT-09:30) Marquesas Islands
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Gambier"
-                                  data-select2-id="19"
-                                >
-                                  (GMT-09:00) Gambier Islands
-                                </option>
-                                <option
-                                  defaultValue="America/Anchorage"
-                                  data-select2-id="20"
-                                >
-                                  (GMT-09:00) Alaska
-                                </option>
-                                <option
-                                  defaultValue="America/Ensenada"
-                                  data-select2-id="21"
-                                >
-                                  (GMT-08:00) Tijuana, Baja California
-                                </option>
-                                <option
-                                  defaultValue="Etc/GMT+8"
-                                  data-select2-id="22"
-                                >
-                                  (GMT-08:00) Pitcairn Islands
-                                </option>
-                                <option
-                                  defaultValue="America/Los_Angeles"
-                                  data-select2-id="23"
-                                >
-                                  (GMT-08:00) Pacific Time (US &amp; Canada)
-                                </option>
-                                <option
-                                  defaultValue="America/Denver"
-                                  data-select2-id="24"
-                                >
-                                  (GMT-07:00) Mountain Time (US &amp; Canada)
-                                </option>
-                                <option
-                                  defaultValue="America/Chihuahua"
-                                  data-select2-id="25"
-                                >
-                                  (GMT-07:00) Chihuahua, La Paz, Mazatlan
-                                </option>
-                                <option
-                                  defaultValue="America/Dawson_Creek"
-                                  data-select2-id="26"
-                                >
-                                  (GMT-07:00) Arizona
-                                </option>
-                                <option
-                                  defaultValue="America/Belize"
-                                  data-select2-id="27"
-                                >
-                                  (GMT-06:00) Saskatchewan, Central America
-                                </option>
-                                <option
-                                  defaultValue="America/Cancun"
-                                  data-select2-id="28"
-                                >
-                                  (GMT-06:00) Guadalajara, Mexico City,
-                                  Monterrey
-                                </option>
-                                <option
-                                  defaultValue="Chile/EasterIsland"
-                                  data-select2-id="29"
-                                >
-                                  (GMT-06:00) Easter Island
-                                </option>
-                                <option
-                                  defaultValue="America/Chicago"
-                                  data-select2-id="30"
-                                >
-                                  (GMT-06:00) Central Time (US &amp; Canada)
-                                </option>
-                                <option
-                                  defaultValue="America/New_York"
-                                  data-select2-id="31"
-                                >
-                                  (GMT-05:00) Eastern Time (US &amp; Canada)
-                                </option>
-                                <option
-                                  defaultValue="America/Havana"
-                                  data-select2-id="32"
-                                >
-                                  (GMT-05:00) Cuba
-                                </option>
-                                <option
-                                  defaultValue="America/Bogota"
-                                  data-select2-id="33"
-                                >
-                                  (GMT-05:00) Bogota, Lima, Quito, Rio Branco
-                                </option>
-                                <option
-                                  defaultValue="America/Caracas"
-                                  data-select2-id="34"
-                                >
-                                  (GMT-04:30) Caracas
-                                </option>
-                                <option
-                                  defaultValue="America/Santiago"
-                                  data-select2-id="35"
-                                >
-                                  (GMT-04:00) Santiago
-                                </option>
-                                <option
-                                  defaultValue="America/La_Paz"
-                                  data-select2-id="36"
-                                >
-                                  (GMT-04:00) La Paz
-                                </option>
-                                <option
-                                  defaultValue="Atlantic/Stanley"
-                                  data-select2-id="37"
-                                >
-                                  (GMT-04:00) Faukland Islands
-                                </option>
-                                <option
-                                  defaultValue="America/Campo_Grande"
-                                  data-select2-id="38"
-                                >
-                                  (GMT-04:00) Brazil
-                                </option>
-                                <option
-                                  defaultValue="America/Goose_Bay"
-                                  data-select2-id="39"
-                                >
-                                  (GMT-04:00) Atlantic Time (Goose Bay)
-                                </option>
-                                <option
-                                  defaultValue="America/Glace_Bay"
-                                  data-select2-id="40"
-                                >
-                                  (GMT-04:00) Atlantic Time (Canada)
-                                </option>
-                                <option
-                                  defaultValue="America/St_Johns"
-                                  data-select2-id="41"
-                                >
-                                  (GMT-03:30) Newfoundland
-                                </option>
-                                <option
-                                  defaultValue="America/Araguaina"
-                                  data-select2-id="42"
-                                >
-                                  (GMT-03:00) UTC-3
-                                </option>
-                                <option
-                                  defaultValue="America/Montevideo"
-                                  data-select2-id="43"
-                                >
-                                  (GMT-03:00) Montevideo
-                                </option>
-                                <option
-                                  defaultValue="America/Miquelon"
-                                  data-select2-id="44"
-                                >
-                                  (GMT-03:00) Miquelon, St. Pierre
-                                </option>
-                                <option
-                                  defaultValue="America/Godthab"
-                                  data-select2-id="45"
-                                >
-                                  (GMT-03:00) Greenland
-                                </option>
-                                <option
-                                  defaultValue="America/Argentina/Buenos_Aires"
-                                  data-select2-id="46"
-                                >
-                                  (GMT-03:00) Buenos Aires
-                                </option>
-                                <option
-                                  defaultValue="America/Sao_Paulo"
-                                  data-select2-id="47"
-                                >
-                                  (GMT-03:00) Brasilia
-                                </option>
-                                <option
-                                  defaultValue="America/Noronha"
-                                  data-select2-id="48"
-                                >
-                                  (GMT-02:00) Mid-Atlantic
-                                </option>
-                                <option
-                                  defaultValue="Atlantic/Cape_Verde"
-                                  data-select2-id="49"
-                                >
-                                  (GMT-01:00) Cape Verde Is.
-                                </option>
-                                <option
-                                  defaultValue="Atlantic/Azores"
-                                  data-select2-id="50"
-                                >
-                                  (GMT-01:00) Azores
-                                </option>
-                                <option
-                                  defaultValue="Europe/Belfast"
-                                  data-select2-id="51"
-                                >
-                                  (GMT) Greenwich Mean Time : Belfast
-                                </option>
-                                <option
-                                  defaultValue="Europe/Dublin"
-                                  data-select2-id="52"
-                                >
-                                  (GMT) Greenwich Mean Time : Dublin
-                                </option>
-                                <option
-                                  defaultValue="Europe/Lisbon"
-                                  data-select2-id="53"
-                                >
-                                  (GMT) Greenwich Mean Time : Lisbon
-                                </option>
-                                <option
-                                  defaultValue="Europe/London"
-                                  data-select2-id="54"
-                                >
-                                  (GMT) Greenwich Mean Time : London
-                                </option>
-                                <option
-                                  defaultValue="Africa/Abidjan"
-                                  data-select2-id="55"
-                                >
-                                  (GMT) Monrovia, Reykjavik
-                                </option>
-                                <option
-                                  defaultValue="Europe/Amsterdam"
-                                  data-select2-id="56"
-                                >
-                                  (GMT+01:00) Amsterdam, Berlin, Bern, Rome,
-                                  Stockholm, Vienna
-                                </option>
-                                <option
-                                  defaultValue="Europe/Belgrade"
-                                  data-select2-id="57"
-                                >
-                                  (GMT+01:00) Belgrade, Bratislava, Budapest,
-                                  Ljubljana, Prague
-                                </option>
-                                <option
-                                  defaultValue="Europe/Brussels"
-                                  data-select2-id="58"
-                                >
-                                  (GMT+01:00) Brussels, Copenhagen, Madrid,
-                                  Paris
-                                </option>
-                                <option
-                                  defaultValue="Africa/Algiers"
-                                  data-select2-id="59"
-                                >
-                                  (GMT+01:00) West Central Africa
-                                </option>
-                                <option
-                                  defaultValue="Africa/Windhoek"
-                                  data-select2-id="60"
-                                >
-                                  (GMT+01:00) Windhoek
-                                </option>
-                                <option
-                                  defaultValue="Asia/Beirut"
-                                  data-select2-id="61"
-                                >
-                                  (GMT+02:00) Beirut
-                                </option>
-                                <option
-                                  defaultValue="Africa/Cairo"
-                                  data-select2-id="62"
-                                >
-                                  (GMT+02:00) Cairo
-                                </option>
-                                <option
-                                  defaultValue="Asia/Gaza"
-                                  data-select2-id="63"
-                                >
-                                  (GMT+02:00) Gaza
-                                </option>
-                                <option
-                                  defaultValue="Africa/Blantyre"
-                                  data-select2-id="64"
-                                >
-                                  (GMT+02:00) Harare, Pretoria
-                                </option>
-                                <option
-                                  defaultValue="Asia/Jerusalem"
-                                  data-select2-id="65"
-                                >
-                                  (GMT+02:00) Jerusalem
-                                </option>
-                                <option
-                                  defaultValue="Europe/Minsk"
-                                  data-select2-id="66"
-                                >
-                                  (GMT+02:00) Minsk
-                                </option>
-                                <option
-                                  defaultValue="Asia/Damascus"
-                                  data-select2-id="67"
-                                >
-                                  (GMT+02:00) Syria
-                                </option>
-                                <option
-                                  defaultValue="Europe/Moscow"
-                                  data-select2-id="68"
-                                >
-                                  (GMT+03:00) Moscow, St. Petersburg,
-                                  Volgograd
-                                </option>
-                                <option
-                                  defaultValue="Africa/Addis_Ababa"
-                                  data-select2-id="69"
-                                >
-                                  (GMT+03:00) Nairobi
-                                </option>
-                                <option
-                                  defaultValue="Asia/Tehran"
-                                  data-select2-id="70"
-                                >
-                                  (GMT+03:30) Tehran
-                                </option>
-                                <option
-                                  defaultValue="Asia/Dubai"
-                                  data-select2-id="71"
-                                >
-                                  (GMT+04:00) Abu Dhabi, Muscat
-                                </option>
-                                <option
-                                  defaultValue="Asia/Yerevan"
-                                  data-select2-id="72"
-                                >
-                                  (GMT+04:00) Yerevan
-                                </option>
-                                <option
-                                  defaultValue="Asia/Kabul"
-                                  data-select2-id="73"
-                                >
-                                  (GMT+04:30) Kabul
-                                </option>
-                                <option
-                                  defaultValue="Asia/Yekaterinburg"
-                                  data-select2-id="74"
-                                >
-                                  (GMT+05:00) Ekaterinburg
-                                </option>
-                                <option
-                                  defaultValue="Asia/Tashkent"
-                                  data-select2-id="75"
-                                >
-                                  (GMT+05:00) Tashkent
-                                </option>
-                                <option
-                                  defaultValue="Asia/Kolkata"
-                                  data-select2-id="76"
-                                >
-                                  (GMT+05:30) Chennai, Kolkata, Mumbai, New
-                                  Delhi
-                                </option>
-                                <option
-                                  defaultValue="Asia/Katmandu"
-                                  data-select2-id="77"
-                                >
-                                  (GMT+05:45) Kathmandu
-                                </option>
-                                <option
-                                  defaultValue="Asia/Dhaka"
-                                  data-select2-id="78"
-                                >
-                                  (GMT+06:00) Astana, Dhaka
-                                </option>
-                                <option
-                                  defaultValue="Asia/Novosibirsk"
-                                  data-select2-id="79"
-                                >
-                                  (GMT+06:00) Novosibirsk
-                                </option>
-                                <option
-                                  defaultValue="Asia/Rangoon"
-                                  data-select2-id="80"
-                                >
-                                  (GMT+06:30) Yangon (Rangoon)
-                                </option>
-                                <option
-                                  defaultValue="Asia/Bangkok"
-                                  data-select2-id="81"
-                                >
-                                  (GMT+07:00) Bangkok, Hanoi, Jakarta
-                                </option>
-                                <option
-                                  defaultValue="Asia/Krasnoyarsk"
-                                  data-select2-id="82"
-                                >
-                                  (GMT+07:00) Krasnoyarsk
-                                </option>
-                                <option
-                                  defaultValue="Asia/Hong_Kong"
-                                  data-select2-id="83"
-                                >
-                                  (GMT+08:00) Beijing, Chongqing, Hong Kong,
-                                  Urumqi
-                                </option>
-                                <option
-                                  defaultValue="Asia/Irkutsk"
-                                  data-select2-id="84"
-                                >
-                                  (GMT+08:00) Irkutsk, Ulaan Bataar
-                                </option>
-                                <option
-                                  defaultValue="Australia/Perth"
-                                  data-select2-id="85"
-                                >
-                                  (GMT+08:00) Perth
-                                </option>
-                                <option
-                                  defaultValue="Australia/Eucla"
-                                  data-select2-id="86"
-                                >
-                                  (GMT+08:45) Eucla
-                                </option>
-                                <option
-                                  defaultValue="Asia/Tokyo"
-                                  data-select2-id="87"
-                                >
-                                  (GMT+09:00) Osaka, Sapporo, Tokyo
-                                </option>
-                                <option
-                                  defaultValue="Asia/Seoul"
-                                  data-select2-id="88"
-                                >
-                                  (GMT+09:00) Seoul
-                                </option>
-                                <option
-                                  defaultValue="Asia/Yakutsk"
-                                  data-select2-id="89"
-                                >
-                                  (GMT+09:00) Yakutsk
-                                </option>
-                                <option
-                                  defaultValue="Australia/Adelaide"
-                                  data-select2-id="90"
-                                >
-                                  (GMT+09:30) Adelaide
-                                </option>
-                                <option
-                                  defaultValue="Australia/Darwin"
-                                  data-select2-id="91"
-                                >
-                                  (GMT+09:30) Darwin
-                                </option>
-                                <option
-                                  defaultValue="Australia/Brisbane"
-                                  data-select2-id="92"
-                                >
-                                  (GMT+10:00) Brisbane
-                                </option>
-                                <option
-                                  defaultValue="Australia/Hobart"
-                                  data-select2-id="93"
-                                >
-                                  (GMT+10:00) Hobart
-                                </option>
-                                <option
-                                  defaultValue="Asia/Vladivostok"
-                                  data-select2-id="94"
-                                >
-                                  (GMT+10:00) Vladivostok
-                                </option>
-                                <option
-                                  defaultValue="Australia/Lord_Howe"
-                                  data-select2-id="95"
-                                >
-                                  (GMT+10:30) Lord Howe Island
-                                </option>
-                                <option
-                                  defaultValue="Etc/GMT-11"
-                                  data-select2-id="96"
-                                >
-                                  (GMT+11:00) Solomon Is., New Caledonia
-                                </option>
-                                <option
-                                  defaultValue="Asia/Magadan"
-                                  data-select2-id="97"
-                                >
-                                  (GMT+11:00) Magadan
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Norfolk"
-                                  data-select2-id="98"
-                                >
-                                  (GMT+11:30) Norfolk Island
-                                </option>
-                                <option
-                                  defaultValue="Asia/Anadyr"
-                                  data-select2-id="99"
-                                >
-                                  (GMT+12:00) Anadyr, Kamchatka
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Auckland"
-                                  data-select2-id="100"
-                                >
-                                  (GMT+12:00) Auckland, Wellington
-                                </option>
-                                <option
-                                  defaultValue="Etc/GMT-12"
-                                  data-select2-id="101"
-                                >
-                                  (GMT+12:00) Fiji, Kamchatka, Marshall Is.
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Chatham"
-                                  data-select2-id="102"
-                                >
-                                  (GMT+12:45) Chatham Islands
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Tongatapu"
-                                  data-select2-id="103"
-                                >
-                                  (GMT+13:00) Nuku'alofa
-                                </option>
-                                <option
-                                  defaultValue="Pacific/Kiritimati"
-                                  data-select2-id="104"
-                                >
-                                  (GMT+14:00) Kiritimati
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={3} className="col">
-                              <Form.Label >
-                                Verification
-                              </Form.Label>
-                            </Col>
-                            <Col md={9} className="col">
-                              <Form.Check className=" mg-b-10-f" type="checkbox"
-                                label="Email" />
-                              <Form.Check className=" mg-b-10-f" defaultChecked type="checkbox"
-                                label="SMS" />
-                              <Form.Check className=" mg-b-10-f" type="checkbox"
-                                label="PHONE" />
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <div className="mb-4 main-content-label">
-                          Secuirity Settings
+                    <h6 className="mb-4">
+                      ORDER ID: <b>OD45345345435</b>
+                    </h6>
+                    <div className="card">
+                      <div className="card-body row">
+                        <div className="col-sm-12 col-md-3 mb-3 mb-md-0">
+                          <strong>Estimated Delivery time:</strong> <br />
+                          29 Dec 2020
                         </div>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={2}>
-                              <Form.Label >
-                                Login Verification
-                              </Form.Label>
-                            </Col>
-                            <Col md={10}>
-                              <Link to="#" className="">
-                                Set up Verification
-                              </Link>
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={2}>
-                              <Form.Label >
-                                Password Verification
-                              </Form.Label>
-                            </Col>
-                            <Col md={10}>
-                              <Form.Label className="mg-b-10-f">
-                                <Form.Check type="checkbox" label="Require Personal Details" />
-                              </Form.Label>
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                        <FormGroup className="form-group">
-                          <Row className=" row-sm">
-                            <Col md={2}> </Col>
-                            <Col md={10}>
-                              <Link to="#">
-                                Deactivate Account
-                              </Link>
-                              <Link to="#" className="mx-2">
-                                Change Password
-                              </Link>
-                            </Col>
-                          </Row>
-                        </FormGroup>
-                      </Form>
+                        <div className="col-sm-12 col-md-3 mb-3 mb-md-0">
+                          <strong>Shipping BY:</strong> <br /> BLUEDART, |
+                          <i className="fa fa-phone mx-2"></i> +1598675986
+                        </div>
+                        <div className="col-sm-12 col-md-3 mb-3 mb-md-">
+                          <strong>Status:</strong> <br /> Picked by the courier
+                        </div>
+                        <div className="col-sm-12 col-md-3">
+                          <strong>Tracking #:</strong> <br /> BD045903594656
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </Tab.Pane>
-              </Tab.Content>
-            </div>
+                    <div className="track mb-5">
+                      <div className="step active">
+                        <span className="icon">
+                          <i className="fa fa-check"></i>
+                        </span>
+                        <span className="text d-none d-md-block">
+                          Order confirmed
+                        </span>
+                      </div>
+                      <div className="step active">
+                        <span className="icon">
+                          <i className="fa fa-user"></i>
+                        </span>
+                        <span className="text d-none d-md-block">
+                          Picked by courier
+                        </span>
+                      </div>
+                      <div className="step">
+                        <span className="icon">
+                          <i className="fa fa-truck"></i>
+                        </span>
+                        <span className="text d-none d-md-block">
+
+                          On the way
+                        </span>
+                      </div>
+                      <div className="step">
+                        <span className="icon">
+
+                          <i className="fa fa-cube"></i>
+                        </span>
+                        <span className="text d-none d-md-block">
+                          Ready For pickup
+                        </span>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="row mt-3">
+                      <div className="col-xl-4">
+                        <figure className="itemside mb-3">
+                          <div className="aside">
+                            <img
+
+                              className="img-sm product-image border"
+                              alt="product-img"
+                            />
+                          </div>
+                          <figcaption className="info align-self-center">
+                            <p className="title mb-1">
+                              Apple iPhone(Black, 128 GB) <br /> 8GB RAM
+                            </p>
+                            <span className="text-muted">$950 </span>
+                          </figcaption>
+                        </figure>
+                      </div>
+                      <div className="col-xl-4">
+                        <figure className="itemside mb-3">
+                          <div className="aside">
+                            <img
+
+                              className="img-sm product-image border"
+                              alt="product-img"
+                            />
+                          </div>
+                          <figcaption className="info align-self-center">
+                            <p className="title mb-1">
+                              Designer Hand Decorative <br /> flower Pot
+                            </p>
+                            <span className="text-muted">$850 </span>
+                          </figcaption>
+                        </figure>
+                      </div>
+                      <div className="col-xl-4">
+                        <figure className="itemside mb-3">
+                          <div className="aside">
+                            <img
+
+                              className="img-sm product-image border"
+                              alt="product-img"
+                            />
+                          </div>
+                          <figcaption className="info align-self-center">
+                            <p className="title mb-1">
+                              Regular waterproof <br />
+                              (24 L) Backpack
+                            </p>
+                            <span className="text-muted">$650 </span>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane
+                    eventKey="whishlist"
+                    className="tab-pane "
+                    id="whishlist"
+                    role="tabpanel"
+                  >
+                    <div className="d-flex mb-4">
+                      <Form.Label className="main-content-Form.Label my-auto">
+                        Wishlist
+                      </Form.Label>
+                    </div>
+                    <div className="table-responsive">
+                      <Table className="table border text-nowrap">
+                        <thead className="border-bottom">
+                          <tr>
+                            <th>#</th>
+                            <th>Photo</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>
+                              <img
+
+                                className="img-sm product-image border"
+                                alt="product-img"
+                              />
+                            </td>
+                            <td>Regular waterproof (24 L) Backpack</td>
+                            <td>
+                              1
+                            </td>
+                            <td>$10</td>
+                            <td>$500</td>
+                            <td>
+                              <Button
+                                variant="primary"
+                                type="button"
+                                className=" mb-1 me-1"
+                              >
+                                <i className="ti-shopping-cart me-2 d-inline-block"></i>Move to
+                                cart
+                              </Button>
+                              <Button
+                                variant="danger"
+                                type="button"
+                                className="mb-1"
+                              >
+                                <i className="ti-trash me-2 d-inline-block"></i>Remove
+                              </Button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>
+                              <img
+
+                                className="img-sm product-image border"
+                                alt="product-img"
+                              />
+                            </td>
+                            <td>Designer Hand Decorative flower Pot</td>
+                            <td>
+                              3
+                            </td>
+                            <td>$20</td>
+                            <td>$200</td>
+                            <td>
+                              <Button
+                                variant="primary"
+                                type="button"
+                                className=" mb-1 me-1"
+                              >
+                                <i className="ti-shopping-cart me-2 d-inline-block"></i>Move to
+                                cart
+                              </Button>
+                              <Button
+                                variant="danger"
+                                type="button"
+                                className="mb-1"
+                              >
+                                <i className="ti-trash me-2 d-inline-block"></i>Remove
+                              </Button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <img
+
+                                className="img-sm product-image border"
+                                alt="product-img"
+                              />
+                            </td>
+                            <td>Apple iPhone(Black, 128 GB) 8GB RAM</td>
+                            <td>
+                              2
+                            </td>
+                            <td>$30</td>
+                            <td>$300</td>
+                            <td>
+                              <Button
+                                variant="primary"
+                                type="button"
+                                className=" mb-1 me-1"
+                              >
+                                <i className="ti-shopping-cart me-2 d-inline-block"></i>Move to
+                                cart
+                              </Button>
+                              <Button
+                                variant="danger"
+                                type="button"
+                                className="mb-1"
+                              >
+                                <i className="ti-trash me-2 d-inline-block"></i>Remove
+                              </Button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="wallet" role="tabpanel">
+                    <div className="border p-4 text-center">
+                      <span className="text-uppercase tx-14 mt-4 text-muted">
+                        Available
+                      </span>
+                      <h1 className="my-3">$245465</h1>
+                      <Link to="#" className="btn btn-primary">
+                        <i className="fe fe-plus me-2"></i>Add Money
+                      </Link>
+                    </div>
+                    <ListGroup className="tx-13">
+                      <ListGroup.Item className="border-top-0 pd-x-0 d-sm-flex justify-content-between">
+                        <div className="d-sm-flex">
+                          <span className="crypto-icon bg-primary-transparent me-3">
+                            <i className="fe fe-arrow-down-left text-primary"></i>
+                          </span>
+                          <span className="my-auto font-weight-semibold tx-15">
+                            Received
+                          </span>
+                        </div>
+                        <span className="font-weight-semibold my-auto text-success tx-15">
+                          +0.00004564
+                        </span>
+                      </ListGroup.Item>
+                      <ListGroup.Item className="pd-x-0 d-sm-flex justify-content-between">
+                        <div className="d-sm-flex">
+                          <span className="crypto-icon bg-primary-transparent me-3">
+                            <i className="fe fe-arrow-up-right text-primary"></i>
+                          </span>
+                          <span className="my-auto font-weight-semibold tx-15">
+                            Sent
+                          </span>
+                        </div>
+                        <span className="font-weight-semibold my-auto text-danger tx-15">
+                          -0.03445436
+                        </span>
+                      </ListGroup.Item>
+                      <ListGroup.Item className="pd-x-0 d-sm-flex justify-content-between">
+                        <div className="d-sm-flex">
+                          <span className="crypto-icon bg-primary-transparent me-3">
+                            <i className="fe fe-arrow-down-left text-primary"></i>
+                          </span>
+                          <span className="my-auto font-weight-semibold tx-15">
+                            Received
+                          </span>
+                        </div>
+                        <span className="font-weight-semibold my-auto text-success tx-15">
+                          +4.2543
+                        </span>
+                      </ListGroup.Item>
+                      <ListGroup.Item className="pd-x-0 d-sm-flex justify-content-between">
+                        <div className="d-sm-flex">
+                          <span className="crypto-icon bg-primary-transparent me-3">
+                            <i className="fe fe-arrow-up-right text-primary"></i>
+                          </span>
+                          <span className="my-auto font-weight-semibold tx-15">
+                            Sent
+                          </span>
+                        </div>
+                        <span className="font-weight-semibold my-auto text-danger tx-15">
+                          +0.00255423
+                        </span>
+                      </ListGroup.Item>
+                      <ListGroup.Item className="pd-x-0 d-sm-flex justify-content-between">
+                        <div className="d-sm-flex">
+                          <span className="crypto-icon bg-primary-transparent me-3">
+                            <i className="fe fe-arrow-down-left text-primary"></i>
+                          </span>
+                          <span className="my-auto font-weight-semibold tx-15">
+                            Received
+                          </span>
+                        </div>
+                        <span className="font-weight-semibold my-auto text-success tx-15">
+                          -0.02434525
+                        </span>
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="profile" role="tabpanel">
+                    <div className="d-flex align-items-start pb-3 border-bottom">
+                      <img
+                        // src={user1}
+                        className="img rounded-circle avatar-xl"
+                        alt="user1"
+                      />
+                      <div className="ps-sm-4 ps-2" id="img-section">
+                        <b>Profile Photo</b>
+                        <p className="mb-1">
+                          Accepted file type .png. Less than 1MB
+                        </p>
+
+                        <Button
+                          variant="default" className="btn button border btn-sm">
+                          <b>Upload</b>
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="py-2">
+                      <div className="row py-2">
+                        <div className="col-md-6 pb-3">
+                          <Form.Label id="firstname">First Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Steve"
+                          />
+                        </div>
+                        <div className="col-md-6 pb-3">
+                          <Form.Label id="last-name">Last Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Smith"
+                          />
+                        </div>
+                      </div>
+                      <div className="row py-2">
+                        <div className="col-md-6 pb-3">
+                          <Form.Label id="emailid">Email Address</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="steve_@email.com"
+                          />
+                        </div>
+                        <div className="col-md-6 pb-3">
+                          <Form.Label id="phoneno">Phone Number</Form.Label>
+                          <Form.Control
+                            type="tel"
+                            placeholder="+1 213-548-6015"
+                          />
+                        </div>
+                      </div>
+                      <div className="row py-2">
+
+                      </div>
+                    </div>
+                  </Tab.Pane>
+                </Tab.Content>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Tab.Container>

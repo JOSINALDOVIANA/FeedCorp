@@ -41,10 +41,10 @@ const Okr = () => {
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">OKR - Objective Key Result</h2>
-          {/* <Breadcrumb>
-            <Breadcrumb.Item href="#">Desempenho</Breadcrumb.Item>
+          <Breadcrumb>
+            <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item active>OKR</Breadcrumb.Item>
-          </Breadcrumb> */}
+          </Breadcrumb>
         </div>
 
         <div className="d-flex">
@@ -57,7 +57,7 @@ const Okr = () => {
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/criar_okr/`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i>
-              Novo
+              Novo objetivo
             </Button>
           </div>
         </div>
@@ -65,9 +65,6 @@ const Okr = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-      {/* <!-- Row --> */}
-      <Outlet />
-      {/* <!-- End Row --> */}
       <div>
         <h2 className="main-content-title tx-20 mx-2">Ativos</h2>
         <Row className="row-sm">
@@ -78,7 +75,7 @@ const Okr = () => {
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
 
-                  navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect: okr } })
+                  navegar(`${process.env.PUBLIC_URL}/okr/progresso_okr`, { state: { ...values, okrselect: okr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">
@@ -101,7 +98,7 @@ const Okr = () => {
 
                   <div className="main-traffic-detail-item">
                     <div>
-                      <span>Progresso</span> <span>{okr.progress}%</span>
+                      <span>Progresso</span> <span>{(okr.progress) ? (okr.progress) : 0}%</span>
                     </div>
                     <div className="progress progress-sm mb-1">
                       <ProgressBar

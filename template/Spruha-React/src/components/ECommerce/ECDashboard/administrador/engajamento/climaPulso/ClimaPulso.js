@@ -1,16 +1,22 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from '../../../../../..';
+
 const ClimaPulso = () => {
 
   const dadosrota = useLocation();
-  const location = useLocation();
-  const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const navegar = useNavigate()
+  const [ values, setValues ] = useState({});
+
   useEffect(() => {
-    setValues(dadosrota.state)
-  }, [dadosrota])
+    if (dadosrota.state) {
+      setValues(dadosrota.state);
+    }else{
+      navegar(`${process.env.PUBLIC_URL}/home`)
+    }
+
+  }, [dadosrota.state])
+  console.log(values)
 
   return (
     <Fragment>
@@ -64,20 +70,8 @@ const ClimaPulso = () => {
 
         <div className="card-header border-bottom-0 d-flex justify-content-between">
 
-          <label className="main-content-label my-auto pt-2">Lista das pesquisas de Clima Pulso</label>
+          <label className="main-content-label my-auto pt-2">Lista de pesquisas</label>
 
-
-          {/* <div className="d-flex align-items-center">
-            <Button
-              type="button"
-              variant="primary"
-              className="btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso`, { state: values }) }}
-            >
-              <i className="fe fe-x me-2"></i>
-              Fechar
-            </Button>
-          </div> */}
         </div>
 
         <div className="card-body pt-2 pb-0">
@@ -86,11 +80,12 @@ const ClimaPulso = () => {
               <thead>
                 <tr>
                   <th className="wd-lg-10p text-center">Nome da pesquisa</th>
-                  <th className="wd-lg-40p text-center">Para quem foi direcionado</th>
+                  <th className="wd-lg-40p text-center">Para onde foi direcionado</th>
                   <th className="wd-lg-10p text-center">Link da pesquisa</th>
                 </tr>
               </thead>
               <tbody>
+                
                 {/* {TRADINGACTIVITIES.map((list, index) => (
                     <tr key={index} data-index={index}>
                       <td className="text-center">{list.id}</td>
@@ -114,6 +109,7 @@ const ClimaPulso = () => {
                       </td>
                     </tr>
                   ))} */}
+
               </tbody>
             </Table>
           </div>
