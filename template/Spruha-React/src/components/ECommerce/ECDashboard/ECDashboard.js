@@ -185,7 +185,7 @@ function ECDashboard() {
         <Col sm={12} md={12} lg={12} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
-            onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
+            onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
           >
             <Card.Body>
               <div className="card-order">

@@ -165,6 +165,7 @@ const CriarFeed = () => {
                 >
                   Enviar
                 </Button>
+                
                 <Button onClick={() => {
                   navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
                 }}

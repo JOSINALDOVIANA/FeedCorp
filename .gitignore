@@ -129,3 +129,4 @@ backend/knexfile.js
 *.json
 *.lock
 template/Spruha-React/yarn.lock
+backend/knexfile.js

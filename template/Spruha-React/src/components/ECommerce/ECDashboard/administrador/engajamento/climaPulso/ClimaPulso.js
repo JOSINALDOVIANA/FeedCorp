@@ -40,7 +40,7 @@ const ClimaPulso = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i> Criar
             </Button>
@@ -64,7 +64,7 @@ const ClimaPulso = () => {
 
         <div className="card-header border-bottom-0 d-flex justify-content-between">
 
-          <label className="main-content-label my-auto pt-2">Lista de pesquisas de Clima Pulso</label>
+          <label className="main-content-label my-auto pt-2">Lista das pesquisas de Clima Pulso</label>
 
 
           {/* <div className="d-flex align-items-center">
@@ -85,11 +85,9 @@ const ClimaPulso = () => {
             <Table className="table card-table table-vcenter text-nowrap border" borderless>
               <thead>
                 <tr>
-                  <th className="wd-lg-10p text-center">Destinatário</th>
-                  <th className="wd-lg-20p text-center">Unidade</th>
-                  {/* <th className="wd-lg-20p text-center">Change</th>
-                                    <th className="wd-lg-20p text-center">Date</th> */}
-                  <th className="wd-lg-40p text-center">Seu comentário</th>
+                  <th className="wd-lg-10p text-center">Nome da pesquisa</th>
+                  <th className="wd-lg-40p text-center">Para quem foi direcionado</th>
+                  <th className="wd-lg-10p text-center">Link da pesquisa</th>
                 </tr>
               </thead>
               <tbody>

@@ -51,7 +51,7 @@ const ClimaTabelaRealizados = () => {
                             variant="primary"
                             type="button"
                             className="my-2 me-2 btn-icon-text"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso`, { state: values }) }}
                         >
                             <i className="bi bi-clipboard-plus me-2"></i> Criar
                         </Button>
@@ -130,7 +130,7 @@ const ClimaTabelaRealizados = () => {
                                 </ListGroup.Item>
                                 <ListGroup.Item
                                     as="li"
-                                    className="d-flex justify-content-betwween align-items-center" border="primary">
+                                    className="d-flex justify-content-betwween align-items-center">
                                     <div className="ms-2 me-auto">Perguntas</div>
 
                                     <div className="me-2">

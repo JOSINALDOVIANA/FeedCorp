@@ -98,13 +98,11 @@ const Root = () => {
                     path={`${process.env.PUBLIC_URL}/dashboard/pesquisas`}
                     element={<Pesquisas />}
                   />
+
+                </Route>
                   <Route>
                     <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
                   </Route>
-
-
-
-                </Route>
 
                 {/* movidas para ca */}
                 <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
@@ -146,7 +144,7 @@ const Root = () => {
                   </Route>
 
                   <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso/criar/`}
+                    path={`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso/`}
                     element={<CriarClima />}
                   />
 
