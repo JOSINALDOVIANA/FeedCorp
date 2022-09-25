@@ -73,7 +73,7 @@ function Countryoptions() {
           },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -106,7 +106,7 @@ function Languageoptions() {
           },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />

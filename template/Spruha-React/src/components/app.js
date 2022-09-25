@@ -26,15 +26,20 @@ const App = () => {
   const [ values, setValues ] = useState({})
   
   useEffect(()=>{
+    console.log("entrou 1")
     if(!dadosrota.state){
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
+    if(dadosrota?.state?.destino.length>0){      
+      navegar(`${dadosrota.state.destino[0]}`,{state:{...dadosrota.state,destino:[]}})
+    }
     setValues(dadosrota.state);
-    
     
   },[dadosrota.state])
 
-// console.log(values)
+console.log(values)
+
+
   return (
     <Fragment >
       <div className="horizontalMenucontainer">

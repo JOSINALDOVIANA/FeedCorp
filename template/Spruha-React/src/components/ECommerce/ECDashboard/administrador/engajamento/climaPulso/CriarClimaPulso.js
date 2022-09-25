@@ -18,18 +18,17 @@ const CriarClimaPulso = () => {
 
   useEffect(() => {
     setValues(dadosrota.state)
-    
+
 
     api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
-      setPulse(a => ({
-        ...a,
+      setPulse({       
         id_company: dadosrota.state.company.id,
         id_user: dadosrota.state.dadosUser.id,
         unitSelect: false,
         checked: true,
         company: false,
         questions: []
-      }))
+      })
       setUnits(a => ([...r.data]))
 
       api.get(`questions/category_question/get`).then(r => {
@@ -40,7 +39,7 @@ const CriarClimaPulso = () => {
 
 
   }, [dadosrota.state])
-  console.log(values)
+  // console.log(values)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -100,7 +99,7 @@ const CriarClimaPulso = () => {
                 <Row>
                   <Col sm={12} md={6} lg={6} xl={6}>
                     <input
-                      onBlur={(e)=>{setPulse(a=>({...a,title:e.target.value}))}}
+                      onBlur={(e) => { setPulse(a => ({ ...a, title: e.target.value })) }}
                       type="text" className="form-control" placeholder="Pesquisa" />
                   </Col>
                 </Row>
@@ -114,7 +113,7 @@ const CriarClimaPulso = () => {
                     type="checkbox"
                     onChange={(e) => {
                       if (e.target.checked) {
-                        setPulse(a => ({ ...a, company: values.company.id, checked: false, unitSelect: false}))
+                        setPulse(a => ({ ...a, company: values.company.id, checked: false, unitSelect: false }))
 
                       } else {
                         setPulse(a => ({ ...a, company: false, checked: true }))
@@ -181,22 +180,39 @@ const CriarClimaPulso = () => {
               <div className=" mt-4 d-flex justify-content-end">
 
                 <Button onClick={() => {
-                  let obj={}
-                  obj.title=pulse.title
-                  obj.id_user=pulse.id_user
-                  obj.id_company=pulse.id_company
-                  obj.questions=pulse.questions.map(item=>(item.question))
-                  
-                  if(!!pulse.company){
-                    obj.company=pulse.company                    
-                  }
-                  if(!!pulse.unitSelect){
-                    obj.units=pulse.unitSelect.map(item=>(item.id));
-                  }
+                  // let checkeds = document.getElementsByClassName("form-check-input");
+                  let obj = {}
+                  obj.title = pulse.title
+                  obj.id_user = pulse.id_user
+                  obj.id_company = pulse.id_company
+                  obj.questions = pulse.questions.map(item => (item.question))
+                  // for (const iterator of checkeds) {
+                  //   iterator.setAttribute("type", "text")
+                  // }
 
-                  api.post("pulses/insert",{...obj}).then(r=>{
-                    console.log(values)
-                    setValues(a=>({...a,pulsesCreate:[...a.pulsesCreate,r.data.pulse]}));
+                  if (!!pulse.company) {
+                    obj.company = pulse.company
+                  }
+                  if (!!pulse.unitSelect) {
+                    obj.units = pulse.unitSelect.map(item => (item.id));
+                  }
+                  setPulse(a=>({       
+                    id_company: values.company.id,
+                    id_user: values.dadosUser.id,
+                    unitSelect: false,
+                    checked: true,
+                    company: false,
+                    questions: []
+                  }))
+                  // console.log(pulse)
+                  api.post("pulses/insert",{...obj}).then( r=>{
+                    let p=values.pulsesCreate
+                    p.push({...r.data.pulse,"updated_at":new Date()})
+                    let destino=[`${process.env.PUBLIC_URL}/climapulso`];
+                    setValues(a=>({...a,pulsesCreate:p,destino}));
+                    
+                    // console.log(values)
+                    navegar('/',{state:{...values}})
                   });
 
 

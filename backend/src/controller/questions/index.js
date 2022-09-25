@@ -68,7 +68,7 @@ export default {
                 let categorias_serial = []
                 for (let iterator of categorias) {
                     let questions = await conexao("bdquestions").where({id_cat:iterator.id});
-                    console.log(questions)
+                    // console.log(questions)
                     categorias_serial.push({ ...iterator, questions });
                 }
 
@@ -79,7 +79,7 @@ export default {
             let categorias_serial = []
             for (let iterator of categorias) {
                 let questions = await conexao("bdquestions").where({id_cat:iterator.id});
-                console.log(questions)
+                // console.log(questions)
                 categorias_serial.push({ ...iterator, questions });
             }
             return res.json({ status: true, categories: categorias_serial })

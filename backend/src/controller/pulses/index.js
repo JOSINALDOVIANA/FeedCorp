@@ -8,12 +8,13 @@ export default{
 
          if(!!questions){
             questions=questions.map(question=>({id_pulse:id,question}));
-            await conexao("pulse_question").insert(questions);
+
+            questions.length>0?await conexao("pulse_question").insert(questions):null
          }
 
          if(!!users){
             users=users.map(user=>({id_pulse:id,id_user:user}));
-            await conexao("pulpse_user").insert(users);
+            users.length>0?await conexao("pulpse_user").insert(users):null
          }
 
          if(!!company){
@@ -22,7 +23,7 @@ export default{
 
          if(!!units){
             units=units.map(unit=>({id_pulse:id,id_unity:unit}));
-            await conexao("pulse_unity").insert(units);
+            units.length>0?await conexao("pulse_unity").insert(units):null
          }
 
           return res.json({status:true,pulse:{

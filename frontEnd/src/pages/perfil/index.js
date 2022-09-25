@@ -42,7 +42,7 @@ export default function Perfil() {
   React.useEffect(() => {
     setValues(rota.state);
   }, [])
-console.log(values)
+// console.log(values)
   const items = {
     "administrador": ['Meu Painel', 'Corporação', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],
     "gestor": ['Meu Painel', 'Minha Unidade', 'Avaliações', 'Ferramentas', 'Mensagens', 'Configurações', 'Sair'],

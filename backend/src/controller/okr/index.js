@@ -39,7 +39,7 @@ export default {
         }
     },
     async update(req, res) {
-        console.log("chegou aqui");
+        // console.log("chegou aqui");
         let { id, objective, id_user, progress = 0, validity, keys, concluded = false } = req.body;
         //keys=[{id,description,id_okr=obrigatorio,id_user,status}...]
         if(concluded){
@@ -77,7 +77,7 @@ export default {
     async getOne(req, res) {
 
         const { id } = req.query;
-        console.log(req.query)
+        // console.log(req.query)
         try {
             if (!!id) {
                 const okr = await conexao('okrs').where({ id }).first();

@@ -26,7 +26,7 @@ function Calendars() {
   }
 
   const [state, _setState] = useState(initialstate1)
-  console.log(_setState)
+  // console.log(_setState)
   useEffect(() => {
     let draggableEl = document.getElementById("external-events");
     new Draggable(draggableEl, {

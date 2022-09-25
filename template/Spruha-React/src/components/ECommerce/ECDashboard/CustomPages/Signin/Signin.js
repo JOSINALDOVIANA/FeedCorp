@@ -76,8 +76,8 @@ const Signin = () => {
         okrscriados = okrs;
         
       })
-      console.log("aqui")
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate:[] } });
+  
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate:[],destino:[] } });
     }
 
   };

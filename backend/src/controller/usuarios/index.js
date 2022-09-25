@@ -122,7 +122,7 @@ export default {
         const { password, id, email } = req.body;
         
         const dados = await conexao("users").where({ id, email }).first();
-        console.log(dados)
+        // console.log(dados)
         try {
             if ((!dados||!isEmpty(dados)) && dados.password == password) {
                 await conexao("users").del().where({ id, password })
@@ -156,7 +156,7 @@ export default {
         try {
             await conexao.transaction(async trx => {
                 const dadosantigos = await trx("users").where({ id }).first();
-                console.log(req.body)
+                // console.log(req.body)
                 if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
                     await trx("users").update({
                         name,
