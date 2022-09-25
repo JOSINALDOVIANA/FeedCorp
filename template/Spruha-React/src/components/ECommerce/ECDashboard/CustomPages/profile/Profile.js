@@ -30,7 +30,7 @@ function Profile() {
           <Col xl={3} lg={6} md={6} >
             <Card className="custom-card">
               <Card.Header>
-                <h3 className="main-content-Form.Label">My Account</h3>
+                <h3 className="main-content-Form.Label">Minha conta</h3>
               </Card.Header>
               <Card.Body className=" text-center item-user">
                 <div className="profile-pic">
@@ -45,7 +45,7 @@ function Profile() {
                   </div>
                   <div className="text-dark">
                     <h5 className="mt-3 mb-0 font-weight-semibold">
-                      {values?.dadosUser?.name}
+                      {values?.dadosUser?.name.toUpperCase()}
                     </h5>
                   </div>
                 </div>
@@ -59,7 +59,7 @@ function Profile() {
                 </Nav.Item>
                 <Nav.Item as="li">
                   <Nav.Link eventKey="security" role="tablist" >
-                    <i className="ti-power-off icon1"></i> Segurança
+                    <i className="ti-lock icon1"></i> Segurança
                   </Nav.Link>
                 </Nav.Item>
 
@@ -75,11 +75,13 @@ function Profile() {
             <Card className="custom-card">
               <Card.Body>
                 <Tab.Content className="tab-content">
+                  {/* PAINEL MEU PERFIL */}
                   <Tab.Pane
                     eventKey="profile"
                     className="tab-pane "
                     id="profile"
                     role="tabpanel">
+                    {/* FOTO DE PERFIL UPLOAD */}
                     <div className="d-flex align-items-start pb-3 border-bottom">
                       <img
                         src={values?.image?.url ? values?.image?.url : null}
@@ -93,11 +95,14 @@ function Profile() {
                         </p>
 
                         <Button
-                          variant="default" className="btn button border btn-sm">
+                          variant="primary" className="btn button border btn-sm me-1">
                           <b>Upload</b>
                         </Button>
+                        <b>Nome da imagem.png</b>
+
                       </div>
                     </div>
+
                     <div className="py-2">
                       <div className="row py-2">
                         <div className="col-md-6 pb-3">
@@ -121,76 +126,74 @@ function Profile() {
                       <div className="row py-2">
                         <div className="col-md-6 pb-3">
                           <Form.Label>Permissão de Usuário</Form.Label>
-                          <span>{values?.permissions}</span>
+                          <Form.Label>{values?.permissions}</Form.Label>
                         </div>
+
                         <div className="col-md-6 pb-3">
                           <Form.Label>Minha Unidade</Form.Label>
-                          <span>{values?.unit?.description}</span>
+                          <Form.Label>{values?.unit?.description}</Form.Label>
                         </div>
+
+                        <div className="col-md-6 pb-3">
+                          <Form.Label>Minha Empresa</Form.Label>
+                          <Form.Label>{values?.company?.namefantasy}</Form.Label>
+                        </div>
+
+                        <div className="col-md-6 pb-3">
+                          <Form.Label>CNPJ</Form.Label>
+                          <Form.Label>{values?.company?.cnpj}</Form.Label>
+                        </div>
+
                       </div>
 
                     </div>
+
                   </Tab.Pane>
 
+                  {/* PAINEL SEGURANÇA */}
                   <Tab.Pane
                     eventKey="security"
                     className="tab-pane "
                     id="security"
                     role="tabpanel">
-                    <div className="d-flex align-items-start pb-3 border-bottom">
-                      <img
-                        src={values?.image?.url ? values?.image?.url : null}
-                        className="img rounded-circle avatar-xl"
-                        alt="user1"
-                      />
-                      <div className="ps-sm-4 ps-2" id="img-section">
-                        <b>Foto de perfil</b>
-                        <p className="mb-1">
-                          Aceito arquivo tipo .png. Menos de 1MB
-                        </p>
 
-                        <Button
-                          variant="default" className="btn button border btn-sm">
-                          <b>Upload</b>
-                        </Button>
-                      </div>
-                    </div>
                     <div className="py-2">
+
                       <div className="row py-2">
                         <div className="col-md-6 pb-3">
-                          <Form.Label id="username">Nome de usuário</Form.Label>
+                          <Form.Label id="username">Senha</Form.Label>
                           <Form.Control
                             type="text"
-                            // placeholder="Steve"
-                            defaultValue={values?.dadosUser?.name}
+                            placeholder="Senha antiga"
+                            defaultValue={values?.dadosUser?.password}
                           />
                         </div>
 
                         <div className="col-md-6 pb-3">
-                          <Form.Label id="emailid">Email</Form.Label>
+                          <Form.Label id="username">Nova Senha</Form.Label>
                           <Form.Control
-                            type="text"
-                            // placeholder="steve_@email.com"
-                            defaultValue={values?.dadosUser?.email}
+                            type="password"
+                            placeholder="Senha Nova "
                           />
                         </div>
                       </div>
-                      <div className="row py-2">
-                        <div className="col-md-6 pb-3">
-                          <Form.Label>Permissão de Usuário</Form.Label>
-                          <span>{values?.permissions}</span>
-                        </div>
-                        <div className="col-md-6 pb-3">
-                          <Form.Label>Minha Unidade</Form.Label>
-                          <span>{values?.unit?.description}</span>
-                        </div>
-                      </div>
+
 
                     </div>
                   </Tab.Pane>
 
                 </Tab.Content>
               </Card.Body>
+
+              {/* UM BOTÃO PARA SALVAR TODAS AS ALTERAÇÕES NO PERFIL */}
+              <Card.Footer>
+                <div className="d-flex justify-content-end">
+                  <Button>
+                    Salvar Alterações
+                  </Button>
+                </div>
+              </Card.Footer>
+
             </Card>
           </Col>
         </Row>

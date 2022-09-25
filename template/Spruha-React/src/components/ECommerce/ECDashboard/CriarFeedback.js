@@ -9,7 +9,7 @@ import { SelectUnit } from "./Cards/dataTabelas/Selects/SelectUnit";
 import { SelecTypes } from "./Cards/dataTabelas/Selects/SelectTypes";
 import { Grid } from "@mui/material";
 
-
+import * as alerts from "./Components/Alerts"
 
 // import { Container } from './styles';
 
@@ -31,7 +31,7 @@ const CriarFeed = () => {
     //     setFeedback(a => ({
     //       ...a,
     //       // users: r.data.Users,
-          
+
     //     }));
     //   });
 
@@ -39,9 +39,9 @@ const CriarFeed = () => {
     // }
     function carregarUnits() {
       api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
-        setFeedback(a => ({ 
-          ...a, 
-          units: r.data ,
+        setFeedback(a => ({
+          ...a,
+          units: r.data,
           id_company: dadosrota.state.company?.id,
           id_user: dadosrota.state.dadosUser?.id,
           name: dadosrota.state.dadosUser.name,
@@ -50,8 +50,7 @@ const CriarFeed = () => {
     }
     // carregarUsers()
     carregarUnits()
-  }, [dadosrota.state,recarregar]);
-
+  }, [dadosrota.state, recarregar]);
 
 
   // console.log(values)
@@ -89,10 +88,10 @@ const CriarFeed = () => {
                 />
               </FormGroup>
 
-              <Form.Check 
-              type="checkbox"
-              label="Feedback Anônimo?"
-              onChange={(e)=>{setFeedback(a=>({...a,anonymous:e.target.checked}))}}
+              <Form.Check
+                type="checkbox"
+                label="Feedback Anônimo?"
+                onChange={(e) => { setFeedback(a => ({ ...a, anonymous: e.target.checked })) }}
               />
 
 
@@ -152,20 +151,24 @@ const CriarFeed = () => {
                 <Button to="#"
                   variant="info"
                   className="btn me-1"
-                  onClick={async () => {
-                    const { data } = await api.post(`/feedback/insert`, { ...feedback })
-                    if (data?.status) {
-                      alert("agrademos sua colaboração!!");
-                      setValues(a=>({...a,sendfeedbacks:[...a.sendfeedbacks,{...feedback}]}))
-                      navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
+                  onClick={
+                    async () => {
+                      const { data } = await api.post(`/feedback/insert`, { ...feedback })
+                      alert("Não é possível enviar: Sem dados")
+                      //alerts.Dangeralert
+                      if (data?.status) {
+                        alert("criado com sucesso")
+                        //alerts.Successalert
+                        setValues(a => ({ ...a, sendfeedbacks: [...a.sendfeedbacks, { ...feedback }] }))
+                        navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
+                      }
 
                     }
-                    
-                  }}
+                  }
                 >
-                  Enviar
+                  Criar
                 </Button>
-                
+
                 <Button onClick={() => {
                   navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
                 }}
