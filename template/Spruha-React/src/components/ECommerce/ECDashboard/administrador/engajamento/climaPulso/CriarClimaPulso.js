@@ -206,13 +206,14 @@ const CriarClimaPulso = () => {
                   }))
                   // console.log(pulse)
                   api.post("pulses/insert",{...obj}).then( r=>{
-                    let p=values.pulsesCreate
-                    p.push({...r.data.pulse,"updated_at":new Date()})
-                    let destino=[`${process.env.PUBLIC_URL}/climapulso`];
-                    setValues(a=>({...a,pulsesCreate:p,destino}));
+                    let v=values
+                  
+                    v.pulsesCreate.push({...r.data.pulse,"updated_at":new Date()})
+                    v.destino=`${process.env.PUBLIC_URL}/climapulso`;
+                    setValues(v);
                     
                     // console.log(values)
-                    navegar('/',{state:{...values}})
+                    navegar(`${process.env.PUBLIC_URL}/`,{state:{...values}})
                   });
 
 

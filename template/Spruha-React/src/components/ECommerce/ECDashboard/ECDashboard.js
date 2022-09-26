@@ -33,54 +33,28 @@ function ECDashboard() {
   const [ values, setValues ] = useState({});
  
 
-  useEffect(() => {
-    
-    if(!!dadosrota.state){
+useEffect(()=>{
+  setValues(dadosrota.state)
+},[dadosrota.state])
+
+if(values){
 
       
-      setValues(dadosrota.state);
-     
-      
-    if(dadosrota.state.permissions=="administrador"){
-      api.get(`/feedback/get?id_company=${dadosrota.state.company?.id}`).then(r=>{       
-       setValues(a=>({...a,receivedfeedbacksCompany:r.data.feedbacks}))
-      });     
-      api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{       
-       setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}))
-      });     
-      }
+ 
+ 
+  api.get(`/feedback/get?id_direction=${values.dadosUser?.id}`).then(r=>{       
+    setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}));        
+  }) 
 
-    if(dadosrota.state.permissions=="gestor"){
-      api.get(`/feedback/get?id_unity=${dadosrota.state.unit?.id}`).then(r=>{       
-        setValues(a=>({...a,receivedfeedbacksUnit:r.data.feedbacks}));        
-      })      
-      api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{       
-        setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}));        
-      })      
-      }
 
-    if(dadosrota.state.permissions=="colaborador"){
-      api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{
-       
-        
-        setValues(a=>({...a,receivedfeedbacksUser:r.data.feedbacks}))
-        
-      })      
-      }
-
-      api.get(`/feedback/get?id_user=${dadosrota.state.dadosUser?.id}`).then(r=>{
-       
-        
-       setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
-      })
-    }else{
-      navegar("/");
-    }
+  api.get(`/feedback/get?id_user=${values.dadosUser?.id}`).then(r=>{
    
-  }, [dadosrota.state]);
-  // console.log(values)
+    
+   setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
+  })
+}
 
-
+// console.log(values)
 
   return (
     <Fragment>
@@ -146,9 +120,7 @@ function ECDashboard() {
                   {/* ICONE */}
                   <i className="bi-person-hearts icon-size float-start text-primary"></i>
                   {/* VALOR VARIAVEL */}
-                  {values?.permissions=="administrador" && <span className="font-weight-bold">{values?.receivedfeedbacksCompany?.length}</span>}
-                  {values?.permissions=="colaborador" && <span className="font-weight-bold">{values?.receivedfeedbacksUser?.length}</span>}
-                  {values?.permissions=="gestor" && <span className="font-weight-bold">{values?.receivedfeedbacksUnit?.length}</span>}
+                  <span className="font-weight-bold">{values?.receivedfeedbacksPessoais?.length}</span>
                 </h2>
                 {/* <p className="mb-0 mt-4 text-muted">
                   Monthly users<span className="float-end">50%</span>

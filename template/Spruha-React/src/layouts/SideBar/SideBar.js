@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { MENUITEMS } from "./SideMenu";
-import { MENUITEMS2 } from "./SideMenu";
-import { MENUITEMS3 } from "./SideMenu";
+import { MENUADM,MENUCOL,MENUGESTOR } from "./SideMenu";
+
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import { horizontalmenusticky } from "../../data/Switcherdata/Switcherdata";
@@ -14,12 +13,13 @@ const SideBar = ({values}) => {
   const navegar = useNavigate();
  
   const [menuitems, setMenuitems] = useState([]);
+  const [MENUITEMS, setMENUITEMS] = useState([]);
 
 // console.log(menuitems)
   useEffect(() => {
-    if (values?.permissions == "administrador") { setMenuitems(MENUITEMS) }
-    if (values?.permissions == "gestor") { setMenuitems(MENUITEMS2) }
-    if (values?.permissions == "colaborador") { setMenuitems(MENUITEMS3) }
+    if (values?.permissions == "administrador") { setMenuitems(MENUADM);setMENUITEMS(MENUADM) }
+    if (values?.permissions == "gestor") { setMenuitems(MENUGESTOR);setMENUITEMS(MENUGESTOR) }
+    if (values?.permissions == "colaborador") { setMenuitems(MENUCOL);setMENUITEMS(MENUCOL) }
     
   }, [values]);
   // initial loading

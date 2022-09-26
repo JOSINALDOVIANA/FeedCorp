@@ -11,11 +11,8 @@ const FeedRecebidos = () => {
   
   const location = useLocation();
   const navegar = useNavigate();
-  const [ values, setValues ] = useState({});
-  useEffect(() => {
-    setValues(location.state)
-  }, [location.state])
-
+  
+ 
   return (
     <Fragment>
 
@@ -35,7 +32,7 @@ const FeedRecebidos = () => {
                     type="button"
                     variant="primary"
                     className="btn-icon-text"
-                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: values }) }}
+                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: location.state }) }}
                   >
                     <i className="fe fe-x"></i>
                   </Button>
@@ -44,7 +41,7 @@ const FeedRecebidos = () => {
 
               <Card.Body className="card-body">
 
-                <Basicdatatable values={values} />
+                <Basicdatatable values={location.state} />
 
               </Card.Body>
             </Card>

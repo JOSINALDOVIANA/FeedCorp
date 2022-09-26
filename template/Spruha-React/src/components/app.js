@@ -7,6 +7,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Rightside from "../layouts/Rightside/Rightside";
 import { Backtotop1 } from "../layouts/Backtotop/Backtotop";
 import { usuarioContext } from "..";
+import api from "../api";
 
 const App = () => {
   document.querySelector("body").classList.remove("error-1");
@@ -26,16 +27,20 @@ const App = () => {
   const [ values, setValues ] = useState({})
   
   useEffect(()=>{
-    console.log("entrou 1")
+    
+    
+
     if(!dadosrota.state){
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
-    if(dadosrota?.state?.destino.length>0){      
-      navegar(`${dadosrota.state.destino[0]}`,{state:{...dadosrota.state,destino:[]}})
+    if(!!dadosrota?.state?.destino!=""){  
+      // console.log("entrou aqui")    
+      navegar(`${dadosrota.state.destino}`,{state:{...dadosrota.state,destino:""}})
     }
+
     setValues(dadosrota.state);
     
-  },[dadosrota.state])
+  },[dadosrota])
 
 console.log(values)
 

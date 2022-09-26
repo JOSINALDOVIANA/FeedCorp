@@ -16,7 +16,7 @@ const FeedFeitos = () => {
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota.state])
-  console.log(values)
+  // console.log(values)
 
   
   return (
@@ -48,7 +48,7 @@ const FeedFeitos = () => {
 
               <Card.Body className="card-body">
 
-                <Basicdatatable values={values} />
+                <Basicdatatable values={dadosrota.state} />
 
               </Card.Body>
             </Card>

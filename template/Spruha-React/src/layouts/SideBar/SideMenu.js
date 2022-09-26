@@ -1,4 +1,4 @@
-export const MENUITEMS = [
+export const MENUADM = [
 	{
 		menutitle: 'Administrador',
 		Items: [
@@ -99,7 +99,7 @@ export const MENUITEMS = [
 	
 ];
 
-export const MENUITEMS2 = [
+export const MENUGESTOR = [
 	{
 		menutitle: 'Gestor',
 		Items: [
@@ -148,7 +148,7 @@ export const MENUITEMS2 = [
 	},
 ];
 
-export const MENUITEMS3 = [
+export const MENUCOL = [
 	{
 		menutitle: 'COLABORADOR',
 		Items: [

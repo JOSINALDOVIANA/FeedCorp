@@ -9,27 +9,23 @@ export function Basicdatatable({ values }) {
     let [data, setData] = useState([])
     useEffect(() => {
 
-    setData([])
     
-     async   function caregarFeedbacks(sendfeedbacks){
-            for (const iterator of sendfeedbacks) {
-                const destinatario=await api.get(`/user/getAll?id=${iterator?.id_direction}`);
-                const unidade=await api.get(`/unit/getAll?id=${iterator?.id_unity}`);
-               
-                setData(a=>([
-                    ...a,{
-                    destinatário:destinatario.data.Users[0].name,
-                    name:values.dadosUser.name,
-                    unidade:unidade.data.units[0]?.initials,
-                    comentario:iterator.feedback,
-                    data:formatData(iterator.updated_at)
+    setData([])
+      let L=[]
+            for (const iterator of values?.sendfeedbacks) {
+                let obj={};
+                api.get(`/user/getAll?id=${iterator?.id_direction}`).then(r=>{obj.detinatário=r.data.Users[0].name});
+                api.get(`/unit/getAll?id=${iterator?.id_unity}`).then(s=>{obj.unidade=s.data?.units[0]?.initials});
+                obj.name=values.dadosUser.name;
+                obj.comentario=iterator.feedback;
+                obj.data=formatData(iterator.updated_at);
 
-                }]))
+                L.push(obj)
             }
-        }
         
-    caregarFeedbacks(values?.sendfeedbacks)
-}, [values])
+    setData(L)
+    
+}, [])
 
 //   console.log(data)
 function formatData(data){

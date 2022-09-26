@@ -153,11 +153,19 @@ export default{
         }
     },
     async Delete(req,res){
-        let {id}=req.query;
+        let {id=false}=req.query;
+        let {ids=false}=req.body
         try { 
-          await conexao("pulses").del().where({id})      
-
-         return res.json({status:true,mensage:"apagado"})
+          if(id){
+            await conexao("pulses").del().where({id})
+            return res.json({status:true,mensage:"apagado"})
+          }  
+          if(ids){
+            await conexao("pulses").del().whereIn("id",ids)
+            return res.json({status:true,mensage:"apagado"})
+          }    
+          return res.json({status:true,mensage:"nada foi apagado"})
+         
         } catch (error) {
             console.log(error)
             return res.json({status:false,mensage:"error pulses=>delete"})

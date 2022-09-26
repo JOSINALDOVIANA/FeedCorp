@@ -77,7 +77,7 @@ const Signin = () => {
         
       })
   
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate:[],destino:[] } });
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate:[],destino:"/dashboard" } });
     }
 
   };

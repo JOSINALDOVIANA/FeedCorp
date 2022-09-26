@@ -11,7 +11,9 @@ import api from '../../../../../api.js';
 export function Basicdatatable({ values }) {
 
     let [data, setData] = useState([])
+   
     useEffect(() => {
+        
         let dados=datafiltro()
         setData(dados)
     }, [values])
@@ -21,95 +23,93 @@ export function Basicdatatable({ values }) {
          // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
          return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
        }
-//  console.log(data)
+//  console.log(v1)
 
    function datafiltro() {
         let v = [];
-        if (values?.permissions == "administrador") {
-            for (const item of values?.receivedfeedbacksCompany) {
-                let valores = {};
+        
+        for (const item of values?.receivedfeedbacksPessoais) {
+            let valores = {};
 
-                if (item.anonymous == 1) {
-                    valores.nome = "Anônimo";
-                   api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    
-                    valores.data = formatData(item.updated_at);
-                    valores.comentario = item.feedback
-                } else {
-                    if (!!item.name) {
-                          valores.nome=item.name;                      
-                    }else{
+            if (item.anonymous == 1) {
+                valores.nome = "Anônimo";
+               api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                
+                valores.data = formatData(item.updated_at);
+                valores.comentario = item.feedback
+            } else {
+                if (!!item.name) {
+                      valores.nome=item.name;                      
+                }else{
 
-                        !!item.id_user ?
-                         api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-                    }
-                     api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-
-                   
-                    valores.data = formatData(item.updated_at);
-                    valores.comentario = item.feedback
+                    !!item.id_user ?
+                     api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
                 }
-                v.push(valores)
-            }
+                 api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
 
+               
+                valores.data = formatData(item.updated_at);
+                valores.comentario = item.feedback
+            }
+            v.push(valores)
         }
 
-        if (values?.permissions == "gestor") {
-            for (const item of values?.receivedfeedbacksUnit) {
-                let valores = {};
-                if (item.anonymous == 1) {
-                    valores.nome = "Anônimo";
+        // if (values?.permissions == "gestor") {
+        //     for (const item of values?.receivedfeedbacksUnit) {
+        //         let valores = {};
+        //         if (item.anonymous == 1) {
+        //             valores.nome = "Anônimo";
                     
-                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    valores.data = formatData(item.updated_at);
-                    valores.comentario = item.feedback;
-                } else {
-                    if (!!item.name) {
-                        valores.nome=item.name ;     
-                    }else{
+        //             api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+        //             valores.data = formatData(item.updated_at);
+        //             valores.comentario = item.feedback;
+        //         } else {
+        //             if (!!item.name) {
+        //                 valores.nome=item.name ;     
+        //             }else{
 
-                        !!item.id_user ?
-                        api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-                    }
-                     api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+        //                 !!item.id_user ?
+        //                 api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
+        //             }
+        //              api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     
-                    valores.data = formatData(item.updated_at);
-                    valores.comentario = item.feedback;
-                }
+        //             valores.data = formatData(item.updated_at);
+        //             valores.comentario = item.feedback;
+        //         }
 
-                v.push(valores)
-            }
+        //         v.push(valores)
+        //     }
 
 
-        }
-        if (values?.permissions == "colaborador") {
-            for (const item of values?.receivedfeedbacksUser) {
-                let valores = {};
-                if (item.anonymous == 1) {
-                    // console.log("entrou aqui")
-                    valores.nome = "Anônimo";
-                    api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+        // }
+        // if (values?.permissions == "colaborador") {
+        //     for (const item of values?.receivedfeedbacksUser) {
+        //         let valores = {};
+        //         if (item.anonymous == 1) {
+        //             // console.log("entrou aqui")
+        //             valores.nome = "Anônimo";
+        //             api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     
-                    valores.data = formatData(item.updated_at);
-                    valores.comentario = item.feedback;
-                } else {
-                    if (!!item.name) {
-                        valores.nome=item.name ;     
-                    }else{
+        //             valores.data = formatData(item.updated_at);
+        //             valores.comentario = item.feedback;
+        //         } else {
+        //             if (!!item.name) {
+        //                 valores.nome=item.name ;     
+        //             }else{
 
-                        !!item.id_user ?
-                       api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-                    }
+        //                 !!item.id_user ?
+        //                api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
+        //             }
                     
-                       api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+        //                api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
                     
-                    valores.data = formatData(item.updated_at);
-                    valores.comentario = item.feedback;
-                }
-                v.push(valores);
-            }
+        //             valores.data = formatData(item.updated_at);
+        //             valores.comentario = item.feedback;
+        //         }
+        //         v.push(valores);
+        //     }
 
-        }
+        // }
 
         return v;
     }
@@ -244,6 +244,7 @@ export function Basicdatatable({ values }) {
     //const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
 
     return (
+    // <hi>em teste</hi>
 
         <DataTableExtensions {...tableData} filterPlaceholder={"Procurar"}>
             <DataTable
