@@ -76,7 +76,7 @@ const Signin = () => {
         okrscriados=okrs;
         // console.log(okrscriados)
       })
-      console.log("aqui")
+      // console.log("aqui")
       await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company,okrscriados } });
     }
 

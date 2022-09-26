@@ -2,21 +2,22 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-import { Basicdatatable } from "./dataTabelas/FeedFeitosDataTabela";
+import { Basicdatatable } from "./dataTabelas/FeedFeitosDataTabela.js";
 
 
 // import { Container } from './styles';
 
-const FeedFeitos = () => {
+export default function FeedFeitos(){
 
   const dadosrota = useLocation();
-
+ 
   const navegar = useNavigate();
-  const [values, setValues] = useState({})
-  useEffect(() => {
+  const [values,setValues]=useState({})
+  useEffect(()=>{
     setValues(dadosrota.state)
-  }, [dadosrota.state])
-  // console.log(values)
+  },[dadosrota.state])
+
+  
 
   
   return (
@@ -39,7 +40,7 @@ const FeedFeitos = () => {
                     type="button"
                     variant="primary"
                     className="btn-icon-text"
-                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: values }) }}
+                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard`, { state: dadosrota.state }) }}
                   >
                     <i className="fe fe-x"></i>
                   </Button>
@@ -48,8 +49,8 @@ const FeedFeitos = () => {
 
               <Card.Body className="card-body">
 
-                <Basicdatatable values={dadosrota.state} />
-
+              
+                {values.sendfeedbacks && <Basicdatatable values={values?.sendfeedbacks} />}
               </Card.Body>
             </Card>
 
@@ -62,4 +63,3 @@ const FeedFeitos = () => {
   );
 }
 
-export default FeedFeitos;

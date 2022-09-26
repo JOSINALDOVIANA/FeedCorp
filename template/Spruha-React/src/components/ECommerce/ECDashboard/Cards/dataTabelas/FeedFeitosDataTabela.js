@@ -6,34 +6,48 @@ import "react-data-table-component-extensions/dist/index.css";
 import api from '../../../../../api';
 
 export function Basicdatatable({ values }) {
-    let [data, setData] = useState([])
+    const [data, setData] = useState([])
+   
     useEffect(() => {
-
-    
-    setData([])
-      let L=[]
-            for (const iterator of values?.sendfeedbacks) {
-                let obj={};
-                api.get(`/user/getAll?id=${iterator?.id_direction}`).then(r=>{obj.detinatário=r.data.Users[0].name});
-                api.get(`/unit/getAll?id=${iterator?.id_unity}`).then(s=>{obj.unidade=s.data?.units[0]?.initials});
-                obj.name=values.dadosUser.name;
-                obj.comentario=iterator.feedback;
-                obj.data=formatData(iterator.updated_at);
-
-                L.push(obj)
-            }
         
-    setData(L)
     
-}, [])
+      
+        let L=[]
+              for (const iterator of values) {
+                
+                  let obj={};
+                  api.get(`/user/getAll?id=${iterator?.id_direction}`).then( r=>{
+                    let f=r.data.Users[0]?.name;
+                    obj.destinatário=f;
+                    // console.log(f)
+                });
+                  api.get(`/unit/getAll?id=${iterator?.id_unity}`).then(s=>{
+                    let f=s.data.units[0]?.initials;
+                    obj.unidade=f;
+                    // console.log(f)
+                });
+                //   obj.name=values.dadosUser.name;
+                  obj.comentario=iterator.feedback;
+                  obj.data=formatData(iterator.updated_at);
+  
+                  L.push(obj)
+              }
+          
+      
+      function formatData(data){
+        const dat=new Date(data);
+        const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
+         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+       }
+    //    console.log(L)
+       setData(L)
 
-//   console.log(data)
-function formatData(data){
-    const dat=new Date(data);
-    const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
-     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
-     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-   }
+    return(()=>null)
+    
+}, [values])
+
+
 
 
     const columns = [
@@ -89,7 +103,7 @@ function formatData(data){
     //     data1 = i
     //     setData(i)
     // }
-    const tableData = {
+    let tableData = {
         columns,
         data,
     };

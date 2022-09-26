@@ -10,25 +10,12 @@ import api from '../../../../../api.js';
 
 export function Basicdatatable({ values }) {
 
-    let [data, setData] = useState([])
+    const [data, setData] = useState([])
    
     useEffect(() => {
-        
-        let dados=datafiltro()
-        setData(dados)
-    }, [values])
-    function formatData(data){
-        const dat=new Date(data);
-        const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
-         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
-         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-       }
-//  console.log(v1)
-
-   function datafiltro() {
         let v = [];
         
-        for (const item of values?.receivedfeedbacksPessoais) {
+        for (const item of values) {
             let valores = {};
 
             if (item.anonymous == 1) {
@@ -54,65 +41,19 @@ export function Basicdatatable({ values }) {
             v.push(valores)
         }
 
-        // if (values?.permissions == "gestor") {
-        //     for (const item of values?.receivedfeedbacksUnit) {
-        //         let valores = {};
-        //         if (item.anonymous == 1) {
-        //             valores.nome = "Anônimo";
-                    
-        //             api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-        //             valores.data = formatData(item.updated_at);
-        //             valores.comentario = item.feedback;
-        //         } else {
-        //             if (!!item.name) {
-        //                 valores.nome=item.name ;     
-        //             }else{
-
-        //                 !!item.id_user ?
-        //                 api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-        //             }
-        //              api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    
-        //             valores.data = formatData(item.updated_at);
-        //             valores.comentario = item.feedback;
-        //         }
-
-        //         v.push(valores)
-        //     }
+        
+       setData(v)
+       return(()=>null)
+    }, [values])
+    function formatData(data){
+        const dat=new Date(data);
+        const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
+         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+       }
+//  console.log(v1)
 
 
-        // }
-        // if (values?.permissions == "colaborador") {
-        //     for (const item of values?.receivedfeedbacksUser) {
-        //         let valores = {};
-        //         if (item.anonymous == 1) {
-        //             // console.log("entrou aqui")
-        //             valores.nome = "Anônimo";
-        //             api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    
-        //             valores.data = formatData(item.updated_at);
-        //             valores.comentario = item.feedback;
-        //         } else {
-        //             if (!!item.name) {
-        //                 valores.nome=item.name ;     
-        //             }else{
-
-        //                 !!item.id_user ?
-        //                api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
-        //             }
-                    
-        //                api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                    
-        //             valores.data = formatData(item.updated_at);
-        //             valores.comentario = item.feedback;
-        //         }
-        //         v.push(valores);
-        //     }
-
-        // }
-
-        return v;
-    }
 
 
     // function downloadCSV(array) {
@@ -158,7 +99,7 @@ export function Basicdatatable({ values }) {
     // }
     //const Export = ({ onExport }) => <Button onClick={e => onExport(e.target.value)}>Exportar</Button>;
 
-    const columns = [
+    let columns = [
         {
             name: "Nome",
             selector: row => [row.nome],

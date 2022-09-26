@@ -33,26 +33,24 @@ function ECDashboard() {
   const [ values, setValues ] = useState({});
  
 
-useEffect(()=>{
-  setValues(dadosrota.state)
-},[dadosrota.state])
-
-if(values){
-
+useEffect(()=>{  
+  setValues(dadosrota.state) 
+  api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{  
+       
       
- 
- 
-  api.get(`/feedback/get?id_direction=${values.dadosUser?.id}`).then(r=>{       
-    setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}));        
-  }) 
-
-
-  api.get(`/feedback/get?id_user=${values.dadosUser?.id}`).then(r=>{
+    setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}))
+            
+ }) 
+ api.get(`/feedback/get?id_user=${dadosrota.state.dadosUser?.id}`).then(r=>{
    
+   
+     setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
     
-   setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
-  })
-}
+  })  
+},[dadosrota])
+
+
+
 
 // console.log(values)
 

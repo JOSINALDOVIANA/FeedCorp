@@ -209,11 +209,11 @@ const CriarClimaPulso = () => {
                     let v=values
                   
                     v.pulsesCreate.push({...r.data.pulse,"updated_at":new Date()})
-                    v.destino=`${process.env.PUBLIC_URL}/climapulso`;
+                   
                     setValues(v);
                     
                     // console.log(values)
-                    navegar(`${process.env.PUBLIC_URL}/`,{state:{...values}})
+                    navegar(`${process.env.PUBLIC_URL}/climapulso`,{state:{...values}})
                   });
 
 

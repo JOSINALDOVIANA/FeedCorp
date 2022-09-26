@@ -26,23 +26,19 @@ const App = () => {
   const navegar=useNavigate()
   const [ values, setValues ] = useState({})
   
-  useEffect(()=>{
-    
-    
+  
+
+  useEffect(() => {
 
     if(!dadosrota.state){
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
-    if(!!dadosrota?.state?.destino!=""){  
-      // console.log("entrou aqui")    
-      navegar(`${dadosrota.state.destino}`,{state:{...dadosrota.state,destino:""}})
-    }
-
-    setValues(dadosrota.state);
+    setValues(dadosrota.state);   
+   
     
-  },[dadosrota])
+  }, [dadosrota.state])
 
-console.log(values)
+  
 
 
   return (

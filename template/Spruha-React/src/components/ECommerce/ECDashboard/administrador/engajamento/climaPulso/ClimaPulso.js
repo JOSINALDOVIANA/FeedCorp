@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import api from "../../../../../../api";
 
 const ClimaPulso = () => {
 
@@ -9,13 +10,32 @@ const ClimaPulso = () => {
   const [ values, setValues ] = useState({});
 
   useEffect(() => {
-    if (dadosrota.state) {
+   
       setValues(dadosrota.state);
-    }else{
-      navegar(`${process.env.PUBLIC_URL}/home`)
-    }
+      
 
   }, [dadosrota.state])
+
+  useEffect(()=>{
+    api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
+      let pulsesDirectUser=r.data.pulsesDirectUser;
+      let pulsesCreate=!!values.pulsesCreate?[...values.pulsesCreate,...r.data.pulsesCreateUser]:[...r.data.pulsesCreateUser]
+
+      let pulsesCreate_serial=[]
+      let ids=[];
+      for (const iterator of pulsesCreate) {        
+        if(!ids.indexOf(iterator.id)>=0){
+          pulsesCreate_serial.push(iterator)
+        }        
+      } 
+
+     pulsesCreate=pulsesCreate_serial;
+         
+      setValues(a=>({...a,pulsesCreate,pulsesDirectUser}))
+
+    })
+    // return(()=>setValues({}))
+  },[dadosrota.state])
   console.log(values)
 
   return (
@@ -69,7 +89,7 @@ const ClimaPulso = () => {
       <div className="card custom-card">
 
         <div className="card-header border-bottom-0 d-flex justify-content-between">
-
+           <h1>p/Marcus.... pulsos criados: {values?.pulsesCreate?.length}</h1>
           <label className="main-content-label my-auto pt-2">Lista de pesquisas</label>
 
         </div>
