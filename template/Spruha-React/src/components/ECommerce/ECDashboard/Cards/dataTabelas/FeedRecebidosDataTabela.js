@@ -53,9 +53,6 @@ export function Basicdatatable({ values }) {
        }
 //  console.log(v1)
 
-
-
-
     // function downloadCSV(array) {
     //     const link = document.createElement('a');
     //     let csv = convertArrayOfObjectsToCSV(array);

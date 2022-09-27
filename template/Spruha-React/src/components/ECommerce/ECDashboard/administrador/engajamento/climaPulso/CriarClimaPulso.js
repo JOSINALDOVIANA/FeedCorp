@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import api from "../../../../../../api";
 import { Divider } from "@mui/material";
 import { SelectUnitPulso } from "../../../Cards/dataTabelas/Selects/SelectUnit";
+import { successAlert } from "../../../Components/Alerts";
 
 const CriarClimaPulso = () => {
 
@@ -211,7 +212,7 @@ const CriarClimaPulso = () => {
                     v.pulsesCreate.push({...r.data.pulse,"updated_at":new Date()})
                    
                     setValues(v);
-                    
+                    successAlert()
                     // console.log(values)
                     navegar(`${process.env.PUBLIC_URL}/climapulso`,{state:{...values}})
                   });

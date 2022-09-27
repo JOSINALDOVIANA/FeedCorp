@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 // SuccessAlert
-export function Successalert() {
+export function successAlert() {
     Swal.fire({
         icon: "success",
         title: "Muito Bem!",
@@ -10,7 +10,7 @@ export function Successalert() {
 }
 
 //DangerAlert
-export function Dangeralert(params) {
+export function dangerAlert(params) {
     Swal.fire({
         icon: "warning",
         title: "Erro",

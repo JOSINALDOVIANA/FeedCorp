@@ -1,41 +1,41 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import api from "../../../../../../api";
 
 const ClimaPulso = () => {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const [ values, setValues ] = useState({});
+  const [values, setValues] = useState({});
 
   useEffect(() => {
-   
-      setValues(dadosrota.state);
-      
+
+    setValues(dadosrota.state);
+
 
   }, [dadosrota.state])
 
-  useEffect(()=>{
-    api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
-      let pulsesDirectUser=r.data.pulsesDirectUser;
-      let pulsesCreate=!!values.pulsesCreate?[...values.pulsesCreate,...r.data.pulsesCreateUser]:[...r.data.pulsesCreateUser]
+  useEffect(() => {
+    api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+      let pulsesDirectUser = r.data.pulsesDirectUser;
+      let pulsesCreate = !!values.pulsesCreate ? [...values.pulsesCreate, ...r.data.pulsesCreateUser] : [...r.data.pulsesCreateUser]
 
-      let pulsesCreate_serial=[]
-      let ids=[];
-      for (const iterator of pulsesCreate) {        
-        if(!ids.indexOf(iterator.id)>=0){
+      let pulsesCreate_serial = []
+      let ids = [];
+      for (const iterator of pulsesCreate) {
+        if (!ids.indexOf(iterator.id) >= 0) {
           pulsesCreate_serial.push(iterator)
-        }        
-      } 
+        }
+      }
 
-     pulsesCreate=pulsesCreate_serial;
-         
-      setValues(a=>({...a,pulsesCreate,pulsesDirectUser}))
+      pulsesCreate = pulsesCreate_serial;
+
+      setValues(a => ({ ...a, pulsesCreate, pulsesDirectUser }))
 
     })
     // return(()=>setValues({}))
-  },[dadosrota.state])
+  }, [dadosrota.state])
   console.log(values)
 
   return (
@@ -89,9 +89,10 @@ const ClimaPulso = () => {
       <div className="card custom-card">
 
         <div className="card-header border-bottom-0 d-flex justify-content-between">
-           <h1>p/Marcus.... pulsos criados: {values?.pulsesCreate?.length}</h1>
           <label className="main-content-label my-auto pt-2">Lista de pesquisas</label>
-
+          <span className="d-block tx-12 mt-2 mb-0 text-muted">
+            Pulsos criados: {values?.pulsesCreate?.length}
+          </span>
         </div>
 
         <div className="card-body pt-2 pb-0">
@@ -102,33 +103,28 @@ const ClimaPulso = () => {
                   <th className="wd-lg-10p text-center">Nome da pesquisa</th>
                   <th className="wd-lg-40p text-center">Para onde foi direcionado</th>
                   <th className="wd-lg-10p text-center">Link da pesquisa</th>
+                  <th className="wd-lg-10p text-center">Data da pesquisa</th>
                 </tr>
               </thead>
               <tbody>
-                
-                {/* {TRADINGACTIVITIES.map((list, index) => (
-                    <tr key={index} data-index={index}>
-                      <td className="text-center">{list.id}</td>
-                      <td className="coin_icon d-flex">
-                        <div className="cryp-icon bg-primary me-2">
-                          <i className={`cf cf-${list.icon} text-center`} />
-                        </div>
-                        <span className=" my-auto text-center">
-                          {list.name} <b>{list.title}</b>
-                        </span>
-                      </td>
-                      <td className="text-center">{list.price}</td>
-                      <td className="text-center">
-                        <span className={`text-${list.changeStatus} `}>{list.change}</span>
-                      </td>
-                      <td className="text-center">{list.date}</td>
-                      <td className="text-center">
-                        <Link to="#" className={`text-${list.status}`}>
-                          {list.statusText}
-                        </Link>
-                      </td>
-                    </tr>
-                  ))} */}
+
+                {/* {values?.pulsesCreate?.map(pulse => (
+                  <tr key={pulse.id}>
+                    <td className="text-center">
+                      {pulse.title}
+                    </td>
+                    <td className="text-center">
+
+                    </td>
+
+                    <td className="text-center">
+
+                    </td>
+                    <td className="text-center">
+                      {pulse.updated_at}
+                    </td>
+                  </tr>
+                ))} */}
 
               </tbody>
             </Table>

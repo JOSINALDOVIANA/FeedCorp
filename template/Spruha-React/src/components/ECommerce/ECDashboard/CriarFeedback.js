@@ -8,8 +8,9 @@ import { SelectUsers } from "./Cards/dataTabelas/Selects/SelectUser";
 import { SelectUnit } from "./Cards/dataTabelas/Selects/SelectUnit";
 import { SelecTypes } from "./Cards/dataTabelas/Selects/SelectTypes";
 import { Grid } from "@mui/material";
-
+import Swal from "sweetalert2";
 import * as alerts from "./Components/Alerts"
+import { successAlert, dangerAlert } from "./Components/Alerts"
 
 // import { Container } from './styles';
 
@@ -154,11 +155,11 @@ const CriarFeed = () => {
                   onClick={
                     async () => {
                       const { data } = await api.post(`/feedback/insert`, { ...feedback })
-                      alert("Não é possível enviar: Sem dados")
-                      //alerts.Dangeralert
+                      //ALERTA ERRO
+                      dangerAlert()
                       if (data?.status) {
-                        alert("criado com sucesso")
-                        //alerts.Successalert
+                        //ALERTA SUCESSO
+                        successAlert()
                         setValues(a => ({ ...a, sendfeedbacks: [...a.sendfeedbacks, { ...feedback }] }))
                         navegar(`${process.env.PUBLIC_URL}/dashboard/`, { state: values })
                       }
