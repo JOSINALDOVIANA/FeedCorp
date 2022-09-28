@@ -1,58 +1,39 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-// import user3 from "../../../assets/img/users/3.jpg";
-// import user4 from "../../../assets/img/users/4.jpg";
-// import user5 from "../../../assets/img/users/5.jpg";
-// import user7 from "../../../assets/img/users/7.jpg";
-// import user9 from "../../../assets/img/users/9.jpg";
-// import png14 from "../../../assets/img/pngs/14.png";
-// import png15 from "../../../assets/img/pngs/15.png";
-// import png16 from "../../../assets/img/pngs/16.png";
-// import png17 from "../../../assets/img/pngs/17.png";
-// import png18 from "../../../assets/img/pngs/18.png";
-// import png19 from "../../../assets/img/pngs/19.png";
 import { Line } from "react-chartjs-2";
 import ReactApexChart from "react-apexcharts";
 import * as edashboard from "../../../data/Ecommerce/E-dashboard/edashboard";
 import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown } from "react-bootstrap";
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
-import { usuarioContext } from "../../..";
 import api from "../../../api";
 import { any } from "prop-types";
-// const ProductsDetails =
-//   [
-//     { Productid: "#C234", Productname: png14, Producttext: "Regular Backpack", Productcost: "$14,500", Total: "2,977", Status: "Available", Statustext: "primary", },
-//     { Productid: "#C389", Productname: png15, Producttext: "Women Pink Sandal", Productcost: "$30,000", Total: "678	", Status: "Limited", Statustext: "primary", },
-//     { Productid: "#C936", Productname: png16, Producttext: "Designer Flower Pot", Productcost: "$13,200", Total: "4,922	", Status: "Available", Statustext: "primary", },
-//     { Productid: "#C493", Productname: png17, Producttext: "Plastic Outdoor Chair", Productcost: "$14,500", Total: "1,234", Status: "Limited", Statustext: "primary", }, { Productid: "#C729", Productname: png18, Producttext: "Digital Smart Watch", Productcost: "$5,987", Total: "4,789", Status: "NoStock", Statustext: "primary  op-5", },
-//     { Productid: "#C529", Productname: png19, Producttext: "Apple iPhone", Productcost: "$11,987", Total: "938", Status: "Limited", Statustext: "primary", },
-//   ];
+
 function ECDashboard() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const [ values, setValues ] = useState({});
- 
-
-useEffect(()=>{  
-  setValues(dadosrota.state) 
-  api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r=>{  
-       
-      
-    setValues(a=>({...a,receivedfeedbacksPessoais:r.data.feedbacks}))
-            
- }) 
- api.get(`/feedback/get?id_user=${dadosrota.state.dadosUser?.id}`).then(r=>{
-   
-   
-     setValues(a=>({...a,sendfeedbacks:r.data.feedbacks}))
-    
-  })  
-},[dadosrota])
+  const [values, setValues] = useState({});
 
 
+  useEffect(() => {
+    setValues(dadosrota.state)
+    api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r => {
 
 
-// console.log(values)
+      setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
+
+    })
+    api.get(`/feedback/get?id_user=${dadosrota.state.dadosUser?.id}`).then(r => {
+
+
+      setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
+
+    })
+  }, [dadosrota])
+
+
+
+
+  // console.log(values)
 
   return (
     <Fragment>
@@ -168,7 +149,7 @@ useEffect(()=>{
                   {/* ICONE */}
                   <i className="bi-check2-circle icon-size float-start text-primary"></i>
                   {/* VALOR VARIAVEL */}
-                  <span className="font-weight-bold">{values?.okrscriados?.map(item=>(item.progress<100?item:false)).length}</span>
+                  <span className="font-weight-bold">{values?.okrscriados?.map(item => (item.progress < 100 ? item : false)).length}</span>
                 </h2>
                 {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Profit<span className="float-end">$4,678</span>

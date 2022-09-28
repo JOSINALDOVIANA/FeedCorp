@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import api from "../../../../../../api";
 import { Divider } from "@mui/material";
-import { SelectUnitPulso } from "../../../Cards/dataTabelas/Selects/SelectUnit";
+import { SelectUnitPulso } from "../../../Components/Selects/SelectUnit";
 import { successAlert } from "../../../Components/Alerts";
 
 const CriarClimaPulso = () => {

@@ -22,7 +22,8 @@ const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashbo
 
 // Dashboard
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
-const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp"))
+const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
+const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
 const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
 //AVPR
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/AVPR"));
@@ -100,29 +101,30 @@ const Root = () => {
                   />
 
                 </Route>
-                  <Route>
-                    <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
-                  </Route>
+                <Route>
+                  <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
+                </Route>
 
                 {/* movidas para ca */}
                 <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
                 {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
                 <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
+                <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
                 {/* ------------------------------OKR------------------------------------------ */}
 
                 <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
                   <Route index element={<Fragment />} />
                 </Route>
-                  {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
-                  <Route 
-                  path={`${process.env.PUBLIC_URL}/okr/criar_okr`} 
+                {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
+                <Route
+                  path={`${process.env.PUBLIC_URL}/okr/criar_okr`}
                   element={<CriarOkr />}
-                  />
+                />
 
-                  <Route 
-                  path={`${process.env.PUBLIC_URL}/okr/progresso_okr`} 
-                  element={<ProgressoOKR />} 
-                  />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/okr/progresso_okr`}
+                  element={<ProgressoOKR />}
+                />
 
 
 
@@ -133,12 +135,12 @@ const Root = () => {
 
                 </Route>
 
-                  {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
-                    element={<CriarAvpr />}
-                  />
-                  <Route
+                {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
+                <Route
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
+                  element={<CriarAvpr />}
+                />
+                <Route
                   path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`}
                   element={<ProgressoAVPR />}
                 />

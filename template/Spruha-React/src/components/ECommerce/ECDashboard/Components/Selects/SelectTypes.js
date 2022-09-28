@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Multiselect from "react-select";
-import api from '../../../../../../api';
+import api from '../../../../../api';
 
 export const SelecTypes = ({ values, setFeedback }) => {
   const [types, setTypes] = useState([]);

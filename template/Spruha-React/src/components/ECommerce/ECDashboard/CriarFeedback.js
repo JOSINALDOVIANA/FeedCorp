@@ -1,15 +1,12 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, ListGroup, Breadcrumb } from "react-bootstrap";
-
-
 import api from "../../../api";
-import { SelectUsers } from "./Cards/dataTabelas/Selects/SelectUser";
-import { SelectUnit } from "./Cards/dataTabelas/Selects/SelectUnit";
-import { SelecTypes } from "./Cards/dataTabelas/Selects/SelectTypes";
+
+import { SelectUsers } from "./Components/Selects/SelectUser";
+import { SelectUnit } from "./Components/Selects/SelectUnit";
+import { SelecTypes } from "./Components/Selects/SelectTypes";
 import { Grid } from "@mui/material";
-import Swal from "sweetalert2";
-import * as alerts from "./Components/Alerts"
 import { successAlert, dangerAlert } from "./Components/Alerts"
 
 // import { Container } from './styles';

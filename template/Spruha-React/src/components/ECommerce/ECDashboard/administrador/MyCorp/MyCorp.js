@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import * as chart from "../../../../data/Chart/chart";
-import * as marketcap from "../../../../data/Cryptodashboard/Marketcap/marketcap";
+import * as chart from "../../../../../data/Chart/chart";
+import * as marketcap from "../../../../../data/Cryptodashboard/Marketcap/marketcap";
 import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
 import { Bar, Pie, Radar, Line, Doughnut, PolarArea } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../..";
+import { usuarioContext } from "../../../../..";
 ChartJS.register(...registerables);
 
 
@@ -64,7 +64,10 @@ function MinhaCorporacao() {
 
         {values?.units.map(unit => (
           <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
-            <Card className="custom-card">
+            <Card className="custom-card" 
+            style={{cursor: "pointer"}}
+            onClick={() => { navegar(`${process.env.PUBLIC_URL}/unidades`, { state: values }) }}
+            >
               <Card.Body className="">
                 <h5 className="tx-14">Unidade</h5>
 
