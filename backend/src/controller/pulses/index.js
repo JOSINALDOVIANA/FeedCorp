@@ -41,6 +41,23 @@ export default{
          if(!!id_user){
           // pulsos que o usuario criou
           let  pulsesCreateUser=await conexao("pulses").where({"pulses.id_user":id_user})
+          let  pulsesCreateUser_serial=[];
+          
+
+          for (let iterator of pulsesCreateUser) {
+            let company=await conexao("pulse_company").where({"id_pulse":iterator.id});
+            let units=[];
+            let users=[];
+            company=company.length==0?false:true;
+            
+             units =await conexao("pulse_unity").where({"id_pulse":iterator.id}).join("units","pulse_unity.id_unity","=","units.id").select("units.initials");
+             users=await conexao("pulse_user").where({"id_pulse":iterator.id}).join("users","pulse_user.id_user","=","users.id").join("images","users.id_image","=","images.id")
+             .select("users.name","images.url");              
+            
+            pulsesCreateUser_serial.push({...iterator,direction:{company,units,users}})
+          } 
+          // console.log(pulsesCreateUser_serial)
+          pulsesCreateUser=pulsesCreateUser_serial
           
           // Pulsos direcionados ao usuario
           let  pulsesDirectUser=await conexao("pulse_user").where({"pulse_user.id_user":id_user})
@@ -154,16 +171,17 @@ export default{
     },
     async Delete(req,res){
         let {id=false}=req.query;
-        let {ids=false}=req.body
+        
+        
         try { 
           if(id){
             await conexao("pulses").del().where({id})
             return res.json({status:true,mensage:"apagado"})
           }  
-          if(ids){
-            await conexao("pulses").del().whereIn("id",ids)
-            return res.json({status:true,mensage:"apagado"})
-          }    
+          // if(ids){
+          //   await conexao("pulses").del().where("id",ids)
+          //   return res.json({status:true,mensage:"apagado"})
+          // }    
           return res.json({status:true,mensage:"nada foi apagado"})
          
         } catch (error) {

@@ -191,11 +191,14 @@ const CriarClimaPulso = () => {
                   //   iterator.setAttribute("type", "text")
                   // }
 
-                  if (!!pulse.company) {
+                  if (!!pulse?.company) {
                     obj.company = pulse.company
                   }
-                  if (!!pulse.unitSelect) {
+                  if (!!pulse?.unitSelect) {
                     obj.units = pulse.unitSelect.map(item => (item.id));
+                  }
+                  if (!!pulse?.userSelect) {
+                    obj.users = pulse.userSelect.map(item => (item.id));
                   }
                   setPulse(a=>({       
                     id_company: values.company.id,
@@ -207,11 +210,7 @@ const CriarClimaPulso = () => {
                   }))
                   // console.log(pulse)
                   api.post("pulses/insert",{...obj}).then( r=>{
-                    let v=values
-                  
-                    v.pulsesCreate.push({...r.data.pulse,"updated_at":new Date()})
                    
-                    setValues(v);
                     successAlert()
                     // console.log(values)
                     navegar(`${process.env.PUBLIC_URL}/climapulso`,{state:{...values}})

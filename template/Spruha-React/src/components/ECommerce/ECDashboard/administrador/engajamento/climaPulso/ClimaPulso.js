@@ -19,17 +19,9 @@ const ClimaPulso = () => {
   useEffect(() => {
     api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
       let pulsesDirectUser = r.data.pulsesDirectUser;
-      let pulsesCreate = !!values.pulsesCreate ? [...values.pulsesCreate, ...r.data.pulsesCreateUser] : [...r.data.pulsesCreateUser]
+      let pulsesCreate = r.data.pulsesCreateUser
 
-      let pulsesCreate_serial = []
-      let ids = [];
-      for (const iterator of pulsesCreate) {
-        if (!ids.indexOf(iterator.id) >= 0) {
-          pulsesCreate_serial.push(iterator)
-        }
-      }
-
-      pulsesCreate = pulsesCreate_serial;
+      
 
       setValues(a => ({ ...a, pulsesCreate, pulsesDirectUser }))
 
@@ -37,7 +29,12 @@ const ClimaPulso = () => {
     // return(()=>setValues({}))
   }, [dadosrota.state])
   console.log(values)
-
+  function formatData(data){
+    const dat=new Date(data);
+    const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
+     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+   }
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -108,23 +105,34 @@ const ClimaPulso = () => {
               </thead>
               <tbody>
 
-                {/* {values?.pulsesCreate?.map(pulse => (
+                {values?.pulsesCreate?.map(pulse => (
                   <tr key={pulse.id}>
                     <td className="text-center">
                       {pulse.title}
                     </td>
                     <td className="text-center">
-
+                      {
+                      !!pulse?.direction?.company?<span>Companhia</span>:
+                      !!pulse?.direction?.units?pulse?.direction?.units.map(unit=>(<span key={unit.initials}>{unit.initials}</span>)):
+                      !!pulse?.direction?.users?pulse?.direction?.users.map(user=>(<span key={user.name}>{user.name}</span>)):
+                      ""
+                      }
                     </td>
 
                     <td className="text-center">
 
                     </td>
                     <td className="text-center">
-                      {pulse.updated_at}
+                      {formatData(pulse.updated_at)}
+                      <Button className="" onClick={()=>{
+                         api.delete(`pulses/delete?id=${pulse.id}`)
+                        navegar("/climapulso",{state:values})
+                      }}>
+                        apagar
+                      </Button>
                     </td>
                   </tr>
-                ))} */}
+                ))}
 
               </tbody>
             </Table>

@@ -43,7 +43,7 @@ export const SelectUnitPulso = ({ units, setPulse }) => {
   return (
     <div>
       <Multiselect id="selectUnits" classNamePrefix="Select2" onChange={(e) => {
-         setPulse(a=>({...a,unitSelect:[]}))
+        setPulse(a=>({...a,unitSelect:[]}))
         setPulse(a => ({ ...a, unitSelect: [...a.unitSelect,...units.filter(unit=>unit.id==e.value)]}));
         setPulse(a => ({ ...a, unitSelect: a.unitSelect.filter((este, i) => a.unitSelect.indexOf(este) === i),company:false}));
         

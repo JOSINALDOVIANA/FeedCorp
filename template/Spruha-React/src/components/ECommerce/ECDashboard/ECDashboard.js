@@ -16,13 +16,13 @@ function ECDashboard() {
 
   useEffect(() => {
     setValues(dadosrota.state)
-    api.get(`/feedback/get?id_direction=${dadosrota.state.dadosUser?.id}`).then(r => {
+    api.get(`/feedback/get?id_direction=${dadosrota?.state?.dadosUser?.id}`).then(r => {
 
 
       setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
 
     })
-    api.get(`/feedback/get?id_user=${dadosrota.state.dadosUser?.id}`).then(r => {
+    api.get(`/feedback/get?id_user=${dadosrota?.state?.dadosUser?.id}`).then(r => {
 
 
       setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
