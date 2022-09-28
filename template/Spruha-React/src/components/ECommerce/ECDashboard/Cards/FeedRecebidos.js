@@ -44,7 +44,7 @@ const FeedRecebidos = () => {
 
               <Card.Body className="card-body">
 
-               {values.receivedfeedbacksPessoais && <Basicdatatable values={values?.receivedfeedbacksPessoais} />}
+               {!!values.receivedfeedbacksPessoais && <Basicdatatable values={values?.receivedfeedbacksPessoais} />}
 
               </Card.Body>
             </Card>

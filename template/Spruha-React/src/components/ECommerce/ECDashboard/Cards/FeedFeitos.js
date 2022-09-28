@@ -50,7 +50,7 @@ export default function FeedFeitos(){
               <Card.Body className="card-body">
 
               
-                {values.sendfeedbacks && <Basicdatatable values={values?.sendfeedbacks} />}
+                {values?.sendfeedbacks && <Basicdatatable valores={values} />}
               </Card.Body>
             </Card>
 

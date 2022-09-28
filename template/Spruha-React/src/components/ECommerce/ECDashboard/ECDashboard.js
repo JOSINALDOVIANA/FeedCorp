@@ -12,25 +12,30 @@ function ECDashboard() {
   const dadosrota = useLocation();
   const navegar = useNavigate()
   const [values, setValues] = useState({});
-
+  const [carregados,setCarregados]=useState(false)
 
   useEffect(() => {
     setValues(dadosrota.state)
-    api.get(`/feedback/get?id_direction=${dadosrota?.state?.dadosUser?.id}`).then(r => {
+   
+  }, [dadosrota.state])
+
+useEffect(()=>{
+  (async()=>{
+    await api.get(`/feedback/get?id_direction=${dadosrota?.state?.dadosUser?.id}`).then(r => {
 
 
-      setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
-
-    })
-    api.get(`/feedback/get?id_user=${dadosrota?.state?.dadosUser?.id}`).then(r => {
-
-
-      setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
-
-    })
-  }, [dadosrota])
-
-
+       setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
+ 
+     })
+    await api.get(`/feedback/get?id_user=${dadosrota?.state?.dadosUser?.id}`).then(r => {
+ 
+ 
+       setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
+       setCarregados(a=>!a)
+ 
+     })
+   })()
+},[])
 
 
   // console.log(values)
@@ -84,7 +89,7 @@ function ECDashboard() {
 
       <Row className="row-sm">
 
-        <Col sm={12} md={6} lg={6} xl={4}>
+        {carregados && <Col sm={12} md={6} lg={6} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/recebidos`, { state: values }) }}
@@ -107,9 +112,9 @@ function ECDashboard() {
               </div>
             </Card.Body>
           </Card>
-        </Col>
+        </Col>}
 
-        <Col sm={12} md={6} lg={6} xl={4}>
+        {carregados && <Col sm={12} md={6} lg={6} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/feitos`, { state: values }) }}
@@ -132,7 +137,7 @@ function ECDashboard() {
               </div>
             </Card.Body>
           </Card>
-        </Col>
+        </Col>}
 
         <Col sm={12} md={12} lg={12} xl={4}>
           <Card className="custom-card"

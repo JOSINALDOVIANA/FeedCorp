@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Row, Card, Table, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from "../../../../../../api";
 
@@ -21,7 +21,7 @@ const ClimaPulso = () => {
       let pulsesDirectUser = r.data.pulsesDirectUser;
       let pulsesCreate = r.data.pulsesCreateUser
 
-      
+
 
       setValues(a => ({ ...a, pulsesCreate, pulsesDirectUser }))
 
@@ -29,12 +29,12 @@ const ClimaPulso = () => {
     // return(()=>setValues({}))
   }, [dadosrota.state])
   console.log(values)
-  function formatData(data){
-    const dat=new Date(data);
-    const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
-     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
-     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-   }
+  function formatData(data) {
+    const dat = new Date(data);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -49,15 +49,6 @@ const ClimaPulso = () => {
 
         <div className="d-flex">
           <div className="justify-content-center">
-
-            <Button
-              variant="white"
-              type="button"
-              className=" btn-icon-text my-2 me-2"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
-            >
-              <i className="bi bi-clipboard2-data me-2"></i> Lista
-            </Button>
 
             <Button
               variant="primary"
@@ -101,6 +92,7 @@ const ClimaPulso = () => {
                   <th className="wd-lg-40p text-center">Para onde foi direcionado</th>
                   <th className="wd-lg-10p text-center">Link da pesquisa</th>
                   <th className="wd-lg-10p text-center">Data da pesquisa</th>
+                  <th className="wd-lg-10p text-center">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -112,23 +104,30 @@ const ClimaPulso = () => {
                     </td>
                     <td className="text-center">
                       {
-                      !!pulse?.direction?.company?<span>Companhia</span>:
-                      !!pulse?.direction?.units?pulse?.direction?.units.map(unit=>(<span key={unit.initials}>{unit.initials}</span>)):
-                      !!pulse?.direction?.users?pulse?.direction?.users.map(user=>(<span key={user.name}>{user.name}</span>)):
-                      ""
+                        !!pulse?.direction?.company ? <span>Companhia</span> :
+                          !!pulse?.direction?.units ? pulse?.direction?.units.map(unit => (<span key={unit.initials}>{unit.initials},</span>)) :
+                            !!pulse?.direction?.users ? pulse?.direction?.users.map(user => (<span key={user.name}>{user.name}</span>)) :
+                              ""
                       }
                     </td>
 
                     <td className="text-center">
-
+                      <Button variant="link"
+                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/resultado/`, { state: {...values,selectPulse:pulse} }) }}
+                      >
+                        Pesquisa
+                      </Button>
                     </td>
                     <td className="text-center">
                       {formatData(pulse.updated_at)}
-                      <Button className="" onClick={()=>{
-                         api.delete(`pulses/delete?id=${pulse.id}`)
-                        navegar("/climapulso",{state:values})
+
+                    </td>
+                    <td className="d-flex justify-content-center">
+                      <Button variant="link" onClick={() => {
+                        api.delete(`pulses/delete?id=${pulse.id}`)
+                        navegar("/climapulso", { state: values })
                       }}>
-                        apagar
+                        <i className="bi bi-trash-fill"></i>
                       </Button>
                     </td>
                   </tr>

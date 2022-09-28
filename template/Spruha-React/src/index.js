@@ -18,6 +18,7 @@ const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard
 const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
 const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"))
+const ResultadosClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/resultadosClima"))
 
 
 // Dashboard
@@ -160,6 +161,11 @@ const Root = () => {
                   <Route
                     path={`${process.env.PUBLIC_URL}/climapulso/configuracoes/`}
                     element={<ConfigurarClima />}
+                  />
+
+<Route
+                    path={`${process.env.PUBLIC_URL}/climapulso/resultado/`}
+                    element={<ResultadosClima />}
                   />
 
                 </Route>
