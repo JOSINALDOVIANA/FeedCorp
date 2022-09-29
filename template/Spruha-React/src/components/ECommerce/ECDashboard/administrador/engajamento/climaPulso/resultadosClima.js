@@ -40,7 +40,7 @@ const ClimaResultado = () => {
             {/* <!-- Page Header --> */}
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5">Resultado da pesquisa de clima pulso</h2>
+                    <h2 className="main-content-title tx-24 mg-b-5">Resultados da pesquisa de clima pulso</h2>
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">Engajamento</Breadcrumb.Item>
                         <Breadcrumb.Item
@@ -86,22 +86,33 @@ const ClimaResultado = () => {
             {/* <!-- End Page Header --> */}
 
 
-            <div className="card custom-card">
-                    <h1>titulo: {values.selectPulse.title}</h1>
-                 <span>
-                    {values?.selectPulse?.questions?.length} - perguntas                                        
-                 </span>
-                 <span>a media geral deste Pulso é de: {values.selectPulse.media}</span>
-                 {values?.selectPulse?.questions.map((q,i)=>(
-                    <div>
+            <Card className="card custom-card">
+                <Card.Header className="pt-3 px-3 pb-2 fs-4 fw-bolder my-auto tx-white bg-primary">
+                    {values?.selectPulse?.title}
+                    <h5 className="tx-14 fw-semibold">
+                        Número de questões desta pesquisa: {values?.selectPulse?.questions?.length}
+                    </h5>
+                </Card.Header>
 
-                        <h5>questão {i+1}: {q.question}</h5>
-                        <span>{q.users_resp.length} pessoas responderam esta pergunta</span>
-                        <span>a média das respostas é de {q.media}</span>
+                <Card.Body>
+                    <h5 className="tx-14 mb-2">Média geral deste Pulso: {values?.selectPulse?.media}</h5>
 
-                    </div>
+                    {values?.selectPulse?.questions?.map((q, i) => (
+                        <div key={q.id}>
+
+                            <h5>{i + 1} - {q?.question}</h5>
+
+                            <h5 className="text-muted tx-14">
+                                {q.users_resp.length} pessoas responderam esta pergunta
+                            </h5>
+
+                            <h5 className="text-muted card-sub-title">
+                                A média das respostas é de {q?.media}
+                            </h5>
+                        </div>
                     ))}
-            </div>
+                </Card.Body>
+            </Card>
 
 
 

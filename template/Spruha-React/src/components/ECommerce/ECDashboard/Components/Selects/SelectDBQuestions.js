@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Multiselect from "react-select";
 import api from '../../../../../api';
 
-export const SelectDBQuestions = () => {
+export const SelectDBQuestions = ({setValues}) => {
   const [objectArray, setObject] = useState([]);
   useEffect(() => {
     api.get(`/questions/category_question/get`).then(r => {
@@ -25,7 +25,7 @@ export const SelectDBQuestions = () => {
       <Multiselect classNamePrefix="Select2" onChange={(e) => {
         // setFeedback(a=>({...a,unitSelect:(units.filter(unit=>unit.id==e.value))[0]}));
         // setFeedback(a=>({...a,id_unity:e.value,users:a.unitSelect.Colaboradores}));
-
+      setValues(a=>({...a,selectQuestionsCat:e.value}));
       }} options={objectArray} singleSelect displayValue="key" placeholder="Qual é a categoria?" />
     </div>
   );

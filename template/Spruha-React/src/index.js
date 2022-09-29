@@ -163,7 +163,7 @@ const Root = () => {
                     element={<ConfigurarClima />}
                   />
 
-<Route
+                  <Route
                     path={`${process.env.PUBLIC_URL}/climapulso/resultado/`}
                     element={<ResultadosClima />}
                   />

@@ -2,15 +2,18 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Row, Col, Tab, Nav, Breadcrumb, Card, Button, ListGroup, Form, Table } from "react-bootstrap";
 import Searchable from "react-searchable-dropdown";
 import { Link } from "react-router-dom";
-
+import api from "../../../../../api"
 import { useLocation, useNavigate } from "react-router-dom";
+import {saveAlert} from "../../Components/Alerts"
 
 function Profile() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
   const [values, setValues] = useState({});
-
+  const [newValues, setNvalues] = useState({})
+  const [pass, setPass] = useState(true)
+  const [icon, setIcon] = useState(true)
   useEffect(() => {
     if (dadosrota.state) {
       setValues(dadosrota.state);
@@ -19,7 +22,24 @@ function Profile() {
     }
 
   }, [dadosrota])
-  // console.log(values)
+
+  useEffect(() => {
+    setNvalues({
+      "id": dadosrota?.state?.dadosUser?.id,
+      "name": dadosrota?.state?.dadosUser?.name,
+      "nameuser": dadosrota?.state?.dadosUser?.nameuser,
+      "email": dadosrota?.state?.dadosUser?.email,
+      "password": dadosrota?.state?.dadosUser?.password,
+      "id_image": dadosrota?.state?.image?.id,
+      "updated_at": new Date(),
+      "passwordantigo": dadosrota?.state?.dadosUser?.password,
+      "id_creator": dadosrota?.state?.dadosUser?.id_creator,
+      "id_company": dadosrota?.state?.company?.id,
+      "id_permission": dadosrota?.state?.dadosUser?.id_permission
+    })
+  }, [])
+
+  console.log(newValues)
 
   return (
     <Fragment>
@@ -98,7 +118,7 @@ function Profile() {
                           variant="primary" className="btn button border btn-sm me-1">
                           <b>Upload</b>
                         </Button>
-                        <b>Nome da imagem.png</b>
+                        <b>{values?.image?.name}</b>
 
                       </div>
                     </div>
@@ -109,8 +129,11 @@ function Profile() {
                           <Form.Label id="username">Nome de usuário</Form.Label>
                           <Form.Control
                             type="text"
-                            // placeholder="Steve"
+                            placeholder="Seu nome"
                             defaultValue={values?.dadosUser?.name}
+                            onBlur={(e) => {
+                              setNvalues(a => ({ ...a, name: e.target.value }))
+                            }}
                           />
                         </div>
 
@@ -118,8 +141,11 @@ function Profile() {
                           <Form.Label id="emailid">Email</Form.Label>
                           <Form.Control
                             type="text"
-                            // placeholder="steve_@email.com"
+                            placeholder="Seu email"
                             defaultValue={values?.dadosUser?.email}
+                            onBlur={(e) => {
+                              setNvalues(a => ({ ...a, email: e.target.value }))
+                            }}
                           />
                         </div>
                       </div>
@@ -129,10 +155,10 @@ function Profile() {
                           <Form.Label>{values?.permissions}</Form.Label>
                         </div>
 
-                        <div className="col-md-6 pb-3">
+                        {/* <div className="col-md-6 pb-3">
                           <Form.Label>Minha Unidade</Form.Label>
                           <Form.Label>{values?.unit?.description}</Form.Label>
-                        </div>
+                        </div> */}
 
                         <div className="col-md-6 pb-3">
                           <Form.Label>Minha Empresa</Form.Label>
@@ -161,20 +187,51 @@ function Profile() {
 
                       <div className="row py-2">
                         <div className="col-md-6 pb-3">
-                          <Form.Label id="username">Senha</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Senha antiga"
-                            defaultValue={values?.dadosUser?.password}
-                          />
+                          <Form.Label id="username">Senha Anterior</Form.Label>
+                          <div className="input-group">
+                            <Form.Control
+                              type="password"
+                              id="ps"
+                              placeholder="Senha antiga"
+                              disabled
+                              defaultValue={values?.dadosUser?.password}
+                            />
+
+                            <Button onClick={() => {
+                              setIcon(icon => !icon)
+                              setPass(a => !a)
+                              document.getElementById('ps').setAttribute("type", `${pass ? "text" : "password"}`)
+
+                              // console.log(pass)
+                              // console.log(icon)
+
+                            }}>
+                              <i className={icon ? "bi bi-eye-slash-fill" : "bi bi-eye-fill"}></i>
+                            </Button>
+
+                          </div>
+
                         </div>
 
                         <div className="col-md-6 pb-3">
                           <Form.Label id="username">Nova Senha</Form.Label>
-                          <Form.Control
-                            type="password"
-                            placeholder="Senha Nova "
-                          />
+                          <div className="input-group">
+                            <Form.Control
+                              type="password"
+                              id="oldPs"
+                              placeholder="Senha Nova "
+                              onBlur={(e) => {
+                                setNvalues(a => ({ ...a, password: e.target.value }))
+                              }}
+                            />
+                            <Button onClick={() => {
+                              setIcon(icon => !icon)
+                              setPass(a => !a)
+                              document.getElementById('oldPs').setAttribute("type", `${pass ? "text" : "password"}`)
+                            }}>
+                              <i className={icon ? "bi bi-eye-slash-fill" : "bi bi-eye-fill"}></i>
+                            </Button>
+                          </div>
                         </div>
                       </div>
 
@@ -188,7 +245,16 @@ function Profile() {
               {/* UM BOTÃO PARA SALVAR TODAS AS ALTERAÇÕES NO PERFIL */}
               <Card.Footer>
                 <div className="d-flex justify-content-end">
-                  <Button>
+                  <Button
+                    onClick={() => {
+                      api.put(`/user/update`, { ...newValues }).then(r => {
+                        if (r.data.status) {
+                          navegar(`/dashboard/`, { state: { ...values, dadosUser: newValues } })
+                          saveAlert()
+                        }
+                      })
+                    }}
+                  >
                     Salvar Alterações
                   </Button>
                 </div>

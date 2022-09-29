@@ -115,7 +115,7 @@ const ClimaPulso = () => {
                       <Button variant="link"
                         onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/resultado/`, { state: {...values,selectPulse:pulse} }) }}
                       >
-                        Pesquisa
+                        Resultados
                       </Button>
                     </td>
                     <td className="text-center">

@@ -15,18 +15,18 @@ const CriarClimaPulso = () => {
   const [values, setValues] = useState({});
   const [units, setUnits] = useState([]);
   const [pulse, setPulse] = useState({});
-  
+
 
   useEffect(() => {
     setValues(dadosrota.state)
-   
+
 
     api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
       setPulse({
         id_company: dadosrota.state.company.id,
         id_user: dadosrota.state.dadosUser.id,
         unitSelect: [],
-        userSelect:[],
+        userSelect: [],
         checked: true,
         company: false,
         questions: []
@@ -107,7 +107,7 @@ const CriarClimaPulso = () => {
                 </Row>
               </FormGroup>
 
-              <div>
+              <div className="mb-2">
                 <span className="d-flex text-muted tx-13 mb-1">Envie a pesquisa para toda a sua empresa</span>
                 <div className="ms-3">
                   <input
@@ -129,35 +129,35 @@ const CriarClimaPulso = () => {
 
               <Row>
                 {pulse.checked &&
-                  <Col sm={12} md={6} lg={6} xl={6}>
+                  <Col>
                     <span className="d-flex text-muted tx-13 mt-1 mb-3">Envie a pesquisa para uma unidade específica</span>
                     {/* <SelectUnitPulso units={units} setPulse={setPulse} /> */}
                     <Row>
                       {units.map(unit => (
-                        <Col  key={unit.initials}>
-                          <i className="unt" id={`${unit.id}-link`} onClick={(e)=>{      
-                            
-                           
-                          
-                            if(pulse.unitSelect.indexOf(unit.id)<0){
-                              const i= document.getElementById(`${unit.id}-link`);
+                        <Col key={unit.initials} className="my-1 mx-1">
+                          <Button 
+                          size="sm"
+                          className="unt outline" 
+                          id={`${unit.id}-link`} 
+
+                          onClick={(e) => {
+
+                            if (pulse.unitSelect.indexOf(unit.id) < 0) {
+                              const i = document.getElementById(`${unit.id}-link`);
                               // console.log(i)
-                              i.classList.add("activeUNIT");                              
-                              setPulse(a=>({...a,unitSelect:[...a.unitSelect,unit.id]}));                              
-                              
-                            }else{
-                              let selectedunit=pulse.unitSelect;
-                              selectedunit=selectedunit.filter((item,i)=>selectedunit.indexOf(unit.id)!=i)
-                              setPulse(a=>({...a,unitSelect:selectedunit}))
-                              const i= document.getElementById(`${unit.id}-link`);
+                              i.classList.add("activeUNIT");
+                              setPulse(a => ({ ...a, unitSelect: [...a.unitSelect, unit.id] }));
+
+                            } else {
+                              let selectedunit = pulse.unitSelect;
+                              selectedunit = selectedunit.filter((item, i) => selectedunit.indexOf(unit.id) != i)
+                              setPulse(a => ({ ...a, unitSelect: selectedunit }))
+                              const i = document.getElementById(`${unit.id}-link`);
                               i.classList.remove("activeUNIT");
                               console.log(pulse)
                             }
 
-                           
-                          
-
-                          }}>{unit.initials}</i>
+                          }}>{unit.initials}</Button>
                         </Col>
                       ))}
                     </Row>
@@ -211,7 +211,7 @@ const CriarClimaPulso = () => {
               <div className=" mt-4 d-flex justify-content-end">
 
                 <Button onClick={() => {
-                  
+
                   let obj = {}
                   obj.title = pulse.title
                   obj.id_user = pulse.id_user
@@ -225,28 +225,28 @@ const CriarClimaPulso = () => {
                     obj.company = pulse.company
                   }
                   // console.log(selectedunit.length)
-                  if (pulse.unitSelect.length>0) {
+                  if (pulse.unitSelect.length > 0) {
                     obj.units = pulse.unitSelect.map(item => (item));
                   }
-                  if (pulse.userSelect.length>0) {
+                  if (pulse.userSelect.length > 0) {
                     obj.users = pulse.userSelect.map(item => (item.id));
                   }
                   setPulse(a => ({
                     id_company: values.company.id,
                     id_user: values.dadosUser.id,
                     unitSelect: [],
-                    userSelect:[],
+                    userSelect: [],
                     checked: true,
                     company: false,
                     questions: []
                   }))
                   // console.log(obj)
                   // console.log(pulse)
-                  api.post("pulses/insert", { ...obj}).then(r => {
-                    if(r.status){
+                  api.post("pulses/insert", { ...obj }).then(r => {
+                    if (r.status) {
                       successAlert()
                       navegar(`${process.env.PUBLIC_URL}/climapulso`, { state: { ...values } })
-                    }else{
+                    } else {
                       alert("Desculpe, algo deu errado check as informações e tente novamente")
                     }
                   });

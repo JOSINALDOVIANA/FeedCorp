@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import * as chart from "../../../../../data/Chart/chart";
 import * as marketcap from "../../../../../data/Cryptodashboard/Marketcap/marketcap";
 import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
 import { Bar, Pie, Radar, Line, Doughnut, PolarArea } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../../..";
+
 ChartJS.register(...registerables);
 
 
@@ -14,7 +14,7 @@ function MinhaCorporacao() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues ] = useState({});
 
   useEffect(() => {
     if (!dadosrota.state) {
@@ -62,7 +62,7 @@ function MinhaCorporacao() {
 
       <Row className="row-sm">
 
-        {values?.units.map(unit => (
+        {values?.units?.map(unit => (
           <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
             <Card className="custom-card" 
             style={{cursor: "pointer"}}
@@ -87,7 +87,7 @@ function MinhaCorporacao() {
 
                 </div>
                 
-                <div className="d-flex text-muted tx-13">
+                <div className="text-muted tx-13">
                   {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
                   {unit.description}
                 </div>

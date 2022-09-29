@@ -35,12 +35,13 @@ export default {
         }
     },
     async Delete(req, res) {
-        let { ids } = req.body;
+        let { id } = req.query;
+        // console.log(req.body)
         try {
-
-            for (const iterator of ids) {
-                await conexao("bdquestions").del().where({ id: iterator })
-            }
+            await conexao("bdquestions").del().where({id})
+            // for (const iterator of ids) {
+            //     await conexao("bdquestions").del().where({ id: iterator })
+            // }
 
             return res.json({ status: true, mensage: "dados pagados" })
         } catch (error) {

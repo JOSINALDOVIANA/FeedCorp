@@ -2,9 +2,10 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Row, Col, Card, Accordion, Form, FormGroup, Collapse, Breadcrumb, Button, ListGroup } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../../../..";
-import {Grid, Divider} from "@mui/material";
+import { Grid, Divider } from "@mui/material";
 import { SelectDBQuestions } from "../../../Components/Selects/SelectDBQuestions"
-
+import api from "../../../../../../api";
+import {ClimaQuestionAdd, ClimaQuestionDelete, ClimaQuestionError} from "../../../Components/Alerts"
 // import { Container } from './styles';
 
 const ClimaTabelaRealizados = () => {
@@ -12,13 +13,24 @@ const ClimaTabelaRealizados = () => {
     const dadosrota = useLocation();
     const location = useLocation();
     const navegar = useNavigate();
-    const { values, setValues } = useContext(usuarioContext);
+    const [values, setValues] = useState({});
+    const [recarregar, setRecarregar] = useState(false);
+
+
+
     useEffect(() => {
         setValues(dadosrota.state)
     }, [dadosrota])
 
-    const [Accordion1, setAccordion1] = useState(false);
+    useEffect(() => {
+        api.get(`/questions/category_question/get`).then(r => {
 
+            setValues(a => ({ ...a, CategoryQuestion: r.data.categories,selectQuestionsCat:"",Question:"" }))
+        })
+    }, [recarregar])
+
+    const [Accordion1, setAccordion1] = useState(false);
+    console.log(values)
     return (
         <Fragment>
             {/* <!-- Page Header --> */}
@@ -96,14 +108,17 @@ const ClimaTabelaRealizados = () => {
 
                                         <input
                                             type="text"
+                                            id="inp"
                                             className="form-control input-description mb-2"
                                             placeholder="Digite sua questão"
-
+                                            onBlur={(e) => {
+                                                setValues(a => ({ ...a, Question: e.target.value }));
+                                            }}
                                         />
                                     </Col>
 
                                     <Col sm={12} md={12} lg={6} xl={6} className="mb-2">
-                                        <SelectDBQuestions />
+                                        <SelectDBQuestions setValues={setValues} />
 
                                     </Col>
 
@@ -113,6 +128,19 @@ const ClimaTabelaRealizados = () => {
                                                 variant="primary"
                                                 type="button"
                                                 className="btn"
+                                                onClick={() => {
+                                                    if(values.Question!="" && values.selectQuestionsCat!=""){
+                                                        api.post(`pulses/questions/insert`, { questions: [{ question: values.Question, id_cat: values.selectQuestionsCat }] }).then(r => {
+                                                            if (r.data.status) {
+                                                                ClimaQuestionAdd()
+                                                                setRecarregar(a => !a)
+                                                                setValues(a=>({...a,selectQuestionsCat:"",Question:""}))
+                                                            }
+                                                        })
+                                                    }else{
+                                                        ClimaQuestionError()
+                                                    }
+                                                }}
                                             >
                                                 Adicionar
                                             </Button>
@@ -123,58 +151,45 @@ const ClimaTabelaRealizados = () => {
                                 </Row>
                             </Grid>
 
-                            <ListGroup>
+                            {values?.CategoryQuestion?.map(item => (
 
-                                <ListGroup.Item className="tx-semibold">
-                                    Categoria 1
-                                </ListGroup.Item>
-                                <ListGroup.Item
-                                    as="li"
-                                    className="d-flex justify-content-betwween align-items-center">
-                                    <div className="ms-2 me-auto">Perguntas</div>
+                                <ListGroup key={item.id}>
 
-                                    <div className="me-2">
-                                        <i
-                                            // onClick={} 
-                                            style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                                    </div>
-                                </ListGroup.Item>
+                                    <ListGroup.Item className="tx-semibold">
+                                        {item.category}
+                                    </ListGroup.Item>
+                                    {item?.questions?.map(r => (
 
-                                <Divider/>
+                                        <ListGroup.Item
+                                            key={r.id}
+                                            as="li"
+                                            className="d-flex justify-content-betwween align-items-center">
+                                            <div className="ms-2 me-auto">{r.question}</div>
 
-                                <ListGroup.Item className="tx-semibold">
-                                    Categoria 2
-                                </ListGroup.Item>
-                                <ListGroup.Item
-                                    as="li"
-                                    className="d-flex justify-content-betwween align-items-center">
-                                    <div className="ms-2 me-auto">Perguntas</div>
+                                            <div className="me-2">
+                                                <i style={{ cursor: 'pointer' }} className="ti ti-trash"
+                                                    onClick={() => {
+                                                        api.delete(`/pulses/questions/delete?id=${r.id}`).then(resp => {
+                                                            if (resp.data.status) {
+                                                                ClimaQuestionDelete()
+                                                                setRecarregar(anterior => !anterior);
 
-                                    <div className="me-2">
-                                        <i
-                                            // onClick={} 
-                                            style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                                    </div>
-                                </ListGroup.Item>
+                                                            }
+                                                        })
+                                                    }}
+                                                >
+                                                </i>
+                                            </div>
+                                        </ListGroup.Item>
 
-                                <Divider/>
 
-                                <ListGroup.Item className="tx-semibold">
-                                    Categoria 3
-                                </ListGroup.Item>
-                                <ListGroup.Item
-                                    as="li"
-                                    className="d-flex justify-content-betwween align-items-center">
-                                    <div className="ms-2 me-auto">Perguntas</div>
+                                    ))}
 
-                                    <div className="me-2">
-                                        <i
-                                            // onClick={} 
-                                            style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                                    </div>
-                                </ListGroup.Item>
+                                    <Divider />
 
-                            </ListGroup>
+                                </ListGroup>
+
+                            ))}
 
 
 
