@@ -1,11 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Row, Col, Card, Container, Form } from "react-bootstrap";
+import { Row, Col, Card, Container, Form, Button } from "react-bootstrap";
 import * as Customswitcherdata from "../../../../../data/Switcherdata/Customswitcherdata";
 import api from "../../../../../api";
+import {LoginError} from "../../Components/Alerts"
+
 const Signin = () => {
   const [permanecer, setPerm] = React.useState(false);
-
+  const [pass, setPass] = useState(true)
+  const [icon, setIcon] = useState(true)
   const navegar = useNavigate();
 
   React.useEffect(() => {
@@ -36,6 +39,7 @@ const Signin = () => {
     await api.post("/user/login", obt).then(r => {
       if (!r.data.status) {
         alert(r.data.message)
+        // LoginError()
       } else {
         dadosUser = r.data?.dadosUser;
         permissions = r.data?.permissions[0]?.description;
@@ -74,10 +78,10 @@ const Signin = () => {
           await api.put(`/okrs/update`, { ...okrs[index1] });
         }
         okrscriados = okrs;
-        
+
       })
-  
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate:[],destino:"/dashboard" } });
+
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate: [], destino: "/dashboard" } });
     }
 
   };
@@ -134,11 +138,20 @@ const Signin = () => {
                   controlId="formpassword"
                 >
                   <Form.Label>Senha</Form.Label>
-                  <Form.Control
-                    placeholder="Digite sua senha"
-                    type="password"
-                    name="password"
-                  />
+                  <div className="input-group">
+                    <Form.Control
+                      placeholder="Digite sua senha"
+                      type="password"
+                      id="loginPs"
+                    />
+                    <Button onClick={() => {
+                      setIcon(icon => !icon)
+                      setPass(a => !a)
+                      document.getElementById('loginPs').setAttribute("type", `${pass ? "text" : "password"}`)
+                    }}>
+                      <i className={icon ? "bi bi-eye-slash-fill" : "bi bi-eye-fill"}></i>
+                    </Button>
+                  </div>
                 </Form.Group>
 
                 <button type="submit" className="btn ripple btn-main-primary btn-block mt-2">
@@ -148,7 +161,7 @@ const Signin = () => {
               </Form>
 
             </Card.Body>
-            
+
             <Card.Footer>
               <div className="mb-1">
                 <Link
@@ -171,7 +184,7 @@ const Signin = () => {
       </div>
 
       {/* <!-- End Row --> */}
-    </Fragment>
+    </Fragment >
   )
 
 };

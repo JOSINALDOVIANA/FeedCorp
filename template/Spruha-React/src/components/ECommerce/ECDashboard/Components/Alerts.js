@@ -55,5 +55,13 @@ export function ClimaQuestionDelete() {
         allowOutsideClick: false,
     });
 }
-
+//Erro Login
+export function LoginError() {
+    Swal.fire({
+        icon: "warning",
+        title: "Não foi possível entrar",
+        text: "Preencha com os dados necessários",
+        allowOutsideClick: false,
+    });
+}
 
