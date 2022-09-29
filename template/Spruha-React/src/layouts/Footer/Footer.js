@@ -7,7 +7,7 @@ const Footer = () => (
 		<Container>
 			<Row className="row-sm">
 				<Col md={12} className="col-md-12">
-					<span>Copyright © 2022 <Link href="#">Spruha</Link>. Designed by <Link href="https://www.spruko.com/">Spruko</Link> All rights reserved.</span>
+					<span>Copyright © 2022 <Link href="#">FeedCorp</Link>. Design por <Link href="https://www.spruko.com/">Spruko.</Link> Todos os direitos reservados.</span>
 				</Col>
 			</Row>
 		</Container>

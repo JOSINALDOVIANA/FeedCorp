@@ -135,29 +135,29 @@ const CriarClimaPulso = () => {
                     <Row>
                       {units.map(unit => (
                         <Col key={unit.initials} className="my-1 mx-1">
-                          <Button 
-                          size="sm"
-                          className="unt outline" 
-                          id={`${unit.id}-link`} 
+                          <Button
+                            size="sm"
+                            className="unt outline"
+                            id={`${unit.id}-link`}
 
-                          onClick={(e) => {
+                            onClick={(e) => {
 
-                            if (pulse.unitSelect.indexOf(unit.id) < 0) {
-                              const i = document.getElementById(`${unit.id}-link`);
-                              // console.log(i)
-                              i.classList.add("activeUNIT");
-                              setPulse(a => ({ ...a, unitSelect: [...a.unitSelect, unit.id] }));
+                              if (pulse.unitSelect.indexOf(unit.id) < 0) {
+                                const i = document.getElementById(`${unit.id}-link`);
+                                // console.log(i)
+                                i.classList.add("activeUNIT");
+                                setPulse(a => ({ ...a, unitSelect: [...a.unitSelect, unit.id] }));
 
-                            } else {
-                              let selectedunit = pulse.unitSelect;
-                              selectedunit = selectedunit.filter((item, i) => selectedunit.indexOf(unit.id) != i)
-                              setPulse(a => ({ ...a, unitSelect: selectedunit }))
-                              const i = document.getElementById(`${unit.id}-link`);
-                              i.classList.remove("activeUNIT");
-                              console.log(pulse)
-                            }
+                              } else {
+                                let selectedunit = pulse.unitSelect;
+                                selectedunit = selectedunit.filter((item, i) => selectedunit.indexOf(unit.id) != i)
+                                setPulse(a => ({ ...a, unitSelect: selectedunit }))
+                                const i = document.getElementById(`${unit.id}-link`);
+                                i.classList.remove("activeUNIT");
+                                console.log(pulse)
+                              }
 
-                          }}>{unit.initials}</Button>
+                            }}>{unit.initials}</Button>
                         </Col>
                       ))}
                     </Row>
@@ -210,7 +210,7 @@ const CriarClimaPulso = () => {
 
               <div className=" mt-4 d-flex justify-content-end">
 
-                <Button onClick={() => {
+                <Button className="me-2" onClick={() => {
 
                   let obj = {}
                   obj.title = pulse.title
@@ -254,6 +254,12 @@ const CriarClimaPulso = () => {
 
                 }}>
                   Criar Pesquisa
+                </Button>
+
+                <Button variant="danger"
+                  onClick={() => navegar(`${process.env.PUBLIC_URL}/climapulso`, { state: { ...values } })}
+                >
+                  Cancelar
                 </Button>
               </div>
 

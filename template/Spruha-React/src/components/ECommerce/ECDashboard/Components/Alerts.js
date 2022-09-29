@@ -1,12 +1,45 @@
 import Swal from "sweetalert2";
 
+// Delete ITEM
+export function deleteQuestionAlert() {
+    return Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Gostaria de excluir este item?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: 'primary',
+        cancelButtonColor: 'secondary',
+        confirmButtonText: 'apagar',
+        cancelButtonText: 'cancelar'
+    });
+
+}
+// Delete ITEM sucesso
+export function deleteSucessAlert() {
+    const Toast = Swal.mixin({
+        toast: true, //trata o alert como notifcação
+        position: 'top-end',  
+        timer: 3000,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    Toast.fire({
+        icon: "success",
+        title: "Item apagado com sucesso",
+    })
+}
 // Successo feedback
 export function successAlert() {
     Swal.fire({
         icon: "success",
-        title: "Muito Bem!",
-        text: "Criado com sucesso",
+        title: "Criado com sucesso",
         allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 1500
     });
 }
 //Erro feedback
@@ -16,17 +49,28 @@ export function dangerAlert(params) {
         title: "Erro",
         text: "Sem dados",
         allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 1500
     });
 }
-// PROFILE
 //Salvar alterações profile
 export function saveAlert() {
-    Swal.fire({
+    const Toast = Swal.mixin({
+        toast: true, //trata o alert como notifcação
+        position: 'bottom-end',  
+        timer: 2000,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    Toast.fire({
         icon: "success",
         title: "Alterações salvas!",
         text: "Dados atualizados",
-        allowOutsideClick: false,
-    });
+    })
 }
 //Criar questão clima
 export function ClimaQuestionAdd() {
@@ -44,6 +88,8 @@ export function ClimaQuestionError() {
         title: "Erro na criação",
         text: "Preencha com os dados necessários",
         allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 1500
     });
 }
 //Deletar questão clima
@@ -58,10 +104,11 @@ export function ClimaQuestionDelete() {
 //Erro Login
 export function LoginError() {
     Swal.fire({
-        icon: "warning",
+        icon: "error",
         title: "Não foi possível entrar",
         text: "Preencha com os dados necessários",
         allowOutsideClick: false,
+        showConfirmButton: true,
     });
 }
 

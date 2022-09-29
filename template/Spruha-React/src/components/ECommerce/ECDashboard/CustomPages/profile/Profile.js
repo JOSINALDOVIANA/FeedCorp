@@ -3,21 +3,22 @@ import { Row, Col, Tab, Nav, Breadcrumb, Card, Button, ListGroup, Form, Table } 
 import Searchable from "react-searchable-dropdown";
 import { Link } from "react-router-dom";
 import api from "../../../../../api"
+import { uniqueId } from "lodash"
+import { partial } from 'filesize'
 import { useLocation, useNavigate } from "react-router-dom";
-import {saveAlert} from "../../Components/Alerts"
+import { saveAlert } from "../../Components/Alerts"
 
 function Profile() {
 
   const dadosrota = useLocation();
+  const [ImagensCarregadas, setImagens] = useState([]);
   const navegar = useNavigate()
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState(dadosrota.state);
   const [newValues, setNvalues] = useState({})
   const [pass, setPass] = useState(true)
   const [icon, setIcon] = useState(true)
   useEffect(() => {
-    if (dadosrota.state) {
-      setValues(dadosrota.state);
-    } else {
+    if (!dadosrota.state) {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
 
@@ -25,22 +26,155 @@ function Profile() {
 
   useEffect(() => {
     setNvalues({
-      "id": dadosrota?.state?.dadosUser?.id,
-      "name": dadosrota?.state?.dadosUser?.name,
-      "nameuser": dadosrota?.state?.dadosUser?.nameuser,
-      "email": dadosrota?.state?.dadosUser?.email,
-      "password": dadosrota?.state?.dadosUser?.password,
-      "id_image": dadosrota?.state?.image?.id,
+      "id": values?.dadosUser?.id,
+      "name": values?.dadosUser?.name,
+      "nameuser": values?.dadosUser?.nameuser,
+      "email": values?.dadosUser?.email,
+      "password": values?.dadosUser?.password,
+      "id_image": values?.image?.id,
       "updated_at": new Date(),
-      "passwordantigo": dadosrota?.state?.dadosUser?.password,
-      "id_creator": dadosrota?.state?.dadosUser?.id_creator,
-      "id_company": dadosrota?.state?.company?.id,
-      "id_permission": dadosrota?.state?.dadosUser?.id_permission
+      "passwordantigo": values?.dadosUser?.password,
+      "id_creator": values?.dadosUser?.id_creator,
+      "id_company": values?.company?.id,
+      "id_permission": values?.dadosUser?.id_permission
     })
-  }, [])
+  }, [values])
+  // console.log(values)
+  // -----------------------MODAL UPLOAD FOTO-----------------------------
 
-  console.log(newValues)
 
+  // const [openF, setOpenF] = useState(false);
+  // const size=partial({base: 2, standard: "jedec"})
+  //ao abrir o modal
+  const handleOpenF = () => {
+    // estou carregando os dados da imagem atual do perfil
+    const dados = {
+      id: dadosrota.state.image.id,
+      idfoto: dadosrota.state.image.id,
+      name: dadosrota.state.image.name,
+      readableSize: dadosrota.state.image.size,
+      preview: dadosrota.state.image.url,
+      progress: 100,
+      uploaded: true,
+      error: false,
+      url: dadosrota.state.image.url,
+      key: dadosrota.state.image.key
+    }
+    setImagens([dados]);// atualizando ImagensCarregadas ja que ela é usada na listagem e futuramente para ser apagada
+
+    // setOpenF(true);// abrindo o modal de fotos
+
+  };
+
+  const handleCloseF = () => {
+
+    try {
+      api.delete(`/images/deletar?id_foto=${values.image.id}&key=${values.image.key}`).then(r => {
+
+        // setImagens(a => [a[1]]);// setando ImagensCarregadas com apenas a nova imagem;
+        
+        setValues(a => ({ ...a, dadosUser: { ...a.dadosUser, id_image: ImagensCarregadas[0].idfoto }, image: { ...ImagensCarregadas[0],id:ImagensCarregadas[0].idfoto } }));
+
+
+      })
+
+
+
+
+
+    } catch (error) {
+      console.log(error)
+      alert("não é possivel apagar ")// caso de algum error por segurança não sera mostrado no console
+
+    }
+    // setando a variavel proprietario com os novos dados
+
+
+  }
+
+
+
+  // ----------------------------------FIM MODAL FOTO------------------------------
+
+  function processUploaded(file) {
+    // 1 - estou criando um formulario com os dados para enviar para a api
+    const data = new FormData();
+    data.append('file', file.file, file.name);// estou passando um item com nome file,o priprio arquivo imagem,o nome do arquivo
+    api.post('images/salvar', data, {
+      //o axios me permite saber o andamento do processo de envio
+      onUploadProgress: e => {
+        //transformando este processo que vem porcentagem para um numero inteiro
+        let progress = parseInt(Math.round((e.loaded * 100) / e.total));
+        AtualizaArquivo(file.id, { progress });//agora vamos atualizar o progress que ja esta salvo em ImagensCarregadas em proprietario/index.js
+      }
+    }).then(r => {
+      // quando finalizo o envio preciso novamente setar ImagensCarregadas com informações vindas da API
+      AtualizaArquivo(file.id, {
+        uploaded: true,
+        // id: r.data.id,
+        idfoto: r.data.id,
+        url: r.data.url,
+        key: r.data.key,
+        name: r.data.name,
+        size: r.data.size,
+
+      })
+      // note que passei novamente um id e um objeto com cados à função AtualizaArquivo que realizara o que foi programada para fazer
+    }).catch(() => {
+      //e claro caso haja erro neste envio preciso reportar 
+      AtualizaArquivo(file.id, {
+        error: true,// isso informa um erro ao front
+      })
+    });
+  }
+
+
+
+  function AtualizaArquivo(id, data) {
+    // 1 - usnando a função que veio nas props para atualizar os dados
+    setImagens(a => {
+      //as funções do useState nos fornecem os dados anteriores sempre que as evocamos
+      // em "a" tem todos os dados de ImagensCarregadas anteriormente
+      // logo preciso apenas localizar qual arquivo possui o id recebido e anexar data a ele
+      let b = a.map(el => (el.id === id ? { ...el, ...data } : el));// observe que se não for o elemento desejado não modifico 
+      return b;// no return eu estou atualizando ImagensCarregadas com "b" que possui tudo atualizado
+    })
+  }
+
+  function el(e) {
+    handleOpenF()
+    const files = e.target.files;
+    let uploadedFiles = [];
+    console.log(files)
+    for (const iterator of files) {
+      uploadedFiles.push(
+        {
+          "file": iterator,
+          "id": uniqueId(),//definindo um id unico 
+          "name": iterator.name,
+          "readableSize": iterator.size,
+          preview: URL.createObjectURL(iterator), // criando um link para preview da foto carregada
+          progress: 0,//sera modificado conforme o upload para a api
+          uploaded: false,//quando finalizar o upload vai mudar para true para que possa ser mostrado os links de exclusao e preview
+          error: false,//se for true no processo de upload sera exibido um aviso no front
+          url: null,// sera usado para setar a variavel img no proprietario/index.js
+        }
+      )
+
+    }
+    setImagens(a => ([...uploadedFiles]));
+    uploadedFiles.forEach(processUploaded)
+    // console.log(ImagensCarregadas) 
+    handleCloseF();
+    // api.put(`/user/update`, { ...newValues }).then(r => {
+    //   if (r.data.status) {
+    //     saveAlert()
+    //     navegar(`/perfil/`, { state: { ...values, dadosUser: newValues } })
+    //   }
+    // })
+    console.log(values);
+  }
+ 
   return (
     <Fragment>
 
@@ -114,11 +248,16 @@ function Profile() {
                           Aceito arquivo tipo .png. Menos de 1MB
                         </p>
 
-                        <Button
+
+                        <input onChange={(e) => {
+                          el(e)
+
+                        }} type="file" accept="image/*">
+                          {/* <Button
                           variant="primary" className="btn button border btn-sm me-1">
-                          <b>Upload</b>
-                        </Button>
-                        <b>{values?.image?.name}</b>
+                        </Button> */}
+                        </input>
+                        {/* <b>{values?.image?.name}</b> */}
 
                       </div>
                     </div>
@@ -249,7 +388,7 @@ function Profile() {
                     onClick={() => {
                       api.put(`/user/update`, { ...newValues }).then(r => {
                         if (r.data.status) {
-                          navegar(`/dashboard/`, { state: { ...values, dadosUser: newValues } })
+                          navegar(`/perfil/`, { state: { ...values, dadosUser: newValues } })
                           saveAlert()
                         }
                       })

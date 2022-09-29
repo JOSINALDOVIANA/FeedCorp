@@ -1,6 +1,8 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, Table, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
+import {deleteQuestionAlert, deleteSucessAlert} from "../../../Components/Alerts"
 import api from "../../../../../../api";
 
 const ClimaPulso = () => {
@@ -21,20 +23,20 @@ const ClimaPulso = () => {
       let pulsesDirectUser = r.data.pulsesDirectUser;
       let pulsesCreate = r.data.pulsesCreateUser
 
-
-
       setValues(a => ({ ...a, pulsesCreate, pulsesDirectUser }))
-
     })
     // return(()=>setValues({}))
   }, [dadosrota.state])
   console.log(values)
+
   function formatData(data) {
     const dat = new Date(data);
     const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
   }
+
+
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -89,9 +91,9 @@ const ClimaPulso = () => {
               <thead>
                 <tr>
                   <th className="wd-lg-10p text-center">Nome da pesquisa</th>
-                  <th className="wd-lg-40p text-center">Para onde foi direcionado</th>
-                  <th className="wd-lg-10p text-center">Link da pesquisa</th>
-                  <th className="wd-lg-10p text-center">Data da pesquisa</th>
+                  <th className="wd-lg-20p text-center">Para onde foi direcionado</th>
+                  <th className="wd-lg-10p text-center">link</th>
+                  <th className="wd-lg-10p text-center">data</th>
                   <th className="wd-lg-10p text-center">Ações</th>
                 </tr>
               </thead>
@@ -113,7 +115,7 @@ const ClimaPulso = () => {
 
                     <td className="text-center">
                       <Button variant="link"
-                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/resultado/`, { state: {...values,selectPulse:pulse} }) }}
+                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/resultado/`, { state: { ...values, selectPulse: pulse } }) }}
                       >
                         Resultados
                       </Button>
@@ -124,8 +126,17 @@ const ClimaPulso = () => {
                     </td>
                     <td className="d-flex justify-content-center">
                       <Button variant="link" onClick={() => {
-                        api.delete(`pulses/delete?id=${pulse.id}`)
-                        navegar("/climapulso", { state: values })
+                        deleteQuestionAlert()
+                        .then((result) => {
+                          if (result.isConfirmed) {
+                            deleteSucessAlert()
+                            api.delete(`pulses/delete?id=${pulse.id}`).then(resp => {
+                              if (resp.data.status) {
+                                navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values })
+                              }
+                            })
+                          }
+                        })
                       }}>
                         <i className="bi bi-trash-fill"></i>
                       </Button>

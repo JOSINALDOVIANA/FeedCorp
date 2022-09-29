@@ -33,6 +33,7 @@ const ProgressoAVPR = React.lazy(() => import("./components/ECommerce/ECDashboar
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const App = React.lazy(() => import("./components/app"));
+const Images = React.lazy(() => import("./images/index.js"));
 
 const Error404 = React.lazy(() => import("./components/Custompages/Error1-404/Error-404"))
 const Signin = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signin/Signin"))
@@ -70,6 +71,7 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
               <Route path={`${process.env.PUBLIC_URL}/cadastro`} element={<Signup />} />
               <Route path={`${process.env.PUBLIC_URL}/esqueceu_senha`} element={<Forgotpassword />} />
+              <Route path={`${process.env.PUBLIC_URL}/images`} element={<Images />} />
 
               {/* rota nivel 1 aninhada */}
               <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >

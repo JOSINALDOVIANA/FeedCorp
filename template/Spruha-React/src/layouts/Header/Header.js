@@ -37,7 +37,12 @@ function Fullscreen() {
 }
 // FullScreen-end
 function Header({ values }) {
+  
   const navegar = useNavigate()
+
+
+
+  
   
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");

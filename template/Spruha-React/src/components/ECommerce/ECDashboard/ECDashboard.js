@@ -12,30 +12,30 @@ function ECDashboard() {
   const dadosrota = useLocation();
   const navegar = useNavigate()
   const [values, setValues] = useState({});
-  const [carregados,setCarregados]=useState(false)
+  const [carregados, setCarregados] = useState(false)
 
   useEffect(() => {
     setValues(dadosrota.state)
-   
+
   }, [dadosrota.state])
 
-useEffect(()=>{
-  (async()=>{
-    await api.get(`/feedback/get?id_direction=${dadosrota?.state?.dadosUser?.id}`).then(r => {
+  useEffect(() => {
+    (async () => {
+      await api.get(`/feedback/get?id_direction=${dadosrota?.state?.dadosUser?.id}`).then(r => {
 
 
-       setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
- 
-     })
-    await api.get(`/feedback/get?id_user=${dadosrota?.state?.dadosUser?.id}`).then(r => {
- 
- 
-       setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
-       setCarregados(a=>!a)
- 
-     })
-   })()
-},[])
+        setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
+
+      })
+      await api.get(`/feedback/get?id_user=${dadosrota?.state?.dadosUser?.id}`).then(r => {
+
+
+        setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
+        setCarregados(a => !a)
+
+      })
+    })()
+  }, [])
 
 
   // console.log(values)
@@ -191,8 +191,8 @@ useEffect(()=>{
       {/* FRAGMENTO QUE ABRE AO CLICAR NO CARD */}
       <Outlet />
 
-      <Row className="row-sm">
         {/* GRAFICO */}
+      {/* <Row className="row-sm">
         <Col xxl={12} xl={12} lg={12} md={12}>
           <Card className="custom-card">
             <Card.Header className=" border-bottom-0">
@@ -215,7 +215,7 @@ useEffect(()=>{
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      </Row> */}
 
 
     </Fragment >

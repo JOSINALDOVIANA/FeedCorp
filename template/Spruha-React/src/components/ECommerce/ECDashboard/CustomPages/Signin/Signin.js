@@ -12,7 +12,7 @@ const Signin = () => {
   const navegar = useNavigate();
 
   React.useEffect(() => {
-    if (localStorage.getItem("values")) {
+    if (!!localStorage.getItem("values")) {
       const valores = localStorage.getItem("values");
       const valores2 = JSON.parse(valores);
 
@@ -24,8 +24,10 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(e)
+
     let obt = {};
-    e.target["e-mail"].value.indexOf("@") > 0 ?
+      e.target["e-mail"].value.indexOf("@") > 0 ?
       obt = { email: e.target["e-mail"].value, password: e.target["password"].value } :
       obt = { nameuser: e.target["e-mail"].value, password: e.target["password"].value };
     let dadosUser;
@@ -38,8 +40,7 @@ const Signin = () => {
     let okrscriados = [];
     await api.post("/user/login", obt).then(r => {
       if (!r.data.status) {
-        alert(r.data.message)
-        // LoginError()
+        LoginError()
       } else {
         dadosUser = r.data?.dadosUser;
         permissions = r.data?.permissions[0]?.description;
@@ -142,6 +143,7 @@ const Signin = () => {
                     <Form.Control
                       placeholder="Digite sua senha"
                       type="password"
+                      name="password"
                       id="loginPs"
                     />
                     <Button onClick={() => {
