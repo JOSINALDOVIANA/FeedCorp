@@ -24,7 +24,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(e)
+    // console.log(e)
 
     let obt = {};
       e.target["e-mail"].value.indexOf("@") > 0 ?

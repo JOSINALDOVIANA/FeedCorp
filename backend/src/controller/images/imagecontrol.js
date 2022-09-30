@@ -38,11 +38,12 @@ export default {
 
     async deletar(req, res, next) {
         const { key, id } = req.query;
+        console.log(req.query)
         try {
             
             if(id!="06ee65f2e4e34dc9319c7a30-teste1.jpg"&&id!="66ed707ee37be5b8a0974901-teste3.png"
             &&id!="6b62ad87b17d9192712e77ee-teste2.png"&&id!="95686a01ae5211fbec86cb54-opclient_logo.png"){
-                await conexao('images').where({ id }).delete();
+                await conexao('images').where({ id }).del();
                 if (process.env.STORAGE_TYPE === 's3') {
     
                     s3.deleteObject({
@@ -59,6 +60,7 @@ export default {
                     return res.status(200).json({ mensagem:true });
                 }
             }
+            
             return res.status(200).json({ mensagem: true });
            
         } catch (error) {
