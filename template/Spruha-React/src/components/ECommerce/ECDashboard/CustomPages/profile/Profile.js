@@ -3,7 +3,7 @@ import { Row, Col, Tab, Nav, Breadcrumb, Card, Button, ListGroup, Form, Table } 
 import Searchable from "react-searchable-dropdown";
 import { Link } from "react-router-dom";
 import api from "../../../../../api"
-import { uniqueId } from "lodash"
+import { set, uniqueId } from "lodash"
 import { partial } from 'filesize'
 import { useLocation, useNavigate } from "react-router-dom";
 import { saveAlert } from "../../Components/Alerts"
@@ -13,102 +13,47 @@ function Profile() {
   const dadosrota = useLocation();
   const navegar = useNavigate()
   const [values, setValues] = useState(dadosrota.state);
+  const [newImage, setNimage] = useState(dadosrota.state.image)
   const [newValues, setNvalues] = useState({})
+  const [trocImage, setTrocImage] = useState(false)
   const [pass, setPass] = useState(true)
   const [icon, setIcon] = useState(true)
   const [progress, setProgress] = useState(0)
+
   useEffect(() => {
     if (!dadosrota.state) {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
-
+  
   }, [dadosrota])
 
-  useEffect(() => {
-    setNvalues({
-      "id": values?.dadosUser?.id,
-      "name": values?.dadosUser?.name,
-      "nameuser": values?.dadosUser?.nameuser,
-      "email": values?.dadosUser?.email,
-      "password": values?.dadosUser?.password,
-      "id_image": values?.image?.id,
-      "updated_at": new Date(),
-      "passwordantigo": values?.dadosUser?.password,
-      "id_creator": values?.dadosUser?.id_creator,
-      "id_company": values?.company?.id,
-      "id_permission": values?.dadosUser?.id_permission
-    })
-    setProgress(0)
-  }, [values])
+ useEffect(()=>{
+  setNvalues({
+    "id": values?.dadosUser?.id,
+    "name": values?.dadosUser?.name,
+    "nameuser": values?.dadosUser?.nameuser,
+    "email": values?.dadosUser?.email,
+    "password": values?.dadosUser?.password,
+    "id_image": values?.image?.id,
+    "updated_at": new Date(),
+    "passwordantigo": values?.dadosUser?.password,
+    "id_creator": values?.dadosUser?.id_creator,
+    "id_company": values?.company?.id,
+    "id_permission": values?.dadosUser?.id_permission
+  })
+ },[values])
+
+
+
   console.log(values)
-  async function Del() {
-    console.log(values.image.id)
-    await api.delete(`/images/deletar?key=${values.image.key}&id=${values.image.id}`).then(r1 => {
-      if (r1.data.mensagem) {
-        alert("apagando foto anterior...")
-      }
-    });
-  }
 
 
 
 
-  async function UpdateImage(e) {
-
-    const files = e.target.files;
-    let uploadedFiles = []
-
-    for (const iterator of files) {
-      uploadedFiles.push(
-        {
-          "file": iterator,
-          "id": uniqueId(),//definindo um id unico 
-          "name": iterator.name,
-          "readableSize": iterator.size,
-          preview: URL.createObjectURL(iterator), // criando um link para preview da foto carregada
-          url: null,// sera usado para setar a variavel img no proprietario/index.js
-        }
-      )
-    }
-    const data = new FormData();
-    data.append('file', uploadedFiles[0].file, uploadedFiles[0].name);
-
-    Del();
-
-    await api.post('images/salvar', data, {
-      //o axios me permite saber o andamento do processo de envio
-      onUploadProgress: e => {
-        //transformando este processo que vem porcentagem para um numero inteiro
-        let progress = parseInt(Math.round((e.loaded * 100) / e.total));
-        //agora vamos atualizar o progress que ja esta salvo em ImagensCarregadas em proprietario/index.js
-        setProgress(a => a + progress)
-      }
-    }).then(r => {
 
 
-      let f = {
-        ...uploadedFiles[0],
-        uploaded: true,
-        id: r.data.id,
-        url: uploadedFiles[0].preview,
-        key: r.data.key,
-        name: r.data.name,
-        size: r.data.size,
-      }
-      setValues(a => ({ ...a, image: f, dadosUser: { ...a.dadosUser, id_image: f.id } }))
 
-    })
-
-  }
-
-  async function salvar() {
-    await api.put(`/user/update`, { ...newValues }).then(r => {
-      if (r.data.status) {
-        navegar(`/perfil/`, { state: { ...values, dadosUser: newValues } })
-        saveAlert()
-      }
-    })
-  }
+  
   return (
     <Fragment>
 
@@ -128,7 +73,8 @@ function Profile() {
                       title="online"
                     ></span>
                     <img
-                      src={values?.image?.url ? values?.image?.url : null}
+                      id="imgtroc1"
+                      src={values?.image?.url}
                       className="rounded-circle" alt="user" />
                   </div>
                   <div className="text-dark">
@@ -172,7 +118,8 @@ function Profile() {
                     {/* FOTO DE PERFIL UPLOAD */}
                     <div className="d-flex align-items-start pb-3 border-bottom">
                       <img
-                        src={values?.image?.url ? values?.image?.url : null}
+                        id="imgtroc"
+                        src={values?.image?.url}
                         className="img rounded-circle avatar-xl"
                         alt="user1"
                       />
@@ -186,12 +133,77 @@ function Profile() {
                         </div>
 
                         <div>
-                          <label for="arquivo" className="btn button border btn-sm tx-bold">Trocar foto de perfil</label>
-                          <input onChange={(e) => { UpdateImage(e) }} type="file" id="arquivo" accept="image/*" style={{ display: 'none' }}>
-                            {/* <Button
-                          variant="primary" className="btn button border btn-sm me-1">
-                        </Button> */}
-                          </input>
+                          <label htmlFor="arquivo" className="btn button border btn-sm tx-bold">Trocar foto de perfil</label>
+                          <input
+                            name="arquivo"
+                            type="file"
+                            onChange={(ee) => {
+
+                              
+                              const files = ee.target.files;
+                              let uploadedFiles = []
+
+                              for (const iterator of files) {
+
+                                uploadedFiles.push(
+                                  {
+                                    "file": iterator,
+                                    "id": uniqueId(),//definindo um id unico 
+                                    "name": iterator.name,
+                                    "readableSize": iterator.size,
+                                    preview: URL.createObjectURL(iterator), // criando um link para preview da foto carregada
+                                    url: URL.createObjectURL(iterator),// sera usado para setar a variavel img no proprietario/index.js
+                                  }
+                                )
+                              }
+
+                              // SETANDO O LOCAL ONDE APARECE IMAGEM 
+                              document.getElementById("imgtroc1").setAttribute("src", uploadedFiles[0].preview);
+                              document.getElementById("imgtroc").setAttribute("src", uploadedFiles[0].preview);
+                              document.getElementById("imgheader").setAttribute("src", uploadedFiles[0].preview);
+
+                              // DELETANDO:
+                              try {
+                                 api.delete(`/images/deletar?key=${values?.image?.key}&id=${values?.image?.id}`).then(r=>{
+                                  console.log(r)
+                                 });
+                              } catch (error) {
+                                
+                              }
+                              
+
+
+
+                              // CRIANDO UM DATAFORM
+                              const data = new FormData();
+                              data.append('file', uploadedFiles[0].file, uploadedFiles[0].name);
+
+                              // SALVANDO NOVA IMAGEM
+                              let val = values;
+                             try {
+                              api.post(`images/salvar?id_user=${values.dadosUser.id}`, data, {
+                                onUploadProgress: e => {
+                                  let progress = parseInt(Math.round((e.loaded * 100) / e.total));
+                                  setProgress(a => a + progress)
+                                }
+                              }).then(r => {
+                                const resposta=r.data;
+                                setValues(a=>({...a,image:resposta}));
+                              })
+                              
+                             } catch (error) {
+                              
+                             }
+                            
+
+
+                            }}
+                            id="arquivo"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                          />
+
+
                           {/* <b>{values?.image?.name}</b> */}
                         </div>
 
@@ -208,6 +220,7 @@ function Profile() {
                             defaultValue={values?.dadosUser?.name}
                             onBlur={(e) => {
                               setNvalues(a => ({ ...a, name: e.target.value }))
+                            
                             }}
                           />
                         </div>
@@ -220,6 +233,7 @@ function Profile() {
                             defaultValue={values?.dadosUser?.email}
                             onBlur={(e) => {
                               setNvalues(a => ({ ...a, email: e.target.value }))
+                            
                             }}
                           />
                         </div>
@@ -297,6 +311,7 @@ function Profile() {
                               placeholder="Senha Nova "
                               onBlur={(e) => {
                                 setNvalues(a => ({ ...a, password: e.target.value }))
+                               
                               }}
                             />
                             <Button onClick={() => {
@@ -322,7 +337,9 @@ function Profile() {
                 <div className="d-flex justify-content-end">
                   <Button
                     onClick={() => {
-                      salvar()
+                     api.put(`user/update`,{...newValues}).then(r=>{
+                      navegar("/perfil",{state:{...values,dadosUser:newValues}})
+                     })
                     }}
                   >
                     Salvar Alterações

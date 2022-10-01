@@ -46,9 +46,9 @@ const CriarAvpr = () => {
             <div className="page-header mx-4">
               <div>
                 <h2 className="main-content-title tx-24 mg-b-5">Nova avaliação</h2>
-                <spam className="d-flex text-muted tx-13">
+                <span className="d-flex text-muted tx-13">
                   Crie uma nova avaliação por resultados
-                </spam>
+                </span>
               </div>
               <div>
                 <Button to="#"
@@ -91,9 +91,9 @@ const CriarAvpr = () => {
               <div className="page-header">
                 <div>
                   <h2 className="main-content-title tx-24 mg-b-5">Indicadores</h2>
-                  <spam className="d-flex text-muted tx-13">
+                  <span className="d-flex text-muted tx-13">
                     Crie indicadores e suas respectivas metas
-                  </spam>
+                  </span>
                 </div>
               </div>
 
@@ -135,11 +135,11 @@ const CriarAvpr = () => {
                   <Grid>
                     <Row>
                       <Col xs={4} md={4} lg={4} xl={4} xxl={4}>
-                        <spam>Nome do indicador</spam>
+                        <span>Nome do indicador</span>
                       </Col>
 
                       <Col xs={4} md={4} lg={4} xl={4} xxl={4} className="d-flex justify-content-end">
-                        <spam>Nome da meta</spam>
+                        <span>Nome da meta</span>
                       </Col>
 
                       <Col xs={4} md={4} lg={4} xl={4} xxl={4} className="d-flex justify-content-end align-items-center">

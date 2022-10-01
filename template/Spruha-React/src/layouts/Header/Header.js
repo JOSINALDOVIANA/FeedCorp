@@ -372,6 +372,7 @@ function Header({ values }) {
                     <Dropdown.Toggle className="d-flex p-0" variant="default">
                       <span className="main-img-user mx-1">
                         <img
+                          id="imgheader"
                           alt="avatar"
                           src={values?.image?.url || require("../../assets/img/users/1.jpg")}
                         />

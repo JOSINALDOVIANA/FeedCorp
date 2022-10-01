@@ -18,13 +18,13 @@ function ECDashboard() {
     setValues(dadosrota.state)
 
   }, [dadosrota.state])
-
+// console.log(values)
   useEffect(() => {
     async function getDados() {
-      let r1 = await api.get(`/feedback/get?id_direction=${values.dadosUser?.id}`)
+      let r1 = await api.get(`/feedback/get?id_direction=${values?.dadosUser?.id}`)
       // .then(r => {setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))})
       setValues(a => ({ ...a, receivedfeedbacksPessoais: r1.data.feedbacks }))
-      let r2 = await api.get(`/feedback/get?id_user=${values.dadosUser?.id}`)
+      let r2 = await api.get(`/feedback/get?id_user=${values?.dadosUser?.id}`)
       setValues(a => ({ ...a, sendfeedbacks: r2.data.feedbacks }));
       setCarregados(a => !a)
 

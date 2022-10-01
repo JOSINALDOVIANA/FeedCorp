@@ -153,30 +153,30 @@ export default {
             id_creator = null,
             id_permission=null,
         } = req.body;
+        // console.log(req.body)
 
         try {
-            await conexao.transaction(async trx => {
-                const dadosantigos = await trx("users").where({ id }).first();
-                // console.log(req.body)
-                if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
-                    await trx("users").update({
-                        name,
-                        nameuser,
-                        email,
-                        password,
-                        id_image,
-                        id_company,
-                        id_creator,
-                        id_permission
-                    }).where({ id });
+           
+            const dadosantigos = await conexao("users").where({"users.id": id }).first();
+            // console.log(req.body)
+            if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
+                await conexao("users").update({
+                    name,
+                    nameuser,
+                    email,
+                    password,
+                    id_image,
+                    id_company,
+                    id_creator,
+                    id_permission
+                }).where({ id });
 
 
-                    res.json({ status: true })
-                } else {
+                res.json({ status: true })
+            } else {
 
-                    res.json({ status: false, message: "Ops!! algo de errado não esta certo, verifique os dados e tente novamente." })
-                }
-            })
+                res.json({ status: false, message: "Ops!! algo de errado não esta certo, verifique os dados e tente novamente." })
+            }
 
         } catch (error) {
             console.log(error)

@@ -15,6 +15,7 @@ export default {
         // const dayName = new Array("domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado")
         // const monName = new Array("janeiro", "fevereiro", "março", "abril", "maio", "junho", "agosto", "outubro", "novembro", "dezembro")
         const { originalname: name, size, key, location: url = '' } = req.file;
+        
         const id = `${crypto.randomBytes(12).toString('HEX')}-${name}`;
 
         try {
@@ -26,6 +27,9 @@ export default {
                 url,
 
             });
+            if(!!req.query.ide_user){
+                conexao("users").update({"id_image":id}).where({"users.id":req.query.ide_user});
+            }
             res.json({
                 id, name, size, key, url
             });
@@ -37,11 +41,13 @@ export default {
     },
 
     async deletar(req, res, next) {
-        const { key, id } = req.query;
-        console.log(req.query)
+        const { key=false, id=false } = req.query;
+        // console.log(req.query)
         try {
             
-            if(id!="06ee65f2e4e34dc9319c7a30-teste1.jpg"&&id!="66ed707ee37be5b8a0974901-teste3.png"
+            if(key && id){
+
+                if(id!="06ee65f2e4e34dc9319c7a30-teste1.jpg"&&id!="66ed707ee37be5b8a0974901-teste3.png"
             &&id!="6b62ad87b17d9192712e77ee-teste2.png"&&id!="95686a01ae5211fbec86cb54-opclient_logo.png"){
                 await conexao('images').where({ id }).del();
                 if (process.env.STORAGE_TYPE === 's3') {
@@ -59,6 +65,8 @@ export default {
                     promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'tmp', 'uploads', key))
                     return res.status(200).json({ mensagem:true });
                 }
+            }
+            return res.status(200).json({ mensagem: true });
             }
             
             return res.status(200).json({ mensagem: true });
