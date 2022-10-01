@@ -4,11 +4,9 @@ import iconlight from '../../../../../assets/img/brand/icon-light.png';
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 import { Button, Card, Col, Container, Form, Nav, Navbar, Row, Tab } from "react-bootstrap";
-import { Slicksider, Slicksiderwithdata } from "../../../../../data/Landingpagedata/landingpagedata";
-import Navbar1 from "../../../../../data/Landingpagedata/Navbar";
+import { SlicksiderTecnologias, SlicksiderParceiros, SlicksiderClientes } from "./Landingpagedata/landingpagedata";
+import Navbar1 from "./Landingpagedata/Navbar";
 
-import { usuarioContext } from "../../../../..";
-import { useNavigate } from 'react-router-dom'
 const Landingpage = () => {
   let [isFirstCollapsed, setisFirstCollapsed] = useState(false);
   let [is2Collapsed, setis2Collapsed] = useState(false);
@@ -232,12 +230,9 @@ const Landingpage = () => {
                     <Col xl={6} lg={6} className="animation-zidex pos-relative">
                       <h4 className="fw-semibold mt-7">Avalie seu negócio</h4>
                       <h1 className="text-start fw-bold">Nós te ajudamos a analisar o desempenho da sua empresa!</h1>
-                      <h6 className="pb-3">
-                        Spruha - Now you can use this admin template to design stunning dashboards
-                        that will wow your target viewers or users to no end. To create a good and
-                        well-structured dashboard,
-                        you need to start from scratch with HTML, SCSS, CSS, and JS and with lots of coding,
-                        but by using this Spruha-Admin template.</h6>
+                      <h6 className="pb-3" style={{ color: "#ffffff" }}>
+                        Avalie o desempenho de sua empresa utilizando as técnicas de avaliação mais usadas no mercado.
+                        Com uma interface responsiva e amigável, de fácil uso para engajar sua empresa e atingir outros patamares!</h6>
 
                       <Link to="https://themeforest.net/item/dashlead-bootstrap-5-admin-dashboard-template/35183671"
                         target="_blank" className="btn ripple btn-min w-lg mb-3 me-2 btn-light"><i
@@ -262,11 +257,16 @@ const Landingpage = () => {
                     <Row>
                       <h4 className="text-center fw-semibold landing-card-header">Recursos</h4>
                       <span className="landing-title"></span>
-                      <h2 className="fw-semibold text-center">Spruha Main Features</h2>
-                      <p className="text-default mb-5 text-center">The Spruha admin template comes with
-                        ready-to-use features that are completely easy-to-use for any user, even for
-                        a beginner.</p>
+                      <h2 className="fw-semibold text-center">Técnicas de avaliação para empresas</h2>
+                      <p className="text-default mb-5 text-center">
+                        As melhores técnicas escolhidas pelo nosso time para aumentar o desempenho da sua empresa
+                        e o engajamento do seu time!
+                      </p>
+
+
                       <Row className="mt-7">
+                        <h3 className="fw-semibold">Avaliações para desempenho</h3>
+
                         <Col lg={3} md={12}>
                           <Card className="features main-features main-features-1 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
@@ -274,18 +274,22 @@ const Landingpage = () => {
                               <div className="counter-body-2">
                                 <div className="bg-img mb-2 text-left hexagon-wrapper">
                                   <div className="counter-icon hexagon">
-                                    <i className="fe fe-package text-white"></i>
+                                    <i className="fe fe-target text-white"></i>
                                   </div>
                                 </div>
                               </div>
+
                               <div className="text-left counter-body">
-                                <h4 className="fw-bold">Unique Design</h4>
-                                <p className="mb-0">Spruha has a unique design that you cannot compare
-                                  with any other templates. It has unique Design</p>
+                                <h4 className="fw-bold">OKR - Objective key results</h4>
+                                <p className="mb-0">
+                                  Metodologia de gestão para definição de metas para empresas, dividindo melhor
+                                  o trabalho entre os colaboradores.
+                                </p>
                               </div>
                             </Card.Body>
                           </Card>
                         </Col>
+
                         <Col lg={3} md={12}>
                           <Card className=" features main-features main-features-2 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
@@ -293,19 +297,20 @@ const Landingpage = () => {
                               <div className="counter-body-2">
                                 <div className="bg-img mb-2 text-left hexagon-wrapper">
                                   <div className="counter-icon hexagon">
-                                    <i className="fe fe-code text-white"></i>
+                                    <i className="fe fe-bar-chart-2 text-white"></i>
                                   </div>
                                 </div>
                               </div>
                               <div className="text-left counter-body">
-                                <h4 className="fw-bold">Quality &amp; Clean Code</h4>
-                                <p className="mb-0">The Spruha admin code is maintained very cleanly and
-                                  well-structured with proper
-                                  comments.</p>
+                                <h4 className="fw-bold">Avaliação por resultados</h4>
+                                <p className="mb-0">Técnica para avaliar o resultados obtidos pelo seu colaborador em
+                                  comparação com a metas propostas.
+                                </p>
                               </div>
                             </Card.Body>
                           </Card>
                         </Col>
+
                         <Col lg={3} md={12}>
                           <Card className="features main-features main-features-3 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
@@ -313,21 +318,22 @@ const Landingpage = () => {
                               <div className="counter-body-2">
                                 <div className="bg-img mb-2 text-left hexagon-wrapper">
                                   <div className="counter-icon hexagon">
-                                    <i className="fe fe-layers text-white"></i>
+                                    <i className="fe fe-message-circle text-white"></i>
                                   </div>
                                 </div>
                               </div>
                               <div className="text-left counter-body">
-                                <h4 className="fw-bold">Multiple Demos</h4>
+                                <h4 className="fw-bold">Reunião 1:1</h4>
                                 <p className="mb-0">
-                                  We included multiple demos, preview video, and screen shots to
-                                  give a quick overview of our Dashlead admin template.
+                                  Marque reuniões com qualquer colaborador de sua empresa e anote previamente
+                                  os assuntos que serão abordados. Nosso sistema avisará para você.
                                 </p>
                               </div>
                             </Card.Body>
                           </Card>
                         </Col>
-                        <Col lg={3} md={12}>
+
+                        {/* <Col lg={3} md={12}>
                           <Card className="features main-features main-features-4 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
                             <Card.Body>
@@ -348,8 +354,35 @@ const Landingpage = () => {
                               </div>
                             </Card.Body>
                           </Card>
-                        </Col>
+                        </Col> */}
+                      </Row>
+
+
+                      <Row>
+                        <h3 className="fw-semibold">Avaliações para engajamento</h3>
                         <Col lg={3} md={12}>
+                          <Card className="features main-features main-features-8 wow fadeInUp reveal revealleft"
+                            data-wow-delay="0.1s">
+                            <Card.Body>
+                              <div className="counter-body-2">
+                                <div className="bg-img mb-2 text-left hexagon-wrapper">
+                                  <div className="counter-icon hexagon">
+                                    <i className="fe fe-file-text text-white"></i>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="text-left counter-body">
+                                <h4 className="fw-bold">Clima Pulso</h4>
+                                <p className="mb-0">
+                                  Pesquisa rápida periódica para avaliação do clima entre os colaboradores no organização,
+                                  direcionado a todos os colaboradores ou para um grupo específico.
+                                </p>
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+
+                        {/* <Col lg={3} md={12}>
                           <Card className="features main-features main-features-5 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
                             <Card.Body>
@@ -371,6 +404,7 @@ const Landingpage = () => {
                             </Card.Body>
                           </Card>
                         </Col>
+
                         <Col lg={3} md={12}>
                           <Card className="features main-features main-features-6 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
@@ -393,6 +427,7 @@ const Landingpage = () => {
                             </Card.Body>
                           </Card>
                         </Col>
+
                         <Col lg={3} md={12}>
                           <Card className="features main-features main-features-7 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
@@ -413,33 +448,15 @@ const Landingpage = () => {
                               </div>
                             </Card.Body>
                           </Card>
-                        </Col>
-                        <Col lg={3} md={12}>
-                          <Card className="features main-features main-features-8 wow fadeInUp reveal revealleft"
-                            data-wow-delay="0.1s">
-                            <Card.Body>
-                              <div className="counter-body-2">
-                                <div className="bg-img mb-2 text-left hexagon-wrapper">
-                                  <div className="counter-icon hexagon">
-                                    <i className="fe fe-file-text text-white"></i>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="text-left counter-body">
-                                <h4 className="fw-bold">Validating Forms</h4>
-                                <p className="mb-0">
-                                  Tempor accusam magna ipsum ea et. Sanctus aliquyam ea duo sit
-                                  consetetur. Labore stet sed. Labore stet sed.
-                                </p>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                        </Col>
+                        </Col> */}
+
                       </Row>
+
                     </Row>
                   </Container>
                 </div>
-                <div className="testimonial-owl-landing">
+                {/* PEQUENA SEÇÃO - NÃO APAGAR */}
+                {/* <div className="testimonial-owl-landing">
                   <Container>
                     <Row>
                       <Card className=" bg-transparent mb-0">
@@ -579,14 +596,40 @@ const Landingpage = () => {
                       </Card>
                     </Row>
                   </Container>
-                </div>
+                </div> */}
+
+                {/* <div className="section testimonial-owl-landing">
+                  <Container>
+                    <Row>
+                      <Card className=" bg-transparent mb-0">
+                        <h4 className="text-center fw-semibold text-white landing-card-header">Parceiros</h4>
+                        <span className="landing-title"></span>
+                        <div className="demo-screen-skin code-quality" id="dependencies">
+                          <div className="text-center p-0">
+                            <h2 className="text-center fw-semibold text-white">
+                              Empresas que utilizam nossa plataforma
+                            </h2>
+                            <Row className="row justify-content-center">
+                              <div className="col-lg-12 px-0">
+                                <div className="feature-logos mt-5">
+                                  <SlicksiderParceiros />
+                                </div>
+                              </div>
+                            </Row>
+                          </div>
+                        </div>
+                      </Card>
+                    </Row>
+                  </Container>
+                </div> */}
+
                 <div className="section bg-landing working-section pb-0" id="Sobre">
                   <Container>
                     <Row>
                       <h4 className="text-center fw-semibold landing-card-header">Nossa Missão</h4>
                       <span className="landing-title"></span>
                       <div className="text-center">
-                        <h2 className="text-center fw-semibold">Our mission is to make work meaningful.
+                        <h2 className="text-center fw-semibold">Nossa missão para alavancar sua empresa.
                         </h2>
                       </div>
                       <div className="reveal">
@@ -883,25 +926,28 @@ const Landingpage = () => {
                                 </svg>
                               </div>
                             </Col>
+
                             <Col xl={8} lg={6} md={6} sm={12}>
                               <div className="working-content content-1">
-                                <h4 className="mb-3">Design Quality </h4>
-                                <p className="title-desc text-muted">No ipsum rebum est invidunt eos
-                                  dolore. Sed sea ipsum vero invidunt rebum et erat, tempor
-                                  consetetur sadipscing no ipsum,.</p>
-                                <p className="title-desc text-muted mb-0">Ut dolor sed aliquyam at lorem
+                                <h4 className="mb-3">Um ambiente conectado e otimista</h4>
+                                <p className="title-desc text-muted">
+                                  Aumentar o desempenho e melhorar o ambiente de trabalho de empresas de forma
+                                  que seus colaboradores ultrapassem seu potencial em um ambiente feliz e saudável.
+                                </p>
+                                {/* <p className="title-desc text-muted mb-0">Ut dolor sed aliquyam at lorem
                                   ipsum labore diam eos. Tempor labore dolor justo nonumy stet,
                                   sanctus amet sed accusam elitr amet eirmod. No ea gubergren
-                                  dolores elitr labore ipsum..</p>
+                                  dolores elitr labore ipsum..</p> */}
                               </div>
                             </Col>
                           </Row>
                         </div>
-                        <div className="working-container">
+
+                        {/* <div className="working-container">
                           <Row className="align-items-center">
                             <Col xl={8} lg={6} md={6} sm={12} className=" myorder-2">
                               <div className="working-content content-2">
-                                <h4 className="mb-3">Documentation</h4>
+                                <h4 className="mb-3">Documentação</h4>
                                 <p className="title-desc text-muted">Dolore voluptua sed kasd labore
                                   erat sed ipsum rebum sit, sanctus invidunt est sed sanctus.
                                   Dolor clita invidunt elitr dolore.</p>
@@ -911,6 +957,7 @@ const Landingpage = () => {
                                   gubergren, ipsum dolor lorem amet stet, aliquyam takimata.</p>
                               </div>
                             </Col>
+                             //IMAGEM
                             <Col xl={4} lg={6} md={6} sm={12} className=" myorder-1">
                               <div className="working-svg-container svg-container-2">
                                 <svg
@@ -1476,9 +1523,11 @@ c-0.6137161,4.8149414-1.0946579,9.651413-1.4447937,14.4860229L43.0290565,232.100
                               </div>
                             </Col>
                           </Row>
-                        </div>
+                        </div> */}
+
                         <div className="working-container">
                           <Row className="align-items-center">
+                            {/* IMAGEM */}
                             <Col xl={4} lg={6} md={6} sm={12}>
                               <div className="working-svg-container svg-container-3">
                                 <svg
@@ -2688,16 +2737,18 @@ c-0.6137161,4.8149414-1.0946579,9.651413-1.4447937,14.4860229L43.0290565,232.100
                                 </svg>
                               </div>
                             </Col>
+
                             <Col xl={8} lg={6} md={6} sm={12}>
                               <div className="working-content content-3">
-                                <h4 className="mb-3">Customization</h4>
-                                <p className="title-desc text-muted">Sea takimata sea sit justo
-                                  consetetur et diam erat erat, dolor vero et sit duo dolor,
-                                  dolores ipsum gubergren stet.</p>
-                                <p className="title-desc text-muted mb-0">Stet sadipscing lorem ipsum
+                                <h4 className="mb-3">Design pensando em você</h4>
+                                <p className="title-desc text-muted">
+                                  Design responsivo e moderno para atender você cliente seja no computador ou celular,
+                                  para ficar conectado e acompanhar em tempo real a sua empresa.
+                                </p>
+                                {/* <p className="title-desc text-muted mb-0">Stet sadipscing lorem ipsum
                                   invidunt takimata ipsum no eos dolor. Sed at dolores et ut dolor
                                   voluptua sit duo. Ipsum ea kasd nonumy dolor, eos takimata
-                                  eirmod est gubergren eos.</p>
+                                  eirmod est gubergren eos.</p> */}
                               </div>
                             </Col>
                           </Row>
@@ -2706,16 +2757,17 @@ c-0.6137161,4.8149414-1.0946579,9.651413-1.4447937,14.4860229L43.0290565,232.100
                           <Row className="align-items-center">
                             <Col xl={8} lg={6} md={6} sm={12} className=" myorder-2">
                               <div className="working-content content-4">
-                                <h4 className="mb-3">Life Time Updates</h4>
-                                <p className="title-desc text-muted">Sea takimata sea sit justo
-                                  consetetur et diam erat erat, dolor vero et sit duo dolor,
-                                  dolores ipsum gubergren stet.</p>
-                                <p className="title-desc text-muted mb-0">Stet sadipscing lorem ipsum
-                                  invidunt takimata ipsum no eos dolor. Sed at dolores et ut dolor
-                                  voluptua sit duo. Ipsum ea kasd nonumy dolor, eos takimata
-                                  eirmod est gubergren eos.</p>
+                                <h4 className="mb-3">Atualizações constantes</h4>
+                                <p className="title-desc text-muted">
+                                  Nosso time de desenvolvedores estão empenhados para proporcionar
+                                  a melhor experiência para você, atualizando a plataforma e protegendo os seus dados.
+                                </p>
+                                {/* <p className="title-desc text-muted mb-0"> 
+                                Nosso time de desenvolvedores estão empenhados para proporcionar
+                                a melhor experiência para você.</p> */}
                               </div>
                             </Col>
+                            {/* IMAGEM */}
                             <Col xl={4} lg={6} md={6} sm={12} className=" myorder-1">
                               <div className="working-svg-container svg-container-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000"
@@ -2864,11 +2916,13 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                 </svg>
                               </div>
                             </Col>
+
                           </Row>
                         </div>
                       </div>
                     </Row>
                   </Container>
+
                   <div className="section testimonial-owl-landing">
                     <Container>
                       <Row>
@@ -2877,12 +2931,13 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                           <span className="landing-title"></span>
                           <div className="demo-screen-skin code-quality" id="dependencies">
                             <div className="text-center p-0">
-                              <h2 className="text-center fw-semibold text-white">Features Used in
-                                Spruha Admin Template</h2>
+                              <h2 className="text-center fw-semibold text-white">
+                                As tecnologias usadas em nossa plataforma!
+                              </h2>
                               <Row className="row justify-content-center">
                                 <div className="col-lg-12 px-0">
                                   <div className="feature-logos mt-5">
-                                    <Slicksider />
+                                    <SlicksiderTecnologias />
                                   </div>
                                 </div>
                               </Row>
@@ -2892,6 +2947,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                       </Row>
                     </Container>
                   </div>
+
                   <div className="section">
                     <Container>
                       <Row>
@@ -3149,10 +3205,10 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                   <div className="bg-landing section">
                     <Container>
                       <Row>
-                        <h4 className="text-center fw-semibold landing-card-header">Choose a plan </h4>
+                        <h4 className="text-center fw-semibold landing-card-header">Planos ideais para você </h4>
                         <span className="landing-title"></span>
-                        <h2 className="text-center fw-semibold">Find the <span className="text-primary">Perfect
-                          Plan</span> for your Business.</h2>
+                        <h2 className="text-center fw-semibold">
+                          Encontre o <span className="text-primary">Plano Perfeito</span> para sua empresa.</h2>
                         <div className="pricing-tabs text-center">
                           <div className="pri-tabs-heading text-center mt-3">
 
@@ -3161,10 +3217,10 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                 <Nav className="justify-content-center"
                                   variant="pills">
                                   <Nav.Item>
-                                    <Nav.Link eventKey="Monthly">Monthly</Nav.Link>
+                                    <Nav.Link eventKey="Monthly">Mensal</Nav.Link>
                                   </Nav.Item>
                                   <Nav.Item>
-                                    <Nav.Link eventKey="Annual">Annual</Nav.Link>
+                                    <Nav.Link eventKey="Annual">Anual</Nav.Link>
                                   </Nav.Item>
                                 </Nav>
                                 <Tab.Content>
@@ -3173,13 +3229,13 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                       <Col lg={4} xl={4} md={8} sm={12}>
                                         <Card className=" p-3 pricing-card">
                                           <Card.Header className="d-block text-justified pt-2">
-                                            <p className="fs-18 fw-semibold mb-1">Basic</p>
+                                            <p className="fs-18 fw-semibold mb-1">Básico</p>
                                             <p className="text-justify fw-semibold mb-1"> <span
                                               className="fs-30 me-2">$</span><span
                                                 className="fs-30 me-1">39</span><span
                                                   className="fs-25"><span
                                                     className="op-0-5 text-muted text-20">/</span>
-                                                month</span></p>
+                                                mês</span></p>
                                             <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
                                               consectetur adipisicing elit. Iure quos debitis
                                               aliquam .</p>
@@ -3204,14 +3260,14 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                               <li className="text-muted"><i
                                                 className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
                                                   Money </strong> BackGuarantee</li>
-                                              <li className="text-muted"><i
-                                                className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                  24/7</strong> support</li>
+                                              <li><i
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                  24h/7</strong> suporte</li>
                                             </ul>
                                           </Card.Body>
                                           <div className="card-footer text-center border-top-0 pt-1">
                                             <button className="btn btn-lg btn-outline-secondary btn-block">
-                                              <span className="ms-4 me-4">Select</span>
+                                              <span className="ms-4 me-4">Escolher</span>
                                             </button>
                                           </div>
                                         </Card>
@@ -3219,15 +3275,14 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                       <Col lg={4} xl={4} md={8} sm={12}>
                                         <Card className=" p-3 border-primary pricing-card advanced">
                                           <Card.Header className="d-block text-justified pt-2">
-                                            <p className="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                              className="tag bg-primary text-white float-end">Limited
-                                              Deal</span></p>
+                                            <p className="fs-18 fw-semibold mb-1 pe-0">Avançado<span
+                                              className="tag bg-primary text-white float-end">Oferta Limitada</span></p>
                                             <p className="text-justify fw-semibold mb-1"> <span
                                               className="fs-30 me-2">$</span><span
                                                 className="fs-30 me-1">199</span><span
                                                   className="fs-25"><span
                                                     className="op-0-5 text-muted text-20">/</span>
-                                                month</span></p>
+                                                mês</span></p>
                                             <p className="fs-13 mb-2">Lorem ipsum dolor sit amet
                                               consectetur adipisicing elit. Iure quos debitis
                                               aliquam .</p>
@@ -3238,7 +3293,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                             <ul className="text-justify pricing-body ps-0">
                                               <li><i
                                                 className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                <strong> 5 Free</strong> Domain Name
+                                                <strong>5 Free</strong> Domain Name
                                               </li>
                                               <li><i
                                                 className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
@@ -3254,13 +3309,13 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                   Money </strong> BackGuarantee</li>
                                               <li className="mb-5"><i
                                                 className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                  24/7</strong> support</li>
+                                                  24h/7</strong> suporte</li>
                                             </ul>
                                           </Card.Body>
                                           <div className="card-footer text-center border-top-0 pt-1">
                                             <button
-                                              className="btn btn-lg btn-primary-gradient text-white btn-block">
-                                              <span className="ms-4 me-4">Select</span>
+                                              className="btn btn-lg btn-outline-danger btn-block">
+                                              <span className="ms-4 me-4">Escolher</span>
                                             </button>
                                           </div>
                                         </Card>
@@ -3274,7 +3329,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                 className="fs-30 me-1">69</span><span
                                                   className="fs-25"><span
                                                     className="op-0-5 text-muted text-20">/</span>
-                                                month</span></p>
+                                                mês</span></p>
                                             <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
                                               consectetur adipisicing elit. Iure quos debitis
                                               aliquam .</p>
@@ -3298,14 +3353,14 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                               <li className="text-muted"><i
                                                 className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
                                                   Money </strong> BackGuarantee</li>
-                                              <li className="text-muted"><i
-                                                className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                  24/7</strong> support</li>
+                                              <li><i
+                                                className="mdi mdi-checkbox-marked-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                  24h/7</strong> suporte</li>
                                             </ul>
                                           </Card.Body>
                                           <div className="card-footer text-center border-top-0 pt-1">
                                             <button className="btn btn-lg btn-outline-danger btn-block">
-                                              <span className="ms-4 me-4">Select</span>
+                                              <span className="ms-4 me-4">Escolher</span>
                                             </button>
                                           </div>
                                         </Card>
@@ -3318,13 +3373,13 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                         <Col lg={4} xl={4} md={8} sm={12}>
                                           <Card className=" p-3 pricing-card reveal revealrotate">
                                             <Card.Header className="d-block text-justified pt-2">
-                                              <p className="fs-18 fw-semibold mb-1">Basic</p>
+                                              <p className="fs-18 fw-semibold mb-1">Básico</p>
                                               <p className="text-justify fw-semibold mb-1"> <span
                                                 className="fs-30 me-2">$</span><span
                                                   className="fs-30 me-1">399</span><span
                                                     className="fs-25"><span
                                                       className="op-0-5 text-muted text-20">/</span>
-                                                  year</span></p>
+                                                  ano</span></p>
                                               <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
                                                 consectetur adipisicing elit. Iure quos debitis
                                                 aliquam .</p>
@@ -3349,14 +3404,14 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                 <li className="text-muted"><i
                                                   className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
                                                     Money </strong> BackGuarantee</li>
-                                                <li className="text-muted"><i
-                                                  className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                    24/7</strong> support</li>
+                                                <li><i
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                    24h/7</strong> suporte</li>
                                               </ul>
                                             </Card.Body>
                                             <div className="card-footer text-center border-top-0 pt-1">
                                               <button className="btn btn-lg btn-outline-secondary btn-block">
-                                                <span className="ms-4 me-4">Select</span>
+                                                <span className="ms-4 me-4">Escolher</span>
                                               </button>
                                             </div>
                                           </Card>
@@ -3365,15 +3420,14 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                           <Card
                                             className="p-3 border bg-primary border-primary pricing-card advanced reveal revealrotate">
                                             <Card.Header className="d-block text-justified pt-2 bd-white-2">
-                                              <p className="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                className="badge bg-white text-primary float-end font-weight-normal">Limited
-                                                Deal</span></p>
+                                              <p className="fs-18 fw-semibold mb-1 pe-0">Avançado<span
+                                                className="badge bg-white text-primary float-end font-weight-normal">Oferta Limitada</span></p>
                                               <p className="text-justify fw-semibold mb-1"> <span
                                                 className="fs-30 me-2">$</span><span
                                                   className="fs-30 me-1">1,299</span><span
                                                     className="fs-25"><span
                                                       className="op-0-5 text-muted text-20">/</span>
-                                                  year</span></p>
+                                                  ano</span></p>
                                               <p className="fs-13 mb-2">Lorem ipsum dolor sit amet
                                                 consectetur adipisicing elit. Iure quos debitis
                                                 aliquam .</p>
@@ -3384,7 +3438,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                               <ul className="text-justify pricing-body ps-0 my-5">
                                                 <li><i
                                                   className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                  <strong> 5 Free</strong> Domain Name
+                                                  <strong>5 Free</strong> Domain Name
                                                 </li>
                                                 <li><i
                                                   className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
@@ -3400,12 +3454,12 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                     Money </strong> BackGuarantee</li>
                                                 <li><i
                                                   className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                    24/7</strong> support</li>
+                                                    24h/7</strong> suporte</li>
                                               </ul>
                                             </Card.Body>
                                             <div className="card-footer text-center border-top-0 pt-1">
                                               <button className="btn btn-lg btn-white text-primary btn-block">
-                                                <span className="ms-4 me-4">Select</span>
+                                                <span className="ms-4 me-4">Escolher</span>
                                               </button>
                                             </div>
                                           </Card>
@@ -3419,7 +3473,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                   className="fs-30 me-1">899</span><span
                                                     className="fs-25"><span
                                                       className="op-0-5 text-muted text-20">/</span>
-                                                  year</span></p>
+                                                  ano</span></p>
                                               <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
                                                 consectetur adipisicing elit. Iure quos debitis
                                                 aliquam .</p>
@@ -3443,14 +3497,14 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                 <li className="text-muted"><i
                                                   className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
                                                     Money </strong> BackGuarantee</li>
-                                                <li className="text-muted"><i
-                                                  className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                    24/7</strong> support</li>
+                                                <li><i
+                                                  className="mdi mdi-checkbox-marked-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                    24h/7</strong> suporte</li>
                                               </ul>
                                             </Card.Body>
                                             <div className="card-footer text-center border-top-0 pt-1">
                                               <button className="btn btn-lg btn-outline-danger btn-block">
-                                                <span className="ms-4 me-4">Select</span>
+                                                <span className="ms-4 me-4">Escolher</span>
                                               </button>
                                             </div>
                                           </Card>
@@ -3635,7 +3689,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                               <h2 className="text-center fw-semibold text-white mb-5">What People Are
                                 Saying Sobre Our Product.</h2>
                               <div className="testimonial-carousel">
-                                <Slicksiderwithdata />
+                                <SlicksiderClientes />
                               </div>
                             </Card.Body>
                           </Card>
@@ -3817,6 +3871,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                 </div>
               </div>
             </div>
+
             <div className="pos-relative">
               <div className="shape overflow-hidden bottom-footer-shape">
                 <svg viewBox="0 0 2880 48" fill="none" xmsns="http://www.w3.org/2000/svg">
