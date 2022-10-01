@@ -5,71 +5,9 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 import api from '../../../../../api';
 
-export function Basicdatatable({ valores }) {
-    const [data, setData] = useState([])
-    const [values, setValues] = useState(valores)
-    const [carregados, setCarregados] = useState(false)
+export function Basicdatatable({data}) {    
 
-     useEffect(()=>{
-        
-         
-          api.get(`/feedback/get?id_direction=${valores?.dadosUser?.id}`).then(r => {
-      
-      
-             setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
-       
-           })
-         api.get(`/feedback/get?id_user=${valores.dadosUser?.id}`).then(r => {
-       
-       
-             setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
-             setCarregados(true)
-       
-           })
-
-        // return(()=>null)
-        
-      },[valores])
-   
-    useEffect(() => {
-        
- 
-      
-        let L=[]
-              for (const iterator of values?.sendfeedbacks) {
-                
-                  let obj={};
-                  api.get(`/user/getAll?id=${iterator?.id_direction}`).then( r=>{
-                    let f=r.data.Users[0]?.name;
-                    obj.destinatário=f;
-                    // console.log(f)
-                });
-                  api.get(`/unit/getAll?id=${iterator?.id_unity}`).then(s=>{
-                    let f=s.data.units[0]?.initials;
-                    obj.unidade=f;
-                    // console.log(f)
-                });
-                //   obj.name=values.dadosUser.name;
-                  obj.comentario=iterator.feedback;
-                  obj.data=formatData(iterator.updated_at);
-  
-                  L.push(obj)
-              }
-          
-      
-     
-   
-       setData(L)
-// return(()=>null)
     
-}, [])
-
-function formatData(data){
-    const dat=new Date(data);
-    const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
-     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
-     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-   }
 
 
     const columns = [

@@ -11,7 +11,7 @@ function ECDashboard() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState(dadosrota.state);
   const [carregados, setCarregados] = useState(false)
 
   useEffect(() => {
@@ -20,21 +20,17 @@ function ECDashboard() {
   }, [dadosrota.state])
 
   useEffect(() => {
-    (async () => {
-      await api.get(`/feedback/get?id_direction=${dadosrota?.state?.dadosUser?.id}`).then(r => {
+    async function getDados() {
+      let r1 = await api.get(`/feedback/get?id_direction=${values.dadosUser?.id}`)
+      // .then(r => {setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))})
+      setValues(a => ({ ...a, receivedfeedbacksPessoais: r1.data.feedbacks }))
+      let r2 = await api.get(`/feedback/get?id_user=${values.dadosUser?.id}`)
+      setValues(a => ({ ...a, sendfeedbacks: r2.data.feedbacks }));
+      setCarregados(a => !a)
 
-
-        setValues(a => ({ ...a, receivedfeedbacksPessoais: r.data.feedbacks }))
-
-      })
-      await api.get(`/feedback/get?id_user=${dadosrota?.state?.dadosUser?.id}`).then(r => {
-
-
-        setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }))
-        setCarregados(a => !a)
-
-      })
-    })()
+      //  .then(r => { setValues(a => ({ ...a, sendfeedbacks: r.data.feedbacks }));setCarregados(a => !a)})
+    }
+    getDados()
   }, [])
 
 
@@ -114,7 +110,8 @@ function ECDashboard() {
           </Card>
         </Col>}
 
-        {carregados && <Col sm={12} md={6} lg={6} xl={4}>
+
+        <Col sm={12} md={6} lg={6} xl={4}>
           <Card className="custom-card"
             style={{ cursor: 'pointer' }}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/dashboard/feitos`, { state: values }) }}
@@ -137,7 +134,7 @@ function ECDashboard() {
               </div>
             </Card.Body>
           </Card>
-        </Col>}
+        </Col>
 
         <Col sm={12} md={12} lg={12} xl={4}>
           <Card className="custom-card"
@@ -191,7 +188,7 @@ function ECDashboard() {
       {/* FRAGMENTO QUE ABRE AO CLICAR NO CARD */}
       <Outlet />
 
-        {/* GRAFICO */}
+      {/* GRAFICO */}
       {/* <Row className="row-sm">
         <Col xxl={12} xl={12} lg={12} md={12}>
           <Card className="custom-card">

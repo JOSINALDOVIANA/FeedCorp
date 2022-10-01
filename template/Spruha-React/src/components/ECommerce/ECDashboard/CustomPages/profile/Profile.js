@@ -40,20 +40,20 @@ function Profile() {
     })
     setProgress(0)
   }, [values])
-console.log(values)
-async function Del(){
-  console.log(values.image.id)
- await api.delete(`/images/deletar?key=${values.image.key}&id=${values.image.id}`).then(r1 => {
-    if (r1.data.mensagem) {
-      alert("apagando foto anterior...")
-    }
-  });
-}
+  console.log(values)
+  async function Del() {
+    console.log(values.image.id)
+    await api.delete(`/images/deletar?key=${values.image.key}&id=${values.image.id}`).then(r1 => {
+      if (r1.data.mensagem) {
+        alert("apagando foto anterior...")
+      }
+    });
+  }
 
 
 
 
- async function UpdateImage(e) {
+  async function UpdateImage(e) {
 
     const files = e.target.files;
     let uploadedFiles = []
@@ -73,8 +73,8 @@ async function Del(){
     const data = new FormData();
     data.append('file', uploadedFiles[0].file, uploadedFiles[0].name);
 
-     Del();
-    
+    Del();
+
     await api.post('images/salvar', data, {
       //o axios me permite saber o andamento do processo de envio
       onUploadProgress: e => {
@@ -99,27 +99,15 @@ async function Del(){
 
     })
 
-   
-
-
-
-
-
-
-
-
-
-
-
   }
 
- async  function salvar(){
-  await api.put(`/user/update`, { ...newValues }).then(r => {
-    if (r.data.status) {
-      navegar(`/perfil/`, { state: { ...values, dadosUser: newValues } })
-      saveAlert()
-    }
-  })
+  async function salvar() {
+    await api.put(`/user/update`, { ...newValues }).then(r => {
+      if (r.data.status) {
+        navegar(`/perfil/`, { state: { ...values, dadosUser: newValues } })
+        saveAlert()
+      }
+    })
   }
   return (
     <Fragment>
@@ -193,17 +181,19 @@ async function Del(){
                         <p className="mb-1">
                           Aceito arquivo tipo .png. Menos de 1MB
                         </p>
-                        <div className="progress">
-                          <div className="progress-bar" role="progressbar" style={{width:`${progress}%`}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">{progress}%</div>
+                        <div className="progress mb-1">
+                          <div className="progress-bar" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">{progress}%</div>
                         </div>
 
-
-                        <input onChange={(e) => { UpdateImage(e) }} type="file" accept="image/*">
-                          {/* <Button
+                        <div>
+                          <label for="arquivo" className="btn button border btn-sm tx-bold">Trocar foto de perfil</label>
+                          <input onChange={(e) => { UpdateImage(e) }} type="file" id="arquivo" accept="image/*" style={{ display: 'none' }}>
+                            {/* <Button
                           variant="primary" className="btn button border btn-sm me-1">
                         </Button> */}
-                        </input>
-                        {/* <b>{values?.image?.name}</b> */}
+                          </input>
+                          {/* <b>{values?.image?.name}</b> */}
+                        </div>
 
                       </div>
                     </div>
