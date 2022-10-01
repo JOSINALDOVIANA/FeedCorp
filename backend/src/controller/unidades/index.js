@@ -67,7 +67,7 @@ export default {
        const {id=false}=req.query
         try {            
                 if(id){
-                  return  res.json({status:true,units:await conexao("units").where({id})})
+                  return  res.json({status:true,units:await conexao("units").where({id}).first()})
                     
                 }
                return res.json({status:true,units:await conexao("units")})

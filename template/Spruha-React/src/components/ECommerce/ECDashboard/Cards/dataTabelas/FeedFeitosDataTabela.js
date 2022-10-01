@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from 'react';
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import DataTable from "react-data-table-component";
@@ -5,11 +7,41 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 import api from '../../../../../api';
 
-export function Basicdatatable({data}) {    
+export function Basicdatatable({feitos}) {    
+const [data,setData]=useState([])
+const [carr,setCarr]=useState(false)
+useEffect(() => {  
+    setCarr(false) 
+    let L = []
+    for (let index = 0; index < feitos.length; index++) {
+      const iterator = feitos[index];
+      let obj = {};
+      
+       api.get(`/user/getAll?id=${iterator?.id_direction}`).then(r1 => {   
+           
+        obj.destinatário = r1.data.Users.name
+      })
+       api.get(`/unit/getAll?id=${iterator?.id_unity}`).then(r2 => {        
+        obj.unidade =r2.data.units.initials
+      })
+      obj.comentario = iterator.feedback;
+      obj.data = formatData(iterator.updated_at);
 
-    
-
-
+      L.push(obj)
+      if(index<feitos.length-1){
+        setCarr(true)
+      }
+    }
+    setData(L)
+    return(()=>null)
+}, [feitos])
+console.log(data)
+function formatData(d) {
+    const dat = new Date(d);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
     const columns = [
 
         {
@@ -63,23 +95,27 @@ export function Basicdatatable({data}) {
     //     data1 = i
     //     setData(i)
     // }
-    let tableData = {
+    const tableData = {
         columns,
         data,
     };
 
     return (
 
-        <DataTableExtensions {...tableData} filterPlaceholder={"Pesquisar"}
-        // export={true} fileName={"a"}
-        >
+        
+       
+          <>
+           {carr && 
             <DataTable
-                columns={columns}
-                defaultSortAsc={false}
-            // striped={true}
-            //pagination
-            />
-        </DataTableExtensions>
+            columns={columns}
+            data={data}
+            defaultSortAsc={false}
+        // striped={true}
+        // selectableRows
+        // pagination
+        />}
+          </>
+        
 
     );
 }

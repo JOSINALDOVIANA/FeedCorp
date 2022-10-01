@@ -54,7 +54,8 @@ export default {
 
         try {
             if(id){
-                return res.json({ status: true, Users: await conexao("users").where({"users.id":id}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
+                const Users=await conexao("users").where({"users.id":id}).join("images","users.id_image",'=','images.id').select("users.*","images.url").first()
+                return res.json({ status: true, Users });
             }
             if(id_company){
                 return res.json({ status: true, Users: await conexao("users").where({"users.id_company":id_company}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
