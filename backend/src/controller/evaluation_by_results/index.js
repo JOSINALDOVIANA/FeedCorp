@@ -3,15 +3,39 @@ import conexao from '../../database/connection.js';
 export default {
 
     async insert(req,res){
-        let {id_user,title,validity=false,items}=req.body;
+        let {id_user,title,validity=false,items,direction}=req.body;
         if(validity){
             validity=new Date(validity)
         }else{validity=null}
+        console.log(req.body)
         try {
              const ebr =  await conexao("evaluation_by_results").insert({title,id_user,validity}) ;      
              let items_serial=items.map((item)=>({...item,validity,id_ebr:ebr[0]}));
              await conexao("items").insert(items_serial)
-            
+
+            if(direction.company.length>0){
+               let users= await conexao("users").where({"id_company":direction.company[0]}).select("users.id")
+               users=users.map(id_user=>({id_ebr:ebr[0],"id_user":id_user.id}));
+               await conexao("user_ebr").insert(users);
+            }
+            if(direction.units.length>0){
+                let users=[]
+               for (const id_unit of direction.units) {
+                let users2= await conexao("user_unit").join("users","users.id","=","user_unit.id_user").where({"user_unit.id_unit":id_unit}).select("users.id")
+                // users.push([]) 
+                users=[...users,...users2] ;           
+               }
+               if(users.length>0){
+                users=users.map(id_user=>({id_ebr:ebr[0],id_user:id_user.id}));
+                await conexao("user_ebr").insert(users);
+               }
+               
+            }
+            if(direction.users.length>0){
+                let users=direction.users;
+                users.map(id_user=>({id_ebr:ebr[0],id_user:id_user.id}));
+               await conexao("user_ebr").insert(users);
+            }
             res.json({"status":true,"avpr":{id:ebr[0],id_user,title,validity,items:items_serial}});
             
         } catch (error) {
@@ -33,10 +57,10 @@ export default {
         }
     },
     async delete(req,res){
-        const {id}=req.body;
+        const {id}=req.query;
 
         try {
-             await conexao("evaluation_by_results").del({title}).where({id}) ;      
+             await conexao("evaluation_by_results").del().where({id}) ;      
             
             res.json({"status":true,"message":"apagado"});
             
@@ -82,12 +106,35 @@ export default {
         }
     },
     async getAll(req,res){
-       
+       const {id_user=false}=req.query
 
         try {
-                
+           let avpr= !!id_user?await conexao("evaluation_by_results").where({id_user}):await conexao("evaluation_by_results");   
             
-            res.json({"status":true,"avaliações":await conexao("evaluation_by_results")});
+           for (const key in avpr) {
+            let paraquem= await conexao("user_ebr").where({"user_ebr.id_ebr":avpr[key].id})
+            .join("users","users.id","=","user_ebr.id_user")
+            .join("images","images.id","=","users.id_image")  
+            .select("users.*","images.url")
+            
+            let items = await conexao("items").where({"id_ebr":avpr[key].id})
+                .select("items.indicator","items.goal","items.max","items.min","items.id_physicalUnity","items.id");
+                let items_serial=[];
+                for (const key2 in items) {
+                    // let und=!items[key].und?await conexao("physicalUnity").where({id:items[key].id_physicalUnity}).first().select("physicalUnity.unity"):null
+                    let resposta=await conexao("item_answer_user").where({"id_item":items[key2].id})
+                    .join("users","item_answer_user.id_user",'=',"users.id")
+                    .join("images","users.id_image","=","images.id")
+                    .select("item_answer_user.answer","users.name","images.url");
+                    items_serial.push({...items[key2],resposta});
+                }
+
+
+            avpr[key]={...avpr[key],paraquem,items:items_serial}
+           }
+            
+            
+            res.json({"status":true,"avaliacoes":avpr});
             
         } catch (error) {
            console.log(error)

@@ -84,7 +84,7 @@ routes.get("/permission/get",permissoes.get)//devolve as permissoes por user se 
 // ------evaluation_by_results----
 routes.post("/avpr/insert",avpr.insert);//cria na tabela "evaluation_by_results"
 routes.put("/avpr/update",avpr.update);//atualiza  a tabela "evaluation_by_results" exige "id"
-routes.put("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results" exige "id"
+routes.delete("/avpr/delete",avpr.delete);//exclui na tabela "evaluation_by_results" exige "id"
 routes.get("/avpr/getone",avpr.getEspecific);//retorna uma avaliação especifica juntamente com as respostas e usuarios que reponderam, exige o "id" da avaliação
 routes.get("/avpr/gettwu",avpr.getCreateAll);//retorna todas as avaliações criadas pelo usuario exige "id_user"
 routes.get("/avpr/getAll",avpr.getAll);//retorna todas as avaliações 
