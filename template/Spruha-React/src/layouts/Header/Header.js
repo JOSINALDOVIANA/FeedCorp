@@ -39,7 +39,7 @@ function Fullscreen() {
 function Header({ values }) {
   
   const navegar = useNavigate()
-
+// console.log(values)
 
 
   
@@ -385,7 +385,7 @@ function Header({ values }) {
                           {values?.dadosUser?.name.toUpperCase()}
                           
                         </h6>
-                        <p className="main-notification-text">Cargo aqui</p>
+                        <p className="main-notification-text">{`${values?.permissions}`.toUpperCase()}</p>
                       </div>
                       <Dropdown.Item
                         className="border-top"

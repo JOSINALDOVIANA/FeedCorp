@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { usuarioContext } from "../../../..";
+import api from "../../../../api";
 
 function MinhaCorporacao() {
 
@@ -14,6 +15,10 @@ function MinhaCorporacao() {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
     setValues(dadosrota.state);
+
+    api.get(`unit/getAll?id=${dadosrota?.state?.unit?.id}`).then(r=>{
+      setValues(a=>({...a,unit:r.data.units}))
+    })
 
   }, [dadosrota])
 
@@ -61,7 +66,9 @@ function MinhaCorporacao() {
 
 
       <Row className="row-sm">
-        <Col sm={12} md={6} xl={3}>
+        
+        {values?.unit?.users?.map(user=>(
+          <Col key={user.id} sm={12} md={6} xl={3}>
           <Card className="custom-card border">
             <Card.Body className="text-center">
               <div className="user-lock text-center">
@@ -69,17 +76,17 @@ function MinhaCorporacao() {
                   <img
                     alt="avatar"
                     className="rounded-circle"
-                  src={require("../../../../assets/img/users/4.jpg")}
+                  src={user.url}
                   />
                 </Link>
               </div>
               <Link to="#">
                 <h4 className=" mb-1 mt-3 main-content-label">
-                  Nome de Usuário
+                  {user.name==values.dadosUser.name?"VOCÊ":user.name}
                 </h4>
               </Link>
               <h5 className="mb-2 mt-2 text-muted tx-14">
-                Cargo
+                {user.permission}
               </h5>
               {/* <p className="text-muted text-center mt-1">
                 Lorem Ipsum is not simply popular belief
@@ -88,7 +95,7 @@ function MinhaCorporacao() {
             </Card.Body>
           </Card>
         </Col>
-        
+        ))}
 
       </Row>
 

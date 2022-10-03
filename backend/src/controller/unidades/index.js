@@ -5,7 +5,7 @@ export default {
 
         const { units, id_user } = req.body; //units=[string,string], id_user=int
 
-        const unit_serial = units.map(unit => ({ description:unit.description,initials:unit.initials, id_user }));
+        const unit_serial = units.map(unit => ({ description: unit.description, initials: unit.initials, id_user }));
         try {
             await conexao("units").insert(unit_serial)
             resp.json({ status: true, message: "dados salvos" });
@@ -13,72 +13,91 @@ export default {
 
             resp.json({ status: false, message: "error: unit-create" });
         }
-    }, 
-   
+    },
+
     async update(req, resp) {
 
         const { unit, id_unit } = req.body; //units=string, id_unit=int       
         try {
-            await conexao("units").update({"description":unit}).where({"id":id_unit})
+            await conexao("units").update({ "description": unit }).where({ "id": id_unit })
             resp.json({ status: true, message: "dados alterados" });
         } catch (error) {
             resp.json({ status: false, message: "error: unit-update" });
         }
     },
 
-    
+
     async getUnitCreateUser(req, res) {
-        const { id_user = false,id_company=false} = req.query; // id_user=int
+        const { id_user = false, id_company = false } = req.query; // id_user=int
         // se nao vier id_user vai ser retonado todas
         try {
-            if (id_user) { 
-                const units = await conexao("units").select("units.id","units.description","units.initials").where({ id_user });
+            if (id_user) {
+                const units = await conexao("units").select("units.id", "units.description", "units.initials").where({ id_user });
                 let units_serialised = [];
 
-               
+
                 for (let i = 0; i < units.length; i++) {
-                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id","users.id_image","users.email","users.name")
+                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id", "users.id_image", "users.email", "users.name")
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
                     units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
                 }
 
-              return  res.json(units_serialised)
+                return res.json(units_serialised)
             }
-            if(id_company){
-                const units = await conexao("units").select("units.id","units.description","units.initials").where({ id_company });
+            if (id_company) {
+                const units = await conexao("units").select("units.id", "units.description", "units.initials").where({ id_company });
                 let units_serialised = [];
 
-               
+
                 for (let i = 0; i < units.length; i++) {
-                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id","users.id_image","users.email","users.name")
+                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id", "users.id_image", "users.email", "users.name")
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
                     units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
                 }
 
-              return  res.json(units_serialised)
-            }        
-            return res.json({status:true,units:await conexao('units')})
+                return res.json(units_serialised)
+            }
+            return res.json({ status: true, units: await conexao('units') })
         } catch (error) {
             res.json({ error: true, message: error.sqlMessage });
         }
     },
     async getAll(req, res) {
-        
-       const {id=false}=req.query
-        try {            
-                if(id){
-                  return  res.json({status:true,units:await conexao("units").where({id}).first()})
-                    
-                }
-               return res.json({status:true,units:await conexao("units")})
+
+        const { id = false, id_user = false } = req.query
+        try {
+            if (id) {
+                let unit = await conexao("units").where({ id }).first();
+                let users = await conexao("user_unit").where({ "user_unit.id_unit": id })
+                    .join('users', "users.id", "=", "user_unit.id_user")
+                    .join("images", "images.id", "=", "users.id_image")
+                    .join("permissions","permissions.id","=","users.id_permission")
+                    .select("users.*", "images.url","permissions.description as permission")
+                return res.json({ status: true, units: { ...unit, users } })
             }
-         catch (error) {
+            if (id_user) {
+                let units = await conexao("units").where({ id_user });
+
+                for (const key in units) {
+                    let users = await conexao("user_unit").where({ "user_unit.id_unit": units[key].id })
+                        .join('users', "users.id", "=", "user_unit.id_user")
+                        .join("images", "images.id", "=", "users.id_image")
+                        .join("permissions","permissions.id","=","users.id_permission")
+                        .select("users.*", "images.url","permissions.description as permission")
+
+                    units[key] = { ...units[key], users }
+                }
+                return res.json({ status: true, units})
+            }
+            return res.json({ status: true, units: await conexao("units") })
+        }
+        catch (error) {
             console.log(error)
-           return  res.json({ error: true, message: error.sqlMessage });
+            return res.json({ error: true, message: error.sqlMessage });
         }
     },
-   
-   
+
+
     async delete(req, res) {
         const { id_user, id } = req.body;
         try {
