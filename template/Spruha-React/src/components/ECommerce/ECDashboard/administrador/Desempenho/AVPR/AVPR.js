@@ -87,7 +87,7 @@ const AvPorResultados = () => {
               {/* ######################################################### */}
             
                 {values?.createAVPR?.map(avpr=>(
-                  <Card className="custom-card"
+                  <Card key={avpr.id} className="custom-card"
                   style={{ cursor: 'pointer' }}
                   // onClick={async () => {
     
