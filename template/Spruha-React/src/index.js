@@ -108,8 +108,6 @@ const Root = () => {
                   <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
                 </Route>
 
-                {/* movidas para ca */}
-                <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
                 {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
                 <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
                 <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
@@ -148,7 +146,6 @@ const Root = () => {
                   element={<ProgressoAVPR />}
                 />
                 {/* ------------------------------CLIMA PULSO------------------------------------------ */}
-                {/* falta alguams coisas  */}
                 <Route>
                   <Route
                     path={`${process.env.PUBLIC_URL}/climapulso`}
@@ -171,16 +168,16 @@ const Root = () => {
                   />
 
                 </Route>
-
-
                 {/* <Route>
                   <Route
                     path={`${process.env.PUBLIC_URL}/ferramentas`}
                     element={<Teste />}
                   />
                 </Route> */}
+                {/* GESTOR PÁGINAS */}
+                <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
 
-
+                
               </Route>
 
 
