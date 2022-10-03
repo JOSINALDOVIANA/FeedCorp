@@ -33,9 +33,10 @@ useEffect(() => {
       }
     }
     setData(L)
-    return(()=>null)
+   
 }, [feitos])
-console.log(data)
+// console.log(data)
+// console.log(feitos)
 function formatData(d) {
     const dat = new Date(d);
     const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
@@ -104,17 +105,16 @@ function formatData(d) {
 
         
        
-          <>
-           {carr && 
-            <DataTable
+        <DataTableExtensions {...tableData} filterPlaceholder={"Procurar"}>
+        <DataTable
             columns={columns}
-            data={data}
             defaultSortAsc={false}
+        //actions={actionsMemo}
         // striped={true}
-        // selectableRows
-        // pagination
-        />}
-          </>
+        //pagination
+
+        />
+    </DataTableExtensions>
         
 
     );

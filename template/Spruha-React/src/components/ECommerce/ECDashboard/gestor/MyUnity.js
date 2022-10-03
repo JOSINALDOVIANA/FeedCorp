@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
+import { Breadcrumb, Card, Col, Row, Table, Button, Image } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { usuarioContext } from "../../../..";
 import api from "../../../../api";
@@ -29,7 +29,7 @@ function MinhaCorporacao() {
 
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Minha Unidade</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">Minha Unidade: {values?.unit?.initials}</h2>
           <Breadcrumb>
           <Breadcrumb.Item> Minha Unidade </Breadcrumb.Item>
           <Breadcrumb.Item active >  Integrantes  </Breadcrumb.Item>
@@ -72,13 +72,20 @@ function MinhaCorporacao() {
           <Card className="custom-card border">
             <Card.Body className="text-center">
               <div className="user-lock text-center">
-                <Link to="#">
-                  <img
-                    alt="avatar"
+               {!!user.url &&  <Link to="#">
+                {/* <b-avatar 
+                variant="primary" 
+                text={user?.name}
+                src={user?.url}
+                >
+
+                </b-avatar> */}
+                  <Image
+                    alt={user.name}
                     className="rounded-circle"
                   src={user.url}
                   />
-                </Link>
+                </Link>}
               </div>
               <Link to="#">
                 <h4 className=" mb-1 mt-3 main-content-label">

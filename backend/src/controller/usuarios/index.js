@@ -36,7 +36,7 @@ export default {
                 
 
 
-                !id_unit ? null : await trx("user_unit").insert({ id_user: user[0], id_unit });
+                !!id_unit ? await trx("user_unit").insert({ id_user: user[0], id_unit }):null ;
 
                 return res.json({ status: true, dadosUser: await trx("users").where({ id: user[0] }).first() });
             })
