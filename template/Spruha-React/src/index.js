@@ -14,6 +14,10 @@ const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard
 const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/OKR"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
 const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/ProgressoOKR"))
+// OKR GESTOR
+const Okr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/OKR"))
+const CriarOkr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/CriarOKR"))
+const ProgressoOKR_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/ProgressoOKR"))
 //CLIMA PULSO
 const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
@@ -177,7 +181,22 @@ const Root = () => {
                 {/* GESTOR PÁGINAS */}
                 <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
 
-                
+                <Route
+                  path={`${process.env.PUBLIC_URL}/okr_unidade`}
+                  element={<Okr_gestor />} >
+                </Route>
+
+                <Route
+                  path={`${process.env.PUBLIC_URL}/okr/criar_okr_unidade`}
+                  element={<CriarOkr_gestor />}
+                />
+
+                <Route
+                  path={`${process.env.PUBLIC_URL}/okr/progresso_unidade_okr`}
+                  element={<ProgressoOKR_gestor />}
+                />
+
+
               </Route>
 
 

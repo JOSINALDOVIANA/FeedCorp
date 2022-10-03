@@ -93,10 +93,10 @@ export const MENUADM = [
 				selected: false,
 				//path: `${process.env.PUBLIC_URL}/`,
 			},
-			
+
 		]
 	},
-	
+
 ];
 
 export const MENUGESTOR = [
@@ -107,8 +107,8 @@ export const MENUGESTOR = [
 				title: 'Meu Painel',
 				icon: 'ti-home',
 				type: 'link',
-				active: false,
-				selected: false,
+				active: true,
+				selected: true,
 				path: `${process.env.PUBLIC_URL}/dashboard`,
 			},
 			{
@@ -122,29 +122,29 @@ export const MENUGESTOR = [
 			{
 				title: 'Desempenho',
 				icon: 'bi-book-half',
-				type: 'link',
+				type: 'sub',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/avaliacoes`
-				// children: [
-				// 	{
-				// 		path: `${process.env.PUBLIC_URL}/crytocurrencies/dashboard`,
-				// 		type: 'link',
-				// 		active: false,
-				// 		selected: false,
-				// 		title: 'Dashboard'
-				// 	},
-				// ]
+				path: `${process.env.PUBLIC_URL}/avaliacoes`,
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/okr_unidade`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'OKR'
+					},
+				]
 			},
-			{
-				title: 'Engajamento',
-				icon: 'ti-home',
-				type: 'link',
-				active: false,
-				selected: false,
-				//path: `${process.env.PUBLIC_URL}/`,
-			},
-		]
+	{
+		title: 'Engajamento',
+		icon: 'ti-home',
+		type: 'link',
+		active: false,
+		selected: false,
+		//path: `${process.env.PUBLIC_URL}/`,
+	},
+]
 	},
 ];
 
@@ -177,8 +177,8 @@ export const MENUCOL = [
 				// 	},
 				// ]
 			},
-			
+
 		]
 	},
-	
+
 ];

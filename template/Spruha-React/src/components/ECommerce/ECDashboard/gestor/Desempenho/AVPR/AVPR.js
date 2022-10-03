@@ -12,6 +12,9 @@ const AvPorResultados = () => {
   useEffect(() => {
     setValues(dadosrota.state);
     carregarUsersKeys(dadosrota.state)
+    api.get(`avpr/getAll?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
+      setValues(a=>({...a,createAVPR:r?.data?.avaliacoes}))
+    })
   }, [dadosrota.state]);
 
   function carregarUsersKeys(valores) {
@@ -31,9 +34,14 @@ const AvPorResultados = () => {
     // console.log(okrs_serial)
     setValues(a => ({ ...a, okrscriados: okrs_serial }))
   }
-  //  console.log(values)
+   console.log(values)
 
-
+   function formatData(data) {
+    const dat = new Date(data);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
 
   return (
     <Fragment>
@@ -76,37 +84,46 @@ const AvPorResultados = () => {
           <Col
             // key={okr.id}
             lg={4} xl={4} xxl={4} md={6} >
-            <Card className="custom-card"
-              style={{ cursor: 'pointer' }}
-              // onClick={async () => {
+              {/* ######################################################### */}
+            
+                {values?.createAVPR?.map(avpr=>(
+                  <Card key={avpr.id} className="custom-card"
+                  style={{ cursor: 'pointer' }}
+                  // onClick={async () => {
+    
+                  //   navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
+                  // }}
+                  onClick={() => {
+                    setValues(a=>({...a,AVPRselect:avpr}))
+                     navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`, { state: values })
+                     }}
+                >
+                  <Card.Body className="iconfont text-center">
+                    <div className="d-flex justify-content-between">
+    
+                      <div className="d-flex flex-column align-items-start">
+                        <h4 className="mb-1">
+                          {avpr.title}
+                        </h4>
+                        <h6 className="tx-16 tx-inverse tx-semibold mg-b-0 mb-2">
+                          Avaliados(as): {avpr.paraquem.length} pessoas
+                        </h6>
+                        <h6 className="tx-13 tx-inverse text-muted mg-b-0 mb-2">
+                          Validade: {formatData(avpr.validity)}
+                        </h6>
+                      </div>
+    
+                      <h2 className="d-flex flex-row">
+    
+                        <i className="bi-bar-chart-fill icon-size float-start text-primary"></i>
+                      </h2>
+                    </div>
+    
+                  </Card.Body>
+                </Card>
+                ))}
 
-              //   navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
-              // }}
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`, { state: values }) }}
-            >
-              <Card.Body className="iconfont text-center">
-                <div className="d-flex justify-content-between">
-
-                  <div className="d-flex flex-column align-items-start">
-                    <h4 className="mb-1">
-                      Atendimento do mês
-                    </h4>
-                    <h6 className="tx-16 tx-inverse tx-semibold mg-b-0 mb-2">
-                      Avaliado: Fulano
-                    </h6>
-                    <h6 className="tx-13 tx-inverse text-muted mg-b-0 mb-2">
-                      Validade: 01/01/2022
-                    </h6>
-                  </div>
-
-                  <h2 className="d-flex flex-row">
-
-                    <i className="bi-bar-chart-fill icon-size float-start text-primary"></i>
-                  </h2>
-                </div>
-
-              </Card.Body>
-            </Card>
+            {/* ########################################################## */}
           </Col>
           {/* ))} */}
 

@@ -18,7 +18,7 @@ function ECDashboard() {
     setValues(dadosrota.state)
 
   }, [dadosrota.state])
-// console.log(values)
+  // console.log(values)
   useEffect(() => {
     async function getDados() {
       let r1 = await api.get(`/feedback/get?id_direction=${values?.dadosUser?.id}`)
@@ -136,30 +136,32 @@ function ECDashboard() {
           </Card>
         </Col>
 
-        <Col sm={12} md={12} lg={12} xl={4}>
-          <Card className="custom-card"
-            style={{ cursor: 'pointer' }}
-            onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
-          >
-            <Card.Body>
-              <div className="card-order">
-                {/* TITULO */}
-                <label className="main-content-label mb-3 pt-1" style={{ cursor: 'pointer' }}>
-                  Objetivos
-                </label>
-                <h2 className="text-end">
-                  {/* ICONE */}
-                  <i className="bi-check2-circle icon-size float-start text-primary"></i>
-                  {/* VALOR VARIAVEL */}
-                  <span className="font-weight-bold">{values?.okrscriados?.map(item => (item.progress < 100 ? item : false)).length}</span>
-                </h2>
-                {/* <p className="mb-0 mt-4 text-muted">
+        {values?.permissions == "administrador" || values?.permissions == "gestor" ?
+          <Col sm={12} md={12} lg={12} xl={4}>
+            <Card className="custom-card"
+              // style={{ cursor: 'pointer' }}
+              // onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+            >
+              <Card.Body>
+                <div className="card-order">
+                  {/* TITULO */}
+                  <label className="main-content-label mb-3 pt-1" style={{ cursor: 'pointer' }}>
+                    Objetivos
+                  </label>
+                  <h2 className="text-end">
+                    {/* ICONE */}
+                    <i className="bi-check2-circle icon-size float-start text-primary"></i>
+                    {/* VALOR VARIAVEL */}
+                    <span className="font-weight-bold">{values?.okrscriados?.map(item => (item.progress < 100 ? item : false)).length}</span>
+                  </h2>
+                  {/* <p className="mb-0 mt-4 text-muted">
                   Monthly Profit<span className="float-end">$4,678</span>
                 </p> */}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+          : null}
 
         {/* <Col sm={12} md={6} lg={6} xl={3}>
           <Card className="custom-card"

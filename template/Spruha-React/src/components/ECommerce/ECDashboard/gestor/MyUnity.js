@@ -1,16 +1,9 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import * as chart from "../../../../data/Chart/chart";
-import * as marketcap from "../../../../data/Cryptodashboard/Marketcap/marketcap";
 import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
-import { Bar, Pie, Radar, Line, Doughnut, PolarArea } from "react-chartjs-2";
-import { Chart as ChartJS, registerables } from "chart.js";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-ChartJS.register(...registerables);
-
 
 function MinhaCorporacao() {
-
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
@@ -24,12 +17,18 @@ function MinhaCorporacao() {
 
   }, [dadosrota])
 
+  console.log(values)
+
   return (
     <Fragment>
 
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">Minha Unidade</h2>
+          <Breadcrumb>
+          <Breadcrumb.Item> Minha Unidade </Breadcrumb.Item>
+          <Breadcrumb.Item active >  Integrantes  </Breadcrumb.Item>
+        </Breadcrumb>
         </div>
 
         {/* <div className="d-flex">
@@ -64,7 +63,7 @@ function MinhaCorporacao() {
       <Row className="row-sm">
         <Col sm={12} md={6} xl={3}>
           <Card className="custom-card border">
-            <Card.Body className=" text-center">
+            <Card.Body className="text-center">
               <div className="user-lock text-center">
                 <Link to="#">
                   <img
@@ -79,51 +78,17 @@ function MinhaCorporacao() {
                   Nome de Usuário
                 </h4>
               </Link>
-              <p className="mb-2 mt-1 tx-muted">
+              <h5 className="mb-2 mt-2 text-muted tx-14">
                 Cargo
-              </p>
-              <p className="text-muted text-center mt-1">
+              </h5>
+              {/* <p className="text-muted text-center mt-1">
                 Lorem Ipsum is not simply popular belief
                 Contrary.
-              </p>
+              </p> */}
             </Card.Body>
           </Card>
         </Col>
-
-      </Row>
-
-      <Row className="row-sm">
-
-        {values?.units.map(unit => (
-          <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
-            <Card className="custom-card">
-              <Card.Body className="">
-                <h5 className="tx-14">Unidade</h5>
-
-                <div className="d-flex justify-content-between">
-                  <div className="volume">
-                    <h4 className="mb-2">
-                      {unit.initials}
-                    </h4>
-
-                  </div>
-
-                  <h2 className="d-flex flex-row">
-                    <span className="font-weight-bold px-1 text-primary">{unit.cols}</span>
-                    {/* ICONE */}
-                    <i className="bi-people-fill icon-size float-start text-primary"></i>
-                  </h2>
-
-                </div>
-
-                <div className="d-flex text-muted tx-13">
-                  {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
-                  {unit.description}
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+        
 
       </Row>
 

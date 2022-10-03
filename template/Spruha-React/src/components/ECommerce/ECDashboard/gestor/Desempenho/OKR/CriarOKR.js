@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image } from "react-bootstrap";
+import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image, Breadcrumb } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
-import { SingleselectUnidade, SingleselectPessoa } from "./FormDataOKR";
+import { SelectPessoaUnidade } from "./FormDataOKR";
+import { BasicDatatable } from "./dataTable/datable";
 // import {MyVerticallyCenteredModal} from "./modalmethods";
-
 import { Grid } from "@mui/material";
-import Okr from ".";
+import Okr from "./OKR";
 import api from "../../../../../../api";
 
 // import { Container } from './styles';
@@ -25,6 +25,21 @@ const CriarOKR = () => {
   // console.log(okr)
   return (
     <Fragment>
+      {/* <!-- Page Header --> */}
+      <div className="page-header">
+        <div>
+          <h2 className="main-content-title tx-24 mg-b-5">Criar Objective Key Result (OKR)</h2>
+          <Breadcrumb>
+            <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
+            <Breadcrumb.Item
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+            >OKR</Breadcrumb.Item>
+            <Breadcrumb.Item active>Criar OKR</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
+
+      </div>
+      {/* <!-- End Page Header --> */}
 
       <Row className="row-sm">
         <Col lg={12} md={12}>
@@ -37,7 +52,6 @@ const CriarOKR = () => {
                   variant="info"
                   className="btn me-1"
                   onClick={async (e) => {
-
 
                     await api.post(`/okrs/insert`, {
                       process: 0,
@@ -58,6 +72,7 @@ const CriarOKR = () => {
                 >
                   Criar
                 </Button>
+
                 <Button onClick={() => {
                   navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
                 }}
@@ -65,18 +80,15 @@ const CriarOKR = () => {
                 >
                   Cancelar
                 </Button>
+
               </div>
             </div>
+
             <Card.Body>
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Nome do Objetivo</Form.Label>
                 <input onChange={(e) => { setOkr(a => ({ ...a, objective: e.target.value })) }} value={Okr.objective} type="text" className="form-control" placeholder="Objetivo" />
               </FormGroup>
-
-              {/* <FormGroup className="form-group">
-                <Form.Label className="tx-medium">Descrição</Form.Label>
-                <textarea className="form-control" />
-              </FormGroup> */}
 
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Validade</Form.Label>
@@ -98,7 +110,7 @@ const CriarOKR = () => {
                       <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Key Results</h2>
                         <spam className="d-flex text-muted tx-13">
-                         Adicione o nome da sua Key result
+                          Adicione o nome da sua Key result a cada um dos integrantes de sua unidade
                         </spam>
                       </div>
                     </div>
@@ -115,20 +127,6 @@ const CriarOKR = () => {
                   <Col>
                     <div className="page-header">
                       <div>
-                        <h2 className="main-content-title tx-24 mg-b-5">Unidade</h2>
-                        <spam className="d-flex text-muted tx-13">
-                          Escolha a unidade onde o colaborador se encontra
-                        </spam>
-                      </div>
-                    </div>
-
-                    <SingleselectUnidade className="select-unit" units={values.units} setOkr={setOkr} />
-
-                  </Col>
-
-                  <Col>
-                    <div className="page-header">
-                      <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Integrantes</h2>
                         <spam className="d-flex text-muted tx-13">
                           Escolha o integrante para essa Key
@@ -136,7 +134,7 @@ const CriarOKR = () => {
                       </div>
                     </div>
 
-                    <SingleselectPessoa className="select-user" unit_select={okr.unit} setOkr={setOkr} />
+                    <SelectPessoaUnidade className="select-user" unit_select={okr.unit} setOkr={setOkr} />
 
                   </Col>
 
@@ -146,7 +144,7 @@ const CriarOKR = () => {
                   <Button
                     variant="primary"
                     type="button"
-                    className="my-2 btn"
+                    className="my-2 btn mt-2"
 
                     onClick={async () => {
                       let user = okr.user[0];
@@ -171,7 +169,35 @@ const CriarOKR = () => {
                 </div>
 
               </Grid>
-              <ListGroup>
+
+              <div className="page-header">
+                <div>
+                  <h2 className="main-content-title tx-24 mg-b-5">Participantes</h2>
+                  <spam className="d-flex text-muted tx-13">
+                    Abaixo mostrará os partipantes com suas respectivas key results deste objetivo
+                  </spam>
+                </div>
+              </div>
+
+              <Row>
+                <Col lg={12}>
+                  <Card className="custom-card overflow-hidden">
+                    <Card.Body>
+                      <div>
+                        <h6 className="main-content-label mb-1">BasicData</h6>
+                        <p className="text-muted card-sub-title">
+                          A simple example with no frills.
+                        </p>
+                      </div>
+                      <div className="responsive">
+                        <BasicDatatable />
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+
+              {/* <ListGroup>
 
                 {okr?.keys?.map((key, index) => (
                   <ListGroup.Item key={index} action
@@ -190,9 +216,7 @@ const CriarOKR = () => {
                         <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
                           {key.user.name}
                         </h6>
-                        {/* <span className="d-block tx-11 text-muted">
-                      ()
-                    </span> */}
+                    
                       </div>
                     </div>
 
@@ -211,7 +235,7 @@ const CriarOKR = () => {
                   </ListGroup.Item>
                 ))}
 
-              </ListGroup>
+              </ListGroup> */}
 
 
             </Card.Body>

@@ -24,36 +24,29 @@ function Profile() {
     if (!dadosrota.state) {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
-  
+
   }, [dadosrota])
 
- useEffect(()=>{
-  setNvalues({
-    "id": values?.dadosUser?.id,
-    "name": values?.dadosUser?.name,
-    "nameuser": values?.dadosUser?.nameuser,
-    "email": values?.dadosUser?.email,
-    "password": values?.dadosUser?.password,
-    "id_image": values?.image?.id,
-    "updated_at": new Date(),
-    "passwordantigo": values?.dadosUser?.password,
-    "id_creator": values?.dadosUser?.id_creator,
-    "id_company": values?.company?.id,
-    "id_permission": values?.dadosUser?.id_permission
-  })
- },[values])
+  useEffect(() => {
+    setNvalues({
+      "id": values?.dadosUser?.id,
+      "name": values?.dadosUser?.name,
+      "nameuser": values?.dadosUser?.nameuser,
+      "email": values?.dadosUser?.email,
+      "password": values?.dadosUser?.password,
+      "id_image": values?.image?.id,
+      "updated_at": new Date(),
+      "passwordantigo": values?.dadosUser?.password,
+      "id_creator": values?.dadosUser?.id_creator,
+      "id_company": values?.company?.id,
+      "id_permission": values?.dadosUser?.id_permission
+    })
+  }, [values])
 
 
 
   console.log(values)
 
-
-
-
-
-
-
-  
   return (
     <Fragment>
 
@@ -139,7 +132,7 @@ function Profile() {
                             type="file"
                             onChange={(ee) => {
 
-                              
+
                               const files = ee.target.files;
                               let uploadedFiles = []
 
@@ -164,13 +157,13 @@ function Profile() {
 
                               // DELETANDO:
                               try {
-                                 api.delete(`/images/deletar?key=${values?.image?.key}&id=${values?.image?.id}`).then(r=>{
+                                api.delete(`/images/deletar?key=${values?.image?.key}&id=${values?.image?.id}`).then(r => {
                                   console.log(r)
-                                 });
+                                });
                               } catch (error) {
-                                
+
                               }
-                              
+
 
 
 
@@ -180,21 +173,21 @@ function Profile() {
 
                               // SALVANDO NOVA IMAGEM
                               let val = values;
-                             try {
-                              api.post(`images/salvar?id_user=${values.dadosUser.id}`, data, {
-                                onUploadProgress: e => {
-                                  let progress = parseInt(Math.round((e.loaded * 100) / e.total));
-                                  setProgress(a => a + progress)
-                                }
-                              }).then(r => {
-                                const resposta=r.data;
-                                setValues(a=>({...a,image:resposta}));
-                              })
-                              
-                             } catch (error) {
-                              
-                             }
-                            
+                              try {
+                                api.post(`images/salvar?id_user=${values.dadosUser.id}`, data, {
+                                  onUploadProgress: e => {
+                                    let progress = parseInt(Math.round((e.loaded * 100) / e.total));
+                                    setProgress(a => a + progress)
+                                  }
+                                }).then(r => {
+                                  const resposta = r.data;
+                                  setValues(a => ({ ...a, image: resposta }));
+                                })
+
+                              } catch (error) {
+
+                              }
+
 
 
                             }}
@@ -220,7 +213,7 @@ function Profile() {
                             defaultValue={values?.dadosUser?.name}
                             onBlur={(e) => {
                               setNvalues(a => ({ ...a, name: e.target.value }))
-                            
+
                             }}
                           />
                         </div>
@@ -233,7 +226,7 @@ function Profile() {
                             defaultValue={values?.dadosUser?.email}
                             onBlur={(e) => {
                               setNvalues(a => ({ ...a, email: e.target.value }))
-                            
+
                             }}
                           />
                         </div>
@@ -311,7 +304,7 @@ function Profile() {
                               placeholder="Senha Nova "
                               onBlur={(e) => {
                                 setNvalues(a => ({ ...a, password: e.target.value }))
-                               
+
                               }}
                             />
                             <Button onClick={() => {
@@ -337,9 +330,10 @@ function Profile() {
                 <div className="d-flex justify-content-end">
                   <Button
                     onClick={() => {
-                     api.put(`user/update`,{...newValues}).then(r=>{
-                      navegar("/perfil",{state:{...values,dadosUser:newValues}})
-                     })
+                        saveAlert()
+                        api.put(`user/update`, { ...newValues }).then(r => {
+                        navegar(`${process.env.PUBLIC_URL}/perfil/`, { state: { ...values, dadosUser: newValues } })
+                      })
                     }}
                   >
                     Salvar Alterações
