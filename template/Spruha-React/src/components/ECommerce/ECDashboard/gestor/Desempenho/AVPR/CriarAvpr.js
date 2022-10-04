@@ -41,7 +41,7 @@ const CriarAvpr = () => {
             <Breadcrumb.Item
               onClick={() => {
 
-                navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values })
               }}
             >Avaliação por Resultados
             </Breadcrumb.Item>
@@ -56,45 +56,14 @@ const CriarAvpr = () => {
         <Col lg={12} md={12}>
           <Card className="custom-card">
 
-            <div className="page-header mx-4">
-              <div>
-                <h2 className="main-content-title tx-24 mg-b-5">Nova avaliação</h2>
+            <Card.Header>
+              <div className="mb-2">
+                <h2 className="main-content-title tx-24 mg-b-5">Nova avaliação para minha unidade</h2>
                 <span className="d-flex text-muted tx-13">
                   Crie uma nova avaliação por resultados
                 </span>
               </div>
-              <div>
-                <Button to="#"
-                  variant="info"
-                  className="btn me-1">
-                  Criar
-                </Button>
-                <Button onClick={() => {
-                  let items=Itemsalvo;
-                  for (const key in items) {
-                   
-                      delete items[key]["id"];
-                    
-                  }
-                  // navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
-                  let obj = {
-                    "id_user": avpr.id_user, "title": avpr.title, "validity": avpr.validity,
-                    "items": items,
-                    "direction": avpr.direction
-                  }
-                  api.post(`/avpr/insert`, { ...obj }).then(r => {
-                    console.log(r)
-                    if (r.data.status) {
-                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
-                    }
-                  })
-                }}
-                  variant="danger"
-                >
-                  Cancelar
-                </Button>
-              </div>
-            </div>
+            </Card.Header>
             <Card.Body>
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Nome da avaliação</Form.Label>
@@ -104,11 +73,12 @@ const CriarAvpr = () => {
                 </span>
               </FormGroup>
 
-              <FormGroup className="form-group">
+              {/* NÃO PRECISA ESCOLHER UNIDADE OU EMPRESA PQ É O GESTOR DA UNIDADE, TEM Q FAZER ELE SER AUTOMÁTICO */}
+              {/* <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Avaliados (as)</Form.Label>
                 {(avpr?.checkunits == false && avpr?.checkusers == false) &&
 
-                  <div className="ml-3">
+                  <div className="form-check">
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -123,9 +93,9 @@ const CriarAvpr = () => {
                         }
                       }}
                     />
-                    <span className="d-flex text-muted tx-13">
+                    <label className="d-flex text-muted tx-13">
                       Marque para enviar a todos da companhia ( {values?.company?.namefantasy} )
-                    </span>
+                    </label>
                   </div>
 
 
@@ -177,11 +147,7 @@ const CriarAvpr = () => {
                   </>}
                 </Row>
 
-
-
-                {/* <input type="text" className="form-control" placeholder="Procure pelo nome" /> */}
-
-              </FormGroup>
+              </FormGroup> */}
 
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Validade</Form.Label>
@@ -246,81 +212,80 @@ const CriarAvpr = () => {
                     />
                   </Col>
                 </Row>
-
-                {avpr?.idItems != "" &&
-                  <>
-                    <Row>
-                      <span className="d-flex text-muted tx-13">
-                        Informe se esta meta é uma medida Minima ou Maxima
-                      </span>
-                    </Row>
-                    <Row>
-                      <input
-                        className="form-check-input checkmed"
-                        type="checkbox"
-                        onChange={(e) => {
-
-                          if (e.target.checked) {
-                            setAVPR(a => {
-                              let items = a.items;
-                              items = items.map(item => (item.id == a.idItems ? { ...item, min: true } : item))
-                              return ({ ...a, items });
-                            })
-                            setEna(false)
-
-                          } else {
-                            setAVPR(a => {
-                              let items = a.items;
-                              let index = 0
-                              items.map((item, i) => (item.id == a.idItems ? index = i : item))
-                              delete items[index]["min"];
-                              return ({ ...a, items });
-                            })
-                            setEna(true)
-                          }
-                        }}
-                      />
-                      <span className="d-flex text-muted tx-13">
-                        Minima
-                      </span>
-
-                    </Row>
-                    <Row>
-                      <input
-                        className="form-check-input checkmed "
-                        type="checkbox"
-                        onChange={(e) => {
-
-                          if (e.target.checked) {
-                            setAVPR(a => {
-                              let items = a.items;
-                              items = items.map(item => (item.id == a.idItems ? { ...item, max: true } : item))
-                              return ({ ...a, items });
-                            })
-                            setEna(false)
-
-                          } else {
-                            setAVPR(a => {
-                              let items = a.items;
-                              let index = 0
-                              items.map((item, i) => (item.id == a.idItems ? index = i : item))
-                              delete items[index]["max"];
-                              return ({ ...a, items });
-                            })
-                            setEna(true)
-
-                          }
-                        }}
-                      />
-                      <span className="d-flex text-muted tx-13">
-                        Máxima
-                      </span>
-
-                    </Row>
-                  </>
-                }
-
               </Grid>
+
+              {avpr?.idItems != "" &&
+                <Col className="form-group">
+                  <div>
+                    <span className="d-flex text-muted tx-13">
+                      Informe se esta meta é uma medida Minima ou Maxima
+                    </span>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      className="form-check-input checkmed"
+                      type="checkbox"
+                      onChange={(e) => {
+
+                        if (e.target.checked) {
+                          setAVPR(a => {
+                            let items = a.items;
+                            items = items.map(item => (item.id == a.idItems ? { ...item, min: true } : item))
+                            return ({ ...a, items });
+                          })
+                          setEna(false)
+
+                        } else {
+                          setAVPR(a => {
+                            let items = a.items;
+                            let index = 0
+                            items.map((item, i) => (item.id == a.idItems ? index = i : item))
+                            delete items[index]["min"];
+                            return ({ ...a, items });
+                          })
+                          setEna(true)
+                        }
+                      }}
+                    />
+                    <label className="d-flex text-muted tx-13 form-check-label">
+                      Minima
+                    </label>
+
+                  </div>
+                  <div class="form-check">
+                    <input
+                      className="form-check-input checkmed "
+                      type="checkbox"
+                      onChange={(e) => {
+
+                        if (e.target.checked) {
+                          setAVPR(a => {
+                            let items = a.items;
+                            items = items.map(item => (item.id == a.idItems ? { ...item, max: true } : item))
+                            return ({ ...a, items });
+                          })
+                          setEna(false)
+
+                        } else {
+                          setAVPR(a => {
+                            let items = a.items;
+                            let index = 0
+                            items.map((item, i) => (item.id == a.idItems ? index = i : item))
+                            delete items[index]["max"];
+                            return ({ ...a, items });
+                          })
+                          setEna(true)
+
+                        }
+                      }}
+                    />
+                    <label className="d-flex text-muted tx-13">
+                      Máxima
+                    </label>
+
+                  </div>
+                </Col>
+              }
 
               <div className="d-flex justify-content-end">
                 <Button
@@ -406,6 +371,42 @@ const CriarAvpr = () => {
 
 
             </Card.Body>
+            <Card.Footer>
+              <div className="d-flex justify-content-end">
+                <Button onClick={() => {
+                  let items = Itemsalvo;
+                  for (const key in items) {
+
+                    delete items[key]["id"];
+
+                  }
+                  // navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                  let obj = {
+                    "id_user": avpr.id_user, "title": avpr.title, "validity": avpr.validity,
+                    "items": items,
+                    "direction": avpr.direction
+                  }
+                  api.post(`/avpr/insert`, { ...obj }).then(r => {
+                    console.log(r)
+                    if (r.data.status) {
+                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values })
+                    }
+                  })
+                }}
+                  variant="primary"
+                  className="btn me-1">
+                  Criar
+                </Button>
+                <Button
+                  onClick={() => {
+                    navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values })
+                  }}
+                  variant="danger"
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </Card.Footer>
           </Card>
         </Col>
       </Row>

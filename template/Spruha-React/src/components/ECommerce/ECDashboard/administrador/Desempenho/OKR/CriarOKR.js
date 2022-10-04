@@ -147,7 +147,7 @@ const CriarOKR = () => {
                       </div>
                     </div>
 
-                    <SingleselectPessoa className="select-user" unit_select={okr.unit} setOkr={setOkr} />
+                    <SingleselectPessoa noOptionsMessage={() => 'Sem opções'} className="select-user" unit_select={okr.unit} setOkr={setOkr} />
 
                   </Col>
 

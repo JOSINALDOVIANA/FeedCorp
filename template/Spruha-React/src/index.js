@@ -1,16 +1,24 @@
-
 import React, { Fragment, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
+//LandingPage
+const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
+const App = React.lazy(() => import("./components/app"));
+const Images = React.lazy(() => import("./images/index.js"));
+// Dashboard
+const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
+const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
+const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
+const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
 //INÍCIO
 const FeedRecebidos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedRecebidos"))
 const FeedFeitos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedFeitos"))
 const Objetivos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/Objetivos"));
 const Pesquisas = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/Pesquisas"));
 const NovoFeedback = React.lazy(() => import("./components/ECommerce/ECDashboard/CriarFeedback"));
-//OKR
+//OKR ADMIN
 const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/OKR"))
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
 const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/ProgressoOKR"))
@@ -18,26 +26,26 @@ const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard
 const Okr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/OKR"))
 const CriarOkr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/CriarOKR"))
 const ProgressoOKR_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/ProgressoOKR"))
-//CLIMA PULSO
+//AVPR ADMIN
+const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/AVPR"));
+const CriarAvpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/CriarAvpr"));
+const ProgressoAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/ProgressoAVPR"))
+//AVPR GESTOR
+const Avpr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/AVPR"));
+const CriarAvpr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/CriarAvpr"));
+const ProgressoAVPR_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/ProgressoAVPR"))
+//CLIMA PULSO ADMIN
 const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
 const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"))
 const ResultadosClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/resultadosClima"))
+//CLIMA PULSO GESTOR
+const ClimaPulso_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/ClimaPulso"))
+const CriarClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/CriarClimaPulso"))
+const ConfigurarClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/configurarClima"))
+const ResultadosClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/resultadosClima"))
 
 
-// Dashboard
-const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
-const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
-const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
-const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
-//AVPR
-const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/AVPR"));
-const CriarAvpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/CriarAvpr"));
-const ProgressoAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/ProgressoAVPR"))
-//LandingPage
-const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
-const App = React.lazy(() => import("./components/app"));
-const Images = React.lazy(() => import("./images/index.js"));
 
 const Error404 = React.lazy(() => import("./components/Custompages/Error1-404/Error-404"))
 const Signin = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signin/Signin"))
@@ -172,29 +180,63 @@ const Root = () => {
                   />
 
                 </Route>
-                {/* <Route>
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/ferramentas`}
-                    element={<Teste />}
-                  />
-                </Route> */}
-                {/* GESTOR PÁGINAS */}
-                <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
 
+                {/* ------------------------------GESTOR PÁGINAS-------------------------------- */}
+                <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
+                {/* OKR GESTOR */}
                 <Route
                   path={`${process.env.PUBLIC_URL}/okr_unidade`}
                   element={<Okr_gestor />} >
                 </Route>
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr/criar_okr_unidade`}
+                  path={`${process.env.PUBLIC_URL}/okr_unidade/criar_okr_unidade`}
                   element={<CriarOkr_gestor />}
                 />
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr/progresso_unidade_okr`}
+                  path={`${process.env.PUBLIC_URL}/okr_unidade/progresso_unidade_okr`}
                   element={<ProgressoOKR_gestor />}
                 />
+                {/* OKR final */}
+                {/* AVPR GESTOR */}
+                <Route
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`}
+                  element={<Avpr_gestor />}
+                />
+
+                <Route
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr_unidade`}
+                  element={<CriarAvpr_gestor />}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR_unidade`}
+                  element={<ProgressoAVPR_gestor />}
+                />
+                {/* AVPR FINAL */}
+                {/*CLIMA PULSO GESTOR */}
+                <Route>
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso_unidade`}
+                    element={<ClimaPulso_gestor />}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso/`}
+                    element={<CriarClima_gestor />}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes/`}
+                    element={<ConfigurarClima_gestor />}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/climapulso_unidade/resultado/`}
+                    element={<ResultadosClima_gestor />}
+                  />
+
+                </Route>
 
 
               </Route>

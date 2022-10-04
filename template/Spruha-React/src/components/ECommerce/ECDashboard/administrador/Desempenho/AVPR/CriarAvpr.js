@@ -70,11 +70,11 @@ const CriarAvpr = () => {
                   Criar
                 </Button>
                 <Button onClick={() => {
-                  let items=Itemsalvo;
+                  let items = Itemsalvo;
                   for (const key in items) {
-                   
-                      delete items[key]["id"];
-                    
+
+                    delete items[key]["id"];
+
                   }
                   // navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
                   let obj = {
@@ -108,7 +108,7 @@ const CriarAvpr = () => {
                 <Form.Label className="tx-medium">Avaliados (as)</Form.Label>
                 {(avpr?.checkunits == false && avpr?.checkusers == false) &&
 
-                  <div className="ml-3">
+                  <div className="form-check">
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -248,77 +248,77 @@ const CriarAvpr = () => {
                 </Row>
 
                 {avpr?.idItems != "" &&
-                  <>
-                    <Row>
-                      <span className="d-flex text-muted tx-13">
-                        Informe se esta meta é uma medida Minima ou Maxima
-                      </span>
-                    </Row>
-                    <Row>
-                      <input
-                        className="form-check-input checkmed"
-                        type="checkbox"
-                        onChange={(e) => {
+                <Col className="form-group">
+                  <div>
+                    <span className="d-flex text-muted tx-13">
+                      Informe se esta meta é uma medida Minima ou Maxima
+                    </span>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      className="form-check-input checkmed"
+                      type="checkbox"
+                      onChange={(e) => {
 
-                          if (e.target.checked) {
-                            setAVPR(a => {
-                              let items = a.items;
-                              items = items.map(item => (item.id == a.idItems ? { ...item, min: true } : item))
-                              return ({ ...a, items });
-                            })
-                            setEna(false)
+                        if (e.target.checked) {
+                          setAVPR(a => {
+                            let items = a.items;
+                            items = items.map(item => (item.id == a.idItems ? { ...item, min: true } : item))
+                            return ({ ...a, items });
+                          })
+                          setEna(false)
 
-                          } else {
-                            setAVPR(a => {
-                              let items = a.items;
-                              let index = 0
-                              items.map((item, i) => (item.id == a.idItems ? index = i : item))
-                              delete items[index]["min"];
-                              return ({ ...a, items });
-                            })
-                            setEna(true)
-                          }
-                        }}
-                      />
-                      <span className="d-flex text-muted tx-13">
-                        Minima
-                      </span>
+                        } else {
+                          setAVPR(a => {
+                            let items = a.items;
+                            let index = 0
+                            items.map((item, i) => (item.id == a.idItems ? index = i : item))
+                            delete items[index]["min"];
+                            return ({ ...a, items });
+                          })
+                          setEna(true)
+                        }
+                      }}
+                    />
+                    <label className="d-flex text-muted tx-13 form-check-label">
+                      Minima
+                    </label>
 
-                    </Row>
-                    <Row>
-                      <input
-                        className="form-check-input checkmed "
-                        type="checkbox"
-                        onChange={(e) => {
+                  </div>
+                  <div class="form-check">
+                    <input
+                      className="form-check-input checkmed "
+                      type="checkbox"
+                      onChange={(e) => {
 
-                          if (e.target.checked) {
-                            setAVPR(a => {
-                              let items = a.items;
-                              items = items.map(item => (item.id == a.idItems ? { ...item, max: true } : item))
-                              return ({ ...a, items });
-                            })
-                            setEna(false)
+                        if (e.target.checked) {
+                          setAVPR(a => {
+                            let items = a.items;
+                            items = items.map(item => (item.id == a.idItems ? { ...item, max: true } : item))
+                            return ({ ...a, items });
+                          })
+                          setEna(false)
 
-                          } else {
-                            setAVPR(a => {
-                              let items = a.items;
-                              let index = 0
-                              items.map((item, i) => (item.id == a.idItems ? index = i : item))
-                              delete items[index]["max"];
-                              return ({ ...a, items });
-                            })
-                            setEna(true)
+                        } else {
+                          setAVPR(a => {
+                            let items = a.items;
+                            let index = 0
+                            items.map((item, i) => (item.id == a.idItems ? index = i : item))
+                            delete items[index]["max"];
+                            return ({ ...a, items });
+                          })
+                          setEna(true)
 
-                          }
-                        }}
-                      />
-                      <span className="d-flex text-muted tx-13">
-                        Máxima
-                      </span>
+                        }
+                      }}
+                    />
+                    <label className="d-flex text-muted tx-13">
+                      Máxima
+                    </label>
 
-                    </Row>
-                  </>
-                }
+                  </div>
+                </Col>
+              }
 
               </Grid>
 

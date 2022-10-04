@@ -11,47 +11,47 @@ import api from '../../../../../api.js';
 export function Basicdatatable({ values }) {
 
     const [data, setData] = useState([])
-   
+
     useEffect(() => {
         let v = [];
-        
+
         for (const item of values) {
             let valores = {};
 
             if (item.anonymous == 1) {
                 valores.nome = "Anônimo";
-               api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
-                
+                api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+
                 valores.data = formatData(item.updated_at);
                 valores.comentario = item.feedback
             } else {
                 if (!!item.name) {
-                      valores.nome=item.name;                      
-                }else{
+                    valores.nome = item.name;
+                } else {
 
                     !!item.id_user ?
-                     api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
+                        api.get(`/user/getAll?id=${item.id_user}`).then(r => { valores.nome = r.data.Users[0]?.name }) : valores.nome = "Anônimo";
                 }
-                 api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
+                api.get(`/typesfeedbacks/get?id=${item.id_type}`).then(r => { valores.tipo = r.data.type[0]?.type })
 
-               
+
                 valores.data = formatData(item.updated_at);
                 valores.comentario = item.feedback
             }
             v.push(valores)
         }
 
-        
-       setData(v)
-       return(()=>null)
+
+        setData(v)
+        return (() => null)
     }, [values])
-    function formatData(data){
-        const dat=new Date(data);
-        const meses=["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"]
-         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
-         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-       }
-//  console.log(v1)
+    function formatData(data) {
+        const dat = new Date(data);
+        const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+        // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+        return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+    }
+    //  console.log(v1)
 
     // function downloadCSV(array) {
     //     const link = document.createElement('a');
@@ -182,7 +182,7 @@ export function Basicdatatable({ values }) {
     //const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
 
     return (
-    // <hi>em teste</hi>
+        // <hi>em teste</hi>
 
         <DataTableExtensions {...tableData} filterPlaceholder={"Procurar"}>
             <DataTable

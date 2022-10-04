@@ -22,7 +22,7 @@ export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
 
   return (
     <div>
-      <Multiselect classNamePrefix="Select2" onChange={(e) => { setOkr(a => ({ ...a, user: unit.Colaboradores.filter(col => col.id == e.value) })) }} options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
+      <Multiselect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2" onChange={(e) => { setOkr(a => ({ ...a, user: unit.Colaboradores.filter(col => col.id == e.value) })) }} options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
     </div>
   );
 };

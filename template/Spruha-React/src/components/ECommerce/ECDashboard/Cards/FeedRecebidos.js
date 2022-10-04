@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-import { Basicdatatable } from "./dataTabelas/FeedRecebidosDataTabela";
+import { Basicdatatable } from "./dataTables/FeedRecebidosData";
 
 // import { Container } from './styles';
 

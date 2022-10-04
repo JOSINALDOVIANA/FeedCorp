@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usuarioContext } from "../../../..";
-import { Basicdatatable } from "./dataTabelas/FeedFeitosDataTabela.js";
+import { Basicdatatable } from "./dataTables/FeedFeitosData.js";
 import api from "../../../../api.js"
 
 // import { Container } from './styles';
