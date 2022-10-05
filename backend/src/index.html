@@ -14,16 +14,18 @@
 
 <body>
 
-     <div class="form-floating">
-        <select class="form-select" id="selectusers" aria-label="selecione um usuário">      
-        </select>
-        <label for="floatingSelect">selecione um Usuário</label>
-      </div>
-     <div class="form-floating">
-        <select class="form-select" id="selectOkrs" aria-label="OKRS">      
-        </select>
-        <label for="floatingSelect">OKRs</label>
-      </div>
+    <div>
+      <div class="form-floating">
+         <select class="form-select" id="selectusers" aria-label="selecione um usuário">      
+         </select>
+         <label for="floatingSelect">selecione um Usuário</label>
+       </div>
+      <div class="form-floating">
+         <select class="form-select" id="selectOkrs" aria-label="OKRS">      
+         </select>
+         <label for="floatingSelect">OKRs</label>
+       </div>
+    </div>
       
 
 
@@ -57,3 +59,18 @@ carregarusers();
 </script>
 
 </html>
+
+<style>
+   body{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1f 1fr 1fr 1fr;
+      gap: 5px;
+      
+      background: #eddd;
+
+   }
+</style>
