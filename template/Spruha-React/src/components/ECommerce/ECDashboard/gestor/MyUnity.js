@@ -16,8 +16,8 @@ function MinhaCorporacao() {
     }
     setValues(dadosrota.state);
 
-    api.get(`unit/getAll?id=${dadosrota?.state?.unit?.id}`).then(r=>{
-      setValues(a=>({...a,unit:r.data.units}))
+    api.get(`unit/getAll?id=${dadosrota?.state?.unit?.id}`).then(r => {
+      setValues(a => ({ ...a, unit: r.data.units }))
     })
 
   }, [dadosrota])
@@ -31,9 +31,9 @@ function MinhaCorporacao() {
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">Minha Unidade: {values?.unit?.initials}</h2>
           <Breadcrumb>
-          <Breadcrumb.Item> Minha Unidade </Breadcrumb.Item>
-          <Breadcrumb.Item active >  Integrantes  </Breadcrumb.Item>
-        </Breadcrumb>
+            <Breadcrumb.Item> Minha Unidade </Breadcrumb.Item>
+            <Breadcrumb.Item active >  Integrantes  </Breadcrumb.Item>
+          </Breadcrumb>
         </div>
 
         {/* <div className="d-flex">
@@ -66,42 +66,42 @@ function MinhaCorporacao() {
 
 
       <Row className="row-sm">
-        
-        {values?.unit?.users?.map(user=>(
+
+        {values?.unit?.users?.map(user => (
           <Col key={user.id} sm={12} md={6} xl={3}>
-          <Card className="custom-card border">
-            <Card.Body className="text-center">
-              <div className="user-lock text-center">
-               {!!user.url &&  <Link to="#">
-                {/* <b-avatar 
+            <Card className="custom-card border">
+              <Card.Body className="text-center">
+                <div className="user-lock text-center">
+                  {!!user.url && <Link to="#">
+                    {/* <b-avatar 
                 variant="primary" 
                 text={user?.name}
                 src={user?.url}
                 >
 
                 </b-avatar> */}
-                  <Image
-                    alt={user.name}
-                    className="rounded-circle"
-                  src={user.url}
-                  />
-                </Link>}
-              </div>
-              <Link to="#">
-                <h4 className=" mb-1 mt-3 main-content-label">
-                  {user.name==values.dadosUser.name?"VOCÊ":user.name}
-                </h4>
-              </Link>
-              <h5 className="mb-2 mt-2 text-muted tx-14">
-                {user.permission}
-              </h5>
-              {/* <p className="text-muted text-center mt-1">
+                    <Image
+                      alt={user.name}
+                      className="rounded-circle"
+                      src={user.url}
+                    />
+                  </Link>}
+                </div>
+                <Link to="#">
+                  <h4 className=" mb-1 mt-3 main-content-label">
+                    {user.name == values.dadosUser.name ? "VOCÊ" : user.name}
+                  </h4>
+                </Link>
+                <h5 className="mb-2 mt-2 text-muted tx-14">
+                  {user.permission}
+                </h5>
+                {/* <p className="text-muted text-center mt-1">
                 Lorem Ipsum is not simply popular belief
                 Contrary.
               </p> */}
-            </Card.Body>
-          </Card>
-        </Col>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
 
       </Row>

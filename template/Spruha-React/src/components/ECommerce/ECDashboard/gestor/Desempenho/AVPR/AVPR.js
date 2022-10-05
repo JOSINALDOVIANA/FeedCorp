@@ -12,8 +12,8 @@ const AvPorResultados = () => {
   useEffect(() => {
     setValues(dadosrota.state);
     carregarUsersKeys(dadosrota.state)
-    api.get(`avpr/getAll?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
-      setValues(a=>({...a,createAVPR:r?.data?.avaliacoes}))
+    api.get(`avpr/getAll?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+      setValues(a => ({ ...a, createAVPR: r?.data?.avaliacoes }))
     })
   }, [dadosrota.state]);
 
@@ -34,9 +34,9 @@ const AvPorResultados = () => {
     // console.log(okrs_serial)
     setValues(a => ({ ...a, okrscriados: okrs_serial }))
   }
-   console.log(values)
+  console.log(values)
 
-   function formatData(data) {
+  function formatData(data) {
     const dat = new Date(data);
     const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
@@ -62,7 +62,7 @@ const AvPorResultados = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr_unidade/`, { state: values }) }}
             >
               <i className="bi bi-clipboard-data-fill me-2"></i>
               Novo
@@ -77,51 +77,47 @@ const AvPorResultados = () => {
       <Outlet />
       {/* <!-- End Row --> */}
       <div>
-        <h2 className="main-content-title tx-20 mx-2">Ativos</h2>
+        <h2 className="main-content-title tx-20 mx-2">Ativos em minha unidade</h2>
         <Row className="row-sm">
 
           {/* {values?.okrscriados?.map(okr => ( */}
           <Col
             // key={okr.id}
             lg={4} xl={4} xxl={4} md={6} >
-              {/* ######################################################### */}
-            
-                {values?.createAVPR?.map(avpr=>(
-                  <Card key={avpr.id} className="custom-card"
-                  style={{ cursor: 'pointer' }}
-                  // onClick={async () => {
-    
-                  //   navegar(`${process.env.PUBLIC_URL}/okr/progresso`, { state: { ...values, okrselect:okr } })
-                  // }}
-                  onClick={() => {
-                    setValues(a=>({...a,AVPRselect:avpr}))
-                     navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`, { state: values })
-                     }}
-                >
-                  <Card.Body className="iconfont text-center">
-                    <div className="d-flex justify-content-between">
-    
-                      <div className="d-flex flex-column align-items-start">
-                        <h4 className="mb-1">
-                          {avpr.title}
-                        </h4>
-                        <h6 className="tx-16 tx-inverse tx-semibold mg-b-0 mb-2">
-                          Avaliados(as): {avpr.paraquem.length} pessoas
-                        </h6>
-                        <h6 className="tx-13 tx-inverse text-muted mg-b-0 mb-2">
-                          Validade: {formatData(avpr.validity)}
-                        </h6>
-                      </div>
-    
-                      <h2 className="d-flex flex-row">
-    
-                        <i className="bi-bar-chart-fill icon-size float-start text-primary"></i>
-                      </h2>
+            {/* ######################################################### */}
+
+            {values?.createAVPR?.map(avpr => (
+              <Card key={avpr.id} className="custom-card"
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  setValues(a => ({ ...a, AVPRselect: avpr }))
+                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR_unidade`, { state: values })
+                }}
+              >
+                <Card.Body className="iconfont text-center">
+                  <div className="d-flex justify-content-between">
+
+                    <div className="d-flex flex-column align-items-start">
+                      <h4 className="mb-1">
+                        {avpr.title}
+                      </h4>
+                      <h6 className="tx-16 tx-inverse tx-semibold mg-b-0 mb-2">
+                        Avaliados(as): {avpr.paraquem.length} pessoas
+                      </h6>
+                      <h6 className="tx-13 tx-inverse text-muted mg-b-0 mb-2">
+                        Validade: {formatData(avpr.validity)}
+                      </h6>
                     </div>
-    
-                  </Card.Body>
-                </Card>
-                ))}
+
+                    <h2 className="d-flex flex-row">
+
+                      <i className="bi-bar-chart-fill icon-size float-start text-primary"></i>
+                    </h2>
+                  </div>
+
+                </Card.Body>
+              </Card>
+            ))}
 
             {/* ########################################################## */}
           </Col>

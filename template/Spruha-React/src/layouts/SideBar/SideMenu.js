@@ -134,17 +134,32 @@ export const MENUGESTOR = [
 						selected: false,
 						title: 'OKR'
 					},
+					{
+						path: `${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Avaliação por resultados'
+					},
 				]
 			},
-	{
-		title: 'Engajamento',
-		icon: 'ti-home',
-		type: 'link',
-		active: false,
-		selected: false,
-		//path: `${process.env.PUBLIC_URL}/`,
-	},
-]
+			{
+				title: 'Engajamento',
+				icon: 'ti-home',
+				type: 'sub',
+				active: false,
+				selected: false,
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/climapulso_unidade`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Clima Pulso'
+					},
+				]
+			},
+		]
 	},
 ];
 

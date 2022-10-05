@@ -54,7 +54,7 @@ const Okr = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/criar_okr_unidade/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade/criar_okr_unidade/`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i>
               Novo objetivo
@@ -75,7 +75,7 @@ const Okr = () => {
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
 
-                  navegar(`${process.env.PUBLIC_URL}/okr/progresso_unidade_okr`, { state: { ...values, okrselect: okr } })
+                  navegar(`${process.env.PUBLIC_URL}/okr_unidade/progresso_unidade_okr`, { state: { ...values, okrselect: okr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">

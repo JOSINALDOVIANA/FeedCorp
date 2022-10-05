@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image, Breadcrumb } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SelectPessoaUnidade } from "./FormDataOKR";
-import { BasicDatatable } from "./dataTable/datable";
+import { DataTables } from "./dataTable/datable";
 // import {MyVerticallyCenteredModal} from "./modalmethods";
 import { Grid } from "@mui/material";
 import Okr from "./OKR";
@@ -28,13 +28,13 @@ const CriarOKR = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Criar Objective Key Result (OKR)</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">Criar OKR para unidade</h2>
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) }}
             >OKR</Breadcrumb.Item>
-            <Breadcrumb.Item active>Criar OKR</Breadcrumb.Item>
+            <Breadcrumb.Item active>Novo objetivo</Breadcrumb.Item>
           </Breadcrumb>
         </div>
 
@@ -44,45 +44,6 @@ const CriarOKR = () => {
       <Row className="row-sm">
         <Col lg={12} md={12}>
           <Card className="custom-card">
-
-            <div className="page-header mx-4">
-              <h2 className="main-content-title tx-24 mg-b-5">Novo Objetivo</h2>
-              <div>
-                <Button to="#"
-                  variant="info"
-                  className="btn me-1"
-                  onClick={async (e) => {
-
-                    await api.post(`/okrs/insert`, {
-                      process: 0,
-                      keys: okr.keys,
-                      objective: okr.objective,
-                      id_user: okr.id_user,
-                      validity: okr.validity
-                    }).then(r => {
-                      let okrscriados = values.okrscriados;
-                      if (r.data.status) {
-                        okrscriados.push(okr)
-                        setValues(a => ({ ...a, okrscriados: okrscriados }));
-                        navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
-                        // {{<MyVerticallyCenteredModal />}}
-                      }
-                    })
-                  }}
-                >
-                  Criar
-                </Button>
-
-                <Button onClick={() => {
-                  navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
-                }}
-                  variant="danger"
-                >
-                  Cancelar
-                </Button>
-
-              </div>
-            </div>
 
             <Card.Body>
               <FormGroup className="form-group">
@@ -170,7 +131,7 @@ const CriarOKR = () => {
 
               </Grid>
 
-              <div className="page-header">
+              <div>
                 <div>
                   <h2 className="main-content-title tx-24 mg-b-5">Participantes</h2>
                   <spam className="d-flex text-muted tx-13">
@@ -179,23 +140,12 @@ const CriarOKR = () => {
                 </div>
               </div>
 
-              <Row>
-                <Col lg={12}>
-                  <Card className="custom-card overflow-hidden">
-                    <Card.Body>
-                      <div>
-                        <h6 className="main-content-label mb-1">BasicData</h6>
-                        <p className="text-muted card-sub-title">
-                          A simple example with no frills.
-                        </p>
-                      </div>
-                      <div className="responsive">
-                        <BasicDatatable />
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
+              <Card className="custom-card overflow-hidden">
+                <div className="responsive">
+                  <DataTables />
+                </div>
+              </Card>
+
 
               {/* <ListGroup>
 
@@ -239,6 +189,43 @@ const CriarOKR = () => {
 
 
             </Card.Body>
+            <Card.Footer>
+              <div className="d-flex justify-content-end">
+                <Button to="#"
+                  variant="info"
+                  className="btn me-1"
+                  onClick={async (e) => {
+
+                    await api.post(`/okrs/insert`, {
+                      process: 0,
+                      keys: okr.keys,
+                      objective: okr.objective,
+                      id_user: okr.id_user,
+                      validity: okr.validity
+                    }).then(r => {
+                      let okrscriados = values.okrscriados;
+                      if (r.data.status) {
+                        okrscriados.push(okr)
+                        setValues(a => ({ ...a, okrscriados: okrscriados }));
+                        navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                        // {{<MyVerticallyCenteredModal />}}
+                      }
+                    })
+                  }}
+                >
+                  Criar
+                </Button>
+
+                <Button onClick={() => {
+                  navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                }}
+                  variant="danger"
+                >
+                  Cancelar
+                </Button>
+
+              </div>
+            </Card.Footer>
           </Card>
         </Col>
       </Row>
