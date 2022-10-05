@@ -13,6 +13,7 @@ export default {
             id_unit = null,
             id_company = null,
             id_creator = null,
+            id_office=null,
         } = req.body;
 
         try {
@@ -30,7 +31,8 @@ export default {
                     password,
                     id_company,
                     id_creator,
-                    id_permission
+                    id_permission,
+                    id_office
                 });
 
                 
@@ -152,6 +154,7 @@ export default {
             id_company = null,
             id_creator = null,
             id_permission=null,
+            id_office,
         } = req.body;
         // console.log(req.body)
 
@@ -168,7 +171,8 @@ export default {
                     id_image,
                     id_company,
                     id_creator,
-                    id_permission
+                    id_permission,
+                    id_office,
                 }).where({ id });
 
 
@@ -292,8 +296,13 @@ export default {
                      company[0].city=await conexao("cities").where({"id":company.id_city}).first();
                      company[0].country=await conexao("countries").where({"id":company.id_country}).first();
                      }
+                     
+                    // carregando o cargo
+                    let cargo= await conexao("positions").where({"id":dados.id_office}).first();
+
+
                     // respondendo a requisição 
-                    return res.json({ status: true, ... {dadosUser:dados}, ...{permissions}, ...{unit},... {company}  } );
+                    return res.json({ status: true, ... {dadosUser:dados}, permissions, unit,company,cargo  } );
 
                 }
                 return res.json({ status: false, message: "vefique os dados e tente novamente" });

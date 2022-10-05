@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
+import { Card, Row, Col, Breadcrumb, Button, Table } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../..";
 import { Basicdatatable } from "./dataTables/FeedFeitosData.js";
 import api from "../../../../api.js"
 
@@ -14,9 +13,7 @@ export default function FeedFeitos() {
   const navegar = useNavigate();
   const [values, setValues] = useState(dadosrota?.state)
   const [feitos, setfeitos] = useState(dadosrota?.state?.sendfeedbacks)
-
-
-
+  const [data, setData] = useState([])
 
   return (
     <Fragment>
@@ -47,8 +44,8 @@ export default function FeedFeitos() {
 
               <Card.Body className="card-body">
 
-                {!!values.sendfeedbacks &&  <Basicdatatable feitos={feitos} />}
-                
+                {!!values.sendfeedbacks && <Basicdatatable feitos={feitos} />}
+
               </Card.Body>
             </Card>
 

@@ -9,25 +9,21 @@ import api from '../../../../../api';
 
 export function Basicdatatable({ feitos }) {
     const [data, setData] = useState([])
-    const [carr, setCarr] = useState(false)
-    let L = []
     useEffect(() => {
-        setCarr(false)
-        for (let index = 0; index < feitos.length; index++) {
-            const iterator = feitos[index];
-            let obj = {};
 
-            api.get(`/user/getAll?id=${iterator?.id_direction}`).then(r => {obj.destinatario = r.data.Users.name})
-            api.get(`/unit/getAll?id=${iterator?.id_unity}`).then(r => {obj.unidade = r.data.units.initials})
-            obj.comentario = iterator.feedback;
-            obj.data = formatData(iterator.updated_at);
-
-            L.push(obj)
-            if (index < feitos.length - 1) {
-                setCarr(true)
+        setData(a => {
+            let array = []
+            for (let iterator of feitos) {
+                let obj = {}
+                obj.key = iterator.id
+                obj.nome = iterator.destinatario.name;
+                obj.unidade = iterator.unidade.initials;
+                obj.data = formatData(iterator.updated_at);
+                obj.comentario = iterator.feedback;
+                array = [...array, { ...obj }];
             }
-        }
-        setData(L)
+            return ([...array])
+        })
 
     }, [feitos])
     // console.log(data)
@@ -42,12 +38,12 @@ export function Basicdatatable({ feitos }) {
 
         {
             name: "Destinatário",
-            selector: row => [row.destinatario],
+            selector: row => [row.nome],
             cell: row =>
                 <div>
                     <span className="my-auto">
 
-                        {row.destinatario}
+                        {row.nome}
                     </span>
                 </div>,
             sortable: false

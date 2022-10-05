@@ -101,8 +101,9 @@ export function Basicdatatable({ values }) {
             name: "Nome",
             selector: row => [row.nome],
             sortable: true,
+            
             cell: row =>
-                <div>
+                <div style={{cursor:'pointer'}} onClick={() => {alert(row.nome)}}>
                     {row.nome}
                 </div>
         },

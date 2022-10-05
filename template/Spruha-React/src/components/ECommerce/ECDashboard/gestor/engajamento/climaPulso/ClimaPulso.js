@@ -56,7 +56,7 @@ const ClimaPulso = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i> Criar
             </Button>
@@ -65,7 +65,7 @@ const ClimaPulso = () => {
               variant="primary"
               type="button"
               className="my-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes`, { state: values }) }}
             >
               <i className="bi bi-gear-fill" />
             </Button>
@@ -79,7 +79,7 @@ const ClimaPulso = () => {
       <div className="card custom-card">
 
         <div className="card-header border-bottom-0 d-flex justify-content-between">
-          <label className="main-content-label my-auto pt-2">Lista de pesquisas</label>
+          <label className="main-content-label my-auto pt-2">Pesquisas da minha unidade</label>
           <span className="d-block tx-12 mt-2 mb-0 text-muted">
             Pulsos criados: {values?.pulsesCreate?.length}
           </span>
@@ -87,14 +87,14 @@ const ClimaPulso = () => {
 
         <div className="card-body pt-2 pb-0">
           <div className="table-responsive tasks">
-            <Table className="table card-table table-vcenter text-nowrap border" borderless>
+            <Table className="table card-table table-vcenter text-nowrap table-bordered">
               <thead>
                 <tr>
-                  <th className="wd-lg-10p text-center">Nome da pesquisa</th>
-                  <th className="wd-lg-20p text-center">Para onde foi direcionado</th>
+                  <th className="wd-lg-20p text-center">Nome da pesquisa</th>
+                  {/* <th className="wd-lg-20p text-center">Para onde foi direcionado</th> */}
                   <th className="wd-lg-10p text-center">link</th>
                   <th className="wd-lg-10p text-center">data</th>
-                  <th className="wd-lg-10p text-center">Ações</th>
+                  <th className="wd-lg-5p text-center">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,18 +104,10 @@ const ClimaPulso = () => {
                     <td className="text-center">
                       {pulse.title}
                     </td>
-                    <td className="text-center">
-                      {
-                        !!pulse?.direction?.company ? <span>Companhia</span> :
-                          !!pulse?.direction?.units ? pulse?.direction?.units.map(unit => (<span key={unit.initials}>{unit.initials},</span>)) :
-                            !!pulse?.direction?.users ? pulse?.direction?.users.map(user => (<span key={user.name}>{user.name}</span>)) :
-                              ""
-                      }
-                    </td>
 
                     <td className="text-center">
                       <Button variant="link"
-                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/resultado/`, { state: { ...values, selectPulse: pulse } }) }}
+                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/resultado/`, { state: { ...values, selectPulse: pulse } }) }}
                       >
                         Resultados
                       </Button>
@@ -132,7 +124,7 @@ const ClimaPulso = () => {
                             deleteSucessAlert()
                             api.delete(`pulses/delete?id=${pulse.id}`).then(resp => {
                               if (resp.data.status) {
-                                navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values })
+                                navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values })
                               }
                             })
                           }

@@ -39,7 +39,8 @@ function Profile() {
       "passwordantigo": values?.dadosUser?.password,
       "id_creator": values?.dadosUser?.id_creator,
       "id_company": values?.company?.id,
-      "id_permission": values?.dadosUser?.id_permission
+      "id_permission": values?.dadosUser?.id_permission,
+      "id_office": values?.dadosUser?.id_office
     })
   }, [values])
 
@@ -233,14 +234,15 @@ function Profile() {
                       </div>
                       <div className="row py-2">
                         <div className="col-md-6 pb-3">
-                          <Form.Label>Permissão de Usuário</Form.Label>
-                          <Form.Label>{values?.permissions}</Form.Label>
-                        </div>
-
-                        {/* <div className="col-md-6 pb-3">
                           <Form.Label>Minha Unidade</Form.Label>
                           <Form.Label>{values?.unit?.description}</Form.Label>
-                        </div> */}
+                        </div>
+
+                        <div className="col-md-6 pb-3">
+                          <Form.Label>Cargo</Form.Label>
+                          <Form.Label></Form.Label>
+                        </div>
+
 
                         <div className="col-md-6 pb-3">
                           <Form.Label>Minha Empresa</Form.Label>
@@ -250,6 +252,11 @@ function Profile() {
                         <div className="col-md-6 pb-3">
                           <Form.Label>CNPJ</Form.Label>
                           <Form.Label>{values?.company?.cnpj}</Form.Label>
+                        </div>
+                        
+                        <div className="col-md-6 pb-3">
+                          <Form.Label>Permissão de Usuário</Form.Label>
+                          <Form.Label>{values?.permissions}</Form.Label>
                         </div>
 
                       </div>
@@ -330,8 +337,8 @@ function Profile() {
                 <div className="d-flex justify-content-end">
                   <Button
                     onClick={() => {
-                        saveAlert()
-                        api.put(`user/update`, { ...newValues }).then(r => {
+                      saveAlert()
+                      api.put(`user/update`, { ...newValues }).then(r => {
                         navegar(`${process.env.PUBLIC_URL}/perfil/`, { state: { ...values, dadosUser: newValues } })
                       })
                     }}

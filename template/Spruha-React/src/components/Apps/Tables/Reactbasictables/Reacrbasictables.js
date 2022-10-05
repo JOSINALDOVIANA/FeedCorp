@@ -139,7 +139,7 @@ const Reactbasicables = () => (
               </p>
             </div>
             <div className="table-responsive" responsive="true">
-              <Table className="table text-nowrap text-md-nowrap table-bordered mg-b-0">
+              <Table className="table text-nowrap text-md-nowrap table-bordered mg-b-0 ">
                 <thead>
                   <tr>
                     <th>ID</th>

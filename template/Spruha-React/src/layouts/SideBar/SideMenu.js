@@ -4,7 +4,7 @@ export const MENUADM = [
 		Items: [
 			{
 				title: 'Meu Painel',
-				icon: 'ti-home',
+				icon: 'ti-layout',
 				type: 'link',
 				active: true,
 				selected: true,
@@ -12,7 +12,7 @@ export const MENUADM = [
 			},
 			{
 				title: 'Minha corporação',
-				icon: 'ti-home',
+				icon: 'bi-building',
 				type: 'link',
 				active: false,
 				selected: false,
@@ -20,7 +20,7 @@ export const MENUADM = [
 			},
 			{
 				title: 'Desempenho',
-				icon: 'bi-book-half',
+				icon: 'ti-bar-chart',
 				type: 'sub',
 				active: false,
 				selected: false,
@@ -64,7 +64,7 @@ export const MENUADM = [
 			},
 			{
 				title: 'Engajamento',
-				icon: 'ti-home',
+				icon: 'ti-stats-up',
 				type: 'sub',
 				active: false,
 				selected: false,
@@ -85,14 +85,14 @@ export const MENUADM = [
 					// },
 				]
 			},
-			{
-				title: 'Relatórios',
-				icon: 'ti-home',
-				type: 'link',
-				active: false,
-				selected: false,
-				//path: `${process.env.PUBLIC_URL}/`,
-			},
+			// {
+			// 	title: 'Relatórios',
+			// 	icon: 'ti-home',
+			// 	type: 'link',
+			// 	active: false,
+			// 	selected: false,
+			// 	path: `${process.env.PUBLIC_URL}/`,
+			// },
 
 		]
 	},
@@ -105,7 +105,7 @@ export const MENUGESTOR = [
 		Items: [
 			{
 				title: 'Meu Painel',
-				icon: 'ti-home',
+				icon: 'ti-layout',
 				type: 'link',
 				active: true,
 				selected: true,
@@ -113,7 +113,7 @@ export const MENUGESTOR = [
 			},
 			{
 				title: 'Minha unidade',
-				icon: 'ti-home',
+				icon: 'bi-people',
 				type: 'link',
 				active: false,
 				selected: false,
@@ -121,7 +121,7 @@ export const MENUGESTOR = [
 			},
 			{
 				title: 'Desempenho',
-				icon: 'bi-book-half',
+				icon: 'ti-bar-chart',
 				type: 'sub',
 				active: false,
 				selected: false,
@@ -145,7 +145,7 @@ export const MENUGESTOR = [
 			},
 			{
 				title: 'Engajamento',
-				icon: 'ti-home',
+				icon: 'ti-stats-up',
 				type: 'sub',
 				active: false,
 				selected: false,

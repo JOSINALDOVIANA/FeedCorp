@@ -192,7 +192,7 @@ const CriarOKR = () => {
             <Card.Footer>
               <div className="d-flex justify-content-end">
                 <Button to="#"
-                  variant="info"
+                  variant="primary"
                   className="btn me-1"
                   onClick={async (e) => {
 
@@ -217,7 +217,7 @@ const CriarOKR = () => {
                 </Button>
 
                 <Button onClick={() => {
-                  navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                  navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values })
                 }}
                   variant="danger"
                 >

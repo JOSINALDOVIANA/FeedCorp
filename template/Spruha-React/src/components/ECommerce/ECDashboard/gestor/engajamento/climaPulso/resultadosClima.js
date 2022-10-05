@@ -44,7 +44,7 @@ const ClimaResultado = () => {
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">Engajamento</Breadcrumb.Item>
                         <Breadcrumb.Item
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values }) }}
                         >Clima Pulso</Breadcrumb.Item>
                         <Breadcrumb.Item active>Resultado</Breadcrumb.Item>
                     </Breadcrumb>
@@ -57,7 +57,7 @@ const ClimaResultado = () => {
                             variant="white"
                             type="button"
                             className=" btn-icon-text my-2 me-2"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values }) }}
                         >
                             <i className="bi bi-clipboard2-data me-2"></i> Lista
                         </Button>
@@ -66,7 +66,7 @@ const ClimaResultado = () => {
                             variant="primary"
                             type="button"
                             className="my-2 me-2 btn-icon-text"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso`, { state: values }) }}
                         >
                             <i className="bi bi-clipboard-plus me-2"></i> Criar
                         </Button>
@@ -75,7 +75,7 @@ const ClimaResultado = () => {
                             variant="primary"
                             type="button"
                             className="my-2 btn-icon-text"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes`, { state: values }) }}
                         >
                             <i className="bi bi-gear-fill" />
                         </Button>

@@ -8,14 +8,14 @@ import { Basicdatatable } from "./dataTables/FeedRecebidosData";
 
 const FeedRecebidos = () => {
 
-  
+
   const location = useLocation();
   const navegar = useNavigate();
-  const [values,setValues]=useState({})
- useEffect(()=>{
-  setValues(location.state)
-  return(()=>null)
- },[location.state])
+  const [values, setValues] = useState({})
+  useEffect(() => {
+    setValues(location.state)
+    return (() => null)
+  }, [location.state])
   return (
     <Fragment>
 
@@ -44,7 +44,7 @@ const FeedRecebidos = () => {
 
               <Card.Body className="card-body">
 
-               {!!values.receivedfeedbacksPessoais && <Basicdatatable values={values?.receivedfeedbacksPessoais} />}
+                {!!values.receivedfeedbacksPessoais && <Basicdatatable values={values?.receivedfeedbacksPessoais} />}
 
               </Card.Body>
             </Card>

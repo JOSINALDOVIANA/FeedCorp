@@ -51,7 +51,7 @@ const CriarClimaPulso = () => {
           <Breadcrumb>
             <Breadcrumb.Item>Engajamento</Breadcrumb.Item>
             <Breadcrumb.Item
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}>
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values }) }}>
               Clima Pulso
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Criar Clima Pulso</Breadcrumb.Item>
@@ -65,7 +65,7 @@ const CriarClimaPulso = () => {
               variant="white"
               type="button"
               className=" btn-icon-text my-2 me-2"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values }) }}
             >
               <i className="bi bi-clipboard2-data me-2"></i> Lista
             </Button>
@@ -74,7 +74,7 @@ const CriarClimaPulso = () => {
               variant="primary"
               type="button"
               className="my-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes`, { state: values }) }}
             >
               <i className="bi bi-gear-fill" />
             </Button>
@@ -89,12 +89,6 @@ const CriarClimaPulso = () => {
         <Col lg={12} md={12}>
           <Card className="custom-card">
             <Card.Body>
-              <div className="mt-1 mb-4">
-                <div>
-                  <h2 className="main-content-title tx-20 mg-b-5">Pra quem será direcionada a pesquisa?</h2>
-                  <span className="d-flex text-muted tx-13">Escolha entre enviar para todos ou para uma unidade específica</span>
-                </div>
-              </div>
 
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Nome da Pesquisa</Form.Label>
@@ -107,7 +101,7 @@ const CriarClimaPulso = () => {
                 </Row>
               </FormGroup>
 
-              <div className="mb-2">
+              {/* <div className="mb-2">
                 <span className="d-flex text-muted tx-13 mb-1">Envie a pesquisa para toda a sua empresa</span>
                 <div className="ms-3">
                   <input
@@ -131,7 +125,7 @@ const CriarClimaPulso = () => {
                 {pulse.checked &&
                   <Col>
                     <span className="d-flex text-muted tx-13 mt-1 mb-3">Envie a pesquisa para uma unidade específica</span>
-                    {/* <SelectUnitPulso units={units} setPulse={setPulse} /> */}
+                 
                     <Row>
                       {units.map(unit => (
                         <Col key={unit.initials} className="my-1 mx-1">
@@ -162,7 +156,7 @@ const CriarClimaPulso = () => {
                       ))}
                     </Row>
                   </Col>}
-              </Row>
+              </Row> */}
 
               <div className="page-header">
                 <div>
@@ -245,7 +239,7 @@ const CriarClimaPulso = () => {
                   api.post("pulses/insert", { ...obj }).then(r => {
                     if (r.status) {
                       successAlert()
-                      navegar(`${process.env.PUBLIC_URL}/climapulso`, { state: { ...values } })
+                      navegar(`${process.env.PUBLIC_URL}/climapulso_unidade`, { state: { ...values } })
                     } else {
                       alert("Desculpe, algo deu errado check as informações e tente novamente")
                     }
@@ -257,7 +251,7 @@ const CriarClimaPulso = () => {
                 </Button>
 
                 <Button variant="danger"
-                  onClick={() => navegar(`${process.env.PUBLIC_URL}/climapulso`, { state: { ...values } })}
+                  onClick={() => navegar(`${process.env.PUBLIC_URL}/climapulso_unidade`, { state: { ...values } })}
                 >
                   Cancelar
                 </Button>

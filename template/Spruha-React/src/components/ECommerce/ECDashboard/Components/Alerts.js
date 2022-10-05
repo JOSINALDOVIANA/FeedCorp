@@ -18,7 +18,7 @@ export function deleteQuestionAlert() {
 export function deleteSucessAlert() {
     const Toast = Swal.mixin({
         toast: true, //trata o alert como notifcação
-        position: 'top-end',  
+        position: 'top-end',
         timer: 3000,
         showConfirmButton: false,
         timerProgressBar: true,
@@ -57,7 +57,7 @@ export function dangerAlert(params) {
 export function saveAlert() {
     const Toast = Swal.mixin({
         toast: true, //trata o alert como notifcação
-        position: 'bottom-end',  
+        position: 'bottom-end',
         timer: 2000,
         showConfirmButton: false,
         timerProgressBar: true,
@@ -109,6 +109,13 @@ export function LoginError() {
         text: "Preencha com os dados necessários",
         allowOutsideClick: false,
         showConfirmButton: true,
+    });
+}
+
+export function AlertProfileUnity() {
+    Swal.fire({
+        text: "Welcome to Your Admin Page",
+        allowOutsideClick: false,
     });
 }
 

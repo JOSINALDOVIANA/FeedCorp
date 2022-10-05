@@ -34,7 +34,7 @@ function ECDashboard() {
   }, [])
 
 
-  // console.log(values)
+  console.log(values)
 
   return (
     <Fragment>
@@ -139,13 +139,13 @@ function ECDashboard() {
         {values?.permissions == "administrador" || values?.permissions == "gestor" ?
           <Col sm={12} md={12} lg={12} xl={4}>
             <Card className="custom-card"
-              // style={{ cursor: 'pointer' }}
-              // onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+            // style={{ cursor: 'pointer' }}
+            // onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
             >
               <Card.Body>
                 <div className="card-order">
                   {/* TITULO */}
-                  <label className="main-content-label mb-3 pt-1" style={{ cursor: 'pointer' }}>
+                  <label className="main-content-label mb-3 pt-1">
                     Objetivos
                   </label>
                   <h2 className="text-end">

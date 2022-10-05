@@ -73,7 +73,7 @@ const Root = () => {
 
   return (
     <Fragment>
-      <UserContextProvider>
+      
         <BrowserRouter>
 
           <React.Suspense fallback={<Loader />}>
@@ -250,7 +250,7 @@ const Root = () => {
           </React.Suspense>
 
         </BrowserRouter>
-      </UserContextProvider>
+     
     </Fragment>
   );
 };

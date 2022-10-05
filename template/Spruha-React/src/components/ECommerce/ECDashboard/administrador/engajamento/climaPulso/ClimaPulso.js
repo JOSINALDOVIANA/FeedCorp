@@ -87,14 +87,14 @@ const ClimaPulso = () => {
 
         <div className="card-body pt-2 pb-0">
           <div className="table-responsive tasks">
-            <Table className="table card-table table-vcenter text-nowrap border" borderless>
+            <Table className="table card-table table-vcenter text-nowrap table-bordered">
               <thead>
                 <tr>
                   <th className="wd-lg-10p text-center">Nome da pesquisa</th>
                   <th className="wd-lg-20p text-center">Para onde foi direcionado</th>
                   <th className="wd-lg-10p text-center">link</th>
                   <th className="wd-lg-10p text-center">data</th>
-                  <th className="wd-lg-10p text-center">Ações</th>
+                  <th className="wd-lg-5p text-center">Ações</th>
                 </tr>
               </thead>
               <tbody>

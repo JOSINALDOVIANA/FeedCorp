@@ -1,14 +1,13 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button, Image } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { usuarioContext } from "../../../..";
 import api from "../../../../api";
 
 function MinhaCorporacao() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const { values, setValues } = useContext(usuarioContext);
+  const [ values, setValues]  = useState({});
 
   useEffect(() => {
     if (!dadosrota.state) {

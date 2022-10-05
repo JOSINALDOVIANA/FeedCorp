@@ -14,7 +14,8 @@ export async function seed(knex) {
       id_image:images[imagesTam-1].id,
       id_company:null,
       id_creator:null,
-      id_permission:permissions[permissions.length-1].id   
+      id_permission:permissions[permissions.length-1].id,
+      id_office:null  
     },
     { 
       name:"marcus vinicius",
@@ -24,7 +25,8 @@ export async function seed(knex) {
       id_image:images[imagesTam-2].id,
       id_company:null,
       id_creator:null,
-      id_permission:permissions[permissions.length-2].id   
+      id_permission:permissions[permissions.length-2].id,
+      id_office:null   
     },
     { 
       name:"victor melo",
@@ -34,7 +36,8 @@ export async function seed(knex) {
       id_image:images[imagesTam-3].id,
       id_company:null,
       id_creator:null,
-      id_permission:permissions[permissions.length-3].id     
+      id_permission:permissions[permissions.length-3].id,
+      id_office:null      
     },
     
   ]);
