@@ -114,7 +114,7 @@
             "user": "root",
             "password": "",
             "database": "opclient",
-            "sql": `SELECT * FROM ${table}`
+            "sql": `SELECT * FROM opclient.${table}`
         }).then(r => {
             console.log(r.data.dados[0])
             let tabela = document.getElementById("dados");
