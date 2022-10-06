@@ -21,7 +21,7 @@ const CriarOKR = () => {
     setValues(dadosrota.state)
     setOkr(a => ({ ...a, keys: [], id_user: dadosrota.state.dadosUser.id }))
   }, [dadosrota])
-  // console.log(values)
+  console.log(values)
   // console.log(okr)
   return (
     <Fragment>
@@ -95,7 +95,7 @@ const CriarOKR = () => {
                       </div>
                     </div>
 
-                    <SelectPessoaUnidade className="select-user" unit_select={okr.unit} setOkr={setOkr} />
+                    <SelectPessoaUnidade className="select-user" unit_select={values.unit} setOkr={setOkr} />
 
                   </Col>
 
@@ -140,14 +140,14 @@ const CriarOKR = () => {
                 </div>
               </div>
 
-              <Card className="custom-card overflow-hidden">
+              {/* <Card className="custom-card overflow-hidden">
                 <div className="responsive">
                   <DataTables />
                 </div>
-              </Card>
+              </Card> */}
 
 
-              {/* <ListGroup>
+              <ListGroup>
 
                 {okr?.keys?.map((key, index) => (
                   <ListGroup.Item key={index} action
@@ -185,7 +185,7 @@ const CriarOKR = () => {
                   </ListGroup.Item>
                 ))}
 
-              </ListGroup> */}
+              </ListGroup>
 
 
             </Card.Body>
@@ -207,7 +207,7 @@ const CriarOKR = () => {
                       if (r.data.status) {
                         okrscriados.push(okr)
                         setValues(a => ({ ...a, okrscriados: okrscriados }));
-                        navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                        navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values })
                         // {{<MyVerticallyCenteredModal />}}
                       }
                     })

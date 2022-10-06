@@ -240,7 +240,7 @@ function Profile() {
 
                         <div className="col-md-6 pb-3">
                           <Form.Label>Cargo</Form.Label>
-                          <Form.Label></Form.Label>
+                          <Form.Label>{!!values?.dadosUser?.id_office ? values?.cargo?.office : 'Não definido'}</Form.Label>
                         </div>
 
 
@@ -253,7 +253,7 @@ function Profile() {
                           <Form.Label>CNPJ</Form.Label>
                           <Form.Label>{values?.company?.cnpj}</Form.Label>
                         </div>
-                        
+
                         <div className="col-md-6 pb-3">
                           <Form.Label>Permissão de Usuário</Form.Label>
                           <Form.Label>{values?.permissions}</Form.Label>

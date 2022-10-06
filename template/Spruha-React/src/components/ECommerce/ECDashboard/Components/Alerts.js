@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-
 // Delete ITEM
 export function deleteQuestionAlert() {
     return Swal.fire({
@@ -112,10 +111,5 @@ export function LoginError() {
     });
 }
 
-export function AlertProfileUnity() {
-    Swal.fire({
-        text: "Welcome to Your Admin Page",
-        allowOutsideClick: false,
-    });
-}
+
 

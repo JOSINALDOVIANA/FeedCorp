@@ -1,13 +1,14 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button, Image } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import * as Modal from "../Components/Modal"
 import api from "../../../../api";
 
 function MinhaCorporacao() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const [ values, setValues]  = useState({});
+  const [values, setValues] = useState({});
 
   useEffect(() => {
     if (!dadosrota.state) {
@@ -71,29 +72,23 @@ function MinhaCorporacao() {
             <Card className="custom-card border">
               <Card.Body className="text-center">
                 <div className="user-lock text-center">
-                  {!!user.url && <Link to="#">
-                    {/* <b-avatar 
-                variant="primary" 
-                text={user?.name}
-                src={user?.url}
-                >
-
-                </b-avatar> */}
+                  {!!user.url &&
                     <Image
-                      alt={user.name}
-                      className="rounded-circle"
+                    alt={user.name}
+                    className="rounded-circle"
                       src={user.url}
                     />
-                  </Link>}
+                  }
                 </div>
-                <Link to="#">
-                  <h4 className=" mb-1 mt-3 main-content-label">
-                    {user.name == values.dadosUser.name ? "VOCÊ" : user.name}
-                  </h4>
-                </Link>
+
+                <h4 className=" mb-1 mt-3 main-content-label">
+                  {user.name == values.dadosUser.name ? "VOCÊ" : user.name}
+                </h4>
+
                 <h5 className="mb-2 mt-2 text-muted tx-14">
-                  {user.permission}
+                  {user.cargo.office.toUpperCase()}
                 </h5>
+                <Modal.AlertProfileUnity userSelect={user}/>
                 {/* <p className="text-muted text-center mt-1">
                 Lorem Ipsum is not simply popular belief
                 Contrary.

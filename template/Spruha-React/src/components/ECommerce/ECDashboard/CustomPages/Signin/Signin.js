@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Card, Container, Form, Button } from "react-bootstrap";
 import * as Customswitcherdata from "../../../../../data/Switcherdata/Customswitcherdata";
 import api from "../../../../../api";
-import {LoginError} from "../../Components/Alerts"
+import { LoginError } from "../../Components/Alerts"
 
 const Signin = () => {
   const [permanecer, setPerm] = React.useState(false);
@@ -27,7 +27,7 @@ const Signin = () => {
     // console.log(e)
 
     let obt = {};
-      e.target["e-mail"].value.indexOf("@") > 0 ?
+    e.target["e-mail"].value.indexOf("@") > 0 ?
       obt = { email: e.target["e-mail"].value, password: e.target["password"].value } :
       obt = { nameuser: e.target["e-mail"].value, password: e.target["password"].value };
     let dadosUser;
@@ -38,6 +38,7 @@ const Signin = () => {
     let units;
     let company = [];
     let okrscriados = [];
+    let cargo;
     await api.post("/user/login", obt).then(r => {
       if (!r.data.status) {
         LoginError()
@@ -47,6 +48,7 @@ const Signin = () => {
         unit = r.data?.unit[0];
         status = r.data?.status;
         company = r.data?.company[0];
+        cargo = r.data?.cargo;
         // console.log(r.data)   
       }
     });
@@ -82,7 +84,7 @@ const Signin = () => {
 
       })
 
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate: [], destino: "/dashboard" } });
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate: [], cargo } });
     }
 
   };

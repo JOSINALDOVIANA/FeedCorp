@@ -72,10 +72,12 @@ export default {
                     .join('users', "users.id", "=", "user_unit.id_user")
                     // .join("images", "images.id", "=", "users.id_image")
                     .join("permissions","permissions.id","=","users.id_permission")
+                    // .join("positions","users.id_office","=","positions.id")
                     .select("users.*","permissions.description as permission")
                     for (const key2 in users) {
                         let url= await conexao("images").where({id:users[key2].id_image}).first().select("images.url")
-                        users[key2]={...users[key2],url:url?.url}
+                        let cargo=await conexao("positions").where({id:users[key2].id_office}).first()
+                        users[key2]={...users[key2],url:url?.url,cargo}
                     }
                     
                 return res.json({ status: true, units: { ...unit, users } })

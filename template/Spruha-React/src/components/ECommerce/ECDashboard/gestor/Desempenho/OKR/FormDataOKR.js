@@ -9,20 +9,26 @@ import { DropzoneAreaBase, DropzoneArea, DropzoneDialog } from "material-ui-drop
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { AttachFile, Audiotrack, Description, PictureAsPdf, Theaters } from "@material-ui/icons";
+import api from "../../../../../../api";
 
 export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
   const [unit, setUnit] = useState({});
   useEffect(() => {
-    if (!!unit_select) {
-      setUnit(unit_select[0])
-    }
+    api.get(`/unit/getAll?id=${unit_select?.id}`).then(r => {
+      console.log(r.data)
+      setUnit(r.data.units);
+    })
   }, [unit_select])
+// console.log(unit_select)
+// console.log(unit)
 
-  const objectArray = unit?.Colaboradores?.map(col => ({ value: col.id, label: col.name }))
+  const objectArray = unit?.users?.map(col => ({ value: col.id, label: col.name }))
 
   return (
     <div>
-      <Multiselect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2" onChange={(e) => { setOkr(a => ({ ...a, user: unit.Colaboradores.filter(col => col.id == e.value) })) }} options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
+      <Multiselect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2" 
+      onChange={(e) => { setOkr(a => ({ ...a, user: unit?.users?.filter(col => col.id == e.value) })) }} 
+      options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
     </div>
   );
 };

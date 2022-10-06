@@ -2,10 +2,10 @@ import conexao from "../../database/connection.js";
 
 export default {
     async Insert(req, res) {
-        let { office } = req.body;
+        let { office, id_company=null,id_user=null } = req.body;
         try {
-            const [id] = await conexao("positions").insert({ office });
-            return res.json({ status: true, cargo: { id, office } });
+            const [id] = await conexao("positions").insert({ office,id_company,id_user });
+            return res.json({ status: true, cargo: { id, office,id_company,id_user } });
         } catch (error) {
             console.log(error)
             return res.json({ status: false, mensage: "error cargos=>insert" });
