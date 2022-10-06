@@ -15,6 +15,7 @@ import feedbacks from './controller/feedbacks/index.js';
 import questions from './controller/questions/index.js';
 import pulses from './controller/pulses/index.js';
 import cargos from "./controller/cargo/index.js"
+import  Knex  from "knex"
 const routes=express.Router();
 
  /*
@@ -271,5 +272,20 @@ routes.post("/cargos/insert",cargos.Insert);
 routes.get("/cargos/get",cargos.select);
 routes.delete("/cargos/del",cargos.del);
 routes.put("/cargos/update",cargos.update);
+
+routes.post("/raw",async(req,res)=>{
+const {user,password,database,sql,table}=req.body;
+const conectBD=Knex({
+    client: 'mysql',
+    connection: {
+      host : '127.0.0.1',
+      port : 3306,
+      user ,
+      password,
+      database 
+    }
+  })
+return res.json({dados:await conectBD.raw(sql)})
+})
 
 export default routes;
