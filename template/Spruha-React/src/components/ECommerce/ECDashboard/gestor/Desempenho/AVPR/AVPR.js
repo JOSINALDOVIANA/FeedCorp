@@ -11,29 +11,13 @@ const AvPorResultados = () => {
   const [values, setValues] = useState({});
   useEffect(() => {
     setValues(dadosrota.state);
-    carregarUsersKeys(dadosrota.state)
+    
     api.get(`avpr/getAll?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
       setValues(a => ({ ...a, createAVPR: r?.data?.avaliacoes }))
     })
   }, [dadosrota.state]);
 
-  function carregarUsersKeys(valores) {
-    let okrs = valores.okrscriados;
-    let okrs_serial = okrs.map(okr => {
-
-      let keys = okr.keys.map(key => {
-        let user = [];
-        api.get(`/user/getAll?id=${key.id_user}`).then(r => {
-          user.push({ ...r.data.Users[0] })
-        })
-        return { ...key, user }
-      });
-      return { ...okr, keys }
-    });
-
-    // console.log(okrs_serial)
-    setValues(a => ({ ...a, okrscriados: okrs_serial }))
-  }
+  
   console.log(values)
 
   function formatData(data) {
@@ -90,8 +74,8 @@ const AvPorResultados = () => {
               <Card key={avpr.id} className="custom-card"
                 style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  setValues(a => ({ ...a, AVPRselect: avpr }))
-                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR_unidade`, { state: values })
+                 
+                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR_unidade`, { state:{...values, AVPRselect: avpr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">
@@ -104,8 +88,9 @@ const AvPorResultados = () => {
                       <h6 className="tx-16 tx-inverse tx-semibold mg-b-0 mb-2">
                         Avaliados(as): {avpr.paraquem.length} pessoas
                       </h6>
-                      <h6 className="tx-13 tx-inverse text-muted mg-b-0 mb-2">
+                      <h6 className={`tx-13 tx-inverse text-${(new Date(avpr.validity)-new Date())/(1000 * 60 * 60 * 24)<5?"danger":"success"} mg-b-0 mb-2`} >
                         Validade: {formatData(avpr.validity)}
+                        {/* {(new Date(avpr.validity)-new Date())/(1000 * 60 * 60 * 24)>5?"danger":"success"} */}
                       </h6>
                     </div>
 

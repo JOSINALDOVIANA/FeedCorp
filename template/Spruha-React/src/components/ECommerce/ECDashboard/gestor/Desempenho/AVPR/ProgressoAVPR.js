@@ -22,11 +22,40 @@ const ProgressoOKR = () => {
 
   }, [dadosrota.state]);
 
-  // console.log(values)
+  useEffect(() => {
+    let paraquem = dadosrota.state.AVPRselect?.paraquem
+    let paraquem_serial = []
+    let items = dadosrota.state.AVPRselect?.items
 
 
+    for (let user of paraquem) {
+      let items_serial = []
+      for (let item of items) {
+        for (const resposta of item.resposta) {
+          if (resposta.id_user == user.id) {
+            items_serial.push({ ...item, resposta });
+          }
+        }
+      }
+      paraquem_serial.push({ ...user, respostas: items_serial })
+    }
+
+    paraquem = paraquem_serial
+
+    // console.log(items)
+    // console.log(paraquem)
+    setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
+  }, [dadosrota])
 
 
+  console.log(values)
+
+  function formatData(data) {
+    const dat = new Date(data);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
 
   return (
     <Fragment>
@@ -63,28 +92,30 @@ const ProgressoOKR = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-      <div className="card custom-card">
+      {values?.AVPRselect?.paraquem?.map(user => (
+        <div key={user.id} className="card custom-card">
 
-        <div className="card-header border-bottom-0 d-flex flex-column">
+          <div className="card-header border-bottom-0 d-flex flex-column">
 
-          <label className="main-content-label my-auto pt-2">Avaliado: </label>
-          <label className="main-content-label my-auto pt-2">Ciclo de avaliação: </label>
+            <label className="main-content-label my-auto pt-2">Avaliado: {user.name} </label>
+            <label className="main-content-label my-auto pt-2">Ciclo de avaliação: {formatData(values?.AVPRselect?.updated_at
+            )} à {formatData(values?.AVPRselect?.validity)}</label>
 
-        </div>
+          </div>
 
-        <div className="card-body pt-2 pb-0">
-          <div className="table-responsive tasks">
-            <Table className="table card-table table-vcenter text-nowrap border" borderless>
-              <thead>
-                <tr>
-                  <th className="wd-lg-10p text-center">Indicador</th>
-                  <th className="wd-lg-10p text-center">Meta</th>
-                  <th className="wd-lg-10p text-center">Realizado</th>
-                  <th className="wd-lg-20p text-center">Resultado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* {TRADINGACTIVITIES.map((list, index) => (
+          <div className="card-body pt-2 pb-0">
+            <div className="table-responsive tasks">
+              <Table className="table card-table table-vcenter text-nowrap border" borderless>
+                <thead>
+                  <tr>
+                    <th className="wd-lg-10p text-center">Indicador</th>
+                    <th className="wd-lg-10p text-center">Meta</th>
+                    <th className="wd-lg-10p text-center">Realizado</th>
+                    <th className="wd-lg-20p text-center">Resultado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* {TRADINGACTIVITIES.map((list, index) => (
                     <tr key={index} data-index={index}>
                       <td className="text-center">{list.id}</td>
                       <td className="coin_icon d-flex">
@@ -107,11 +138,21 @@ const ProgressoOKR = () => {
                       </td>
                     </tr>
                   ))} */}
-              </tbody>
-            </Table>
+
+                  {user?.respostas?.map((resp, index) => (
+                    <tr key={index} data-index={index}>
+                      <td className="text-center">{resp.indicator}</td>
+                      <td className="text-center">{resp.goal}</td>
+                      <td className="text-center">{resp.resposta.answer}</td>
+                      <td className="text-center">Falta calcular</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </Fragment>
   )
 };

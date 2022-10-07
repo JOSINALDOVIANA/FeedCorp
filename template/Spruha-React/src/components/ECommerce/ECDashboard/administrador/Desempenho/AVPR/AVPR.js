@@ -11,29 +11,29 @@ const AvPorResultados = () => {
   const [values, setValues] = useState({});
   useEffect(() => {
     setValues(dadosrota.state);
-    carregarUsersKeys(dadosrota.state)
+    // carregarUsersKeys(dadosrota.state)
     api.get(`avpr/getAll?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
       setValues(a=>({...a,createAVPR:r?.data?.avaliacoes}))
     })
   }, [dadosrota.state]);
 
-  function carregarUsersKeys(valores) {
-    let okrs = valores.okrscriados;
-    let okrs_serial = okrs.map(okr => {
+  // function carregarUsersKeys(valores) {
+  //   let okrs = valores.okrscriados;
+  //   let okrs_serial = okrs.map(okr => {
 
-      let keys = okr.keys.map(key => {
-        let user = [];
-        api.get(`/user/getAll?id=${key.id_user}`).then(r => {
-          user.push({ ...r.data.Users[0] })
-        })
-        return { ...key, user }
-      });
-      return { ...okr, keys }
-    });
+  //     let keys = okr.keys.map(key => {
+  //       let user = [];
+  //       api.get(`/user/getAll?id=${key.id_user}`).then(r => {
+  //         user.push({ ...r.data.Users[0] })
+  //       })
+  //       return { ...key, user }
+  //     });
+  //     return { ...okr, keys }
+  //   });
 
-    // console.log(okrs_serial)
-    setValues(a => ({ ...a, okrscriados: okrs_serial }))
-  }
+  //   // console.log(okrs_serial)
+  //   setValues(a => ({ ...a, okrscriados: okrs_serial }))
+  // }
    console.log(values)
 
    function formatData(data) {

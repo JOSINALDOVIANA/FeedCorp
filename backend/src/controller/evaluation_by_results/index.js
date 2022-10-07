@@ -114,9 +114,15 @@ export default {
            for (const key in avpr) {
             let paraquem= await conexao("user_ebr").where({"user_ebr.id_ebr":avpr[key].id})
             .join("users","users.id","=","user_ebr.id_user")
-            .join("images","images.id","=","users.id_image")  
-            .select("users.*","images.url")
-            
+            // .join("images","images.id","=","users.id_image")  
+            .select("users.*")
+            let paraquem_serial=[]
+            for(let user of paraquem){
+                let image=await conexao("images").where({id:user.id_image}).first()
+                user={...user,image}
+                paraquem_serial.push(user);
+            }
+            paraquem=paraquem_serial;
             let items = await conexao("items").where({"id_ebr":avpr[key].id})
                 .select("items.indicator","items.goal","items.max","items.min","items.id_physicalUnity","items.id");
                 let items_serial=[];
@@ -124,8 +130,15 @@ export default {
                     // let und=!items[key].und?await conexao("physicalUnity").where({id:items[key].id_physicalUnity}).first().select("physicalUnity.unity"):null
                     let resposta=await conexao("item_answer_user").where({"id_item":items[key2].id})
                     .join("users","item_answer_user.id_user",'=',"users.id")
-                    .join("images","users.id_image","=","images.id")
-                    .select("item_answer_user.answer","users.name","images.url");
+                    // .join("images","users.id_image","=","images.id")
+                    .select("item_answer_user.*","users.name","users.id_image");
+                    let resposta_serial=[];
+                    for(let resp of resposta){
+                        let image=await conexao("images").where({id:resp.id_image}).first().select("images.url");
+                        resp={...resp,image}
+                        resposta_serial.push(resp)
+                    }
+                    resposta=resposta_serial;
                     items_serial.push({...items[key2],resposta});
                 }
 
@@ -138,7 +151,7 @@ export default {
             
         } catch (error) {
            console.log(error)
-            res.json({status:false, erro:"error avpr_=>getCreateAll"});
+            res.json({status:false, erro:"error avpr_=>getAll"});
         }
     },
 

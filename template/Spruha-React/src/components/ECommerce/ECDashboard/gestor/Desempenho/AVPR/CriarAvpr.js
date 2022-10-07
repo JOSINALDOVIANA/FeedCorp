@@ -19,7 +19,7 @@ const CriarAvpr = () => {
   const [Itemsalvo, setItem] = useState([]);
   const [enabled, setEna] = useState(true);
   const [selectdata, setData] = useState(new Date());
-  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "", items: [], direction: { company: [], units: [], users: [] }, checkcompany: false, checkunits: false, checkusers: false })
+  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "", items: [], direction: { company: [], units: [dadosrota.state.unit.id], users: [] }, checkcompany: false, checkunits: true, checkusers: false })
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota])
@@ -221,7 +221,7 @@ const CriarAvpr = () => {
                       Informe se esta meta é uma medida Minima ou Maxima
                     </span>
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
                       className="form-check-input checkmed"
                       type="checkbox"
@@ -252,7 +252,7 @@ const CriarAvpr = () => {
                     </label>
 
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
                       className="form-check-input checkmed "
                       type="checkbox"
