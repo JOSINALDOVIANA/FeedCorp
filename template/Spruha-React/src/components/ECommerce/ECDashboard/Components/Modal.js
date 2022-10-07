@@ -30,7 +30,7 @@ export function AlertProfileUnity({ userSelect }) {
                         <tbody>
                             <tr>
                                 <th>Nome</th>
-                                <th>{userSelect?.name}</th>
+                                <th style={{ textTransform: 'capitalize' }}>{userSelect?.name}</th>
                             </tr>
                             <tr>
                                 <th>Email</th>
@@ -38,11 +38,13 @@ export function AlertProfileUnity({ userSelect }) {
                             </tr>
                             <tr>
                                 <th>Permissão</th>
-                                <th>{userSelect?.permission}</th>
+                                <th style={{ textTransform: 'capitalize' }}>{userSelect?.permission}</th>
                             </tr>
                             <tr>
                                 <th>Cargo</th>
-                                <th>{!!userSelect?.id_office ? userSelect?.cargo?.office : 'Não definido'}</th>
+                                <th style={{ textTransform: 'capitalize' }}>
+                                    {!!userSelect?.id_office ? userSelect?.cargo?.office : 'Não definido'}
+                                </th>
                             </tr>
                         </tbody>
                     </Table>

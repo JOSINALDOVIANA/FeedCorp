@@ -2,10 +2,8 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import {
   Dropdown,
   Container,
- 
   Nav,
   Navbar,
-  
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -37,13 +35,13 @@ function Fullscreen() {
 }
 // FullScreen-end
 function Header({ values }) {
-  
+
   const navegar = useNavigate()
-// console.log(values)
+  // console.log(values)
 
 
-  
-  
+
+
   const openCloseSidebar1 = () => {
     document.querySelector(".header-settings").classList.toggle("show");
     document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
@@ -294,8 +292,8 @@ function Header({ values }) {
                       <span className="badge bg-danger nav-link-badge">4</span>
                     </Dropdown.Toggle> */}
 
-                    {/* NOTIFICAÇÕES TELA FLUTUANTE */}
-                    {/* <Dropdown.Menu style={{ margin: "0px" }}>
+                  {/* NOTIFICAÇÕES TELA FLUTUANTE */}
+                  {/* <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
                         <p className="main-notification-text">
                           You have 1 unread notification
@@ -355,7 +353,7 @@ function Header({ values }) {
                       </div>
                     </Dropdown.Menu>
                   </Dropdown> */}
-                  
+
                   {/* CHAT */}
                   {/* <div className="main-header-notification">
                     <Link
@@ -378,18 +376,22 @@ function Header({ values }) {
                         />
                       </span>
                     </Dropdown.Toggle>
+                    
                     {/* PERFIL AVATAR tela flutuante */}
                     <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
-                        <h6 className="main-notification-title">
-                          {values?.dadosUser?.name.toUpperCase()}
-                          
+                        <h6 className="main-notification-title" style={{ textTransform: 'capitalize' }}>
+                          {values?.dadosUser?.name}
                         </h6>
-                        <p className="main-notification-text">{`${values?.permissions}`.toUpperCase()}</p>
+
+                        <p className="main-notification-text" style={{ textTransform: 'capitalize' }}>
+                          {`${values?.permissions}`}
+                        </p>
+
                       </div>
                       <Dropdown.Item
                         className="border-top"
-                        onClick={() => {navegar(`${process.env.PUBLIC_URL}/perfil`, {state: values})}}
+                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/perfil`, { state: values }) }}
                       >
                         <i className="fe fe-user"></i> Meu Perfil
                       </Dropdown.Item>
