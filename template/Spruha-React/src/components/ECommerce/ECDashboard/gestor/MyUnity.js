@@ -86,7 +86,7 @@ function MinhaCorporacao() {
                 </h4>
 
                 <h5 className="mb-2 mt-2 text-muted tx-14">
-                  {user.cargo.office.toUpperCase()}
+                  {user.cargo?.office?.toUpperCase()}
                 </h5>
                 <Modal.AlertProfileUnity userSelect={user}/>
                 {/* <p className="text-muted text-center mt-1">

@@ -1,6 +1,6 @@
 import { Divider } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
+import { Breadcrumb, Button, Col, Row, Card, ProgressBar, Image } from 'react-bootstrap';
 import {Grid} from "@mui/material";
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ const Okr = () => {
 
   }, [dadosrota.state]);
 
-  // console.log(values)
+  console.log(values)
 
   return (
     <Fragment>
@@ -105,11 +105,12 @@ const Okr = () => {
                     <img
                       alt="avatar"
                       className="rounded-circle avatar mx-1"
-                      src={chave?.user[0]?.url}
+                      src={chave.user[0].url}
                     />
+                    {/* <Image src={chave.}></Image> */}
                     <div>
                       <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                        {chave?.user[0]?.name}
+                        {chave.user[0].name}
                       </h6>
                     </div>
                   </Col>

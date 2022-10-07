@@ -10,18 +10,45 @@ const Okr = () => {
   const navegar = useNavigate();
   const [values, setValues] = useState({});
   useEffect(() => {
-    setValues(dadosrota.state);
-    carregarUsersKeys(dadosrota.state)
-  }, [dadosrota.state]);
+    setValues(dadosrota.state);    
+  }, [dadosrota]);
+
+  useEffect(()=>{
+    api.get(`/okrs/getTwu?id_user=${dadosrota?.state?.dadosUser?.id}`).then(async r => {
+      let v=values;
+      let okrs = r?.data?.okrs;
+      // let k=[].length
+      for (const index1 in okrs) {
+        let process = 0
+        for (const index2 in okrs[index1].keys) {
+          process = process + okrs[index1].keys[index2].status;
+        }
+        let keys = okrs[index1].keys
+        okrs[index1].progress = process / keys.length
+        // console.log(keys.length)
+        if (okrs[index1].progress == 100) {
+          okrs[index1].concluded = true
+        }
+        await api.put(`/okrs/update`, { ...okrs[index1] });
+      }
+      v={...v,okrscriados:okrs}
+      setValues(a=>({...a,okrscriados:okrs}))
+      
+
+      carregarUsersKeys(v)
+    })
+  },[dadosrota])
 
   function carregarUsersKeys(valores) {
-    let okrs = valores.okrscriados;
-    let okrs_serial = okrs.map(okr => {
+    let okrs = valores?.okrscriados;
+    let okrs_serial = okrs?.map(okr => {
 
       let keys = okr.keys.map(key => {
         let user = [];
-        api.get(`/user/getAll?id=${key.id_user}`).then(r => {
-          user.push({ ...r.data.Users[0] })
+        api.get(`/user/getAll?id=${key?.id_user}`).then(r => {
+          // console.log(r)
+          user.push({ ...r?.data?.Users })
+          
         })
         return { ...key, user }
       });
@@ -31,7 +58,7 @@ const Okr = () => {
     // console.log(okrs_serial)
     setValues(a => ({ ...a, okrscriados: okrs_serial }))
   }
-  //  console.log(values)
+   console.log(values)
 
 
 

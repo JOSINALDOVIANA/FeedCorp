@@ -109,8 +109,9 @@ const CriarOKR = () => {
 
                     onClick={async () => {
                       let user = okr.user[0];
+                      console.log(user)
                       // console.log(user);
-                      await api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
+                      // await api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
 
                       setOkr(a => ({
                         ...a, keys: [...a.keys,
@@ -160,7 +161,7 @@ const CriarOKR = () => {
                       <Image
                         alt="avatar"
                         className="wd-30 rounded-circle mg-r-15"
-                        src={key?.user.image.url}
+                        src={key?.user.url}
                       />
                       <div>
                         <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
