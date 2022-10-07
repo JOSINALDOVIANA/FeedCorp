@@ -30,6 +30,10 @@ function MinhaCorporacao() {
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">Unidades</h2>
+          <Breadcrumb>
+            <Breadcrumb.Item> Minha corporação </Breadcrumb.Item>
+            <Breadcrumb.Item active >  Unidades  </Breadcrumb.Item>
+          </Breadcrumb>
         </div>
 
         {/* <div className="d-flex">
@@ -63,7 +67,7 @@ function MinhaCorporacao() {
       <Row className="row-sm">
 
         {values?.units?.map(unit => (
-          <Col key={unit.id} lg={3} xl={3} xxl={3} md={6} >
+          <Col key={unit.id} lg={3} xl={3} xxl={3} md={6}>
             <Card className="custom-card" 
             style={{cursor: "pointer"}}
             onClick={() => { navegar(`${process.env.PUBLIC_URL}/unidades`, { state: values }) }}

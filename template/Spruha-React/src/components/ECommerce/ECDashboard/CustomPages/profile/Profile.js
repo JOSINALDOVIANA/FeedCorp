@@ -165,9 +165,6 @@ function Profile() {
 
                               }
 
-
-
-
                               // CRIANDO UM DATAFORM
                               const data = new FormData();
                               data.append('file', uploadedFiles[0].file, uploadedFiles[0].name);
@@ -188,9 +185,6 @@ function Profile() {
                               } catch (error) {
 
                               }
-
-
-
                             }}
                             id="arquivo"
                             accept="image/*"
@@ -306,6 +300,7 @@ function Profile() {
                           <Form.Label id="username">Nova Senha</Form.Label>
                           <div className="input-group">
                             <Form.Control
+                              required
                               type="password"
                               id="oldPs"
                               placeholder="Senha Nova "

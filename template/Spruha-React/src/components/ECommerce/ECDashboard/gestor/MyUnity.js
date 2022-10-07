@@ -74,8 +74,8 @@ function MinhaCorporacao() {
                 <div className="user-lock text-center">
                   {!!user.url &&
                     <Image
-                    alt={user.name}
-                    className="rounded-circle"
+                      alt={user.name}
+                      className="rounded-circle"
                       src={user.url}
                     />
                   }
@@ -88,7 +88,7 @@ function MinhaCorporacao() {
                 <h5 className="mb-2 mt-2 text-muted tx-14">
                   {user.cargo?.office?.toUpperCase()}
                 </h5>
-                <Modal.AlertProfileUnity userSelect={user}/>
+                <Modal.AlertProfileUnity userSelect={user} />
                 {/* <p className="text-muted text-center mt-1">
                 Lorem Ipsum is not simply popular belief
                 Contrary.
