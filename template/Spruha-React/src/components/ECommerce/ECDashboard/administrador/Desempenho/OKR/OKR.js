@@ -119,7 +119,7 @@ const Okr = () => {
 
         </Row>
       </div>
-    </Fragment>
+    </Fragment >
   )
 };
 

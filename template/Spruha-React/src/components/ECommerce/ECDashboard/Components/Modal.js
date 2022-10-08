@@ -9,16 +9,15 @@ export function AlertProfileUnity({ userSelect }) {
     console.log(userSelect)
     return (
         <Fragment>
-            <label className="btn button border btn-sm tx-bold" onClick={handleShow}>
+            <label className="btn ripple btn-primary btn-sm border mt-3 tx-bold" onClick={handleShow}>
                 Ver perfil
             </label>
 
             <Modal show={show} onHide={handleClose} backdrop="static">
                 <Modal.Header closeButton>
-                    <Modal.Title>PERFIL DE {userSelect?.name.toUpperCase()}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className={"d-flex justify-content-center"}>
+                    <div className="d-flex justify-content-center mb-3">
                         <Avatar
                             alt={userSelect.name}
                             style={{ width: 200, height: 200 }}
