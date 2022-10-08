@@ -190,12 +190,12 @@ const Root = () => {
                 </Route>
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr_unidade/criar_okr_unidade`}
+                  path={`${process.env.PUBLIC_URL}/okr_unidade/criar_okr`}
                   element={<CriarOkr_gestor />}
                 />
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr_unidade/progresso_unidade_okr`}
+                  path={`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`}
                   element={<ProgressoOKR_gestor />}
                 />
                 {/* OKR final */}
@@ -206,11 +206,11 @@ const Root = () => {
                 />
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr_unidade`}
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr`}
                   element={<CriarAvpr_gestor />}
                 />
                 <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR_unidade`}
+                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR`}
                   element={<ProgressoAVPR_gestor />}
                 />
                 {/* AVPR FINAL */}

@@ -10,12 +10,12 @@ const Okr = () => {
   const navegar = useNavigate();
   const [values, setValues] = useState({});
   useEffect(() => {
-    setValues(dadosrota.state);    
+    setValues(dadosrota.state);
   }, [dadosrota]);
 
-  useEffect(()=>{
+  useEffect(() => {
     api.get(`/okrs/getTwu?id_user=${dadosrota?.state?.dadosUser?.id}`).then(async r => {
-      let v=values;
+      let v = values;
       let okrs = r?.data?.okrs;
       // let k=[].length
       for (const index1 in okrs) {
@@ -31,13 +31,13 @@ const Okr = () => {
         }
         await api.put(`/okrs/update`, { ...okrs[index1] });
       }
-      v={...v,okrscriados:okrs}
-      setValues(a=>({...a,okrscriados:okrs}))
-      
+      v = { ...v, okrscriados: okrs }
+      setValues(a => ({ ...a, okrscriados: okrs }))
+
 
       carregarUsersKeys(v)
     })
-  },[dadosrota])
+  }, [dadosrota])
 
   function carregarUsersKeys(valores) {
     let okrs = valores?.okrscriados;
@@ -48,7 +48,7 @@ const Okr = () => {
         api.get(`/user/getAll?id=${key?.id_user}`).then(r => {
           // console.log(r)
           user.push({ ...r?.data?.Users })
-          
+
         })
         return { ...key, user }
       });
@@ -58,7 +58,7 @@ const Okr = () => {
     // console.log(okrs_serial)
     setValues(a => ({ ...a, okrscriados: okrs_serial }))
   }
-   console.log(values)
+  console.log(values)
 
 
 
@@ -81,7 +81,7 @@ const Okr = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade/criar_okr_unidade/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade/criar_okr/`, { state: values }) }}
             >
               <i className="bi bi-clipboard-plus me-2"></i>
               Novo objetivo
@@ -102,13 +102,13 @@ const Okr = () => {
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
 
-                  navegar(`${process.env.PUBLIC_URL}/okr_unidade/progresso_unidade_okr`, { state: { ...values, okrselect: okr } })
+                  navegar(`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`, { state: { ...values, okrselect: okr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
                     <div className="d-flex flex-column align-items-start">
-                      <h4 className="mb-1">
+                      <h4 className="mb-1" style={{textTransform: 'capitalize'}}>
                         {okr.objective}
                       </h4>
                       {/* <h6 className="tx-13 tx-inverse tx-semibold mg-b-0 mb-2">

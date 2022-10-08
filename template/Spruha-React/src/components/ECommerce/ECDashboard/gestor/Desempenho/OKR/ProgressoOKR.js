@@ -1,8 +1,7 @@
 import { Divider } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, ProgressBar, Image } from 'react-bootstrap';
-import {Grid} from "@mui/material";
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const Okr = () => {
@@ -27,12 +26,14 @@ const Okr = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">{values?.okrselect?.objective}</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">
+            {values?.okrselect?.objective.toUpperCase()}
+          </h2>
 
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade`, { state: values }) }}
             >OKR
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Progresso</Breadcrumb.Item>
@@ -45,10 +46,10 @@ const Okr = () => {
             <Button
               variant="primary"
               type="button"
-              className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+              className="my-2 me-2 btn-icon"
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) }}
             >
-              Voltar
+              <i className="bi bi-caret-left-fill"></i>
             </Button>
 
           </div>
@@ -57,73 +58,68 @@ const Okr = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-      {/* <!-- Row --> */}
-      <Outlet />
-      {/* <!-- End Row --> */}
-      <Col sm={12} md={12} lg={12} xl={12}>
-        <Card className="custom-card top-inquiries">
-          <Card.Header className="border-bottom-0 pb-0">
-            <div>
-              <div className="d-flex">
-                <label className="main-content-label my-auto pt-2">
-                  Chaves
-                </label>
-              </div>
-              <span className="d-block tx-12 mt-2 mb-0 text-muted">
-                Chaves do objetivo em andamento
-              </span>
+      <Card>
+        <Card.Header className="card-header ms-1">
+          <h2 className="main-content-title tx-20 mb-1">Objetivo</h2>
+          <h4 className="tx-12 text-muted">
+            Chaves do objetivo em andamento
+          </h4>
+        </Card.Header>
+
+        <Card.Body>
+
+          {values?.okrselect?.keys?.map(chave => (
+            <div key={chave.id}>
+
+              <table className="table table-hover m-b-0 transcations mt-2">
+                <tbody>
+                  <tr>
+                    <td className="wd-5p">
+                      <div className="main-img-user avatar-md">
+                        <img
+                          alt="avatar"
+                          className="rounded-circle avatar mx-1"
+                          src={chave.user[0].url}
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div className="d-flex align-middle ms-3">
+                        <div className="d-inline-block">
+                          <h6 className="tx-13 tx-inverse tx-semibold mg-b-0" >
+                            {chave.user[0].name.toUpperCase()}
+                          </h6>
+                          <span className="mb-0 text-muted">{chave.description}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="wd-40p">
+
+                      <ProgressBar
+                        variant="info"
+                        className="progress ht-6 my-auto"
+                        animated={true}
+                        min={0}
+                        max={100}
+                        now={chave.status}
+                      >
+                      </ProgressBar>
+
+                      <span className="tx-13">
+                        <b>{chave.status + "%"}</b>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </Card.Header>
-          <Card.Body>
+          ))}
 
-            {values?.okrselect?.keys?.map(chave => (
-              <Grid key={chave.id}>
+        </Card.Body>
 
-                <Row className="d-flex justify-content-between align-items-center mt-3">
-                  <Col xs={4} md={4} lg={4}>
-                    <span >{chave.description}</span>
-                  </Col>
+      </Card>
 
-                  <Col xs={4} md={5} lg={5}>
-                    <ProgressBar
-                      variant="info"
-                      className="progress ht-6 my-auto"
-                      animated={true}
-                      min={0}
-                      max={100}
-                      now={chave.status}
-                    >
-                    </ProgressBar>
-
-                    <span className="tx-13">
-                      <b>{chave.status + "%"}</b>
-                    </span>
-                  </Col>
-
-                  <Col xs={4} md={3} lg={3}
-                  className="d-flex justify-content-center align-items-center mb-2">
-                    <img
-                      alt="avatar"
-                      className="rounded-circle avatar mx-1"
-                      src={chave.user[0].url}
-                    />
-                    {/* <Image src={chave.}></Image> */}
-                    <div>
-                      <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                        {chave.user[0].name}
-                      </h6>
-                    </div>
-                  </Col>
-
-                </Row>
-                <Divider className="mt-1" />
-              </Grid>
-            ))}
-
-          </Card.Body>
-
-        </Card>
-      </Col>
     </Fragment>
   )
 };

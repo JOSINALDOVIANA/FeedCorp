@@ -51,10 +51,10 @@ const ProgressoOKR = () => {
             <Button
               variant="primary"
               type="button"
-              className="my-2 me-2 btn-icon-text"
+              className="my-2 me-2 btn-icon"
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values }) }}
             >
-              Voltar
+              <i className="bi bi-caret-left-fill"></i>
             </Button>
 
           </div>

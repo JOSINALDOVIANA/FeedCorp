@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image, Breadcrumb } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SelectPessoaUnidade } from "./FormDataOKR";
-import { DataTables } from "./dataTable/datable";
+import { successAlert, dangerAlert } from '../../../Components/Alerts';
 // import {MyVerticallyCenteredModal} from "./modalmethods";
 import { Grid } from "@mui/material";
 import Okr from "./OKR";
@@ -167,7 +167,7 @@ const CriarOKR = () => {
                         <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
                           {key.user.name}
                         </h6>
-                    
+
                       </div>
                     </div>
 
@@ -208,10 +208,14 @@ const CriarOKR = () => {
                       if (r.data.status) {
                         okrscriados.push(okr)
                         setValues(a => ({ ...a, okrscriados: okrscriados }));
+                        successAlert()
                         navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values })
                         // {{<MyVerticallyCenteredModal />}}
                       }
-                    })
+                    }).catch(
+                      dangerAlert()
+
+                    )
                   }}
                 >
                   Criar
