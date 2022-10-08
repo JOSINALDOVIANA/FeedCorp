@@ -11,6 +11,7 @@ const Images = React.lazy(() => import("./images/index.js"));
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
 const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
+const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
 const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
 //INÍCIO
 const FeedRecebidos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedRecebidos"))
@@ -116,6 +117,7 @@ const Root = () => {
                   />
 
                 </Route>
+                
                 <Route>
                   <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
                 </Route>
@@ -123,6 +125,7 @@ const Root = () => {
                 {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
                 <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
                 <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
+                <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
                 {/* ------------------------------OKR------------------------------------------ */}
 
                 <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >

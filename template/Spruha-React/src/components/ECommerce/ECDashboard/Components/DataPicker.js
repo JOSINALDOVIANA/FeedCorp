@@ -1,15 +1,17 @@
 
-import DatePicker from "react-datepicker";
+import DatePicker, {registerLocale} from "react-datepicker";
+import BR from "date-fns/locale/pt-BR";
+registerLocale("pt-br", BR);
+
 export const Datepicker = (props) => {
     // const [startDate, setStartDate] = useState(new Date());
     return (
       <DatePicker
       {...props}
         className="form-control"
-        // selected={startDate}
-        // onChange={(date) => {setStartDate(date);setOkr(a=>({...a,validity:date}))}}
         //FORMATO DATA
         dateFormat="dd/MM/yyyy"
+        locale="pt-br"
       />
     );
   };

@@ -67,7 +67,7 @@ const ProgressoOKR = () => {
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values }) }}
             >Avaliação por Resultados
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Progresso</Breadcrumb.Item>
@@ -81,9 +81,9 @@ const ProgressoOKR = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values }) }}
             >
-              Voltar
+              <i className="bi bi-caret-left-fill"></i>
             </Button>
 
           </div>

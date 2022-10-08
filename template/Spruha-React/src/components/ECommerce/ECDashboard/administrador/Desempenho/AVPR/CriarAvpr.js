@@ -3,12 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Breadcrumb } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataAVPR";
-import { usuarioContext } from "../../../../../..";
 import "./style.css"
-import user1 from "../../../../../../assets/img/users/1.jpg";
 import { Grid } from "@material-ui/core";
-// import { Container } from './styles';
-import { Datepicker } from "./DataPIcker"
+import { Datepicker } from "../../../Components/DataPicker"
 import { forEach, uniqueId } from "lodash";
 import api from "../../../../../../api";
 const CriarAvpr = () => {

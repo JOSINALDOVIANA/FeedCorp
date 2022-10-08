@@ -76,14 +76,15 @@ export const MENUADM = [
 						selected: false,
 						title: 'Clima Pulso'
 					},
-					// {
-					// 	path: `${process.env.PUBLIC_URL}/avr`,
-					// 	type: 'link',
-					// 	active: false,
-					// 	selected: false,
-					// 	title: 'Pesquisas Internas'
-					// },
 				]
+			},
+			{
+				title: 'Configurações (admin)',
+				icon: 'ti-settings',
+				type: 'link',
+				active: false,
+				selected: false,
+				path: `${process.env.PUBLIC_URL}/configuracoes`,
 			},
 			// {
 			// 	title: 'Relatórios',

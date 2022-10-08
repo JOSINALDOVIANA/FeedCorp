@@ -1,15 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image, Breadcrumb } from "react-bootstrap";
-import * as formelement from "../../../../../../data/Forms/formelement";
-import { SelectPessoaUnidade } from "./FormDataOKR";
+import { Button, Card, Col, FormGroup, Row, Form, InputGroup, Table, Image, Breadcrumb } from "react-bootstrap";
+import { Datepicker } from "../../../Components/DataPicker"
+import { SelectPessoaUnidade } from "./data/FormDataOKR";
 import { successAlert, dangerAlert } from '../../../Components/Alerts';
-// import {MyVerticallyCenteredModal} from "./modalmethods";
 import { Grid } from "@mui/material";
 import Okr from "./OKR";
 import api from "../../../../../../api";
 
-// import { Container } from './styles';
 
 const CriarOKR = () => {
   const dadosrota = useLocation();
@@ -17,12 +15,15 @@ const CriarOKR = () => {
   const navegar = useNavigate();
   const [values, setValues] = useState({})
   const [okr, setOkr] = useState({})
+  const [startDate, setStartDate] = useState(new Date());
+
   useEffect(() => {
     setValues(dadosrota.state)
     setOkr(a => ({ ...a, keys: [], id_user: dadosrota.state.dadosUser.id }))
   }, [dadosrota])
   console.log(values)
   // console.log(okr)
+  
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -59,7 +60,14 @@ const CriarOKR = () => {
                     variant="light" type="button">
                     <i className="fe fe-calendar lh--9 op-6"></i>
                   </Button>
-                  <formelement.Datepicker setOkr={setOkr} />
+                  <Datepicker
+                    className="form-control"
+                    selected={startDate}
+                    minDate={startDate}
+                    onChange={(date) => { setStartDate(date); setOkr(a => ({ ...a, validity: date })) }}
+                    //FORMATO DATA
+                    dateFormat="dd/MM/yyyy"
+                  />
                 </InputGroup>
               </FormGroup>
 
@@ -132,61 +140,61 @@ const CriarOKR = () => {
 
               </Grid>
 
-              <div>
-                <div>
-                  <h2 className="main-content-title tx-24 mg-b-5">Participantes</h2>
-                  <spam className="d-flex text-muted tx-13">
-                    Abaixo mostrará os partipantes com suas respectivas key results deste objetivo
-                  </spam>
-                </div>
-              </div>
 
-              {/* <Card className="custom-card overflow-hidden">
-                <div className="responsive">
-                  <DataTables />
-                </div>
-              </Card> */}
-
-
-              <ListGroup>
-
+              <Table responsive className="card-table table-striped table-vcenter text-nowrap mb-0">
+                <thead>
+                  <tr>
+                    <th className="wd-lg-40p">
+                      <span>Key</span>
+                    </th>
+                    <th className="wd-20p">
+                      <span>Usuário</span>
+                    </th>
+                    <th className="wd-lg-10p">
+                      <span>Ações</span>
+                    </th>
+                  </tr>
+                </thead>
                 {okr?.keys?.map((key, index) => (
-                  <ListGroup.Item key={index} action
-                    as="li"
-                    className="d-flex justify-content-betwween align-items-center"
-                  >
-                    <div className="ms-2 me-auto">{key.description}</div>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div className="ms-2 me-auto">{key.description}</div>
+                      </td>
 
-                    <div className="d-flex align-items-center mb-2 me-4">
-                      <Image
-                        alt="avatar"
-                        className="wd-30 rounded-circle mg-r-15"
-                        src={key?.user.url}
-                      />
-                      <div>
-                        <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                          {key.user.name}
-                        </h6>
+                      <td>
+                        <div className="d-flex align-items-center mb-2 me-4">
+                          <Image
+                            alt="avatar"
+                            className="wd-30 rounded-circle mg-r-15"
+                            src={key?.user.url}
+                          />
+                          <div>
+                            <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
+                              {key.user.name}
+                            </h6>
 
-                      </div>
-                    </div>
+                          </div>
+                        </div>
+                      </td>
 
-                    <div className="me-2">
-                      <i onClick={(index) => {
-                        let keys = []
-                        for (const i in okr.keys) {
-                          if (i == index) {
-                            keys.push(okr.keys[i]);
+                      <td>
+                        <i onClick={(index) => {
+                          let keys = []
+                          for (const i in okr.keys) {
+                            if (i == index) {
+                              keys.push(okr.keys[i]);
+                            }
                           }
-                        }
-                        setOkr(a => ({ ...a, keys: keys }))
-                      }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
-                    </div>
-
-                  </ListGroup.Item>
+                          setOkr(a => ({ ...a, keys: keys }))
+                        }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
+                      </td>
+                    </tr>
+                  </tbody>
                 ))}
 
-              </ListGroup>
+              </Table>
+
 
 
             </Card.Body>

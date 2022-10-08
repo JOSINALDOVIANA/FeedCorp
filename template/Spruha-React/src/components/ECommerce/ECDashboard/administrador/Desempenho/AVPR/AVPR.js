@@ -78,10 +78,6 @@ const AvPorResultados = () => {
       {/* <!-- End Row --> */}
       <div>
         <h2 className="main-content-title tx-20 mx-2">Ativos</h2>
-
-        {/* {values?.okrscriados?.map(okr => ( */}
-        {/* ######################################################### */}
-
         <Row className="row-sm">
           {values?.createAVPR?.map(avpr => (
             <Col lg={4} xl={4} xxl={4} md={6} >

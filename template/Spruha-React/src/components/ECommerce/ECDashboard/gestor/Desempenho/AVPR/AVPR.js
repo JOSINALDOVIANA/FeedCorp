@@ -11,13 +11,13 @@ const AvPorResultados = () => {
   const [values, setValues] = useState({});
   useEffect(() => {
     setValues(dadosrota.state);
-    
+
     api.get(`avpr/getAll?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
       setValues(a => ({ ...a, createAVPR: r?.data?.avaliacoes }))
     })
   }, [dadosrota.state]);
 
-  
+
   console.log(values)
 
   function formatData(data) {
@@ -46,7 +46,7 @@ const AvPorResultados = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon-text"
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr_unidade/`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr/`, { state: values }) }}
             >
               <i className="bi bi-clipboard-data-fill me-2"></i>
               Novo
@@ -64,31 +64,27 @@ const AvPorResultados = () => {
         <h2 className="main-content-title tx-20 mx-2">Ativos em minha unidade</h2>
         <Row className="row-sm">
 
-          {/* {values?.okrscriados?.map(okr => ( */}
-          <Col
-            // key={okr.id}
-            lg={4} xl={4} xxl={4} md={6} >
-            {/* ######################################################### */}
 
-            {values?.createAVPR?.map(avpr => (
+          {values?.createAVPR?.map(avpr => (
+            <Col lg={4} xl={4} xxl={4} md={6} >
               <Card key={avpr.id} className="custom-card"
                 style={{ cursor: 'pointer' }}
                 onClick={() => {
-                 
-                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR_unidade`, { state:{...values, AVPRselect: avpr } })
+
+                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR`, { state: { ...values, AVPRselect: avpr } })
                 }}
               >
                 <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
 
                     <div className="d-flex flex-column align-items-start">
-                      <h4 className="mb-1">
+                      <h4 className="mb-1" style={{textTransform: 'capitalize'}}>
                         {avpr.title}
                       </h4>
                       <h6 className="tx-16 tx-inverse tx-semibold mg-b-0 mb-2">
                         Avaliados(as): {avpr.paraquem.length} pessoas
                       </h6>
-                      <h6 className={`tx-13 tx-inverse text-${(new Date(avpr.validity)-new Date())/(1000 * 60 * 60 * 24)<5?"danger":"success"} mg-b-0 mb-2`} >
+                      <h6 className={`tx-13 tx-inverse text-${(new Date(avpr.validity) - new Date()) / (1000 * 60 * 60 * 24) < 5 ? "danger" : "success"} mg-b-0 mb-2`} >
                         Validade: {formatData(avpr.validity)}
                         {/* {(new Date(avpr.validity)-new Date())/(1000 * 60 * 60 * 24)>5?"danger":"success"} */}
                       </h6>
@@ -102,11 +98,8 @@ const AvPorResultados = () => {
 
                 </Card.Body>
               </Card>
-            ))}
-
-            {/* ########################################################## */}
-          </Col>
-          {/* ))} */}
+            </Col>
+          ))}
 
         </Row>
       </div>

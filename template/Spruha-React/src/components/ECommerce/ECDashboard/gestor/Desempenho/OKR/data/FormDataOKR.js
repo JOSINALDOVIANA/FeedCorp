@@ -9,7 +9,7 @@ import { DropzoneAreaBase, DropzoneArea, DropzoneDialog } from "material-ui-drop
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { AttachFile, Audiotrack, Description, PictureAsPdf, Theaters } from "@material-ui/icons";
-import api from "../../../../../../api";
+import api from "../../../../../../../api";
 
 export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
   const [unit, setUnit] = useState({});

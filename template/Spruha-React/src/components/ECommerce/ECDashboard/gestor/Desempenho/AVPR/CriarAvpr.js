@@ -3,14 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Breadcrumb } from "react-bootstrap";
 import * as formelement from "../../../../../../data/Forms/formelement";
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataAVPR";
-import { usuarioContext } from "../../../../../..";
 import "./style.css"
-import user1 from "../../../../../../assets/img/users/1.jpg";
 import { Grid } from "@material-ui/core";
-// import { Container } from './styles';
-import { Datepicker } from "./DataPIcker"
+import { Datepicker } from "../../../Components/DataPicker"
 import { forEach, uniqueId } from "lodash";
 import api from "../../../../../../api";
+
 const CriarAvpr = () => {
   const dadosrota = useLocation();
   const location = useLocation();
@@ -20,6 +18,7 @@ const CriarAvpr = () => {
   const [enabled, setEna] = useState(true);
   const [selectdata, setData] = useState(new Date());
   const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "", items: [], direction: { company: [], units: [dadosrota.state.unit.id], users: [] }, checkcompany: false, checkunits: true, checkusers: false })
+  
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota])
@@ -160,6 +159,7 @@ const CriarAvpr = () => {
                   {/* <formelement.Datepicker onChange={e=>{console.log(e)}}/> */}
                   <Datepicker
                     selected={selectdata}
+                    minDate={selectdata}
                     onChange={(date) => { setData(date); setAVPR(a => ({ ...a, validity: date })) }}
                   />
                 </InputGroup>

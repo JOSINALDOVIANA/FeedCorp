@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from "../../../../../..";
 import api from "../../../../../../api";
 
 const Okr = () => {
@@ -105,15 +104,15 @@ const Okr = () => {
         <Row className="row-sm p-3">
 
           {values?.okrscriados?.map(okr => (
-            <Col key={okr.id} lg={6} xl={6} xxl={6} md={6} >
+            <Col key={okr.id} lg={4} xl={4} xxl={4} md={4} >
               <Card.Body className="list-card"
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
 
                   navegar(`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`, { state: { ...values, okrselect: okr } })
-                }}
+                }} P
               >
-                <Card.Body className="iconfont text-center">
+                <div className="iconfont text-center">
                   <div className="d-flex justify-content-between">
                     <div className="d-flex flex-column align-items-start">
                       <h4 className="mb-1" style={{ textTransform: 'capitalize' }}>
@@ -146,8 +145,17 @@ const Okr = () => {
                       ></ProgressBar>
                     </div>
                   </div>
-
-                </Card.Body>
+                  {/* {values?.okrscriados?.keys?.user?.map(img => (
+                    <div key={img.id}>
+                      <img
+                        alt="avatar"
+                        className="rounded-circle avatar mx-1"
+                        src={img.image.url}
+                      //okr.keys[0].users[0].url
+                      />
+                    </div>
+                  ))} */}
+                </div>
               </Card.Body>
             </Col>
           ))}
