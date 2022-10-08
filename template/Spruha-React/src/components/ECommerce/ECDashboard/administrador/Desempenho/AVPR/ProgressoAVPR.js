@@ -59,6 +59,28 @@ const ProgressoOKR = () => {
 
           </div>
         </div>
+        <div className="d-flex">
+          <div className="justify-content-center">
+
+            <Button
+              variant="primary"
+              type="button"
+              className="my-2 me-2 btn-icon"
+              onClick={() => { 
+                // navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r=>{
+                  if(r.data.status){
+                    alert("apagado")
+                     navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                  }
+                })
+               }}
+            >
+               <i class="bi bi-file-earmark-excel"></i>
+            </Button>
+
+          </div>
+        </div>
 
       </div>
       {/* <!-- End Page Header --> */}

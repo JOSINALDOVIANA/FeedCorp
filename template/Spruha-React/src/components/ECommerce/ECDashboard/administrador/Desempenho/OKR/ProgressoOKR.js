@@ -1,8 +1,8 @@
 import { Divider } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
-import { Grid } from "@mui/material";
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import api from "../../../../../../api";
 
 
 const Okr = () => {
@@ -20,7 +20,7 @@ const Okr = () => {
 
   }, [dadosrota.state]);
 
-  // console.log(values)
+  console.log(values)
 
   return (
     <Fragment>
@@ -28,13 +28,13 @@ const Okr = () => {
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">
-            {values?.okrselect?.objective.toUpperCase()}
-            </h2>
+            {values?.okrselect?.objective?.toUpperCase()}
+          </h2>
 
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade`, { state: values }) }}
             >OKR
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Progresso</Breadcrumb.Item>
@@ -56,20 +56,46 @@ const Okr = () => {
           </div>
         </div>
 
+        <div className="d-flex">
+          <div className="justify-content-center">
+
+            <Button
+              variant="primary"
+              type="button"
+              className="my-2 me-2 btn-icon"
+              onClick={() => { 
+                // navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) 
+                api.delete(`okrs/delete?id=${values?.okrselect?.id}`).then(r=>{
+                  if(r.data.status){
+                    alert("apagado")
+                     navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) 
+
+                  }
+                })
+              }}
+            >
+              <i class="bi bi-file-earmark-excel"></i>
+            </Button>
+
+          </div>
+        </div>
+
       </div>
       {/* <!-- End Page Header --> */}
 
-      <Card className="custom-card top-inquiries">
+      <Card>
         <Card.Header className="card-header ms-1">
           <h2 className="main-content-title tx-20 mb-1">Objetivo</h2>
           <h4 className="tx-12 text-muted">
             Chaves do objetivo em andamento
           </h4>
         </Card.Header>
+
         <Card.Body>
 
           {values?.okrselect?.keys?.map(chave => (
             <div key={chave.id}>
+
               <table className="table table-hover m-b-0 transcations mt-2">
                 <tbody>
                   <tr>
@@ -78,21 +104,22 @@ const Okr = () => {
                         <img
                           alt="avatar"
                           className="rounded-circle avatar mx-1"
-                          src={chave?.user[0]?.url}
+                          src={chave.user[0].url}
                         />
                       </div>
                     </td>
                     <td>
                       <div className="d-flex align-middle ms-3">
                         <div className="d-inline-block">
-                          <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
-                            {chave?.user[0]?.name}
+                          <h6 className="tx-13 tx-inverse tx-semibold mg-b-0" >
+                            {chave?.user[0]?.name?.toUpperCase()}
                           </h6>
                           <span className="mb-0 text-muted">{chave.description}</span>
                         </div>
                       </div>
                     </td>
                     <td className="wd-40p">
+
                       <ProgressBar
                         variant="info"
                         className="progress ht-6 my-auto"
@@ -106,20 +133,18 @@ const Okr = () => {
                       <span className="tx-13">
                         <b>{chave.status + "%"}</b>
                       </span>
+
                     </td>
-
                   </tr>
-
                 </tbody>
               </table>
-
-
             </div>
           ))}
 
         </Card.Body>
 
       </Card>
+
     </Fragment>
   )
 };
