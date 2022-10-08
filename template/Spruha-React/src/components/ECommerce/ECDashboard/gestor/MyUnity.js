@@ -68,35 +68,32 @@ function MinhaCorporacao() {
       <Row className="row-sm">
 
         {values?.unit?.users?.map(user => (
-          <Col key={user.id} sm={12} md={6} xl={3}>
-            <Card className="custom-card border">
-              <Card.Body className="text-center">
-                <div className="user-lock text-center">
-                  {!!user.url &&
-                    <Image
+          <Col key={user.id} md={6} sm={6} xl={3}>
+            <Card className="card custom-card our-team">
+              <Card.Body className="user-card text-center">
+                <div className="picture avatar-lg online text-center">
+                {!!user.url &&
+                    <img
                       alt={user.name}
                       className="rounded-circle"
                       src={user.url}
                     />
                   }
                 </div>
-
-                <h4 className=" mb-1 mt-3 main-content-label">
-                  {user.name == values.dadosUser.name ? "VOCÊ" : user.name}
-                </h4>
-
-                <h5 className="mb-2 mt-2 text-muted tx-14">
-                  {user.cargo?.office?.toUpperCase()}
-                </h5>
+                <div className="text-center mt-3" style={{ textTransform: 'capitalize' }}>
+                  <h5 className="pro-user-username text-dark mt-2 mb-0">
+                    {user.name == values.dadosUser.name ? "VOCÊ" : user.name}
+                  </h5>
+                  <p className="pro-user-desc text-muted mb-1">
+                    {user.cargo?.office}
+                  </p>
+                </div>
                 <Modal.AlertProfileUnity userSelect={user} />
-                {/* <p className="text-muted text-center mt-1">
-                Lorem Ipsum is not simply popular belief
-                Contrary.
-              </p> */}
               </Card.Body>
             </Card>
           </Col>
         ))}
+
 
       </Row>
 

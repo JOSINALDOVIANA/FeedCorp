@@ -214,7 +214,6 @@ const CriarOKR = () => {
                       }
                     }).catch(
                       dangerAlert()
-
                     )
                   }}
                 >
