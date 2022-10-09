@@ -56,8 +56,12 @@ export default {
 
         try {
             if(id){
-                const Users=await conexao("users").where({"users.id":id}).join("images","users.id_image",'=','images.id').select("users.*","images.url").first()
-                return res.json({ status: true, Users });
+                let Users=await conexao("users").where({"users.id":id})
+                // .join("images","users.id_image",'=','images.id')
+                .select("users.*")
+                .first()
+                let url=await conexao("images").where({id:Users.id_image}).first();
+                return res.json({ status: true, Users:{...Users,url} });
             }
             if(id_company){
                 return res.json({ status: true, Users: await conexao("users").where({"users.id_company":id_company}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
@@ -122,7 +126,7 @@ export default {
         }
     },
     async delete(req, res) {
-        const { password, id, email } = req.body;
+        const { password, id, email } = req.query;
         
         const dados = await conexao("users").where({ id, email }).first();
         // console.log(dados)

@@ -70,7 +70,7 @@ function MinhaCorporacao() {
           <Col key={unit.id} lg={3} xl={3} xxl={3} md={6}>
             <Card className="custom-card" 
             style={{cursor: "pointer"}}
-            onClick={() => { navegar(`${process.env.PUBLIC_URL}/unidades`, { state: values }) }}
+            onClick={() => { navegar(`${process.env.PUBLIC_URL}/unidades`, { state: {...values,selectUnit:unit} }) }}
             >
               <Card.Body className="">
                 <h5 className="tx-14">Unidade</h5>

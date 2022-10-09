@@ -1,3 +1,4 @@
+import { uniqueId } from "lodash";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -66,7 +67,7 @@ const AvPorResultados = () => {
 
 
           {values?.createAVPR?.map(avpr => (
-            <Col lg={4} xl={4} xxl={4} md={6} >
+            <Col key={uniqueId()} lg={4} xl={4} xxl={4} md={6} >
               <Card key={avpr.id} className="custom-card"
                 style={{ cursor: 'pointer' }}
                 onClick={() => {

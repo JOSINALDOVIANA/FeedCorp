@@ -37,9 +37,17 @@ export default {
 
 
                 for (let i = 0; i < units.length; i++) {
-                    const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id", "users.id_image", "users.email", "users.name")
+                    let Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.*")
+                    let colaboradores_serial=[];
+                    for (let iterator of Colaboradores) {
+                        let image = await conexao("images").where({id:iterator.id_image}).first().select("images.url");
+                        colaboradores_serial.push({...iterator,image});
+                    }
+                    Colaboradores=colaboradores_serial;
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
-                    units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
+                    units_serialised[i] = { ...units[i],
+                         cols: contador['count(*)'], 
+                         Colaboradores };
                 }
 
                 return res.json(units_serialised)
@@ -53,12 +61,14 @@ export default {
                     const Colaboradores = await conexao("user_unit").where({ "id_unit": units[i].id }).join("users", "users.id", "=", "user_unit.id_user").select("users.id", "users.id_image", "users.email", "users.name")
                     const [contador] = await conexao("user_unit").where({ "id_unit": units[i].id }).count().join("users", "users.id", "=", "user_unit.id_user");
                     units_serialised[i] = { ...units[i], cols: contador['count(*)'], Colaboradores };
+                    
                 }
 
                 return res.json(units_serialised)
             }
             return res.json({ status: true, units: await conexao('units') })
         } catch (error) {
+            console.log(error)
             res.json({ error: true, message: error.sqlMessage });
         }
     },

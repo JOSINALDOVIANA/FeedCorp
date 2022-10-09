@@ -18,7 +18,7 @@ const CriarOKR = () => {
 
   useEffect(() => {
     setValues(dadosrota.state)
-    setOkr(a => ({ ...a, keys: [], id_user: dadosrota.state.dadosUser.id }))
+    setOkr({keys: [], id_user: dadosrota.state.dadosUser.id })
   }, [dadosrota])
   // console.log(values)
   // console.log(okr)

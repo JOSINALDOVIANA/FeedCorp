@@ -19,9 +19,9 @@ const CriarOKR = () => {
 
   useEffect(() => {
     setValues(dadosrota.state)
-    setOkr(a => ({ ...a, keys: [], id_user: dadosrota.state.dadosUser.id }))
+    setOkr({ keys: [], id_user: dadosrota.state.dadosUser.id,description:"" })
   }, [dadosrota])
-  console.log(values)
+  // console.log(values)
   // console.log(okr)
   
   return (
@@ -78,9 +78,9 @@ const CriarOKR = () => {
                     <div className="page-header">
                       <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Key Results</h2>
-                        <spam className="d-flex text-muted tx-13">
+                        <span className="d-flex text-muted tx-13">
                           Adicione o nome da sua Key result a cada um dos integrantes de sua unidade
-                        </spam>
+                        </span>
                       </div>
                     </div>
 
@@ -88,7 +88,7 @@ const CriarOKR = () => {
                       type="text"
                       className="form-control input-description"
                       placeholder="Key Result"
-                      value={okr?.description}
+                      value={okr.description}
                       onChange={(e) => { setOkr(a => ({ ...a, description: e.target.value })) }}
                     />
                   </Col>
@@ -97,9 +97,9 @@ const CriarOKR = () => {
                     <div className="page-header">
                       <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Integrantes</h2>
-                        <spam className="d-flex text-muted tx-13">
+                        <span className="d-flex text-muted tx-13">
                           Escolha o integrante para essa Key
-                        </spam>
+                        </span>
                       </div>
                     </div>
 
@@ -156,7 +156,7 @@ const CriarOKR = () => {
                   </tr>
                 </thead>
                 {okr?.keys?.map((key, index) => (
-                  <tbody>
+                  <tbody key={index}>
                     <tr>
                       <td>
                         <div className="ms-2 me-auto">{key.description}</div>
@@ -164,11 +164,12 @@ const CriarOKR = () => {
 
                       <td>
                         <div className="d-flex align-items-center mb-2 me-4">
+                          {key.user.url && 
                           <Image
                             alt="avatar"
                             className="wd-30 rounded-circle mg-r-15"
-                            src={key?.user.url}
-                          />
+                            src={key?.user?.url}
+                          />}
                           <div>
                             <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
                               {key.user.name}
@@ -179,14 +180,14 @@ const CriarOKR = () => {
                       </td>
 
                       <td>
-                        <i onClick={(index) => {
+                        <i onClick={() => {
                           let keys = []
                           for (const i in okr.keys) {
-                            if (i == index) {
+                            if (i != index) {
                               keys.push(okr.keys[i]);
                             }
                           }
-                          setOkr(a => ({ ...a, keys: keys }))
+                          setOkr(a => ({ ...a, keys }))
                         }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
                       </td>
                     </tr>

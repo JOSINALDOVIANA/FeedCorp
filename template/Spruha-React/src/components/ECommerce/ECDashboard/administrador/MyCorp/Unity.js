@@ -113,15 +113,20 @@ let UserlistData = [
 ];
 
 const Unidade = () => {
-    var Delete = (list) => {
-        let items = UserlistData.filter((userlist, i) => {
+    var Delete = (list, user) => {
+        let items = values?.selectUnit?.Colaboradores?.filter((userlist, i) => {
             return userlist.id !== list
         })
-        UserlistData = items
-        setdata(items)
+
+        api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r=>{
+            if(r.data.status){
+            }
+        })
+        setValues(a =>({...a,selectUnit:{...a.selectUnit,Colaboradores:items}}))
+        // setdata(items)
         // console.log(items);
     }
-    const [data, setdata] = useState(UserlistData)
+    // const [data, setdata] = useState(UserlistData)
 
     const dadosrota = useLocation();
     const navegar = useNavigate()
@@ -142,7 +147,7 @@ const Unidade = () => {
             {/* <!-- Page Header --> */}
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5">Unidade: </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5">Unidade: {values?.selectUnit?.description} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item
                             onClick={() => { navegar(`${process.env.PUBLIC_URL}/corporacao`, { state: values }) }}
@@ -199,19 +204,21 @@ const Unidade = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.map((item, index) => (
+                                        {values?.selectUnit?.Colaboradores?.map((item, index) => (
                                             <tr key={index}>
 
                                                 <td>
-                                                    <img
-                                                        alt="avatar"
-                                                        className="rounded-circle avatar-md me-3"
-                                                        src={item.Product1}
-                                                    />
-                                                    {item.ProductId}
+                                                    {item.image &&
+                                                        <img
+                                                            alt="avatar"
+                                                            className="rounded-circle avatar-md me-3"
+                                                            src={item.image.url}
+                                                        />
+                                                    }
+                                                    {item.name}
                                                 </td>
 
-                                                <td>{item.created}</td>
+                                                <td>{item.updated_at}</td>
 
                                                 {/* <td className="text-center">
                                                     <span className={`label text-${item.information} d-flex`}>
@@ -233,7 +240,7 @@ const Unidade = () => {
                                                         <i className="fe fe-edit-2"></i>
                                                     </Link>
 
-                                                    <Link to="#" className="btn btn-sm btn-danger me-1" onClick={() => { Delete(item.id) }}>
+                                                    <Link to="#" className="btn btn-sm btn-danger me-1" onClick={() => { Delete(item.id, item) }}>
                                                         <i className="fe fe-trash"></i>
                                                     </Link>
                                                 </td>

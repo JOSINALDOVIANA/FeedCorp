@@ -16,6 +16,12 @@ const Okr = () => {
 
 
     setValues(dadosrota.state);
+    let keys = dadosrota.state.okrselect.keys.map(key=>{
+      let user=key.user[0]
+      return {...key,user}
+    })
+
+    setValues(a=>({...a,okrselect:{...a.okrselect,keys}}));
 
   }, [dadosrota.state]);
 
@@ -76,18 +82,20 @@ const Okr = () => {
                   <tr>
                     <td className="wd-5p">
                       <div className="main-img-user avatar-md">
-                        <img
+                          {chave.user.url && 
+                           <img
                           alt="avatar"
                           className="rounded-circle avatar mx-1"
-                          src={chave.user[0].url}
+                          src={chave?.user?.url}
                         />
+                        }
                       </div>
                     </td>
                     <td>
                       <div className="d-flex align-middle ms-3">
                         <div className="d-inline-block">
                           <h6 className="tx-13 tx-inverse tx-semibold mg-b-0" >
-                            {chave.user[0].name.toUpperCase()}
+                            {chave?.user?.name?.toUpperCase()}
                           </h6>
                           <span className="mb-0 text-muted">{chave.description}</span>
                         </div>

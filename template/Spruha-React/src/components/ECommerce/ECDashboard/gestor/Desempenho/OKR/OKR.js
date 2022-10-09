@@ -44,7 +44,7 @@ const Okr = () => {
 
       let keys = okr.keys.map(key => {
         let user = [];
-        api.get(`/user/getAll?id=${key?.id_user}`).then(r => {
+        api.get(`/user/getAll?id=${key.id_user}`).then(r => {
           // console.log(r)
           user.push({ ...r?.data?.Users })
 
