@@ -5,6 +5,7 @@ import { Breadcrumb, Card, Col, Row, Table, Button } from "react-bootstrap";
 import { Bar, Pie, Radar, Line, Doughnut, PolarArea } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
 import { useLocation, useNavigate } from "react-router-dom";
+import api from "../../../../../api";
 
 ChartJS.register(...registerables);
 
@@ -21,7 +22,7 @@ function MinhaCorporacao() {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
     setValues(dadosrota.state);
-
+  api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a=>({...a,units:r.data}))});
   }, [dadosrota])
 
   return (
@@ -35,7 +36,19 @@ function MinhaCorporacao() {
             <Breadcrumb.Item active >  Unidades  </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-
+        <div className="d-flex justify-content-between w-50">
+                    <div className="justify-content-center">
+                        <Button variant="primary" onClick={()=>{navegar("/adm_add_user",{state:values})}} type="button" className="my-2 btn-icon-text">
+                            <i className="fe fe-download-cloud me-2"></i> Criar Usuario
+                        </Button>
+                    </div>
+                    <div className="justify-content-center">
+                        <Button variant="primary" type="button" onClick={()=>{navegar("/adm_add_unidade",{state:values})}} className="my-2 btn-icon-text">
+                            <i className="fe fe-download-cloud me-2" ></i> Criar Unidade
+                        </Button>
+                    </div>
+                </div>
+        
         {/* <div className="d-flex">
           <div className="justify-content-center">
             <Button
@@ -78,7 +91,7 @@ function MinhaCorporacao() {
                 <div className="d-flex justify-content-between">
                   <div className="volume">
                     <h4 className="mb-2">
-                      {unit.initials}
+                      {unit.initials.toUpperCase()}
                     </h4>
 
                   </div>

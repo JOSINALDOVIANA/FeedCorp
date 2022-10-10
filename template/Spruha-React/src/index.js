@@ -1,6 +1,8 @@
 import React, { Fragment, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreateUnity from "./components/ECommerce/ECDashboard/administrador/MyCorp/create_unity";
+import CreateUser from "./components/ECommerce/ECDashboard/administrador/MyCorp/create_user";
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
 //LandingPage
@@ -74,186 +76,189 @@ const Root = () => {
 
   return (
     <Fragment>
-      
-        <BrowserRouter>
 
-          <React.Suspense fallback={<Loader />}>
-            <Routes>
-              {/* rotas nivel 1 */}
-              <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
-              <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
-              <Route path={`${process.env.PUBLIC_URL}/cadastro`} element={<Signup />} />
-              <Route path={`${process.env.PUBLIC_URL}/esqueceu_senha`} element={<Forgotpassword />} />
-              <Route path={`${process.env.PUBLIC_URL}/images`} element={<Images />} />
+      <BrowserRouter>
 
-              {/* rota nivel 1 aninhada */}
-              <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
-                <Route index element={<ECDashboard />} />
+        <React.Suspense fallback={<Loader />}>
+          <Routes>
+            {/* rotas nivel 1 */}
+            <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
+            <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
+            <Route path={`${process.env.PUBLIC_URL}/cadastro`} element={<Signup />} />
+            <Route path={`${process.env.PUBLIC_URL}/esqueceu_senha`} element={<Forgotpassword />} />
+            <Route path={`${process.env.PUBLIC_URL}/images`} element={<Images />} />
 
-                <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/perfil`} element={<Profile />} />
-                </Route>
+            {/* rota nivel 1 aninhada */}
+            <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
+              <Route index element={<ECDashboard />} />
 
-                {/* rota nivel 2 aninhada */}
+              <Route>
+                <Route path={`${process.env.PUBLIC_URL}/perfil`} element={<Profile />} />
+              </Route>
 
-                <Route path={`${process.env.PUBLIC_URL}/dashboard/`} element={<ECDashboard />} >
-                  <Route index element={<Fragment />} />
+              {/* rota nivel 2 aninhada */}
 
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/dashboard/recebidos`}
-                    element={<FeedRecebidos />}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/dashboard/feitos`}
-                    element={<FeedFeitos />}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/dashboard/objetivos`}
-                    element={<Objetivos />}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/dashboard/pesquisas`}
-                    element={<Pesquisas />}
-                  />
-
-                </Route>
-                
-                <Route>
-                  <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
-                </Route>
-
-                {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
-                <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
-                <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
-                <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
-                {/* ------------------------------OKR------------------------------------------ */}
-
-                <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
-                  <Route index element={<Fragment />} />
-                </Route>
-                {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/okr/criar_okr`}
-                  element={<CriarOkr />}
-                />
+              <Route path={`${process.env.PUBLIC_URL}/dashboard/`} element={<ECDashboard />} >
+                <Route index element={<Fragment />} />
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr/progresso_okr`}
-                  element={<ProgressoOKR />}
-                />
-
-
-
-                {/* ------------------------------AVR------------------------------------------ */}
-
-                <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
-                  <Route index element={<Fragment />} />
-
-                </Route>
-
-                {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
-                  element={<CriarAvpr />}
+                  path={`${process.env.PUBLIC_URL}/dashboard/recebidos`}
+                  element={<FeedRecebidos />}
                 />
                 <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`}
-                  element={<ProgressoAVPR />}
+                  path={`${process.env.PUBLIC_URL}/dashboard/feitos`}
+                  element={<FeedFeitos />}
                 />
-                {/* ------------------------------CLIMA PULSO------------------------------------------ */}
-                <Route>
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso`}
-                    element={<ClimaPulso />} >
-                  </Route>
-
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso/`}
-                    element={<CriarClima />}
-                  />
-
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso/configuracoes/`}
-                    element={<ConfigurarClima />}
-                  />
-
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso/resultado/`}
-                    element={<ResultadosClima />}
-                  />
-
-                </Route>
-
-                {/* ------------------------------GESTOR PÁGINAS-------------------------------- */}
-                <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
-                {/* OKR GESTOR */}
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr_unidade`}
-                  element={<Okr_gestor />} >
+                  path={`${process.env.PUBLIC_URL}/dashboard/objetivos`}
+                  element={<Objetivos />}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/pesquisas`}
+                  element={<Pesquisas />}
+                />
+
+              </Route>
+
+              <Route>
+                <Route path={`${process.env.PUBLIC_URL}/dashboard/novo_feedback`} element={<NovoFeedback />} />
+              </Route>
+
+              {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
+              <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
+              <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_add_unidade`} element={<CreateUnity />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
+
+              <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
+              {/* ------------------------------OKR------------------------------------------ */}
+
+              <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
+                <Route index element={<Fragment />} />
+              </Route>
+              {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
+              <Route
+                path={`${process.env.PUBLIC_URL}/okr/criar_okr`}
+                element={<CriarOkr />}
+              />
+
+              <Route
+                path={`${process.env.PUBLIC_URL}/okr/progresso_okr`}
+                element={<ProgressoOKR />}
+              />
+
+
+
+              {/* ------------------------------AVR------------------------------------------ */}
+
+              <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
+                <Route index element={<Fragment />} />
+
+              </Route>
+
+              {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
+              <Route
+                path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/criar_avpr`}
+                element={<CriarAvpr />}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`}
+                element={<ProgressoAVPR />}
+              />
+              {/* ------------------------------CLIMA PULSO------------------------------------------ */}
+              <Route>
+                <Route
+                  path={`${process.env.PUBLIC_URL}/climapulso`}
+                  element={<ClimaPulso />} >
                 </Route>
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr_unidade/criar_okr`}
-                  element={<CriarOkr_gestor />}
+                  path={`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso/`}
+                  element={<CriarClima />}
                 />
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`}
-                  element={<ProgressoOKR_gestor />}
-                />
-                {/* OKR final */}
-                {/* AVPR GESTOR */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`}
-                  element={<Avpr_gestor />}
+                  path={`${process.env.PUBLIC_URL}/climapulso/configuracoes/`}
+                  element={<ConfigurarClima />}
                 />
 
                 <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr`}
-                  element={<CriarAvpr_gestor />}
+                  path={`${process.env.PUBLIC_URL}/climapulso/resultado/`}
+                  element={<ResultadosClima />}
                 />
+
+              </Route>
+
+              {/* ------------------------------GESTOR PÁGINAS-------------------------------- */}
+              <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
+              {/* OKR GESTOR */}
+              <Route
+                path={`${process.env.PUBLIC_URL}/okr_unidade`}
+                element={<Okr_gestor />} >
+              </Route>
+
+              <Route
+                path={`${process.env.PUBLIC_URL}/okr_unidade/criar_okr`}
+                element={<CriarOkr_gestor />}
+              />
+
+              <Route
+                path={`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`}
+                element={<ProgressoOKR_gestor />}
+              />
+              {/* OKR final */}
+              {/* AVPR GESTOR */}
+              <Route
+                path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`}
+                element={<Avpr_gestor />}
+              />
+
+              <Route
+                path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr`}
+                element={<CriarAvpr_gestor />}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR`}
+                element={<ProgressoAVPR_gestor />}
+              />
+              {/* AVPR FINAL */}
+              {/*CLIMA PULSO GESTOR */}
+              <Route>
                 <Route
-                  path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR`}
-                  element={<ProgressoAVPR_gestor />}
+                  path={`${process.env.PUBLIC_URL}/climapulso_unidade`}
+                  element={<ClimaPulso_gestor />}
                 />
-                {/* AVPR FINAL */}
-                {/*CLIMA PULSO GESTOR */}
-                <Route>
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso_unidade`}
-                    element={<ClimaPulso_gestor />}
-                  />
 
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso/`}
-                    element={<CriarClima_gestor />}
-                  />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso/`}
+                  element={<CriarClima_gestor />}
+                />
 
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes/`}
-                    element={<ConfigurarClima_gestor />}
-                  />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes/`}
+                  element={<ConfigurarClima_gestor />}
+                />
 
-                  <Route
-                    path={`${process.env.PUBLIC_URL}/climapulso_unidade/resultado/`}
-                    element={<ResultadosClima_gestor />}
-                  />
-
-                </Route>
-
+                <Route
+                  path={`${process.env.PUBLIC_URL}/climapulso_unidade/resultado/`}
+                  element={<ResultadosClima_gestor />}
+                />
 
               </Route>
 
 
-              {/* ........................................Errorpage............................................... */}
-              <Route path="*" element={<Error404 />} />
-            </Routes>
+            </Route>
 
 
-          </React.Suspense>
+            {/* ........................................Errorpage............................................... */}
+            <Route path="*" element={<Error404 />} />
+          </Routes>
 
-        </BrowserRouter>
-     
+
+        </React.Suspense>
+
+      </BrowserRouter>
+
     </Fragment>
   );
 };

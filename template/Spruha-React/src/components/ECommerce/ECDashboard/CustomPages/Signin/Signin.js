@@ -35,7 +35,7 @@ const Signin = () => {
     let unit;
     let status;
     let image = {};
-    let units;
+    // let units;
     let company = [];
     let okrscriados = [];
     let cargo;
@@ -60,9 +60,14 @@ const Signin = () => {
     if (status) {
 
       await api.get(`/images/listar?nameuser=${e.target["e-mail"].value.includes("@") ? "" : e.target["e-mail"].value}&email=${e.target["e-mail"].value.includes("@") ? e.target["e-mail"].value : ""}`).then(r => { image = r.data.dados });
-      await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
+      // await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
       if (permanecer) {
-        localStorage.setItem("values", JSON.stringify({ dadosUser, image, permissions, units, unit }))
+        localStorage.setItem("values", JSON.stringify({
+           dadosUser, 
+           image,
+            permissions,
+            // units, 
+            unit }))
       }
       await api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(async r => {
         let okrs = r?.data?.okrs;
@@ -84,7 +89,16 @@ const Signin = () => {
 
       })
 
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit, company, okrscriados, pulsesCreate: [], cargo } });
+      await navegar(`${process.env.PUBLIC_URL}/`, { state: { 
+        dadosUser, 
+        image,
+         permissions,
+        //  units, 
+         unit, 
+         company,
+         okrscriados,
+         pulsesCreate: [], 
+         cargo } });
     }
 
   };
