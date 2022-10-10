@@ -77,18 +77,18 @@ const TASKS = [
   },
 ];
 function Dashboard() {
-  const rotadados=useLocation();
+  const rotadados = useLocation();
   // console.log(rotadados.state)
-  const navegar=useNavigate()
-  const {values,setValues}=useContext(usuarioContext);
-  useEffect(()=>{
-    if(rotadados.state){
+  const navegar = useNavigate()
+  const { values, setValues } = useContext(usuarioContext);
+  useEffect(() => {
+    if (rotadados.state) {
       setValues(rotadados.state)
-    }else{
+    } else {
       navegar(`${process.env.PUBLIC_URL}/home`);
     }
 
-  },[])
+  }, [])
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -497,7 +497,7 @@ function Dashboard() {
                   <div className=" tasks">
                     <Table responsive hover
                       className="card-table table-vcenter text-nowrap mb-0
-border hover"  >
+                        border hover"  >
                       <thead>
                         <tr>
                           <th className="wd-lg-10p">Task</th>
