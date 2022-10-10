@@ -262,7 +262,7 @@ function Profile() {
                   {/* PAINEL SEGURANÇA */}
                   <Tab.Pane
                     eventKey="security"
-                    className="tab-pane "
+                    className="tab-pane"
                     id="security"
                     role="tabpanel">
 

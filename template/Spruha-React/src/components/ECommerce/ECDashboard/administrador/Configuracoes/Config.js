@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
-import { Breadcrumb, Col, Button, Nav, Card, Row } from "react-bootstrap";
+import { Breadcrumb, Col, Button, Nav, Card, Row, Tab } from "react-bootstrap";
 
 function Settings() {
     const dadosrota = useLocation();
@@ -43,479 +43,254 @@ function Settings() {
                 </div>
             </div> */}
             </div>
-            <Row className="row-sm">
-                <Col lg={4} xl={3}>
-                    <Card className="custom-card">
-                        <Card.Header>
-                            <div>
-                                <h3 className="card-title tx-18">
-                                    <label className="main-content-label tx-15">Administração</label>
-                                </h3>
-                            </div>
-                        </Card.Header>
-                        <Card.Body>
-                            <div className="main-content-left main-content-left-mail">
-                                <div className="main-mail-menu">
-                                    <Nav className="nav main-nav-column mg-b-20" defaultActiveKey="/home">
 
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="home" className="thumb  mb-2">
-                                                <i className="fe fe-user"></i> Minha conta
-                                            </Nav.Link>
-                                        </Nav.Item>
 
-                                        {/* VAI ME SERVIR NO FUTURO */}
-                                        {/*<Nav.Item>
+            <Tab.Container defaultActiveKey='edit'>
+                <Row className="row-sm">
+                    <Col lg={4} xl={3}>
+                        <Card className="custom-card">
+                            <Card.Header>
+                                <div>
+                                    <h3 className="card-title tx-18">
+                                        <label className="main-content-label tx-15">Administração</label>
+                                    </h3>
+                                </div>
+                            </Card.Header>
+                            <Card.Body>
+                                <div className="main-content-left main-content-left-mail">
+                                    <div className="main-mail-menu">
+                                        <Nav className="nav main-nav-column mg-b-20" defaultActiveKey="/edit">
+
+                                            {/* <Nav.Item>
+                                                <Nav.Link eventKey="home" className="thumb  mb-2"
+                                                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/perfil`, { state: values }) }}>
+                                                    <i className="fe fe-user"></i> Minha conta
+                                                </Nav.Link>
+                                            </Nav.Item> */}
+
+                                            <Nav.Item>
+                                                <Nav.Link className="thumb mb-2" eventKey="edit">
+                                                    <i className="fe fe-edit-2"></i> Edições
+                                                </Nav.Link>
+                                            </Nav.Item>
+
+                                            <Nav.Item>
+                                                <Nav.Link className="thumb mb-2" eventKey="corp">
+                                                    <i className="bi-building"></i> Corporação
+                                                </Nav.Link>
+                                            </Nav.Item>
+
+                                            {/* VAI ME SERVIR NO FUTURO */}
+                                            {/*<Nav.Item>
                                         <Nav.Link eventKey="Privacy&Security" className="thumb mb-2">
                                             <i className="fe fe-lock"></i> Privacy & Security
                                         </Nav.Link>
                                          */}
 
-                                        <Nav.Item>
-                                            <Nav.Link className="thumb mb-2" eventKey="General">
-                                                <i className="fe fe-edit-2"></i> Editar
-                                            </Nav.Link>
-                                        </Nav.Item>
-                                        {/*
-                                            <Nav.Item>
-                                            <Nav.Link className="thumb mb-2" eventKey="Help">
-                                                <i className="fe fe-info"></i> Help & Support
-                                            </Nav.Link>
-                                        </Nav.Item> */}
-
-
-                                        {/* <Nav.Item>
+                                            {/* <Nav.Item>
                                             <Nav.Link className="thumb mb-2" eventKey="Emails">
                                                 <i className="fe fe-mail"></i> Emails
                                             </Nav.Link>
                                         </Nav.Item> */}
 
 
-                                        {/* <Nav.Item>
+                                            {/* <Nav.Item>
                                             <Nav.Link className="thumb mb-2" eventKey="Language">
                                                 <i className="fe fe-flag"></i> Language & Region
                                             </Nav.Link>
                                         </Nav.Item> */}
 
 
-                                        {/* <Nav.Item>
+                                            {/* <Nav.Item>
                                             <Nav.Link className="thumb mb-2" eventKey="Notifications">
                                                 <i className="fe fe-bell"></i> Notifications
                                             </Nav.Link>
                                         </Nav.Item> */}
 
-                                        {/* <Nav.Item>
+                                            {/* <Nav.Item>
                                             <Nav.Link className="thumb mb-2" eventKey="Blog">
                                                 <i className="fe fe-settings"></i> Blog
                                             </Nav.Link>
                                         </Nav.Item> */}
-                                    </Nav>
+                                        </Nav>
+                                    </div>
                                 </div>
-                            </div>
-                        </Card.Body>
-                        <Card.Footer className="px-4 ">
+                            </Card.Body>
+                            {/* <Card.Footer className="px-4 ">
                             <Button variant="primary" className="w-lg">Save Changes</Button>
-                        </Card.Footer>
-                    </Card>
-                </Col>
-                <Col lg={8} xl={9}>
-                    <Row className="row-sm">
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-home fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Dashboard
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        Dashboard Settings such as sidemenu,header and main
-                                                        page can be Controlled.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                        </Card.Footer> */}
+                        </Card>
+                    </Col>
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-layout-grid2 fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Web Apps
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        Web apps settings such as Apps,Elements,Advanced Ui &
-                                                        Mail can be Controlled.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                    <Col lg={8} xl={9}>
+                        <Tab.Content>
+                            <Tab.Pane
+                                eventKey='edit'>
+                                <Row className="row-sm">
+                                    <Col xl={6}>
+                                        <Card className="custom-card"
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => {
+                                                navegar(`${process.env.PUBLIC_URL}/adm_add_user/`, { state: values })
+                                            }}>
+                                            <Card.Body>
+                                                <Row>
+                                                    <Col lg={12}>
+                                                        <div className="d-flex">
+                                                            <div className="settings-main-icon me-4 mt-1">
+                                                                <div className="avatar avatar-md bg-primary-transparent text-primary">
+                                                                    <i className="bi-person-plus fs-18"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
+                                                                    Adicionar Usuário
+                                                                </h5>
+                                                                <p className="tx-13 text-muted mb-0">
+                                                                    Crie e adicione usuários em unidades da corporação.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                    <Col xl={6}>
+                                        <Card className="custom-card"
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => {
+                                                navegar(`${process.env.PUBLIC_URL}/adm_edit_user`, { state: values })
+                                            }}>
+                                            <Card.Body>
+                                                <Row>
+                                                    <Col lg={12}>
+                                                        <div className="d-flex">
+                                                            <div className="settings-main-icon me-4 mt-1">
+                                                                <div className="avatar avatar-md bg-primary-transparent text-primary">
+                                                                    <i className="bi-person-lines-fill fs-18"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
+                                                                    Editar Usuário
+                                                                </h5>
+                                                                <p className="tx-13 text-muted mb-0">
+                                                                    Edite cargos, permissões, informações pessoais e
+                                                                    remaneje usuários.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                    <Col xl={6}>
+                                        <Card className="custom-card"
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => {
+                                                navegar(`${process.env.PUBLIC_URL}/adm_add_unidade/`, { state: values })
+                                            }}>
+                                            <Card.Body>
+                                                <Row>
+                                                    <Col lg={12}>
+                                                        <div className="d-flex">
+                                                            <div className="settings-main-icon me-4 mt-1">
+                                                                <div className="avatar avatar-md bg-primary-transparent text-primary">
+                                                                    <i className="bi-plus-square fs-18"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
+                                                                    Adicionar Unidade
+                                                                </h5>
+                                                                <p className="tx-13 text-muted mb-0">
+                                                                    Crie unidades e adicione usuários
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                    <Col xl={6}>
+                                        <Card className="custom-card"
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => {
+                                                navegar(`${process.env.PUBLIC_URL}/adm_edit_unidade/`, { state: values })
+                                            }}>
+                                            <Card.Body>
+                                                <Row>
+                                                    <Col lg={12}>
+                                                        <div className="d-flex">
+                                                            <div className="settings-main-icon me-4 mt-1">
+                                                                <div className="avatar avatar-md bg-primary-transparent text-primary">
+                                                                    <i className="bi-pen fs-18"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
+                                                                    Editar Unidade
+                                                                </h5>
+                                                                <p className="tx-13 text-muted mb-0">
+                                                                    Edite unidades criadas
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                            </Tab.Pane>
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                            defaultChecked
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-pencil fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        General
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        General settings such as Icons,Charts,Ecommerce can be
-                                                        Controlled.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                            <Tab.Pane eventKey='corp'>
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                            defaultChecked
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-flag-alt-2 fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Language & Region
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        In this settings we can change the region and language
-                                                        manually.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                                <Card className="custom-card">
+                                    <Card.Body>
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-bell fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Notification
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        Notification settings we can control the notification
-                                                        privacy and security.
-                                                    </p>
-                                                </div>
+                                        <div className="d-flex">
+                                            <div>
+                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
+                                                    Dados de sua empresa
+                                                </h5>
+                                                <p className="tx-13 text-muted mb-0">
+                                                    Aqui ficam os dados gerais de sua empresa.
+                                                </p>
                                             </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                                        </div>
+                                    </Card.Body>
+                                    <Card.Footer className="">
+                                        <div className="custom-switch float-end mb-0">
+                                            <Link
+                                                to="#"
+                                                className="tx-15 mb-0 me-2"
+                                            >
+                                                Salvar
+                                            </Link>
+                                            <Button
+                                                eventKey='edit'
+                                                onClick={() => { navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values }) }}
+                                                size='sm'
+                                                variant="outline-danger btn-rounded"
+                                                className="mb-0"
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                            defaultChecked
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-settings fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Blog
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        In this settings we can modify all Blog related
-                                                        settings in this template.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                                            >
+                                                cancelar
+                                            </Button>
+                                        </div>
+                                    </Card.Footer>
+                                </Card>
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-lock fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Privacy & Security
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        In this we can control the privacy related settings.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
+                            </Tab.Pane>
 
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="custom-card">
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={12}>
-                                            <div className="d-flex">
-                                                <div className="settings-main-icon me-4 mt-1">
-                                                    <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                        <i className="ti-info-alt fs-18"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                        Help & Support
-                                                    </h5>
-                                                    <p className="tx-13 text-muted mb-0">
-                                                        In this we can know about how to change settings.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                                <Card.Footer className="">
-                                    <Link
-                                        to="#"
-                                        className="tx-14 mb-0"
-                                    >
-                                        Go to Settings
-                                    </Link>
-                                    <label className="custom-switch float-end mb-0">
-                                        <Link
-                                            to="#"
-                                            className="tx-14 mb-0 me-2 text-dark"
-                                        >
-                                            Restore default
-                                        </Link>
-                                        <input
-                                            type="checkbox"
-                                            name="custom-switch-checkbox"
-                                            className="custom-switch-input"
-                                            defaultChecked
-                                        />
-                                        <span className="custom-switch-indicator"></span>
-                                    </label>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+                        </Tab.Content>
+                    </Col>
+                </Row>
+            </Tab.Container>
         </Fragment >
     )
 };

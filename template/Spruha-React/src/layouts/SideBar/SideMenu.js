@@ -79,7 +79,7 @@ export const MENUADM = [
 				]
 			},
 			{
-				title: 'Configurações (admin)',
+				title: 'Administração',
 				icon: 'ti-settings',
 				type: 'link',
 				active: false,

@@ -15,14 +15,14 @@ function MinhaCorporacao() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
-  const [ values, setValues ] = useState({});
+  const [values, setValues] = useState({});
 
   useEffect(() => {
     if (!dadosrota.state) {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
     setValues(dadosrota.state);
-  api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a=>({...a,units:r.data}))});
+    api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
 
   return (
@@ -36,19 +36,14 @@ function MinhaCorporacao() {
             <Breadcrumb.Item active >  Unidades  </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        <div className="d-flex justify-content-between w-50">
-                    <div className="justify-content-center">
-                        <Button variant="primary" onClick={()=>{navegar("/adm_add_user",{state:values})}} type="button" className="my-2 btn-icon-text">
-                            <i className="fe fe-download-cloud me-2"></i> Criar Usuario
-                        </Button>
-                    </div>
-                    <div className="justify-content-center">
-                        <Button variant="primary" type="button" onClick={()=>{navegar("/adm_add_unidade",{state:values})}} className="my-2 btn-icon-text">
-                            <i className="fe fe-download-cloud me-2" ></i> Criar Unidade
-                        </Button>
-                    </div>
-                </div>
-        
+
+        <div className="justify-content-center">
+          <Button variant="primary" type="button" onClick={() => { navegar("/configuracoes/", { state: values }) }} className="my-2 btn-icon-text">
+            <i className="fe fe-settings me-2" ></i> Configurações
+          </Button>
+
+        </div>
+
         {/* <div className="d-flex">
           <div className="justify-content-center">
             <Button
@@ -81,9 +76,9 @@ function MinhaCorporacao() {
 
         {values?.units?.map(unit => (
           <Col key={unit.id} lg={3} xl={3} xxl={3} md={6}>
-            <Card className="custom-card" 
-            style={{cursor: "pointer"}}
-            onClick={() => { navegar(`${process.env.PUBLIC_URL}/unidades`, { state: {...values,selectUnit:unit} }) }}
+            <Card className="custom-card"
+              style={{ cursor: "pointer" }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/unidades`, { state: { ...values, selectUnit: unit } }) }}
             >
               <Card.Body className="">
                 <h5 className="tx-14">Unidade</h5>
@@ -103,7 +98,7 @@ function MinhaCorporacao() {
                   </h2>
 
                 </div>
-                
+
                 <div className="text-muted tx-13">
                   {/* <span className="text-danger me-2 font-weight-bold">{unit.cols}</span> */}
                   {unit.description}
@@ -114,7 +109,7 @@ function MinhaCorporacao() {
         ))}
 
       </Row>
-      
+
       {/* GRÁFICO EM BARRA */}
       <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">

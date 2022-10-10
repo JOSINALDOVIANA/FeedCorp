@@ -1,8 +1,6 @@
 import React, { Fragment, createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CreateUnity from "./components/ECommerce/ECDashboard/administrador/MyCorp/create_unity";
-import CreateUser from "./components/ECommerce/ECDashboard/administrador/MyCorp/create_user";
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
 //LandingPage
@@ -13,8 +11,13 @@ const Images = React.lazy(() => import("./images/index.js"));
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
 const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
-const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
 const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
+// ADMIN CONFIG
+const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
+const CreateUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_unity"));
+const CreateUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_user"));
+const EditUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/edit_unity"));
+const EditUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/edit_user"));
 //INÍCIO
 const FeedRecebidos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedRecebidos"))
 const FeedFeitos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedFeitos"))
@@ -127,10 +130,13 @@ const Root = () => {
               {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
               <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
               <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
-              <Route path={`${process.env.PUBLIC_URL}/adm_add_unidade`} element={<CreateUnity />} />
-              <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
 
               <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_add_unidade`} element={<CreateUnity />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_edit_unidade`} element={<EditUnity />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_edit_user`} element={<EditUser />} />
+
               {/* ------------------------------OKR------------------------------------------ */}
 
               <Route path={`${process.env.PUBLIC_URL}/okr`} element={<Okr />} >
