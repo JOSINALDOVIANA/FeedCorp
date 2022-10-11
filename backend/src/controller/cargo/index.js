@@ -12,9 +12,12 @@ export default {
         }
     },
     async select(req, res) {
-        let { id } = req.query;
+        let { id=false,id_company=false ,id_user=false} = req.query;
         try {
-            let cargo = !!id ? await conexao("positions").where({ "id": id }).first() : await conexao("positions");
+            let cargo = id ? await conexao("positions").where({ "id": id }).first() : 
+            id_company?await conexao("positions").where({id_company}):
+            id_user?await conexao("positions").where({id_user}):await conexao("positions")
+            ;
             return res.json({ status: true, cargo });
         } catch (error) {
             console.log(error)

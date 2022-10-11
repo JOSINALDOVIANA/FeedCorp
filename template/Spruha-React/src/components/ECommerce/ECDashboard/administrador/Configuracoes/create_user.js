@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Card, Form, Col, Row, Table, InputGroup } from "react-bootstrap";
+import  MultiSelect  from "react-select";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import api from "../../../../../api";
 
@@ -8,26 +9,56 @@ function CreateUser() {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event.preventDefault()
+    console.log(values)
+    console.log(event)
 
-    setValidated(true);
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
+
+    // setValidated(true);
+     api.post(`user/insert`,{...values.usercreate}).then(r=>{
+      if(r.data.status){
+        alert("dados salvos")
+        setValues(a=>({...a,usercreate:""}))
+      }
+     })
   };
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
   const [values, setValues] = useState(dadosrota.state);
-  const [carregados, setCarregados] = useState(false)
+  
 
   useEffect(() => {
-    setValues(dadosrota.state)
+    setValues({...dadosrota.state,usercreate:{
+  "name":"",
+	"nameuser":"",
+	"email":"",	
+	"password":"",	
+	"id_image":null,	
+	"id_permission":"",
+	"id_unit" : "",
+	"id_company" :dadosrota.state.company.id ,
+	"id_creator" : dadosrota.state.dadosUser.id,
+	"id_office":null
+    }})
+    api.get(`cargos/get?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
+      setValues(a=>({...a,cargos:r.data.cargo}))
+       })
+    api.get(`permission/get`).then(r=>{
+      setValues(a=>({...a,permissionscreate:r.data.permissions}))
+       })
 
   }, [dadosrota.state])
-  // console.log(values)
-
+  console.log(values)
+// function handleSubmit(e){
+//   console.log(e)
+//   console.log(values)
+// }
   return (
     <Fragment>
       <div className="page-header">
@@ -87,9 +118,11 @@ function CreateUser() {
                     </Form.Label>
                     <Form.Control
                       required
+                      value={values?.usercreate?.name}
                       name="Nome"
                       placeholder="Nome Completo"
                       type="text"
+                      onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,name:e.target.value}}))}}
                     />
                     <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
                   </Form.Group>
@@ -103,9 +136,39 @@ function CreateUser() {
                         type="text"
                         aria-describedby="inputGroupPrepend3"
                         required
+                        value={values?.usercreate?.nameuser}
+                        onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,nameuser:e.target.value}}))}}
                       />
                     </InputGroup>
                   </Form.Group>
+                </Row>
+                <Row>
+                  <Form.Group className="col-md-8 form-group" controlid="">
+                    <Form.Label>
+                     password: <span className="tx-danger">*</span>
+                    </Form.Label>
+                    <Form.Control
+                      required
+                      name="password"
+                      placeholder="Nome Completo"
+                      type="password"
+                      value={values?.usercreate?.password}
+                      onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,password:e.target.value}}))}}
+                    />
+                    <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
+                  </Form.Group>
+{/* 
+                  <Form.Group className="col-md-4 form-group" controlid=""                  >
+                    <Form.Label className="form-label">Confir. password</Form.Label>
+                    <InputGroup hasValidation>
+                      <InputGroup.Text id="inputGroupPrepend3">@</InputGroup.Text>
+                      <Form.Control
+                        type="text"
+                        aria-describedby="inputGroupPrepend3"
+                        required
+                      />
+                    </InputGroup>
+                  </Form.Group> */}
                 </Row>
 
                 <Form.Group className="form-group" controlid="">
@@ -117,8 +180,48 @@ function CreateUser() {
                     name="Email"
                     placeholder="Email"
                     type="text"
+                    value={values?.usercreate?.email}
+                    onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,email:e.target.value}}))}}
                   />
                   <Form.Control.Feedback>Email válido!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="form-group" controlid="">
+                  <Form.Label>
+                   Unidade : <span className="tx-danger">*</span>
+                  </Form.Label>
+                  <div>
+                    <MultiSelect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2"
+                      onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,id_unit:e.value}}))}}
+                      options={values?.units?.map(und=>({value: und.id, label: und.initials}))} singleSelect displayValue="key" placeholder="Integrante" />
+                  </div>
+                  <Form.Control.Feedback>Unidade inválida!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="form-group" controlid="">
+                  <Form.Label>
+                   Cargo de: <span className="tx-danger">*</span>
+                  </Form.Label>
+                  <div>
+                    <MultiSelect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2"
+                      // onChange={(e) => { setOkr(a => ({ ...a, user: unit?.users?.filter(col => col.id == e.value) })) }}
+                      onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,id_office:e.value}}))}}
+                      options={values?.cargos?.map(r=>({value:r.id,label:r.office}))} singleSelect displayValue="key" placeholder="Integrante" />
+                  </div>
+                  <Form.Control.Feedback>Cargo invalido!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="form-group" controlid="">
+                  <Form.Label>
+                   Permissões de: <span className="tx-danger">*</span>
+                  </Form.Label>
+                  <div>
+                    <MultiSelect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2"
+                      // onChange={(e) => { setOkr(a => ({ ...a, user: unit?.users?.filter(col => col.id == e.value) })) }}
+                      onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,id_permission:e.value}}))}}
+                      options={values?.permissionscreate?.map(r=>({value:r.id,label:r.description}))} singleSelect displayValue="key" placeholder="Integrante" />
+                  </div>
+                  <Form.Control.Feedback>permisão inválida!</Form.Control.Feedback>
                 </Form.Group>
 
                 <Button

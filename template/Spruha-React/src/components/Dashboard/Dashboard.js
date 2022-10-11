@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, BreadcrumbItem, Dropdown, ProgressBar, Row, Col, Table, Card, Container, Button, } from "react-bootstrap";
 import user1 from "../../assets/img/users/1.jpg";
 import user2 from "../../assets/img/users/2.jpg";
@@ -80,7 +80,7 @@ function Dashboard() {
   const rotadados = useLocation();
   // console.log(rotadados.state)
   const navegar = useNavigate()
-  const { values, setValues } = useContext(usuarioContext);
+  const  [values, setValues]  = useState({});
   useEffect(() => {
     if (rotadados.state) {
       setValues(rotadados.state)
