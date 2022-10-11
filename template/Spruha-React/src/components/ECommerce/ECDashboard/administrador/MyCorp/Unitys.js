@@ -1,116 +1,8 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Breadcrumb, Card, Col, Row, Button, Table, Dropdown, Pagination } from "react-bootstrap";
+import * as Modal from "../../Components/Modal"
 import api from "../../../../../api";
-
-import user1 from "../../../../../assets/img/users/1.jpg";
-import user2 from "../../../../../assets/img/users/2.jpg";
-import user3 from "../../../../../assets/img/users/3.jpg";
-import user4 from "../../../../../assets/img/users/4.jpg";
-import user5 from "../../../../../assets/img/users/5.jpg";
-import user6 from "../../../../../assets/img/users/6.jpg";
-import user7 from "../../../../../assets/img/users/7.jpg";
-import user9 from "../../../../../assets/img/users/9.jpg";
-import user12 from "../../../../../assets/img/users/12.jpg";
-import user11 from "../../../../../assets/img/users/11.jpg";
-
-let UserlistData = [
-    {
-        id: 1,
-        Product1: user1,
-        ProductId: "Megan Peters",
-        created: "08/06/2022",
-        status: "Inactive",
-        email: "mila@Kunis.com",
-        information: "danger"
-
-    },
-    {
-        id: 2,
-        Product1: user2,
-        ProductId: "George Clooney",
-        created: "08/06/2022",
-        status: "active",
-        email: "	marlon@brando.com",
-        information: "success"
-    },
-    {
-        id: 3,
-        Product1: user3,
-        ProductId: "Ryan Gossling	",
-        created: "08/06/2022",
-        status: "Banned",
-        email: "jack@nicholson",
-        information: "danger"
-    },
-    {
-        id: 4,
-        Product1: user4,
-        ProductId: "Emma Watson",
-        created: "16/06/2022",
-        status: "Pending",
-        email: "jack@nicholsonm",
-        information: "warning"
-
-    },
-    {
-        id: 5,
-        Product1: user5,
-        ProductId: "Mila Kunis",
-        created: "18/06/2022",
-        status: "active",
-        information: "success",
-        email: "mila@Kunis.com",
-    },
-
-    {
-        id: 6,
-        Product1: user6,
-        ProductId: "	Phil Watsons",
-        created: "22/06/2022",
-        status: "active",
-        email: "	phil@watson.com",
-        information: "success",
-    },
-    {
-        id: 7,
-        Product1: user7,
-        ProductId: "Sonia Robertson",
-        created: "25/06/2022",
-        status: "active",
-        email: "robertson@sonia.com",
-        information: "success"
-    },
-    {
-        id: 8,
-        Product1: user9,
-        ProductId: "Megan Peters",
-        created: "28/06/2022",
-        status: "Banned",
-        email: "amelia23@kunis.com",
-        information: "danger"
-    },
-    {
-        id: 9,
-        Product1: user11,
-        ProductId: "Adam Hamilton",
-        created: "30/06/2022",
-        status: "pending",
-        email: "	morganleah@.com",
-        information: "warning"
-
-    },
-    {
-        id: 10,
-        Product1: user12,
-        ProductId: "Leah Morgan",
-        created: "08/06/2022",
-        status: "active",
-        email: "mila@Kunis.com",
-        information: "success"
-
-    }
-];
 
 const Unidade = () => {
     var Delete = (list, user) => {
@@ -235,13 +127,16 @@ const Unidade = () => {
                                                 </td>
 
                                                 <td>
-                                                    <Link to="#" className="btn btn-sm btn-primary me-1">
-                                                        <i className="bi bi-eye-fill"></i>
-                                                    </Link>
 
-                                                    <Link to="#" className="btn btn-sm btn-info me-1">
+                                                    <Modal.AdminProfileUnity userUnity={item} />
+
+                                                    <label
+                                                        onClick={() => {
+                                                            navegar(`${process.env.PUBLIC_URL}/adm_edit_user`, { state: values })
+                                                        }}
+                                                        className="btn btn-sm btn-info me-1 mt-2">
                                                         <i className="fe fe-edit-2"></i>
-                                                    </Link>
+                                                    </label>
 
                                                     <Link to="#" className="btn btn-sm btn-danger me-1" onClick={() => { Delete(item.id, item) }}>
                                                         <i className="fe fe-trash"></i>

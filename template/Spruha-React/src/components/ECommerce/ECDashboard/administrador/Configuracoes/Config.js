@@ -160,7 +160,7 @@ function Settings() {
                                         <Card className="custom-card"
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => {
-                                                navegar(`${process.env.PUBLIC_URL}/adm_edit_user`, { state: values })
+                                                navegar(`${process.env.PUBLIC_URL}/adm_add_office`, { state: values })
                                             }}>
                                             <Card.Body>
                                                 <Row>

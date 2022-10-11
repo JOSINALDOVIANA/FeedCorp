@@ -10,9 +10,10 @@ const Images = React.lazy(() => import("./images/index.js"));
 // Dashboard
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
-const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
+const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unitys"))
 const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
 const EditUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/edit_unity"));
+const EditUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/edit_user"));
 // ADMIN CONFIG
 const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
 const CreateUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_unity"));
@@ -130,12 +131,13 @@ const Root = () => {
               {/* ------------------------------CORPORAÇÃO------------------------------------------ */}
               <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
               <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_edit_user`} element={<EditUser />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_edit_unidade`} element={<EditUnity />} />
 
               <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_unidade`} element={<CreateUnity />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_add_office`} element={<EditOffice />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
-              <Route path={`${process.env.PUBLIC_URL}/adm_edit_unidade`} element={<EditUnity />} />
-              <Route path={`${process.env.PUBLIC_URL}/adm_edit_user`} element={<EditOffice />} />
 
               {/* ------------------------------OKR------------------------------------------ */}
 
