@@ -3,7 +3,7 @@ import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Drop
 import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
 import api from "../../../../../api";
 
-function EditUnity() {
+function EditUser() {
 
   const dadosrota = useLocation();
   const navegar = useNavigate()
@@ -21,7 +21,7 @@ function EditUnity() {
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">
-            Editar Unidade
+            Criar novos cargos
           </h2>
           <Breadcrumb>
             <Breadcrumb.Item
@@ -31,27 +31,23 @@ function EditUnity() {
               Administração
             </Breadcrumb.Item>
             <Breadcrumb.Item active>
-              Editar Unidade
+              novo cargo
             </Breadcrumb.Item>
           </Breadcrumb>
         </div>
 
         <div className="d-flex">
           <div className="justify-content-center">
-            {/* <Button
-              type="button"
-              variant="white"
-              className=" btn-icon-text my-2 me-2"
-            >
-              <i className="fe fe-download me-2"></i> Import
-            </Button>
             <Button
               type="button"
               variant="white"
-              className=" btn-icon-text my-2 me-2"
+              className=" btn-icon-text my-2"
+              onClick={() => {
+                navegar(`${process.env.PUBLIC_URL}/configuracoes/`, { state: values })
+              }}
             >
-              <i className="fe fe-filter me-2"></i> Filter
-            </Button> */}
+              <i className="bi bi-caret-left-fill"></i>
+            </Button>
           </div>
         </div>
       </div>
@@ -66,8 +62,8 @@ function EditUnity() {
   );
 }
 
-EditUnity.propTypes = {};
+EditUser.propTypes = {};
 
-EditUnity.defaultProps = {};
+EditUser.defaultProps = {};
 
-export default EditUnity;
+export default EditUser;

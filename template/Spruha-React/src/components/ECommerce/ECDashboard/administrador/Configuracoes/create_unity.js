@@ -56,20 +56,23 @@ function CreateUnity() {
               className=" btn-icon-text my-2 me-2"
             >
               <i className="fe fe-download me-2"></i> Import
-            </Button>
+            </Button> */}
             <Button
               type="button"
               variant="white"
-              className=" btn-icon-text my-2 me-2"
+              className=" btn-icon-text my-2"
+              onClick={() => {
+                navegar(`${process.env.PUBLIC_URL}/configuracoes/`, { state: values })
+              }}
             >
-              <i className="fe fe-filter me-2"></i> Filter
-            </Button> */}
+              <i className="bi bi-caret-left-fill"></i>
+            </Button>
           </div>
         </div>
       </div>
 
       <Row className="row-sm">
-        <Col sm={12} lg={9} xl={9}>
+        <Col sm={12} lg={12} xl={12}>
           <Card className="custom-card">
             <Card.Body>
               <div>
@@ -80,19 +83,19 @@ function CreateUnity() {
               </div>
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
 
- 
-                  <Form.Group className="form-group" controlid="">
-                    <Form.Label>
-                      Unidade: <span className="tx-danger">*</span>
-                    </Form.Label>
-                    <Form.Control
-                      required
-                      name="Nome"
-                      placeholder="Nome Unidade"
-                      type="text"
-                    />
-                    <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
-                  </Form.Group>
+
+                <Form.Group className="form-group" controlid="">
+                  <Form.Label>
+                    Unidade: <span className="tx-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    required
+                    name="Nome"
+                    placeholder="Nome Unidade"
+                    type="text"
+                  />
+                  <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
+                </Form.Group>
 
                 {/* <Form.Group className="form-group" controlid="">
                   <Form.Label>
@@ -118,7 +121,7 @@ function CreateUnity() {
             </Card.Body>
           </Card>
         </Col>
-        <Col sm={12} lg={3} xl={3}>
+        {/* <Col sm={12} lg={3} xl={3}>
           <Card className="custom-card">
             <Card.Body>
               <div>
@@ -156,7 +159,7 @@ function CreateUnity() {
 
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
       </Row>
 
     </Fragment >

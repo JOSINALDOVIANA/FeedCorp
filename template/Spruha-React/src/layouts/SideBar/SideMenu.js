@@ -39,20 +39,20 @@ export const MENUADM = [
 						selected: false,
 						title: 'Avaliação por resultados'
 					},
-					{
-						path: `${process.env.PUBLIC_URL}/`,
-						type: 'link',
-						active: false,
-						selected: false,
-						title: 'Avaliação de desempenho'
-					},
-					{
-						path: `${process.env.PUBLIC_URL}/reuniao1:1`,
-						type: 'link',
-						active: false,
-						selected: false,
-						title: 'Reunião 1:1'
-					},
+					// {
+					// 	path: `${process.env.PUBLIC_URL}/`,
+					// 	type: 'link',
+					// 	active: false,
+					// 	selected: false,
+					// 	title: 'Avaliação de desempenho'
+					// },
+					// {
+					// 	path: `${process.env.PUBLIC_URL}/reuniao1:1`,
+					// 	type: 'link',
+					// 	active: false,
+					// 	selected: false,
+					// 	title: 'Reunião 1:1'
+					// },
 					// {
 					// 	path: `${process.env.PUBLIC_URL}/avr`,
 					// 	type: 'link',

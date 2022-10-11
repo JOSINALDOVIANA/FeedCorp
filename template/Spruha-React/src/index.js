@@ -12,12 +12,12 @@ const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
 const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unity"))
 const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
+const EditUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/edit_unity"));
 // ADMIN CONFIG
 const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
 const CreateUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_unity"));
 const CreateUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_user"));
-const EditUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/edit_unity"));
-const EditUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/edit_user"));
+const EditOffice = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/edit_office"));
 //INÍCIO
 const FeedRecebidos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedRecebidos"))
 const FeedFeitos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedFeitos"))
@@ -135,7 +135,7 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/adm_add_unidade`} element={<CreateUnity />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_edit_unidade`} element={<EditUnity />} />
-              <Route path={`${process.env.PUBLIC_URL}/adm_edit_user`} element={<EditUser />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_edit_user`} element={<EditOffice />} />
 
               {/* ------------------------------OKR------------------------------------------ */}
 

@@ -118,11 +118,11 @@ const Unidade = () => {
             return userlist.id !== list
         })
 
-        api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r=>{
-            if(r.data.status){
+        api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r => {
+            if (r.data.status) {
             }
         })
-        setValues(a =>({...a,selectUnit:{...a.selectUnit,Colaboradores:items}}))
+        setValues(a => ({ ...a, selectUnit: { ...a.selectUnit, Colaboradores: items } }))
         // setdata(items)
         // console.log(items);
     }
@@ -164,8 +164,11 @@ const Unidade = () => {
                 </div>
                 <div className="d-flex">
                     <div className="justify-content-center">
-                        <Button variant="primary" type="button" className="my-2 btn-icon-text">
-                            <i className="fe fe-download-cloud me-2"></i> Baixar relação
+                        <Button variant="primary" type="button" className="my-2 btn-icon-text"
+                            onClick={() => {
+                                navegar(`${process.env.PUBLIC_URL}/adm_edit_unidade/`, { state: values })
+                            }}>
+                            <i className="bi bi-box-seam me-2"></i> Editar unidade
                         </Button>
                     </div>
                 </div>

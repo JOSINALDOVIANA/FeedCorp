@@ -127,7 +127,7 @@ function Settings() {
                             <Tab.Pane
                                 eventKey='edit'>
                                 <Row className="row-sm">
-                                    <Col xl={6}>
+                                    <Col xl={12}>
                                         <Card className="custom-card"
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => {
@@ -144,7 +144,7 @@ function Settings() {
                                                             </div>
                                                             <div>
                                                                 <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                                    Adicionar Usuário
+                                                                    Criar Usuário
                                                                 </h5>
                                                                 <p className="tx-13 text-muted mb-0">
                                                                     Crie e adicione usuários em unidades da corporação.
@@ -173,11 +173,10 @@ function Settings() {
                                                             </div>
                                                             <div>
                                                                 <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                                    Editar Usuário
+                                                                    Criar Cargos
                                                                 </h5>
                                                                 <p className="tx-13 text-muted mb-0">
-                                                                    Edite cargos, permissões, informações pessoais e
-                                                                    remaneje usuários.
+                                                                    Crie novos cargos para seus usuários.
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -203,7 +202,7 @@ function Settings() {
                                                             </div>
                                                             <div>
                                                                 <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                                    Adicionar Unidade
+                                                                    Criar Unidade
                                                                 </h5>
                                                                 <p className="tx-13 text-muted mb-0">
                                                                     Crie unidades e adicione usuários
@@ -215,7 +214,7 @@ function Settings() {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    <Col xl={6}>
+                                    {/* <Col xl={6}>
                                         <Card className="custom-card"
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => {
@@ -243,7 +242,7 @@ function Settings() {
                                                 </Row>
                                             </Card.Body>
                                         </Card>
-                                    </Col>
+                                    </Col> */}
                                 </Row>
                             </Tab.Pane>
 
