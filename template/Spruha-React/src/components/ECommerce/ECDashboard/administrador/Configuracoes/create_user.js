@@ -14,16 +14,17 @@ function CreateUser() {
     console.log(event)
 
     // const form = event.currentTarget;
+    // console.log(form)
     // if (form.checkValidity() === false) {
     //   event.preventDefault();
     //   event.stopPropagation();
     // }
 
-    // setValidated(true);
+    setValidated(true);
      api.post(`user/insert`,{...values.usercreate}).then(r=>{
       if(r.data.status){
         alert("dados salvos")
-        setValues(a=>({...a,usercreate:""}))
+        setValues(a=>({...a,usercreate:reset()}))
       }
      })
   };
@@ -34,18 +35,8 @@ function CreateUser() {
   
 
   useEffect(() => {
-    setValues({...dadosrota.state,usercreate:{
-  "name":"",
-	"nameuser":"",
-	"email":"",	
-	"password":"",	
-	"id_image":null,	
-	"id_permission":"",
-	"id_unit" : "",
-	"id_company" :dadosrota.state.company.id ,
-	"id_creator" : dadosrota.state.dadosUser.id,
-	"id_office":null
-    }})
+    setValues({...dadosrota.state,usercreate:reset()})
+    
     api.get(`cargos/get?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
       setValues(a=>({...a,cargos:r.data.cargo}))
        })
@@ -55,10 +46,20 @@ function CreateUser() {
 
   }, [dadosrota.state])
   console.log(values)
-// function handleSubmit(e){
-//   console.log(e)
-//   console.log(values)
-// }
+function reset(){
+  return({
+    "name":"",
+    "nameuser":"",
+    "email":"",	
+    "password":"",	
+    "id_image":null,	
+    "id_permission":"",
+    "id_unit" : "",
+    "id_company" :dadosrota.state.company.id ,
+    "id_creator" : dadosrota.state.dadosUser.id,
+    "id_office":null
+      })
+}
   return (
     <Fragment>
       <div className="page-header">
@@ -193,7 +194,7 @@ function CreateUser() {
                   <div>
                     <MultiSelect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2"
                       onChange={(e)=>{setValues(a=>({...a,usercreate:{...a.usercreate,id_unit:e.value}}))}}
-                      options={values?.units?.map(und=>({value: und.id, label: und.initials}))} singleSelect displayValue="key" placeholder="Integrante" />
+                      options={values?.units?.map(und=>({value: und.id, label: und.initials.toUpperCase()}))} singleSelect displayValue="key" placeholder="Integrante" />
                   </div>
                   <Form.Control.Feedback>Unidade inválida!</Form.Control.Feedback>
                 </Form.Group>

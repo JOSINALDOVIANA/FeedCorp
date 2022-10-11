@@ -18,6 +18,7 @@ const Okr = () => {
     setValues(dadosrota.state);
     let keys = dadosrota.state.okrselect.keys.map(key=>{
       let user=key.user[0]
+      user.url=user.url.url;
       return {...key,user}
     })
 

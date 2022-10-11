@@ -25,9 +25,9 @@ morganBody(App, { noColors: true, stream: log })
 App.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')))
 App.use(express.json());
 App.use(routes);
-App.use("*", (req, res, next) => {
-  res.send("<span>você esta tentando acessar um recurso inexistente</span>")
-  next();
+App.use("/*", (req, res, next) => {
+ return  res.send("<span>você esta tentando acessar um recurso inexistente</span>")
+  
 });
 var port = process.env.PORT || 3002;
 App.listen(port, () => {

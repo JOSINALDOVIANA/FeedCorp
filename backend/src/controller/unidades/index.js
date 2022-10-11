@@ -3,9 +3,9 @@ import conexao from '../../database/connection.js';
 export default {
     async Insert(req, resp) {
 
-        const { units, id_user } = req.body; //units=[string,string], id_user=int
+        const { units, id_user,id_company } = req.body; //units=[string,string], id_user=int
 
-        const unit_serial = units.map(unit => ({ description: unit.description, initials: unit.initials, id_user }));
+        const unit_serial = units.map(unit => ({ description: unit.description, initials: unit.initials, id_user,id_company }));
         try {
             await conexao("units").insert(unit_serial)
             resp.json({ status: true, message: "dados salvos" });

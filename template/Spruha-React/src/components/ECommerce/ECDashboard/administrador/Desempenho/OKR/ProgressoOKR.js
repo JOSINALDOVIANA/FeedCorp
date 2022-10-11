@@ -18,6 +18,14 @@ const Okr = () => {
 
     setValues(dadosrota.state);
 
+   
+    let keys = dadosrota.state.okrselect.keys.map(key=>{
+      let user=key.user[0]
+      // user.url=user.url.url;
+      return {...key,user}
+    })
+
+    setValues(a=>({...a,okrselect:{...a.okrselect,keys}}));
   }, [dadosrota.state]);
 
   console.log(values)
@@ -104,7 +112,7 @@ const Okr = () => {
                         <img
                           alt="avatar"
                           className="rounded-circle avatar mx-1"
-                          src={chave.user[0].url}
+                          src={chave.user.url.url}
                         />
                       </div>
                     </td>
