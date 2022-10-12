@@ -16,13 +16,13 @@ const Okr = () => {
 
 
     setValues(dadosrota.state);
-    let keys = dadosrota.state.okrselect.keys.map(key=>{
-      let user=key.user[0]
-      user.url=user.url.url;
-      return {...key,user}
+    let keys = dadosrota.state.okrselect.keys.map(key => {
+      let user = key.user[0]
+      user.url = user.url.url;
+      return { ...key, user }
     })
 
-    setValues(a=>({...a,okrselect:{...a.okrselect,keys}}));
+    setValues(a => ({ ...a, okrselect: { ...a.okrselect, keys } }));
 
   }, [dadosrota.state]);
 
@@ -83,12 +83,12 @@ const Okr = () => {
                   <tr>
                     <td className="wd-5p">
                       <div className="main-img-user avatar-md">
-                          {chave.user.url && 
-                           <img
-                          alt="avatar"
-                          className="rounded-circle avatar mx-1"
-                          src={chave?.user?.url}
-                        />
+                        {chave.user.url &&
+                          <img
+                            alt="avatar"
+                            className="rounded-circle avatar mx-1"
+                            src={chave?.user?.url}
+                          />
                         }
                       </div>
                     </td>

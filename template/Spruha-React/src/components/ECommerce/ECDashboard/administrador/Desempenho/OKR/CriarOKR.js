@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Image, Breadcrumb, Table } from "react-bootstrap";
 import { Datepicker } from "../../../Components/DataPicker"
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataOKR";
+import { successAlert } from "../../../Components/Alerts"
 import { Grid } from "@mui/material";
 import Okr from "./OKR";
 import api from "../../../../../../api";
@@ -18,7 +19,7 @@ const CriarOKR = () => {
 
   useEffect(() => {
     setValues(dadosrota.state)
-    setOkr({keys: [], id_user: dadosrota.state.dadosUser.id })
+    setOkr({ keys: [], id_user: dadosrota.state.dadosUser.id })
     api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
   // console.log(values)
@@ -45,11 +46,11 @@ const CriarOKR = () => {
         <Col lg={12} md={12}>
           <Card className="custom-card">
 
-            <div className="page-header mx-4">
+            <Card.Header className="page-header mx-4">
               <h2 className="main-content-title tx-24 mg-b-5">Novo Objetivo</h2>
               <div>
                 <Button to="#"
-                  variant="info"
+                  variant="primary"
                   className="btn me-1"
                   onClick={async (e) => {
 
@@ -64,6 +65,7 @@ const CriarOKR = () => {
                       if (r.data.status) {
                         okrscriados.push(okr)
                         setValues(a => ({ ...a, okrscriados: okrscriados }));
+                        successAlert()
                         navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
                         // {{<MyVerticallyCenteredModal />}}
                       }
@@ -82,7 +84,7 @@ const CriarOKR = () => {
                 </Button>
 
               </div>
-            </div>
+            </Card.Header>
 
             <Card.Body>
               <FormGroup className="form-group">

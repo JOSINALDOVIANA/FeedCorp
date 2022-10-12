@@ -2,6 +2,7 @@ import { Divider } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { deleteQuestionAlert, deleteSucessAlert } from "../../../Components/Alerts"
 import api from "../../../../../../api";
 
 
@@ -18,14 +19,14 @@ const Okr = () => {
 
     setValues(dadosrota.state);
 
-   
-    let keys = dadosrota.state.okrselect.keys.map(key=>{
-      let user=key.user[0]
+
+    let keys = dadosrota.state.okrselect.keys.map(key => {
+      let user = key.user[0]
       // user.url=user.url.url;
-      return {...key,user}
+      return { ...key, user }
     })
 
-    setValues(a=>({...a,okrselect:{...a.okrselect,keys}}));
+    setValues(a => ({ ...a, okrselect: { ...a.okrselect, keys } }));
   }, [dadosrota.state]);
 
   console.log(values)
@@ -42,7 +43,7 @@ const Okr = () => {
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
             <Breadcrumb.Item
-              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade`, { state: values }) }}
+              onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
             >OKR
             </Breadcrumb.Item>
             <Breadcrumb.Item active>Progresso</Breadcrumb.Item>
@@ -63,40 +64,43 @@ const Okr = () => {
 
           </div>
         </div>
-
-        <div className="d-flex">
-          <div className="justify-content-center">
-
-            <Button
-              variant="primary"
-              type="button"
-              className="my-2 me-2 btn-icon"
-              onClick={() => { 
-                // navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) 
-                api.delete(`okrs/delete?id=${values?.okrselect?.id}`).then(r=>{
-                  if(r.data.status){
-                    alert("apagado")
-                     navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) 
-
-                  }
-                })
-              }}
-            >
-              <i class="bi bi-file-earmark-excel"></i>
-            </Button>
-
-          </div>
-        </div>
-
       </div>
       {/* <!-- End Page Header --> */}
 
       <Card>
         <Card.Header className="card-header ms-1">
-          <h2 className="main-content-title tx-20 mb-1">Objetivo</h2>
-          <h4 className="tx-12 text-muted">
-            Chaves do objetivo em andamento
-          </h4>
+          <div className="d-flex justify-content-between">
+
+            <div>
+              <h2 className="main-content-title tx-20 mb-1">Objetivo</h2>
+              <h4 className="tx-12 text-muted">
+                Chaves do objetivo em andamento
+              </h4>
+            </div>
+
+            <div className="mb-1">
+              <Button
+                variant="danger"
+                type="button"
+                className="me-2 btn-icon"
+                onClick={() => {
+                  deleteQuestionAlert().then((result) => {
+                    if (result.isConfirmed) {
+                      api.delete(`okrs/delete?id=${values?.okrselect?.id}`).then(r => {
+                        if (r.data.status) {
+                          deleteSucessAlert()
+                          navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
+                        }
+                      })
+                    }
+                  })
+                  // navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) 
+                }}
+              >
+                <i class="bi bi-trash2-fill"></i>
+              </Button>
+            </div>
+          </div>
         </Card.Header>
 
         <Card.Body>
@@ -120,7 +124,7 @@ const Okr = () => {
                       <div className="d-flex align-middle ms-3">
                         <div className="d-inline-block">
                           <h6 className="tx-13 tx-inverse tx-semibold mg-b-0" >
-                            {chave?.user[0]?.name?.toUpperCase()}
+                            {chave?.user?.name?.toUpperCase()}
                           </h6>
                           <span className="mb-0 text-muted">{chave.description}</span>
                         </div>

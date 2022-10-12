@@ -78,6 +78,9 @@ export function ClimaQuestionAdd() {
         title: "Nova questão!",
         text: "Questão adicionado com sucesso",
         allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
     });
 }
 //Erro questão clima

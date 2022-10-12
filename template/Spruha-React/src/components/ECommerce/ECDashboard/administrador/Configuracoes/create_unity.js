@@ -76,9 +76,9 @@ function CreateUnity() {
           <Card className="custom-card">
             <Card.Body>
               <div>
-                <h6 className="main-content-label mb-1">Novo Usuário</h6>
+                <h6 className="main-content-label mb-1">Nova unidade</h6>
                 <p className="text-muted card-sub-title">
-                  Crie um usuário e adicione em uma unidade
+                  Crie uma unidade para sua corporação
                 </p>
               </div>
               <Form noValidate validated={validated} onSubmit={handleSubmit}>

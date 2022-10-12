@@ -1,13 +1,15 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Breadcrumb } from "react-bootstrap";
-import * as formelement from "../../../../../../data/Forms/formelement";
+import { successAlert } from "../../../Components/Alerts"
 import { SingleselectUnidade, SingleselectPessoa } from "./FormDataAVPR";
 import "./style.css"
 import { Grid } from "@material-ui/core";
 import { Datepicker } from "../../../Components/DataPicker"
 import { forEach, uniqueId } from "lodash";
 import api from "../../../../../../api";
+
+
 const CriarAvpr = () => {
   const dadosrota = useLocation();
   const location = useLocation();
@@ -82,15 +84,20 @@ const CriarAvpr = () => {
                   api.post(`/avpr/insert`, { ...obj }).then(r => {
                     console.log(r)
                     if (r.data.status) {
-                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values })
+                      successAlert()
+                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
                     }
                   })
                   }}
                   >
                   Criar
                 </Button>
+
                 <Button 
                   variant="danger"
+                  onClick={() => {
+                    navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                  }}
                 >
                   Cancelar
                 </Button>
@@ -193,7 +200,6 @@ const CriarAvpr = () => {
                     variant="light" type="button" disabled>
                     <i className="fe fe-calendar lh--9 op-6"></i>
                   </Button>
-                  {/* <formelement.Datepicker onChange={e=>{console.log(e)}}/> */}
                   <Datepicker
                     selected={selectdata}
                     onChange={(date) => { setData(date); setAVPR(a => ({ ...a, validity: date })) }}
