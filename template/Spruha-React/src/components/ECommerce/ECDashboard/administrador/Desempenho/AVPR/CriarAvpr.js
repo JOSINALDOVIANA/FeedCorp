@@ -16,9 +16,10 @@ const CriarAvpr = () => {
   const [Itemsalvo, setItem] = useState([]);
   const [enabled, setEna] = useState(true);
   const [selectdata, setData] = useState(new Date());
-  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "", items: [], direction: { company: [], units: [], users: [] }, checkcompany: false, checkunits: false, checkusers: false })
+  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, item:"", items: [], direction: { company: [], units: [], users: [] }, checkcompany: false, checkunits: false, checkusers: false })
   useEffect(() => {
     setValues(dadosrota.state)
+    api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
   console.log(avpr)
 
@@ -63,11 +64,10 @@ const CriarAvpr = () => {
               <div>
                 <Button to="#"
                   variant="info"
-                  className="btn me-1">
-                  Criar
-                </Button>
-                <Button onClick={() => {
-                  let items = Itemsalvo;
+                  className="btn me-1"
+                  onClick={() => {
+                    
+                  let items = avpr.items;
                   for (const key in items) {
 
                     delete items[key]["id"];
@@ -82,10 +82,14 @@ const CriarAvpr = () => {
                   api.post(`/avpr/insert`, { ...obj }).then(r => {
                     console.log(r)
                     if (r.data.status) {
-                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values })
                     }
                   })
-                }}
+                  }}
+                  >
+                  Criar
+                </Button>
+                <Button 
                   variant="danger"
                 >
                   Cancelar
@@ -93,9 +97,10 @@ const CriarAvpr = () => {
               </div>
             </div>
             <Card.Body>
+
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Nome da avaliação</Form.Label>
-                <input type="text" className="form-control" placeholder="Avaliaçao" onBlur={(e) => { setAVPR(a => ({ ...a, title: e.target.value })) }} />
+                <input type="text" className="form-control" placeholder="Avaliaçao" onChange={(e) => { setAVPR(a => ({ ...a, title: e.target.value })) }} />
                 <span className="d-flex text-muted tx-13">
                   exemplo: "Avaliação semestral"
                 </span>
@@ -214,12 +219,10 @@ const CriarAvpr = () => {
                       className="form-control nt"
                       placeholder="Indicador"
                       required
-                      onBlur={e => {
-                        let index = avpr?.items.length;
-                        let items = avpr?.items;
-                        let id = uniqueId();
-                        items[index] = { "indicator": e.target.value, id, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };
-                        setAVPR(a => ({ ...a, items, idItems: id }));
+                      value={avpr?.item?.indicator}
+                      onChange={e => {
+                        let item= { "indicator": e.target.value, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };
+                        setAVPR(a => ({ ...a, item }));
                       }}
                     />
                   </Col>
@@ -229,22 +232,19 @@ const CriarAvpr = () => {
                       className="form-control nt"
                       placeholder="Meta (NUMERO)"
                       required
-                      onBlur={e => {
+                      onChange={e => {
 
-                        let items = avpr?.items;
+                        let goal= e.target.value;
 
-                        setAVPR(a => {
-                          let items = a.items;
-                          items = items.map(item => (item.id == a.idItems ? { ...item, goal: e.target.value } : item))
-                          return ({ ...a, items })
-                        })
+                        setAVPR(a => ({...a,item:{...a.item,goal}}))
+                        
 
                       }}
                     />
                   </Col>
                 </Row>
 
-                {avpr?.idItems != "" &&
+                
                 <Col className="form-group">
                   <div>
                     <span className="d-flex text-muted tx-13">
@@ -256,22 +256,16 @@ const CriarAvpr = () => {
                       className="form-check-input checkmed"
                       type="checkbox"
                       onChange={(e) => {
-
                         if (e.target.checked) {
-                          setAVPR(a => {
-                            let items = a.items;
-                            items = items.map(item => (item.id == a.idItems ? { ...item, min: true } : item))
-                            return ({ ...a, items });
-                          })
+                          setAVPR(a => ({...a,item:{...a.item,min: true}}))
                           setEna(false)
 
                         } else {
                           setAVPR(a => {
-                            let items = a.items;
-                            let index = 0
-                            items.map((item, i) => (item.id == a.idItems ? index = i : item))
-                            delete items[index]["min"];
-                            return ({ ...a, items });
+                            let item=a.item;              
+                          
+                            delete item["min"];
+                            return ({ ...a, item });
                           })
                           setEna(true)
                         }
@@ -289,20 +283,18 @@ const CriarAvpr = () => {
                       onChange={(e) => {
 
                         if (e.target.checked) {
-                          setAVPR(a => {
-                            let items = a.items;
-                            items = items.map(item => (item.id == a.idItems ? { ...item, max: true } : item))
-                            return ({ ...a, items });
-                          })
+                          setAVPR(a=>({...a,item:{...a.item, max: true }}))
+                          
                           setEna(false)
 
                         } else {
+
                           setAVPR(a => {
-                            let items = a.items;
-                            let index = 0
-                            items.map((item, i) => (item.id == a.idItems ? index = i : item))
-                            delete items[index]["max"];
-                            return ({ ...a, items });
+                            let item = a.item;
+                           
+                            
+                            delete item["max"];
+                            return ({ ...a, item });
                           })
                           setEna(true)
 
@@ -315,7 +307,7 @@ const CriarAvpr = () => {
 
                   </div>
                 </Col>
-              }
+              
 
               </Grid>
 
@@ -326,18 +318,22 @@ const CriarAvpr = () => {
                   className="my-2 btn"
                   disabled={enabled}
                   onClick={() => {
+                    
                     const inputs = document.getElementsByClassName("nt");
                     const checks = document.getElementsByClassName("checkmed")
                     for (const element of inputs) {
                       element.value = ""
                     }
                     for (const element of checks) {
-                      element.setAttribute("checked", false)
+                      element.checked=false
                     }
-                    setAVPR(a => ({ ...a, idItems: "" }));
-                    setItem(a => ([...a, ...avpr.items]))
+                    let item=avpr.item;
+                    item.id=uniqueId();
+                    setAVPR(a=>({...a,items:[...a.items,{...item}],item:""}));
+                    
                     setEna(true);
-                  }}
+                  }
+                }
                 >
                   Adicionar
                 </Button>
@@ -364,7 +360,7 @@ const CriarAvpr = () => {
                   </Grid>
                 </ListGroup.Item>
 
-                {Itemsalvo?.map(item => (
+                {avpr?.items.map(item => (
                   <ListGroup.Item key={item.id} action as="li">
                     <Grid>
                       <Row>
@@ -384,11 +380,6 @@ const CriarAvpr = () => {
                                   let items = a.items;
                                   items = items.filter((goal, i) => goal.id != item.id)
                                   return ({ ...a, items })
-                                })
-                                setItem(a => {
-                                  let items = a
-                                  items = items.filter((goal, i) => goal.id != item.id)
-                                  return (items)
                                 })
                               }}
                             ></i>

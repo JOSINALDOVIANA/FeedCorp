@@ -184,6 +184,7 @@ const CriarAvpr = () => {
                       className="form-control nt"
                       placeholder="Indicador"
                       required
+                      value={avpr?.item?.indicator}
                       onChange={e => {
                         
                        let item= { "indicator": e.target.value, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };

@@ -19,6 +19,7 @@ const CriarOKR = () => {
   useEffect(() => {
     setValues(dadosrota.state)
     setOkr({keys: [], id_user: dadosrota.state.dadosUser.id })
+    api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
   // console.log(values)
   // console.log(okr)
