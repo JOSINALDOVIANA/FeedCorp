@@ -73,7 +73,7 @@ export function AdminProfileUnity({ userUnity }) {
                             alt={userUnity.name}
                             style={{ width: 200, height: 200 }}
                             className="rounded-circle"
-                            src={userUnity.image.url}
+                            src={userUnity?.image?.url}
                         />
                     </div>
                     <Table className="table text-nowrap text-md-nowrap table-bordered mg-b-0 ">

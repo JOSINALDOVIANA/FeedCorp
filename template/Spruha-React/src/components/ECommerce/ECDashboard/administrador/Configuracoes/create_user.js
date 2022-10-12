@@ -10,8 +10,8 @@ function CreateUser() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(values)
-    console.log(event)
+    // console.log(values)
+    // console.log(event)
 
     // const form = event.currentTarget;
     // console.log(form)
@@ -20,8 +20,9 @@ function CreateUser() {
     //   event.stopPropagation();
     // }
 
-    setValidated(true);
+    // setValidated(true);
     api.post(`user/insert`, { ...values.usercreate }).then(r => {
+      console.log(r)
       if (r.data.status) {
         alert("dados salvos")
         setValues(a => ({ ...a, usercreate: reset() }))

@@ -5,19 +5,7 @@ import * as Modal from "../../Components/Modal"
 import api from "../../../../../api";
 
 const Unidade = () => {
-    var Delete = (list, user) => {
-        let items = values?.selectUnit?.Colaboradores?.filter((userlist, i) => {
-            return userlist.id !== list
-        })
-
-        api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r => {
-            if (r.data.status) {
-            }
-        })
-        setValues(a => ({ ...a, selectUnit: { ...a.selectUnit, Colaboradores: items } }))
-        // setdata(items)
-        // console.log(items);
-    }
+   
     // const [data, setdata] = useState(UserlistData)
 
     const dadosrota = useLocation();
@@ -34,6 +22,19 @@ const Unidade = () => {
 
     console.log(values)
 
+    let Delete = (list, user) => {
+        let items = values?.selectUnit?.Colaboradores?.filter((userlist, i) => {
+            return userlist.id !== list
+        })
+
+        api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r => {
+            if (r.data.status) {
+            }
+        })
+        setValues(a => ({ ...a, selectUnit: { ...a.selectUnit, Colaboradores: items } }))
+        // setdata(items)
+        // console.log(items);
+    }
     return (
         <Fragment>
             {/* <!-- Page Header --> */}
