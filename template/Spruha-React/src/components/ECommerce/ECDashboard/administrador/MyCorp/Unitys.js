@@ -2,10 +2,11 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Breadcrumb, Card, Col, Row, Button, Table, Dropdown, Pagination } from "react-bootstrap";
 import * as Modal from "../../Components/Modal"
+import { deleteQuestionAlert, deleteSucessAlert, deleteErrorAlert } from "../../Components/Alerts";
 import api from "../../../../../api";
 
 const Unidade = () => {
-   
+
     // const [data, setdata] = useState(UserlistData)
 
     const dadosrota = useLocation();
@@ -18,22 +19,37 @@ const Unidade = () => {
         }
         setValues(dadosrota.state);
 
+
+        api.get(`unit/getAll?id=${dadosrota?.state?.selectUnit?.id}`).then(r => {
+            setValues(a => ({ ...a, selectUnit: r.data.units }))
+        })
+
+
     }, [dadosrota])
 
-    console.log(values)
+    //.log(values)
 
     let Delete = (list, user) => {
         let items = values?.selectUnit?.Colaboradores?.filter((userlist, i) => {
             return userlist.id !== list
         })
 
-        api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r => {
-            if (r.data.status) {
+        deleteQuestionAlert().then((result) => {
+            if (result.isConfirmed) {
+                api.delete(`/user/delete?password=${user.password}&id=${user.id}&email=${user.email}`).then(r => {
+                    if (r.data.status) {
+                        setValues(a => ({ ...a, selectUnit: { ...a.selectUnit, Colaboradores: items } }))
+                        deleteSucessAlert()
+                        navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values })
+                    } else {
+                        deleteErrorAlert()
+                    }
+                })
             }
         })
         setValues(a => ({ ...a, selectUnit: { ...a.selectUnit, Colaboradores: items } }))
         // setdata(items)
-        // console.log(items);
+        // //.log(items);
     }
     return (
         <Fragment>
@@ -46,9 +62,6 @@ const Unidade = () => {
                             onClick={() => { navegar(`${process.env.PUBLIC_URL}/corporacao`, { state: values }) }}
                         >
                             Minha Corporação
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item active>
-                            Unidade nome
                         </Breadcrumb.Item>
                         <Breadcrumb.Item active>
                             Lista de integrantes
@@ -90,9 +103,6 @@ const Unidade = () => {
                                             <th className="wd-lg-20p">
                                                 <span>Membro desde</span>
                                             </th>
-                                            {/* <th className="wd-lg-20p">
-                                                <span>Situação</span>
-                                            </th> */}
                                             <th className="wd-lg-20p">
                                                 <span>Email</span>
                                             </th>
@@ -100,28 +110,20 @@ const Unidade = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {values?.selectUnit?.Colaboradores?.map((item, index) => (
+                                        {values?.selectUnit?.users?.map((item, index) => (
                                             <tr key={index}>
-
                                                 <td>
-                                                    {item.image &&
+                                                    {item.url &&
                                                         <img
                                                             alt="avatar"
                                                             className="rounded-circle avatar-md me-3"
-                                                            src={item.image.url}
+                                                            src={item.url}
                                                         />
                                                     }
                                                     {item.name}
                                                 </td>
 
                                                 <td>{item.updated_at}</td>
-
-                                                {/* <td className="text-center">
-                                                    <span className={`label text-${item.information} d-flex`}>
-                                                        <span className={`dot-label bg-${item.information} me-1- 300`}></span>
-                                                        {item.status}
-                                                    </span>
-                                                </td> */}
 
                                                 <td>
                                                     <Link to="#">{item.email}</Link>
@@ -133,15 +135,15 @@ const Unidade = () => {
 
                                                     <label
                                                         onClick={() => {
-                                                            navegar(`${process.env.PUBLIC_URL}/adm_edit_user`, { state: values })
+                                                            navegar(`${process.env.PUBLIC_URL}/adm_edit_user`, { state: { ...values, userselect: item } })
                                                         }}
                                                         className="btn btn-sm btn-info me-1 mt-2">
                                                         <i className="fe fe-edit-2"></i>
                                                     </label>
 
-                                                    <Link to="#" className="btn btn-sm btn-danger me-1" onClick={() => { Delete(item.id, item) }}>
+                                                    <label className="btn btn-sm btn-danger me-1 mt-2" onClick={() => { Delete(item.id, item) }}>
                                                         <i className="fe fe-trash"></i>
-                                                    </Link>
+                                                    </label>
                                                 </td>
                                             </tr>
 

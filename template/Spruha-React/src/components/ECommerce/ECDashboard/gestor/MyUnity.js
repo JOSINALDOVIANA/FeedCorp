@@ -22,7 +22,7 @@ function MinhaCorporacao() {
 
   }, [dadosrota])
 
-  console.log(values)
+  // console.log(values)
 
   return (
     <Fragment>
@@ -35,33 +35,6 @@ function MinhaCorporacao() {
             <Breadcrumb.Item active >  Integrantes  </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-
-        {/* <div className="d-flex">
-          <div className="justify-content-center">
-            <Button
-              variant="white"
-              type="button"
-              className="white btn-icon-text my-2 me-2"
-            >
-              <i className="fe fe-download me-2"></i> Import
-            </Button>
-            <Button
-              variant="white"
-              type="button"
-              className="white btn-icon-text my-2 me-2"
-            >
-              <i className="fe fe-filter me-2"></i> Filter
-            </Button>
-            <Button
-              variant="primary"
-              type="button"
-              className=" my-2 btn-icon-text"
-            >
-              <i className="fe fe-download-cloud me-2"></i> Download Report
-            </Button>
-          </div>
-        </div> */}
-
       </div>
 
 

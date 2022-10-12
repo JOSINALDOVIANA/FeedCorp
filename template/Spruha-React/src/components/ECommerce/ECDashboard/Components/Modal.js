@@ -1,6 +1,7 @@
 import { Avatar } from "@material-ui/core";
-import React, { useState, Fragment } from "react";
-import { Modal, Button, Table, Image } from "react-bootstrap";
+import React, { useState, Fragment, useEffect } from "react";
+import { Modal, Button, Table, Image, Form } from "react-bootstrap";
+import api from "../../../../api";
 
 export function AlertProfileUnity({ userSelect }) {
     const [show, setShow] = useState(false);
@@ -90,7 +91,7 @@ export function AdminProfileUnity({ userUnity }) {
                                 <th>Permissão</th>
                                 <th>
                                     {!!userUnity?.permission ? userUnity?.permission : 'Não definido'}
-                                    </th>
+                                </th>
                             </tr>
                             <tr>
                                 <th>Cargo</th>
@@ -105,3 +106,127 @@ export function AdminProfileUnity({ userUnity }) {
         </Fragment>
     );
 }
+
+export function OfficeChanges({cargo,setValues}) {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [cargoEdit,setCargo]=useState({});
+    useEffect(()=>{setCargo(cargo)},[])
+    // console.log(cargoEdit)
+    return (
+        <Fragment>
+
+            <label className="btn btn-sm btn-primary me-1 mt-2" onClick={handleShow}>
+                <i className="fe fe-edit-2"></i>
+            </label>
+
+            <Modal show={show} onHide={handleClose} backdrop="static">
+                <Modal.Header closeButton>
+                    <Modal.Title>Alterar informações</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p className='text-muted card-sub-title'>Altere informações deste cargo</p>
+
+                    <Form.Group className="form-group" controlid="">
+                        <Form.Label>
+                            Editar nome: <span className="tx-danger">*</span>
+                        </Form.Label>
+                        <Form.Control
+                            required
+                            name="Nome"
+                            placeholder={cargoEdit.office}
+                            type="text"
+                            onChange={(e)=>{setCargo(a=>({...a,office:e.target.value}))}}
+                        />
+                    </Form.Group>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={()=>{
+                        api.put(`cargos/update`,{id:cargoEdit.id,office:cargoEdit.office}).then(r=>{
+                            if(r.data.status){
+                                setValues(a=>{
+                                    let cargos=a.cargos
+                                    cargos=cargos.filter(cargo=>cargo.id!=cargoEdit.id)
+                                    cargos=[...cargos,{...cargoEdit}];
+                                    return({...a,cargos})
+                                })
+                                handleClose()
+                            }
+
+                        });
+                        
+                    }}>
+                        Salvar alterações
+                    </Button>
+                    <Button variant="danger" onClick={handleClose}>
+                        fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </Fragment>
+    );
+}
+
+// export function OfficeChanges() {
+//     const [show, setShow] = useState(false);
+//     const handleClose = () => setShow(false);
+//     const handleShow = () => setShow(true);
+//     return (
+//         <Fragment>
+
+//             <label className="btn btn-sm btn-primary me-1 mt-2" onClick={handleShow}>
+//                 <i className="fe fe-edit-2"></i>
+//             </label>
+
+//             <Modal show={show} onHide={handleClose} backdrop="static">
+//                 <Modal.Header closeButton>
+//                     <Modal.Title>Alterar informações</Modal.Title>
+//                 </Modal.Header>
+//                 <Modal.Body>
+//                     <p className='text-muted card-sub-title'>Altere informações deste cargo</p>
+
+//                     <Form.Group className="form-group" controlid="">
+//                         <Form.Label>
+//                             Cargo sigla: <span className="tx-danger">*</span>
+//                         </Form.Label>
+//                         <Form.Control
+//                             required
+//                             name="Nome"
+//                             placeholder="Nova sigla"
+//                             type="text"
+//                         />
+//                         <Form.Label className="text-muted card-sub-title">
+//                             Obs: Sigla da unidade
+//                         </Form.Label>
+//                     </Form.Group>
+
+//                     <Form.Group className="form-group" controlid="">
+//                         <Form.Label>
+//                             Cargo nome: <span className="tx-danger">*</span>
+//                         </Form.Label>
+//                         <Form.Control
+//                             required
+//                             name="Nome"
+//                             placeholder="Novo nome"
+//                             type="text"
+//                         />
+//                         <Form.Label className="text-muted card-sub-title">
+//                             Obs: Nome por extenso da unidade
+//                         </Form.Label>
+//                     </Form.Group>
+
+//                 </Modal.Body>
+//                 <Modal.Footer>
+//                     <Button variant="success" onClick={handleClose}>
+//                         Salvar alterações
+//                     </Button>
+//                     <Button variant="danger" onClick={handleClose}>
+//                         fechar
+//                     </Button>
+//                 </Modal.Footer>
+//             </Modal>
+//         </Fragment>
+//     );
+// }

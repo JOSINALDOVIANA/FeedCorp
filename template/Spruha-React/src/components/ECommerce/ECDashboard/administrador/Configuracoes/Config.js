@@ -173,7 +173,7 @@ function Settings() {
                                                             </div>
                                                             <div>
                                                                 <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                                    Criar Cargos
+                                                                    Criar e editar Cargos
                                                                 </h5>
                                                                 <p className="tx-13 text-muted mb-0">
                                                                     Crie novos cargos para seus usuários.

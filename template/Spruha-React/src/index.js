@@ -18,7 +18,7 @@ const EditUser = React.lazy(() => import("./components/ECommerce/ECDashboard/adm
 const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
 const CreateUnity = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_unity"));
 const CreateUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/create_user"));
-const EditOffice = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/edit_office"));
+const AddEditOffice = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/add_edit_office"));
 //INÍCIO
 const FeedRecebidos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedRecebidos"))
 const FeedFeitos = React.lazy(() => import("./components/ECommerce/ECDashboard/Cards/FeedFeitos"))
@@ -136,7 +136,7 @@ const Root = () => {
 
               <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_unidade`} element={<CreateUnity />} />
-              <Route path={`${process.env.PUBLIC_URL}/adm_add_office`} element={<EditOffice />} />
+              <Route path={`${process.env.PUBLIC_URL}/adm_add_office`} element={<AddEditOffice />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
 
               {/* ------------------------------OKR------------------------------------------ */}

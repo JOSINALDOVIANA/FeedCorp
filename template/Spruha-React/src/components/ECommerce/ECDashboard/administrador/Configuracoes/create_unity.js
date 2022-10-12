@@ -50,13 +50,6 @@ function CreateUnity() {
 
         <div className="d-flex">
           <div className="justify-content-center">
-            {/* <Button
-              type="button"
-              variant="white"
-              className=" btn-icon-text my-2 me-2"
-            >
-              <i className="fe fe-download me-2"></i> Import
-            </Button> */}
             <Button
               type="button"
               variant="white"
@@ -96,20 +89,6 @@ function CreateUnity() {
                   />
                   <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
                 </Form.Group>
-
-                {/* <Form.Group className="form-group" controlid="">
-                  <Form.Label>
-                    Email: <span className="tx-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    required
-                    name="Email"
-                    placeholder="Email"
-                    type="text"
-                  />
-                  <Form.Control.Feedback>Email válido!</Form.Control.Feedback>
-                </Form.Group> */}
-
                 <Button
                   className="btn ripple btn-main-primary btn-block"
                   type="submit"
@@ -121,45 +100,6 @@ function CreateUnity() {
             </Card.Body>
           </Card>
         </Col>
-        {/* <Col sm={12} lg={3} xl={3}>
-          <Card className="custom-card">
-            <Card.Body>
-              <div>
-                <p className="text-muted card-sub-title ms-2">
-                  Navegação
-                </p>
-              </div>
-
-              <div>
-                <Button onClick={() => { navegar(`${process.env.PUBLIC_URL}/adm_edit_unidade/`, { state: values }) }}
-                  className="tx-14 mb-0"
-                  variant="outline"
-                  size='sm'>
-                  Editar Unidade
-                </Button>
-              </div>
-
-              <div>
-                <Button onClick={() => { navegar(`${process.env.PUBLIC_URL}/adm_add_user/`, { state: values }) }}
-                  className="tx-14 mb-0"
-                  variant="outline"
-                  size='sm'>
-                  Criar Usuário
-                </Button>
-              </div>
-
-              <div>
-                <Button onClick={() => { navegar(`${process.env.PUBLIC_URL}/adm_edit_user/`, { state: values }) }}
-                  className="tx-14 mb-0"
-                  variant="outline"
-                  size='sm'>
-                  Editar Usuário
-                </Button>
-              </div>
-
-            </Card.Body>
-          </Card>
-        </Col> */}
       </Row>
 
     </Fragment >

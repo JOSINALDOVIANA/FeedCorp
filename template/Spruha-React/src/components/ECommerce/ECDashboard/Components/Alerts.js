@@ -31,6 +31,17 @@ export function deleteSucessAlert() {
         title: "Item apagado com sucesso",
     })
 }
+// Delete ITEM erro
+export function deleteErrorAlert() {
+    Swal.fire({
+        icon: "warning",
+        title: "Erro",
+        text: "Não foi possível apagar este item",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timerProgressBar: true,
+    });
+}
 // Successo feedback
 export function successAlert() {
     Swal.fire({
@@ -69,6 +80,25 @@ export function saveAlert() {
         icon: "success",
         title: "Alterações salvas!",
         text: "Dados atualizados",
+    })
+}
+//Salvar alterações profile
+export function errorSaveAlert() {
+    const Toast = Swal.mixin({
+        toast: true, //trata o alert como notifcação
+        position: 'top-end',
+        timer: 2000,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    Toast.fire({
+        icon: "danger",
+        title: "Não foi possível salvar as alterações",
+        text: "Verifique os dados e tente novamente",
     })
 }
 //Criar questão clima

@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Card, Form, Col, Row, Table, InputGroup } from "react-bootstrap";
 import MultiSelect from "react-select";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { successAlert } from "../../Components/Alerts";
 import api from "../../../../../api";
 
 function CreateUser() {
@@ -13,19 +14,12 @@ function CreateUser() {
     // console.log(values)
     // console.log(event)
 
-    // const form = event.currentTarget;
-    // console.log(form)
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
-
-    // setValidated(true);
     api.post(`user/insert`, { ...values.usercreate }).then(r => {
       console.log(r)
       if (r.data.status) {
-        alert("dados salvos")
+        successAlert()
         setValues(a => ({ ...a, usercreate: reset() }))
+        navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values })
       }
     })
   };

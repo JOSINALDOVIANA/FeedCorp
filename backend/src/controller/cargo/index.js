@@ -16,8 +16,14 @@ export default {
         try {
             let cargo = id ? await conexao("positions").where({ "id": id }).first() : 
             id_company?await conexao("positions").where({id_company}):
-            id_user?await conexao("positions").where({id_user}):await conexao("positions")
-            ;
+            id_user?await conexao("positions").where({id_user}):await conexao("positions");
+            let cargo_serial=[]
+            for (let iterator of cargo) {
+                let users=await conexao("users").where({id_office:iterator.id})
+                iterator={...iterator,users}
+                cargo_serial.push(iterator)
+            }
+            cargo=cargo_serial
             return res.json({ status: true, cargo });
         } catch (error) {
             console.log(error)

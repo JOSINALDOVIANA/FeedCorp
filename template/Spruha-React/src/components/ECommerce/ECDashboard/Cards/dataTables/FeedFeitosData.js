@@ -15,11 +15,11 @@ export function Basicdatatable({ feitos }) {
             let array = []
             for (let iterator of feitos) {
                 let obj = {}
-                obj.key = iterator.id
-                obj.nome = iterator.destinatario.name;
-                obj.unidade = iterator.unidade.initials;
-                obj.data = formatData(iterator.updated_at);
-                obj.comentario = iterator.feedback;
+                obj.key = iterator?.id
+                obj.nome = iterator?.destinatario?.name;
+                obj.unidade = iterator?.unidade?.initials;
+                obj.data = formatData(iterator?.updated_at);
+                obj.comentario = iterator?.feedback;
                 array = [...array, { ...obj }];
             }
             return ([...array])

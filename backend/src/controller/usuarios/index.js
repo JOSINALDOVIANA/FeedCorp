@@ -152,13 +152,14 @@ export default {
             name,
             nameuser,
             email,
-            id_image = null,
+            id_image = false,
             password,
             passwordantigo,
-            id_company = null,
-            id_creator = null,
-            id_permission=null,
-            id_office,
+            id_company = false,
+            id_creator = false,
+            id_permission=false,
+            id_office=false,
+            id_unit=false
         } = req.body;
         // console.log(req.body)
 
@@ -172,12 +173,24 @@ export default {
                     nameuser,
                     email,
                     password,
-                    id_image,
-                    id_company,
-                    id_creator,
-                    id_permission,
-                    id_office,
+                    id_image:id_image?id_image:null,
+                    id_company:id_company?id_company:null,
+                    id_creator:id_creator?id_creator:null,
+                    id_permission:id_permission?id_permission:null,
+                    id_office:id_office?id_office:null,
                 }).where({ id });
+
+                if(id_unit){
+
+                    let dado=await conexao("user_unit").where({"user_unit.id_user":id}).first();
+                    console.log(dado)
+                    if(dado){
+                        await conexao("user_unit").update({"user_unit.id_unit":id_unit,"user_unit.id_user":id}).where({"user_unit.id":dado.id});
+                    }
+                    else{
+                        await conexao("user_unit").insert({"user_unit.id_unit":id_unit,"user_unit.id_user":id});
+                    }
+                }
 
 
                 res.json({ status: true })
@@ -256,7 +269,7 @@ export default {
 
         try {
             await conexao.transaction(async trx => {
-                const unit = await conexao("user_unit").join("units", "user_unit.id_unit", "=", "units.id").where({ "user_unit.id_user": id_user }).select("units.*")
+                const unit = await conexao("user_unit").join("units", "user_unit.id_unit", "=", "units.id").where({ "user_unit.id_user": id_user }).select("units.*").first()
                 res.json({ status: true, unit })
             })
 
