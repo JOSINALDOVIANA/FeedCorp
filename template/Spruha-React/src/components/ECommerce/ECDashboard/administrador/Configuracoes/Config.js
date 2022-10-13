@@ -61,13 +61,6 @@ function Settings() {
                                     <div className="main-mail-menu">
                                         <Nav className="nav main-nav-column mg-b-20" defaultActiveKey="/edit">
 
-                                            {/* <Nav.Item>
-                                                <Nav.Link eventKey="home" className="thumb  mb-2"
-                                                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/perfil`, { state: values }) }}>
-                                                    <i className="fe fe-user"></i> Minha conta
-                                                </Nav.Link>
-                                            </Nav.Item> */}
-
                                             <Nav.Item>
                                                 <Nav.Link className="thumb mb-2" eventKey="edit">
                                                     <i className="fe fe-edit-2"></i> Edições
@@ -79,46 +72,10 @@ function Settings() {
                                                     <i className="bi-building"></i> Corporação
                                                 </Nav.Link>
                                             </Nav.Item>
-
-                                            {/* VAI ME SERVIR NO FUTURO */}
-                                            {/*<Nav.Item>
-                                        <Nav.Link eventKey="Privacy&Security" className="thumb mb-2">
-                                            <i className="fe fe-lock"></i> Privacy & Security
-                                        </Nav.Link>
-                                         */}
-
-                                            {/* <Nav.Item>
-                                            <Nav.Link className="thumb mb-2" eventKey="Emails">
-                                                <i className="fe fe-mail"></i> Emails
-                                            </Nav.Link>
-                                        </Nav.Item> */}
-
-
-                                            {/* <Nav.Item>
-                                            <Nav.Link className="thumb mb-2" eventKey="Language">
-                                                <i className="fe fe-flag"></i> Language & Region
-                                            </Nav.Link>
-                                        </Nav.Item> */}
-
-
-                                            {/* <Nav.Item>
-                                            <Nav.Link className="thumb mb-2" eventKey="Notifications">
-                                                <i className="fe fe-bell"></i> Notifications
-                                            </Nav.Link>
-                                        </Nav.Item> */}
-
-                                            {/* <Nav.Item>
-                                            <Nav.Link className="thumb mb-2" eventKey="Blog">
-                                                <i className="fe fe-settings"></i> Blog
-                                            </Nav.Link>
-                                        </Nav.Item> */}
                                         </Nav>
                                     </div>
                                 </div>
                             </Card.Body>
-                            {/* <Card.Footer className="px-4 ">
-                            <Button variant="primary" className="w-lg">Save Changes</Button>
-                        </Card.Footer> */}
                         </Card>
                     </Col>
 
@@ -189,7 +146,7 @@ function Settings() {
                                         <Card className="custom-card"
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => {
-                                                navegar(`${process.env.PUBLIC_URL}/adm_add_unidade/`, { state: values })
+                                                navegar(`${process.env.PUBLIC_URL}/adm_add_edit_unidade/`, { state: values })
                                             }}>
                                             <Card.Body>
                                                 <Row>
@@ -202,10 +159,10 @@ function Settings() {
                                                             </div>
                                                             <div>
                                                                 <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                                    Criar Unidade
+                                                                    Criar e editar Unidades
                                                                 </h5>
                                                                 <p className="tx-13 text-muted mb-0">
-                                                                    Crie unidades e adicione usuários
+                                                                    Crie, edite e apague unidades
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -214,35 +171,6 @@ function Settings() {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    {/* <Col xl={6}>
-                                        <Card className="custom-card"
-                                            style={{ cursor: 'pointer' }}
-                                            onClick={() => {
-                                                navegar(`${process.env.PUBLIC_URL}/adm_edit_unidade/`, { state: values })
-                                            }}>
-                                            <Card.Body>
-                                                <Row>
-                                                    <Col lg={12}>
-                                                        <div className="d-flex">
-                                                            <div className="settings-main-icon me-4 mt-1">
-                                                                <div className="avatar avatar-md bg-primary-transparent text-primary">
-                                                                    <i className="bi-pen fs-18"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                                    Editar Unidade
-                                                                </h5>
-                                                                <p className="tx-13 text-muted mb-0">
-                                                                    Edite unidades criadas
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col> */}
                                 </Row>
                             </Tab.Pane>
 

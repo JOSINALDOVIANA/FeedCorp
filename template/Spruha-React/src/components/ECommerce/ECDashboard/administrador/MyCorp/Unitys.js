@@ -72,9 +72,9 @@ const Unidade = () => {
                     <div className="justify-content-center">
                         <Button variant="primary" type="button" className="my-2 btn-icon-text"
                             onClick={() => {
-                                navegar(`${process.env.PUBLIC_URL}/adm_edit_unidade/`, { state: values })
+                                navegar(`${process.env.PUBLIC_URL}/adm_add_edit_unidade/`, { state: values })
                             }}>
-                            <i className="bi bi-box-seam me-2"></i> Editar unidade
+                            <i className="bi bi-box-seam me-2"></i> Editar unidades
                         </Button>
                     </div>
                 </div>

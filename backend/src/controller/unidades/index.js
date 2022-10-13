@@ -17,9 +17,9 @@ export default {
 
     async update(req, resp) {
 
-        const { unit, id_unit } = req.body; //units=string, id_unit=int       
+        const { description, id,initials } = req.body; //units=string, id_unit=int       
         try {
-            await conexao("units").update({ "description": unit }).where({ "id": id_unit })
+            await conexao("units").update({ description,initials }).where({  id })
             resp.json({ status: true, message: "dados alterados" });
         } catch (error) {
             resp.json({ status: false, message: "error: unit-update" });
@@ -121,7 +121,7 @@ export default {
 
 
     async delete(req, res) {
-        const { id_user, id } = req.body;
+        const { id_user, id } = req.query;
         try {
             const del = await conexao("units").del().where({ id_user, id });
 

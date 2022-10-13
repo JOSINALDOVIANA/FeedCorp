@@ -118,9 +118,9 @@ const CriarOKR = () => {
                     <div className="page-header">
                       <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Key Results</h2>
-                        <spam className="d-flex text-muted tx-13">
+                        <span className="d-flex text-muted tx-13">
                           Adicione o nome da sua Key result
-                        </spam>
+                        </span>
                       </div>
                     </div>
 
@@ -137,9 +137,9 @@ const CriarOKR = () => {
                     <div className="page-header">
                       <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Unidade</h2>
-                        <spam className="d-flex text-muted tx-13">
+                        <span className="d-flex text-muted tx-13">
                           Escolha a unidade onde o colaborador se encontra
-                        </spam>
+                        </span>
                       </div>
                     </div>
 
@@ -151,9 +151,9 @@ const CriarOKR = () => {
                     <div className="page-header">
                       <div>
                         <h2 className="main-content-title tx-24 mg-b-5">Integrantes</h2>
-                        <spam className="d-flex text-muted tx-13">
+                        <span className="d-flex text-muted tx-13">
                           Escolha o integrante para essa Key
-                        </spam>
+                        </span>
                       </div>
                     </div>
 

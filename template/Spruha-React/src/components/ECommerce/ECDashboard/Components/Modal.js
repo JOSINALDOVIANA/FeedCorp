@@ -169,64 +169,84 @@ export function OfficeChanges({cargo,setValues}) {
     );
 }
 
-// export function OfficeChanges() {
-//     const [show, setShow] = useState(false);
-//     const handleClose = () => setShow(false);
-//     const handleShow = () => setShow(true);
-//     return (
-//         <Fragment>
+export function UnityChanges(props) {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [unitEdit, setunitEdit] = useState({});
+    useEffect(()=>{
+        setunitEdit(props.unidade)
+    },[])
+    console.log(unitEdit)
+    return (
+        <Fragment>
 
-//             <label className="btn btn-sm btn-primary me-1 mt-2" onClick={handleShow}>
-//                 <i className="fe fe-edit-2"></i>
-//             </label>
+            <label className="btn btn-sm btn-primary me-1 mt-2" onClick={handleShow}>
+                <i className="fe fe-edit-2"></i>
+            </label>
 
-//             <Modal show={show} onHide={handleClose} backdrop="static">
-//                 <Modal.Header closeButton>
-//                     <Modal.Title>Alterar informações</Modal.Title>
-//                 </Modal.Header>
-//                 <Modal.Body>
-//                     <p className='text-muted card-sub-title'>Altere informações deste cargo</p>
+            <Modal show={show} onHide={handleClose} backdrop="static">
+                <Modal.Header closeButton>
+                    <Modal.Title>Alterar informações</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p className='text-muted card-sub-title'>Altere informações deste cargo</p>
 
-//                     <Form.Group className="form-group" controlid="">
-//                         <Form.Label>
-//                             Cargo sigla: <span className="tx-danger">*</span>
-//                         </Form.Label>
-//                         <Form.Control
-//                             required
-//                             name="Nome"
-//                             placeholder="Nova sigla"
-//                             type="text"
-//                         />
-//                         <Form.Label className="text-muted card-sub-title">
-//                             Obs: Sigla da unidade
-//                         </Form.Label>
-//                     </Form.Group>
+                    <Form.Group className="form-group" controlid="">
+                        <Form.Label>
+                            Sigla: <span className="tx-danger">*</span>
+                        </Form.Label>
+                        <Form.Control
+                            required
+                            name="sigla"
+                            value={unitEdit.initials}
+                            placeholder={unitEdit.initials}
+                            type="text"
+                            onChange={e=>{setunitEdit(a=>({...a,initials:e.target.value}))}}
+                        />
+                        <Form.Label className="text-muted card-sub-title">
+                            Obs: Sigla da unidade
+                        </Form.Label>
+                    </Form.Group>
 
-//                     <Form.Group className="form-group" controlid="">
-//                         <Form.Label>
-//                             Cargo nome: <span className="tx-danger">*</span>
-//                         </Form.Label>
-//                         <Form.Control
-//                             required
-//                             name="Nome"
-//                             placeholder="Novo nome"
-//                             type="text"
-//                         />
-//                         <Form.Label className="text-muted card-sub-title">
-//                             Obs: Nome por extenso da unidade
-//                         </Form.Label>
-//                     </Form.Group>
+                    <Form.Group className="form-group" controlid="">
+                        <Form.Label>
+                            Nome: <span className="tx-danger">*</span>
+                        </Form.Label>
+                        <Form.Control
+                            required
+                            name="Nome"
+                            value={unitEdit.description}
+                            placeholder={unitEdit.description}
+                            type="text"
+                            onChange={e=>{setunitEdit(a=>({...a,description:e.target.value}))}}
+                        />
+                        <Form.Label className="text-muted card-sub-title">
+                            Obs: Nome por extenso da unidade
+                        </Form.Label>
+                    </Form.Group>
 
-//                 </Modal.Body>
-//                 <Modal.Footer>
-//                     <Button variant="success" onClick={handleClose}>
-//                         Salvar alterações
-//                     </Button>
-//                     <Button variant="danger" onClick={handleClose}>
-//                         fechar
-//                     </Button>
-//                 </Modal.Footer>
-//             </Modal>
-//         </Fragment>
-//     );
-// }
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={()=>{
+                        api.put(`unit/update`,{...unitEdit}).then(r=>{
+                            if(r.data.status){
+                                props.recarregarUnits()
+                                // pode por outro alerta de sucesso aqui :
+                                handleClose()
+                            }else{
+                                // pode por um alerte aqui
+                            }
+                        })
+                    }}>
+                        Salvar alterações
+                    </Button>
+                    <Button variant="danger" onClick={handleClose}>
+                        fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </Fragment>
+    );
+}

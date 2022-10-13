@@ -42,6 +42,16 @@ export function deleteErrorAlert() {
         timerProgressBar: true,
     });
 }
+// Delete UNIDADE erro
+export function deleteUnityAlert() {
+    Swal.fire({
+        icon: "error",
+        title: "Não é possível apagar essa unidade",
+        text: "Esta unidade possui pessoas vinculadas, por favor, remaneje-os para outra unidade antes de realizar esta ação",
+        allowOutsideClick: false,
+        showConfirmButton: true,
+    });
+}
 // Successo feedback
 export function successAlert() {
     Swal.fire({
