@@ -18,7 +18,7 @@ const ProgressoOKR = () => {
 
   }, [dadosrota.state]);
 
-  // console.log(values)
+  console.log(values)
 
   return (
     <Fragment>
@@ -70,9 +70,10 @@ const ProgressoOKR = () => {
               type="button"
               className="me-2 btn-icon"
               onClick={() => {
-                deleteQuestionAlert().then((result) => {
+                deleteQuestionAlert().then(async(result) => {
                   if (result.isConfirmed) {
-                    api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
+                   await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
+                    console.log(r)
                       if (r.data.status) {
                         deleteSucessAlert()
                         navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })

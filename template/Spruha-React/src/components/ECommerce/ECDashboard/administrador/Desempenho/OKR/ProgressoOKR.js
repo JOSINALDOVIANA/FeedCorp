@@ -72,7 +72,7 @@ const Okr = () => {
           <div className="d-flex justify-content-between">
 
             <div>
-              <h2 className="main-content-title tx-20 mb-1">Objetivo</h2>
+              <h2 className="main-content-title tx-20 mb-1">Objetivos</h2>
               <h4 className="tx-12 text-muted">
                 Chaves do objetivo em andamento
               </h4>
@@ -113,11 +113,12 @@ const Okr = () => {
                   <tr>
                     <td className="wd-5p">
                       <div className="main-img-user avatar-md">
-                        <img
+                        {chave.user.url && <img
                           alt="avatar"
                           className="rounded-circle avatar mx-1"
-                          src={chave.user.url.url}
-                        />
+                          src={chave?.user?.url?.url}
+                        />}
+                        
                       </div>
                     </td>
                     <td>

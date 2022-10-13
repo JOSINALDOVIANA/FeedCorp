@@ -83,8 +83,8 @@ const AvPorResultados = () => {
             <Col lg={4} xl={4} xxl={4} md={6} >
               <Card key={avpr.id} className="custom-card" style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  setValues(a => ({ ...a, AVPRselect: avpr }))
-                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`, { state: values })
+                  // setValues(a => ({ ...a, AVPRselect: avpr }))
+                  navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/progressoAVPR`, { state: {...values,AVPRselect: avpr} })
                 }}
               >
                 <Card.Body className="iconfont text-center">

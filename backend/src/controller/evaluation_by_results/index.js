@@ -58,15 +58,15 @@ export default {
     },
     async delete(req,res){
         const {id}=req.query;
-
+// console.log(id)
         try {
              await conexao("evaluation_by_results").del().where({id}) ;      
             
-            res.json({"status":true,"message":"apagado"});
+          return  res.json({"status":true,"message":"apagado"});
             
         } catch (error) {
-           // console.log(error)
-            res.json({status:false, erro:"error avpr_=>delete"});
+           console.log(error)
+        return    res.json({status:false, erro:"error avpr_=>delete"});
         }
     },
     async getEspecific(req,res){

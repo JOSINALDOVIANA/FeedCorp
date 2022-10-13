@@ -23,7 +23,7 @@ const CriarOKR = () => {
     api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
   // console.log(values)
-  // console.log(okr)
+  console.log(okr)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -169,10 +169,10 @@ const CriarOKR = () => {
                     type="button"
                     className="my-2 btn mt-2"
 
-                    onClick={async () => {
+                    onClick={ () => {
                       let user = okr.user[0];
                       // console.log(user);
-                      await api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
+                       api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
 
                       setOkr(a => ({
                         ...a, keys: [...a.keys,
@@ -217,11 +217,12 @@ const CriarOKR = () => {
 
                       <td>
                         <div className="d-flex align-items-center mb-2 me-4">
-                          <Image
+                          {!!key.user.image && <Image
                             alt="avatar"
                             className="wd-30 rounded-circle mg-r-15"
-                            src={key?.user.image.url}
-                          />
+                            src={key?.user?.image?.url}
+                          />}
+                          
                           <div>
                             <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
                               {key.user.name}
