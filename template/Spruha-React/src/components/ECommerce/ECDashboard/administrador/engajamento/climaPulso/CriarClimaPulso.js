@@ -41,7 +41,7 @@ const CriarClimaPulso = () => {
 
 
   }, [dadosrota.state])
-  // console.log(units)
+  console.log(pulse)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -101,8 +101,10 @@ const CriarClimaPulso = () => {
                 <Row>
                   <Col sm={12} md={6} lg={6} xl={6}>
                     <input
-                      onBlur={(e) => { setPulse(a => ({ ...a, title: e.target.value })) }}
-                      type="text" className="form-control" placeholder="Pesquisa" />
+                      onChange={(e) => { setPulse(a => ({ ...a, title: e.target.value })) }}
+                      type="text" className="form-control" placeholder="Pesquisa"
+                      value={pulse.title}
+                    />
                   </Col>
                 </Row>
               </FormGroup>
@@ -184,10 +186,11 @@ const CriarClimaPulso = () => {
                     <ListGroup.Item key={item2.id}
                       as="li"
                       className="d-flex justify-content-betwween align-items-center">
-                      <div className="ms-2 me-auto">{item2.question}</div>
+                      {/* <div className="ms-2 me-auto">{item2.question}</div> */}
+                      <label htmlFor={item2.id} className="ms-2 me-auto">{item2.question}</label>
 
                       <div className="me-2 d-flex align-items-center">
-                        <input onChange={(e) => {
+                        <input id={item2.id} onChange={(e) => {
                           if (e.target.checked) {
                             setPulse(a => ({ ...a, questions: [...a.questions, item2] }))
                           }
@@ -197,7 +200,9 @@ const CriarClimaPulso = () => {
                             setPulse(a => ({ ...a, questions }));
 
                           }
-                        }} className="form-check-input" type="checkbox" />
+                        }} className="form-check-input" type="checkbox" >
+
+                        </input>
                       </div>
                     </ListGroup.Item>
                   )}

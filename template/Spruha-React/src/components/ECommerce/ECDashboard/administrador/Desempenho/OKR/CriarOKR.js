@@ -105,8 +105,7 @@ const CriarOKR = () => {
                     selected={startDate}
                     minDate={startDate}
                     onChange={(date) => { setStartDate(date); setOkr(a => ({ ...a, validity: date })) }}
-                    //FORMATO DATA
-                    dateFormat="dd/MM/yyyy"
+                    
                   />
                 </InputGroup>
               </FormGroup>

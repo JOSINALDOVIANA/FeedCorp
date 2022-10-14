@@ -2,13 +2,14 @@ import React, { Fragment, useState } from "react";
 import MaskInput from "react-maskinput";
 
 // CEP MÁSCARA
-export function Cepformat() {
+export function Cepformat(props) {
     return (
         <Fragment>
             <MaskInput
-                alwaysShowMask //Comentando isso ele fica invisível
+            {...props}
+                //alwaysShowMask //Comentando isso ele fica invisível
                 className="form-control"
-                maskChar="_"
+                maskChar=""
                 mask="00000-000"
                 size={9}
             />

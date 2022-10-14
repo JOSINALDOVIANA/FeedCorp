@@ -2,12 +2,14 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Breadcrumb, Col, Button, Nav, Card, Row, Tab, Form } from "react-bootstrap";
 import * as InputMask from "../../Components/Masks";
-
+import api from "../../../../../api";
 function Settings() {
     const dadosrota = useLocation();
     const navegar = useNavigate()
-    const [values, setValues] = useState(dadosrota.state);
-    const [validated, setValidated] = useState(false);
+    const [validated, setValidated] = useState(false)
+    const [values, setValues] = useState({});
+    const [states, setStates] = useState([]);
+    const [cities, setCities] = useState([]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,9 +20,66 @@ function Settings() {
 
     useEffect(() => {
         setValues(dadosrota.state)
+        api.get(`city/get?id_state=${dadosrota.state.company.id_state}`).then(r => {
+            if (r.data.status) {
+                setCities(r.data.cities)
+            }
+
+        })
+        api.get(`state/get?id_country=${dadosrota.state.company.id_country}`).then(r => {
+            if (r.data.status) {
+
+                setStates(r.data.states)
+            }
+        })
 
     }, [dadosrota.state])
-    //console.log(values)
+
+    // console.log(cities)
+    // console.log(states)
+
+    useEffect(()=>{
+        const select_state=document.getElementById("select_state");
+        select_state.innerHTML=""
+        for (const iterator of states) {
+            if(iterator.id==dadosrota.state.company.id_state){
+                select_state.innerHTML+=`
+                <option value=${iterator.id} selected>${iterator.state}</option>
+                `
+            }else{
+
+                select_state.innerHTML+=`
+                    <option value=${iterator.id} >${iterator.state}</option>
+                    `
+            }
+        }
+        CarregarCidades(dadosrota.state.company.id_state)
+    },[states])
+
+    function CarregarCidades(id_state) {
+        api.get(`city/get?id_state=${id_state}`).then(r => {
+            if (r.data.status) {
+
+                setCities(r.data.cities)
+            }
+        })
+        const select_city=document.getElementById("select_city");
+        select_city.innerHTML=""
+        for (const iterator of cities) {
+            if(iterator.id===values.company.id_city){
+                select_city.innerHTML+=`
+                <option value=${iterator.id} selected>${iterator.city}</option>
+                `
+            }else{
+
+                select_city.innerHTML+=`
+                    <option value=${iterator.id} >${iterator.city}</option>
+                    `
+            }
+        }
+
+    }
+
 
     return (
         <Fragment>
@@ -191,6 +250,7 @@ function Settings() {
                                                     name="Nome Fantasia"
                                                     placeholder="Nome fantasia"
                                                     type="text"
+                                                    value={values?.company?.namefantasy}
 
                                                 />
                                             </Form.Group>
@@ -204,37 +264,9 @@ function Settings() {
                                                     name="cnpj"
                                                     placeholder="cnpj da empresa"
                                                     type="text"
+                                                    value={values?.company?.cnpj}
                                                 />
                                             </Form.Group>
-
-                                            <Row>
-                                                <Col>
-                                                    <Form.Group className="form-group" controlid="">
-                                                        <Form.Label>
-                                                            Cidade: <span className="tx-danger">*</span>
-                                                        </Form.Label>
-                                                        <Form.Control
-                                                            required
-                                                            name="cidade"
-                                                            placeholder="cidade onde situa a empresa"
-                                                            type="text"
-                                                        />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col>
-                                                    <Form.Group className="form-group" controlid="">
-                                                        <Form.Label>
-                                                            Estado: <span className="tx-danger">*</span>
-                                                        </Form.Label>
-                                                        <Form.Control
-                                                            required
-                                                            name="estado"
-                                                            placeholder="estado onde situa a empresa"
-                                                            type="text"
-                                                        />
-                                                    </Form.Group>
-                                                </Col>
-                                            </Row>
 
                                             <Row>
                                                 <Col>
@@ -247,7 +279,44 @@ function Settings() {
                                                             name="país"
                                                             placeholder="País onde situa a empresa"
                                                             type="text"
+                                                            value={values?.company?.country.country}
                                                         />
+                                                    </Form.Group>
+                                                </Col>
+
+                                                <Col>
+                                                    <Form.Group className="form-group" controlid="">
+                                                        <Form.Label>
+                                                            Estado: <span className="tx-danger">*</span>
+                                                        </Form.Label>
+                                                        {/* <Form.Control
+                                                            required
+                                                            name="estado"
+                                                            placeholder="estado onde situa a empresa"
+                                                            type="text"
+                                                            value={values?.company?.state.state}
+                                                        /> */}
+                                                        <select onClick={(e)=>{CarregarCidades(e.target.value)}} id="select_state"></select>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="form-group" controlid="">
+                                                        <Form.Label>
+                                                            Cidade: <span className="tx-danger">*</span>
+                                                        </Form.Label>
+                                                        {/* <Form.Control
+                                                            required
+                                                            name="cidade"
+                                                            placeholder="cidade onde situa a empresa"
+                                                            type="text"
+                                                            value={values?.company?.city.city}
+                                                        /> */}
+
+                                                        <select id="select_city"></select>
+
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
@@ -256,7 +325,7 @@ function Settings() {
                                                             CEP: <span className="tx-danger">*</span>
                                                         </Form.Label>
 
-                                                        <InputMask.Cepformat />
+                                                        <InputMask.Cepformat onChange={(e) => { setValues(a => ({ ...a, company: { ...a.company, postcard: e.target.value } })) }} value={values?.company?.postcard} />
 
                                                     </Form.Group>
                                                 </Col>

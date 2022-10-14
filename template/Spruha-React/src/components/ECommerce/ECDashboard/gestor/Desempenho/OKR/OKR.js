@@ -91,28 +91,28 @@ const Okr = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-      <Card className="custom-card">
-        <Card.Header className="border-bottom-0 pb-0 d-flex ps-3 ms-1">
+
+        <div className="border-bottom-0 pb-0 d-flex mb-2">
           <div>
-            <label className="main-content-label mb-2 pt-2">Ativos em minha unidade</label>
+            <h2 className="main-content-title tx-20 mb-1">Ativos em minha unidade</h2>
             <span className="d-block tx-12 mb-2 text-muted">
               Okrs de sua unidade
             </span>
           </div>
-        </Card.Header>
+        </div>
 
-        <Row className="row-sm p-3">
+        <Row className="row-sm">
 
           {values?.okrscriados?.map(okr => (
             <Col key={okr.id} lg={4} xl={4} xxl={4} md={4} >
-              <Card.Body className="list-card"
+              <Card className="custom-card shadow-sm"
                 style={{ cursor: 'pointer' }}
                 onClick={async () => {
 
                   navegar(`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`, { state: { ...values, okrselect: okr } })
                 }} P
               >
-                <div className="iconfont text-center">
+                <Card.Body className="iconfont text-center">
                   <div className="d-flex justify-content-between">
                     <div className="d-flex flex-column align-items-start">
                       <h4 className="mb-1" style={{ textTransform: 'capitalize' }}>
@@ -155,13 +155,13 @@ const Okr = () => {
                       />
                     </div>
                   ))} */}
-                </div>
-              </Card.Body>
+                </Card.Body>
+              </Card>
             </Col>
           ))}
 
         </Row>
-      </Card>
+
     </Fragment>
   )
 };

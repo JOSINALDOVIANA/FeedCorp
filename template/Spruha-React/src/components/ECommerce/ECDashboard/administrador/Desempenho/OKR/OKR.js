@@ -89,16 +89,15 @@ const Okr = () => {
             </Button>
           </div>
         </div>
-
-        
-
       </div>
       {/* <!-- End Page Header --> */}
 
+
+
       <div>
         <h2 className="main-content-title tx-20 mx-2">Ativos</h2>
+        
         <Row className="row-sm">
-
           {values?.okrscriados?.map(okr => (
             <Col key={okr.id} lg={6} xl={6} xxl={6} md={6} >
               <Card className="custom-card"

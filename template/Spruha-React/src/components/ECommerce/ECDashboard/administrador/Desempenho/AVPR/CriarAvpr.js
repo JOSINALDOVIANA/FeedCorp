@@ -18,7 +18,7 @@ const CriarAvpr = () => {
   const [Itemsalvo, setItem] = useState([]);
   const [enabled, setEna] = useState(true);
   const [selectdata, setData] = useState(new Date());
-  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, item:"", items: [], direction: { company: [], units: [], users: [] }, checkcompany: false, checkunits: false, checkusers: false })
+  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, item: "", items: [], direction: { company: [], units: [], users: [] }, checkcompany: false, checkunits: false, checkusers: false })
   useEffect(() => {
     setValues(dadosrota.state)
     api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
@@ -68,32 +68,32 @@ const CriarAvpr = () => {
                   variant="info"
                   className="btn me-1"
                   onClick={() => {
-                    
-                  let items = avpr.items;
-                  for (const key in items) {
 
-                    delete items[key]["id"];
+                    let items = avpr.items;
+                    for (const key in items) {
 
-                  }
-                  // navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
-                  let obj = {
-                    "id_user": avpr.id_user, "title": avpr.title, "validity": avpr.validity,
-                    "items": items,
-                    "direction": avpr.direction
-                  }
-                  api.post(`/avpr/insert`, { ...obj }).then(r => {
-                    console.log(r)
-                    if (r.data.status) {
-                      successAlert()
-                      navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                      delete items[key]["id"];
+
                     }
-                  })
+                    // navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                    let obj = {
+                      "id_user": avpr.id_user, "title": avpr.title, "validity": avpr.validity,
+                      "items": items,
+                      "direction": avpr.direction
+                    }
+                    api.post(`/avpr/insert`, { ...obj }).then(r => {
+                      console.log(r)
+                      if (r.data.status) {
+                        successAlert()
+                        navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                      }
+                    })
                   }}
-                  >
+                >
                   Criar
                 </Button>
 
-                <Button 
+                <Button
                   variant="danger"
                   onClick={() => {
                     navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
@@ -201,6 +201,8 @@ const CriarAvpr = () => {
                     <i className="fe fe-calendar lh--9 op-6"></i>
                   </Button>
                   <Datepicker
+                    className="form-control"
+                    minDate={selectdata}
                     selected={selectdata}
                     onChange={(date) => { setData(date); setAVPR(a => ({ ...a, validity: date })) }}
                   />
@@ -227,7 +229,7 @@ const CriarAvpr = () => {
                       required
                       value={avpr?.item?.indicator}
                       onChange={e => {
-                        let item= { "indicator": e.target.value, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };
+                        let item = { "indicator": e.target.value, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };
                         setAVPR(a => ({ ...a, item }));
                       }}
                     />
@@ -240,17 +242,17 @@ const CriarAvpr = () => {
                       required
                       onChange={e => {
 
-                        let goal= e.target.value;
+                        let goal = e.target.value;
 
-                        setAVPR(a => ({...a,item:{...a.item,goal}}))
-                        
+                        setAVPR(a => ({ ...a, item: { ...a.item, goal } }))
+
 
                       }}
                     />
                   </Col>
                 </Row>
 
-                
+
                 <Col className="form-group">
                   <div>
                     <span className="d-flex text-muted tx-13">
@@ -263,13 +265,13 @@ const CriarAvpr = () => {
                       type="checkbox"
                       onChange={(e) => {
                         if (e.target.checked) {
-                          setAVPR(a => ({...a,item:{...a.item,min: true}}))
+                          setAVPR(a => ({ ...a, item: { ...a.item, min: true } }))
                           setEna(false)
 
                         } else {
                           setAVPR(a => {
-                            let item=a.item;              
-                          
+                            let item = a.item;
+
                             delete item["min"];
                             return ({ ...a, item });
                           })
@@ -289,16 +291,16 @@ const CriarAvpr = () => {
                       onChange={(e) => {
 
                         if (e.target.checked) {
-                          setAVPR(a=>({...a,item:{...a.item, max: true }}))
-                          
+                          setAVPR(a => ({ ...a, item: { ...a.item, max: true } }))
+
                           setEna(false)
 
                         } else {
 
                           setAVPR(a => {
                             let item = a.item;
-                           
-                            
+
+
                             delete item["max"];
                             return ({ ...a, item });
                           })
@@ -313,7 +315,7 @@ const CriarAvpr = () => {
 
                   </div>
                 </Col>
-              
+
 
               </Grid>
 
@@ -324,22 +326,22 @@ const CriarAvpr = () => {
                   className="my-2 btn"
                   disabled={enabled}
                   onClick={() => {
-                    
+
                     const inputs = document.getElementsByClassName("nt");
                     const checks = document.getElementsByClassName("checkmed")
                     for (const element of inputs) {
                       element.value = ""
                     }
                     for (const element of checks) {
-                      element.checked=false
+                      element.checked = false
                     }
-                    let item=avpr.item;
-                    item.id=uniqueId();
-                    setAVPR(a=>({...a,items:[...a.items,{...item}],item:""}));
-                    
+                    let item = avpr.item;
+                    item.id = uniqueId();
+                    setAVPR(a => ({ ...a, items: [...a.items, { ...item }], item: "" }));
+
                     setEna(true);
                   }
-                }
+                  }
                 >
                   Adicionar
                 </Button>

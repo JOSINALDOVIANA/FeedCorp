@@ -84,7 +84,7 @@ function MinhaCorporacao() {
       </Row>
 
       {/* GRÁFICO EM BARRA */}
-      <Col lg={12} xl={12} xxl={12} md={12}>
+      {/* <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">
           <Card.Body>
             <div>
@@ -103,9 +103,9 @@ function MinhaCorporacao() {
             </div>
           </Card.Body>
         </Card>
-      </Col>
+      </Col> */}
       {/* GRÁFICO EM LINHA */}
-      <Col lg={12} xl={12} xxl={12} md={12}>
+      {/* <Col lg={12} xl={12} xxl={12} md={12}>
         <Card className="custom-card overflow-hidden">
           <Card.Body className="card-body">
             <div>
@@ -115,7 +115,7 @@ function MinhaCorporacao() {
               </p>
             </div>
             <div className="chartjs-wrapper-demo">
-              {/* <canvas id="chartLine"></canvas> */}
+              <canvas id="chartLine"></canvas>
 
               <Line
                 options={chart.Linechart}
@@ -126,43 +126,7 @@ function MinhaCorporacao() {
             </div>
           </Card.Body>
         </Card>
-      </Col>
-
-
-      {/* <Row>
-        <Col xl={12} lg={12} md={12}>
-          <Card className="custom-card">
-            <Card.Header className=" border-bottom-0"><label className="main-content-label my-auto">Crypt Marketing Values</label></Card.Header>
-            <Card.Body>
-
-              <Table hover responsive className="table text-nowrap border">
-                <thead className="table border-bottom">
-                  <tr>
-                    <th className="bg-transparent">No</th>
-                    <th className="bg-transparent">Name</th>
-                    <th className="bg-transparent">Last Price</th>
-                    <th className="bg-transparent">Market Cap</th>
-                    <th className="bg-transparent">Change(24h)</th>
-                    <th className="bg-transparent"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {CryptMarketingValues.map((items, index) => (
-                    <tr key={index} data-index={index}>
-                      <td>{items.ID}</td>
-                      <td><img src={items.IMAGES} className="wd-30 ht-30 me-3" alt="img" />{items.Name} <b>{items.crypt}</b></td>
-                      <td>{items.MarkerCap}</td>
-                      <td>{items.lastprice}</td>
-                      <td><span className={`text-${items.Change}`}>+3.49%</span></td>
-                      <td><b className="btn btn-outline-primary btn-sm">{items.platform}</b></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row> */}
+      </Col> */}
 
     </Fragment>
   );
