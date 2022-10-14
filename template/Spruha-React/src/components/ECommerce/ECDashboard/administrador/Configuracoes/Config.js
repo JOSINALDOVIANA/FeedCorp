@@ -1,11 +1,20 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
-import { Breadcrumb, Col, Button, Nav, Card, Row, Tab } from "react-bootstrap";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Breadcrumb, Col, Button, Nav, Card, Row, Tab, Form } from "react-bootstrap";
+import * as InputMask from "../../Components/Masks";
 
 function Settings() {
     const dadosrota = useLocation();
     const navegar = useNavigate()
     const [values, setValues] = useState(dadosrota.state);
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+
+        setValidated(true);
+    };
 
     useEffect(() => {
         setValues(dadosrota.state)
@@ -23,25 +32,6 @@ function Settings() {
                         <Breadcrumb.Item active>Administração </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
-                {/* <div className="d-flex">
-                <div className="justify-content-center">
-                    <Button variant="white"
-                        type="button"
-                        className="btn-icon-text my-2 me-2"
-                    >
-                        <i className="fe fe-download me-2"></i> Import
-                    </Button>
-                    <Button variant="white"
-                        type="button"
-                        className="btn-icon-text my-2 me-2"
-                    >
-                        <i className="fe fe-filter me-2"></i> Filter
-                    </Button>
-                    <Button variant="primary" type="button" className="my-2 btn-icon-text">
-                        <i className="fe fe-download-cloud me-2"></i> Download Report
-                    </Button>
-                </div>
-            </div> */}
             </div>
 
 
@@ -177,39 +167,124 @@ function Settings() {
                             <Tab.Pane eventKey='corp'>
 
                                 <Card className="custom-card">
-                                    <Card.Body>
+                                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                                        <Card.Body>
 
-                                        <div className="d-flex">
-                                            <div>
-                                                <h5 className="tx-14 d-flex text-dark tx-uppercase">
-                                                    Dados de sua empresa
-                                                </h5>
-                                                <p className="tx-13 text-muted mb-0">
-                                                    Aqui ficam os dados gerais de sua empresa.
-                                                </p>
+                                            <div className="d-flex mb-2">
+                                                <div>
+                                                    <h5 className="tx-14 d-flex text-dark tx-uppercase">
+                                                        Dados de sua empresa
+                                                    </h5>
+                                                    <p className="tx-13 text-muted mb-0">
+                                                        Aqui ficam os dados gerais de sua empresa.
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Card.Body>
-                                    <Card.Footer className="">
-                                        <div className="custom-switch float-end mb-0">
-                                            <Link
-                                                to="#"
-                                                className="tx-15 mb-0 me-2"
-                                            >
-                                                Salvar
-                                            </Link>
-                                            <Button
-                                                eventKey='edit'
-                                                onClick={() => { navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values }) }}
-                                                size='sm'
-                                                variant="outline-danger btn-rounded"
-                                                className="mb-0"
 
-                                            >
-                                                cancelar
-                                            </Button>
-                                        </div>
-                                    </Card.Footer>
+
+                                            <Form.Group className="form-group" controlid="">
+                                                <Form.Label>
+                                                    Nome fantasia: <span className="tx-danger">*</span>
+                                                </Form.Label>
+                                                <Form.Control
+                                                    required
+                                                    name="Nome Fantasia"
+                                                    placeholder="Nome fantasia"
+                                                    type="text"
+
+                                                />
+                                            </Form.Group>
+
+                                            <Form.Group className="form-group" controlid="">
+                                                <Form.Label>
+                                                    CNPJ: <span className="tx-danger">*</span>
+                                                </Form.Label>
+                                                <Form.Control
+                                                    required
+                                                    name="cnpj"
+                                                    placeholder="cnpj da empresa"
+                                                    type="text"
+                                                />
+                                            </Form.Group>
+
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="form-group" controlid="">
+                                                        <Form.Label>
+                                                            Cidade: <span className="tx-danger">*</span>
+                                                        </Form.Label>
+                                                        <Form.Control
+                                                            required
+                                                            name="cidade"
+                                                            placeholder="cidade onde situa a empresa"
+                                                            type="text"
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="form-group" controlid="">
+                                                        <Form.Label>
+                                                            Estado: <span className="tx-danger">*</span>
+                                                        </Form.Label>
+                                                        <Form.Control
+                                                            required
+                                                            name="estado"
+                                                            placeholder="estado onde situa a empresa"
+                                                            type="text"
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="form-group" controlid="">
+                                                        <Form.Label>
+                                                            País: <span className="tx-danger">*</span>
+                                                        </Form.Label>
+                                                        <Form.Control
+                                                            required
+                                                            name="país"
+                                                            placeholder="País onde situa a empresa"
+                                                            type="text"
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="form-group" controlid="">
+                                                        <Form.Label>
+                                                            CEP: <span className="tx-danger">*</span>
+                                                        </Form.Label>
+
+                                                        <InputMask.Cepformat />
+
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+
+                                        </Card.Body>
+
+                                        <Card.Footer className="">
+                                            <div className="custom-switch float-end mb-2">
+                                                <Button
+                                                    type="submit"
+                                                    size='sm'
+                                                    // onClick={}
+                                                    className="mb-0 me-2"
+                                                >
+                                                    Salvar
+                                                </Button>
+                                                <Button
+                                                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values }) }}
+                                                    size='sm'
+                                                    variant="outline-danger btn-rounded"
+                                                    className="mb-0"
+                                                >
+                                                    cancelar
+                                                </Button>
+                                            </div>
+                                        </Card.Footer>
+                                    </Form>
                                 </Card>
 
                             </Tab.Pane>
