@@ -28,11 +28,12 @@ function EditUser() {
         obj = r.data.cargo
         obj.users = [];
         setValues(a => ({ ...a, cargos: [...a.cargos, { ...obj }] }));
+        document.getElementById("cargo_form").value=''
       }
     })
+    
+    setValidated(false);
 
-
-    setValidated(true);
   };
 
   const dadosrota = useLocation();
@@ -130,9 +131,6 @@ function EditUser() {
                           <label onClick={() => {
                             deleteQuestionAlert().then((result) => {
                               if (result.isConfirmed) {
-                                deleteSucessAlert()
-                                navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values })
-                                //COLOCA A FUNÇAO DE DELETAR AQUI E JOGA AS 2 linhas de cima pra dentro dele, dentro do r.data.status q tu criar
                                 api.delete(`cargos/del?id=${cargo.id}`).then(r => {
                                   if (r.data.status) {
                                     setValues(a => {
@@ -141,7 +139,7 @@ function EditUser() {
                                       return ({ ...a, cargos })
                                     });
                                     deleteSucessAlert()
-                                    navegar(`${process.env.PUBLIC_URL}/corporacao/`, { state: values })
+                                    navegar(`${process.env.PUBLIC_URL}/adm_add_office`, { state: values })
                                   }
                                 })
                               }
@@ -172,11 +170,12 @@ function EditUser() {
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
 
 
-                <Form.Group className="form-group" controlid="">
+                <Form.Group className="form-group">
                   <Form.Label>
                     Cargo: <span className="tx-danger">*</span>
                   </Form.Label>
                   <Form.Control
+                    id="cargo_form"
                     required
                     name="office"
                     placeholder="Novo cargo"
