@@ -3,17 +3,32 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Breadcrumb, Col, Button, Nav, Card, Row, Tab, Form } from "react-bootstrap";
 import * as InputMask from "../../Components/Masks";
 import api from "../../../../../api";
+import { Selectstate } from "./select";
 function Settings() {
     const dadosrota = useLocation();
     const navegar = useNavigate()
     const [validated, setValidated] = useState(false)
     const [values, setValues] = useState({});
-    const [states, setStates] = useState([]);
+    const [states, setStates] = useState([]);    
     const [cities, setCities] = useState([]);
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        let modules=values?.company?.modules
+        if(!!modules){
+            modules=modules.filter(item=>item.id)
+        }
+        else{
+            modules=[]
+        }
+        // console.log(modules)
 
+        api.put(`/company/update`,{...values.company}).then(r=>{
+            if(r.data.status){
+                alert("atualizado")
+            }
+        })
 
         setValidated(true);
     };
@@ -22,61 +37,45 @@ function Settings() {
         setValues(dadosrota.state)
         api.get(`city/get?id_state=${dadosrota.state.company.id_state}`).then(r => {
             if (r.data.status) {
-                setCities(r.data.cities)
+                let ct=[]
+                for (let iterator of r.data.cities) {
+                    iterator={value:iterator.id,label:iterator.city};
+                    ct.push(iterator)
+                }
+                setCities(ct)
             }
 
         })
         api.get(`state/get?id_country=${dadosrota.state.company.id_country}`).then(r => {
             if (r.data.status) {
-
-                setStates(r.data.states)
+                let st=[]
+                for (let iterator of r.data.states) {
+                    iterator={value:iterator.id,label:iterator.state};
+                    st.push(iterator)
+                }
+                setStates(st)
             }
         })
 
     }, [dadosrota.state])
 
-    // console.log(cities)
-    // console.log(states)
+    console.log(values)
 
-    useEffect(()=>{
-        const select_state=document.getElementById("select_state");
-        select_state.innerHTML=""
-        for (const iterator of states) {
-            if(iterator.id==dadosrota.state.company.id_state){
-                select_state.innerHTML+=`
-                <option value=${iterator.id} selected>${iterator.state}</option>
-                `
-            }else{
-
-                select_state.innerHTML+=`
-                    <option value=${iterator.id} >${iterator.state}</option>
-                    `
-            }
-        }
-        CarregarCidades(dadosrota.state.company.id_state)
-    },[states])
+    
 
     function CarregarCidades(id_state) {
+        // console.log(id_state)
         api.get(`city/get?id_state=${id_state}`).then(r => {
             if (r.data.status) {
-
-                setCities(r.data.cities)
+                let ct=[]
+                for (let iterator of r.data.cities) {
+                    iterator={value:iterator.id,label:iterator.city};
+                    ct.push(iterator)
+                }
+                setCities(ct)
             }
+
         })
-        const select_city=document.getElementById("select_city");
-        select_city.innerHTML=""
-        for (const iterator of cities) {
-            if(iterator.id===values.company.id_city){
-                select_city.innerHTML+=`
-                <option value=${iterator.id} selected>${iterator.city}</option>
-                `
-            }else{
-
-                select_city.innerHTML+=`
-                    <option value=${iterator.id} >${iterator.city}</option>
-                    `
-            }
-        }
 
     }
 
@@ -251,6 +250,7 @@ function Settings() {
                                                     placeholder="Nome fantasia"
                                                     type="text"
                                                     value={values?.company?.namefantasy}
+                                                    onChange={e=>{setValues(a=>({...a,company:{...a.company,namefantasy:e.target.value}}))}}
 
                                                 />
                                             </Form.Group>
@@ -261,10 +261,12 @@ function Settings() {
                                                 </Form.Label>
                                                 <Form.Control
                                                     required
+                                                    disabled
                                                     name="cnpj"
                                                     placeholder="cnpj da empresa"
                                                     type="text"
                                                     value={values?.company?.cnpj}
+                                                    onChange={e=>{setValues(a=>({...a,company:{...a.company,cnpj:e.target.value}}))}}
                                                 />
                                             </Form.Group>
 
@@ -275,6 +277,7 @@ function Settings() {
                                                             País: <span className="tx-danger">*</span>
                                                         </Form.Label>
                                                         <Form.Control
+                                                        disabled
                                                             required
                                                             name="país"
                                                             placeholder="País onde situa a empresa"
@@ -296,8 +299,21 @@ function Settings() {
                                                             type="text"
                                                             value={values?.company?.state.state}
                                                         /> */}
-                                                        <select onClick={(e)=>{CarregarCidades(e.target.value)}} id="select_state"></select>
+                                                        {/* <select id="select_state"></select> */}
+                                                        
                                                     </Form.Group>
+                                                    <Selectstate 
+                                                         classNamePrefix="Select2"
+                                                          onChange={(e)=>{ 
+                                                            setValues(a=>({...a,company:{...a.company,id_state:e.value}}))
+                                                            CarregarCidades(e.value)}} 
+                                                          options={states} 
+                                                          singleSelect
+                                                        displayValue="key" 
+                                                          placeholder={values?.company?.state.state} 
+                                                          >
+
+                                                          </Selectstate>
                                                 </Col>
                                             </Row>
 
@@ -314,10 +330,20 @@ function Settings() {
                                                             type="text"
                                                             value={values?.company?.city.city}
                                                         /> */}
+                                                     
 
-                                                        <select id="select_city"></select>
+                                                       
 
                                                     </Form.Group>
+                                                    <Selectstate 
+                                                         classNamePrefix="Select2"
+                                                          onChange={(e)=>{setValues(a=>({...a,company:{...a.company,id_city:e.value}}))}} 
+                                                          options={cities} 
+                                                          singleSelect 
+                                                          displayValue="key" 
+                                                          placeholder={values?.company?.city.city}
+                                                        >                                                            
+                                                          </Selectstate>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group className="form-group" controlid="">
@@ -338,7 +364,11 @@ function Settings() {
                                                 <Button
                                                     type="submit"
                                                     size='sm'
-                                                    // onClick={}
+                                                    onClick={
+                                                        ()=>{
+
+                                                        }
+                                                    }
                                                     className="mb-0 me-2"
                                                 >
                                                     Salvar
