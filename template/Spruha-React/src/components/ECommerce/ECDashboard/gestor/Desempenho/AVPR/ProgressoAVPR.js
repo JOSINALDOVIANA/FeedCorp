@@ -62,7 +62,7 @@ const ProgressoOKR = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Nome da Avaliação</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">{values?.AVPRselect?.title}</h2>
 
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>

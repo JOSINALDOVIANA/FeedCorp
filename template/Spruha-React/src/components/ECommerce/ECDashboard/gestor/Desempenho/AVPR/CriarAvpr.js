@@ -6,7 +6,7 @@ import { SingleselectUnidade, SingleselectPessoa } from "./FormDataAVPR";
 import "./style.css"
 import { Grid } from "@material-ui/core";
 import { Datepicker } from "../../../Components/DataPicker"
-import {  uniqueId } from "lodash";
+import { uniqueId } from "lodash";
 import api from "../../../../../../api";
 
 const CriarAvpr = () => {
@@ -17,8 +17,8 @@ const CriarAvpr = () => {
   const [Itemsalvo, setItem] = useState([]);
   const [enabled, setEna] = useState(true);
   const [selectdata, setData] = useState(new Date());
-  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "",item:"", items: [], direction: { company: [], units: [dadosrota.state.unit.id], users: [] }, checkcompany: false, checkunits: true, checkusers: false })
-  
+  const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "", item: "", items: [], direction: { company: [], units: [dadosrota.state.unit.id], users: [] }, checkcompany: false, checkunits: true, checkusers: false })
+
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota])
@@ -72,83 +72,6 @@ const CriarAvpr = () => {
                 </span>
               </FormGroup>
 
-              {/* NÃO PRECISA ESCOLHER UNIDADE OU EMPRESA PQ É O GESTOR DA UNIDADE, TEM Q FAZER ELE SER AUTOMÁTICO */}
-              {/* JA ESTA FEITO NO INICIO AVPR JA É SETADO EM DIRECTION{UNITS[values.UNIT.ID]} E checkunits=TRUE */}
-              {/* <FormGroup className="form-group">
-                <Form.Label className="tx-medium">Avaliados (as)</Form.Label>
-                {(avpr?.checkunits == false && avpr?.checkusers == false) &&
-
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      onChange={(e) => {
-
-                        if (e.target.checked) {
-                          setAVPR(a => ({ ...a, direction: { ...a.direction, company: [values.company.id] }, checkcompany: true }))
-
-                        } else {
-                          setAVPR(a => ({ ...a, direction: { ...a.direction, company: [] }, checkcompany: false }))
-
-                        }
-                      }}
-                    />
-                    <label className="d-flex text-muted tx-13">
-                      Marque para enviar a todos da companhia ( {values?.company?.namefantasy} )
-                    </label>
-                  </div>
-
-
-                }
-
-
-                <Row>
-                  {avpr.checkcompany == false && <>
-                    <Form.Label className="tx-medium mt-3">Também pode escolher enviar a uma ou mais UNDADE</Form.Label>
-
-                    {values?.units?.map(unit => (
-                      <Col key={unit.initials} className="my-1 mx-1">
-                        <i
-                          size="sm"
-
-                          className="untavpr outline btn "
-                          id={`${unit.id}-link2`}
-
-                          onClick={(e) => {
-                            let u = avpr.direction.units;
-                            if (u.indexOf(unit.id) < 0) {
-                              const i = document.getElementById(`${unit.id}-link2`);
-                              // console.log(i)
-                              i.classList.add("activeUNITavpr");
-                              setAVPR(a => ({ ...a, direction: { ...a.direction, units: [...a.direction.units, unit.id] } }));
-
-                            } else {
-                              setAVPR(a => {
-                                let units = a.direction.units;
-                                units = units.filter((item, i) => units.indexOf(unit.id) != i);
-                                return ({ ...a, direction: { ...a.direction, units } });
-                              })
-
-                              const i = document.getElementById(`${unit.id}-link2`);
-                              i.classList.remove("activeUNITavpr");
-
-                            }
-
-                            if (document.querySelectorAll(".activeUNITavpr").length == 0) {
-                              setAVPR(a => ({ ...a, checkunits: false }))
-                            }
-                            if (document.querySelectorAll(".activeUNITavpr").length > 0) {
-                              setAVPR(a => ({ ...a, checkunits: true }))
-                            }
-
-                          }}>{unit.initials}</i>
-                      </Col>
-                    ))}
-                  </>}
-                </Row>
-
-              </FormGroup> */}
-
               <FormGroup className="form-group">
                 <Form.Label className="tx-medium">Validade</Form.Label>
 
@@ -186,8 +109,8 @@ const CriarAvpr = () => {
                       required
                       value={avpr?.item?.indicator}
                       onChange={e => {
-                        
-                       let item= { "indicator": e.target.value, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };
+
+                        let item = { "indicator": e.target.value, "id_physicalUnity": null, "id_ebr": "", "validity": avpr.validity };
                         setAVPR(a => ({ ...a, item }));
                       }}
                     />
@@ -200,10 +123,10 @@ const CriarAvpr = () => {
                       required
                       onChange={e => {
 
-                        let goal= e.target.value;
+                        let goal = e.target.value;
 
-                        setAVPR(a => ({...a,item:{...a.item,goal}}))
-                        
+                        setAVPR(a => ({ ...a, item: { ...a.item, goal } }))
+
 
                       }}
                     />
@@ -211,71 +134,71 @@ const CriarAvpr = () => {
                 </Row>
               </Grid>
 
-           
-                <Col className="form-group">
-                  <div>
-                    <span className="d-flex text-muted tx-13">
-                      Informe se esta meta é uma medida Minima ou Maxima
-                    </span>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input checkmed"
-                      type="checkbox"
-                      onChange={(e) => {
 
-                        if (e.target.checked) {
-                          setAVPR(a => ({...a,item:{...a.item,min: true}}))
-                          setEna(false)
+              <Col className="form-group">
+                <div>
+                  <span className="d-flex text-muted tx-13">
+                    Informe se esta meta é uma medida Minima ou Maxima
+                  </span>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checkmed"
+                    type="checkbox"
+                    onChange={(e) => {
 
-                        } else {
-                          setAVPR(a => {
-                            let item=a.item;              
-                          
-                            delete item["min"];
-                            return ({ ...a, item });
-                          })
-                          setEna(true)
-                        }
-                      }}
-                    />
-                    <label className="d-flex text-muted tx-13 form-check-label">
-                      Minima
-                    </label>
+                      if (e.target.checked) {
+                        setAVPR(a => ({ ...a, item: { ...a.item, min: true } }))
+                        setEna(false)
 
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input checkmed "
-                      type="checkbox"
-                      onChange={(e) => {
+                      } else {
+                        setAVPR(a => {
+                          let item = a.item;
 
-                        if (e.target.checked) {
-                          setAVPR(a=>({...a,item:{...a.item, max: true }}))
-                          
-                          setEna(false)
+                          delete item["min"];
+                          return ({ ...a, item });
+                        })
+                        setEna(true)
+                      }
+                    }}
+                  />
+                  <label className="d-flex text-muted tx-13 form-check-label">
+                    Minima
+                  </label>
 
-                        } else {
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checkmed "
+                    type="checkbox"
+                    onChange={(e) => {
 
-                          setAVPR(a => {
-                            let item = a.item;
-                           
-                            
-                            delete item["max"];
-                            return ({ ...a, item });
-                          })
-                          setEna(true)
+                      if (e.target.checked) {
+                        setAVPR(a => ({ ...a, item: { ...a.item, max: true } }))
 
-                        }
-                      }}
-                    />
-                    <label className="d-flex text-muted tx-13">
-                      Máxima
-                    </label>
+                        setEna(false)
 
-                  </div>
-                </Col>
-              
+                      } else {
+
+                        setAVPR(a => {
+                          let item = a.item;
+
+
+                          delete item["max"];
+                          return ({ ...a, item });
+                        })
+                        setEna(true)
+
+                      }
+                    }}
+                  />
+                  <label className="d-flex text-muted tx-13">
+                    Máxima
+                  </label>
+
+                </div>
+              </Col>
+
 
               <div className="d-flex justify-content-end">
                 <Button
@@ -290,12 +213,12 @@ const CriarAvpr = () => {
                       element.value = ""
                     }
                     for (const element of checks) {
-                      element.checked=false
+                      element.checked = false
                     }
-                    let item=avpr.item;
-                    item.id=uniqueId();
-                    setAVPR(a=>({...a,items:[...a.items,{...item}],item:""}));
-                    
+                    let item = avpr.item;
+                    item.id = uniqueId();
+                    setAVPR(a => ({ ...a, items: [...a.items, { ...item }], item: "" }));
+
                     setEna(true);
                   }}
                 >

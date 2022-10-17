@@ -19,11 +19,11 @@ const CriarOKR = () => {
 
   useEffect(() => {
     setValues(dadosrota.state)
-    setOkr({ keys: [], id_user: dadosrota.state.dadosUser.id,description:"" })
+    setOkr({ keys: [], id_user: dadosrota.state.dadosUser.id, description: "" })
   }, [dadosrota])
   // console.log(values)
   // console.log(okr)
-  
+
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -164,12 +164,12 @@ const CriarOKR = () => {
 
                       <td>
                         <div className="d-flex align-items-center mb-2 me-4">
-                          {key.user.url && 
-                          <Image
-                            alt="avatar"
-                            className="wd-30 rounded-circle mg-r-15"
-                            src={key?.user?.url}
-                          />}
+                          {key.user.url &&
+                            <Image
+                              alt="avatar"
+                              className="wd-30 rounded-circle mg-r-15"
+                              src={key?.user?.url}
+                            />}
                           <div>
                             <h6 className="tx-13 tx-inverse tx-semibold mg-b-0">
                               {key.user.name}

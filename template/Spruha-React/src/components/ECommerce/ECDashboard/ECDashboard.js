@@ -41,7 +41,7 @@ function ECDashboard() {
       <div className="page-header">
         <div>
           <h2 className="main-content-title tx-24 mg-b-5">
-            Bem vindo a FeedCorp
+            Bem vindo, {values?.dadosUser.name}
           </h2>
           {/* <Breadcrumb>
             <Breadcrumb.Item href="#">

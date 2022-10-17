@@ -11,7 +11,7 @@ const Images = React.lazy(() => import("./images/index.js"));
 const ECDashboard = React.lazy(() => import("./components/ECommerce/ECDashboard/ECDashboard"))
 const MinhaCorporação = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/MyCorp"))
 const Unidades = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/Unitys"))
-const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/MyUnity"))
+const MinhaUnidade = React.lazy(() => import("./components/ECommerce/ECDashboard/MyUnity"))
 const EditUser = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/MyCorp/edit_user"));
 // ADMIN CONFIG
 const AdminConfig = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Configuracoes/Config"))
@@ -60,11 +60,7 @@ const Profile = React.lazy(() => import("./components/ECommerce/ECDashboard/Cust
 // const Lockscreen = React.lazy(() => import("./components/Custompages/Lockscreen/Lockscreen"))
 // const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
 const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
-// const AddProduct = React.lazy(() => import("./components/ECommerce/AddProduct/Addproduct"))
-// const Custompage = React.lazy(() => import("./components/Custompage"))
-// const Underconstructionpage = React.lazy(() => import("./components/UnderConstruction"))
-// const LazyCurrencyExchange = React.lazy(() => import("./components/Cryptocurrencies/CurrencyExchange/CurrencyExchange"));
-// const LazyCryptoDashboard = React.lazy(() => import("./components/Cryptocurrencies/Dashboard/Dashboard"));
+
 export const usuarioContext = createContext();
 const Root = () => {
   function UserContextProvider({ children }) {
@@ -153,13 +149,10 @@ const Root = () => {
                 element={<ProgressoOKR />}
               />
 
-
-
               {/* ------------------------------AVR------------------------------------------ */}
 
               <Route path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`} element={<Avpr />} >
                 <Route index element={<Fragment />} />
-
               </Route>
 
               {/* LADO DE FORA PRA ABRIR EM UMA NOVA PÁGINA */}
@@ -197,6 +190,7 @@ const Root = () => {
 
               {/* ------------------------------GESTOR PÁGINAS-------------------------------- */}
               <Route path={`${process.env.PUBLIC_URL}/minha_unidade`} element={<MinhaUnidade />} />
+
               {/* OKR GESTOR */}
               <Route
                 path={`${process.env.PUBLIC_URL}/okr_unidade`}
@@ -213,6 +207,7 @@ const Root = () => {
                 element={<ProgressoOKR_gestor />}
               />
               {/* OKR final */}
+
               {/* AVPR GESTOR */}
               <Route
                 path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`}
@@ -228,6 +223,7 @@ const Root = () => {
                 element={<ProgressoAVPR_gestor />}
               />
               {/* AVPR FINAL */}
+
               {/*CLIMA PULSO GESTOR */}
               <Route>
                 <Route
@@ -249,8 +245,10 @@ const Root = () => {
                   path={`${process.env.PUBLIC_URL}/climapulso_unidade/resultado/`}
                   element={<ResultadosClima_gestor />}
                 />
-
               </Route>
+
+              {/* ------------------------------COLABORADOR PÁGINAS-------------------------------- */}
+              <Route path={`${process.env.PUBLIC_URL}/okr_colaborador`} element={<MinhaUnidade />} />
 
 
             </Route>

@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button, Image } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import * as Modal from "../Components/Modal"
-import api from "../../../../api";
+import * as Modal from "./Components/Modal"
+import api from "../../../api";
 
 function MinhaCorporacao() {
 

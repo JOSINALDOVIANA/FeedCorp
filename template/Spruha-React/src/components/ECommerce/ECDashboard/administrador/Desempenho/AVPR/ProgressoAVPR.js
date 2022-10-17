@@ -25,7 +25,7 @@ const ProgressoOKR = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">Nome da Avaliação</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">{values?.AVPRselect?.title}</h2>
 
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
@@ -70,10 +70,10 @@ const ProgressoOKR = () => {
               type="button"
               className="me-2 btn-icon"
               onClick={() => {
-                deleteQuestionAlert().then(async(result) => {
+                deleteQuestionAlert().then(async (result) => {
                   if (result.isConfirmed) {
-                   await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
-                    console.log(r)
+                    await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
+                      console.log(r)
                       if (r.data.status) {
                         deleteSucessAlert()
                         navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })

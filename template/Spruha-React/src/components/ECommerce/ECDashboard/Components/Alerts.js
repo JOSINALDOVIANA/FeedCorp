@@ -73,6 +73,17 @@ export function dangerAlert(params) {
         timer: 1500
     });
 }
+//Erro feedback
+export function dangerSelfAlert(params) {
+    Swal.fire({
+        icon: "error",
+        title: "Impossível realizar esta ação!",
+        text: "Não é possível mandar feedback pra você mesmo",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 2500
+    });
+}
 //Salvar alterações profile
 export function saveAlert() {
     const Toast = Swal.mixin({

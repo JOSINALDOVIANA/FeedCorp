@@ -39,27 +39,6 @@ export const MENUADM = [
 						selected: false,
 						title: 'Avaliação por resultados'
 					},
-					// {
-					// 	path: `${process.env.PUBLIC_URL}/`,
-					// 	type: 'link',
-					// 	active: false,
-					// 	selected: false,
-					// 	title: 'Avaliação de desempenho'
-					// },
-					// {
-					// 	path: `${process.env.PUBLIC_URL}/reuniao1:1`,
-					// 	type: 'link',
-					// 	active: false,
-					// 	selected: false,
-					// 	title: 'Reunião 1:1'
-					// },
-					// {
-					// 	path: `${process.env.PUBLIC_URL}/avr`,
-					// 	type: 'link',
-					// 	active: false,
-					// 	selected: false,
-					// 	title: 'Escalas Gráficas'
-					// },
 				]
 			},
 			{
@@ -172,8 +151,8 @@ export const MENUCOL = [
 				title: 'Meu Painel',
 				icon: 'ti-home',
 				type: 'link',
-				active: false,
-				selected: false,
+				active: true,
+				selected: true,
 				path: `${process.env.PUBLIC_URL}/dashboard`,
 			},
 			{
@@ -182,16 +161,37 @@ export const MENUCOL = [
 				type: 'link',
 				active: false,
 				selected: false,
-				path: `${process.env.PUBLIC_URL}/avaliacoes`
-				// children: [
-				// 	{
-				// 		path: `${process.env.PUBLIC_URL}/crytocurrencies/dashboard`,
-				// 		type: 'link',
-				// 		active: false,
-				// 		selected: false,
-				// 		title: 'Dashboard'
-				// 	},
-				// ]
+				path: `${process.env.PUBLIC_URL}/minha_unidade`
+			},
+			{
+				title: 'Minhas avaliações',
+				icon: 'bi-book-half',
+				type: 'sub',
+				active: false,
+				selected: false,
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'OKR'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Av. por resultados'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Clima Pulso'
+					},
+				]
 			},
 
 		]
