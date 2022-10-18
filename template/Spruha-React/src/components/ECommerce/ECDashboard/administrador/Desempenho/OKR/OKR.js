@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from "../../../../../..";
 import api from "../../../../../../api";
+
 
 const Okr = () => {
 
@@ -25,9 +25,9 @@ const Okr = () => {
           process = process + okrs[index1].keys[index2].status;
         }
         let keys = okrs[index1].keys
-        okrs[index1].progress = process / keys.length
+        keys.length>0?okrs[index1].progress = Math.round(process / keys.length,-1):okrs[index1].progress=0
         // console.log(keys.length)
-        if (okrs[index1].progress == 100) {
+        if (okrs[index1].progress >= 100) {
           okrs[index1].concluded = true
         }
         await api.put(`/okrs/update`, { ...okrs[index1] });
@@ -39,6 +39,7 @@ const Okr = () => {
       carregarUsersKeys(v)
     })
   }, [dadosrota])
+  console.log(values)
 
   function carregarUsersKeys(valores) {
     let okrs = valores?.okrscriados;

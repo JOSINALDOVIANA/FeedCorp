@@ -7,6 +7,8 @@ import { successAlert } from "../../../Components/Alerts"
 import { Grid } from "@mui/material";
 import Okr from "./OKR";
 import api from "../../../../../../api";
+import {Selectstate} from "../../Configuracoes/select.js"
+import {uniqueId} from 'lodash';
 
 
 const CriarOKR = () => {
@@ -53,6 +55,12 @@ const CriarOKR = () => {
                   variant="primary"
                   className="btn me-1"
                   onClick={async (e) => {
+                    let keys_serial=[]
+                    for(let iterator of okr?.keys){
+                      delete iterator["id"];
+                      keys_serial.push(iterator)
+                    }
+                    setOkr(a=>({...a,keys:keys_serial}));
 
                     await api.post(`/okrs/insert`, {
                       process: 0,
@@ -141,8 +149,17 @@ const CriarOKR = () => {
                         </span>
                       </div>
                     </div>
+                    <Selectstate
+                     id="selecUnit" 
+                     classNamePrefix="Select2"
+                     onChange={(e)=>{setOkr(a=>({...a,unit:values.units.filter(und=>und.id==e.value)[0]}))}} 
+                     options={values?.units?.map(und=>({value:und.id,label:und.initials}))} 
+                     singleSelect
+                    //  displayValue="key" 
+                     placeholder="Unidade"                    
+                    ></Selectstate>
 
-                    <SingleselectUnidade className="select-unit" units={values.units} setOkr={setOkr} />
+                    {/* <SingleselectUnidade className="select-unit" units={values.units} setOkr={setOkr} /> */}
 
                   </Col>
 
@@ -155,8 +172,18 @@ const CriarOKR = () => {
                         </span>
                       </div>
                     </div>
+                    <Selectstate
+                    id="selectUser" 
+                    classNamePrefix="Select2" 
+                    onChange={(e)=>{setOkr(a=>({...a,user:okr.unit.Colaboradores.filter(col=>col.id==e.value)}))}} 
+                    options={okr?.unit?.Colaboradores?.map(col=>({value:col.id,label:col.name}))} 
+                    singleSelect 
+                    // displayValue="key" 
+                    placeholder="Integrante"
+                    ></Selectstate>
 
-                    <SingleselectPessoa noOptionsMessage={() => 'Sem opções'} className="select-user" unit_select={okr.unit} setOkr={setOkr} />
+
+                    {/* <SingleselectPessoa noOptionsMessage={() => 'Sem opções'} className="select-user" unit_select={okr.unit} setOkr={setOkr} /> */}
 
                   </Col>
 
@@ -169,6 +196,10 @@ const CriarOKR = () => {
                     className="my-2 btn mt-2"
 
                     onClick={ () => {
+                    // let va=values;
+                   
+                    
+                    //  it.setAttribute("placeholder","Integrante")
                       let user = okr.user[0];
                       // console.log(user);
                        api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
@@ -180,10 +211,13 @@ const CriarOKR = () => {
                           id_user: user.id,
                           status: 0,
                           id_okr: null,
-                          user
+                          user,
+                          id:uniqueId()
+
                         }]
                       }))
-                      setOkr(a => ({ ...a, description: "", unit: [], user: [] }))
+                      // setOkr(a => ({ ...a, description: "", unit: [], user: [] }))
+                      // setValues(va);
                     }}
                   >
                     Adicionar
@@ -208,7 +242,7 @@ const CriarOKR = () => {
                   </tr>
                 </thead>
                 {okr?.keys?.map((key, index) => (
-                  <tbody>
+                  <tbody key={index}>
                     <tr>
                       <td>
                         <div className="ms-2 me-auto">{key.description}</div>
@@ -232,13 +266,9 @@ const CriarOKR = () => {
                       </td>
 
                       <td>
-                        <i onClick={(index) => {
-                          let keys = []
-                          for (const i in okr.keys) {
-                            if (i == index) {
-                              keys.push(okr.keys[i]);
-                            }
-                          }
+                        <i onClick={() => {
+                          let keys =okr?.keys?.filter(key2=>key2.id!=key.id)
+                         
                           setOkr(a => ({ ...a, keys: keys }))
                         }} style={{ cursor: 'pointer' }} className="ti ti-trash"></i>
                       </td>

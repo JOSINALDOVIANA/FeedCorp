@@ -50,6 +50,12 @@ const ClimaPulso_gestor = React.lazy(() => import("./components/ECommerce/ECDash
 const CriarClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/CriarClimaPulso"))
 const ConfigurarClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/configurarClima"))
 const ResultadosClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/resultadosClima"))
+//MINHAS AVALIAÇÕES
+const MinhasOKRs = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/my_okr"))
+const OKRresposta = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/okr_resposta"))
+const OKRconcluido = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/okr_concluido"))
+const MinhasAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_avpr"))
+const MeusPulsos = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_pulse"))
 
 
 
@@ -132,6 +138,13 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/adm_add_edit_unidade`} element={<AddEditUnidade />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_office`} element={<AddEditOffice />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_user`} element={<CreateUser />} />
+
+              {/* ------------------------------MINHAS AVALIAÇÕES------------------------------------------ */}
+              <Route path={`${process.env.PUBLIC_URL}/minhas_okrs`} element={<MinhasOKRs />} />
+              <Route path={`${process.env.PUBLIC_URL}/okr_resposta`} element={<OKRresposta />} />
+              <Route path={`${process.env.PUBLIC_URL}/okr_concluido`} element={<OKRconcluido />} />
+              <Route path={`${process.env.PUBLIC_URL}/minhas_av_resultados`} element={<MinhasAVPR />} />
+              <Route path={`${process.env.PUBLIC_URL}/meus_climas_pulso`} element={<MeusPulsos />} />
 
               {/* ------------------------------OKR------------------------------------------ */}
 

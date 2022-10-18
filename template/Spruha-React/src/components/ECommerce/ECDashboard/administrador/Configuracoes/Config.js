@@ -9,23 +9,23 @@ function Settings() {
     const navegar = useNavigate()
     const [validated, setValidated] = useState(false)
     const [values, setValues] = useState({});
-    const [states, setStates] = useState([]);    
+    const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let modules=values?.company?.modules
-        if(!!modules){
-            modules=modules.filter(item=>item.id)
+        let modules = values?.company?.modules
+        if (!!modules) {
+            modules = modules.filter(item => item.id)
         }
-        else{
-            modules=[]
+        else {
+            modules = []
         }
         // console.log(modules)
 
-        api.put(`/company/update`,{...values.company}).then(r=>{
-            if(r.data.status){
+        api.put(`/company/update`, { ...values.company }).then(r => {
+            if (r.data.status) {
                 alert("atualizado")
             }
         })
@@ -37,9 +37,9 @@ function Settings() {
         setValues(dadosrota.state)
         api.get(`city/get?id_state=${dadosrota.state.company.id_state}`).then(r => {
             if (r.data.status) {
-                let ct=[]
+                let ct = []
                 for (let iterator of r.data.cities) {
-                    iterator={value:iterator.id,label:iterator.city};
+                    iterator = { value: iterator.id, label: iterator.city };
                     ct.push(iterator)
                 }
                 setCities(ct)
@@ -48,9 +48,9 @@ function Settings() {
         })
         api.get(`state/get?id_country=${dadosrota.state.company.id_country}`).then(r => {
             if (r.data.status) {
-                let st=[]
+                let st = []
                 for (let iterator of r.data.states) {
-                    iterator={value:iterator.id,label:iterator.state};
+                    iterator = { value: iterator.id, label: iterator.state };
                     st.push(iterator)
                 }
                 setStates(st)
@@ -61,15 +61,15 @@ function Settings() {
 
     console.log(values)
 
-    
+
 
     function CarregarCidades(id_state) {
         // console.log(id_state)
         api.get(`city/get?id_state=${id_state}`).then(r => {
             if (r.data.status) {
-                let ct=[]
+                let ct = []
                 for (let iterator of r.data.cities) {
-                    iterator={value:iterator.id,label:iterator.city};
+                    iterator = { value: iterator.id, label: iterator.city };
                     ct.push(iterator)
                 }
                 setCities(ct)
@@ -250,7 +250,7 @@ function Settings() {
                                                     placeholder="Nome fantasia"
                                                     type="text"
                                                     value={values?.company?.namefantasy}
-                                                    onChange={e=>{setValues(a=>({...a,company:{...a.company,namefantasy:e.target.value}}))}}
+                                                    onChange={e => { setValues(a => ({ ...a, company: { ...a.company, namefantasy: e.target.value } })) }}
 
                                                 />
                                             </Form.Group>
@@ -266,7 +266,7 @@ function Settings() {
                                                     placeholder="cnpj da empresa"
                                                     type="text"
                                                     value={values?.company?.cnpj}
-                                                    onChange={e=>{setValues(a=>({...a,company:{...a.company,cnpj:e.target.value}}))}}
+                                                    onChange={e => { setValues(a => ({ ...a, company: { ...a.company, cnpj: e.target.value } })) }}
                                                 />
                                             </Form.Group>
 
@@ -277,7 +277,7 @@ function Settings() {
                                                             País: <span className="tx-danger">*</span>
                                                         </Form.Label>
                                                         <Form.Control
-                                                        disabled
+                                                            disabled
                                                             required
                                                             name="país"
                                                             placeholder="País onde situa a empresa"
@@ -300,20 +300,21 @@ function Settings() {
                                                             value={values?.company?.state.state}
                                                         /> */}
                                                         {/* <select id="select_state"></select> */}
-                                                        
-                                                    </Form.Group>
-                                                    <Selectstate 
-                                                         classNamePrefix="Select2"
-                                                          onChange={(e)=>{ 
-                                                            setValues(a=>({...a,company:{...a.company,id_state:e.value}}))
-                                                            CarregarCidades(e.value)}} 
-                                                          options={states} 
-                                                          singleSelect
-                                                        displayValue="key" 
-                                                          placeholder={values?.company?.state.state} 
-                                                          >
 
-                                                          </Selectstate>
+                                                    </Form.Group>
+                                                    <Selectstate
+                                                        classNamePrefix="Select2"
+                                                        onChange={(e) => {
+                                                            setValues(a => ({ ...a, company: { ...a.company, id_state: e.value } }))
+                                                            CarregarCidades(e.value)
+                                                        }}
+                                                        options={states}
+                                                        singleSelect
+                                                        displayValue="key"
+                                                        placeholder={values?.company?.state.state}
+                                                    >
+
+                                                    </Selectstate>
                                                 </Col>
                                             </Row>
 
@@ -330,20 +331,17 @@ function Settings() {
                                                             type="text"
                                                             value={values?.company?.city.city}
                                                         /> */}
-                                                     
-
-                                                       
 
                                                     </Form.Group>
-                                                    <Selectstate 
-                                                         classNamePrefix="Select2"
-                                                          onChange={(e)=>{setValues(a=>({...a,company:{...a.company,id_city:e.value}}))}} 
-                                                          options={cities} 
-                                                          singleSelect 
-                                                          displayValue="key" 
-                                                          placeholder={values?.company?.city.city}
-                                                        >                                                            
-                                                          </Selectstate>
+                                                    <Selectstate
+                                                        classNamePrefix="Select2"
+                                                        onChange={(e) => { setValues(a => ({ ...a, company: { ...a.company, id_city: e.value } })) }}
+                                                        options={cities}
+                                                        singleSelect
+                                                        displayValue="key"
+                                                        placeholder={values?.company?.city.city}
+                                                    >
+                                                    </Selectstate>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group className="form-group" controlid="">
@@ -363,12 +361,7 @@ function Settings() {
                                             <div className="custom-switch float-end mb-2">
                                                 <Button
                                                     type="submit"
-                                                    size='sm'
-                                                    onClick={
-                                                        ()=>{
-
-                                                        }
-                                                    }
+                                                    size='sm'                                                 
                                                     className="mb-0 me-2"
                                                 >
                                                     Salvar

@@ -171,21 +171,21 @@ export const MENUCOL = [
 				selected: false,
 				children: [
 					{
-						path: `${process.env.PUBLIC_URL}/`,
+						path: `${process.env.PUBLIC_URL}/minhas_okrs`,
 						type: 'link',
 						active: false,
 						selected: false,
 						title: 'OKR'
 					},
 					{
-						path: `${process.env.PUBLIC_URL}/`,
+						path: `${process.env.PUBLIC_URL}/minhas_av_resultados`,
 						type: 'link',
 						active: false,
 						selected: false,
 						title: 'Av. por resultados'
 					},
 					{
-						path: `${process.env.PUBLIC_URL}/`,
+						path: `${process.env.PUBLIC_URL}/meus_climas_pulso`,
 						type: 'link',
 						active: false,
 						selected: false,

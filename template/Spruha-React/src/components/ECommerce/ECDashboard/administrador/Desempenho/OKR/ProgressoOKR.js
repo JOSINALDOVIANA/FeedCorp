@@ -99,7 +99,7 @@ const Okr = () => {
                   // navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) 
                 }}
               >
-                <i class="bi bi-trash2-fill"></i>
+                <i className="bi bi-trash2-fill"></i>
               </Button>
             </div>
           </div>

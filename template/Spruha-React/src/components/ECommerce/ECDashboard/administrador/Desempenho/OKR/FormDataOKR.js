@@ -19,7 +19,7 @@ export const SingleselectUnidade = ({units,setOkr}) => {
   // ];
   return (
     <div>
-      <Multiselect classNamePrefix="Select2" onChange={(e)=>{setOkr(a=>({...a,unit:units.filter(und=>und.id==e.value)}))}} options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
+      <Multiselect id="selecUnit" classNamePrefix="Select2" onChange={(e)=>{setOkr(a=>({...a,unit:units.filter(und=>und.id==e.value)}))}} options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
     </div>
   );
 };
@@ -40,7 +40,7 @@ export const SingleselectPessoa = ({unit_select,setOkr}) => {
       
     return (
       <div>
-        <Multiselect classNamePrefix="Select2" onChange={(e)=>{setOkr(a=>({...a,user:unit.Colaboradores.filter(col=>col.id==e.value)}))}} options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
+        <Multiselect id="selectUser" classNamePrefix="Select2" onChange={(e)=>{setOkr(a=>({...a,user:unit.Colaboradores.filter(col=>col.id==e.value)}))}} options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
       </div>
     );
   };
