@@ -179,24 +179,37 @@ export default {
                 if (!!key) {
                     return res.json({ status: true, key })
                 }
-                return res.json({ status: true, mensage: "key com id não localizada" })
+                return res.json({ status: false, mensage: "key com id não localizada" })
             }
             if (!!id_okr) {
                 const key = await conexao('keys').where({ "keys.id_okr": id_okr }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name").where('status', "<", 100).first();
                 if (!!key) {
                     return res.json({ status: true, key })
                 }
-                return res.json({ status: true, mensage: "key com id_okr não localizada" })
+                return res.json({ status: false, mensage: "key com id_okr não localizada" })
             }
             if (!!id_user) {
-                const key = await conexao('keys').where({ "keys.id_user": id_user }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name").where('status', "<", 100).first();
+                let key = await conexao('keys').where({ "keys.id_user": id_user }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name");
+               let key_serial=[]
                 if (!!key) {
+                 for (let iterator of key) {
+                    let okr = await conexao("okrs").where({"okrs.id":iterator.id_okr}).first();
+                    let criador=await conexao("users").where({"users.id":okr.id_user}).first();
+                    let image=await conexao("images").where({"id":criador.id_image}).select("images.url").first()
+                    criador={...criador,url:image?.url||""}
+                    let numkeys=await conexao("keys").where({id_okr:okr.id})
+                    okr={...okr,numkeys:numkeys.length,criador}
+                    iterator={...iterator,okr}
+                    key_serial.push(iterator)
+
+                  }
+                key=key_serial;
                     return res.json({ status: true, key })
                 }
-                return res.json({ status: true, mensage: "key com id_user não localizada" })
+                return res.json({ status: false, mensage: "key com id_user não localizada" })
             }
 
-            return res.json({ status: true, mensage: "enviar id, id_okr ou id_user" })
+            return res.json({ status: false, mensage: "enviar id, id_okr ou id_user" })
 
         } catch (error) {
             console.log(error);

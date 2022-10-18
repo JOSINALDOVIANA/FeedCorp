@@ -18,7 +18,13 @@ function MinhaOKR() {
 
     }, [dadosrota])
 
-    // console.log(values)
+    useEffect(() => {
+        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+            setValues(a => ({ ...a, keysDirect: r.data.key }))
+        })
+    }, [])
+
+    console.log(values)
 
     return (
         <Fragment>
@@ -54,75 +60,86 @@ function MinhaOKR() {
                                     <Tab.Pane eventKey="pendente">
                                         <Row>
                                             <Col md={12} xl={4}>
-                                                <Card className="custom-card">
+                                                {values?.keysDirect?.filter(item => item.status < 100)?.map(key => (
+                                                    <Card key={key.id} className="custom-card">
 
-                                                    <Card.Body>
-                                                        <div className="d-flex justify-content-between">
-                                                            <div className="d-flex flex-column align-items-start">
-                                                                <h6>Título do OKR</h6>
-                                                            </div>
+                                                        <Card.Body>
+                                                            <div className="d-flex justify-content-between">
+                                                                <div className="d-flex flex-column align-items-start">
+                                                                    <h6>{key?.okr?.objective?.toUpperCase()}</h6>
+                                                                    <h6 className="font-weight-bold px-1 text-primary">
+                                                                        Sua meta: {key?.description}
+                                                                    </h6>
+                                                                </div>
 
-                                                            <h2 className="d-flex flex-row">
-                                                                <span className="font-weight-bold px-1 text-primary">
-                                                                    {4}
-                                                                </span>
-                                                                {/* ICONE */}
-                                                                <i className="bi-people-fill icon-size float-start text-primary"></i>
-                                                            </h2>
-                                                        </div>
-                                                        <div className="main-traffic-detail-item">
-                                                            <div>
-                                                                <span>Progresso</span>
-                                                                <span>68%</span>
-                                                                {/* <span>{(okr.progress) ? (okr.progress) : 0}%</span> */}
+                                                                <h2 className="d-flex flex-row">
+                                                                    <span className="font-weight-bold px-1 text-primary">
+                                                                        {key?.okr?.numkeys}
+                                                                    </span>
+
+                                                                    {/* ICONE */}
+                                                                    <i className="bi-people-fill icon-size float-start text-primary"></i>
+                                                                </h2>
                                                             </div>
-                                                            <div className="progress progress-sm mb-1">
-                                                                <ProgressBar
-                                                                    animated={true}
-                                                                    className=" wd-100p"
-                                                                    striped
-                                                                    variant="primary"
-                                                                    now="68"
-                                                                    role="progressbar"
-                                                                ></ProgressBar>
+                                                            <div className="main-traffic-detail-item">
+                                                                <div>
+                                                                    <span>Seu Progresso</span>
+                                                                    <span>{key?.status}%</span>
+                                                                    {/* <span>{(okr.progress) ? (okr.progress) : 0}%</span> */}
+                                                                </div>
+                                                                <div className="progress progress-sm mb-1">
+                                                                    <ProgressBar
+                                                                        animated={true}
+                                                                        className=" wd-100p"
+                                                                        striped
+                                                                        variant="primary"
+                                                                        now={key?.status}
+                                                                        role="progressbar"
+                                                                    ></ProgressBar>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <Button className="btn btn-primary ripple btn-block"
-                                                            onClick={() => {
-                                                                navegar(`${process.env.PUBLIC_URL}/okr_resposta/`, { state: values })
-                                                            }} >
-                                                            Responder
-                                                        </Button>
-                                                    </Card.Body>
-                                                </Card>
+                                                            <Button className="btn btn-primary ripple btn-block"
+                                                                onClick={() => {
+                                                                    navegar(`${process.env.PUBLIC_URL}/okr_resposta/`, { state: values })
+                                                                }} >
+                                                                Responder
+                                                            </Button>
+                                                        </Card.Body>
+                                                    </Card>
+                                                ))}
                                             </Col>
                                         </Row>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="concluído">
                                         <Row>
                                             <Col md={12} xl={4}>
-                                                <Card className="custom-card">
-                                                    <Card.Body>
-                                                        <div className="d-flex justify-content-between">
-                                                            <div className="d-flex flex-column justify-content-center">
-                                                                <h6>Título do OKR</h6>
-                                                            </div>
+                                                {values?.keysDirec?.filter(item => item.status >= 100)?.map(key => (
 
-                                                            <h2 className="d-flex flex-row">
-                                                                <span className="font-weight-bold px-1 text-primary">
-                                                                    {4}
-                                                                </span>
-                                                                {/* ICONE */}
-                                                                <i className="bi-people-fill icon-size float-start text-primary"></i>
-                                                            </h2>
-                                                        </div>
-                                                        <Button onClick={() => {
-                                                            navegar(`${process.env.PUBLIC_URL}/okr_concluido/`, { state: values })
-                                                        }} className="btn btn-primary ripple btn-block">
-                                                            Visualizar
-                                                        </Button>
-                                                    </Card.Body>
-                                                </Card>
+                                                    <Card key={key.id} className="custom-card">
+                                                        <Card.Body>
+                                                            <div className="d-flex justify-content-between">
+                                                                <div className="d-flex flex-column justify-content-center">
+                                                                    <h6>Título do OKR</h6>
+                                                                </div>
+
+                                                                <h2 className="d-flex flex-row">
+                                                                    <span className="font-weight-bold px-1 text-primary">
+                                                                        {4}
+                                                                    </span>
+                                                                    {/* ICONE */}
+                                                                    <i className="bi-people-fill icon-size float-start text-primary"></i>
+                                                                </h2>
+                                                            </div>
+                                                            <Button onClick={() => {
+                                                                navegar(`${process.env.PUBLIC_URL}/okr_concluido/`, { state: values })
+                                                            }} className="btn btn-primary ripple btn-block">
+                                                                Visualizar
+                                                            </Button>
+                                                        </Card.Body>
+                                                    </Card>
+
+
+                                                ))}
                                             </Col>
                                         </Row>
                                     </Tab.Pane>
