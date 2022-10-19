@@ -14,31 +14,21 @@ function MinhaOKR() {
             navegar(`${process.env.PUBLIC_URL}/home`)
         }
         setValues(dadosrota.state);
-
+        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then( r => {
+            
+            setValues(a => ({ ...a, keysDirect: r.data.key }))
+        })
 
     }, [dadosrota])
 
     useEffect(() => {
-        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(async r => {
-            let v = values;
-            let okrs = r?.data?.okrs;
-            // let k=[].length
-            for (const index1 in okrs) {
-                let process = 0
-                for (const index2 in okrs[index1].keys) {
-                    process = process + okrs[index1].keys[index2].status;
-                }
-                let keys = okrs[index1].keys
-                keys.length > 0 ? okrs[index1].progress = Math.round(process / keys.length, -1) : okrs[index1].progress = 0
-                // console.log(keys.length)
-                if (okrs[index1].progress >= 100) {
-                    okrs[index1].concluded = true
-                }
-                await api.put(`/okrs/update`, { ...okrs[index1] });
-            }
-            v = { ...v, keysDirect: r.data.key }
-            setValues(a => ({ ...a, keysDirect: r.data.key }))
-        })
+        let v = values;
+        let okrs =[];
+        let keys = values.keysDirec;
+        for(let key of keys){
+
+        }
+
     }, [])
 
     console.log(values)
@@ -84,9 +74,6 @@ function MinhaOKR() {
                                                             <div className="d-flex justify-content-between">
                                                                 <div className="d-flex flex-column align-items-start">
                                                                     <h6>{key?.okr?.objective?.toUpperCase()}</h6>
-                                                                    <h6 className="font-weight-bold px-1 text-primary">
-                                                                        Sua meta: {key?.description}
-                                                                    </h6>
                                                                 </div>
 
                                                                 <h2 className="d-flex flex-row">
@@ -128,9 +115,9 @@ function MinhaOKR() {
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="concluído">
                                         <Row>
-                                            <Col md={12} xl={4}>
-                                                {values?.keysDirec?.filter(item => item.status >= 100)?.map(key => (
+                                            {values?.keysDirec?.filter(item => item.status >= 100)?.map(key => (
 
+                                                <Col md={12} xl={4}>
                                                     <Card key={key.id} className="custom-card">
                                                         <Card.Body>
                                                             <div className="d-flex justify-content-between">
@@ -153,10 +140,8 @@ function MinhaOKR() {
                                                             </Button>
                                                         </Card.Body>
                                                     </Card>
-
-
-                                                ))}
-                                            </Col>
+                                                </Col>
+                                            ))}
                                         </Row>
                                     </Tab.Pane>
                                 </Tab.Content>

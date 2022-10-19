@@ -1,25 +1,8 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Card, Col, Row, Table, Button, Image, Tab, Nav } from "react-bootstrap";
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumb, Card, Col, Row, Table, Button, Form, Tab, Nav } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import api from "../../../../../api";
-import user1 from "../../../../../assets/img/users/1.jpg";
-import user2 from "../../../../../assets/img/users/2.jpg";
-import user3 from "../../../../../assets/img/users/3.jpg";
-import user4 from "../../../../../assets/img/users/4.jpg";
-const TASKS = [
-    {
-        Task: "Evaluating the design",
-        TeamMember1: user1,
-        TeamMember2: user2,
-        TeamMember3: user3,
-        TeamMember4: user4,
-        OpenTask: "37",
-        TaskProfit: "High",
-        Profittext: "primary",
-        Status: "pendente",
-        Statustext: "info",
-    },
-];
+
 
 function OKR_resposta() {
 
@@ -32,6 +15,7 @@ function OKR_resposta() {
             navegar(`${process.env.PUBLIC_URL}/home`)
         }
         setValues(dadosrota.state);
+        
 
     }, [dadosrota])
 
@@ -106,15 +90,17 @@ function OKR_resposta() {
 
                                                 <Tab.Content>
                                                     <Tab.Pane eventKey="minhaChave">
+                                                        <span className="d-block tx-12 mb-3 text-muted">
+                                                            Aqui você pode editar o progresso de sua(s) key(s) deste OKR.
+                                                        </span>
                                                         <Table responsive hover
                                                             className="card-table table-vcenter text-nowrap mb-0
                                                             border hover"  >
                                                             <thead>
                                                                 <tr>
                                                                     <th className="wd-lg-30p">Sua chave</th>
-                                                                    <th className="wd-lg-10p">Responsável</th>
                                                                     <th className="wd-lg-20p text-center">Seu progresso</th>
-                                                                    <th className="wd-lg-20p">Status</th>
+                                                                    <th className="wd-lg-20p">Atualizar progresso</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -129,19 +115,17 @@ function OKR_resposta() {
                                                                                 <span className="mt-1">{key?.description}</span>
                                                                             </div>
                                                                         </td>
-                                                                        <td className="text-nowrap">
-                                                                            {key?.name}<i className=""></i>
+                                                                        <td className="text-center">
+                                                                            {key?.status}%
                                                                         </td>
                                                                         <td className="text-center">
-                                                                            37<i className=""></i>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span
-                                                                                className={`badge bg-pill bg-success-light`}
-                                                                            >
-                                                                                {key?.status}
-                                                                                {/* podew ser um select aqui, n sei */}
-                                                                            </span>
+                                                                            <Form.Control
+                                                                                size='sm'
+                                                                                type="text"
+                                                                                id="progress"
+                                                                                placeholder="Adicione seu progresso"
+                                                                            // onBlur={}
+                                                                            />
                                                                         </td>
                                                                     </tr>
                                                                 ))}
@@ -149,20 +133,23 @@ function OKR_resposta() {
                                                         </Table>
                                                     </Tab.Pane>
                                                     <Tab.Pane eventKey="todasChaves">
+                                                        <span className="d-block tx-12 mb-3 text-muted">
+                                                            Aqui você pode visualizar o progresso geral de seus colegas neste OKR
+                                                        </span>
                                                         <Table responsive hover
                                                             className="card-table table-vcenter text-nowrap mb-0
                                                             border hover"  >
                                                             <thead>
                                                                 <tr>
                                                                     <th className="wd-lg-30p">Chaves de objetivo</th>
-                                                                    <th className="wd-lg-10p">Responsável</th>
+                                                                    <th className="wd-lg-10p">Responsáveis</th>
                                                                     <th className="wd-lg-20p text-center">Progressos</th>
-                                                                    <th className="wd-lg-20p">Status</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {TASKS.map((items, index) => (
-                                                                    <tr key={index} data-index={index}>
+                                                                {/* Ve como faz esse map aqui */}
+                                                                {values?.okrselect?.keys?.map(key => (
+                                                                    <tr key={key.id}>
                                                                         <td className="font-weight-semibold">
                                                                             <span className="mt-1">key</span>
                                                                         </td>
@@ -171,14 +158,6 @@ function OKR_resposta() {
                                                                         </td>
                                                                         <td className="text-center">
                                                                             67<i className=""></i>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span
-                                                                                className={`badge bg-pill bg-${items.Statustext}-light`}
-                                                                            >
-                                                                                {items.Status}
-                                                                                {/* pode ser um select aqui */}
-                                                                            </span>
                                                                         </td>
                                                                     </tr>
                                                                 ))}

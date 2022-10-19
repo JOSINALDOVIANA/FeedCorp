@@ -1,11 +1,11 @@
 import conexao from "../../database/connection.js";
-
+import isEmpty from "../../isEmpty.js"
 export default {
     async Insert(req, res) {
-       
-       
+
+
         let { objective, id_user, progress = 0, validity, keys } = req.body;
-        validity=new Date(validity);
+        validity = new Date(validity);
         //keys=[{description,id_okr=null,id_user,status}...]
         //validity=new date()
         console.log(req.body)
@@ -15,12 +15,12 @@ export default {
                 const id_okr = await trx("okrs").insert({ objective, id_user, progress, validity });
 
                 if (!!keys) {
-                    let keys_serial = keys.map(key => ({ 
+                    let keys_serial = keys.map(key => ({
                         id_okr: id_okr[0],
-                        description:key.description,
-                        id_user:key.id_user,
-                        status:key.status
-                    
+                        description: key.description,
+                        id_user: key.id_user,
+                        status: key.status
+
                     }));
                     await trx("keys").insert(keys_serial);
 
@@ -42,10 +42,10 @@ export default {
         // console.log("chegou aqui");
         let { id, objective, id_user, progress = 0, validity, keys, concluded = false } = req.body;
         //keys=[{id,description,id_okr=obrigatorio,id_user,status}...]
-        if(concluded){
-            concluded=new Date();
+        if (concluded) {
+            concluded = new Date();
         }
-        validity=new Date(validity);
+        validity = new Date(validity);
         try {
             await conexao.transaction(async trx => {
                 await trx("okrs").update({ objective, id_user, progress, validity, concluded }).where({ id });
@@ -58,7 +58,7 @@ export default {
                     }
 
                     return res.json({
-                            status: true, okr: {
+                        status: true, okr: {
                             objective, id, id_user, progress, validity, keys
                         }
                     })
@@ -81,12 +81,13 @@ export default {
         try {
             if (!!id) {
                 const okr = await conexao('okrs').where({ id }).first();
+                console.log(okr)
                 let keys = [];
                 if (!!okr) {
-                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name");
+                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name" );
                 }
 
-                if (!!okr && !!keys) {
+                if (!isEmpty(okr)) {
 
                     return res.json({ status: true, okr: { ...okr, keys } })
                 }
@@ -190,20 +191,20 @@ export default {
             }
             if (!!id_user) {
                 let key = await conexao('keys').where({ "keys.id_user": id_user }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name");
-               let key_serial=[]
+                let key_serial = []
                 if (!!key) {
-                 for (let iterator of key) {
-                    let okr = await conexao("okrs").where({"okrs.id":iterator.id_okr}).first();
-                    let criador=await conexao("users").where({"users.id":okr.id_user}).first();
-                    let image=await conexao("images").where({"id":criador.id_image}).select("images.url").first()
-                    criador={...criador,url:image?.url||""}
-                    let numkeys=await conexao("keys").where({id_okr:okr.id})
-                    okr={...okr,numkeys:numkeys.length,criador}
-                    iterator={...iterator,okr}
-                    key_serial.push(iterator)
+                    for (let iterator of key) {
+                        let okr = await conexao("okrs").where({ "okrs.id": iterator.id_okr }).first();
+                        let criador = await conexao("users").where({ "users.id": okr.id_user }).first();
+                        let image = await conexao("images").where({ "id": criador.id_image }).select("images.url").first()
+                        criador = { ...criador, url: image?.url || "" }
+                        let numkeys = await conexao("keys").where({ id_okr: okr.id })
+                        okr = { ...okr, numkeys: numkeys.length, criador }
+                        iterator = { ...iterator, okr }
+                        key_serial.push(iterator)
 
-                  }
-                key=key_serial;
+                    }
+                    key = key_serial;
                     return res.json({ status: true, key })
                 }
                 return res.json({ status: false, mensage: "key com id_user não localizada" })
