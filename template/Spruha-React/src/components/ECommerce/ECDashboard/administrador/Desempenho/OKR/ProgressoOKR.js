@@ -9,16 +9,12 @@ import api from "../../../../../../api";
 const Okr = () => {
 
   const dadosrota = useLocation();
-
   const navegar = useNavigate();
-
   const [values, setValues] = useState({});
 
   useEffect(() => {
 
-
     setValues(dadosrota.state);
-
 
     let keys = dadosrota.state.okrselect.keys.map(key => {
       let user = key.user[0]
@@ -30,6 +26,7 @@ const Okr = () => {
   }, [dadosrota.state]);
 
   console.log(values)
+  
 
   return (
     <Fragment>

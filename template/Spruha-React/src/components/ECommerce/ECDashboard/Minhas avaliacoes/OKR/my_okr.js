@@ -19,7 +19,24 @@ function MinhaOKR() {
     }, [dadosrota])
 
     useEffect(() => {
-        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(async r => {
+            let v = values;
+            let okrs = r?.data?.okrs;
+            // let k=[].length
+            for (const index1 in okrs) {
+                let process = 0
+                for (const index2 in okrs[index1].keys) {
+                    process = process + okrs[index1].keys[index2].status;
+                }
+                let keys = okrs[index1].keys
+                keys.length > 0 ? okrs[index1].progress = Math.round(process / keys.length, -1) : okrs[index1].progress = 0
+                // console.log(keys.length)
+                if (okrs[index1].progress >= 100) {
+                    okrs[index1].concluded = true
+                }
+                await api.put(`/okrs/update`, { ...okrs[index1] });
+            }
+            v = { ...v, keysDirect: r.data.key }
             setValues(a => ({ ...a, keysDirect: r.data.key }))
         })
     }, [])
@@ -59,8 +76,8 @@ function MinhaOKR() {
                                 <Tab.Content>
                                     <Tab.Pane eventKey="pendente">
                                         <Row>
-                                            <Col md={12} xl={4}>
-                                                {values?.keysDirect?.filter(item => item.status < 100)?.map(key => (
+                                            {values?.keysDirect?.filter(item => item.status < 100)?.map(key => (
+                                                <Col md={12} xl={4}>
                                                     <Card key={key.id} className="custom-card">
 
                                                         <Card.Body>
@@ -76,7 +93,6 @@ function MinhaOKR() {
                                                                     <span className="font-weight-bold px-1 text-primary">
                                                                         {key?.okr?.numkeys}
                                                                     </span>
-
                                                                     {/* ICONE */}
                                                                     <i className="bi-people-fill icon-size float-start text-primary"></i>
                                                                 </h2>
@@ -84,7 +100,7 @@ function MinhaOKR() {
                                                             <div className="main-traffic-detail-item">
                                                                 <div>
                                                                     <span>Seu Progresso</span>
-                                                                    <span>{key?.status}%</span>
+                                                                    <span>{key?.okr?.progress}%</span>
                                                                     {/* <span>{(okr.progress) ? (okr.progress) : 0}%</span> */}
                                                                 </div>
                                                                 <div className="progress progress-sm mb-1">
@@ -93,7 +109,7 @@ function MinhaOKR() {
                                                                         className=" wd-100p"
                                                                         striped
                                                                         variant="primary"
-                                                                        now={key?.status}
+                                                                        now={key?.okr?.progress}
                                                                         role="progressbar"
                                                                     ></ProgressBar>
                                                                 </div>
@@ -102,12 +118,12 @@ function MinhaOKR() {
                                                                 onClick={() => {
                                                                     navegar(`${process.env.PUBLIC_URL}/okr_resposta/`, { state: values })
                                                                 }} >
-                                                                Responder
+                                                                Visualizar
                                                             </Button>
                                                         </Card.Body>
                                                     </Card>
-                                                ))}
-                                            </Col>
+                                                </Col>
+                                            ))}
                                         </Row>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="concluído">

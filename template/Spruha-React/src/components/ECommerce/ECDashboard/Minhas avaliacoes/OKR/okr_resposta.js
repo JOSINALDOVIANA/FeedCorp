@@ -33,10 +33,15 @@ function OKR_resposta() {
         }
         setValues(dadosrota.state);
 
-
     }, [dadosrota])
 
-    // console.log(values)
+    useEffect(() => {
+        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+            setValues(a => ({ ...a, keysDirect: r.data.key }))
+        })
+    }, [])
+
+    console.log(values)
 
     return (
         <Fragment>
@@ -70,8 +75,6 @@ function OKR_resposta() {
                     </div>
                 </div>
             </div>
-
-
 
 
             <Row className="row-sm">
@@ -115,28 +118,28 @@ function OKR_resposta() {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {TASKS.map((items, index) => (
-                                                                    <tr key={index} data-index={index}>
+                                                                {values?.keysDirect?.map(key => (
+                                                                    <tr key={key}>
                                                                         <td className="font-weight-semibold">
                                                                             <div className="d-flex">
                                                                                 <label className="ckbox my-auto me-4">
                                                                                     <input readOnly="" type="checkbox" />
                                                                                     <span></span>
                                                                                 </label>
-                                                                                <span className="mt-1">Key</span>
+                                                                                <span className="mt-1">{key?.description}</span>
                                                                             </div>
                                                                         </td>
                                                                         <td className="text-nowrap">
-                                                                            USUÁRIO<i className=""></i>
+                                                                            {key?.name}<i className=""></i>
                                                                         </td>
                                                                         <td className="text-center">
                                                                             37<i className=""></i>
                                                                         </td>
                                                                         <td>
                                                                             <span
-                                                                                className={`badge bg-pill bg-${items.Statustext}-light`}
+                                                                                className={`badge bg-pill bg-success-light`}
                                                                             >
-                                                                                {items.Status}
+                                                                                {key?.status}
                                                                                 {/* podew ser um select aqui, n sei */}
                                                                             </span>
                                                                         </td>

@@ -62,11 +62,7 @@ const Okr = () => {
   }
   //  console.log(values)
 
-  function TransformaValor(a){
-    const valor = Math.round(a)
-    console.log(valor)
-    return valor
-  }
+ 
 
 
   return (
@@ -141,7 +137,7 @@ const Okr = () => {
                         className=" wd-100p"
                         striped
                         variant="primary"
-                        now={TransformaValor(okr.progress)}
+                        now={okr.progress}
                         role="progressbar"
                       ></ProgressBar>
                     </div>
