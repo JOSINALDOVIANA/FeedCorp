@@ -1,5 +1,5 @@
 import conexao from "../../database/connection.js";
-import isEmpty from "../../isEmpty.js"
+
 export default {
     async Insert(req, res) {
 
@@ -81,13 +81,12 @@ export default {
         try {
             if (!!id) {
                 const okr = await conexao('okrs').where({ id }).first();
-                console.log(okr)
                 let keys = [];
                 if (!!okr) {
-                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name" );
+                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name");
                 }
 
-                if (!isEmpty(okr)) {
+                if (!!okr && !!keys) {
 
                     return res.json({ status: true, okr: { ...okr, keys } })
                 }

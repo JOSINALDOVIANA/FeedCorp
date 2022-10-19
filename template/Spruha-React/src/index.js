@@ -54,7 +54,9 @@ const ResultadosClima_gestor = React.lazy(() => import("./components/ECommerce/E
 const MinhasOKRs = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/my_okr"))
 const OKRresposta = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/okr_resposta"))
 const OKRconcluido = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/okr_concluido"))
-const MinhasAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_avpr"))
+const MinhasAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_avpr/my_avpr"))
+const AVPRresposta = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_avpr/avpr_resposta"))
+const AVPRconcluido = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_avpr/avpr_concluido"))
 const MeusPulsos = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/my_pulse"))
 
 
@@ -144,6 +146,8 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/okr_resposta`} element={<OKRresposta />} />
               <Route path={`${process.env.PUBLIC_URL}/okr_concluido`} element={<OKRconcluido />} />
               <Route path={`${process.env.PUBLIC_URL}/minhas_av_resultados`} element={<MinhasAVPR />} />
+              <Route path={`${process.env.PUBLIC_URL}/avpr_resposta`} element={<AVPRresposta />} />
+              <Route path={`${process.env.PUBLIC_URL}/avpr_concluido`} element={<AVPRconcluido />} />
               <Route path={`${process.env.PUBLIC_URL}/meus_climas_pulso`} element={<MeusPulsos />} />
 
               {/* ------------------------------OKR------------------------------------------ */}
