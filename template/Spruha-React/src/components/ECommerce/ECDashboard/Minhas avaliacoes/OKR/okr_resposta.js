@@ -19,13 +19,13 @@ function OKR_resposta() {
 
     }, [dadosrota])
 
-    useEffect(() => {
-        api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
-            setValues(a => ({ ...a, keysDirect: r.data.key }))
-        })
-    }, [])
+    // useEffect(() => {
+    //     api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+    //         setValues(a => ({ ...a, keysDirect: r.data.key }))
+    //     })
+    // }, [])
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <Fragment>
@@ -104,8 +104,8 @@ function OKR_resposta() {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {values?.keysDirect?.map(key => (
-                                                                    <tr key={key}>
+                                                                {values?.okrselect?.keys?.filter(item=>item.id_user==values?.dadosUser?.id)?.map(key => (
+                                                                    <tr key={key.id}>
                                                                         <td className="font-weight-semibold">
                                                                             <div className="d-flex">
                                                                                 <label className="ckbox my-auto me-4">
@@ -124,7 +124,22 @@ function OKR_resposta() {
                                                                                 type="text"
                                                                                 id="progress"
                                                                                 placeholder="Adicione seu progresso"
-                                                                            // onBlur={}
+                                                                                onBlur={async e=>{
+                                                                                    console.log(key)
+                                                                                    let up=key;
+                                                                                    up.status=e.target.value;
+                                                                                    
+                                                                                    setValues(a=>{
+                                                                                        let keys=a.okrselect.keys.filter(item=>item.id!=key.id);
+                                                                                        let k=key;
+                                                                                        k.status=e.target.value;
+                                                                                        keys.push({...k})
+                                                                                        return ({...a,okrselect:{...a.okrselect,keys}})
+
+                                                                                    })
+                                                                                await api.put(`keys/update`,{keys:[{...up}]})
+
+                                                                                }}
                                                                             />
                                                                         </td>
                                                                     </tr>
@@ -151,13 +166,15 @@ function OKR_resposta() {
                                                                 {values?.okrselect?.keys?.map(key => (
                                                                     <tr key={key.id}>
                                                                         <td className="font-weight-semibold">
-                                                                            <span className="mt-1">key</span>
+                                                                            <span className="mt-1">{key.description}</span>
                                                                         </td>
                                                                         <td className="text-nowrap">
-                                                                            USUÁRIO<i className=""></i>
+                                                                            {key.name}
+                                                                            {/* <i className=""></i> */}
                                                                         </td>
                                                                         <td className="text-center">
-                                                                            67<i className=""></i>
+                                                                            {key.status}
+                                                                            {/* <i className=""></i> */}
                                                                         </td>
                                                                     </tr>
                                                                 ))}

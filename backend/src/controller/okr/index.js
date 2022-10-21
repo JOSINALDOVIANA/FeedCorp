@@ -80,13 +80,13 @@ export default {
         // console.log(req.query)
         try {
             if (!!id) {
-                const okr = await conexao('okrs').where({ id }).first();
-                let keys = [];
+                let okr = await conexao('okrs').where({ id });
+                okr=okr[0]
+            
                 if (!!okr) {
-                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name");
+                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name" );
                 }
 
-                if (!!okr && !!keys) {
 
                     return res.json({ status: true, okr: { ...okr, keys } })
                 }

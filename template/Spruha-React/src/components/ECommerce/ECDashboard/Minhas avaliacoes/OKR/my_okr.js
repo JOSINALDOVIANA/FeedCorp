@@ -17,20 +17,60 @@ function MinhaOKR() {
         api.get(`keys/getOne?id_user=${dadosrota.state.dadosUser.id}`).then( r => {
             
             setValues(a => ({ ...a, keysDirect: r.data.key }))
+            CarregarOkrs(r.data.key)
         })
 
     }, [dadosrota])
 
-    useEffect(() => {
-        let v = values;
+    async function CarregarOkrs(keys){
+       
         let okrs =[];
-        let keys = values.keysDirec;
+       
         for(let key of keys){
-
+            await  api.get(`okrs/getOne?id=${key.id_okr}`).then(r=>{
+                okrs.push({...r.data.okr})
+                
+            })
         }
+        // okrs=okrs.filter((item,index)=>item.id!=okrs[index].id)
+       setValues(a=>({...a,okrs}))
+       FiltarOkrs(okrs)
+    }
 
-    }, [])
+   async function FiltarOkrs(okrs){
+        let array=[]
+        let okrs2= okrs?.filter((item,index)=>{
+           if(array.indexOf(item.id)<0){
+            array.push(item.id)
+            return item
+           }
+        });
+        
+        
+        // let k=[].length
+        for (const index1 in okrs2) {
+          let process = 0
+          for (const index2 in okrs2[index1].keys) {
+            process = process + okrs2[index1].keys[index2].status;
+          }
+          let keys = okrs2[index1].keys
+          okrs2[index1].progress = process / keys.length
+          // console.log(keys.length)
+          if (okrs2[index1].progress == 100) {
+            okrs2[index1].concluded = true
+          }
+          await api.put(`/okrs/update`, { ...okrs[index1] });
+        }
+        
 
+        setValues(a=>{
+            
+            return ({...a,okrs:okrs2})
+
+        })
+    }
+    
+    
     console.log(values)
 
     return (
@@ -66,44 +106,44 @@ function MinhaOKR() {
                                 <Tab.Content>
                                     <Tab.Pane eventKey="pendente">
                                         <Row>
-                                            {values?.keysDirect?.filter(item => item.status < 100)?.map(key => (
+                                            {values?.okrs?.filter(item => item.progress < 100)?.map(okr => (
                                                 <Col md={12} xl={4}>
-                                                    <Card key={key.id} className="custom-card">
+                                                    <Card key={okr.id} className="custom-card">
 
                                                         <Card.Body>
                                                             <div className="d-flex justify-content-between">
                                                                 <div className="d-flex flex-column align-items-start">
-                                                                    <h6>{key?.okr?.objective?.toUpperCase()}</h6>
+                                                                    <h6>{okr?.objective?.toUpperCase()}</h6>
                                                                 </div>
 
                                                                 <h2 className="d-flex flex-row">
                                                                     <span className="font-weight-bold px-1 text-primary">
-                                                                        {key?.okr?.numkeys}
+                                                                        {okr?.keys?.length}
                                                                     </span>
                                                                     {/* ICONE */}
                                                                     <i className="bi-people-fill icon-size float-start text-primary"></i>
                                                                 </h2>
                                                             </div>
                                                             <div className="main-traffic-detail-item">
-                                                                <div>
+                                                                {/* <div>
                                                                     <span>Seu Progresso</span>
                                                                     <span>{key?.okr?.progress}%</span>
-                                                                    {/* <span>{(okr.progress) ? (okr.progress) : 0}%</span> */}
-                                                                </div>
+                                                                    <span>{(okr.progress) ? (okr.progress) : 0}%</span>
+                                                                </div> */}
                                                                 <div className="progress progress-sm mb-1">
                                                                     <ProgressBar
                                                                         animated={true}
                                                                         className=" wd-100p"
                                                                         striped
                                                                         variant="primary"
-                                                                        now={key?.okr?.progress}
+                                                                        now={okr?.progress}
                                                                         role="progressbar"
                                                                     ></ProgressBar>
                                                                 </div>
                                                             </div>
                                                             <Button className="btn btn-primary ripple btn-block"
                                                                 onClick={() => {
-                                                                    navegar(`${process.env.PUBLIC_URL}/okr_resposta/`, { state: values })
+                                                                    navegar(`${process.env.PUBLIC_URL}/okr_resposta/`, { state:{...values,okrselect:okr }})
                                                                 }} >
                                                                 Visualizar
                                                             </Button>
@@ -115,10 +155,10 @@ function MinhaOKR() {
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="concluído">
                                         <Row>
-                                            {values?.keysDirec?.filter(item => item.status >= 100)?.map(key => (
+                                            {values?.okrs?.filter(item => item.progress >= 100)?.map(okr => (
 
                                                 <Col md={12} xl={4}>
-                                                    <Card key={key.id} className="custom-card">
+                                                    <Card key={okr.id} className="custom-card">
                                                         <Card.Body>
                                                             <div className="d-flex justify-content-between">
                                                                 <div className="d-flex flex-column justify-content-center">
