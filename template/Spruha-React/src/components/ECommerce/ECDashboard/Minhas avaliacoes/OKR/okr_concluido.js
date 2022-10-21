@@ -2,24 +2,6 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button, Image, Tab, Nav } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import api from "../../../../../api";
-import user1 from "../../../../../assets/img/users/1.jpg";
-import user2 from "../../../../../assets/img/users/2.jpg";
-import user3 from "../../../../../assets/img/users/3.jpg";
-import user4 from "../../../../../assets/img/users/4.jpg";
-const TASKS = [
-    {
-        Task: "Evaluating the design",
-        TeamMember1: user1,
-        TeamMember2: user2,
-        TeamMember3: user3,
-        TeamMember4: user4,
-        OpenTask: "37",
-        TaskProfit: "High",
-        Profittext: "primary",
-        Status: "concluído",
-        Statustext: "primary",
-    },
-];
 
 function OKR_resposta() {
 
@@ -43,7 +25,7 @@ function OKR_resposta() {
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5"> Título do OKR </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> {values?.okrselect?.objective.toUpperCase()} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item
@@ -51,7 +33,7 @@ function OKR_resposta() {
                                 navegar(`${process.env.PUBLIC_URL}/minhas_okrs/`, { state: values })
                             }}
                         >  Minhas OKRs  </Breadcrumb.Item>
-                        <Breadcrumb.Item active >  Título do OKR  </Breadcrumb.Item>
+                        <Breadcrumb.Item active >  {values?.okrselect?.objective}  </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
                 <div className="d-flex">
@@ -91,30 +73,26 @@ function OKR_resposta() {
                                         <thead>
                                             <tr>
                                                 <th className="wd-lg-20p">Chaves</th>
-                                                <th className="wd-lg-10p">Responsáveis</th>
-                                                <th className="wd-lg-20p">Status</th>
+                                                <th className="wd-lg-20p">Responsáveis</th>
+                                                <th className="wd-lg-10p">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {TASKS.map((items, index) => (
-                                                <tr key={index} data-index={index}>
+                                            {values?.okrselect?.keys?.map(key => (
+                                                <tr key={key.id}>
                                                     <td className="font-weight-semibold">
                                                         <div className="d-flex">
-                                                            <label className="ckbox my-auto me-4">
-                                                                <input readOnly="" type="checkbox" />
-                                                                <span></span>
-                                                            </label>
-                                                            <span className="mt-1">Key</span>
+                                                            <span className="mt-1">{key?.description}</span>
                                                         </div>
                                                     </td>
                                                     <td className="text-nowrap">
-                                                        USUÁRIO<i className=""></i>
+                                                        {key.name}
                                                     </td>
                                                     <td>
                                                         <span
-                                                            className={`badge bg-pill bg-${items.Statustext}-light`}
-                                                        >
-                                                            {items.Status}
+                                                            className={`badge bg-pill bg-primary-light`}
+                                                            >
+                                                            {key.status}
                                                             {/* podew ser um select aqui */}
                                                         </span>
                                                     </td>

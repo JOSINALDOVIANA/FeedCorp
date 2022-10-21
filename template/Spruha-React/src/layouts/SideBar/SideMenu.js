@@ -58,6 +58,36 @@ export const MENUADM = [
 				]
 			},
 			{
+				title: 'Minhas avaliações',
+				icon: 'bi-book-half',
+				type: 'sub',
+				active: false,
+				selected: false,
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/minhas_okrs`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'OKR'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/minhas_av_resultados`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Av. por resultados'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/meus_climas_pulso`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Clima Pulso'
+					},
+				]
+			},
+			{
 				title: 'Administração',
 				icon: 'ti-settings',
 				type: 'link',
@@ -65,15 +95,7 @@ export const MENUADM = [
 				selected: false,
 				path: `${process.env.PUBLIC_URL}/configuracoes`,
 			},
-			// {
-			// 	title: 'Relatórios',
-			// 	icon: 'ti-home',
-			// 	type: 'link',
-			// 	active: false,
-			// 	selected: false,
-			// 	path: `${process.env.PUBLIC_URL}/`,
-			// },
-
+			
 		]
 	},
 
@@ -132,6 +154,36 @@ export const MENUGESTOR = [
 				children: [
 					{
 						path: `${process.env.PUBLIC_URL}/climapulso_unidade`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Clima Pulso'
+					},
+				]
+			},
+			{
+				title: 'Minhas avaliações',
+				icon: 'bi-book-half',
+				type: 'sub',
+				active: false,
+				selected: false,
+				children: [
+					{
+						path: `${process.env.PUBLIC_URL}/minhas_okrs`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'OKR'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/minhas_av_resultados`,
+						type: 'link',
+						active: false,
+						selected: false,
+						title: 'Av. por resultados'
+					},
+					{
+						path: `${process.env.PUBLIC_URL}/meus_climas_pulso`,
 						type: 'link',
 						active: false,
 						selected: false,

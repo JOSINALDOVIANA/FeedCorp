@@ -15,7 +15,7 @@ function OKR_resposta() {
             navegar(`${process.env.PUBLIC_URL}/home`)
         }
         setValues(dadosrota.state);
-        
+
 
     }, [dadosrota])
 
@@ -25,14 +25,14 @@ function OKR_resposta() {
     //     })
     // }, [])
 
-    // console.log(values)
+    console.log(values)
 
     return (
         <Fragment>
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5"> Título do OKR </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> {values?.okrselect?.objective.toUpperCase()} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item
@@ -40,7 +40,7 @@ function OKR_resposta() {
                                 navegar(`${process.env.PUBLIC_URL}/minhas_okrs/`, { state: values })
                             }}
                         >  Minhas OKRs  </Breadcrumb.Item>
-                        <Breadcrumb.Item active >  Título do OKR  </Breadcrumb.Item>
+                        <Breadcrumb.Item active >  {values?.okrselect?.objective}  </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
 
@@ -104,14 +104,10 @@ function OKR_resposta() {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {values?.okrselect?.keys?.filter(item=>item.id_user==values?.dadosUser?.id)?.map(key => (
+                                                                {values?.okrselect?.keys?.filter(item => item.id_user == values?.dadosUser?.id)?.map(key => (
                                                                     <tr key={key.id}>
                                                                         <td className="font-weight-semibold">
                                                                             <div className="d-flex">
-                                                                                <label className="ckbox my-auto me-4">
-                                                                                    <input readOnly="" type="checkbox" />
-                                                                                    <span></span>
-                                                                                </label>
                                                                                 <span className="mt-1">{key?.description}</span>
                                                                             </div>
                                                                         </td>
@@ -124,20 +120,20 @@ function OKR_resposta() {
                                                                                 type="text"
                                                                                 id="progress"
                                                                                 placeholder="Adicione seu progresso"
-                                                                                onBlur={async e=>{
+                                                                                onBlur={async e => {
                                                                                     console.log(key)
-                                                                                    let up=key;
-                                                                                    up.status=e.target.value;
-                                                                                    
-                                                                                    setValues(a=>{
-                                                                                        let keys=a.okrselect.keys.filter(item=>item.id!=key.id);
-                                                                                        let k=key;
-                                                                                        k.status=e.target.value;
-                                                                                        keys.push({...k})
-                                                                                        return ({...a,okrselect:{...a.okrselect,keys}})
+                                                                                    let up = key;
+                                                                                    up.status = e.target.value;
+
+                                                                                    setValues(a => {
+                                                                                        let keys = a.okrselect.keys.filter(item => item.id != key.id);
+                                                                                        let k = key;
+                                                                                        k.status = e.target.value;
+                                                                                        keys.push({ ...k })
+                                                                                        return ({ ...a, okrselect: { ...a.okrselect, keys } })
 
                                                                                     })
-                                                                                await api.put(`keys/update`,{keys:[{...up}]})
+                                                                                    await api.put(`keys/update`, { keys: [{ ...up }] })
 
                                                                                 }}
                                                                             />
