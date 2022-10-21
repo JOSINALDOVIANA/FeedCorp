@@ -77,14 +77,14 @@ export default {
     async getOne(req, res) {
 
         const { id } = req.query;
-        // console.log(req.query)
+        console.log(req.query)
         try {
             if (!!id) {
                 let okr = await conexao('okrs').where({ id });
-                okr=okr[0]
-            
+                okr=okr[0];
+                let keys=[];            
                 if (!!okr) {
-                    keys = await conexao("keys").where({ id_okr: okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name" );
+                    keys = await conexao("keys").where({ "keys.id_okr": okr.id }).join("users", "users.id", "=", "keys.id_user").select("keys.*", "users.name" );
                 }
 
 
@@ -93,11 +93,8 @@ export default {
 
                 return res.json({ status: false, mensage: "okr não localizado" })
 
-            } else {
-
-                return res.json({ status: true, okrs: await conexao("okrs") })
             }
-        } catch (error) {
+         catch (error) {
             console.log(error);
             return res.json({ status: false, mensage: "erro okr=>getOne" })
         }

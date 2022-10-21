@@ -23,21 +23,23 @@ function MinhaOKR() {
     }, [dadosrota])
 
     async function CarregarOkrs(keys){
-       
+    //    console.log(keys)
         let okrs =[];
        
         for(let key of keys){
-            await  api.get(`okrs/getOne?id=${key.id_okr}`).then(r=>{
+         await    api.get(`okrs/getOne?id=${key.id_okr}`).then(r=>{
                 okrs.push({...r.data.okr})
+                // console.log(r.data.okr)
                 
             })
         }
         // okrs=okrs.filter((item,index)=>item.id!=okrs[index].id)
+        console.log(okrs)
        setValues(a=>({...a,okrs}))
-       FiltarOkrs(okrs)
+       FiltrarOkrs(okrs)
     }
 
-   async function FiltarOkrs(okrs){
+   async function FiltrarOkrs(okrs){
         let array=[]
         let okrs2= okrs?.filter((item,index)=>{
            if(array.indexOf(item.id)<0){
@@ -53,8 +55,8 @@ function MinhaOKR() {
           for (const index2 in okrs2[index1].keys) {
             process = process + okrs2[index1].keys[index2].status;
           }
-          let keys = okrs2[index1].keys
-          okrs2[index1].progress = process / keys.length
+          let keys = okrs2[index1]?.keys
+          okrs2[index1].progress = keys?.length>0? process / keys?.length:0
           // console.log(keys.length)
           if (okrs2[index1].progress == 100) {
             okrs2[index1].concluded = true
