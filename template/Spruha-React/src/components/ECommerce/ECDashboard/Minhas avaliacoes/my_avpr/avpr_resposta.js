@@ -26,7 +26,7 @@ function AVPR_resposta() {
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5"> Título da AVPR </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> {values?.avprselect?.title.toUpperCase()} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item
@@ -73,33 +73,55 @@ function AVPR_resposta() {
                                 <thead>
                                     <tr>
                                         <th className="wd-lg-30p">Indicador</th>
-                                        <th className="wd-lg-20p text-center">Meta</th>
+                                        {/* <th className="wd-lg-20p text-center">Meta</th> */}
                                         <th className="wd-lg-20p text-center">Realizado</th>
                                         <th className="wd-lg-20p text-center">Resultado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr>
-                                        <td className="font-weight-semibold">
-                                            <span className="mt-1">Atender clientes</span>
-                                        </td>
-                                        <td className="text-center">
+                                    {values?.avprselect?.items?.map(item => (
+                                        <tr key={item.id}>
+                                            <td className="font-weight-semibold">
+                                                <span className="mt-1">{item.indicator}</span>
+                                            </td>
+                                            {/* <td className="text-center">
                                             25 min
-                                        </td>
-                                        <td className="text-center">
-                                            <Form.Control
-                                                size='sm'
-                                                type="text"
-                                                id="progress"
-                                                placeholder="Resultado"
-                                            // onBlur={}
-                                            />
-                                        </td>
-                                        <td className="text-center">
-                                            --
-                                        </td>
-                                    </tr>
+                                        </td> */}
+                                            <td className="text-center">
+                                                <Form.Control
+                                                    size='sm'
+                                                    style={{ textAlign: "center" }}
+                                                    type="text"
+                                                    id="progress"
+                                                    disabled={item?.M_resposta?.answer ? true : false}
+                                                    placeholder={item?.M_resposta?.answer || "Valor numerico"}
+                                                    onBlur={e => {
+                                                        let M_resposta = { answer: e.target.value, id_item: item.id, id_user: values.dadosUser.id }
+                                                        api.post(`item_answer_user/insert`, { ...M_resposta }).then(r => {
+
+                                                            let item2 = { ...item, M_resposta };
+                                                            let avprselect = values.avprselect;
+
+                                                            let items = avprselect.items.filter(i => i.id != item2.id);
+                                                            items = [...items, { ...item2 }];
+                                                            avprselect.items = items;
+
+                                                            let Myavpr = values.Myavpr.filter(i => i.id != values.avprselect.id);
+                                                            Myavpr = [...Myavpr, { ...avprselect }]
+
+                                                            setValues(a => ({ ...a, Myavpr, avprselect }))
+
+                                                        })
+
+                                                    }}
+                                                />
+                                            </td>
+                                            <td className="text-center">
+                                                {item?.M_resposta?.answer}
+                                            </td>
+                                        </tr>
+                                    ))}
 
                                 </tbody>
                             </Table>
