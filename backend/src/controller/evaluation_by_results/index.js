@@ -109,7 +109,7 @@ export default {
         const { id_user = false, id_direction = false } = req.query
 
         try {
-            if (!!id_user) {
+            if (id_user) {
                 let avpr = !!id_user ? await conexao("evaluation_by_results").where({ id_user }) : await conexao("evaluation_by_results");
 
                 for (const key in avpr) {
@@ -150,7 +150,7 @@ export default {
 
                 res.json({ "status": true, "avaliacoes": avpr });
             }
-            if (!!id_direction) {
+            if (id_direction) {
                 let avprs = await conexao("user_ebr").where({ "user_ebr.id_user": id_direction })
                     .join("evaluation_by_results", "user_ebr.id_ebr", "=", "evaluation_by_results.id")
                     .select("evaluation_by_results.*");
