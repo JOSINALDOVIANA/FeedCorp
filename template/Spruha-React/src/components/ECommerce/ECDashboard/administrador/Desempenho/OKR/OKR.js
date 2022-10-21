@@ -11,7 +11,7 @@ const Okr = () => {
   const [values, setValues] = useState({});
   useEffect(() => {
     setValues(dadosrota.state);
-    
+
   }, [dadosrota.state]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Okr = () => {
           process = process + okrs[index1].keys[index2].status;
         }
         let keys = okrs[index1].keys
-        keys.length>0?okrs[index1].progress = Math.round(process / keys.length,-1):okrs[index1].progress=0
+        keys.length > 0 ? okrs[index1].progress = Math.round(process / keys.length, -1) : okrs[index1].progress = 0
         // console.log(keys.length)
         if (okrs[index1].progress >= 100) {
           okrs[index1].concluded = true
@@ -62,7 +62,7 @@ const Okr = () => {
   }
   //  console.log(values)
 
- 
+
 
 
   return (
@@ -98,7 +98,7 @@ const Okr = () => {
 
       <div>
         <h2 className="main-content-title tx-20 mx-2">Ativos</h2>
-        
+
         <Row className="row-sm">
           {values?.okrscriados?.map(okr => (
             <Col key={okr.id} lg={6} xl={6} xxl={6} md={6} >
