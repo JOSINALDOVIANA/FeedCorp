@@ -18,13 +18,13 @@ function MinhasAvPr() {
 
     }, [dadosrota])
 
-    useEffect(()=>{
-        api.get(`avpr/getAll?id_direction=${dadosrota.state.dadosUser.id}`).then(r=>{
-            if(r.data.status){
-                setValues(a=>({...a,Myavpr:r.data.avaliacoes}))
+    useEffect(() => {
+        api.get(`avpr/getAll?id_direction=${dadosrota.state.dadosUser.id}`).then(r => {
+            if (r.data.status) {
+                setValues(a => ({ ...a, Myavpr: r.data.avaliacoes }))
             }
         })
-    },[])
+    }, [])
 
     console.log(values)
 
@@ -33,14 +33,14 @@ function MinhasAvPr() {
         const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-      }
+    }
 
     return (
         <Fragment>
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5">Minha Unidade: </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5">Minhas avaliações por resultados </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item active >  Minhas av. por resultados  </Breadcrumb.Item>
@@ -65,80 +65,78 @@ function MinhasAvPr() {
 
                                 <Tab.Content>
                                     <Tab.Pane eventKey="pendente">
-                                       {values?.Myavpr?.filter(item=>!item.concluded)?.map(avpr=>(
-                                        
-                                        <Row key={avpr.id}>
-                                        <Col md={12} xl={4}>
-                                            <Card className="custom-card">
+                                        <Row >
 
-                                                <Card.Body>
-                                                    <div className="card-item-body">
-                                                        <div className="card-item-stat">
-                                                            <small className="tx-12 text-primary font-weight-semibold">
-                                                                {formatData(avpr.validity)}
-                                                            </small>
-                                                            <h5 className=" mt-2">{avpr.title.toUpperCase()}</h5>
-                                                        </div>
-                                                    </div>
+                                            {values?.Myavpr?.filter(item => !item.concluded)?.map(avpr => (
+                                                <Col key={avpr.id} md={12} xl={4}>
+                                                    <Card className="custom-card">
 
-                                                    <div className="d-flex justify-content-between">
-                                                        <div className="d-flex flex-column align-items-start">
-                                                            <h6>{`Metas: ${avpr.totalItems}`}</h6>
-                                                        </div>
-                                                    </div>
+                                                        <Card.Body>
+                                                            <div className="card-item-body">
+                                                                <div className="card-item-stat">
+                                                                    <small className="tx-12 text-primary font-weight-semibold">
+                                                                        {formatData(avpr.validity)}
+                                                                    </small>
+                                                                    <h5 className=" mt-2">{avpr.title.toUpperCase()}</h5>
+                                                                </div>
+                                                            </div>
 
-
-                                                    <Button className="btn btn-primary ripple btn-block"
-                                                        onClick={() => {
-                                                            navegar(`${process.env.PUBLIC_URL}/avpr_resposta/`, { state:{...values,avprselect:avpr} })
-                                                        }} >
-                                                        Visualizar
-                                                    </Button>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    </Row>
+                                                            <div className="d-flex justify-content-between">
+                                                                <div className="d-flex flex-column align-items-start">
+                                                                    <h6>{`Metas: ${avpr.totalItems}`}</h6>
+                                                                </div>
+                                                            </div>
 
 
-                                       ))}
+                                                            <Button className="btn btn-primary ripple btn-block"
+                                                                onClick={() => {
+                                                                    navegar(`${process.env.PUBLIC_URL}/avpr_resposta/`, { state: { ...values, avprselect: avpr } })
+                                                                }} >
+                                                                Visualizar
+                                                            </Button>
+                                                        </Card.Body>
+                                                    </Card>
+                                                </Col>
+                                            ))}
+                                        </Row>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="concluído">
-                                       {values?.Myavpr?.filter(i=>i.concluded)?.map(avpr=>(
-                                        
-                                        <Row key={avpr.id}>
-
-                                        <Col md={12} xl={4}>
-                                            <Card className="custom-card bg-primary tx-white">
-
-                                                <Card.Body>
-                                                    <div className="card-item-body">
-                                                        <div className="card-item-stat">
-                                                            <small className="tx-12 font-weight-semibold text-light">
-                                                                {formatData(avpr.validity)}
-                                                            </small>
-                                                            <h5 className=" mt-2">{avpr.title.toUpperCase()}</h5>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="d-flex justify-content-between">
-                                                        <div className="d-flex flex-column align-items-start">
-                                                            <h6>{"Concluído"}</h6>
-                                                        </div>
-                                                    </div>
+                                        <Row >
+                                            {values?.Myavpr?.filter(i => i.concluded)?.map(avpr => (
 
 
-                                                    <Button className="btn ripple btn-block" variant="light btn-rounded"
-                                                        onClick={() => {
-                                                            navegar(`${process.env.PUBLIC_URL}/avpr_concluido/`, { state:{...values,avprselect:avpr} })
-                                                        }} >
-                                                        Resumo
-                                                    </Button>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    </Row>
+                                                <Col key={avpr.id} md={12} xl={4}>
+                                                    <Card className="custom-card bg-primary tx-white">
 
-                                       ))}
+                                                        <Card.Body>
+                                                            <div className="card-item-body">
+                                                                <div className="card-item-stat">
+                                                                    <small className="tx-12 font-weight-semibold text-light">
+                                                                        {formatData(avpr.validity)}
+                                                                    </small>
+                                                                    <h5 className=" mt-2">{avpr.title.toUpperCase()}</h5>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="d-flex justify-content-between">
+                                                                <div className="d-flex flex-column align-items-start">
+                                                                    <h6>{"Concluído"}</h6>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <Button className="btn ripple btn-block" variant="light btn-rounded"
+                                                                onClick={() => {
+                                                                    navegar(`${process.env.PUBLIC_URL}/avpr_concluido/`, { state: { ...values, avprselect: avpr } })
+                                                                }} >
+                                                                Resumo
+                                                            </Button>
+                                                        </Card.Body>
+                                                    </Card>
+                                                </Col>
+                                            ))}
+                                        </Row>
+
                                     </Tab.Pane>
                                 </Tab.Content>
                             </Row>

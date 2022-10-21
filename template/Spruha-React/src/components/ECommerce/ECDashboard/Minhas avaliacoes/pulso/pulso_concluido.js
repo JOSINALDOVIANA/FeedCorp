@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Card, Col, Row, Table, Button, Image } from "react-bootstrap";
+import { Breadcrumb, Card, Col, Row, Table, Button, Tab, Nav } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import api from "../../../../api";
+import api from "../../../../../api";
 
 function MeuClimaPulso() {
 
@@ -25,19 +25,22 @@ function MeuClimaPulso() {
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5">Minha Unidade: </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> Resumo - Titulo pulso </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
-                        <Breadcrumb.Item active >  Meus Clima Pulsos  </Breadcrumb.Item>
+                        <Breadcrumb.Item
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/meus_climas_pulso`, { state: values }) }}
+                        >  Meus Clima Pulsos  </Breadcrumb.Item>
+                        <Breadcrumb.Item active >  titulo pulso  </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
             </div>
 
 
-            <Row className="row-sm">
+            <div className="card custom-card">
 
 
-            </Row>
+            </div>
 
         </Fragment>
     );
