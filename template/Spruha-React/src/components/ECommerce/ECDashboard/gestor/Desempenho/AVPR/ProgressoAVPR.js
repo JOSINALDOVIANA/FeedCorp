@@ -56,7 +56,36 @@ const ProgressoOKR = () => {
     // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
   }
+function resposta(resp){
+  // console.log(resp)
+  if(resp.min){
+    let por=Math.round((resp.resposta.answer/resp.goal)*100,-1);
+    if(100-por<0){
+      return(
+      <div  className="text-success">
+        <i className="bi bi-arrow-up text-success"></i>
+        <span >{(100-por)*(-1)}</span>
+      </div>)
+    }else{
+      if(por<100){
+        return (
+          <div  className="text-danger">
+          <i className="bi bi-arrow-down text-danger"></i>
+          <span >{por}</span>
+         </div>
+        )
+      }
+      return (
+        <div  className="text-success">
+        <i className="bi bi-arrow-right-short text-success"></i>
+        <span >{por}</span>
+       </div>
+      )
+    }
 
+    
+  }
+}
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -144,7 +173,7 @@ const ProgressoOKR = () => {
                       <td className="text-center">{resp.indicator}</td>
                       <td className="text-center">{resp.goal}</td>
                       <td className="text-center">{resp.resposta.answer}</td>
-                      <td className="text-center">Falta calcular</td>
+                      <td className="text-center">{resposta(resp)}%</td>
                     </tr>
                   ))}
                 </tbody>

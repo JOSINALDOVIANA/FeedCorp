@@ -18,7 +18,70 @@ const ProgressoOKR = () => {
 
   }, [dadosrota.state]);
 
+  useEffect(() => {
+    let paraquem = dadosrota.state.AVPRselect?.paraquem
+    let paraquem_serial = []
+    let items = dadosrota.state.AVPRselect?.items
+
+
+    for (let user of paraquem) {
+      let items_serial = []
+      for (let item of items) {
+        for (const resposta of item.resposta) {
+          if (resposta.id_user == user.id) {
+            items_serial.push({ ...item, resposta });
+          }
+        }
+      }
+      paraquem_serial.push({ ...user, respostas: items_serial })
+    }
+
+    paraquem = paraquem_serial
+
+    // console.log(items)
+    // console.log(paraquem)
+    setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
+  }, [dadosrota])
+
   console.log(values)
+  function formatData(data) {
+    const dat = new Date(data);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
+
+  function resposta(resp) {
+    // console.log(resp)
+    if (resp.min) {
+      let por = Math.round((resp.resposta.answer / resp.goal) * 100, -1);
+      if (100 - por < 0) {
+        return (
+          <div className="text-success">
+            <i className="bi bi-arrow-up text-success"></i>
+            <span >{(100 - por) * (-1)}</span>
+          </div>)
+      } else {
+        if (por < 100) {
+          return (
+            <div className="text-danger">
+              <i className="bi bi-arrow-down text-danger"></i>
+              <span >{por}</span>
+            </div>
+          )
+        }
+        return (
+          <div className="text-success">
+            <i className="bi bi-arrow-right-short text-success"></i>
+            <span >{por}</span>
+          </div>
+        )
+      }
+
+
+    }
+    return ("enm desenvolvimento")
+  }
 
   return (
     <Fragment>
@@ -55,80 +118,90 @@ const ProgressoOKR = () => {
       </div>
       {/* <!-- End Page Header --> */}
 
-      <div className="card custom-card">
+      {values?.AVPRselect?.paraquem?.map(user => (
 
-        <Card.Header className="border-bottom-0 d-flex justify-content-between">
 
-          <div className="d-flex flex-column">
-            <label className="main-content-label my-auto pt-2">Avaliado: </label>
-            <label className="main-content-label my-auto pt-2">Ciclo de avaliação: </label>
-          </div>
+        <div key={user.id} className="card custom-card">
 
-          <div>
-            <Button
-              variant="danger"
-              type="button"
-              className="me-2 btn-icon"
-              onClick={() => {
-                deleteQuestionAlert().then(async (result) => {
-                  if (result.isConfirmed) {
-                    await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
-                      console.log(r)
-                      if (r.data.status) {
-                        deleteSucessAlert()
-                        navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
-                      }
-                    })
-                  }
-                })
-              }}
-            >
-              <i class="bi bi-trash2-fill"></i>
-            </Button>
-          </div>
+          <Card.Header className="border-bottom-0 d-flex justify-content-between">
 
-        </Card.Header>
+            <div className="d-flex flex-column">
+              <label className="main-content-label my-auto pt-2">Avaliado: {user.name} </label>
+              <label className="main-content-label my-auto pt-2">
+                Ciclo de avaliação: {formatData(values?.AVPRselect?.updated_at)} à {formatData(values?.AVPRselect?.validity)}</label>
+            </div>
 
-        <div className="card-body pt-2 pb-0">
-          <div className="table-responsive tasks">
-            <Table className="table card-table table-vcenter text-nowrap border" borderless>
-              <thead>
-                <tr>
-                  <th className="wd-lg-10p text-center">Indicador</th>
-                  <th className="wd-lg-10p text-center">Meta</th>
-                  <th className="wd-lg-10p text-center">Realizado</th>
-                  <th className="wd-lg-20p text-center">Resultado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* {TRADINGACTIVITIES.map((list, index) => (
+            {/* <div>
+              <Button
+                variant="danger"
+                type="button"
+                className="me-2 btn-icon"
+                onClick={() => {
+                  deleteQuestionAlert().then(async (result) => {
+                    if (result.isConfirmed) {
+                      await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
+                        console.log(r)
+                        if (r.data.status) {
+                          deleteSucessAlert()
+                          navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                        }
+                      })
+                    }
+                  })
+                }}
+              >
+                <i className="bi bi-trash2-fill"></i>
+              </Button>
+            </div> */}
+
+          </Card.Header>
+
+          <div className="card-body pt-2 pb-0">
+            <div className="table-responsive tasks">
+              <Table className="table card-table table-vcenter text-nowrap border" borderless>
+                <thead>
+                  <tr>
+                    <th className="wd-lg-10p text-center">Indicador</th>
+                    <th className="wd-lg-10p text-center">Meta</th>
+                    <th className="wd-lg-10p text-center">Realizado</th>
+                    <th className="wd-lg-20p text-center">Resultado</th>
+                    <th className="wd-lg-20p text-center">Deletar</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {user?.respostas?.map((resp, index) => (
                     <tr key={index} data-index={index}>
-                      <td className="text-center">{list.id}</td>
-                      <td className="coin_icon d-flex">
-                        <div className="cryp-icon bg-primary me-2">
-                          <i className={`cf cf-${list.icon} text-center`} />
-                        </div>
-                        <span className=" my-auto text-center">
-                          {list.name} <b>{list.title}</b>
-                        </span>
-                      </td>
-                      <td className="text-center">{list.price}</td>
-                      <td className="text-center">
-                        <span className={`text-${list.changeStatus} `}>{list.change}</span>
-                      </td>
-                      <td className="text-center">{list.date}</td>
-                      <td className="text-center">
-                        <Link to="#" className={`text-${list.status}`}>
-                          {list.statusText}
-                        </Link>
-                      </td>
+                      <td className="text-center">{resp.indicator}</td>
+                      <td className="text-center">{resp.goal}</td>
+                      <td className="text-center">{resp.resposta.answer}</td>
+                      <td className="text-center">{resposta(resp)}%</td>
+                      <td className="text-center"><i class="bi bi-trash" 
+                       onClick={() => {
+                        deleteQuestionAlert().then(async (result) => {
+                          if (result.isConfirmed) {
+                            await api.delete(`item_answer_user/delete?id=${resp.resposta.id}`).then(r => {
+                              console.log(r)
+                              if (r.data.status) {
+                                deleteSucessAlert()
+                                navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                              }
+                            })
+                          }
+                        })
+                      }}
+                      ></i></td>
+
                     </tr>
-                  ))} */}
-              </tbody>
-            </Table>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           </div>
         </div>
-      </div>
+
+
+      ))}
     </Fragment>
   )
 };

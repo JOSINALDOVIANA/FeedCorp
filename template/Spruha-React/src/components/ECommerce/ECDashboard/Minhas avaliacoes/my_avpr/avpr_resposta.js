@@ -97,7 +97,8 @@ function AVPR_resposta() {
                                                     disabled={item?.M_resposta?.answer ? true : false}
                                                     placeholder={item?.M_resposta?.answer || "Valor numerico"}
                                                     onBlur={e => {
-                                                        let M_resposta = { answer: e.target.value, id_item: item.id, id_user: values.dadosUser.id }
+                                                        if(e.target.value!=""){
+                                                            let M_resposta = { answer: e.target.value, id_item: item.id, id_user: values.dadosUser.id }
                                                         api.post(`item_answer_user/insert`, { ...M_resposta }).then(r => {
 
                                                             let item2 = { ...item, M_resposta };
@@ -113,6 +114,7 @@ function AVPR_resposta() {
                                                             setValues(a => ({ ...a, Myavpr, avprselect }))
 
                                                         })
+                                                        }
 
                                                     }}
                                                 />

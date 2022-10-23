@@ -109,61 +109,7 @@ export default {
         const { id_user = false, id_direction = false } = req.query
         //  console.log(req.query)
         try {
-            // if (id_user) {
-            //     let avpr = await conexao("evaluation_by_results").where({ id_user });
-            //     // console.log(avpr)
-
-            //     // for (const key in avpr) {
-            //     //     let paraquem = await conexao("user_ebr").where({ "user_ebr.id_ebr": avpr[key].id })
-            //     //         .join("users", "users.id", "=", "user_ebr.id_user")
-            //     //         // .join("images","images.id","=","users.id_image")  
-            //     //         .select("users.*")
-            //     //         // console.log(paraquem)
-
-            //     //     let paraquem_serial = []
-            //     //     for (let user of paraquem) {
-            //     //         let image = await conexao("images").where({ id: user.id_image }).first()
-            //     //         user = { ...user, image }
-            //     //         paraquem_serial.push(user);
-            //     //     }
-            //     //     paraquem = paraquem_serial;
-            //     //         // console.log(paraquem)
-
-            //     //     let items = await conexao("items").where({ "id_ebr": avpr[key].id })
-            //     //         .select("items.indicator", "items.goal", "items.max", "items.min", "items.id");
-            //     //     let items_serial = [];
-
-            //     //     for (const key2 in items) {
-            //     //         // let und=!items[key].und?await conexao("physicalUnity").where({id:items[key].id_physicalUnity}).first().select("physicalUnity.unity"):null
-            //     //         let resposta = await conexao("item_answer_user").where({ "id_item": items[key2].id })
-            //     //             .join("users", "item_answer_user.id_user", '=', "users.id")
-            //     //             // .join("images","users.id_image","=","images.id")
-            //     //             .select("item_answer_user.*", "users.name", "users.id_image");
-            //     //         let resposta_serial = [];
-            //     //         // console.log(resposta)
-            //     //         for (let resp of resposta) {
-            //     //             // console.log(resp)
-            //     //              await conexao("images").where({ id: resp.id_image }).first().select("images.url").then(r=>{
-
-            //     //                  resposta_serial.push({ ...resp, url:r.url })
-            //     //              });
-
-
-            //     //         }
-            //     //         resposta = resposta_serial;
-            //     //         // console.log(resposta)
-            //     //         items_serial.push({ ...items[key2], resposta });
-            //     //         console.log(items_serial)
-            //     //     }
-
-
-            //     //     avpr[key] = { ...avpr[key], paraquem, items: items_serial }
-            //     // }
-
-            // console.log(avpr)
-
-            //     res.json({ "status": true, "avaliacoes": avpr });
-            // }
+            
 
             if (id_user) {
                 let avprs = await conexao("evaluation_by_results").where({ id_user });
@@ -178,7 +124,7 @@ export default {
                             .join("users", "item_answer_user.id_user", '=', "users.id")
                             .select("item_answer_user.*", "users.name", "users.id_image");
                             for (let key2 in avprs[index].items[key].resposta) {
-                                avprs[index].items[key].resposta[key2].image= (await conexao("images").where({ "images.id": avprs[index].items[key].resposta[key2].id_image }).first().select("images.url")).url
+                                avprs[index].items[key].resposta[key2].image= (await conexao("images").where({ "images.id": avprs[index].items[key].resposta[key2].id_image }).first().select("images.url"))?.url
                             }
 
                     }
@@ -324,7 +270,7 @@ export default {
         }
     },
     async deleteItem_Answer_User(req, res) {
-        const { id } = req.body;
+        const { id } = req.query;
 
         try {
             await conexao("item_answer_user").del().where({ id })
