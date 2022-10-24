@@ -248,10 +248,10 @@ export default {
         }
     },
     async updateItem_Answer_User(req, res) {
-        const { id, id_user, id_item, answer } = req.body;
+        const { id, id_user, id_item, answer,result } = req.body;
 
         try {
-            await conexao("item_answer_user").update({ id_user, id_item, answer }).where({ id });
+            await conexao("item_answer_user").update({ id_user, id_item, answer,result }).where({ id });
             return res.json({ status: true, mensage: "atualizado" });
         } catch (error) {
             console.log(error)
