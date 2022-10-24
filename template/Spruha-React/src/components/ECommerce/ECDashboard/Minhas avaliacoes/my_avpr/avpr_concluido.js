@@ -19,6 +19,64 @@ function AVPR_resposta() {
 
     }, [dadosrota])
 
+    useEffect(() => {
+        let paraquem = dadosrota.state.AVPRselect?.paraquem
+        let paraquem_serial = []
+        let items = dadosrota.state.AVPRselect?.items
+
+
+        for (let user of paraquem) {
+            let items_serial = []
+            for (let item of items) {
+                for (const resposta of item.resposta) {
+                    if (resposta.id_user == user.id) {
+                        items_serial.push({ ...item, resposta });
+                    }
+                }
+            }
+            paraquem_serial.push({ ...user, respostas: items_serial })
+        }
+
+        paraquem = paraquem_serial
+
+        // console.log(items)
+        // console.log(paraquem)
+        setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
+    }, [dadosrota])
+
+    //O que foi feito lá em progressoAVPR tem que está aqui
+    function resposta(resp) {
+        // console.log(resp)
+        if (resp.min) {
+            let por = Math.round((resp.resposta.answer / resp.goal) * 100, -1);
+            if (100 - por < 0) {
+                return (
+                    <div className="text-success">
+                        <i className="bi bi-arrow-up text-success"></i>
+                        <span >{(100 - por) * (-1)}</span> %
+                    </div>)
+            } else {
+                if (por < 100) {
+                    return (
+                        <div className="text-danger tx-15">
+                            <i className="bi bi-arrow-down"></i>
+                            <span>{por}</span> %
+                        </div>
+                    )
+                }
+                return (
+                    <div className="text-success tx-15">
+                        <i className="bi bi-arrow-right"></i>
+                        <span >{por}</span> %
+                    </div>
+                )
+            }
+
+
+        }
+        return ("em desenvolvimento")
+    }
+
     console.log(values)
 
     return (
@@ -26,7 +84,7 @@ function AVPR_resposta() {
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5"> Título da AVPR </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> {values?.avprselect?.title.toUpperCase()} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item
@@ -34,7 +92,7 @@ function AVPR_resposta() {
                                 navegar(`${process.env.PUBLIC_URL}/minhas_av_resultados/`, { state: values })
                             }}
                         >  Meus AVPRs  </Breadcrumb.Item>
-                        <Breadcrumb.Item active >  Título da AVPR  </Breadcrumb.Item>
+                        <Breadcrumb.Item active >  {values?.avprselect?.title}  </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
 
@@ -54,53 +112,53 @@ function AVPR_resposta() {
                 </div>
             </div>
 
+            {values?.AVPRselect?.paraquem?.map(user => (
+                <Row key={user.id} className="row-sm">
+                    <Col lg={12}>
+                        <Card className="custom-card mg-b-20">
+                            <Card.Body>
+                                <Card.Header className="card-header border-bottom-0 pt-0 ps-0 pe-0 d-flex">
+                                    <div>
+                                        <label className="main-content-label mb-2">Resumo de {user.name}</label>
+                                        <span className="d-block tx-12 mb-3 text-muted">
+                                            Estes são os resultados de avaliação por resultados desse usuário.
+                                        </span>
+                                    </div>
+                                </Card.Header>
 
-            <Row className="row-sm">
-                <Col lg={12}>
-                    <Card className="custom-card mg-b-20">
-                        <Card.Body>
-                            <Card.Header className="card-header border-bottom-0 pt-0 ps-0 pe-0 d-flex">
-                                <div>
-                                    <label className="main-content-label mb-2">Resumo de Avaliação por resultados</label>
-                                    <span className="d-block tx-12 mb-3 text-muted">
-                                        Estes são os seus resultados dessa avaliação por resultados.
-                                    </span>
-                                </div>
-                            </Card.Header>
-
-                            <Table responsive hover className="card-table table-vcenter text-nowrap mb-0 border hover">
-                                <thead>
-                                    <tr>
-                                        <th className="wd-lg-20p">Indicador</th>
-                                        <th className="wd-lg-10p text-center">Meta</th>
-                                        <th className="wd-lg-20p text-center">Realizado</th>
-                                        <th className="wd-lg-10p text-center">Resultado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td className="font-weight-semibold">
-                                            <span className="mt-1">Atender clientes</span>
-                                        </td>
-                                        <td className="text-center">
-                                            1 min
-                                        </td>
-                                        <td className="text-center">
-                                            2 min
-                                        </td>
-                                        <td className="text-center">
-                                            3%
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </Table>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-
+                                <Table responsive hover className="card-table table-vcenter text-nowrap mb-0 border hover">
+                                    <thead>
+                                        <tr>
+                                            <th className="wd-lg-20p">Indicador</th>
+                                            <th className="wd-lg-10p text-center">Meta</th>
+                                            <th className="wd-lg-20p text-center">Realizado</th>
+                                            <th className="wd-lg-10p text-center">Resultado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {user?.respostas?.map((resp, index) => (
+                                            <tr key={index} data-index={index}>
+                                                <td className="font-weight-semibold">
+                                                    <span className="mt-1">{resp.indicator}</span>
+                                                </td>
+                                                <td className="text-center">
+                                                    {resp.goal}
+                                                </td>
+                                                <td className="text-center">
+                                                    {resp.resposta.answer}
+                                                </td>
+                                                <td className="text-center">
+                                                    {resposta(resp)}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            ))}
 
         </Fragment>
     );

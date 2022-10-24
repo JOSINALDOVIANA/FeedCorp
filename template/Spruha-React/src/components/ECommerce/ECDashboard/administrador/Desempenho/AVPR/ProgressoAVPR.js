@@ -51,6 +51,7 @@ const ProgressoOKR = () => {
     return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
   }
 
+  //DPS REPLICAR EM AVPR_CONCLUIDO
   function resposta(resp) {
     // console.log(resp)
     if (resp.min) {
@@ -59,28 +60,28 @@ const ProgressoOKR = () => {
         return (
           <div className="text-success">
             <i className="bi bi-arrow-up text-success"></i>
-            <span >{(100 - por) * (-1)}</span>
+            <span >{(100 - por) * (-1)}</span> %
           </div>)
       } else {
         if (por < 100) {
           return (
-            <div className="text-danger">
-              <i className="bi bi-arrow-down text-danger"></i>
-              <span >{por}</span>
+            <div className="text-danger tx-15">
+              <i className="bi bi-arrow-down"></i>
+              <span>{por}</span> %
             </div>
           )
         }
         return (
-          <div className="text-success">
-            <i className="bi bi-arrow-right-short text-success"></i>
-            <span >{por}</span>
+          <div className="text-success tx-15">
+            <i className="bi bi-arrow-right"></i>
+            <span >{por}</span> %
           </div>
         )
       }
 
 
     }
-    return ("enm desenvolvimento")
+    return ("em desenvolvimento")
   }
 
   return (
@@ -88,7 +89,7 @@ const ProgressoOKR = () => {
       {/* <!-- Page Header --> */}
       <div className="page-header">
         <div>
-          <h2 className="main-content-title tx-24 mg-b-5">{values?.AVPRselect?.title}</h2>
+          <h2 className="main-content-title tx-24 mg-b-5">{values?.AVPRselect?.title.toUpperCase()}</h2>
 
           <Breadcrumb>
             <Breadcrumb.Item>Desempenho</Breadcrumb.Item>
@@ -131,41 +132,18 @@ const ProgressoOKR = () => {
                 Ciclo de avaliação: {formatData(values?.AVPRselect?.updated_at)} à {formatData(values?.AVPRselect?.validity)}</label>
             </div>
 
-            {/* <div>
-              <Button
-                variant="danger"
-                type="button"
-                className="me-2 btn-icon"
-                onClick={() => {
-                  deleteQuestionAlert().then(async (result) => {
-                    if (result.isConfirmed) {
-                      await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`).then(r => {
-                        console.log(r)
-                        if (r.data.status) {
-                          deleteSucessAlert()
-                          navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
-                        }
-                      })
-                    }
-                  })
-                }}
-              >
-                <i className="bi bi-trash2-fill"></i>
-              </Button>
-            </div> */}
-
           </Card.Header>
 
-          <div className="card-body pt-2 pb-0">
+          <div className="card-body pt-2 pb-4">
             <div className="table-responsive tasks">
-              <Table className="table card-table table-vcenter text-nowrap border" borderless>
+              <Table responsive hover className="card-table table-vcenter text-nowrap mb-0 border hover" >
                 <thead>
                   <tr>
-                    <th className="wd-lg-10p text-center">Indicador</th>
+                    <th className="wd-lg-15p text-center">Indicador</th>
                     <th className="wd-lg-10p text-center">Meta</th>
                     <th className="wd-lg-10p text-center">Realizado</th>
-                    <th className="wd-lg-20p text-center">Resultado</th>
-                    <th className="wd-lg-20p text-center">Deletar</th>
+                    <th className="wd-lg-10p text-center">Resultado</th>
+                    <th className="wd-lg-10p text-center">Deletar</th>
 
                   </tr>
                 </thead>
@@ -175,22 +153,28 @@ const ProgressoOKR = () => {
                       <td className="text-center">{resp.indicator}</td>
                       <td className="text-center">{resp.goal}</td>
                       <td className="text-center">{resp.resposta.answer}</td>
-                      <td className="text-center">{resposta(resp)}%</td>
-                      <td className="text-center"><i class="bi bi-trash" 
-                       onClick={() => {
-                        deleteQuestionAlert().then(async (result) => {
-                          if (result.isConfirmed) {
-                            await api.delete(`item_answer_user/delete?id=${resp.resposta.id}`).then(r => {
-                              console.log(r)
-                              if (r.data.status) {
-                                deleteSucessAlert()
-                                navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                      <td className="text-center">{resposta(resp)}</td>
+                      <td className="text-center">
+                        <Button variant="link"
+                          onClick={() => {
+                            deleteQuestionAlert().then(async (result) => {
+                              if (result.isConfirmed) {
+                                await api.delete(`item_answer_user/delete?id=${resp.resposta.id}`).then(r => {
+                                  console.log(r)
+                                  if (r.data.status) {
+                                    deleteSucessAlert()
+                                    navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
+                                  }
+                                })
                               }
                             })
-                          }
-                        })
-                      }}
-                      ></i></td>
+                          }}
+                        >
+                          <i className="bi bi-trash-fill"></i>
+
+                        </Button>
+
+                      </td>
 
                     </tr>
                   ))}
