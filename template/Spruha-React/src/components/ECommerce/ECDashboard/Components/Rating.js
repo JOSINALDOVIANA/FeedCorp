@@ -1,5 +1,5 @@
 import React from "react";
-import Rating from "@mui/material/Rating";
+import MUIRating from "@mui/material/Rating";
 import ReactRating from "react-rating";
 import PropTypes from "prop-types";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
@@ -7,6 +7,8 @@ import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAltOutlined";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
+import StarRateIcon from '@mui/icons-material/StarRate';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -17,28 +19,58 @@ import StarsIcon from "@mui/icons-material/Stars";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CircleIcon from "@mui/icons-material/Circle";
 
-const StyledRating = styled(Rating)({
-    ".MuiRating-iconFilled": {
-        color: "#ff6d75",
-    },
-});
-const StyledRating1 = styled(Rating)({
-    ".MuiRating-iconFilled": {
-        color: "#faaf00",
-    },
-});
 
-// StaticRating:
-export function StarRating() {
+// Teste com o mesmo que tá lá na página só que n aparece a div label-onrate mesmo colocando lá
+export function MarcusRating() {
+
+    // const [color, setColor] = useState("#564f74");
+
+    function labeling(rate) {
+        let label;
+        if (rate <= 0.5) {
+            label = "Horrível";
+        }
+        if (rate > 0.5 && rate < 2) {
+            label = "Muito ruim";
+        }
+        if (rate > 1 && rate <= 2) {
+            label = "Ruim";
+        }
+        if (rate > 2 && rate <= 3) {
+            label = "Normal";
+        }
+        if (rate > 3 && rate <= 4.5) {
+            label = "Bom";
+        }
+        if (rate > 4.5) {
+            label = "Excelente";
+        }
+        document.getElementById("label-onrate").innerHTML = label || "";
+    }
     return (
-        <div><Rating defaultValue={5} max={5} /> </div>
+        <div style={{ textAlign: "center" }}>
+            <ReactRating
+                emptySymbol={
+                    <StarOutlineIcon style={{ color: "#aaa", fontSize: 25, margin: 2 }} />
+                }
+                fullSymbol={
+                    <StarRateIcon style={{ color: "#36D98D", fontSize: 25, margin: 2 }} />
+                }
+                placeholderSymbol={
+                    <StarRateIcon style={{ color: "#36D98D", fontSize: 25, margin: 2 }} />
+                }
+                placeholderRating={0}
+                fractions={1}
+                onChange={value => alert(value)}
+                onHover={rate => labeling(rate)}
+            />
+            <div id="label-onrate" style={{ height: 20, fontFamily: "Arial" }} />
+        </div>
     );
 }
-// Customizerating:
-export function CustomizedRating() {
-    return <ReactRating initialRating={0} onChange={(e) => console.log(e)} />;
-}
-// Radiogroup:
+
+
+// RATING COM AS CARAS
 const customIcons = {
     1: {
         icon: <SentimentVeryDissatisfiedIcon />,
@@ -65,7 +97,9 @@ const customIcons = {
 // IconContainer
 function IconContainer(props) {
     const { value, ...other } = props;
-    return <span {...other}>{customIcons[value].icon}</span>;
+    return <span {...other}>
+        {customIcons[value].icon}
+    </span>;
 }
 
 IconContainer.propTypes = {
@@ -75,7 +109,7 @@ IconContainer.propTypes = {
 //RadioGroupRating
 export function RadioGroupRating() {
     return (
-        <Rating
+        <MUIRating
             className="text-center"
             defaultValue={2}
             IconContainerComponent={IconContainer}
@@ -84,51 +118,14 @@ export function RadioGroupRating() {
     );
 }
 
+//DisableRating - VOU USAR!!
+// export function DisabledRating() {
+//     const [value] = React.useState(2);
 
-//CustomizedRating5
-const labels = {
-    0.5: "Useless",
-    1: "Useless+",
-    1.5: "Poor",
-    2: "Poor+",
-    2.5: "Ok",
-    3: "Ok+",
-    3.5: "Good",
-    4: "Good+",
-    4.5: "Excellent",
-    5: "Excellent+",
-};
-
-export function CustomizedRating5() {
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
-
-    return (
-        <div
-            sx={{
-                width: 200,
-                display: "flex",
-                alignItems: "center",
-                fontSize: "10px",
-            }}
-        >
-            <Rating
-                name="hover-feedback"
-                value={value}
-                precision={0.5}
-                max={10}
-                onChange={(_event, newValue) => {
-                    setValue(newValue);
-                }}
-                onChangeActive={(_event, newHover) => {
-                    setHover(newHover);
-                }}
-                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-            />
-            {value !== null && (
-                <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
-        </div>
-    );
-}
+//     return (
+//         <div>
+//             <ReactRating name="disabled" value={value} disabled />
+//         </div>
+//     );
+// }
 
