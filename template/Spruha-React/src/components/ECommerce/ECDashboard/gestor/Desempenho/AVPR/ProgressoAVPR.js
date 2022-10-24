@@ -66,15 +66,7 @@ const ProgressoOKR = () => {
   if(resp.min){
 
     let por=Math.round((resp.resposta.answer/resp.goal)*100,-1);
-    // if(100-por<0){
-      
-      //   // console.log(answer)
-      //   return(
-        //   <div  className="text-danger">
-        //     <i className="bi bi-arrow-up"></i>
-        //     <span >{por}</span>
-        //   </div>)
-        // }
+   
       if(por<100){
         answer.resposta.result=por;
         save(answer.resposta);
@@ -94,12 +86,7 @@ const ProgressoOKR = () => {
           <span >{por}</span>
          </div>)
       }
-      // return (
-      //   <div  className="text-success">
-      //   <i className="bi bi-arrow-right-short text-success"></i>
-      //   <span >{por}</span>
-      //  </div>
-      // )
+     
        
   }
   if(resp.max){
