@@ -45,38 +45,70 @@ function AVPR_resposta() {
     // }, [dadosrota])
 
     //O que foi feito lá em progressoAVPR tem que está aqui
-    function resposta(resp) {
-        // console.log(resp)
-        if (resp?.item?.min) {
-            let por = Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
-            if (100 - por < 0) {
-                return (
-                    <div className="text-success">
-                        <i className="bi bi-arrow-up text-success"></i>
-                        <span >{(100 - por) * (-1)}</span> %
-                    </div>)
-            } else {
-                if (por < 100) {
-                    return (
-                        <div className="text-danger tx-15">
-                            <i className="bi bi-arrow-down"></i>
-                            <span>{por}</span> %
-                        </div>
-                    )
+   
+    function resposta(resp){
+        if(resp.resp){
+
+            // let answer=resp.resp;
+            // console.log(answer)
+            if(resp.item.min){
+          
+                let por = resp.resp.result?resp.resp.result:Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
+                console.log(por)
+                if(por<100){
+                //   answer.resposta.result=por;
+                //   save(answer.resposta);
+                  return (
+                    <div  className="text-danger">
+                    <i className="bi bi-arrow-up"></i>
+                    <span >{por}</span>
+                   </div>
+                  )        
                 }
-                return (
-                    <div className="text-success tx-15">
-                        <i className="bi bi-arrow-right"></i>
-                        <span >{por}</span> %
-                    </div>
-                )
+                if(por>=100){
+                //   answer.resposta.result=100;
+                //   save(answer.resposta);
+                  return (
+                    <div  className="text-success">
+                    {100==por?<i className="bi bi-arrow-right-short"></i>:<i className="bi bi-arrow-up"></i>}
+                    <span >{por}</span>
+                   </div>)
+                }
+               
+                 
             }
-
-
+            if(resp.item.max){
+              
+                let por = resp.resp.result?resp.resp.result:Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
+              // console.log(por)
+              if(100<por||por==100||por<0){
+                // answer.resposta.result=100<por?100-(por-100):por;
+                //   save(answer.resposta);
+                return(
+                <div  className={por==100?"text-success":"text-danger"}>
+                  { por==100? <i className="bi bi-arrow-right-short "></i>:<i className="bi bi-arrow-up "></i>}
+                  <span  >{por}</span>
+                </div>)
+              }
+          
+                if(por<100 && por>0){
+                //   answer.resposta.result=por;
+                //   save(answer.resposta);
+                  return (
+                    <div  className="text-success">
+                    <i className="bi bi-arrow-up "></i>
+                    <span >{por}</span>
+                   </div>
+                  )
+                }
+               
+          
+              
+            }
         }
-        return ("em desenvolvimento")
-    }
-
+        return ""
+        console.log(resp)
+      }
     console.log(values)
 
     return (
@@ -119,7 +151,7 @@ function AVPR_resposta() {
                             <Card.Body>
                                 <Card.Header className="card-header border-bottom-0 pt-0 ps-0 pe-0 d-flex">
                                     <div>
-                                        <label className="main-content-label mb-2">Resumo de {user.name}</label>
+                                        <label className="main-content-label mb-2">Resumo de {user?.name}</label>
                                         <span className="d-block tx-12 mb-3 text-muted">
                                             Estes são os resultados de avaliação por resultados desse usuário.
                                         </span>
@@ -142,7 +174,7 @@ function AVPR_resposta() {
                                                     <span className="mt-1">{resp?.item?.indicator}</span>
                                                 </td>
                                                 <td className="text-center">
-                                                    {resp?.item?.goal}
+                                                    {resp?.item?.goal} ({resp?.item?.max?"MÁXIMO":"MÍNIMO"})
                                                 </td>
                                                 <td className="text-center">
                                                     {resp?.resp?.answer}
