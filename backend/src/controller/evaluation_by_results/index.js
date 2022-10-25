@@ -106,11 +106,32 @@ export default {
         }
     },
     async getAll(req, res) {
-        const { id_user = false, id_direction = false } = req.query
+        const { id_user = false, id_direction = false ,id=false} = req.query
         //  console.log(req.query)
         try {
             
 
+            if (id) {
+                let avprs = await conexao("evaluation_by_results").where({ id });
+                for (let index in avprs) {
+                    avprs[index].items = await conexao("items").where({ id_ebr: avprs[index].id })
+                    avprs[index].paraquem = await conexao("user_ebr").where({ "user_ebr.id_ebr": avprs[index].id })
+                        .join("users", "users.id", "=", "user_ebr.id_user")
+                        // .join("images","images.id","=","users.id_image")  
+                        .select("users.* ")
+                    for (let key in avprs[index].items) {
+                        avprs[index].items[key].resposta = await conexao("item_answer_user").where({ "item_answer_user.id_item": avprs[index].items[key].id })
+                            .join("users", "item_answer_user.id_user", '=', "users.id")
+                            .select("item_answer_user.*", "users.name", "users.id_image");
+                            for (let key2 in avprs[index].items[key].resposta) {
+                                avprs[index].items[key].resposta[key2].image= (await conexao("images").where({ "images.id": avprs[index].items[key].resposta[key2].id_image }).first().select("images.url"))?.url
+                            }
+
+                    }
+                }
+                return res.json({ "status": true, "avaliacoes": avprs });
+
+            }
             if (id_user) {
                 let avprs = await conexao("evaluation_by_results").where({ id_user });
                 for (let index in avprs) {
@@ -144,10 +165,25 @@ export default {
 
                     for (let avpr of avprs) {
                         let items = await conexao("items").where({ "items.id_ebr": avpr.id });
+                        let paraquem = await conexao("user_ebr").where({ "user_ebr.id_ebr": avpr.id })
+                        .join("users", "users.id", "=", "user_ebr.id_user")
+                        // .join("images","images.id","=","users.id_image")  
+                        .select("users.* ")
+                        for (let  index in paraquem) {
+                            paraquem[index].image=(await conexao("images").where({id:paraquem[index].id_image}).first())?.url;
+                            paraquem[index].respostas=[];
+                        }
                         totalItems = items.length;
                         let items_serial = [];
 
                         for (let item of items) {
+
+                            for (let index in paraquem) {
+                                
+                                paraquem[index].respostas=[...paraquem[index].respostas,{item,resp:await conexao("item_answer_user")
+                                .where({ "item_answer_user.id_user": paraquem[index].id, "item_answer_user.id_item": item.id })
+                                .first()}]
+                            }
 
                             let M_resposta = await conexao("item_answer_user")
                                 .where({ "item_answer_user.id_user": id_direction, "item_answer_user.id_item": item.id })
@@ -162,7 +198,7 @@ export default {
 
                         items = items_serial;
                         let concluded = totalItems == totalItemsResp ? true : false;
-                        avpr = { ...avpr, items, totalItems, totalItemsResp, concluded };
+                        avpr = { ...avpr, items, totalItems, totalItemsResp, concluded,paraquem };
 
                         avprs_serial.push({ ...avpr })
                         totalItems = 0;

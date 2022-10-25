@@ -127,7 +127,7 @@ function MinhasAvPr() {
 
                                                             <Button className="btn ripple btn-block" variant="light btn-rounded"
                                                                 onClick={() => {
-                                                                    navegar(`${process.env.PUBLIC_URL}/avpr_concluido/`, { state: { ...values, avprselect: avpr } })
+                                                                    navegar(`${process.env.PUBLIC_URL}/avpr_concluido/`, { state: { ...values, AVPRselect: avpr } })
                                                                 }} >
                                                                 Resumo
                                                             </Button>

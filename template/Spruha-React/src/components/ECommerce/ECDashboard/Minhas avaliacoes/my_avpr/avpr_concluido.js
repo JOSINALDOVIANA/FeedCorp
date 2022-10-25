@@ -16,39 +16,39 @@ function AVPR_resposta() {
         }
         setValues(dadosrota.state);
 
+        console.log(dadosrota.state)
 
     }, [dadosrota])
+    // useEffect(() => {
+    //     let paraquem = dadosrota.state.AVPRselect?.paraquem
+    //     let paraquem_serial = []
+    //     let items = dadosrota.state.AVPRselect?.items
 
-    useEffect(() => {
-        let paraquem = dadosrota.state.AVPRselect?.paraquem
-        let paraquem_serial = []
-        let items = dadosrota.state.AVPRselect?.items
 
+    //     for (let user of paraquem) {
+    //         let items_serial = []
+    //         for (let item of items) {
+    //             for (const resposta of item.resposta) {
+    //                 if (resposta.id_user == user.id) {
+    //                     items_serial.push({ ...item, resposta });
+    //                 }
+    //             }
+    //         }
+    //         paraquem_serial.push({ ...user, respostas: items_serial })
+    //     }
 
-        for (let user of paraquem) {
-            let items_serial = []
-            for (let item of items) {
-                for (const resposta of item.resposta) {
-                    if (resposta.id_user == user.id) {
-                        items_serial.push({ ...item, resposta });
-                    }
-                }
-            }
-            paraquem_serial.push({ ...user, respostas: items_serial })
-        }
+    //     paraquem = paraquem_serial
 
-        paraquem = paraquem_serial
-
-        // console.log(items)
-        // console.log(paraquem)
-        setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
-    }, [dadosrota])
+    //     // console.log(items)
+    //     // console.log(paraquem)
+    //     setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
+    // }, [dadosrota])
 
     //O que foi feito lá em progressoAVPR tem que está aqui
     function resposta(resp) {
         // console.log(resp)
-        if (resp.min) {
-            let por = Math.round((resp.resposta.answer / resp.goal) * 100, -1);
+        if (resp?.item?.min) {
+            let por = Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
             if (100 - por < 0) {
                 return (
                     <div className="text-success">
@@ -84,7 +84,7 @@ function AVPR_resposta() {
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5"> {values?.avprselect?.title.toUpperCase()} </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> {values?.AVPRselect?.title.toUpperCase()} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item
@@ -92,7 +92,7 @@ function AVPR_resposta() {
                                 navegar(`${process.env.PUBLIC_URL}/minhas_av_resultados/`, { state: values })
                             }}
                         >  Meus AVPRs  </Breadcrumb.Item>
-                        <Breadcrumb.Item active >  {values?.avprselect?.title}  </Breadcrumb.Item>
+                        <Breadcrumb.Item active >  {values?.AVPRselect?.title}  </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
 
@@ -139,13 +139,13 @@ function AVPR_resposta() {
                                         {user?.respostas?.map((resp, index) => (
                                             <tr key={index} data-index={index}>
                                                 <td className="font-weight-semibold">
-                                                    <span className="mt-1">{resp.indicator}</span>
+                                                    <span className="mt-1">{resp?.item?.indicator}</span>
                                                 </td>
                                                 <td className="text-center">
-                                                    {resp.goal}
+                                                    {resp?.item?.goal}
                                                 </td>
                                                 <td className="text-center">
-                                                    {resp.resposta.answer}
+                                                    {resp?.resp?.answer}
                                                 </td>
                                                 <td className="text-center">
                                                     {resposta(resp)}
