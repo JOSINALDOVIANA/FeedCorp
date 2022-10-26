@@ -2,6 +2,7 @@ import { Divider } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import api from "../../../../../../api";
 
 
 const Okr = () => {
@@ -57,6 +58,18 @@ const Okr = () => {
               onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) }}
             >
               <i className="bi bi-caret-left-fill"></i>
+            </Button>
+
+          </div>
+          <div className="justify-content-center">
+
+            <Button
+              variant="primary"
+              type="button"
+              className="my-2 me-2 btn-icon"
+              onClick={async() => { await api.delete(`okrs/delete?id=${values?.okrselect?.id}`) ;navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+            >
+               <i class="bi bi-calendar2-x-fill"></i>
             </Button>
 
           </div>

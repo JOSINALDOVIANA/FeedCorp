@@ -60,6 +60,18 @@ const Okr = () => {
             </Button>
 
           </div>
+          <div className="justify-content-center">
+
+            <Button
+              variant="primary"
+              type="button"
+              className="my-2 me-2 btn-icon"
+              onClick={async() => { await api.delete(`okrs/delete?id=${values?.okrselect?.id}`) ;navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+            >
+               <i class="bi bi-calendar2-x-fill"></i>
+            </Button>
+
+          </div>
         </div>
       </div>
       {/* <!-- End Page Header --> */}

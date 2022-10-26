@@ -148,6 +148,19 @@ const ProgressoOKR = () => {
             </Button>
 
           </div>
+          <div className="justify-content-center">
+
+            <Button
+              variant="primary"
+              type="button"
+              className="my-2 me-2 btn-icon-text"
+              // onClick={() => { navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values }) }}
+              onClick={async() => { await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`) ;navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values }) }}
+            >
+             <i class="bi bi-calendar2-x-fill"></i>
+            </Button>
+
+          </div>
         </div>
 
       </div>
@@ -207,13 +220,18 @@ const ProgressoOKR = () => {
                       <td className="text-center">{resp.resposta.answer}</td>
                       <td className="text-center">{resposta(resp)}%</td>
                     </tr>
-                  ))}
+                  )
+                  
+                  )
+                  }
                 </tbody>
               </Table>
             </div>
           </div>
         </div>
-      ))}
+      )
+      )
+      }
     </Fragment>
   )
 };
