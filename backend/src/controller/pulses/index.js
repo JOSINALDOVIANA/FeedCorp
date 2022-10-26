@@ -39,29 +39,68 @@ export default {
   async Get(req, res) {
     let { id_user = false, id_company = false, id_unit = false } = req.query;
     try {
-
+       // se houver id_user
       if (!!id_user) {
         // pulsos que o usuario criou
         let pulsesCreateUser = await conexao("pulses").where({ "pulses.id_user": id_user })
+        
         let pulsesCreateUser_serial = [];
 
-
+        //percorrendo os pulses criados pelo usuario
         for (let iterator of pulsesCreateUser) {
+          // direcionado para toda a companhia
           let company = await conexao("pulse_company").where({ "pulse_company.id_pulse": iterator.id }).join("users","users.id_company","=","pulse_company.id_company").select("users.*");
+         // se ele direcionou a uma unidade ou mais 
           let units = await conexao("pulse_unity").where({ "id_pulse": iterator.id }).join("units", "pulse_unity.id_unity", "=", "units.id").select("units.*");
           for (const key in units) {
               units[key]={...units[key],users:await conexao("user_unit").where({"user_unit.id_unit":units[key].id}).join("users","users.id","=","user_unit.id_user")}
           }
+          // ele direcionou a usuarios
           let users = await conexao("pulse_user").where({ "id_pulse": iterator.id }).join("users", "pulse_user.id_user", "=", "users.id")
           .select("users.*",);;
-          // company = company.length == 0 ? false : true;
 
+          let mediapulse = 0;
+          let totalpulse = 0;
+          let questions = await conexao("pulse_question").where({ "id_pulse": iterator.id });
+          for (let index2 in questions) {
+            let users_resp = await conexao("answer_user").where({ "answer_user.id_question": questions[index2].id })
+              .join("users", "users.id", "=", "answer_user.id_user")
+              // .join("images", "users.id_image", "=", "images.id")
+              .select("users.*", "answer_user.status", "answer_user.answer");
+            let total = 0;
+            let media = 0;
+            if (users_resp.length > 0) {
+              for (const iterator2 of users_resp) {
+                total = total + iterator2.answer;
+              }
+              media = users_resp.lengt>0?total / users_resp.length:0
+            }
+            questions[index2] = { ...questions[index2], users_resp, media };
+            totalpulse = total + media;
+            
+          }
+          mediapulse =questions.length>0? totalpulse / questions.length:0;
+         
+          // pulsesCreateUser[index] = { ...pulsesCreateUser[index], questions, media: mediapulse }
           
+          
+          
+                   
+          
+          
+          await conexao("pulses").update({id_user,id_company:iterator.id_company,title:iterator.title,result:mediapulse}).where({"id":iterator?.id})
 
-          pulsesCreateUser_serial.push({ ...iterator, direction: { company, units, users } })
+          pulsesCreateUser_serial.push({ ...iterator, direction: { company, units, users },media: mediapulse,questions })
         }
-        // console.log(pulsesCreateUser_serial)
+
+       
+        
         pulsesCreateUser = pulsesCreateUser_serial
+       
+
+        
+
+
 
         // Pulsos direcionados ao usuario
         let pulsesDirectUser = await conexao("pulse_user").where({ "pulse_user.id_user": id_user })
@@ -71,20 +110,19 @@ export default {
         // dados do usuario
         let mydados = await conexao("users").where({ "users.id": id_user })
           .first()
-
-
-        let myUnit = await conexao("user_unit").join("units", "units.id", "=", "user_unit.id_unit")
+        // unidade do usuario que esta solicitando
+        let myUnit =  await conexao("user_unit").join("units", "units.id", "=", "user_unit.id_unit")
           .where({ "user_unit.id_user": id_user })
           .select("units.*")
           .first();
 
-        // pulsos da companhia
-        let pulsescompany = await conexao("pulse_company").where({ "pulse_company.id_company": mydados.id_company })
+        // pulsos da companhia e por tanto direcionados ao solicitante
+        let pulsescompany = !!mydados? await conexao("pulse_company").where({ "pulse_company.id_company": mydados.id_company })
           .join("pulses", "pulse_company.id_pulse", "=", "pulses.id")
-          .select("pulses.*");
+          .select("pulses.*"):[];
 
         let pulsesunit = [];
-        // pulsos da unidade
+        // pulsos direcionados a toda a unidade do usuario que esta solicitando
         if (!!myUnit) {
           pulsesunit = await conexao("pulse_unity").where({ "pulse_unity.id_unity": myUnit.id })
             .join("pulses", "pulse_unity.id_pulse", "=", "pulses.id")
@@ -95,30 +133,30 @@ export default {
         pulsesDirectUser = pulsesDirectUser.filter(item =>  item.id_user != id_user ); // filtrando os que o usuario criou
         pulsesDirectUser = pulsesDirectUser.filter((este, i) => pulsesDirectUser.indexOf(este) === i);//tirando duplicatas
 
-        for (const index in pulsesCreateUser) {
-          let mediapulse = 0;
-          let totalpulse = 0;
-          let questions = await conexao("pulse_question").where({ "id_pulse": pulsesCreateUser[index].id });
-          for (let index2 in questions) {
-            let users_resp = await conexao("answer_user").where({ "answer_user.id_question": questions[index2].id })
-              .join("users", "users.id", "=", "answer_user.id_user")
-              // .join("images", "users.id_image", "=", "images.id")
-              .select("users.*", "answer_user.status", "answer_user.answer");
-            let total = 0;
-            let media = 0;
-            if (users_resp.length > 0) {
-              for (const iterator of users_resp) {
-                total = total + iterator.answer;
-              }
-              media = total / users_resp.length
-            }
-            questions[index2] = { ...questions[index2], users_resp, media };
-            totalpulse = total + media;
-          }
-          mediapulse = totalpulse / questions.length;
-          await conexao("pulses").update({...pulsesCreateUser[index],result:mediapulse}).where({id:pulsesCreateUser[index].id});
-          pulsesCreateUser[index] = { ...pulsesCreateUser[index], questions, media: mediapulse }
-        }
+        // for (const index in pulsesCreateUser) {
+        //   let mediapulse = 0;
+        //   let totalpulse = 0;
+        //   let questions = await conexao("pulse_question").where({ "id_pulse": pulsesCreateUser[index].id });
+        //   for (let index2 in questions) {
+        //     let users_resp = await conexao("answer_user").where({ "answer_user.id_question": questions[index2].id })
+        //       .join("users", "users.id", "=", "answer_user.id_user")
+        //       // .join("images", "users.id_image", "=", "images.id")
+        //       .select("users.*", "answer_user.status", "answer_user.answer");
+        //     let total = 0;
+        //     let media = 0;
+        //     if (users_resp.length > 0) {
+        //       for (const iterator of users_resp) {
+        //         total = total + iterator.answer;
+        //       }
+        //       media = total / users_resp.length
+        //     }
+        //     questions[index2] = { ...questions[index2], users_resp, media };
+        //     totalpulse = total + media;
+        //   }
+        //   mediapulse = totalpulse / questions.length;
+         
+        //   pulsesCreateUser[index] = { ...pulsesCreateUser[index], questions, media: mediapulse }
+        // }
 
         for (const index in pulsesDirectUser) {
           let questions = await conexao("pulse_question").where({ "id_pulse": pulsesDirectUser[index].id });

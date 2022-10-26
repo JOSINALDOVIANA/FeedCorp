@@ -18,6 +18,14 @@ function MeuClimaPulso() {
 
     }, [dadosrota])
 
+    useEffect(()=>{
+        api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
+            if(r.data.status){
+                setValues(a=>({...a,pulsesCreate:r.data.pulsesCreateUser,pulsesDirect:r.data.pulsesDirectUser}))
+            }
+        })
+    },[])
+
     console.log(values)
 
     return (
