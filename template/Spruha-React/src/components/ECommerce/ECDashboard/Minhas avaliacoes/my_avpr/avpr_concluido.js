@@ -45,70 +45,70 @@ function AVPR_resposta() {
     // }, [dadosrota])
 
     //O que foi feito lá em progressoAVPR tem que está aqui
-   
-    function resposta(resp){
-        if(resp.resp){
+
+    function resposta(resp) {
+        if (resp.resp) {
 
             // let answer=resp.resp;
             // console.log(answer)
-            if(resp.item.min){
-          
-                let por = resp.resp.result?resp.resp.result:Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
+            if (resp.item.min) {
+
+                let por = resp.resp.result ? resp.resp.result : Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
                 console.log(por)
-                if(por<100){
-                //   answer.resposta.result=por;
-                //   save(answer.resposta);
-                  return (
-                    <div  className="text-danger">
-                    <i className="bi bi-arrow-up"></i>
-                    <span >{por}</span>
-                   </div>
-                  )        
+                if (por < 100) {
+                    //   answer.resposta.result=por;
+                    //   save(answer.resposta);
+                    return (
+                        <div className="text-danger">
+                            <i className="bi bi-arrow-up"></i>
+                            <span >{por}</span>
+                        </div>
+                    )
                 }
-                if(por>=100){
-                //   answer.resposta.result=100;
-                //   save(answer.resposta);
-                  return (
-                    <div  className="text-success">
-                    {100==por?<i className="bi bi-arrow-right-short"></i>:<i className="bi bi-arrow-up"></i>}
-                    <span >{por}</span>
-                   </div>)
+                if (por >= 100) {
+                    //   answer.resposta.result=100;
+                    //   save(answer.resposta);
+                    return (
+                        <div className="text-success">
+                            {100 == por ? <i className="bi bi-arrow-right-short"></i> : <i className="bi bi-arrow-up"></i>}
+                            <span >{por}</span>
+                        </div>)
                 }
-               
-                 
+
+
             }
-            if(resp.item.max){
-              
-                let por = resp.resp.result?resp.resp.result:Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
-              // console.log(por)
-              if(100<por||por==100||por<0){
-                // answer.resposta.result=100<por?100-(por-100):por;
-                //   save(answer.resposta);
-                return(
-                <div  className={por==100?"text-success":"text-danger"}>
-                  { por==100? <i className="bi bi-arrow-right-short "></i>:<i className="bi bi-arrow-up "></i>}
-                  <span  >{por}</span>
-                </div>)
-              }
-          
-                if(por<100 && por>0){
-                //   answer.resposta.result=por;
-                //   save(answer.resposta);
-                  return (
-                    <div  className="text-success">
-                    <i className="bi bi-arrow-up "></i>
-                    <span >{por}</span>
-                   </div>
-                  )
+            if (resp.item.max) {
+
+                let por = resp.resp.result ? resp.resp.result : Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
+                // console.log(por)
+                if (100 < por || por == 100 || por < 0) {
+                    // answer.resposta.result=100<por?100-(por-100):por;
+                    //   save(answer.resposta);
+                    return (
+                        <div className={por == 100 ? "text-success" : "text-danger"}>
+                            {por == 100 ? <i className="bi bi-arrow-right-short "></i> : <i className="bi bi-arrow-up "></i>}
+                            <span  >{por}</span>
+                        </div>)
                 }
-               
-          
-              
+
+                if (por < 100 && por > 0) {
+                    //   answer.resposta.result=por;
+                    //   save(answer.resposta);
+                    return (
+                        <div className="text-success">
+                            <i className="bi bi-arrow-up "></i>
+                            <span >{por}</span>
+                        </div>
+                    )
+                }
+
+
+
             }
         }
         return ""
         console.log(resp)
-      }
+    }
     console.log(values)
 
     return (
@@ -174,7 +174,7 @@ function AVPR_resposta() {
                                                     <span className="mt-1">{resp?.item?.indicator}</span>
                                                 </td>
                                                 <td className="text-center">
-                                                    {resp?.item?.goal} ({resp?.item?.max?"MÁXIMO":"MÍNIMO"})
+                                                    {resp?.item?.goal} ({resp?.item?.max ? "MÁXIMO" : "MÍNIMO"})
                                                 </td>
                                                 <td className="text-center">
                                                     {resp?.resp?.answer}

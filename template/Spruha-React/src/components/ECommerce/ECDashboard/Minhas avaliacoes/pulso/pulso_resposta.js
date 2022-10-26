@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button, Tab, Nav } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import * as rating1 from "../../Components/Rating"
 import StarRateIcon from '@mui/icons-material/StarRate';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import Rating from "react-rating";
@@ -13,9 +12,6 @@ function MeuClimaPulso() {
 
     function labeling(rate) {
         let label;
-        if (rate <= 0.5) {
-            label = "Horrível";
-        }
         if (rate > 0.5 && rate < 2) {
             label = "Muito ruim";
         }
@@ -48,7 +44,7 @@ function MeuClimaPulso() {
 
     }, [dadosrota])
 
-    // console.log(values)
+    console.log(values)
 
     return (
         <Fragment>
@@ -82,87 +78,49 @@ function MeuClimaPulso() {
             </div>
 
             {/* <!-- Row --> */}
-            <Row className="row-sm">
-
-                <Card className="custom-card">
-                    <Card.Header>
-                        <h6 className="card-title">
-                            <label className="main-content-label"> Rating funcionando dentro da página</label>
-                        </h6>
-                    </Card.Header>
-                    <Card.Body>
-                        <div>
-                            <label className="main-content-label">Qual seu nível de satisfação e blá blá blá</label>
-                        </div>
-
-                        <div className="box-body text-center fs-70">
-                            <Rating
-                                emptySymbol={
-                                    <StarOutlineIcon style={{ color: "#aaa", fontSize: 25, margin: 2 }} />
-                                }
-                                fullSymbol={
-                                    <StarRateIcon style={{ color: "#36D98D", fontSize: 25, margin: 2 }} />
-                                }
-                                placeholderSymbol={
-                                    <StarRateIcon style={{ color: "#36D98D", fontSize: 25, margin: 2 }} />
-                                }
-                                placeholderRating={0}
-                                fractions={1}
-                                onChange={value => alert(value)}
-                                onHover={rate => labeling(rate)}
-                            />
-                            <div id="label-onrate" style={{ height: 20, fontFamily: "Arial" }} />
-                        </div>
-                    </Card.Body>
-                </Card>
-
-            </Row>
-            {/* <!-- End Row --> */}
-
-            {/* <!-- Row --> */}
-            <Row className="row-sm">
-
-                <Card className="custom-card">
-                    <Card.Header>
-                        <h6 className="card-title">
-                            <label className="main-content-label"> Rating componente funcionando fora da página</label>
-                        </h6>
-                    </Card.Header>
-                    <Card.Body>
-                        <div className="box  box-example-1to10">
-                            <div className="box-body  text-center fs-30">
-                                <rating1.MarcusRating />
+            <div className="row-sm">
+                {/* COMEÇO MAP */}
+                <Row>
+                    <Card className="custom-card">
+                        <Card.Body>
+                            <div className="mt-2 mb-4 d-inline-block">
+                                <label className="main-content-label">Pergunta aqui</label>
                             </div>
-                        </div>
-                    </Card.Body>
-                </Card>
 
-            </Row>
-            {/* <!-- End Row --> */}
-
-            {/* <!-- Row --> */}
-            <Row className="row-sm">
-
-                <Card className="custom-card">
-                    <Card.Header>
-                        <h6 className="card-title">
-                            <label className="main-content-label"> Rating MUI pra te ver o bug ao passar o mouse</label>
-                            <label className="main-content-label"> O problema é a margin entre eles q eu n consegui tirar via styled, sx, className, style, NADA</label>
-                        </h6>
-                    </Card.Header>
-                    <Card.Body>
-                        <div className="box  box-example-1to10">
-                            <div className="box-body  text-center fs-30">
-                                <rating1.RadioGroupRating />
+                            <div className="box-body text-center fs-70">
+                                <Rating
+                                    emptySymbol={
+                                        <StarOutlineIcon style={{ color: "#aaa", fontSize: 35, margin: 2 }} />
+                                    }
+                                    fullSymbol={
+                                        <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
+                                    }
+                                    placeholderSymbol={
+                                        <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
+                                    }
+                                    placeholderRating={0}
+                                    fractions={1}
+                                    onChange={value => alert(value)}
+                                    onHover={rate => labeling(rate)}
+                                />
+                                <div id="label-onrate" style={{ height: 20, fontFamily: "Arial" }} />
                             </div>
-                        </div>
-                    </Card.Body>
-                </Card>
+                        </Card.Body>
+                    </Card>
+                </Row>
+                {/* FINAL MAP */}
+                <div className="d-flex justify-content-end mb-2">
+                    <Button
+                        variant="primary"
+                        type="button"
+                        className="btn"
+                    >
+                        Finalizar pesquisa
+                    </Button>
+                </div>
+            </div>
 
-            </Row>
             {/* <!-- End Row --> */}
-
-
 
         </Fragment>
     );

@@ -106,9 +106,9 @@ const ClimaPulso = () => {
                     </td>
                     <td className="text-center">
                       {
-                        !!pulse?.direction?.company ? <span>Companhia</span> :
-                          !!pulse?.direction?.units ? pulse?.direction?.units.map(unit => (<span key={unit.initials}>{unit.initials},</span>)) :
-                            !!pulse?.direction?.users ? pulse?.direction?.users.map(user => (<span key={user.name}>{user.name}</span>)) :
+                        pulse?.direction?.company.length>0 ? <span>Companhia</span> :
+                          pulse?.direction?.units.length>0 ? pulse?.direction?.units.map(unit => (<span key={unit.initials}>{unit.initials},</span>)) :
+                            pulse?.direction?.users.length>0 ? pulse?.direction?.users.map(user => (<span key={user.name}>{user.name}</span>)) :
                               ""
                       }
                     </td>

@@ -79,7 +79,7 @@ const ClimaTabelaRealizados = () => {
                         <Card.Header className="d-sm-flex justify-content-between align-items-center">
                             <div>
                                 <Card.Title className="main-content-label mb-1">
-                                    <h6>Configurações OKR</h6>
+                                    <h6>Configurações CLIMA PULSO</h6>
                                 </Card.Title>
                                 <Card.Subtitle className="text-muted card-sub-title">
                                     <p>Crie perguntas para cada categoria</p>

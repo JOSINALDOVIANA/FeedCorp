@@ -44,72 +44,72 @@ const ProgressoOKR = () => {
   }, [dadosrota])
 
   console.log(values)
-  async function save(answer){
-    await api.put(`item_answer_user/update`,{...answer})
-    }
-  
-    function formatData(data) {
-      const dat = new Date(data);
-      const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
-      // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
-      return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-    }
-   function resposta(resp){
-    let answer=resp;
+  async function save(answer) {
+    await api.put(`item_answer_user/update`, { ...answer })
+  }
+
+  function formatData(data) {
+    const dat = new Date(data);
+    const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+    return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+  }
+  function resposta(resp) {
+    let answer = resp;
     console.log(answer)
-    if(resp.min){
-  
-      let por=Math.round((resp.resposta.answer/resp.goal)*100,-1);
-     
-        if(por<100){
-          answer.resposta.result=por;
-          save(answer.resposta);
-          return (
-            <div  className="text-danger">
+    if (resp.min) {
+
+      let por = Math.round((resp.resposta.answer / resp.goal) * 100, -1);
+
+      if (por < 100) {
+        answer.resposta.result = por;
+        save(answer.resposta);
+        return (
+          <div className="text-danger">
             <i className="bi bi-arrow-up"></i>
             <span >{por}</span>
-           </div>
-          )        
-        }
-        if(por>=100){
-          answer.resposta.result=100;
-          save(answer.resposta);
-          return (
-            <div  className="text-success">
-            {100==por?<i className="bi bi-arrow-right-short"></i>:<i className="bi bi-arrow-up"></i>}
-            <span >{por}</span>
-           </div>)
-        }
-       
-         
-    }
-    if(resp.max){
-      
-      let por=Math.round((resp.resposta.answer/resp.goal)*100,-1);
-      // console.log(por)
-      if(100<por||por==100){
-        answer.resposta.result=100<por?100-(por-100):por;
-          save(answer.resposta);
-        return(
-        <div  className={por==100?"text-success":"text-danger"}>
-          { por==100? <i className="bi bi-arrow-right-short "></i>:<i className="bi bi-arrow-up "></i>}
-          <span  >{por}</span>
-        </div>)
+          </div>
+        )
       }
-  
-        if(por<100){
-          answer.resposta.result=por;
-          save(answer.resposta);
-          return (
-            <div  className="text-success">
+      if (por >= 100) {
+        answer.resposta.result = 100;
+        save(answer.resposta);
+        return (
+          <div className="text-success">
+            {100 == por ? <i className="bi bi-arrow-right-short"></i> : <i className="bi bi-arrow-up"></i>}
+            <span >{por}</span>
+          </div>)
+      }
+
+
+    }
+    if (resp.max) {
+
+      let por = Math.round((resp.resposta.answer / resp.goal) * 100, -1);
+      // console.log(por)
+      if (100 < por || por == 100) {
+        answer.resposta.result = 100 < por ? 100 - (por - 100) : por;
+        save(answer.resposta);
+        return (
+          <div className={por == 100 ? "text-success" : "text-danger"}>
+            {por == 100 ? <i className="bi bi-arrow-right-short "></i> : <i className="bi bi-arrow-up "></i>}
+            <span  >{por}</span>
+          </div>)
+      }
+
+      if (por < 100) {
+        answer.resposta.result = por;
+        save(answer.resposta);
+        return (
+          <div className="text-success">
             <i className="bi bi-arrow-up "></i>
             <span >{por}</span>
-           </div>
-          )
-        }
-       
-  
-      
+          </div>
+        )
+      }
+
+
+
     }
   }
 
@@ -149,7 +149,7 @@ const ProgressoOKR = () => {
               variant="primary"
               type="button"
               className="my-2 me-2 btn-icon"
-              onClick={async() => { await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`);navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values }) }}
+              onClick={async () => { await api.delete(`avpr/delete?id=${values?.AVPRselect?.id}`); navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values }) }}
             >
               <i class="bi bi-calendar2-x-fill"></i>
             </Button>
@@ -192,7 +192,7 @@ const ProgressoOKR = () => {
                   {user?.respostas?.map((resp, index) => (
                     <tr key={index} data-index={index}>
                       <td className="text-center">{resp.indicator}</td>
-                      <td className="text-center">{resp.goal} {resp.max?"MÁXIMO":"MÍNIMO"}</td>
+                      <td className="text-center">{resp.goal} {resp.max ? "MÁXIMO" : "MÍNIMO"}</td>
                       <td className="text-center">{resp.resposta.answer}</td>
                       <td className="text-center">{resposta(resp)}</td>
                       <td className="text-center">
