@@ -21,9 +21,19 @@ const ClimaPulso = () => {
   useEffect(() => {
     api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
       let pulsesDirectUser = r.data.pulsesDirectUser;
-      let pulsesCreate = r.data.pulsesCreateUser
+      let pulsesCreateUser = r.data.pulsesCreateUser
 
-      setValues(a => ({ ...a, pulsesCreate, pulsesDirectUser }))
+      for (const i in pulsesDirectUser) {
+        pulsesDirectUser[i].perguntasResp=0
+        for (const iterator of pulsesDirectUser[i].questions) {
+          if(!!iterator.resp){
+            console.log("entrou aqui ")
+            pulsesDirectUser[i].perguntasResp+=1
+          }
+        }
+      }
+
+      setValues(a => ({ ...a, pulsesCreateUser, pulsesDirectUser }))
     })
     // return(()=>setValues({}))
   }, [dadosrota.state])

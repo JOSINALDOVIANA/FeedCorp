@@ -4,13 +4,15 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import StarRateIcon from '@mui/icons-material/StarRate';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import Rating from "react-rating";
+
 import api from "../../../../../api";
 
 function MeuClimaPulso() {
 
     const [color, setColor] = useState("primary");
 
-    function labeling(rate) {
+    function labeling({rate,q}) {
+        // console.log(q)
         let label;
         if (rate > 0.5 && rate < 2) {
             label = "Muito ruim";
@@ -27,7 +29,7 @@ function MeuClimaPulso() {
         if (rate > 4.5) {
             label = "Excelente";
         }
-        document.getElementById("label-onrate").innerHTML = label || "";
+        document.getElementById(`${q.id}`).innerHTML = label || "";
     }
 
 
@@ -80,34 +82,61 @@ function MeuClimaPulso() {
             {/* <!-- Row --> */}
             <div className="row-sm">
                 {/* COMEÇO MAP */}
-                <Row>
-                    <Card className="custom-card">
-                        <Card.Body>
-                            <div className="mt-2 mb-4 d-inline-block">
-                                <label className="main-content-label">Pergunta aqui</label>
-                            </div>
+                {values?.PulseSelect?.questions?.map(q => (
 
-                            <div className="box-body text-center fs-70">
-                                <Rating
-                                    emptySymbol={
-                                        <StarOutlineIcon style={{ color: "#aaa", fontSize: 35, margin: 2 }} />
-                                    }
-                                    fullSymbol={
-                                        <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
-                                    }
-                                    placeholderSymbol={
-                                        <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
-                                    }
-                                    placeholderRating={0}
-                                    fractions={1}
-                                    onChange={value => alert(value)}
-                                    onHover={rate => labeling(rate)}
-                                />
-                                <div id="label-onrate" style={{ height: 20, fontFamily: "Arial" }} />
-                            </div>
-                        </Card.Body>
-                    </Card>
-                </Row>
+                    <Row key={q.id}>
+                        <Card className="custom-card">
+                            <Card.Body>
+                                <div className="mt-2 mb-4 d-inline-block">
+                                    <label className="main-content-label">{q?.question}</label>
+                                </div>
+
+                                <div className="box-body text-center fs-70">
+                                    <Rating id={q.id+3}
+                                        // quiet={!!q.resp?true:false}
+                                        readonly={!!q.resp?true:false}
+                                        emptySymbol={
+                                            <StarOutlineIcon style={{ color: "#aaa", fontSize: 35, margin: 2 }} />
+                                        }
+                                        fullSymbol={
+                                            <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
+                                        }
+                                        placeholderSymbol={
+                                            <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
+                                        }
+                                        placeholderRating={q?.resp?.answer/20 }                                        
+                                        fractions={1}
+                                        // value={q?.resp?.answer/20}
+                                        onChange={async value => {
+                                            // document.getElementById(`${q.id+3}`).placeholderRating=value
+                                            let pulse=values.PulseSelect;
+                                            let questions=pulse.questions.filter(i=>i.id!=q.id);
+                                            let obj={
+                                                id_question:q.id,
+                                                id_user:values.dadosUser.id,
+                                                answer:value*20
+                                            }
+                                            api.post(`pulses/answer_user/insert`,{...obj}).then(r=>{
+                                                let question=q;
+                                                if(r.data.status){
+                                                    question.resp={...r.data.dados}
+                                                }
+                                                questions.push({...q});
+                                                pulse.questions=questions;
+                                                setValues(a=>({...a,PulseSelect:pulse}))
+                                            })
+
+                                        }}
+                                        onHover={rate => labeling({rate,q})}
+                                        
+                                    />
+                                    <div id={q.id} style={{ height: 20, fontFamily: "Arial" }} />
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Row>
+
+                ))}
                 {/* FINAL MAP */}
                 <div className="d-flex justify-content-end mb-2">
                     <Button

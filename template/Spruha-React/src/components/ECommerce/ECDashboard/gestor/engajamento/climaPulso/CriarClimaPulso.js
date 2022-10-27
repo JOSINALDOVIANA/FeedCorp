@@ -178,10 +178,10 @@ const CriarClimaPulso = () => {
                     <ListGroup.Item key={item2.id}
                       as="li"
                       className="d-flex justify-content-betwween align-items-center">
-                      <div className="ms-2 me-auto">{item2.question}</div>
+                      <label style={{cursor:"pointer"}} htmlFor={item2.id} className="ms-2 me-auto ">{item2.question}</label>
 
-                      <div className="me-2 d-flex align-items-center">
-                        <input onChange={(e) => {
+                      <div className="me-2 d-flex align-items-center ">
+                        <input id={item2.id} onChange={(e) => {
                           if (e.target.checked) {
                             setPulse(a => ({ ...a, questions: [...a.questions, item2] }))
                           }

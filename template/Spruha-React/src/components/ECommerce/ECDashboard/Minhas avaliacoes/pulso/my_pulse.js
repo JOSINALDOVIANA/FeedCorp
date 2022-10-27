@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row, Table, Button, Tab, Nav } from "react-bootstrap";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import api from "../../../../../api";
+import { FormatData } from "../../../../../CreateFunctions";
 
 function MeuClimaPulso() {
 
@@ -18,13 +19,28 @@ function MeuClimaPulso() {
 
     }, [dadosrota])
 
-    useEffect(()=>{
-        api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r=>{
-            if(r.data.status){
-                setValues(a=>({...a,pulsesCreate:r.data.pulsesCreateUser,pulsesDirect:r.data.pulsesDirectUser}))
+    useEffect(() => {
+        api.get(`pulses/get?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
+            let pulsesDirectUser = r.data.pulsesDirectUser;
+            let pulsesCreateUser = r.data.pulsesCreateUser
+
+            for (const i in pulsesDirectUser) {
+                pulsesDirectUser[i].conclud = false
+                pulsesDirectUser[i].perguntasResp = 0
+                for (const iterator of pulsesDirectUser[i].questions) {
+                    if (!!iterator.resp) {
+                        //   console.log("entrou aqui ")
+                        pulsesDirectUser[i].perguntasResp += 1
+                    }
+                }
+                if (pulsesDirectUser[i].perguntasResp == pulsesDirectUser[i].questions.length) {
+                    pulsesDirectUser[i].conclud = true;
+                }
             }
+
+            setValues(a => ({ ...a, pulsesCreateUser, pulsesDirectUser }))
         })
-    },[])
+    }, [dadosrota])
 
     console.log(values)
 
@@ -69,21 +85,28 @@ function MeuClimaPulso() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td className="main-content-label">
-                                                            Nome pesquisa
-                                                        </td>
-                                                        <td className="tx-center font-weight-bold">
-                                                            21 de OUT de 2022
-                                                        </td>
-                                                        <td className="tx-center d-grid">
-                                                            <Button variant="warning"
-                                                                onClick={() => { navegar(`${process.env.PUBLIC_URL}/pulso_resposta`, { state: values }) }}
-                                                            >
-                                                                Responder
-                                                            </Button>
-                                                        </td>
-                                                    </tr>
+                                                    {values?.pulsesDirectUser?.filter(p => p.conclud == false)?.map(pulse => (
+
+                                                        <tr key={pulse.id}>
+                                                            <td className="main-content-label">
+                                                                {pulse?.title}
+                                                            </td>
+                                                            <td className="tx-center font-weight-bold">
+                                                                {FormatData(pulse?.updated_at)}
+
+                                                            </td>
+                                                            <td className="tx-center d-grid">
+                                                                <Button variant="warning"
+                                                                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/pulso_resposta`, { state: { ...values, PulseSelect: pulse } }) }}
+                                                                >
+                                                                    Responder
+                                                                </Button>
+                                                            </td>
+                                                        </tr>
+
+                                                    )
+                                                    )
+                                                    }
                                                 </tbody>
                                             </Table>
                                         </Tab.Pane>
@@ -98,21 +121,25 @@ function MeuClimaPulso() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td className="main-content-label">
-                                                            Nome pesquisa
-                                                        </td>
-                                                        <td className="tx-center font-weight-bold font-italic">
-                                                            21 de OUT de 2022
-                                                        </td>
-                                                        <td className="tx-center d-grid">
-                                                            <Button variant="info btn-rounded"
-                                                                onClick={() => { navegar(`${process.env.PUBLIC_URL}/pulso_concluido`, { state: values }) }}
-                                                            >
-                                                                Resumo
-                                                            </Button>
-                                                        </td>
-                                                    </tr>
+                                                    {values?.pulsesDirectUser?.filter(i => i.conclud)?.map(pulse => (
+
+                                                        <tr key={pulse.id}>
+                                                            <td className="main-content-label">
+                                                                {pulse?.title}
+                                                            </td>
+                                                            <td className="tx-center font-weight-bold font-italic">
+                                                                {FormatData(pulse?.updated_at)}
+                                                            </td>
+                                                            <td className="tx-center d-grid">
+                                                                <Button variant="info btn-rounded"
+                                                                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/pulso_concluido`, { state: {...values, PulseSelect: pulse} }) }}
+                                                                >
+                                                                    Resumo
+                                                                </Button>
+                                                            </td>
+                                                        </tr>
+
+                                                    ))}
                                                 </tbody>
                                             </Table>
                                         </Tab.Pane>

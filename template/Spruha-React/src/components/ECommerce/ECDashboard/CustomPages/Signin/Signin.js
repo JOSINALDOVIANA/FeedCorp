@@ -97,7 +97,7 @@ const Signin = () => {
          unit, 
          company,
          okrscriados,
-         pulsesCreate: [], 
+        //  pulsesCreate: [], 
          cargo } });
     }
 

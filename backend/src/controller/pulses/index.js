@@ -234,12 +234,12 @@ export default {
     }
   },
   async answer_userInsert(req, res) {
-    let { id_user, resp } = req.body;
+    let { id_user, id_question, answer } = req.body;
     try {
-      resp = resp.map(({ id_question, answer }) => ({ id_user, id_question, answer }));
-      await conexao("answer_user").insert(resp)
+      // resp = resp.map(({ id_question, answer }) => ({ id_user, id_question, answer }));
+     const [id]= await conexao("answer_user").insert({id_user,id_question,answer})
 
-      return res.json({ status: true, answer: resp })
+      return res.json({ status: true, dados: {id,id_user,id_question,answer}})
     } catch (error) {
       console.log(error)
       return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })
