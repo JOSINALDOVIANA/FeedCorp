@@ -6,7 +6,7 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
+import * as Modal from "../../components/ECommerce/ECDashboard/Components/Modal"
 
 // FuScreen-start
 function Fullscreen() {
@@ -172,6 +172,16 @@ function Header({ values }) {
                       </InputGroup>
                     </Dropdown.Menu>
                   </Dropdown> */}
+
+                  {/* FEEDBACK */}
+                  <Dropdown className="dropdown d-flex main-header-theme">
+                    <Nav.Link
+                      className="nav-link icon layout-setting"
+                    // onClick={}
+                    >
+                      <Modal.FeedbackQrCode values={values} />
+                    </Nav.Link>
+                  </Dropdown>
 
                   {/* MODO ESCURO */}
                   <Dropdown className="dropdown d-flex main-header-theme">
@@ -376,7 +386,7 @@ function Header({ values }) {
                         />
                       </span>
                     </Dropdown.Toggle>
-                    
+
                     {/* PERFIL AVATAR tela flutuante */}
                     <Dropdown.Menu style={{ margin: "0px" }}>
                       <div className="header-navheading">
@@ -443,11 +453,11 @@ function Header({ values }) {
               </Navbar.Collapse>
 
               {/* CONFIGURAÇÕES LAYOUT */}
-              <div className="d-flex header-setting-icon demo-icon fa-spin">
+              {/* <div className="d-flex header-setting-icon demo-icon fa-spin">
                 <Nav.Link className="nav-link icon" onClick={Swicherbutton}>
                   <i className="fe fe-settings settings-icon "></i>
                 </Nav.Link>
-              </div>
+              </div> */}
 
             </div>
           </div>

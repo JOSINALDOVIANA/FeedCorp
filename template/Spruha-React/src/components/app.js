@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState,  } from "react";
+import React, { Fragment, useContext, useEffect, useState, } from "react";
 import Header from "../layouts/Header/Header";
 import Sidebar from "../layouts/SideBar/SideBar";
 import Footer from "../layouts/Footer/Footer";
@@ -22,23 +22,23 @@ const App = () => {
   };
 
   // PADRAO - VAI PARA TODAS AS OUTRAS PÁGINAS
-  const dadosrota=useLocation();
-  const navegar=useNavigate()
-  const [ values, setValues ] = useState({})
-  
-  
+  const dadosrota = useLocation();
+  const navegar = useNavigate()
+  const [values, setValues] = useState({})
+
+
 
   useEffect(() => {
 
-    if(!dadosrota.state){
+    if (!dadosrota.state) {
       navegar(`${process.env.PUBLIC_URL}/home`)
     }
-    setValues(dadosrota.state);   
-   
-    
+    setValues(dadosrota.state);
+
+
   }, [dadosrota.state])
 
-  
+
 
 
   return (

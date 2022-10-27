@@ -74,7 +74,7 @@ export default {
     },
     async getAll(req, res) {
 
-        const { id = false, id_user = false } = req.query
+        const { id = false, id_user = false,id_company=false } = req.query
         try {
             if (id) {
                 let unit = await conexao("units").where({ id }).first();
@@ -111,6 +111,28 @@ export default {
                 }
                 return res.json({ status: true, units})
             }
+            if (id_company) {
+                let company=await conexao("companies").where({id:id_company }).first();
+                let units = await conexao("units").where({ id_company });
+
+                for (const key in units) {
+                    let users = await conexao("user_unit").where({ "user_unit.id_unit": units[key].id })
+                        .join('users', "users.id", "=", "user_unit.id_user")
+                        // .join("images", "images.id", "=", "users.id_image")
+                        .join("permissions","permissions.id","=","users.id_permission")
+                        .select("users.*","permissions.description as permission")
+
+                    for (const key2 in users) {
+                        let url= await conexao("images").where({id:users[key2].id_image}).first().select("images.url")
+                        users[key2]={...users[key2],url:url?.url}
+                    }
+
+                    units[key] = { ...units[key], users }
+                }
+                return res.json({ status: true, units,company})
+            }
+
+
             return res.json({ status: true, units: await conexao("units") })
         }
         catch (error) {

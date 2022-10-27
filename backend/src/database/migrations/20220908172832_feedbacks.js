@@ -1,7 +1,7 @@
 export function up(knex) {
     return  knex.schema.createTable('feedbacks', function (table) {
         table.increments('id');
-        table.integer("id_user").unsigned();           
+        table.integer("id_user").unsigned();//quem criou           
         table.integer("id_unity").unsigned();
         table.integer("id_company").unsigned().notNullable();
         table.integer("id_direction").unsigned();

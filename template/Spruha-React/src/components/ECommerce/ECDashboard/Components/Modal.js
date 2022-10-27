@@ -2,7 +2,7 @@ import { Avatar } from "@material-ui/core";
 import React, { useState, Fragment, useEffect } from "react";
 import { Modal, Button, Table, Image, Form } from "react-bootstrap";
 import api from "../../../../api";
-
+import QRCode from 'qrcode.react'
 export function AlertProfileUnity({ userSelect }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -107,12 +107,12 @@ export function AdminProfileUnity({ userUnity }) {
     );
 }
 
-export function OfficeChanges({cargo,setValues}) {
+export function OfficeChanges({ cargo, setValues }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [cargoEdit,setCargo]=useState({});
-    useEffect(()=>{setCargo(cargo)},[])
+    const [cargoEdit, setCargo] = useState({});
+    useEffect(() => { setCargo(cargo) }, [])
     // console.log(cargoEdit)
     return (
         <Fragment>
@@ -137,26 +137,26 @@ export function OfficeChanges({cargo,setValues}) {
                             name="Nome"
                             placeholder={cargoEdit.office}
                             type="text"
-                            onChange={(e)=>{setCargo(a=>({...a,office:e.target.value}))}}
+                            onChange={(e) => { setCargo(a => ({ ...a, office: e.target.value })) }}
                         />
                     </Form.Group>
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" onClick={()=>{
-                        api.put(`cargos/update`,{id:cargoEdit.id,office:cargoEdit.office}).then(r=>{
-                            if(r.data.status){
-                                setValues(a=>{
-                                    let cargos=a.cargos
-                                    cargos=cargos.filter(cargo=>cargo.id!=cargoEdit.id)
-                                    cargos=[...cargos,{...cargoEdit}];
-                                    return({...a,cargos})
+                    <Button variant="success" onClick={() => {
+                        api.put(`cargos/update`, { id: cargoEdit.id, office: cargoEdit.office }).then(r => {
+                            if (r.data.status) {
+                                setValues(a => {
+                                    let cargos = a.cargos
+                                    cargos = cargos.filter(cargo => cargo.id != cargoEdit.id)
+                                    cargos = [...cargos, { ...cargoEdit }];
+                                    return ({ ...a, cargos })
                                 })
                                 handleClose()
                             }
 
                         });
-                        
+
                     }}>
                         Salvar alterações
                     </Button>
@@ -174,9 +174,9 @@ export function UnityChanges(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [unitEdit, setunitEdit] = useState({});
-    useEffect(()=>{
+    useEffect(() => {
         setunitEdit(props.unidade)
-    },[])
+    }, [])
     console.log(unitEdit)
     return (
         <Fragment>
@@ -202,7 +202,7 @@ export function UnityChanges(props) {
                             value={unitEdit.initials}
                             placeholder={unitEdit.initials}
                             type="text"
-                            onChange={e=>{setunitEdit(a=>({...a,initials:e.target.value}))}}
+                            onChange={e => { setunitEdit(a => ({ ...a, initials: e.target.value })) }}
                         />
                         <Form.Label className="text-muted card-sub-title">
                             Obs: Sigla da unidade
@@ -219,7 +219,7 @@ export function UnityChanges(props) {
                             value={unitEdit.description}
                             placeholder={unitEdit.description}
                             type="text"
-                            onChange={e=>{setunitEdit(a=>({...a,description:e.target.value}))}}
+                            onChange={e => { setunitEdit(a => ({ ...a, description: e.target.value })) }}
                         />
                         <Form.Label className="text-muted card-sub-title">
                             Obs: Nome por extenso da unidade
@@ -229,19 +229,68 @@ export function UnityChanges(props) {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" onClick={()=>{
-                        api.put(`unit/update`,{...unitEdit}).then(r=>{
-                            if(r.data.status){
+                    <Button variant="success" onClick={() => {
+                        api.put(`unit/update`, { ...unitEdit }).then(r => {
+                            if (r.data.status) {
                                 props.recarregarUnits()
                                 // pode por outro alerta de sucesso aqui :
                                 handleClose()
-                            }else{
+                            } else {
                                 // pode por um alerte aqui
                             }
                         })
                     }}>
                         Salvar alterações
                     </Button>
+                    <Button variant="danger" onClick={handleClose}>
+                        fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </Fragment>
+    );
+}
+
+export function FeedbackQrCode(props) {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    return (
+        <Fragment>
+
+            <span onClick={handleShow}>
+                <i className="bi bi-qr-code header-icons"></i>
+            </span>
+
+            <Modal show={show} onHide={handleClose} backdrop="static">
+                <Modal.Header closeButton>
+                    <Modal.Title>Feedback de sua empresa!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="d-flex justify-content-center">
+
+                    <QRCode
+
+                        value={`http:192.168.1.5:3000/feedback_cliente/${props?.values?.company?.id}`}
+                        size={300}
+                        bgColor={"#ffff"}
+                        fgColor={"#000000"}
+                        level={"L"}
+                        includeMargin={false}
+                        renderAs={"svg"}
+                        imageSettings={{
+                            src: "https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png",
+                            x: null,
+                            y: null,
+                            height: 50,
+                            width: 50,
+                            excavate: true,
+
+                        }}
+                    />
+
+                </Modal.Body>
+                <Modal.Footer>
                     <Button variant="danger" onClick={handleClose}>
                         fechar
                     </Button>

@@ -95,6 +95,14 @@ export const MENUADM = [
 				selected: false,
 				path: `${process.env.PUBLIC_URL}/configuracoes`,
 			},
+			{
+				title: 'Feedbacks',
+				icon: 'ti-settings',
+				type: 'link',
+				active: false,
+				selected: false,
+				path: `${process.env.PUBLIC_URL}/feedback_cliente`,
+			},
 			
 		]
 	},

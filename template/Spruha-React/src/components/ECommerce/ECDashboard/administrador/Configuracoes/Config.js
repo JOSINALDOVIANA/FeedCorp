@@ -4,6 +4,7 @@ import { Breadcrumb, Col, Button, Nav, Card, Row, Tab, Form } from "react-bootst
 import * as InputMask from "../../Components/Masks";
 import api from "../../../../../api";
 import { Selectstate } from "./select";
+import axios from "axios";
 function Settings() {
     const dadosrota = useLocation();
     const navegar = useNavigate()
@@ -349,9 +350,14 @@ function Settings() {
                                                             CEP: <span className="tx-danger">*</span>
                                                         </Form.Label>
 
-                                                        <InputMask.Cepformat onChange={(e) => { setValues(a => ({ ...a, company: { ...a.company, postcard: e.target.value } })) }} value={values?.company?.postcard} />
+                                                        <InputMask.Cepformat id="CEP" onChange={(e) => { setValues(a => ({ ...a, company: { ...a.company, postcard: e.target.value } })) }} value={values?.company?.postcard} />
 
                                                     </Form.Group>
+                                                    {/* <i style={{color:"#36D98D",cursor:"pointer",border:"3px",padding:"3px",borderRadius:"5px"}} onClick={async ()=>{
+                                                        axios.get(`http://cep.republicavirtual.com.br/web_cep.php?cep=68909818&formato=jsonp`).then(r=>{
+                                                            console.log(r.data)
+                                                        })
+                                                    }} >Buscar Cep</i > */}
                                                 </Col>
                                             </Row>
 

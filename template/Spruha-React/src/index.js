@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
+//Feedbacks da empresa
+const FeedbackClientes = React.lazy(() => import("./components/ECommerce/ECDashboard/feedback/feedbackClientes"))
+const FeedbackExterno = React.lazy(() => import("./components/ECommerce/ECDashboard/feedback/index"))
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const App = React.lazy(() => import("./components/app"));
@@ -91,16 +94,23 @@ const Root = () => {
 
         <React.Suspense fallback={<Loader />}>
           <Routes>
-            {/* rotas nivel 1 */}
+            {/* rotas nivel 0 */}
             <Route path={`${process.env.PUBLIC_URL}/home`} element={<Landingpageapp />} />
             <Route path={`${process.env.PUBLIC_URL}/login`} element={<Signin />} />
             <Route path={`${process.env.PUBLIC_URL}/cadastro`} element={<Signup />} />
             <Route path={`${process.env.PUBLIC_URL}/esqueceu_senha`} element={<Forgotpassword />} />
             <Route path={`${process.env.PUBLIC_URL}/images`} element={<Images />} />
+            {/* TEU LINK JOSINALDO!! */}
+            <Route path={`${process.env.PUBLIC_URL}/feedbacks/:company`} element={<FeedbackExterno />} />
 
             {/* rota nivel 1 aninhada */}
             <Route path={`${process.env.PUBLIC_URL}/`} element={<App />} >
               <Route index element={<ECDashboard />} />
+
+              {/* FEEDBACK DOS CLIENTES PARA OS PERFIS VISUALIZAREM - NÃO MEXER!!! */}
+              <Route>
+                <Route path={`${process.env.PUBLIC_URL}/feedback_cliente`} element={<FeedbackClientes />} />
+              </Route>
 
               <Route>
                 <Route path={`${process.env.PUBLIC_URL}/perfil`} element={<Profile />} />
@@ -138,6 +148,8 @@ const Root = () => {
               <Route path={`${process.env.PUBLIC_URL}/corporacao`} element={<MinhaCorporação />} />
               <Route path={`${process.env.PUBLIC_URL}/unidades`} element={<Unidades />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_edit_user`} element={<EditUser />} />
+
+              {/* <Route path='/totem/:idloja/:idprop' component={Totem} /> */}
 
               <Route path={`${process.env.PUBLIC_URL}/configuracoes`} element={<AdminConfig />} />
               <Route path={`${process.env.PUBLIC_URL}/adm_add_edit_unidade`} element={<AddEditUnidade />} />

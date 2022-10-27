@@ -12,13 +12,15 @@ export default {
       updated_at = new Date(),
       anonymous = false,
       name,
+      phone=null,
+      ext=false
     } = req.body;
 
     try {
-      const id = await conexao("feedbacks").insert({ name, id_user, id_unity, feedback, id_company, id_direction, id_type, updated_at, anonymous });
+      const id = await conexao("feedbacks").insert({ phone,ext,name, id_user, id_unity, feedback, id_company, id_direction, id_type, updated_at, anonymous });
       return res.json({
         status: true,
-        feedback: { name, id_user, id_unity, feedback, id_company, id_direction, id_type, updated_at, id: id[0] }
+        feedback: { phone,ext,name, id_user, id_unity, feedback, id_company, id_direction, id_type, updated_at, id: id[0] }
       })
     } catch (error) {
       console.log(error)
@@ -26,9 +28,10 @@ export default {
     }
   },
   async update(req, res) {
-    const { id, id_user = null, id_unity = null, feedback, id_company, id_direction = null, id_type, anonymous = false } = req.body;
+    const { id, id_user = null, id_unity = null, feedback, id_company, id_direction = null, id_type, anonymous = false,phone=null,
+      ext=false } = req.body;
     try {
-      await conexao("feedbacks").update({ id_user, id_unity, feedback, id_company, id_direction, id_type, anonymous }).where({ id });
+      await conexao("feedbacks").update({ phone,ext,id_user, id_unity, feedback, id_company, id_direction, id_type, anonymous }).where({ id });
       return res.json({
         status: true,
         mensage: "atualizado"
