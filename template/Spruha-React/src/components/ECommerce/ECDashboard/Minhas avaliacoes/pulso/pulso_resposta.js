@@ -94,7 +94,7 @@ function MeuClimaPulso() {
                                 <div className="box-body text-center fs-70">
                                     <Rating id={q.id+3}
                                         // quiet={!!q.resp?true:false}
-                                        readonly={!!q.resp?true:false}
+                                        // readonly={!!q.resp?true:false}
                                         emptySymbol={
                                             <StarOutlineIcon style={{ color: "#aaa", fontSize: 35, margin: 2 }} />
                                         }
@@ -112,11 +112,23 @@ function MeuClimaPulso() {
                                             let pulse=values.PulseSelect;
                                             let questions=pulse.questions.filter(i=>i.id!=q.id);
                                             let obj={
+                                                id:q?.resp?.id||0,
                                                 id_question:q.id,
                                                 id_user:values.dadosUser.id,
                                                 answer:value*20
                                             }
-                                            api.post(`pulses/answer_user/insert`,{...obj}).then(r=>{
+                                            if(!!q.resp){
+                                                api.put(`pulses/answer_user/update`,{...obj}).then(r=>{
+                                                    let question=q;
+                                                    if(r.data.status){
+                                                        question.resp={...r.data.dados}
+                                                    }
+                                                    questions.push({...q});
+                                                    pulse.questions=questions;
+                                                    setValues(a=>({...a,PulseSelect:pulse}))
+                                                })
+                                            }else{
+                                                api.post(`pulses/answer_user/insert`,{...obj}).then(r=>{
                                                 let question=q;
                                                 if(r.data.status){
                                                     question.resp={...r.data.dados}
@@ -125,6 +137,7 @@ function MeuClimaPulso() {
                                                 pulse.questions=questions;
                                                 setValues(a=>({...a,PulseSelect:pulse}))
                                             })
+                                        }
 
                                         }}
                                         onHover={rate => labeling({rate,q})}

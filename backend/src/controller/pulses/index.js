@@ -245,6 +245,18 @@ export default {
       return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })
     }
   },
+  async answer_userUpdate(req, res) {
+    let {id, id_user, id_question, answer } = req.body;
+    try {
+      // resp = resp.map(({ id_question, answer }) => ({ id_user, id_question, answer }));
+      await conexao("answer_user").update({id_user,id_question,answer}).where({id})
+
+      return res.json({ status: true, dados: {id,id_user,id_question,answer}})
+    } catch (error) {
+      console.log(error)
+      return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })
+    }
+  },
 
 
 }

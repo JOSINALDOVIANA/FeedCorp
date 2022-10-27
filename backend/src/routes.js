@@ -252,9 +252,8 @@ routes.delete("/pulses/delete",pulses.Delete);
 
 // ------answer_user-----
 routes.post("/pulses/answer_user/insert",pulses.answer_userInsert);
-// routes.put("/pulses/update",pulses.update);
-// routes.get("/pulses/get",pulses.get);
-// routes.delete("/pulses/delete",pulses.delete);
+routes.put("/pulses/answer_user/update",pulses.answer_userUpdate);
+
 
 // ------BDQuestion-----
 routes.post("/pulses/questions/insert",questions.Insert);

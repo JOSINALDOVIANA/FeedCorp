@@ -52,13 +52,13 @@ function MeuClimaPulso() {
 
             <div className="page-header">
                 <div>
-                    <h2 className="main-content-title tx-24 mg-b-5"> Resumo - Titulo pulso </h2>
+                    <h2 className="main-content-title tx-24 mg-b-5"> Resumo - {values?.PulseSelect?.title} </h2>
                     <Breadcrumb>
                         <Breadcrumb.Item> Minha Avaliações </Breadcrumb.Item>
                         <Breadcrumb.Item
                             onClick={() => { navegar(`${process.env.PUBLIC_URL}/meus_climas_pulso`, { state: values }) }}
                         >  Meus Clima Pulsos  </Breadcrumb.Item>
-                        <Breadcrumb.Item active >  titulo pulso  </Breadcrumb.Item>
+                        <Breadcrumb.Item active >  {values?.PulseSelect?.title}  </Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
             </div>
@@ -66,21 +66,41 @@ function MeuClimaPulso() {
 
             <label className="text-muted fs-12">Esta página mostra o seu resultado nessa pesquisa de clima pulso</label>
             {/* <!-- Row --> */}
-            <Row className="row-sm">
+            {values?.PulseSelect?.questions?.map(q => (
+                <Row key={q.id} className="row-sm">
 
-                <Card className="custom-card">
-                    <Card.Body>
-                        <div className="mt-2 mb-4 d-inline-block">
-                            <label className="main-content-label">Pergunta aqui</label>
-                        </div>
+                    <Card className="custom-card">
+                        <Card.Body>
+                            <div className="mt-2 mb-4 d-inline-block">
+                                <label className="main-content-label">{q?.question}</label>
+                            </div>
 
-                        <div className="box-body text-center fs-70 d-flex justify-content-center mb-3">
-                            <rating1.DisabledRating/>
-                        </div>
-                    </Card.Body>
-                </Card>
+                            <div className="box-body text-center fs-70 d-flex justify-content-center mb-3">
+                                <Rating 
+                                    
+                                    readonly
+                                    emptySymbol={
+                                        <StarOutlineIcon style={{ color: "#aaa", fontSize: 35, margin: 2 }} />
+                                    }
+                                    fullSymbol={
+                                        <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
+                                    }
+                                    placeholderSymbol={
+                                        <StarRateIcon style={{ color: "#36D98D", fontSize: 35, margin: 2 }} />
+                                    }
+                                    placeholderRating={q?.resp?.answer / 20}
+                                    fractions={1}
 
-            </Row>
+
+                                    onHover={rate => labeling({ rate, q })}
+
+                                />
+                            </div>
+                        </Card.Body>
+                    </Card>
+
+                </Row>
+            ))}
             {/* <!-- End Row --> */}
 
 
