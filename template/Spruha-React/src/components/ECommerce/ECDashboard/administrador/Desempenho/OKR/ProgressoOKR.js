@@ -1,4 +1,3 @@
-import { Divider } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -16,17 +15,17 @@ const Okr = () => {
 
     setValues(dadosrota.state);
 
-    let keys = dadosrota.state.okrselect.keys.map(key => {
-      let user = key.user[0]
+    let keys = dadosrota?.state?.okrselect?.keys?.map(key => {
+      // let user = key.user
       // user.url=user.url.url;
-      return { ...key, user }
+      return { ...key, user: key.user[0] }
     })
 
     setValues(a => ({ ...a, okrselect: { ...a.okrselect, keys } }));
   }, [dadosrota.state]);
 
   console.log(values)
-  
+
 
   return (
     <Fragment>
@@ -63,12 +62,21 @@ const Okr = () => {
           <div className="justify-content-center">
 
             <Button
-              variant="primary"
+              variant="danger"
               type="button"
               className="my-2 me-2 btn-icon"
-              onClick={async() => { await api.delete(`okrs/delete?id=${values?.okrselect?.id}`) ;navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values }) }}
+              onClick={async () => { 
+                deleteQuestionAlert().then(async (result) => {
+                  if (result.isConfirmed) {
+                    await api.delete(`okrs/delete?id=${values?.okrselect?.id}`); 
+                    deleteSucessAlert()
+                    navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })   
+                  }
+                })
+              
+              }}
             >
-               <i class="bi bi-calendar2-x-fill"></i>
+              <i className="bi bi-trash2-fill"></i>
             </Button>
 
           </div>
@@ -88,29 +96,6 @@ const Okr = () => {
                 Chaves do objetivo em andamento
               </h4>
             </div>
-
-            <div className="mb-1">
-              <Button
-                variant="danger"
-                type="button"
-                className="me-2 btn-icon"
-                onClick={() => {
-                  deleteQuestionAlert().then((result) => {
-                    if (result.isConfirmed) {
-                      api.delete(`okrs/delete?id=${values?.okrselect?.id}`).then(r => {
-                        if (r.data.status) {
-                          deleteSucessAlert()
-                          navegar(`${process.env.PUBLIC_URL}/okr/`, { state: values })
-                        }
-                      })
-                    }
-                  })
-                  // navegar(`${process.env.PUBLIC_URL}/okr_unidade/`, { state: values }) 
-                }}
-              >
-                <i className="bi bi-trash2-fill"></i>
-              </Button>
-            </div>
           </div>
         </Card.Header>
 
@@ -129,7 +114,7 @@ const Okr = () => {
                           className="rounded-circle avatar mx-1"
                           src={chave?.user?.url?.url}
                         />}
-                        
+
                       </div>
                     </td>
                     <td>
@@ -178,53 +163,3 @@ Okr.propTypes = {};
 Okr.defaultProps = {};
 
 export default Okr;
-
-
-
-{/* <Row
-              // style={{ cursor: 'pointer' }}
-              className="mt-3"
-            // onClick={() => { navegar(`${process.env.PUBLIC_URL}/okr`, { state: values }) }}
-            >
-              <Col sm={5} className="main-content-label">
-                <span>Chave 1</span>
-              </Col>
-
-              <Col sm={6} className="col-4 my-auto">
-                <ProgressBar
-                  className="progress ht-6 my-auto"
-                  now={90}
-                ></ProgressBar>
-              </Col>
-              <Col sm={1} className="col-4">
-                <div className="d-flex">
-                  <span className="tx-13">
-                    <b>90%</b>
-                  </span>
-                </div>
-              </Col>
-            </Row> */}
-
-{/* NÃO MEXE */ }
-{/* <div class="d-flex justify-content-between mt-3 mx-2">
-              <span>SubChave 1</span>
-              <Col sm={6} className="col-4 my-auto">
-                <ProgressBar
-                  className="progress ht-6 my-auto"
-                  now={50}
-                ></ProgressBar>
-                <span className="tx-13">
-                  <b>50%</b>
-                </span>
-              </Col>
-              <div>
-                <img
-                  alt="avatar"
-                  className="rounded-circle avatar-md me-1"
-                  src={user1}
-                />
-                <span>Nome</span>
-              </div>
-            </div>
-
-            <Divider className="mt-2 mb-4" /> */}

@@ -82,6 +82,7 @@ const CriarFeed = () => {
                 <textarea
                   onChange={(e) => { setFeedback(a => ({ ...a, feedback: e.target.value })) }} value={feedback.feedback}
                   rows="5"
+                  maxLength={255}
                   className="form-control"
                 />
               </FormGroup>

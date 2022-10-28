@@ -7,21 +7,26 @@ import api from "../../../../api";
 
 function FeedbackCliente() {
 
-    const { company } = useParams();
+    const dadosrota = useLocation();
     const navegar = useNavigate()
     const [values, setValues] = useState({});
-    const [carregados, setCarregados] = useState(false)
+
 
     useEffect(() => {
-        api.get(`unit/getAll?id_company=${company}`).then(r => {
+        api.get(`feedback/get?id_company=${dadosrota.state.company.id}`).then(r => {
             if (r.data.status) {
-                setValues(a => ({ ...a, units: r.data.units, company: r.data.company }))
+                setValues(a => ({ ...dadosrota.state, companyFeed: r.data.feedbacks }))
             }
         })
     }, [])
     console.log(values)
 
-
+    function formatData(data) {
+        const dat = new Date(data);
+        const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+        // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+        return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+      }
     return (
         <Fragment>
             <div className="page-header">
@@ -71,7 +76,47 @@ function FeedbackCliente() {
 
 
             <Row className="row-sm">
-                <h2>TESTE</h2>
+                <Card className=" custom-card">
+                    <Card.Body>
+
+                        <div>
+                            <h6 className="main-content-label mb-3">Comentários</h6>
+                        </div>
+
+                        <div className="text-wrap">
+
+                            {/* MAP INICIO */}
+                            {values?.companyFeed?.map(feed => (
+                                <div key={feed.id} className="example mt-1">
+                                    <div className="d-sm-flex comment-section">
+                                        <div className="d-flex me-3">
+                                            <Link to="#"><img className="main-avatar avatar" alt="img" src={require("../../../../assets/img/users/1.jpg")} /></Link>
+                                        </div>
+                                        <div className="media-body">
+                                            <h5 className="mt-0 mb-1 font-weight-semibold"> {feed.anonymous ? "Anônimo" : feed.name}
+                                                <span className="tx-14 mx-2"><i className="fe fe-check-circle text-success tx-12"></i></span>
+                                                {/* <span className="tx-12 text-muted"> 10mins atrás</span> */}
+                                                <span>{formatData(feed.updated_at)}</span>
+                                            </h5>
+                                            <p className="font-13  mb-2 mt-2">
+                                                {feed.feedback}
+                                            </p>
+                                            {/* Pode colocar uma condição aqui pra aparecer pra cada tipo de comentário */}
+                                            {feed.type == "Criticas" && <span className="badge bg-success-light mt-1">elogio</span>}
+                                            {feed.type == "Sugestões" && <span className="badge bg-info-light mt-1">sugestão</span>}
+                                            {feed.type == "Elogios" && <span className="badge bg-warning-light mt-1">crítica</span>}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            ))}
+                            {/* MAP FINAL*/}
+
+
+                        </div>
+
+                    </Card.Body>
+                </Card>
             </Row>
 
 

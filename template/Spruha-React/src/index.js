@@ -5,7 +5,8 @@ import "./index.scss";
 import Loader from "./layouts/Loader/Loader";
 //Feedbacks da empresa
 const FeedbackClientes = React.lazy(() => import("./components/ECommerce/ECDashboard/feedback/feedbackClientes"))
-const FeedbackExterno = React.lazy(() => import("./components/ECommerce/ECDashboard/feedback/index"))
+//Link EXTERNO
+const FeedbackExterno = React.lazy(() => import("./components/ECommerce/ECDashboard/feedback/feedbackExterno"))
 //LandingPage
 const Landingpageapp = React.lazy(() => import("./components/Landingpageapp"));
 const App = React.lazy(() => import("./components/app"));

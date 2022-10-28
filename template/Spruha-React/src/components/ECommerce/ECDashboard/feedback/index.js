@@ -27,6 +27,7 @@ function Feedbaks() {
           <FormGroup className="form-group">
             <Form.Label className="tx-medium">Descrição do Feedback</Form.Label>
             <textarea
+            maxLength={255}
               // onChange={} 
               // value={}
               rows="5"

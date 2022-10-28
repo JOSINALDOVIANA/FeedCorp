@@ -11,7 +11,7 @@ export default {
       id_type = 1,
       updated_at = new Date(),
       anonymous = false,
-      name,
+      name=null,
       phone=null,
       ext=false
     } = req.body;
@@ -70,6 +70,14 @@ export default {
       }
       if (id_company) {
         feedbacks = await conexao("feedbacks").where({ id_company });
+        for (const index in feedbacks) {
+          if(feedbacks[index].anonymous){
+            delete feedbacks[index]['name']
+          }
+
+          feedbacks[index].type=(await conexao("typesfeedbacks").where({id:feedbacks[index].id_type}).select("typesfeedbacks.type").first()).type
+          
+        }
       }
       if (id_direction) {
         feedbacks = await conexao("feedbacks").where({ id_direction });
@@ -80,7 +88,7 @@ export default {
 
       return res.json({
         status: true,
-        feedbacks
+        feedbacks:!!feedbacks?feedbacks:await conexao("feedbacks")
       })
     } catch (error) {
       console.log(error)
