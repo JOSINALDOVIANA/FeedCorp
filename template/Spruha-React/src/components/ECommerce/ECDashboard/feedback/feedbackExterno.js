@@ -23,9 +23,9 @@ function Feedbaks() {
           ext: true,
           id_type: 1,
           anonymous: false,
-          feedback:""
-          
-          
+          feedback: ""
+
+
         })
 
 
@@ -42,89 +42,102 @@ function Feedbaks() {
   }, [])
 
   return (
-    <Row className="row-sm">
-      <Card className="custom-card">
+    <div className="page main-signin-wrapper">
+      <div className="d-flex justify-content-center">
+        <Card style={{ width: '50rem', height: '35%' }}>
 
-        <Card.Body>
-
-          <FormGroup className="form-group">
-            <Form.Label className="tx-medium">Descrição do Feedback</Form.Label>
-            <textarea
-              onChange={e => setFeedback(a => ({ ...a, feedback: e.target.value }))}
-              value={feedback.feedback}
-              rows="5"
-              className="form-control"
-            />
-            <Form.Label className="tx-medium">Nome: </Form.Label>
-            <input
-              type="text"
-              disabled={feedback.anonymous?true:false}
-              onChange={e => setFeedback(a => ({ ...a, name: e.target.value }))}
-              value={feedback.name||""}
-              
-              className="form-control"
-            />
-            <Form.Label className="tx-medium">Telefone: </Form.Label>
-            <input
-              type="text"
-              disabled={feedback.anonymous?true:false}
-              onChange={e => setFeedback(a => ({ ...a, phone: e.target.value }))}
-              value={feedback.phone||""}
-              
-              className="form-control"
-            />
-            <div className="me-2 d-flex align-items-center">
-
-            <label htmlFor="an" className="ms-2 me-auto">Marque anonimo caso nao deseje identificar-se</label>
-            <input id="an" className="form-check-input"  type="checkbox" onChange={e=>{
-              if (e.target.checked) {
-                setFeedback(a=>({...a,anonymous: true}))
-              }
-              else {
-                setFeedback(a=>({...a,anonymous: false}))
-
-              }
-            }} />
-            </div>
-          </FormGroup>
-
-          <div className="page-header">
-            <div>
-              <h2 className="main-content-title tx-20 mg-b-5">Tipo de feedback</h2>
+          <Card.Header>
+            <div className='mb-2'>
+              <h2 className="main-content-title tx-20 mg-b-5">Envie seu feedback!!</h2>
               <span className="d-flex text-muted tx-13">
-                Escolha a categoria que mais se adequa ao seu feedback.
+                Ajude esse negócio a se desenvolver enviando seu feedback.
               </span>
             </div>
-          </div>
+          </Card.Header>
 
+          <Card.Body>
+            <FormGroup className="form-group">
+              <Form.Label className="tx-medium">Descrição do Feedback</Form.Label>
+              <textarea
+                onChange={e => setFeedback(a => ({ ...a, feedback: e.target.value }))}
+                value={feedback.feedback}
+                rows="5"
+                className="form-control"
+              />
+              <Row className="mt-1">
+                <Col>
+                  <Form.Label className="tx-medium">Nome: </Form.Label>
+                  <input
+                    type="text"
+                    disabled={feedback.anonymous ? true : false}
+                    onChange={e => setFeedback(a => ({ ...a, name: e.target.value }))}
+                    value={feedback.name || ""}
 
-          {/* <select class="form-select" aria-label="Default select example">
-            <option selected>Selecione</option>
-            <option value="1">Sugestão</option>
-            <option value="2">Elogio</option>
-            <option value="3">Crítica</option>
-          </select> */}
-          <Multiselect classNamePrefix="Select2" onChange={e => { setFeedback(a => ({ ...a, id_type: e.value })) }} options={values?.types} singleSelect displayValue="key" placeholder="Categoria" />
+                    className="form-control"
+                  />
+                </Col>
+                <Col>
+                  <Form.Label className="tx-medium">Telefone: </Form.Label>
+                  <input
+                    type="text"
+                    disabled={feedback.anonymous ? true : false}
+                    onChange={e => setFeedback(a => ({ ...a, phone: e.target.value }))}
+                    value={feedback.phone || ""}
 
-        </Card.Body>
-        <Card.Footer>
-          <div className="float-end mb-2">
-            <Button
-              type="submit"
-              className="mb-0 me-2"
-              onClick={async()=>{
-               let re= await api.post(`feedback/insert`,{...feedback});
-               if(re.data.status){
-                alert("feedbacks enviado!!")
-               }
-              }}
-            >
-              enviar
-            </Button>
-          </div>
-        </Card.Footer>
-      </Card>
-    </Row>
+                    className="form-control"
+                  />
+                </Col>
+              </Row>
+
+              <div className="form-check">
+
+                <input id="an" className="form-check-input" type="checkbox" onChange={e => {
+                  if (e.target.checked) {
+                    setFeedback(a => ({ ...a, anonymous: true }))
+                  }
+                  else {
+                    setFeedback(a => ({ ...a, anonymous: false }))
+
+                  }
+                }} />
+                <label htmlFor="an" className="d-flex text-muted tx-13 mt-2">
+                  Marque anonimo caso nao deseje identificar-se
+                </label>
+              </div>
+            </FormGroup>
+
+            <div className="page-header">
+              <div>
+                <h2 className="main-content-title tx-20 mg-b-5">Tipo de feedback</h2>
+                <span className="d-flex text-muted tx-13">
+                  Escolha a categoria que mais se adeque ao seu feedback.
+                </span>
+              </div>
+            </div>
+
+            <Multiselect classNamePrefix="Select2" onChange={e => { setFeedback(a => ({ ...a, id_type: e.value })) }} options={values?.types} singleSelect displayValue="key" placeholder="Categoria" />
+
+          </Card.Body>
+
+          <Card.Footer>
+            <div className="float-end mb-2">
+              <Button
+                type="submit"
+                className="mb-0 me-2"
+                onClick={async () => {
+                  let re = await api.post(`feedback/insert`, { ...feedback });
+                  if (re.data.status) {
+                    alert("feedbacks enviado!!")
+                  }
+                }}
+              >
+                enviar
+              </Button>
+            </div>
+          </Card.Footer>
+        </Card>
+      </div>
+    </div>
   );
 }
 

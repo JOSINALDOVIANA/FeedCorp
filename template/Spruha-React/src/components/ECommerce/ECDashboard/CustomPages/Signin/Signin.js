@@ -63,11 +63,12 @@ const Signin = () => {
       // await api.get(`/unit/consult?id_user=${dadosUser.id}`).then(r => { units = r.data });
       if (permanecer) {
         localStorage.setItem("values", JSON.stringify({
-           dadosUser, 
-           image,
-            permissions,
-            // units, 
-            unit }))
+          dadosUser,
+          image,
+          permissions,
+          // units, 
+          unit
+        }))
       }
       await api.get(`/okrs/getTwu?id_user=${dadosUser.id}`).then(async r => {
         let okrs = r?.data?.okrs;
@@ -89,16 +90,19 @@ const Signin = () => {
 
       })
 
-      await navegar(`${process.env.PUBLIC_URL}/`, { state: { 
-        dadosUser, 
-        image,
-         permissions,
-        //  units, 
-         unit, 
-         company,
-         okrscriados,
-        //  pulsesCreate: [], 
-         cargo } });
+      await navegar(`${process.env.PUBLIC_URL}/`, {
+        state: {
+          dadosUser,
+          image,
+          permissions,
+          //  units, 
+          unit,
+          company,
+          okrscriados,
+          //  pulsesCreate: [], 
+          cargo
+        }
+      });
     }
 
   };

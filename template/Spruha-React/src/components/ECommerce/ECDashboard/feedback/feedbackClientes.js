@@ -26,7 +26,7 @@ function FeedbackCliente() {
         const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
-      }
+    }
     return (
         <Fragment>
             <div className="page-header">
@@ -46,29 +46,15 @@ function FeedbackCliente() {
 
                 <div className="d-flex">
                     <div className="justify-content-center">
-                        {/* <Button
-                        type="button"
-                        variant="white"
-                        className=" btn-icon-text my-2 me-2"
-                        >
-                        <i className="fe fe-download me-2"></i> Import
-                        </Button>
                         <Button
-                        type="button"
-                        variant="white"
-                        className=" btn-icon-text my-2 me-2"
-                        >
-                        <i className="fe fe-filter me-2"></i> Filter
-                        </Button> */}
-                        {/* <Button
                             type="button"
                             variant="primary"
                             className=" my-2 btn-icon-text"
-                            // onClick={}
+                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/feedbacks/:company`, { state: values }) }}
                         >
                             <i className="fe fe-download-cloud me-2"></i>
-                            a
-                        </Button> */}
+                            ver página de feedback
+                        </Button>
 
                     </div>
                 </div>
@@ -95,8 +81,7 @@ function FeedbackCliente() {
                                         <div className="media-body">
                                             <h5 className="mt-0 mb-1 font-weight-semibold"> {feed.anonymous ? "Anônimo" : feed.name}
                                                 <span className="tx-14 mx-2"><i className="fe fe-check-circle text-success tx-12"></i></span>
-                                                {/* <span className="tx-12 text-muted"> 10mins atrás</span> */}
-                                                <span>{formatData(feed.updated_at)}</span>
+                                                <span className="tx-12 text-muted">{formatData(feed.updated_at)}</span>
                                             </h5>
                                             <p className="font-13  mb-2 mt-2">
                                                 {feed.feedback}
