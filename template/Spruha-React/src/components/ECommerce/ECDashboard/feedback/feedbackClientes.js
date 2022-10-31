@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown } from "react-bootstrap";
+import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown, Image } from "react-bootstrap";
 import { Link, useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
 import api from "../../../../api";
-
+import IMG from "../../../../assets/img/users/1.jpg";
 
 
 function FeedbackCliente() {
@@ -19,7 +19,7 @@ function FeedbackCliente() {
             }
         })
     }, [])
-    console.log(values)
+    
 
     function formatData(data) {
         const dat = new Date(data);
@@ -76,7 +76,7 @@ function FeedbackCliente() {
                                 <div key={feed.id} className="example mt-1">
                                     <div className="d-sm-flex comment-section">
                                         <div className="d-flex me-3">
-                                            <Link to="#"><img className="main-avatar avatar" alt="img" src={require("../../../../assets/img/users/1.jpg")} /></Link>
+                                            <Image className="main-avatar avatar" alt="img" src={"https://imagensjosinaldo.s3.amazonaws.com/fbf3c3a12fc9044b5920b7b55433cb72-opclient_logo.png"} />
                                         </div>
                                         <div className="media-body">
                                             <h5 className="mt-0 mb-1 font-weight-semibold"> {feed.anonymous ? "Anônimo" : feed.name}
