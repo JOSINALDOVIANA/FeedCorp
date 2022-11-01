@@ -91,7 +91,7 @@ const ClimaPulso = () => {
         <div className="card-header border-bottom-0 d-flex justify-content-between">
           <label className="main-content-label my-auto pt-2">Lista de pesquisas</label>
           <span className="d-block tx-12 mt-2 mb-0 text-muted">
-            Pulsos criados: {values?.pulsesCreate?.length}
+            Pulsos criados: {values?.pulsesCreateUser?.length}
           </span>
         </div>
 
@@ -109,7 +109,7 @@ const ClimaPulso = () => {
               </thead>
               <tbody>
 
-                {values?.pulsesCreate?.map(pulse => (
+                {values?.pulsesCreateUser?.map(pulse => (
                   <tr key={pulse.id}>
                     <td className="text-center">
                       {pulse.title}
