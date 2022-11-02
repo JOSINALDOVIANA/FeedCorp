@@ -50,7 +50,7 @@ function FeedbackCliente() {
                             type="button"
                             variant="primary"
                             className=" my-2 btn-icon-text"
-                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/feedbacks/:company`, { state: values }) }}
+                        onClick={() => { navegar(`${process.env.PUBLIC_URL}/feedbacks/${values.company.id}`, { state: values }) }}
                         >
                             <i className="fe fe-download-cloud me-2"></i>
                             ver página de feedback
