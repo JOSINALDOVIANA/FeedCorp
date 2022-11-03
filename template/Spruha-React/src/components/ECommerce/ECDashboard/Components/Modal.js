@@ -271,7 +271,7 @@ export function FeedbackQrCode(props) {
 
                     <QRCode
 
-                        value={`http:192.168.1.5:3000/feedback_cliente/${props?.values?.company?.id}`}
+                        value={`http:3.87.218.247:3000/feedback_cliente/${props?.values?.company?.id}`}
                         size={300}
                         bgColor={"#ffff"}
                         fgColor={"#000000"}
