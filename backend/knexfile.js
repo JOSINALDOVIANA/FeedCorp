@@ -3,12 +3,12 @@
 export const development = {
   client: 'mysql',
   connection: {
-    host: `mydbjosinaldo.csjtctuw0vgd.us-east-1.rds.amazonaws.com`,
-    user: 'josinaldo_master',
-    password:'wikazako',
-    // host:`localhost`,
-    // user: `root`,
-    // password: `wikazako`,
+    // host: `mydbjosinaldo.csjtctuw0vgd.us-east-1.rds.amazonaws.com`,
+    host:'109.123.243.212',
+    // user: 'josinaldo_master',
+    user:'feedcorp',
+    password:'Wikazako@123*',
+   
      database: 'feedcorp',
   },
   migrations: {

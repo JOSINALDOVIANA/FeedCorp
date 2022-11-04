@@ -7,9 +7,9 @@ export async function seed(knex) {
   await knex('users').del()
   await knex('users').insert([
     { 
-      name:"josinaldo viana",
-      nameuser:"VianaNaldo",
-      email:"gestor@gmail.com",	
+      name:"Bruno Ataide",
+      nameuser:"Sr. Bruno",
+      email:"Bruno@gmail.com",	
       password:123456,
       id_image:images[imagesTam-1].id,
       id_company:null,
@@ -18,9 +18,9 @@ export async function seed(knex) {
       id_office:null  
     },
     { 
-      name:"marcus vinicius",
-      nameuser:"ViniciusMarcus",
-      email:"colaborador@gmail.com",	
+      name:"João Lucas",
+      nameuser:"Sr João",
+      email:"João@gmail.com",	
       password:123456, 
       id_image:images[imagesTam-2].id,
       id_company:null,
@@ -29,14 +29,36 @@ export async function seed(knex) {
       id_office:null   
     },
     { 
-      name:"victor melo",
-      nameuser:"MeloVictor",
-      email:"admin@gmail.com",	
+      name:"Raimundo Nogueira",
+      nameuser:"Sr Raimundo",
+      email:"Raimundo@gmail.com",	
       password:123456,
       id_image:images[imagesTam-3].id,
       id_company:null,
       id_creator:null,
       id_permission:permissions[permissions.length-3].id,
+      id_office:null      
+    },
+    { 
+      name:"Nonato Lobato",
+      nameuser:"Sr Nonato",
+      email:"Nonato@gmail.com",	
+      password:123456,
+      id_image:images[imagesTam-3].id,
+      id_company:null,
+      id_creator:null,
+      id_permission:permissions[permissions.length-1].id,
+      id_office:null      
+    },
+    { 
+      name:"Julio viana",
+      nameuser:"Sr Julio",
+      email:"Julio@gmail.com",	
+      password:123456,
+      id_image:images[imagesTam-3].id,
+      id_company:null,
+      id_creator:null,
+      id_permission:permissions[permissions.length-2].id,
       id_office:null      
     },
     
