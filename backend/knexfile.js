@@ -4,7 +4,7 @@ export const development = {
   client: 'mysql',
   connection: {
     // host: `mydbjosinaldo.csjtctuw0vgd.us-east-1.rds.amazonaws.com`,
-    host:'109.123.243.212',
+    host:'localhost',
     // user: 'josinaldo_master',
     user:'feedcorp',
     password:'Wikazako@123*',

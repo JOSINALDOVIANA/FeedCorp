@@ -16,9 +16,9 @@
     { question:"quantos itens você vendeu nesta manhã?","id_cat":produtividade},
     { question:"quantos itens você vendeu nesta tarde?","id_cat":produtividade},
     { question:"quantos itens você vendeu nesta noite?","id_cat":produtividade},
-    { question:"quantos clientes voc^atendeu nas redes sociais nesta manhã?","id_cat":Conectividade},
-    { question:"quantos clientes voc^atendeu nas redes sociais nesta tarde?","id_cat":Conectividade},
-    { question:"quantos clientes voc^atendeu nas redes sociais nesta noite?","id_cat":Conectividade},
+    { question:"quantos clientes você atendeu nas redes sociais nesta manhã?","id_cat":Conectividade},
+    { question:"quantos clientes você atendeu nas redes sociais nesta tarde?","id_cat":Conectividade},
+    { question:"quantos clientes você atendeu nas redes sociais nesta noite?","id_cat":Conectividade},
        
   ]);
 };
