@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
-import makeAnimated from "react-select/animated";
-import Select from "react-select";
+import api from "../../../../../../../api.js";
 import Multiselect from "react-select";
-import styled from "styled-components";
-import { useDropzone, } from "react-dropzone";
-import { DropzoneAreaBase, DropzoneArea, DropzoneDialog } from "material-ui-dropzone";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { AttachFile, Audiotrack, Description, PictureAsPdf, Theaters } from "@material-ui/icons";
-import api from "../../../../../../../api";
+
 
 export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
   const [unit, setUnit] = useState({});
@@ -27,7 +19,7 @@ export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
   return (
     <div>
       <Multiselect noOptionsMessage={() => 'Sem opções'} classNamePrefix="Select2" 
-      onChange={(e) => { setOkr(a => ({ ...a, user: unit?.users?.filter(col => col.id == e.value) })) }} 
+      onChange={(e) => { setOkr(a => ({ ...a, user: unit?.users?.filter(col => Number(col.id) === Number(e.value)) })) }} 
       options={objectArray} singleSelect displayValue="key" placeholder="Integrante" />
     </div>
   );

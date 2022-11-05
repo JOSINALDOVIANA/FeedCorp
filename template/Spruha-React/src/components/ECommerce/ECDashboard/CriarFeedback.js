@@ -1,6 +1,6 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, ListGroup, Breadcrumb } from "react-bootstrap";
+import { Button, Card, Col, FormGroup, Row, Form, Breadcrumb } from "react-bootstrap";
 import api from "../../../api";
 
 import { SelectUsers } from "./Components/Selects/SelectUser";
@@ -17,7 +17,7 @@ const CriarFeed = () => {
   const navegar = useNavigate();
   const [values, setValues] = useState({});
   const [feedback, setFeedback] = useState({});
-  const [recarregar, setRecarregar] = useState(false);
+  // const [recarregar, setRecarregar] = useState(false);
 
   useEffect(() => {
     setValues(dadosrota.state);
@@ -48,7 +48,7 @@ const CriarFeed = () => {
     }
     // carregarUsers()
     carregarUnits()
-  }, [dadosrota.state, recarregar]);
+  }, [dadosrota]);
 
 
   // console.log(values)
@@ -145,7 +145,7 @@ const CriarFeed = () => {
             </Card.Body>
 
             <div className="page-header mx-4">
-              <h2 className="main-content-title tx-24 mg-b-5"></h2>
+              {/* <h2 className="main-content-title tx-24 mg-b-5"></h2> */}
               <div>
                 <Button to="#"
                   variant="info"

@@ -1,11 +1,10 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
-import api from '../../../../../api';
+
 
 export function Basicdatatable({ feitos }) {
     const [data, setData] = useState([])

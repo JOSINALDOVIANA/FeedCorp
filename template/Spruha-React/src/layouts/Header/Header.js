@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import {
   Dropdown,
   Container,
@@ -42,10 +42,10 @@ function Header({ values }) {
 
 
 
-  const openCloseSidebar1 = () => {
-    document.querySelector(".header-settings").classList.toggle("show");
-    document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
-  };
+  // const openCloseSidebar1 = () => {
+  //   document.querySelector(".header-settings").classList.toggle("show");
+  //   document.querySelector(".sidebar-right").classList.toggle("sidebar-open");
+  // };
   //  headerToggleButton
   const headerToggleButton = () => {
     let body = document.querySelector("body");
@@ -65,10 +65,10 @@ function Header({ values }) {
     }
   };
 
-  function Swicherbutton() {
-    document.querySelector(".demo_changer").classList.toggle("active");
-    document.querySelector(".demo_changer").style.right = "0px";
-  }
+  // function Swicherbutton() {
+  //   document.querySelector(".demo_changer").classList.toggle("active");
+  //   document.querySelector(".demo_changer").style.right = "0px";
+  // }
   const Darkmode = () => {
     document.querySelector("body").classList.toggle("dark-theme");
   };

@@ -1,8 +1,7 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup, Badge, Breadcrumb } from "react-bootstrap";
-import * as formelement from "../../../../../../data/Forms/formelement";
-import { SingleselectUnidade, SingleselectPessoa } from "./FormDataAVPR";
+import { Button, Card, Col, FormGroup, Row, Form, InputGroup, ListGroup,  Breadcrumb } from "react-bootstrap";
+
 import "./style.css"
 import { Grid } from "@material-ui/core";
 import { Datepicker } from "../../../Components/DataPicker"
@@ -11,10 +10,10 @@ import api from "../../../../../../api";
 
 const CriarAvpr = () => {
   const dadosrota = useLocation();
-  const location = useLocation();
+  
   const navegar = useNavigate();
   const [values, setValues] = useState({});
-  const [Itemsalvo, setItem] = useState([]);
+  
   const [enabled, setEna] = useState(true);
   const [selectdata, setData] = useState(new Date());
   const [avpr, setAVPR] = useState({ id_user: dadosrota.state.dadosUser.id, idItems: "", item: "", items: [], direction: { company: [], units: [dadosrota.state.unit.id], users: [] }, checkcompany: false, checkunits: true, checkusers: false })
@@ -265,7 +264,7 @@ const CriarAvpr = () => {
                               onClick={() => {
                                 setAVPR(a => {
                                   let items = a.items;
-                                  items = items.filter((goal, i) => goal.id != item.id)
+                                  items = items.filter((goal, i) => Number(goal.id) !== Number(item.id))
                                   return ({ ...a, items })
                                 })
                                 // setItem(a => {

@@ -183,7 +183,7 @@ const CriarOKR = () => {
                         <i onClick={() => {
                           let keys = []
                           for (const i in okr.keys) {
-                            if (i != index) {
+                            if (Number(i) !== Number(index)) {
                               keys.push(okr.keys[i]);
                             }
                           }

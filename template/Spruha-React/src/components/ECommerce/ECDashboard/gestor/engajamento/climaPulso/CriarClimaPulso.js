@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment,  useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ListGroup, Form, FormGroup } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import api from "../../../../../../api";
 import { Divider } from "@mui/material";
-import { SelectUnitPulso } from "../../../Components/Selects/SelectUnit";
+
 import { successAlert } from "../../../Components/Alerts";
 import "./style.css"
 const CriarClimaPulso = () => {
@@ -13,31 +13,41 @@ const CriarClimaPulso = () => {
 
   const navegar = useNavigate();
   const [values, setValues] = useState({});
-  const [units, setUnits] = useState([]);
+  // const [units, setUnits] = useState([]);
   const [pulse, setPulse] = useState({});
 
 
   useEffect(() => {
     setValues(dadosrota.state)
-
-
-    api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
-      setPulse({
-        id_company: dadosrota.state.company.id,
-        id_user: dadosrota.state.dadosUser.id,
-        unitSelect: [],
-        userSelect: [],
-        checked: true,
-        company: false,
-        questions: []
-      })
-      setUnits(a => ([...r.data]))
-
-      api.get(`questions/category_question/get`).then(r => {
-        setPulse(a => ({ ...a, categorias: r.data.categories }))
-      })
-
+    setPulse({
+      id_company: dadosrota.state.company.id,
+      id_user: dadosrota.state.dadosUser.id,
+      unitSelect: [],
+      userSelect: [],
+      checked: true,
+      company: false,
+      questions: []
     })
+    api.get(`questions/category_question/get`).then(r => {
+      setPulse(a => ({ ...a, categorias: r.data.categories }))
+    })
+    // api.get(`/unit/consult?id_company=${dadosrota.state.company.id}`).then(r => {
+    //   setPulse({
+    //     id_company: dadosrota.state.company.id,
+    //     id_user: dadosrota.state.dadosUser.id,
+    //     unitSelect: [],
+    //     userSelect: [],
+    //     checked: true,
+    //     company: false,
+    //     questions: []
+    //   })
+    //   // setUnits(a => ([...r.data]))
+
+    //   api.get(`questions/category_question/get`).then(r => {
+    //     setPulse(a => ({ ...a, categorias: r.data.categories }))
+    //   })
+
+    // })
 
 
   }, [dadosrota.state])
@@ -187,7 +197,7 @@ const CriarClimaPulso = () => {
                           }
                           else {
                             let questions = pulse.questions;
-                            questions = questions.filter(i => i.id != item2.id)
+                            questions = questions.filter(i => Number(i.id) !== Number(item2.id))
                             setPulse(a => ({ ...a, questions }));
 
                           }

@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Card, Row, Col, Breadcrumb, Button, Table } from "react-bootstrap";
+import React, { Fragment, useState } from "react";
+import { Card, Row, Col,  Button} from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Basicdatatable } from "./dataTables/FeedFeitosData.js";
-import api from "../../../../api.js"
+
 
 // import { Container } from './styles';
 
@@ -11,9 +11,9 @@ export default function FeedFeitos() {
   const dadosrota = useLocation();
 
   const navegar = useNavigate();
-  const [values, setValues] = useState(dadosrota?.state)
-  const [feitos, setfeitos] = useState(dadosrota?.state?.sendfeedbacks)
-  const [data, setData] = useState([])
+  const [values] = useState(dadosrota?.state)
+  const [feitos] = useState(dadosrota?.state?.sendfeedbacks)
+  
   console.log(feitos)
   return (
     <Fragment>

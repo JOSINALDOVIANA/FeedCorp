@@ -17,7 +17,7 @@ export const SelectUnit = ({ units, setFeedback }) => {
   return (
     <div>
       <Multiselect classNamePrefix="Select2" onChange={(e) => {
-        setFeedback(a => ({ ...a, unitSelect: (units.filter(unit => unit.id == e.value))[0] }));
+        setFeedback(a => ({ ...a, unitSelect: (units.filter(unit => Number(unit.id)===Number(e.value)))[0] }));
         setFeedback(a => ({ ...a, id_unity: e.value, users: a.unitSelect.Colaboradores }));
 
       }} options={objectArray} singleSelect displayValue="key" placeholder="Unidade" />
@@ -44,7 +44,7 @@ export const SelectUnitPulso = ({ units, setPulse }) => {
     <div>
       <Multiselect id="selectUnits" classNamePrefix="Select2" onChange={(e) => {
         setPulse(a=>({...a,unitSelect:[]}))
-        setPulse(a => ({ ...a, unitSelect: [...a.unitSelect,...units.filter(unit=>unit.id==e.value)]}));
+        setPulse(a => ({ ...a, unitSelect: [...a.unitSelect,...units.filter(unit=>Number(unit.id)===Number(e.value))]}));
         setPulse(a => ({ ...a, unitSelect: a.unitSelect.filter((este, i) => a.unitSelect.indexOf(este) === i),company:false}));
         
         // (units.filter(unit => unit.id == e.value))[0] }))

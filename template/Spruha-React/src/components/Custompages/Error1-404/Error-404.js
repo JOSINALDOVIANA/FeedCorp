@@ -1,13 +1,13 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment,  useEffect, useState } from "react";
 import { Col, Container, Button } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../..";
+import {  useLocation, useNavigate } from "react-router-dom";
+
 const Error404 = () => {
 
   const dadosrota = useLocation();
-  const location = useLocation();
+ 
   const navegar = useNavigate();
-  const { values, setValues } = useContext(usuarioContext);
+  const [values,setValues]=useState({})
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota])
@@ -39,7 +39,7 @@ const Error404 = () => {
                     variant="btn-success"
                     type="button"
                     className="btn ripple btn-success text-center mb-2"
-                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/`, { state: values }) }}
+                    onClick={() => { navegar(`${process.env.PUBLIC_URL}/`,{state:{...values}})}}
                   >
                     Voltar
                   </Button>

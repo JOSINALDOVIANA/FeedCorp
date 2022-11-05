@@ -1,6 +1,6 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 import api from "../../../../../../api";
 
 const Okr = () => {
@@ -25,7 +25,7 @@ const Okr = () => {
         let keys = okrs[index1].keys
         okrs[index1].progress = process / keys.length
         // console.log(keys.length)
-        if (okrs[index1].progress == 100) {
+        if (okrs[index1].progress >= 100) {
           okrs[index1].concluded = true
         }
         await api.put(`/okrs/update`, { ...okrs[index1] });

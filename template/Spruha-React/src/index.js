@@ -1,4 +1,4 @@
-import React, { Fragment, createContext } from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.scss";
@@ -33,27 +33,27 @@ const Okr = React.lazy(() => import("./components/ECommerce/ECDashboard/administ
 const CriarOkr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/CriarOKR"))
 const ProgressoOKR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/OKR/ProgressoOKR"))
 // OKR GESTOR
-const Okr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/OKR"))
-const CriarOkr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/CriarOKR"))
-const ProgressoOKR_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/ProgressoOKR"))
+const OkrGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/OKR"))
+const CriarOkrGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/CriarOKR"))
+const ProgressoOkrGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/OKR/ProgressoOKR"))
 //AVPR ADMIN
 const Avpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/AVPR"));
 const CriarAvpr = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/CriarAvpr"));
 const ProgressoAVPR = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/Desempenho/AVPR/ProgressoAVPR"))
 //AVPR GESTOR
-const Avpr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/AVPR"));
-const CriarAvpr_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/CriarAvpr"));
-const ProgressoAVPR_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/ProgressoAVPR"))
+const AvprGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/AVPR"));
+const CriarAvprGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/CriarAvpr"));
+const ProgressoAvprGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/Desempenho/AVPR/ProgressoAVPR"))
 //CLIMA PULSO ADMIN
 const ClimaPulso = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/ClimaPulso"))
 const CriarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/CriarClimaPulso"))
 const ConfigurarClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/configurarClima"))
 const ResultadosClima = React.lazy(() => import("./components/ECommerce/ECDashboard/administrador/engajamento/climaPulso/resultadosClima"))
 //CLIMA PULSO GESTOR
-const ClimaPulso_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/ClimaPulso"))
-const CriarClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/CriarClimaPulso"))
-const ConfigurarClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/configurarClima"))
-const ResultadosClima_gestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/resultadosClima"))
+const ClimaPulsoGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/ClimaPulso"))
+const CriarClimaGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/CriarClimaPulso"))
+const ConfigurarClimaGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/configurarClima"))
+const ResultadosClimaGestor = React.lazy(() => import("./components/ECommerce/ECDashboard/gestor/engajamento/climaPulso/resultadosClima"))
 //MINHAS AVALIAÇÕES
 const MinhasOKRs = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/my_okr"))
 const OKRresposta = React.lazy(() => import("./components/ECommerce/ECDashboard/Minhas avaliacoes/OKR/okr_resposta"))
@@ -76,17 +76,9 @@ const Profile = React.lazy(() => import("./components/ECommerce/ECDashboard/Cust
 // const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
 const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
 
-export const usuarioContext = createContext();
-const Root = () => {
-  function UserContextProvider({ children }) {
-    const [values, setValues] = React.useState();
 
-    return (
-      <usuarioContext.Provider value={{ values, setValues }}>
-        {children}
-      </usuarioContext.Provider>
-    );
-  }
+const Root = () => {
+  
 
   return (
     <Fragment>
@@ -229,33 +221,33 @@ const Root = () => {
               {/* OKR GESTOR */}
               <Route
                 path={`${process.env.PUBLIC_URL}/okr_unidade`}
-                element={<Okr_gestor />} >
+                element={<OkrGestor />} >
               </Route>
 
               <Route
                 path={`${process.env.PUBLIC_URL}/okr_unidade/criar_okr`}
-                element={<CriarOkr_gestor />}
+                element={<CriarOkrGestor />}
               />
 
               <Route
                 path={`${process.env.PUBLIC_URL}/okr_unidade/progresso_okr`}
-                element={<ProgressoOKR_gestor />}
+                element={<ProgressoOkrGestor />}
               />
               {/* OKR final */}
 
               {/* AVPR GESTOR */}
               <Route
                 path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`}
-                element={<Avpr_gestor />}
+                element={<AvprGestor />}
               />
 
               <Route
                 path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/criar_avpr`}
-                element={<CriarAvpr_gestor />}
+                element={<CriarAvprGestor />}
               />
               <Route
                 path={`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/progressoAVPR`}
-                element={<ProgressoAVPR_gestor />}
+                element={<ProgressoAvprGestor />}
               />
               {/* AVPR FINAL */}
 
@@ -263,22 +255,22 @@ const Root = () => {
               <Route>
                 <Route
                   path={`${process.env.PUBLIC_URL}/climapulso_unidade`}
-                  element={<ClimaPulso_gestor />}
+                  element={<ClimaPulsoGestor />}
                 />
 
                 <Route
                   path={`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso/`}
-                  element={<CriarClima_gestor />}
+                  element={<CriarClimaGestor />}
                 />
 
                 <Route
                   path={`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes/`}
-                  element={<ConfigurarClima_gestor />}
+                  element={<ConfigurarClimaGestor />}
                 />
 
                 <Route
                   path={`${process.env.PUBLIC_URL}/climapulso_unidade/resultado/`}
-                  element={<ResultadosClima_gestor />}
+                  element={<ResultadosClimaGestor />}
                 />
               </Route>
 

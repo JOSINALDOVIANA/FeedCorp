@@ -1,11 +1,11 @@
-import { Divider } from "@mui/material";
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, ProgressBar, Table } from 'react-bootstrap';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from "../../../../../..";
+
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumb, Button, Table } from 'react-bootstrap';
+import {  useLocation, useNavigate } from 'react-router-dom';
+
 import api from "../../../../../../api";
 
-import user1 from "../../../../../../assets/img/users/1.jpg";
+
 
 const ProgressoOKR = () => {
 
@@ -32,7 +32,7 @@ const ProgressoOKR = () => {
       let items_serial = []
       for (let item of items) {
         for (const resposta of item.resposta) {
-          if (resposta.id_user == user.id) {
+          if (Number(resposta.id_user) === Number(user.id)) {
             items_serial.push({ ...item, resposta });
           }
         }

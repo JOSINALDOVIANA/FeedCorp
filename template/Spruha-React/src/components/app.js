@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState, } from "react";
+import React, { Fragment, useEffect, useState, } from "react";
 import Header from "../layouts/Header/Header";
 import Sidebar from "../layouts/SideBar/SideBar";
 import Footer from "../layouts/Footer/Footer";
@@ -6,8 +6,8 @@ import Switcher from "../layouts/Switcher/Switcher";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Rightside from "../layouts/Rightside/Rightside";
 import { Backtotop1 } from "../layouts/Backtotop/Backtotop";
-import { usuarioContext } from "..";
-import api from "../api";
+
+
 
 const App = () => {
   document.querySelector("body").classList.remove("error-1");

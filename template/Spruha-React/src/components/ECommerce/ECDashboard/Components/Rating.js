@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
-import StarRateIcon from '@mui/icons-material/StarRate';
+
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { styled } from '@mui/material/styles';
 

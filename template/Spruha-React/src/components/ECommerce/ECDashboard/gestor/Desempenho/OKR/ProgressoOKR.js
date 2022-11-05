@@ -1,6 +1,6 @@
-import { Divider } from "@mui/material";
+
 import React, { Fragment, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
+import { Breadcrumb, Button,  Card, ProgressBar } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from "../../../../../../api";
 
@@ -141,19 +141,6 @@ const Okr = () => {
         </Card.Body>
 
       </Card>
-
-    </Fragment>
-  )
-};
-
-Okr.propTypes = {};
-
-Okr.defaultProps = {};
-
-export default Okr;
-
-
-
 {/* <Row
               // style={{ cursor: 'pointer' }}
               className="mt-3"
@@ -201,3 +188,16 @@ export default Okr;
             </div>
 
             <Divider className="mt-2 mb-4" /> */}
+
+    </Fragment>
+  )
+};
+
+Okr.propTypes = {};
+
+Okr.defaultProps = {};
+
+export default Okr;
+
+
+

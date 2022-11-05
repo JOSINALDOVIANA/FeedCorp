@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown, Image } from "react-bootstrap";
-import { Link, useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumb, Button, Card,  Row, Image } from "react-bootstrap";
+import {  useLocation, useNavigate,  } from "react-router-dom";
 import api from "../../../../api";
-import IMG from "../../../../assets/img/users/1.jpg";
+
 
 
 function FeedbackCliente() {

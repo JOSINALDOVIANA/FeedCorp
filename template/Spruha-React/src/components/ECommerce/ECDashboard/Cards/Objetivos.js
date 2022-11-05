@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../..";
-import api from "../../../../api";
+
+
 
 // import { Container } from './styles';
 

@@ -1,7 +1,7 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Row, Col, Card, Accordion, Form, FormGroup, Collapse, Breadcrumb, Button, ListGroup } from "react-bootstrap";
+import React, { Fragment,  useEffect, useState } from "react";
+import { Row, Col, Card, Breadcrumb, Button, ListGroup } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../../../..";
+
 import { Grid, Divider } from "@mui/material";
 import { SelectDBQuestions } from "../../../Components/Selects/SelectDBQuestions"
 import api from "../../../../../../api";
@@ -11,7 +11,7 @@ import {ClimaQuestionAdd, ClimaQuestionDelete, ClimaQuestionError} from "../../.
 const ClimaTabelaRealizados = () => {
 
     const dadosrota = useLocation();
-    const location = useLocation();
+    
     const navegar = useNavigate();
     const [values, setValues] = useState({});
     const [recarregar, setRecarregar] = useState(false);
@@ -29,7 +29,7 @@ const ClimaTabelaRealizados = () => {
         })
     }, [recarregar])
 
-    const [Accordion1, setAccordion1] = useState(false);
+  
     console.log(values)
     return (
         <Fragment>
@@ -120,7 +120,7 @@ const ClimaTabelaRealizados = () => {
                                                 type="button"
                                                 className="btn"
                                                 onClick={() => {
-                                                    if(values.Question!="" && values.selectQuestionsCat!=""){
+                                                    if(String(values.Question)!=="" && String(values.selectQuestionsCat)!==""){
                                                         api.post(`pulses/questions/insert`, { questions: [{ question: values.Question, id_cat: values.selectQuestionsCat }] }).then(r => {
                                                             if (r.data.status) {
                                                                 ClimaQuestionAdd()

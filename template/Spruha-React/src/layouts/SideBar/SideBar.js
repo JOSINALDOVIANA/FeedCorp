@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { MENUADM,MENUCOL,MENUGESTOR } from "./SideMenu";
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import { horizontalmenusticky } from "../../data/Switcherdata/Switcherdata";
 import { useLocation } from "react-router-dom";
-import { usuarioContext } from "../..";
+
 
 let history = [];
 const SideBar = ({values}) => {
@@ -17,9 +17,9 @@ const SideBar = ({values}) => {
 
 // console.log(menuitems)
   useEffect(() => {
-    if (values?.permissions == "administrador") { setMenuitems(MENUADM);setMENUITEMS(MENUADM) }
-    if (values?.permissions == "gestor") { setMenuitems(MENUGESTOR);setMENUITEMS(MENUGESTOR) }
-    if (values?.permissions == "colaborador") { setMenuitems(MENUCOL);setMENUITEMS(MENUCOL) }
+    if (String(values?.permissions) === "administrador") { setMenuitems(MENUADM);setMENUITEMS(MENUADM) }
+    if (String(values?.permissions) === "gestor") { setMenuitems(MENUGESTOR);setMENUITEMS(MENUGESTOR) }
+    if (String(values?.permissions) === "colaborador") { setMenuitems(MENUCOL);setMENUITEMS(MENUCOL) }
     
   }, [values]);
   // initial loading

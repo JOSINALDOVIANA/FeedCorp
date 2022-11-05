@@ -17,7 +17,7 @@ export const SelectUsers = ({users,setFeedback}) => {
   return (
     <div>
       <Multiselect classNamePrefix="Select2" onChange={(e)=>{
-        setFeedback(a=>({...a,userSelect:(users.filter(user=>user.id==e.value))[0]}));
+        setFeedback(a=>({...a,userSelect:(users.filter(user=>Number(user.id)==Number(e.value)))[0]}));
         setFeedback(a=>({...a,id_direction:e.value}));
     }} options={objectArray} singleSelect displayValue="key" placeholder="Colaborador" />
     </div>

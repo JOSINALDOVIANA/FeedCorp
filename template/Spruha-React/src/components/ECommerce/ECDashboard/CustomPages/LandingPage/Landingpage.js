@@ -1,10 +1,10 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState } from "react";
 import icon from '../../../../../assets/img/brand/icon.png';
 import iconlight from '../../../../../assets/img/brand/icon-light.png';
 import { Link } from "react-router-dom";
-import CountUp from "react-countup";
+
 import { Button, Card, Col, Container, Form, Nav, Navbar, Row, Tab } from "react-bootstrap";
-import { SlicksiderTecnologias, SlicksiderParceiros, SlicksiderClientes } from "./Landingpagedata/landingpagedata";
+import { SlicksiderTecnologias,SlicksiderClientes } from "./Landingpagedata/landingpagedata";
 import Navbar1 from "./Landingpagedata/Navbar";
 
 const Landingpage = () => {

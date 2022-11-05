@@ -1,8 +1,8 @@
 import { uniqueId } from "lodash";
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, ProgressBar } from 'react-bootstrap';
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumb, Button, Col, Row, Card } from 'react-bootstrap';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { usuarioContext } from "../../../../../..";
+
 import api from "../../../../../../api";
 
 const AvPorResultados = () => {

@@ -1,12 +1,12 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { usuarioContext } from "../../../..";
+
 import api from "../../../../api";
 
 // import { Container } from './styles';
 
-export default  () => {
+const  Pesquisas= () => {
 
   const dadosrota = useLocation();
 
@@ -98,3 +98,4 @@ export default  () => {
   );
 }
 
+export default Pesquisas;

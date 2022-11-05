@@ -1,7 +1,7 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, Table } from 'react-bootstrap';
+import React, { Fragment,  useEffect, useState } from "react";
+import { Breadcrumb, Button,  Card } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from "../../../../../../api";
+
 
 const ClimaResultado = () => {
 

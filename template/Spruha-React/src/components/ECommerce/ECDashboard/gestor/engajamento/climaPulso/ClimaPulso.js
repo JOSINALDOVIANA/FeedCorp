@@ -1,7 +1,7 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Breadcrumb, Button, Col, Row, Card, Table, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import React, { Fragment, useEffect, useState } from "react";
+import { Breadcrumb, Button,  Table,  } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Swal from "sweetalert2";
+
 import {deleteQuestionAlert, deleteSucessAlert} from "../../../Components/Alerts"
 import api from "../../../../../../api";
 

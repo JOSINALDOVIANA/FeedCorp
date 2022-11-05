@@ -21,7 +21,7 @@ export const SelecTypes = ({ values, setFeedback }) => {
   return (
     <div>
       <Multiselect classNamePrefix="Select2" onChange={(e) => {
-        setFeedback(a => ({ ...a, typeSelect: (types.filter(type => type.id == e.value))[0] }));
+        setFeedback(a => ({ ...a, typeSelect: (types.filter(type => Number(type.id) === Number(e.value)))[0] }));
         setFeedback(a => ({ ...a, id_type: e.value }));
       }} options={objectArray} singleSelect displayValue="key" placeholder="Categoria" />
     </div>
