@@ -1,14 +1,24 @@
 
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> } 
+ */
  export async function seed(knex) {
  
-  
+  const {id:produtividade} = await knex("categoryquestion").where({category:"Produtividade"}).first().select("categoryquestion.id");
+  const {id:Conectividade} = await knex("categoryquestion").where({category:"Conectividade"}).first().select("categoryquestion.id");
+  const {id:BemStar} = await knex("categoryquestion").where({category:"Bem estar"}).first().select("categoryquestion.id");
   await knex('bdquestions').del();
   await knex('bdquestions').insert([
-    { question:"como você se sente nesta tarde?","id_cat":null},
-    { question:"como você se sente neste dia?","id_cat":null},
-    { question:"como você se sente nesta manhâ?","id_cat":null},
-    { question:"como você se sente hoje?","id_cat":null},
-    { question:"qual o seu nivel de humor?","id_cat":null},
+    { question:"como você se sente nesta tarde?","id_cat":BemStar},
+    { question:"como você se sente nesta manhã?","id_cat":BemStar},
+    { question:"como você se sente nesta noite?","id_cat":BemStar},
+    { question:"quantos itens você vendeu nesta manhã?","id_cat":produtividade},
+    { question:"quantos itens você vendeu nesta tarde?","id_cat":produtividade},
+    { question:"quantos itens você vendeu nesta noite?","id_cat":produtividade},
+    { question:"quantos clientes voc^atendeu nas redes sociais nesta manhã?","id_cat":Conectividade},
+    { question:"quantos clientes voc^atendeu nas redes sociais nesta tarde?","id_cat":Conectividade},
+    { question:"quantos clientes voc^atendeu nas redes sociais nesta noite?","id_cat":Conectividade},
        
   ]);
 };

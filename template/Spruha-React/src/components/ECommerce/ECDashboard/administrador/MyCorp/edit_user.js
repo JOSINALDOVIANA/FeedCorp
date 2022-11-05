@@ -10,23 +10,23 @@ function EditUnity() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    let userEdit=values.userselect;
-let user={
-  name:userEdit.name,
-  nameuser:userEdit.nameuser,
-  email:userEdit.email,
-  password:userEdit.password,
-  id_image:userEdit.id_image,
-  id_company:userEdit.id_company,
-  id_creator:userEdit.id_creator,
-  id_permission:userEdit.id_permission,
-  id_office:userEdit.id_office,
-  passwordantigo:userEdit.password,
-  id_unit:userEdit.id_unit,
-  id:userEdit.id
+    let userEdit = values.userselect;
+    let user = {
+      name: userEdit.name,
+      nameuser: userEdit.nameuser,
+      email: userEdit.email,
+      password: userEdit.password,
+      id_image: userEdit.id_image,
+      id_company: userEdit.id_company,
+      id_creator: userEdit.id_creator,
+      id_permission: userEdit.id_permission,
+      id_office: userEdit.id_office,
+      passwordantigo: userEdit.password,
+      id_unit: userEdit.id_unit,
+      id: userEdit.id
 
-}
-console.log(user)
+    }
+    // console.log(user)
     // console.log(values)
     // console.log(event)
 
@@ -43,7 +43,7 @@ console.log(user)
       if (r.data.status) {
         saveAlert()
         navegar(`${process.env.PUBLIC_URL}/corporacao`, { state: values })
-      }else{
+      } else {
         errorSaveAlert()
       }
     })
@@ -60,18 +60,18 @@ console.log(user)
 
   useEffect(() => {
     setValues(dadosrota.state)
-    api.get(`cargos/get?id_user=${dadosrota.state.userselect.id_creator}`).then(r => {
+    api.get(`cargos/get?id_company=${dadosrota.state.company.id}`).then(r => {
       setValues(a => ({ ...a, cargos: r.data.cargo }))
     })
     api.get(`permission/get`).then(r => {
       setValues(a => ({ ...a, permissionscreate: r.data.permissions }))
     })
     api.get(`user_unit/get?id_user=${dadosrota.state.userselect.id}`).then(r => {
-      setValues(a => ({ ...a, userselect:{...a.userselect,unit:r.data.unit}  }))
+      setValues(a => ({ ...a, userselect: { ...a.userselect, unit: r.data.unit } }))
     })
 
   }, [dadosrota.state])
-  console.log(values.userselect)
+  // console.log(values.userselect)
 
   return (
     <Fragment>
