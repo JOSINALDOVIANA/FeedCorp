@@ -10,18 +10,18 @@ const Okr = () => {
   const dadosrota = useLocation();
   const navegar = useNavigate();
   const [values, setValues] = useState({});
-
+console.log(values)
   useEffect(() => {
 
     setValues(dadosrota.state);
 
-    let keys = dadosrota?.state?.okrselect?.keys?.map(key => {
-      // let user = key.user
-      // user.url=user.url.url;
-      return { ...key, user: key.user[0] }
-    })
+    // let keys = dadosrota?.state?.okrselect?.keys?.map(key => {
+    //   // let user = key.user
+    //   // user.url=user.url.url;
+    //   return { ...key, user: key.user[0] }
+    // })
 
-    setValues(a => ({ ...a, okrselect: { ...a.okrselect, keys } }));
+    // setValues(a => ({ ...a, okrselect: { ...a.okrselect, keys } }));
   }, [dadosrota.state]);
 
   console.log(values)
@@ -109,10 +109,10 @@ const Okr = () => {
                   <tr>
                     <td className="wd-5p">
                       <div className="main-img-user avatar-md">
-                        {chave.user.url && <img
+                        {chave.url && <img
                           alt="avatar"
                           className="rounded-circle avatar mx-1"
-                          src={chave?.user?.url?.url}
+                          src={chave?.url}
                         />}
 
                       </div>
@@ -121,7 +121,7 @@ const Okr = () => {
                       <div className="d-flex align-middle ms-3">
                         <div className="d-inline-block">
                           <h6 className="tx-13 tx-inverse tx-semibold mg-b-0" >
-                            {chave?.user?.name?.toUpperCase()}
+                            {chave?.name?.toUpperCase()}
                           </h6>
                           <span className="mb-0 text-muted">{chave.description}</span>
                         </div>

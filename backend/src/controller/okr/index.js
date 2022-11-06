@@ -108,9 +108,16 @@ export default {
                 let okrs = await conexao('okrs').where({ id_user });
 
                 for (const index in okrs) {
-                    let keys = await conexao("keys").where({ id_okr: okrs[index].id }).join("users", "keys.id_user", "=", "users.id").select("keys.*", "users.name");
+                    let keys = await conexao("keys").where({ id_okr: okrs[index].id }).join("users", "keys.id_user", "=", "users.id").select("keys.*", "users.name","users.id_image");
+                    
+                    for (let i in keys) {
+                        keys[i].url = (await conexao("images").where({ id: keys[i].id_image }).select("images.url").first()).url; 
+                        delete keys[i]["id_image"]
+
+                    }
                     okrs[index] = { ...okrs[index], keys };
                 }
+               
                 return res.json({ status: true, okrs })
             }
             return res.json({ status: true, okrs: await conexao("okrs") });

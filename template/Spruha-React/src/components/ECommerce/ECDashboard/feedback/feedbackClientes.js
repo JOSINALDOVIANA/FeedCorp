@@ -15,7 +15,7 @@ function FeedbackCliente() {
     useEffect(() => {
         api.get(`feedback/get?id_company=${dadosrota.state.company.id}`).then(r => {
             if (r.data.status) {
-                setValues(a => ({ ...dadosrota.state, companyFeed: r.data.feedbacks }))
+                setValues(a => ({ ...dadosrota.state, companyFeed: r?.data?.feedbacks?.filter(item=>item.ext) }))
             }
         })
     }, [])
