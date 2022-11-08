@@ -56,7 +56,9 @@ export default {
                         Bucket: 'imagensjosinaldo',
                         Key: key,
                     }, function (err, data) {
-                        if (err) { // console.log(err, err.stack) }
+                        if (err) { 
+                            // console.log(err, err.stack)
+                         }
     
                     })
                     return res.status(200).json({ mensagem: true });
