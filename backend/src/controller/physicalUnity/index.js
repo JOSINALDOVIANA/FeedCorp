@@ -7,7 +7,7 @@ export default{
             const id=await conexao("physicalUnity").insert({unity});
             return res.json({status:true,dados:{id:id[0],unity}})
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:"erro physicalUnity=>insert"})
         }
     },
@@ -17,7 +17,7 @@ export default{
             await conexao("physicalUnity").update({unity}).where({id});
             return res.json({status:true,dados:{id,unity}})
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:"erro physicalUnity=>update"})
         }
     },
@@ -27,7 +27,7 @@ export default{
             await conexao("physicalUnity").del().where({id});
             return res.json({status:true,mensage:"deletado"})
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:"erro physicalUnity=>delete"})
         }
     },
@@ -37,7 +37,7 @@ export default{
             const physicalUnity = !id?await conexao("physicalUnity"):await conexao("physicalUnity").where({id});
             return res.json({status:true,physicalUnity})
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:"erro physicalUnity=>delete"})
         }
     },

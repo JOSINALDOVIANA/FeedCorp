@@ -7,12 +7,12 @@ export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
   const [unit, setUnit] = useState({});
   useEffect(() => {
     api.get(`/unit/getAll?id=${unit_select?.id}`).then(r => {
-      console.log(r.data)
+      // // console.log(r.data)
       setUnit(r.data.units);
     })
   }, [unit_select])
-// console.log(unit_select)
-// console.log(unit)
+// // console.log(unit_select)
+// // console.log(unit)
 
   const objectArray = unit?.users?.map(col => ({ value: col.id, label: col.name }))
 
@@ -26,7 +26,7 @@ export const SelectPessoaUnidade = ({ unit_select, setOkr }) => {
 };
 
 // export const SingleselectUnidade = ({ units, setOkr }) => {
-//   // console.log(units)
+//   // // console.log(units)
 //   const objectArray = units?.map(und => ({ value: und.id, label: und.initials }))
 //   // [
 //   //   { value: "UMC", label: "UMC" },

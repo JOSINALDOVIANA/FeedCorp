@@ -809,7 +809,7 @@ export function Singleselect1() {
           { label: " XRP", value: "xrp " },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -835,7 +835,7 @@ export function Singleselect2() {
           { label: " RIAL", value: "rial " },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />

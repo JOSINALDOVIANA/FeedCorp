@@ -7,7 +7,7 @@ export default {
             const [id] = await conexao("positions").insert({ office,id_company,id_user });
             return res.json({ status: true, cargo: { id, office,id_company,id_user } });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "error cargos=>insert" });
         }
     },
@@ -26,7 +26,7 @@ export default {
             cargo=cargo_serial
             return res.json({ status: true, cargo });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "error cargos=>select" });
         }
     },
@@ -36,7 +36,7 @@ export default {
             await conexao("positions").update({ office }).where({ "id": id });
             return res.json({ status: true, mensage: "dados atualizados" });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "error cargos=>update" })
         }
 
@@ -47,7 +47,7 @@ export default {
             await conexao("positions").del().where({ id });
             return res.json({ status: true, mensage: "dados apagados" });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "error cargos=>delete" });
         }
     }

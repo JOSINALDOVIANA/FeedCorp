@@ -25,7 +25,7 @@ function OKR_resposta() {
     //     })
     // }, [])
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <Fragment>
@@ -121,7 +121,7 @@ function OKR_resposta() {
                                                                                 id="progress"
                                                                                 placeholder="Adicione seu progresso"
                                                                                 onBlur={async e => {
-                                                                                    console.log(key)
+                                                                                    // console.log(key)
                                                                                     let up = key;
                                                                                     up.status = e.target.value;
 

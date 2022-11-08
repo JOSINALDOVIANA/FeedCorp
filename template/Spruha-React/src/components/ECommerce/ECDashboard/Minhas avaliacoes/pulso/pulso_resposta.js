@@ -12,7 +12,7 @@ function MeuClimaPulso() {
     const [color, setColor] = useState("primary");
 
     function labeling({rate,q}) {
-        // console.log(q)
+        // // console.log(q)
         let label;
         if (rate > 0.5 && rate < 2) {
             label = "Muito ruim";
@@ -46,7 +46,7 @@ function MeuClimaPulso() {
 
     }, [dadosrota])
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <Fragment>

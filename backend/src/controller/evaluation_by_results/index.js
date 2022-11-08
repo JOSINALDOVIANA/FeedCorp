@@ -7,7 +7,7 @@ export default {
         if (validity) {
             validity = new Date(validity)
         } else { validity = null }
-        // console.log(req.body)
+        // // console.log(req.body)
         try {
             const ebr = await conexao("evaluation_by_results").insert({ title, id_user, validity });
             let items_serial = items.map((item) => ({ ...item, validity, id_ebr: ebr[0] }));
@@ -39,7 +39,7 @@ export default {
             res.json({ "status": true, "avpr": { id: ebr[0], id_user, title, validity, items: items_serial } });
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ status: false, erro: "error avpr_=>insert" });
         }
     },
@@ -52,20 +52,20 @@ export default {
             res.json({ "status": true, "message": "atualizado" });
 
         } catch (error) {
-            // console.log(error)
+            // // console.log(error)
             res.json({ status: false, erro: "error avpr_=>update" });
         }
     },
     async delete(req, res) {
         const { id } = req.query;
-        // console.log(id)
+        // // console.log(id)
         try {
             await conexao("evaluation_by_results").del().where({ id });
 
             return res.json({ "status": true, "message": "apagado" });
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, erro: "error avpr_=>delete" });
         }
     },
@@ -88,7 +88,7 @@ export default {
             res.json({ "status": true, "avaliação": avaliação });
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ status: false, erro: "error avpr_=>getEspecific" });
         }
     },
@@ -101,13 +101,13 @@ export default {
             res.json({ "status": true, "avaliações": await conexao("evaluation_by_results").where({ id_user }) });
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ status: false, erro: "error avpr_=>getCreateAll" });
         }
     },
     async getAll(req, res) {
         const { id_user = false, id_direction = false ,id=false} = req.query
-        //  console.log(req.query)
+        //  // console.log(req.query)
         try {
             
 
@@ -214,7 +214,7 @@ export default {
             return res.json({ "status": true, "avaliacoes": await conexao("evaluation_by_results") });
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ "status": false, "mensage": "error avpr_=>getAll" });
             // return
         }
@@ -230,7 +230,7 @@ export default {
             res.json({ "status": true, "items": ebr_items });
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ status: false, erro: "error avpr_=>insertEbr_items" });
         }
     },
@@ -279,7 +279,7 @@ export default {
             const id = await conexao("item_answer_user").insert({ id_user, id_item, answer });
             return res.json({ status: true, mensage: "inserido" });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro avpr=>insertItem_Answer_User" });
         }
     },
@@ -290,7 +290,7 @@ export default {
             await conexao("item_answer_user").update({ id_user, id_item, answer,result }).where({ id });
             return res.json({ status: true, mensage: "atualizado" });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro avpr=>updateItem_Answer_User" });
         }
     },
@@ -301,7 +301,7 @@ export default {
             const respostas = !id ? !id_user ? await conexao("item_answer_user").where({ id_item }) : await conexao("item_answer_user").where({ id_user }) : await conexao("item_answer_user").where({ id })
             return res.json({ status: true, respostas });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro avpr=>getItem_Answer_User" });
         }
     },
@@ -312,7 +312,7 @@ export default {
             await conexao("item_answer_user").del().where({ id })
             return res.json({ status: true, mensage: "deletado" });
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro avpr=>deleteItem_Answer_User" });
         }
     },

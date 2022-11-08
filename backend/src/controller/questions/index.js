@@ -5,7 +5,7 @@ export default {
         try {
             return res.json({ status: true, questions: await conexao("bdquestions") })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro questions=>get" })
         }
     },
@@ -16,7 +16,7 @@ export default {
             await conexao("bdquestions").insert(questions);
             return res.json({ status: true, mensage: "dados inseridos" })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro questions=>insert" })
         }
     },
@@ -30,13 +30,13 @@ export default {
 
             return res.json({ status: true, mensage: "dados inseridos" })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro questions=>update" })
         }
     },
     async Delete(req, res) {
         let { id } = req.query;
-        // console.log(req.body)
+        // // console.log(req.body)
         try {
             await conexao("bdquestions").del().where({id})
             // for (const iterator of ids) {
@@ -45,7 +45,7 @@ export default {
 
             return res.json({ status: true, mensage: "dados pagados" })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro questions=>delete" })
         }
     },
@@ -57,7 +57,7 @@ export default {
 
             return res.json({ status: true, mensage: "dados salvos" })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro questions.categoryquestion=>delete" })
         }
     },
@@ -69,7 +69,7 @@ export default {
                 let categorias_serial = []
                 for (let iterator of categorias) {
                     let questions = await conexao("bdquestions").where({id_cat:iterator.id});
-                    // console.log(questions)
+                    // // console.log(questions)
                     categorias_serial.push({ ...iterator, questions });
                 }
 
@@ -80,14 +80,14 @@ export default {
             let categorias_serial = []
             for (let iterator of categorias) {
                 let questions = await conexao("bdquestions").where({id_cat:iterator.id});
-                // console.log(questions)
+                // // console.log(questions)
                 categorias_serial.push({ ...iterator, questions });
             }
             return res.json({ status: true, categories: categorias_serial })
 
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, mensage: "erro questions.categoryquestionget=>delete" })
         }
     },

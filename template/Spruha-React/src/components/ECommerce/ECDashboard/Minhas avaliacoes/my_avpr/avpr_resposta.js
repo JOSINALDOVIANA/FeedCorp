@@ -19,7 +19,7 @@ function AVPR_resposta() {
 
     }, [dadosrota])
 
-    console.log(values)
+    // // console.log(values)
 
     return (
         <Fragment>

@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import { AttachFile, Audiotrack, Description, PictureAsPdf, Theaters } from "@material-ui/icons";
 
 export const SingleselectUnidade = ({units,setOkr}) => {
-  // console.log(units)
+  // // console.log(units)
   const objectArray = units?.map(und=>({value:und.id,label:und.initials}))
   // [
   //   { value: "UMC", label: "UMC" },
@@ -381,7 +381,7 @@ export function MUIdropzonebutton() {
         open={open}
         onClose={() => setOpen(false)}
         onSave={(files) => {
-          console.log("Files:", files);
+          // // console.log("Files:", files);
           setOpen(false);
         }}
         showPreviews={true}

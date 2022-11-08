@@ -25,8 +25,8 @@ export function Basicdatatable({ feitos }) {
         })
 
     }, [feitos])
-    // console.log(data)
-    // console.log(feitos)
+    // // console.log(data)
+    // // console.log(feitos)
     function formatData(d) {
         const dat = new Date(d);
         const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]

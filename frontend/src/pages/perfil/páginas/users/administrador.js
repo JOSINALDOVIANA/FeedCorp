@@ -10,7 +10,7 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 function Administrador() {
   const theme = useTheme();
   const [values, setValues] = UseDados();
-  // console.log(values)
+  // // console.log(values)
   return (
 
     <MuiBox>

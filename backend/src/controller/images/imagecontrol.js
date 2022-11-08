@@ -34,7 +34,7 @@ export default {
                 id, name, size, key, url
             });
         } catch (error) {
-           // console.log(error)
+           // // console.log(error)
             res.json({ error: true, mensagem: error });
         }
 
@@ -42,7 +42,7 @@ export default {
 
     async deletar(req, res, next) {
         const { key=false, id=false } = req.query;
-        // console.log(req.query)
+        // // console.log(req.query)
         try {
             
             if(key && id){
@@ -56,7 +56,7 @@ export default {
                         Bucket: 'imagensjosinaldo',
                         Key: key,
                     }, function (err, data) {
-                        if (err) { console.log(err, err.stack) }
+                        if (err) { // console.log(err, err.stack) }
     
                     })
                     return res.status(200).json({ mensagem: true });
@@ -81,7 +81,7 @@ export default {
 
     async listar(req, res, next) {
         const {nameuser=false,email=false}=req.query;
-        //console.log(req.query)
+        //// console.log(req.query)
         try {
             if (!nameuser && !email) {
             const { page = 1 } = req.query;
@@ -93,7 +93,7 @@ export default {
             return res.json(dados_serial);
             }else{
                 if(!nameuser){
-                   // console.log("!nameuser")
+                   // // console.log("!nameuser")
                     const dados=await conexao('users').select("images.*").where({email}).first().join("images","users.id_image","=","images.id");
                     if(dados){
                         return res.json({mensage:true,dados})
@@ -102,7 +102,7 @@ export default {
                 }
                 if (!email) {
                     const dados=await conexao('users').select("images.*").where({nameuser}).join("images","users.id_image","=","images.id").first();
-                   // console.log(dados)
+                   // // console.log(dados)
                     if(!dados){
                         return res.json({mensagem:false})
                     }
@@ -111,7 +111,7 @@ export default {
             }
            
         } catch (error) {
-          //  console.log(error)
+          //  // console.log(error)
             return res.json({error:true,message:error})
         }
 

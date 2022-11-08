@@ -30,7 +30,7 @@ const ClimaTabelaRealizados = () => {
     }, [recarregar])
 
   
-    console.log(values)
+    // // console.log(values)
     return (
         <Fragment>
             {/* <!-- Page Header --> */}

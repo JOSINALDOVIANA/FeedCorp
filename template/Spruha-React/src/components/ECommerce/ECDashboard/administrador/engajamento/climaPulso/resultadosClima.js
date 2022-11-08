@@ -28,7 +28,7 @@ const ClimaResultado = () => {
     //     })
     //     // return(()=>setValues({}))
     // }, [dadosrota.state])
-    console.log(values)
+    // // console.log(values)
     function formatData(data) {
         const dat = new Date(data);
         const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]

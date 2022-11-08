@@ -21,8 +21,8 @@ const CriarOKR = () => {
     setValues(dadosrota.state)
     setOkr({ keys: [], id_user: dadosrota.state.dadosUser.id, description: "" })
   }, [dadosrota])
-  // console.log(values)
-  // console.log(okr)
+  // // console.log(values)
+  // // console.log(okr)
 
   return (
     <Fragment>
@@ -117,8 +117,8 @@ const CriarOKR = () => {
 
                     onClick={async () => {
                       let user = okr.user[0];
-                      console.log(user)
-                      // console.log(user);
+                      // // console.log(user)
+                      // // console.log(user);
                       // await api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
 
                       setOkr(a => ({

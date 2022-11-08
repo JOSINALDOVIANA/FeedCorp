@@ -10,7 +10,7 @@ import draftToHtml from "draftjs-to-html";
 export function QuillEditor() {
 
   const { quill, quillRef } = useQuill();
-  console.log(quill);
+  // console.log(quill);
   return (
     <div>
       <div>
@@ -22,8 +22,8 @@ export function QuillEditor() {
 // Modalinedtor
 export function Modalineditor() {
   const { quill, quillRef } = useQuill();
-  console.log(quill);
-  console.log(quillRef);
+  // console.log(quill);
+  // console.log(quillRef);
   return (
     <div>
       <div>

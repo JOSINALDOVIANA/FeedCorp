@@ -14,7 +14,7 @@ export default function FeedFeitos() {
   const [values] = useState(dadosrota?.state)
   const [feitos] = useState(dadosrota?.state?.sendfeedbacks)
   
-  console.log(feitos)
+  // // console.log(feitos)
   return (
     <Fragment>
 

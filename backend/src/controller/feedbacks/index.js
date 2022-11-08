@@ -23,7 +23,7 @@ export default {
         feedback: { phone,ext,name, id_user, id_unity, feedback, id_company, id_direction, id_type, updated_at, id: id[0] }
       })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error feedback=>insert" });
     }
   },
@@ -37,7 +37,7 @@ export default {
         mensage: "atualizado"
       })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error feedback=>update" });
     }
   },
@@ -91,7 +91,7 @@ export default {
         feedbacks:!!feedbacks?feedbacks:await conexao("feedbacks")
       })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error feedback=>get" });
     }
   },
@@ -106,7 +106,7 @@ export default {
         mensage: "apagado"
       })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error feedback=>delete" });
     }
   },

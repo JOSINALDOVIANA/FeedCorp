@@ -30,7 +30,7 @@ const ClimaTabelaRealizados = () => {
     }, [recarregar])
 
     const [Accordion1, setAccordion1] = useState(false);
-    console.log(values)
+    // // console.log(values)
     return (
         <Fragment>
             {/* <!-- Page Header --> */}

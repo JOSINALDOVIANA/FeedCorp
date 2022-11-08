@@ -32,7 +32,7 @@ export default {
         }
       })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error pulses=>insert" })
     }
   },
@@ -209,7 +209,7 @@ export default {
 
       return res.json({ status: false, pulses: await conexao("pulses") })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error pulses=>get" })
     }
   },
@@ -229,7 +229,7 @@ export default {
       return res.json({ status: true, mensage: "nada foi apagado" })
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error pulses=>delete" })
     }
   },
@@ -241,7 +241,7 @@ export default {
 
       return res.json({ status: true, dados: {id,id_user,id_question,answer}})
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })
     }
   },
@@ -253,7 +253,7 @@ export default {
 
       return res.json({ status: true, dados: {id,id_user,id_question,answer}})
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })
     }
   },

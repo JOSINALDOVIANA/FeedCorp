@@ -16,7 +16,7 @@ function Feedbaks() {
       }
     })
   }, [])
-  console.log(values)
+  // // console.log(values)
 
   return (
     <Row className="row-sm">

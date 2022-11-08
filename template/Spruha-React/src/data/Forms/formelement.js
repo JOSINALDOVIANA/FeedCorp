@@ -505,7 +505,7 @@ export function SelectoptionsSizesLg() {
           },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -536,7 +536,7 @@ export function SelectoptionsSizesMd() {
           },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -566,7 +566,7 @@ export function SelectoptionsSizesSm() {
           },
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />

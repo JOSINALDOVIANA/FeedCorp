@@ -7,7 +7,7 @@ export default {
             const id = await conexao("countries").insert({country});
             return res.json({status:true,country:{id:id[0],country}})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro insertCountry"})
         }
     },
@@ -17,7 +17,7 @@ export default {
             await conexao("countries").del().where({id});
             return res.json({status:true,mensage:"apagado"})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro deleteCountry"})
         }
     },
@@ -27,7 +27,7 @@ export default {
             await conexao("countries").update({country}).where({id});
             return res.json({status:true,mensage:"atualizado"})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro updateCountry"})
         }
     },
@@ -37,7 +37,7 @@ export default {
             const country=!id?await conexao("countries"):await conexao("countries").where({id});
             return res.json({status:true,country})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro getCountry"})
         }
     },
@@ -47,7 +47,7 @@ export default {
             const id = await conexao("states").insert({state,initials,id_country});
             return res.json({status:true,state:{id:id[0],state}})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro insertState"})
         }
     },
@@ -57,7 +57,7 @@ export default {
             await conexao("states").del().where({id});
             return res.json({status:true,mensage:"apagado"})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro deleteState"})
         }
     },
@@ -67,7 +67,7 @@ export default {
             await conexao("states").update({state,id_country,initials}).where({id});
             return res.json({status:true,mensage:"atualizado"})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro updateState"})
         }
     },
@@ -80,7 +80,7 @@ export default {
             const states=!id?await conexao("states"):await conexao("states").where({id});
             return res.json({status:true,states})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro getState"})
         }
     },
@@ -90,7 +90,7 @@ export default {
             const id = await conexao("cities").insert({city,id_state});
             return res.json({status:true,city:{id:id[0],city}})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro insertCity"})
         }
     },
@@ -100,18 +100,18 @@ export default {
             await conexao("cities").del().where({id});
             return res.json({status:true,mensage:"apagado"})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro deleteCity"})
         }
     },
     async updateCity(req,res){
         const {id,city,updated_at,id_state}=req.body;
-        console.log(req.body)
+        // console.log(req.body)
         try {
             await conexao("cities").update({city,updated_at,id_state}).where({id});
             return res.json({status:true,mensage:"atualizado"})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro updateCity"})
         }
     },
@@ -124,7 +124,7 @@ export default {
             const cities=!id?await conexao("cities"):await conexao("cities").where({id});
             return res.json({status:true,cities})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({status:false,mensage:"erro getCity"})
         }
     },

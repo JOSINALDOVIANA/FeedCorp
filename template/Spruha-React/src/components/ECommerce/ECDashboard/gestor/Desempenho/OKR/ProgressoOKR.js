@@ -27,7 +27,7 @@ const Okr = () => {
 
   }, [dadosrota.state]);
 
-  console.log(values)
+  // // console.log(values)
 
   return (
     <Fragment>

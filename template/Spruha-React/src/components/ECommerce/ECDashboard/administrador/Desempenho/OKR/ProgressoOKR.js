@@ -10,7 +10,7 @@ const Okr = () => {
   const dadosrota = useLocation();
   const navegar = useNavigate();
   const [values, setValues] = useState({});
-console.log(values)
+// // console.log(values)
   useEffect(() => {
 
     setValues(dadosrota.state);
@@ -24,7 +24,7 @@ console.log(values)
     // setValues(a => ({ ...a, okrselect: { ...a.okrselect, keys } }));
   }, [dadosrota.state]);
 
-  console.log(values)
+  // // console.log(values)
 
 
   return (

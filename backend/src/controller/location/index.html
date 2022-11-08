@@ -165,7 +165,7 @@
     document.getElementById('updatecity').addEventListener('submit', async e => {
         e.preventDefault();
         axios.put("http://localhost:3001/city/update", { id_state: e.target['selectstate'].value, city: e.target['createcity'].value, id_country:e.target['selectpais'].value,id:e.target['selectcity'].value }).then(r => {
-            console.log(r.data.status);
+            // console.log(r.data.status);
             carregapaises();
         })
     })
@@ -174,7 +174,7 @@
     document.getElementById('createcity').addEventListener('submit', async e => {
         e.preventDefault();
         axios.post("http://localhost:3001/city/insert", { id_state: e.target['selectcreatestate'].value, city: e.target['createcity'].value }).then(r => {
-            console.log(r.data.status);
+            // console.log(r.data.status);
             carregapaises();
         })
     })
@@ -184,16 +184,16 @@
     document.getElementById('createpais').addEventListener('submit', async (e) => {
         e.preventDefault();
         axios.post("http://localhost:3001/country/insert", { country: e.target['createpais'].value }).then(r => {
-            console.log(r.data.status);
+            // console.log(r.data.status);
             carregapaises();
         })
     })
     //form atualizar pais
     document.getElementById("paisupdate").addEventListener('submit', e => {
         e.preventDefault();
-        // console.log(e.target['select'].value)
+        // // console.log(e.target['select'].value)
         axios.put("http://localhost:3001/country/update", { id: e.target['selectupdate'].value, country: e.target['paisupdate'].value }).then(r => {
-            console.log(r.data.status);
+            // console.log(r.data.status);
             carregapaises();
         })
     })
@@ -210,9 +210,9 @@
     //form atualizar estado
     document.getElementById("updatestate").addEventListener('submit', e => {
         e.preventDefault();
-        // console.log(e.target['select'].value)
+        // // console.log(e.target['select'].value)
         axios.put("http://localhost:3001/state/update", { id: e.target['selectupdatestate'].value, state: e.target['updatestate'].value, initials: e.target['initials'].value, id_country: e.target['selecupdatepais'].value }).then(r => {
-            console.log(r.data)
+            // console.log(r.data)
             carregapaises()
         })
     })

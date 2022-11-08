@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 
 const App = express();
 // App.use(function (req, res, next) {
-//   // console.log('Time:', Date.now());
+//   // // console.log('Time:', Date.now());
 //   next();
 // });
 App.use(cors());
@@ -31,5 +31,5 @@ App.use("/*", (req, res, next) => {
 });
 var port = 3001;
 App.listen(port, () => {
-  console.log(`servidor rodando na porta: ${port}`);
+  // console.log(`servidor rodando na porta: ${port}`);
 });

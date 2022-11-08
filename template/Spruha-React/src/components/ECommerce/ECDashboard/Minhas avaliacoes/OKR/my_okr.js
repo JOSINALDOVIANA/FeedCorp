@@ -23,18 +23,18 @@ function MinhaOKR() {
     }, [dadosrota])
 
     async function CarregarOkrs(keys) {
-        //    console.log(keys)
+        //    // console.log(keys)
         let okrs = [];
 
         for (let key of keys) {
             await api.get(`okrs/getOne?id=${key.id_okr}`).then(r => {
                 okrs.push({ ...r.data.okr })
-                // console.log(r.data.okr)
+                // // console.log(r.data.okr)
 
             })
         }
         // okrs=okrs.filter((item,index)=>item.id!=okrs[index].id)
-        console.log(okrs)
+        // // console.log(okrs)
         setValues(a => ({ ...a, okrs }))
         FiltrarOkrs(okrs)
     }
@@ -57,7 +57,7 @@ function MinhaOKR() {
             }
             let keys = okrs2[index1]?.keys
             okrs2[index1].progress = keys?.length > 0 ? Math.round((process / keys.length), -1) : 0
-            // console.log(keys.length)
+            // // console.log(keys.length)
             if (okrs2[index1].progress == 100) {
                 okrs2[index1].concluded = true
             }
@@ -73,7 +73,7 @@ function MinhaOKR() {
     }
 
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <Fragment>

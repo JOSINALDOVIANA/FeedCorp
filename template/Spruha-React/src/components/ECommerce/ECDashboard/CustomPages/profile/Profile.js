@@ -46,7 +46,7 @@ function Profile() {
 
 
 
-  console.log(values)
+  // console.log(values)
 
   return (
     <Fragment>
@@ -159,7 +159,7 @@ function Profile() {
                               // DELETANDO:
                               try {
                                 api.delete(`/images/deletar?key=${values?.image?.key}&id=${values?.image?.id}`).then(r => {
-                                  console.log(r)
+                                  // console.log(r)
                                 });
                               } catch (error) {
 
@@ -285,8 +285,8 @@ function Profile() {
                               setPass(a => !a)
                               document.getElementById('ps').setAttribute("type", `${pass ? "text" : "password"}`)
 
-                              // console.log(pass)
-                              // console.log(icon)
+                              // // console.log(pass)
+                              // // console.log(icon)
 
                             }}>
                               <i className={icon ? "bi bi-eye-slash-fill" : "bi bi-eye-fill"}></i>

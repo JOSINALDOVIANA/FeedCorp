@@ -21,7 +21,7 @@ const CriarAvpr = () => {
   useEffect(() => {
     setValues(dadosrota.state)
   }, [dadosrota])
-  console.log(avpr)
+  // // console.log(avpr)
 
   // useEffect(()=>{
   //   if(document.querySelectorAll(".activeUNIT").length>0){
@@ -79,7 +79,7 @@ const CriarAvpr = () => {
                     variant="light" type="button" disabled>
                     <i className="fe fe-calendar lh--9 op-6"></i>
                   </Button>
-                  {/* <formelement.Datepicker onChange={e=>{console.log(e)}}/> */}
+                  {/* <formelement.Datepicker onChange={e=>{// console.log(e)}}/> */}
                   <Datepicker
                     selected={selectdata}
                     minDate={selectdata}
@@ -301,7 +301,7 @@ const CriarAvpr = () => {
                     "direction": avpr.direction
                   }
                   api.post(`/avpr/insert`, { ...obj }).then(r => {
-                    console.log(r)
+                    // // console.log(r)
                     if (r.data.status) {
                       navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado_unidade/`, { state: values })
                     }

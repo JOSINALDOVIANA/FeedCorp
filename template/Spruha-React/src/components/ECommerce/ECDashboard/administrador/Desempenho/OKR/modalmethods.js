@@ -419,8 +419,8 @@ export function Modalcontentscroll() {
 }
 export const Datepicker = () => {
   const [date, setDate] = useState(new Date());
-  const handleCalendarClose = () => console.log("Calendar closed");
-  const handleCalendarOpen = () => console.log("Calendar opened");
+  const handleCalendarClose = () => // console.log("Calendar closed");
+  const handleCalendarOpen = () => // console.log("Calendar opened");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -699,7 +699,7 @@ export function ModalwithSelect2() {
               { value: "team building", label: "Team Building" }
             ]}
             onSelect={(value) => {
-              console.log(value);
+              // // console.log(value);
             }}
             listMaxHeight={140} //by default 140
           />

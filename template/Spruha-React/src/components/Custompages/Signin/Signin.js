@@ -42,7 +42,7 @@ const Signin = () => {
         unit = r.data?.unit[0];
         status = r.data?.status;
         company=r.data?.company[0];    
-        // console.log(r.data)   
+        // // console.log(r.data)   
       }
     });
    
@@ -67,16 +67,16 @@ const Signin = () => {
           }
           let keys=okrs[index1].keys
           okrs[index1].progress=process/keys.length
-          // console.log(keys.length)
+          // // console.log(keys.length)
           if(okrs[index1].progress==100){
             okrs[index1].concluded=true
           }
           await api.put(`/okrs/update`,{...okrs[index1]});
         }
         okrscriados=okrs;
-        // console.log(okrscriados)
+        // // console.log(okrscriados)
       })
-      // console.log("aqui")
+      // // console.log("aqui")
       await navegar(`${process.env.PUBLIC_URL}/`, { state: { dadosUser, image, permissions, units, unit,company,okrscriados } });
     }
 

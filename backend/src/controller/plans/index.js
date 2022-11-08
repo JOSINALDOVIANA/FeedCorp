@@ -132,7 +132,7 @@ export default {
              let plans=await trx("plans");
              for (let key in plans) {
                  
-                // console.log(key)
+                // // console.log(key)
                  const modules=await  trx("module_plan").where({id_plan:plans[key].id})
                  .join("modules","module_plan.id_module","=","modules.id")
                  .select("modules.*")

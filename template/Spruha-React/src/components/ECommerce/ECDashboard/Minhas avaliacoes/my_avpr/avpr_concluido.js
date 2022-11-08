@@ -16,7 +16,7 @@ function AVPR_resposta() {
         }
         setValues(dadosrota.state);
 
-        console.log(dadosrota.state)
+        // console.log(dadosrota.state)
 
     }, [dadosrota])
     // useEffect(() => {
@@ -39,8 +39,8 @@ function AVPR_resposta() {
 
     //     paraquem = paraquem_serial
 
-    //     // console.log(items)
-    //     // console.log(paraquem)
+    //     // // console.log(items)
+    //     // // console.log(paraquem)
     //     setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
     // }, [dadosrota])
 
@@ -50,11 +50,11 @@ function AVPR_resposta() {
         if (resp.resp) {
 
             // let answer=resp.resp;
-            // console.log(answer)
+            // // console.log(answer)
             if (resp.item.min) {
 
                 let por = resp.resp.result ? resp.resp.result : Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
-                console.log(por)
+                // console.log(por)
                 if (por < 100) {
                     //   answer.resposta.result=por;
                     //   save(answer.resposta);
@@ -80,7 +80,7 @@ function AVPR_resposta() {
             if (resp.item.max) {
 
                 let por = resp.resp.result ? resp.resp.result : Math.round((resp?.resp?.answer / resp?.item?.goal) * 100, -1);
-                // console.log(por)
+                // // console.log(por)
                 if (100 < por || por == 100 || por < 0) {
                     // answer.resposta.result=100<por?100-(por-100):por;
                     //   save(answer.resposta);
@@ -107,9 +107,9 @@ function AVPR_resposta() {
             }
         }
         return ""
-        console.log(resp)
+        // // console.log(resp)
     }
-    console.log(values)
+    // // console.log(values)
 
     return (
         <Fragment>

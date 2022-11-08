@@ -150,7 +150,7 @@ export default function ProductCategory() {
 
         ]}
         onSelect={(value) => {
-          // console.log(value);
+          // // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -200,7 +200,7 @@ export function BlogpostCategory() {
 
         ]}
         onSelect={(value) => {
-          // console.log(value);
+          // // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />

@@ -24,8 +24,8 @@ const CriarOKR = () => {
     setOkr({ keys: [], id_user: dadosrota.state.dadosUser.id })
     api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
-  // console.log(values)
-  console.log(okr)
+  // // console.log(values)
+  // // console.log(okr)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -201,7 +201,7 @@ const CriarOKR = () => {
                     
                     //  it.setAttribute("placeholder","Integrante")
                       let user = okr.user[0];
-                      // console.log(user);
+                      // // console.log(user);
                        api.get(`/images/listar?email=${user.email}`).then(r => { user.image = r.data.dados });
 
                       setOkr(a => ({

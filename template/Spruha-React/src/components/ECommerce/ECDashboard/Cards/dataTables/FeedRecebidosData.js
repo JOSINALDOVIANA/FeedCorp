@@ -51,7 +51,7 @@ export function Basicdatatable({ values }) {
         // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
         return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
     }
-    //  console.log(v1)
+    //  // console.log(v1)
 
     // function downloadCSV(array) {
     //     const link = document.createElement('a');
@@ -165,7 +165,7 @@ export function Basicdatatable({ values }) {
         // },
     ];
     //     let data1 = datafiltro();
-    //    console.log(datafiltro())
+    //    // console.log(datafiltro())
 
     // var click = (id) => {
     //     let i = data.filter((e, index) => {

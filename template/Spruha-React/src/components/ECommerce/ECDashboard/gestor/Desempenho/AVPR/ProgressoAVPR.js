@@ -42,13 +42,13 @@ const ProgressoOKR = () => {
 
     paraquem = paraquem_serial
 
-    // console.log(items)
-    // console.log(paraquem)
+    // // console.log(items)
+    // // console.log(paraquem)
     setValues(a => ({ ...a, AVPRselect: { ...a.AVPRselect, paraquem } }))
   }, [dadosrota])
 
 
-  console.log(values)
+  // // console.log(values)
 
  async function save(answer){
   await api.put(`item_answer_user/update`,{...answer})
@@ -62,7 +62,7 @@ const ProgressoOKR = () => {
   }
  function resposta(resp){
   let answer=resp;
-  // console.log(answer)
+  // // console.log(answer)
   if(resp.min){
 
     let por=Math.round((resp.resposta.answer/resp.goal)*100,-1);
@@ -92,7 +92,7 @@ const ProgressoOKR = () => {
   if(resp.max){
     
     let por=Math.round((resp.resposta.answer/resp.goal)*100,-1);
-    // console.log(por)
+    // // console.log(por)
     if(100<por||por==100){
       answer.resposta.result=100<por?100-(por-100):por;
         save(answer.resposta);

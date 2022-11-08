@@ -37,7 +37,7 @@ function Fullscreen() {
 function Header({ values }) {
 
   const navegar = useNavigate()
-  // console.log(values)
+  // // console.log(values)
 
 
 

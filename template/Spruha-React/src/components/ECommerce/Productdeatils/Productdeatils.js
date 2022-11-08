@@ -13,7 +13,7 @@ const Productdeatils = () => {
   let [img, setimg] = useState(watch4);
 
   let click = (id) => {
-    // console.log(id)
+    // // console.log(id)
     if ((id) === "watch3") {
       setimg(watch3)
     }

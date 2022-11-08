@@ -31,10 +31,10 @@ const AvPorResultados = () => {
   //     return { ...okr, keys }
   //   });
 
-  //   // console.log(okrs_serial)
+  //   // // console.log(okrs_serial)
   //   setValues(a => ({ ...a, okrscriados: okrs_serial }))
   // }
-  console.log(values)
+  // // console.log(values)
 
   function formatData(data) {
     const dat = new Date(data);

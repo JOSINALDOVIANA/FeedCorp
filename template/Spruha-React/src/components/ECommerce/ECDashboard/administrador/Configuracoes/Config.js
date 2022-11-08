@@ -23,7 +23,7 @@ function Settings() {
         else {
             modules = []
         }
-        // console.log(modules)
+        // // console.log(modules)
 
         api.put(`/company/update`, { ...values.company }).then(r => {
             if (r.data.status) {
@@ -60,12 +60,12 @@ function Settings() {
 
     }, [dadosrota.state])
 
-    console.log(values)
+    // console.log(values)
 
 
 
     function CarregarCidades(id_state) {
-        // console.log(id_state)
+        // // console.log(id_state)
         api.get(`city/get?id_state=${id_state}`).then(r => {
             if (r.data.status) {
                 let ct = []
@@ -355,7 +355,7 @@ function Settings() {
                                                     </Form.Group>
                                                     {/* <i style={{color:"#36D98D",cursor:"pointer",border:"3px",padding:"3px",borderRadius:"5px"}} onClick={async ()=>{
                                                         axios.get(`http://cep.republicavirtual.com.br/web_cep.php?cep=68909818&formato=jsonp`).then(r=>{
-                                                            console.log(r.data)
+                                                            // console.log(r.data)
                                                         })
                                                     }} >Buscar Cep</i > */}
                                                 </Col>

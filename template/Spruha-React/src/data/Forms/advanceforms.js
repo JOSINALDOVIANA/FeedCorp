@@ -358,7 +358,7 @@ export function MUIdropzonebutton() {
         open={open}
         onClose={() => setOpen(false)}
         onSave={(files) => {
-          console.log("Files:", files);
+          // console.log("Files:", files);
           setOpen(false);
         }}
         showPreviews={true}

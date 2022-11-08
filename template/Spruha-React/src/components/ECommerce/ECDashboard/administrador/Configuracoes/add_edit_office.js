@@ -15,13 +15,13 @@ function EditUser() {
     //   event.preventDefault();
     //   event.stopPropagation();
     // }
-    //  console.log(event.target['office'].value)
+    //  // console.log(event.target['office'].value)
     let obj = {
       office: event.target['office'].value,
       id_company: values.company.id,
       id_user: values.dadosUser.id
     }
-    //  console.log(obj)
+    //  // console.log(obj)
 
     api.post(`cargos/insert`, { ...obj }).then(r => {
       if (r.data.status) {
@@ -47,7 +47,7 @@ function EditUser() {
       setValues(a => ({ ...a, cargos: r.data.cargo }));
     })
   }, [dadosrota.state])
-  console.log(values)
+  // // console.log(values)
 
   return (
     <Fragment>

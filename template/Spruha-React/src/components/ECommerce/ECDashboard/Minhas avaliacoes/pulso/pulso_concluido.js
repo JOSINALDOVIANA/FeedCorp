@@ -45,7 +45,7 @@ function MeuClimaPulso() {
 
     }, [dadosrota])
 
-    // console.log(values)
+    // // console.log(values)
 
     return (
         <Fragment>

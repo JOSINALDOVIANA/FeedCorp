@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Card, useAccordionButton, Accordion, Breadcrumb, Button, Col, Row } from 'react-bootstrap';
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
-    console.log('totally custom!'),
+    // console.log('totally custom!'),
   );
   return (
     <Button

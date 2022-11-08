@@ -32,7 +32,7 @@ function Feedbaks() {
       }
     })
   }, [])
-  console.log(feedback)
+  // // console.log(feedback)
   useEffect(() => {
     api.get(`/typesfeedbacks/get`).then(r => {
       let tipos = r.data.types;

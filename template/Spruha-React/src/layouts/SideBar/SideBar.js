@@ -15,7 +15,7 @@ const SideBar = ({values}) => {
   const [menuitems, setMenuitems] = useState([]);
   const [MENUITEMS, setMENUITEMS] = useState([]);
 
-// console.log(menuitems)
+// // console.log(menuitems)
   useEffect(() => {
     if (String(values?.permissions) === "administrador") { setMenuitems(MENUADM);setMENUITEMS(MENUADM) }
     if (String(values?.permissions) === "gestor") { setMenuitems(MENUGESTOR);setMENUITEMS(MENUGESTOR) }

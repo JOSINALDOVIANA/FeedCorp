@@ -26,7 +26,7 @@ export default {
               return res.json({status:true, mensage:"salvo"})
             })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
            return res.json({status:false,mensage:error})
         }
     },
@@ -39,7 +39,7 @@ export default {
                 return res.json({startus:true})
             })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:error})
         }
     },
@@ -87,7 +87,7 @@ export default {
 
                     }
                    }
-                //    console.log(users)
+                //    // console.log(users)
                company={... company,city,country,state,plan,modules:[...modules_plan_serial,...module_solos_serial],users}
                return res.json({startus:true,company})
                }
@@ -95,7 +95,7 @@ export default {
 
             })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:"erro comapny=>get"});
         }
     },
@@ -112,7 +112,7 @@ export default {
             modules=false
                    
         } = req.body;
-        // console.log(req.body)
+        // // console.log(req.body)
         try {
             await conexao.transaction(async (trx)=>{
                await trx("companies").where({id}).update({namefantasy,cnpj,id_city,id_country,id_plan,id_state,postcard});              
@@ -123,7 +123,7 @@ export default {
                 return res.json({status:true})
             })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({status:false,mensage:"erro company=>update"})
         }
     },

@@ -12,7 +12,7 @@ export default {
            
             res.json({status:true,message:"permisoes adicionadas"});
         } catch (error) {
-          //  console.log(error);
+          //  // console.log(error);
             res.json({status:false,mensagem:"error server"});
         }
     },
@@ -25,7 +25,7 @@ export default {
           
             res.json({status:true,message:"permissão atualizada"});
         } catch (error) {
-           console.log(error);
+           // console.log(error);
             res.json({status:false,mensagem:"error permissions=>update"});
         }
     },
@@ -53,7 +53,7 @@ export default {
           
             res.json({status:true,permissions});
         } catch (error) {
-         console.log(error)
+         // console.log(error)
             res.json({status:false,mensagem:"error permissions=>getPermissions"});
         }
     },

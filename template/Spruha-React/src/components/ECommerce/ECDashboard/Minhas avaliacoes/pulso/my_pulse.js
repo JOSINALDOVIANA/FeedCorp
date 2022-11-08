@@ -29,7 +29,7 @@ function MeuClimaPulso() {
                 pulsesDirectUser[i].perguntasResp = 0
                 for (const iterator of pulsesDirectUser[i].questions) {
                     if (!!iterator.resp) {
-                        //   console.log("entrou aqui ")
+                        //   // console.log("entrou aqui ")
                         pulsesDirectUser[i].perguntasResp += 1
                     }
                 }
@@ -42,7 +42,7 @@ function MeuClimaPulso() {
         })
     }, [dadosrota])
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <Fragment>

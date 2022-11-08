@@ -6,7 +6,7 @@ import { FeedBox, MuiBox } from './styles';
 
 function Colaborador() {
   const [values, setValues] = UseDados();
-  // console.log(values)
+  // // console.log(values)
   return (
 
     <MuiBox>

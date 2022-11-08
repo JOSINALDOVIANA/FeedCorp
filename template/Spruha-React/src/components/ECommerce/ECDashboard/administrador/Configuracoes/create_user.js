@@ -11,11 +11,11 @@ function CreateUser() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    // console.log(values)
-    // console.log(event)
+    // // console.log(values)
+    // // console.log(event)
 
     api.post(`user/insert`, { ...values.usercreate }).then(r => {
-      console.log(r)
+      // // console.log(r)
       if (r.data.status) {
         successAlert()
         setValues(a => ({ ...a, usercreate: reset() }))
@@ -40,7 +40,7 @@ function CreateUser() {
     })
 
   }, [dadosrota.state])
-  console.log(values)
+  // // console.log(values)
   function reset() {
     return ({
       "name": "",

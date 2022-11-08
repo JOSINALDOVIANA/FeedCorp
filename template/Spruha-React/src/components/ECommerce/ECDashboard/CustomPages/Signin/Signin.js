@@ -24,7 +24,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log(e)
+    // // console.log(e)
 
     let obt = {};
     e.target["e-mail"].value.indexOf("@") > 0 ?
@@ -49,7 +49,7 @@ const Signin = () => {
         status = r.data?.status;
         company = r.data?.company[0];
         cargo = r.data?.cargo;
-        // console.log(r.data)   
+        // // console.log(r.data)   
       }
     });
 
@@ -80,7 +80,7 @@ const Signin = () => {
           }
           let keys = okrs[index1].keys
           okrs[index1].progress = process / keys.length
-          // console.log(keys.length)
+          // // console.log(keys.length)
           if (okrs[index1].progress == 100) {
             okrs[index1].concluded = true
           }

@@ -26,12 +26,12 @@ function EditUnity() {
       id: userEdit.id
 
     }
-    // console.log(user)
-    // console.log(values)
-    // console.log(event)
+    // // console.log(user)
+    // // console.log(values)
+    // // console.log(event)
 
     // const form = event.currentTarget;
-    // console.log(form)
+    // // console.log(form)
     // if (form.checkValidity() === false) {
     //   event.preventDefault();
     //   event.stopPropagation();
@@ -39,7 +39,7 @@ function EditUnity() {
 
     // setValidated(true);
     api.put(`user/update`, { ...user }).then(r => {
-      console.log(r)
+      // // console.log(r)
       if (r.data.status) {
         saveAlert()
         navegar(`${process.env.PUBLIC_URL}/corporacao`, { state: values })
@@ -71,7 +71,7 @@ function EditUnity() {
     })
 
   }, [dadosrota.state])
-  // console.log(values.userselect)
+  // // console.log(values.userselect)
 
   return (
     <Fragment>

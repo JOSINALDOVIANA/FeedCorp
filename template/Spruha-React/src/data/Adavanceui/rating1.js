@@ -48,7 +48,7 @@ export function StarRating() {
 }
 // Customizerating:
 export function CustomizedRating() {
-  return <ReactRating initialRating={2} onChange={(e) => console.log(e)} />;
+  return <ReactRating initialRating={2} onChange={(e) => // console.log(e)} />;
 }
 // Radiogroup:
 const customIcons = {

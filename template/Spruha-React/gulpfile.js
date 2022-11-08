@@ -10,7 +10,7 @@ var beautify = require('gulp-beautify');
 
 //_______ task for scss folder to css main style 
 gulp.task('watch', function () {
-    console.log('Command executed successfully compiling SCSS in assets.');
+    // console.log('Command executed successfully compiling SCSS in assets.');
     return gulp.src('src/assets/scss/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -24,7 +24,7 @@ gulp.task('watch', function () {
 
 //_______ task for Plugins scss folder to Plugins css main style 
 gulp.task('plugins', function () {
-    console.log('Command executed successfully compiling SCSS in plugins.');
+    // console.log('Command executed successfully compiling SCSS in plugins.');
     return (gulp.src('src/assets/plugins/**/*.scss'), gulp.src('src/assets/plugins/**/**/*.scss'))
         .pipe(sourcemaps.init())
         .pipe(sass())

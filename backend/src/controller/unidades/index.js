@@ -68,7 +68,7 @@ export default {
             }
             return res.json({ status: true, units: await conexao('units') })
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ error: true, message: error.sqlMessage });
         }
     },
@@ -136,7 +136,7 @@ export default {
             return res.json({ status: true, units: await conexao("units") })
         }
         catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ error: true, message: error.sqlMessage });
         }
     },

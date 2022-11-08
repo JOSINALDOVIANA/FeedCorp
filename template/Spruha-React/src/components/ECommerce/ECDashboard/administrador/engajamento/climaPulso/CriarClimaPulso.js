@@ -41,7 +41,7 @@ const CriarClimaPulso = () => {
 
 
   }, [dadosrota.state])
-  console.log(pulse)
+  // // console.log(pulse)
   return (
     <Fragment>
       {/* <!-- Page Header --> */}
@@ -146,7 +146,7 @@ const CriarClimaPulso = () => {
 
                               if (pulse.unitSelect.indexOf(unit.id) < 0) {
                                 const i = document.getElementById(`${unit.id}-link`);
-                                // console.log(i)
+                                // // console.log(i)
                                 i.classList.add("activeUNIT");
                                 setPulse(a => ({ ...a, unitSelect: [...a.unitSelect, unit.id] }));
 
@@ -156,7 +156,7 @@ const CriarClimaPulso = () => {
                                 setPulse(a => ({ ...a, unitSelect: selectedunit }))
                                 const i = document.getElementById(`${unit.id}-link`);
                                 i.classList.remove("activeUNIT");
-                                console.log(pulse)
+                                // console.log(pulse)
                               }
 
                             }}>{unit.initials}</Button>
@@ -229,7 +229,7 @@ const CriarClimaPulso = () => {
                   if (!!pulse.company) {
                     obj.company = pulse.company
                   }
-                  // console.log(selectedunit.length)
+                  // // console.log(selectedunit.length)
                   if (pulse.unitSelect.length > 0) {
                     obj.units = pulse.unitSelect.map(item => (item));
                   }
@@ -245,8 +245,8 @@ const CriarClimaPulso = () => {
                     company: false,
                     questions: []
                   }))
-                  // console.log(obj)
-                  // console.log(pulse)
+                  // // console.log(obj)
+                  // // console.log(pulse)
                   api.post("pulses/insert", { ...obj }).then(r => {
                     if (r.status) {
                       successAlert()

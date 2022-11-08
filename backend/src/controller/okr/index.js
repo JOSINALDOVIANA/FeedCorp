@@ -8,8 +8,8 @@ export default {
         validity = new Date(validity);
         //keys=[{description,id_okr=null,id_user,status}...]
         //validity=new date()
-        console.log(req.body)
-        console.log(validity)
+        // console.log(req.body)
+        // console.log(validity)
         try {
             await conexao.transaction(async trx => {
                 const id_okr = await trx("okrs").insert({ objective, id_user, progress, validity });
@@ -34,12 +34,12 @@ export default {
             })
             // return res.json({status:true})
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro okr=>insert" })
         }
     },
     async update(req, res) {
-        // console.log("chegou aqui");
+        // // console.log("chegou aqui");
         let { id, objective, id_user, progress = 0, validity, keys, concluded = false } = req.body;
         //keys=[{id,description,id_okr=obrigatorio,id_user,status}...]
         if (concluded) {
@@ -70,14 +70,14 @@ export default {
                 })
             })
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro okr=>update" })
         }
     },
     async getOne(req, res) {
 
         const { id } = req.query;
-        console.log(req.query)
+        // console.log(req.query)
         try {
             if (!!id) {
                 let okr = await conexao('okrs').where({ id });
@@ -95,7 +95,7 @@ export default {
 
             }
          catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro okr=>getOne" })
         }
     },
@@ -123,7 +123,7 @@ export default {
             return res.json({ status: true, okrs: await conexao("okrs") });
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro okr=>getTwu" })
         }
     },
@@ -133,7 +133,7 @@ export default {
             await conexao("okrs").del().where({ id })
             return res.json({ status: true, mensage: "apagado" })
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "error okr=>delete" })
         }
     },
@@ -151,7 +151,7 @@ export default {
 
             })
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro keys=>insert" })
         }
     },
@@ -169,7 +169,7 @@ export default {
                 return res.json({ status: true, mensage: "atualizados" })
             })
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro keys=>update" })
         }
     },
@@ -216,7 +216,7 @@ export default {
             return res.json({ status: false, mensage: "enviar id, id_okr ou id_user" })
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro key=>getOne" })
         }
     },
@@ -234,7 +234,7 @@ export default {
                 return res.json({ status: true, keys })
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "erro okr=>getTwu" })
         }
     },
@@ -244,7 +244,7 @@ export default {
             await conexao("okrs").del().where({ id })
             return res.json({ status: true, mensage: "apagado" })
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return res.json({ status: false, mensage: "error okr=>delete" })
         }
     },

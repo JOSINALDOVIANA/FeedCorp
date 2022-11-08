@@ -16,7 +16,7 @@ export function FormExample1() {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={// console.log}
       initialValues={{
         firstName: "Mark",
         lastName: "Otto",

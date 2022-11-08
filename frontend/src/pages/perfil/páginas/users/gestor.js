@@ -6,7 +6,7 @@ import { FeedBox, MuiBox } from './styles';
 
 function Gestor() {
   const [values, setValues] = UseDados();
-  // console.log(values)
+  // // console.log(values)
   return (
 
     <MuiBox>

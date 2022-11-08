@@ -1,13 +1,14 @@
 import { Avatar } from "@material-ui/core";
 import React, { useState, Fragment, useEffect } from "react";
-import { Modal, Button, Table, Image, Form } from "react-bootstrap";
+import { Modal, Button, Table, Form } from "react-bootstrap";
 import api from "../../../../api";
 import QRCode from 'qrcode.react'
+
 export function AlertProfileUnity({ userSelect }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    console.log(userSelect)
+    // // console.log(userSelect)
     return (
         <Fragment>
             <label className="btn ripple btn-primary btn-sm border mt-3 tx-bold" onClick={handleShow}>
@@ -58,7 +59,7 @@ export function AdminProfileUnity({ userUnity }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    console.log(userUnity)
+    // // console.log(userUnity)
     return (
         <Fragment>
             <label className="btn btn-sm btn-primary me-1 mt-2" onClick={handleShow}>
@@ -113,7 +114,7 @@ export function OfficeChanges({ cargo, setValues }) {
     const handleShow = () => setShow(true);
     const [cargoEdit, setCargo] = useState({});
     useEffect(() => { setCargo(cargo) }, [])
-    // console.log(cargoEdit)
+    // // console.log(cargoEdit)
     return (
         <Fragment>
 
@@ -177,7 +178,7 @@ export function UnityChanges(props) {
     useEffect(() => {
         setunitEdit(props.unidade)
     }, [])
-    console.log(unitEdit)
+    // // console.log(unitEdit)
     return (
         <Fragment>
 
@@ -271,7 +272,7 @@ export function FeedbackQrCode(props) {
 
                     <QRCode
 
-                        value={`http:3.87.218.247:3000/feedback_cliente/${props?.values?.company?.id}`}
+                        value={`http://feedcorp.com.br/feedbacks/${props?.values?.company?.id}`}
                         size={300}
                         bgColor={"#ffff"}
                         fgColor={"#000000"}

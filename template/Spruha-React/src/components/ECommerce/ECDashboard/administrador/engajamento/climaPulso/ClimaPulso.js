@@ -27,7 +27,7 @@ const ClimaPulso = () => {
         pulsesDirectUser[i].perguntasResp=0
         for (const iterator of pulsesDirectUser[i].questions) {
           if(!!iterator.resp){
-            console.log("entrou aqui ")
+            // // console.log("entrou aqui ")
             pulsesDirectUser[i].perguntasResp+=1
           }
         }
@@ -37,7 +37,7 @@ const ClimaPulso = () => {
     })
     // return(()=>setValues({}))
   }, [dadosrota.state])
-  console.log(values)
+  // // console.log(values)
 
   function formatData(data) {
     const dat = new Date(data);

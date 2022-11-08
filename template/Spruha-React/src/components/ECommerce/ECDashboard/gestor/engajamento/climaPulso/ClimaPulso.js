@@ -27,7 +27,7 @@ const ClimaPulso = () => {
     })
     // return(()=>setValues({}))
   }, [dadosrota.state])
-  console.log(values)
+  // // console.log(values)
 
   function formatData(data) {
     const dat = new Date(data);

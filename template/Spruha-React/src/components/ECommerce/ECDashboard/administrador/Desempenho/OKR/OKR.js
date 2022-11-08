@@ -26,7 +26,7 @@ const Okr = () => {
         }
         let keys = okrs[index1].keys
         keys.length > 0 ? okrs[index1].progress = Math.round(process / keys.length, -1) : okrs[index1].progress = 0
-        // console.log(keys.length)
+        // // console.log(keys.length)
         if (okrs[index1].progress >= 100) {
           okrs[index1].concluded = true
         }
@@ -39,7 +39,7 @@ const Okr = () => {
       carregarUsersKeys(v)
     })
   }, [dadosrota])
-  console.log(values)
+  // console.log(values)
 
   function carregarUsersKeys(valores) {
     let okrs = valores?.okrscriados;
@@ -48,7 +48,7 @@ const Okr = () => {
       let keys = okr.keys.map(key => {
         let user = [];
         api.get(`/user/getAll?id=${key?.id_user}`).then(r => {
-          // console.log(r)
+          // // console.log(r)
           user.push({ ...r?.data?.Users })
 
         })
@@ -57,10 +57,10 @@ const Okr = () => {
       return { ...okr, keys }
     });
 
-    // console.log(okrs_serial)
+    // // console.log(okrs_serial)
     setValues(a => ({ ...a, okrscriados: okrs_serial }))
   }
-  //  console.log(values)
+  //  // console.log(values)
 
 
 

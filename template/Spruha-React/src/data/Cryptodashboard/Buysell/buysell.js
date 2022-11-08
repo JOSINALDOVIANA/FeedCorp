@@ -718,7 +718,7 @@ export function BuyCurrencySingleselect1() {
 
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -745,7 +745,7 @@ export function BuyCurrencySingleselect2() {
 
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -771,7 +771,7 @@ export function SellCurrencySingleselect1() {
 
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />
@@ -796,7 +796,7 @@ export function SellCurrencySingleselect2() {
 
         ]}
         onSelect={(value) => {
-          console.log(value);
+          // console.log(value);
         }}
         listMaxHeight={140} //by default 140
       />

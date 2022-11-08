@@ -44,7 +44,7 @@ export default {
             })
 
         } catch (error) {
-            // console.log(error)
+            // // console.log(error)
             return res.json({
                 status: false,
                 "message": error.sqlMessage
@@ -71,7 +71,7 @@ export default {
             
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({
                 status: false,
                 "message": error.sqlMessage
@@ -95,7 +95,7 @@ export default {
             })
 
         } catch (error) {
-             console.log(error)
+             // console.log(error)
             return res.json({
                 status: false,
                 "message": "error insertUser_ebr"
@@ -118,7 +118,7 @@ export default {
             })
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({
                 status: false,
                 "message": "error insertUser_unit"
@@ -129,7 +129,7 @@ export default {
         const { password, id, email } = req.query;
         
         const dados = await conexao("users").where({ id, email }).first();
-        // console.log(dados)
+        // // console.log(dados)
         try {
             if ((!dados||!isEmpty(dados)) && dados.password == password) {
                 await conexao("users").del().where({ id, password })
@@ -141,7 +141,7 @@ export default {
 
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             res.json({ status: false, message: "error user=>delete" })
         }
     },
@@ -161,12 +161,12 @@ export default {
             id_office=false,
             id_unit=false
         } = req.body;
-        // console.log(req.body)
+        // // console.log(req.body)
 
         try {
            
             const dadosantigos = await conexao("users").where({"users.id": id }).first();
-            // console.log(req.body)
+            // // console.log(req.body)
             if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
                 await conexao("users").update({
                     name,
@@ -183,7 +183,7 @@ export default {
                 if(id_unit){
 
                     let dado=await conexao("user_unit").where({"user_unit.id_user":id}).first();
-                    console.log(dado)
+                    // console.log(dado)
                     if(dado){
                         await conexao("user_unit").update({"user_unit.id_unit":id_unit,"user_unit.id_user":id}).where({"user_unit.id":dado.id});
                     }
@@ -200,7 +200,7 @@ export default {
             }
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({ status: false, message: error })
         }
 
@@ -255,7 +255,7 @@ export default {
             })
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ status: false, message: "error getUser_ebr" })
         }
 
@@ -274,7 +274,7 @@ export default {
             })
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             res.json({ status: false, message: "error getUser_unit" })
         }
 
@@ -325,7 +325,7 @@ export default {
                 return res.json({ status: false, message: "vefique os dados e tente novamente" });
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return res.json({
                 status: false,
                 mensagem: "error server"

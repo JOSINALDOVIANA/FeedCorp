@@ -41,7 +41,7 @@ function CreateUnity() {
     setValues(dadosrota.state)
     recarregarUnits()
   }, [dadosrota.state])
-  console.log(values)
+  // // console.log(values)
   function recarregarUnits() {
     api.get(`unit/consult?id_user=${dadosrota.state?.dadosUser?.id}`).then(r => {
       setUnits(r.data)

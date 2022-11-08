@@ -78,7 +78,7 @@ const TASKS = [
 ];
 function Dashboard() {
   const rotadados = useLocation();
-  // console.log(rotadados.state)
+  // // console.log(rotadados.state)
   const navegar = useNavigate()
   const  [values, setValues]  = useState({});
   useEffect(() => {

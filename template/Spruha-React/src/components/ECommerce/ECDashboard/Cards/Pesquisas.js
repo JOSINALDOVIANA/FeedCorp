@@ -18,7 +18,7 @@ const  Pesquisas= () => {
   }, [dadosrota])
   useEffect(() => {
     api.get(`/avpr/gettwu?id_user=${dadosrota.state.dadosUser.id}`).then(r => {
-      // console.log(r.data);
+      // // console.log(r.data);
       // setAvpc()
       let avpr = r.data.avaliações;
       for (const index in avpr) {

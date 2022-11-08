@@ -25,7 +25,7 @@ const CriarFeed = () => {
     // function carregarUsers() {
 
     //   api.get(`/user/getAll?id_company=${dadosrota?.state?.company.id}`).then(r => {
-    //     // console.log(dadosrota.state)
+    //     // // console.log(dadosrota.state)
     //     setFeedback(a => ({
     //       ...a,
     //       // users: r.data.Users,
@@ -51,8 +51,8 @@ const CriarFeed = () => {
   }, [dadosrota]);
 
 
-  // console.log(values)
-  console.log(feedback)
+  // // console.log(values)
+  // // console.log(feedback)
 
   return (
     <Fragment>

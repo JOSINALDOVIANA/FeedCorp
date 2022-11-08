@@ -1,11 +1,9 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import ReactApexChart from "react-apexcharts";
-import * as edashboard from "../../../data/Ecommerce/E-dashboard/edashboard";
-import { Breadcrumb, Button, Card, Col, ListGroup, ProgressBar, Row, Table, Dropdown } from "react-bootstrap";
-import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+
+import { Button, Card, Col, Row,  } from "react-bootstrap";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import api from "../../../api";
-import { any } from "prop-types";
+
 
 function ECDashboard() {
 
@@ -18,7 +16,7 @@ function ECDashboard() {
     setValues(dadosrota.state)
 
   }, [dadosrota.state])
-  // console.log(values)
+  // // console.log(values)
   useEffect(() => {
     async function getDados() {
       let r1 = await api.get(`/feedback/get?id_direction=${values?.dadosUser?.id}`)
@@ -34,7 +32,7 @@ function ECDashboard() {
   }, [])
 
 
-  console.log(values)
+  // // console.log(values)
 
   return (
     <Fragment>
@@ -136,7 +134,7 @@ function ECDashboard() {
           </Card>
         </Col>
 
-        {values?.permissions == "administrador" || values?.permissions == "gestor" ?
+        {String(values?.permissions) === "administrador" || String(values?.permissions) === "gestor" ?
           <Col sm={12} md={12} lg={12} xl={4}>
             <Card className="custom-card"
             // style={{ cursor: 'pointer' }}

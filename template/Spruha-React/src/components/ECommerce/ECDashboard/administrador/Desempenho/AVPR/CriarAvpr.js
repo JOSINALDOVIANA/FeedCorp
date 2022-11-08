@@ -23,7 +23,7 @@ const CriarAvpr = () => {
     setValues(dadosrota.state)
     api.get(`/unit/consult?id_user=${dadosrota.state.dadosUser.id}`).then(r => { setValues(a => ({ ...a, units: r.data })) });
   }, [dadosrota])
-  console.log(avpr)
+  // // console.log(avpr)
 
   // useEffect(()=>{
   //   if(document.querySelectorAll(".activeUNIT").length>0){
@@ -82,7 +82,7 @@ const CriarAvpr = () => {
                       "direction": avpr.direction
                     }
                     api.post(`/avpr/insert`, { ...obj }).then(r => {
-                      console.log(r)
+                      // // console.log(r)
                       if (r.data.status) {
                         successAlert()
                         navegar(`${process.env.PUBLIC_URL}/avaliacao_por_resultado/`, { state: values })
@@ -157,7 +157,7 @@ const CriarAvpr = () => {
                             let u = avpr.direction.units;
                             if (u.indexOf(unit.id) < 0) {
                               const i = document.getElementById(`${unit.id}-link2`);
-                              // console.log(i)
+                              // // console.log(i)
                               i.classList.add("activeUNITavpr");
                               setAVPR(a => ({ ...a, direction: { ...a.direction, units: [...a.direction.units, unit.id] } }));
 
