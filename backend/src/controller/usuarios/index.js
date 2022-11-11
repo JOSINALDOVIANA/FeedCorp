@@ -9,18 +9,18 @@ export default {
             id_image = null,
             email,
             password,
-            id_permission=false,
+            id_permission = false,
             id_unit = null,
             id_company = null,
             id_creator = null,
-            id_office=null,
+            id_office = null,
         } = req.body;
 
         try {
             await conexao.transaction(async trx => {
-                if(!id_permission){
-                    const permission=await trx("permissions").where({"description":"administrador"});
-                    id_permission=permission[0].id
+                if (!id_permission) {
+                    const permission = await trx("permissions").where({ "description": "administrador" });
+                    id_permission = permission[0].id
 
                 }
                 const user = await trx("users").insert({
@@ -35,10 +35,10 @@ export default {
                     id_office
                 });
 
-                
 
 
-                !!id_unit ? await trx("user_unit").insert({ id_user: user[0], id_unit }):null ;
+
+                !!id_unit ? await trx("user_unit").insert({ id_user: user[0], id_unit }) : null;
 
                 return res.json({ status: true, dadosUser: await trx("users").where({ id: user[0] }).first() });
             })
@@ -52,23 +52,23 @@ export default {
         }
     },
     async GetAll(req, res) {
-        const {id=false,id_company=false}=req.query;
+        const { id = false, id_company = false } = req.query;
 
         try {
-            if(id){
-                let Users=await conexao("users").where({"users.id":id})
-                // .join("images","users.id_image",'=','images.id')
-                .select("users.*")
-                .first()
-                let url=await conexao("images").where({id:Users.id_image}).first();
-                return res.json({ status: true, Users:{...Users,url} });
+            if (id) {
+                let Users = await conexao("users").where({ "users.id": id })
+                    // .join("images","users.id_image",'=','images.id')
+                    .select("users.*")
+                    .first()
+                let url = await conexao("images").where({ id: Users.id_image }).first();
+                return res.json({ status: true, Users: { ...Users, url } });
             }
-            if(id_company){
-                return res.json({ status: true, Users: await conexao("users").where({"users.id_company":id_company}).join("images","users.id_image",'=','images.id').select("users.*","images.url")});
+            if (id_company) {
+                return res.json({ status: true, Users: await conexao("users").where({ "users.id_company": id_company }).join("images", "users.id_image", '=', 'images.id').select("users.*", "images.url") });
             }
 
-                return res.json({ status: true, Users: await conexao("users")});
-            
+            return res.json({ status: true, Users: await conexao("users") });
+
 
         } catch (error) {
             // console.log(error)
@@ -78,7 +78,7 @@ export default {
             })
         }
     },
-   
+
     async insertUser_ebr(req, res) {
         const { id_ebr, id_user } = req.body;
 
@@ -95,7 +95,7 @@ export default {
             })
 
         } catch (error) {
-             // console.log(error)
+            // console.log(error)
             return res.json({
                 status: false,
                 "message": "error insertUser_ebr"
@@ -127,11 +127,11 @@ export default {
     },
     async delete(req, res) {
         const { password, id, email } = req.query;
-        
+
         const dados = await conexao("users").where({ id, email }).first();
         // // console.log(dados)
         try {
-            if ((!dados||!isEmpty(dados)) && dados.password == password) {
+            if ((!dados || !isEmpty(dados)) && dados.password == password) {
                 await conexao("users").del().where({ id, password })
                 res.json({ status: true });
             }
@@ -157,15 +157,15 @@ export default {
             passwordantigo,
             id_company = false,
             id_creator = false,
-            id_permission=false,
-            id_office=false,
-            id_unit=false
+            id_permission = false,
+            id_office = false,
+            id_unit = false
         } = req.body;
         // // console.log(req.body)
 
         try {
-           
-            const dadosantigos = await conexao("users").where({"users.id": id }).first();
+
+            const dadosantigos = await conexao("users").where({ "users.id": id }).first();
             // // console.log(req.body)
             if (!isEmpty(dadosantigos) && passwordantigo == dadosantigos.password) {
                 await conexao("users").update({
@@ -173,22 +173,22 @@ export default {
                     nameuser,
                     email,
                     password,
-                    id_image:id_image?id_image:null,
-                    id_company:id_company?id_company:null,
-                    id_creator:id_creator?id_creator:null,
-                    id_permission:id_permission?id_permission:null,
-                    id_office:id_office?id_office:null,
+                    id_image: id_image ? id_image : null,
+                    id_company: id_company ? id_company : null,
+                    id_creator: id_creator ? id_creator : null,
+                    id_permission: id_permission ? id_permission : null,
+                    id_office: id_office ? id_office : null,
                 }).where({ id });
 
-                if(id_unit){
+                if (id_unit) {
 
-                    let dado=await conexao("user_unit").where({"user_unit.id_user":id}).first();
+                    let dado = await conexao("user_unit").where({ "user_unit.id_user": id }).first();
                     // console.log(dado)
-                    if(dado){
-                        await conexao("user_unit").update({"user_unit.id_unit":id_unit,"user_unit.id_user":id}).where({"user_unit.id":dado.id});
+                    if (dado) {
+                        await conexao("user_unit").update({ "user_unit.id_unit": id_unit, "user_unit.id_user": id }).where({ "user_unit.id": dado.id });
                     }
-                    else{
-                        await conexao("user_unit").insert({"user_unit.id_unit":id_unit,"user_unit.id_user":id});
+                    else {
+                        await conexao("user_unit").insert({ "user_unit.id_unit": id_unit, "user_unit.id_user": id });
                     }
                 }
 
@@ -205,7 +205,7 @@ export default {
         }
 
     },
-    
+
     async updateUser_unit(req, res, next) {
         const {
             id,
@@ -250,7 +250,7 @@ export default {
 
         try {
             await conexao.transaction(async trx => {
-                const up = await trx("user_ebr").where({"user_ebr.id_user":id_user}).join("evaluation_by_results", 'evaluation_by_results.id', '=', 'user_ebr.id_ebr').select("evaluation_by_results.*");
+                const up = await trx("user_ebr").where({ "user_ebr.id_user": id_user }).join("evaluation_by_results", 'evaluation_by_results.id', '=', 'user_ebr.id_ebr').select("evaluation_by_results.*");
                 res.json({ status: true, dados: up })
             })
 
@@ -291,7 +291,7 @@ export default {
             }
             if (!nameuser) { // se nao vier nameuser ele usa o email
                 dados = await conexao("users").where({ email }).first();
-                delete dados['password']
+
 
             }
 
@@ -308,19 +308,20 @@ export default {
                         .where({ "user_unit.id_user": dados.id })
                         .select("units.id", "units.description");
                     //carregando a empresa
-                    let company=await conexao("companies").where({"id":dados.id_company});
-                     if(!company){
-                     company[0].state=await conexao("states").where({"id":company.id_state}).first();
-                     company[0].city=await conexao("cities").where({"id":company.id_city}).first();
-                     company[0].country=await conexao("countries").where({"id":company.id_country}).first();
-                     }
-                     
+                    let company = await conexao("companies").where({ "id": dados.id_company });
+                    if (!company) {
+                        company[0].state = await conexao("states").where({ "id": company.id_state }).first();
+                        company[0].city = await conexao("cities").where({ "id": company.id_city }).first();
+                        company[0].country = await conexao("countries").where({ "id": company.id_country }).first();
+                    }
+
                     // carregando o cargo
-                    let cargo= await conexao("positions").where({"id":dados.id_office}).first();
+                    let cargo = await conexao("positions").where({ "id": dados.id_office }).first();
 
 
                     // respondendo a requisição 
-                    return res.json({ status: true, ... {dadosUser:dados}, permissions, unit,company,cargo  } );
+                    dados.password=""
+                    return res.json({ status: true, ... { dadosUser: dados }, permissions, unit, company, cargo });
 
                 }
                 return res.json({ status: false, message: "vefique os dados e tente novamente" });
