@@ -291,6 +291,7 @@ export default {
             }
             if (!nameuser) { // se nao vier nameuser ele usa o email
                 dados = await conexao("users").where({ email }).first();
+                delete dados['password']
 
             }
 

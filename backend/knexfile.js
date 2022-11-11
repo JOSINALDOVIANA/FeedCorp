@@ -4,12 +4,12 @@ export const development = {
   client: 'mysql',
   connection: {
     // host: `mydbjosinaldo.csjtctuw0vgd.us-east-1.rds.amazonaws.com`,
-    host:'localhost',
+    host: 'localhost',
     // user: 'josinaldo_master',
-    user:'feedcorp',
-    password:'Wikazako@123*',
-   
-     database: 'feedcorp',
+    user: 'feedcorp',
+    password: 'Wikazako@123*',
+
+    database: 'feedcorp',
   },
   migrations: {
     directory: './src/database/migrations'
@@ -18,7 +18,7 @@ export const development = {
     directory: './src/database/seeds'
   }
 
-  
+
 };
 export const staging = {
   client: 'mysql',
