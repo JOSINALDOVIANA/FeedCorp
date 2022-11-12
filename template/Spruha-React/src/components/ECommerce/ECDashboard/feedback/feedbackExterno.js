@@ -4,7 +4,7 @@ import { Button, Card, Col, FormGroup, Row, Form } from "react-bootstrap";
 import { useParams } from 'react-router-dom';
 import Multiselect from "react-select";
 import api from '../../../../api';
-
+import { successAlertFeedExterno, dangerAlertFeedExterno } from "../Components/Alerts"
 // import { Container } from './styles';
 
 function Feedbaks() {
@@ -127,7 +127,9 @@ function Feedbaks() {
                 onClick={async () => {
                   let re = await api.post(`feedback/insert`, { ...feedback });
                   if (re.data.status) {
-                    alert("feedbacks enviado!!")
+                    successAlertFeedExterno()
+                  }else{
+                    dangerAlertFeedExterno()
                   }
                 }}
               >

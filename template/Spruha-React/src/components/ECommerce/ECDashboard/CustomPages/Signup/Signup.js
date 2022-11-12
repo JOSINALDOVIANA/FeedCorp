@@ -15,34 +15,23 @@ const Signup = () => (
 
 
         <Card>
-          <Card.Header className="bg-primary d-flex justify-content-center">
+          <Card.Header className="d-flex justify-content-center mt-3 pt-3 p-3">
             <img
               src={require("../../../../../assets/img/brand/logo.png")}
-              className="header-brand-img mb-4"
+              className="header-brand-img mb-2"
               alt="logo"
             />
 
-            <h5 className="mt-4 text-white">Solicite um orçamento</h5>
-
-            <span className="tx-white-6 tx-13 mb-5 mt-xl-0">
-              Gratuito e sem compromisso
-            </span>
           </Card.Header>
 
+
+
+
           <Card.Body className="mt-2 mb-2">
-            <img
-              src={require("../../../../../assets/img/brand/logo.png")}
-              className=" d-lg-none header-brand-img text-start float-start mb-4 auth-light-logo"
-              alt="logo"
-            />
-            <img
-              src={require("../../../../../assets/img/brand/logo-light.png")}
-              className=" d-lg-none header-brand-img text-start float-start mb-4 auth-dark-logo"
-              alt="logo"
-            />
             <div className="clearfix"></div>
-            <h5 className="text-start mb-2">Preencha o formulário abaixo</h5>
-            <p className="mb-4 text-muted tx-13 ms-0 text-start">
+            <h5 className="text-start mb-2">Solicite um orçamento gratuito e sem compromisso</h5>
+
+            <p className="mb-3 text-muted tx-13 ms-0 text-start">
               Para Administradores/Gestores RH que precisam otimizar o desempenho de sua empresa
             </p>
             <Form>

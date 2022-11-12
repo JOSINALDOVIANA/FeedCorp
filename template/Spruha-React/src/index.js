@@ -72,9 +72,9 @@ const Error404 = React.lazy(() => import("./components/Custompages/Error1-404/Er
 const Signin = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signin/Signin"))
 const Signup = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Signup/Signup"))
 const Profile = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/profile/Profile"))
+const Forgotpassword = React.lazy(() => import("./components/ECommerce/ECDashboard/CustomPages/Forgotpassword/Forgotpassword"))
 // const Lockscreen = React.lazy(() => import("./components/Custompages/Lockscreen/Lockscreen"))
 // const Resetpassword = React.lazy(() => import("./components/Custompages/Resetpassword/Resetpassword"))
-const Forgotpassword = React.lazy(() => import("./components/Custompages/Forgotpassword/Forgotpassword"))
 
 
 const Root = () => {

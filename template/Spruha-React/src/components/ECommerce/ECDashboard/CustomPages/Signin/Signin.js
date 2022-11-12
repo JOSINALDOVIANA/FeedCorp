@@ -194,7 +194,7 @@ const Signin = () => {
               <div>
                 Não possui conta? Faça um orçamento
                 <Link
-                  to={`${process.env.PUBLIC_URL}/cadastrar`}
+                  to={`${process.env.PUBLIC_URL}/cadastro`}
                 > aqui</Link>
               </div>
             </Card.Footer>

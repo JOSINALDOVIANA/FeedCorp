@@ -62,6 +62,27 @@ export function successAlert() {
         timer: 1500
     });
 }
+// Successo feedback externo
+export function successAlertFeedExterno() {
+    Swal.fire({
+        icon: "success",
+        title: "Feedback enviado!",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 2000
+    });
+}
+//Erro feedback externo
+export function dangerAlertFeedExterno(params) {
+    Swal.fire({
+        icon: "error",
+        title: "Erro no feedback",
+        text: "Verifique os dados antes de enviar",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 2000
+    });
+}
 //Erro feedback
 export function dangerAlert(params) {
     Swal.fire({
