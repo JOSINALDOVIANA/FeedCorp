@@ -281,6 +281,7 @@ export default {
     },
     async login(req, res) {
         //observe se houver error ele retorna um status false
+        // console.log(req.body)
         let dados;
         try { //inicio try
             const { email = false, nameuser = false, password } = req.body; // dados vindos na rota
