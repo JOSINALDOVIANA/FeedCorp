@@ -3,11 +3,11 @@
 export const development = {
   client: 'mysql',
   connection: {
-    
+    // host: `mydbjosinaldo.csjtctuw0vgd.us-east-1.rds.amazonaws.com`,
     host: 'localhost',
-   
-    user: '',
-    password: '',
+    // user: 'josinaldo_master',
+    user: 'feedcorp',
+    password: 'Wikazako@123*',
 
     database: 'feedcorp',
   },
@@ -23,9 +23,9 @@ export const development = {
 export const staging = {
   client: 'mysql',
   connection: {
-    database: '',
-    user: '',
-    password: ''
+    database: 'opclient',
+    user: 'rainerio',
+    password: 'meta2020'
   },
   migrations: {
     directory: './src/database/migrations'
