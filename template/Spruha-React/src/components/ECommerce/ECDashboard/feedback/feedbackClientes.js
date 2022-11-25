@@ -87,9 +87,9 @@ function FeedbackCliente() {
                                                 {feed.feedback}
                                             </p>
                                             {/* Pode colocar uma condição aqui pra aparecer pra cada tipo de comentário */}
-                                            {String(feed.type) === "Criticas" && <span className="badge bg-success-light mt-1">Critica</span>}
+                                            {String(feed.type) === "Criticas" && <span className="badge bg-warning-light mt-1">Critica</span>}
                                             {String(feed.type) === "Sugestões" && <span className="badge bg-info-light mt-1">sugestão</span>}
-                                            {String(feed.type) === "Elogios" && <span className="badge bg-warning-light mt-1">Elogio</span>}
+                                            {String(feed.type) === "Elogios" && <span className="badge bg-success-light mt-1">Elogio</span>}
                                         </div>
                                     </div>
                                 </div>

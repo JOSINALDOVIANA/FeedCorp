@@ -52,6 +52,29 @@ export function deleteUnityAlert() {
         showConfirmButton: true,
     });
 }
+
+// Successo feedback externo
+export function successClimaPulse() {
+    Swal.fire({
+        icon: "success",
+        title: "Pesquisa finalizada com sucesso!",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 2000
+    });
+}
+//Erro feedback externo
+export function dangerClimaPulse(params) {
+    Swal.fire({
+        icon: "error",
+        title: "Erro ao enviar pesquisa",
+        text: "Verifique as respostas antes de enviar",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 2000
+    });
+}
+
 // Successo feedback
 export function successAlert() {
     Swal.fire({

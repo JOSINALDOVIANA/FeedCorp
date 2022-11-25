@@ -39,25 +39,25 @@ export default {
   async Get(req, res) {
     let { id_user = false, id_company = false, id_unit = false } = req.query;
     try {
-       // se houver id_user
+      // se houver id_user
       if (!!id_user) {
         // pulsos que o usuario criou
         let pulsesCreateUser = await conexao("pulses").where({ "pulses.id_user": id_user })
-        
+
         let pulsesCreateUser_serial = [];
 
         //percorrendo os pulses criados pelo usuario
         for (let iterator of pulsesCreateUser) {
           // direcionado para toda a companhia
-          let company = await conexao("pulse_company").where({ "pulse_company.id_pulse": iterator.id }).join("users","users.id_company","=","pulse_company.id_company").select("users.*");
-         // se ele direcionou a uma unidade ou mais 
+          let company = await conexao("pulse_company").where({ "pulse_company.id_pulse": iterator.id }).join("users", "users.id_company", "=", "pulse_company.id_company").select("users.*");
+          // se ele direcionou a uma unidade ou mais 
           let units = await conexao("pulse_unity").where({ "id_pulse": iterator.id }).join("units", "pulse_unity.id_unity", "=", "units.id").select("units.*");
           for (const key in units) {
-              units[key]={...units[key],users:await conexao("user_unit").where({"user_unit.id_unit":units[key].id}).join("users","users.id","=","user_unit.id_user")}
+            units[key] = { ...units[key], users: await conexao("user_unit").where({ "user_unit.id_unit": units[key].id }).join("users", "users.id", "=", "user_unit.id_user") }
           }
           // ele direcionou a usuarios
           let users = await conexao("pulse_user").where({ "id_pulse": iterator.id }).join("users", "pulse_user.id_user", "=", "users.id")
-          .select("users.*",);;
+            .select("users.*",);;
 
           let mediapulse = 0;
           let totalpulse = 0;
@@ -73,32 +73,32 @@ export default {
               for (const iterator2 of users_resp) {
                 total = total + iterator2.answer;
               }
-              media = users_resp.lengt>0?total / users_resp.length:0
+              media = users_resp.length > 0 ? total / users_resp.length : 0
             }
             questions[index2] = { ...questions[index2], users_resp, media };
             totalpulse = total + media;
-            
-          }
-          mediapulse =questions.length>0? totalpulse / questions.length:0;
-         
-          // pulsesCreateUser[index] = { ...pulsesCreateUser[index], questions, media: mediapulse }
-          
-          
-          
-                   
-          
-          
-          await conexao("pulses").update({id_user,id_company:iterator.id_company,title:iterator.title,result:mediapulse}).where({"id":iterator?.id})
 
-          pulsesCreateUser_serial.push({ ...iterator, direction: { company, units, users },media: mediapulse,questions })
+          }
+          mediapulse = questions.length > 0 ? totalpulse / questions.length : 0;
+
+          // pulsesCreateUser[index] = { ...pulsesCreateUser[index], questions, media: mediapulse }
+
+
+
+
+
+
+          await conexao("pulses").update({ id_user, id_company: iterator.id_company, title: iterator.title, result: mediapulse }).where({ "id": iterator?.id })
+
+          pulsesCreateUser_serial.push({ ...iterator, direction: { company, units, users }, media: mediapulse, questions })
         }
 
-       
-        
-        pulsesCreateUser = pulsesCreateUser_serial
-       
 
-        
+
+        pulsesCreateUser = pulsesCreateUser_serial
+
+
+
 
 
 
@@ -111,15 +111,15 @@ export default {
         let mydados = await conexao("users").where({ "users.id": id_user })
           .first()
         // unidade do usuario que esta solicitando
-        let myUnit =  await conexao("user_unit").join("units", "units.id", "=", "user_unit.id_unit")
+        let myUnit = await conexao("user_unit").join("units", "units.id", "=", "user_unit.id_unit")
           .where({ "user_unit.id_user": id_user })
           .select("units.*")
           .first();
 
         // pulsos da companhia e por tanto direcionados ao solicitante
-        let pulsescompany = !!mydados? await conexao("pulse_company").where({ "pulse_company.id_company": mydados.id_company })
+        let pulsescompany = !!mydados ? await conexao("pulse_company").where({ "pulse_company.id_company": mydados.id_company })
           .join("pulses", "pulse_company.id_pulse", "=", "pulses.id")
-          .select("pulses.*"):[];
+          .select("pulses.*") : [];
 
         let pulsesunit = [];
         // pulsos direcionados a toda a unidade do usuario que esta solicitando
@@ -130,7 +130,7 @@ export default {
         }
 
         pulsesDirectUser = [...pulsesDirectUser, ...pulsescompany, ...pulsesunit] // juntando todos
-        pulsesDirectUser = pulsesDirectUser.filter(item =>  item.id_user != id_user ); // filtrando os que o usuario criou
+        pulsesDirectUser = pulsesDirectUser.filter(item => item.id_user != id_user); // filtrando os que o usuario criou
         pulsesDirectUser = pulsesDirectUser.filter((este, i) => pulsesDirectUser.indexOf(este) === i);//tirando duplicatas
 
         // for (const index in pulsesCreateUser) {
@@ -154,7 +154,7 @@ export default {
         //     totalpulse = total + media;
         //   }
         //   mediapulse = totalpulse / questions.length;
-         
+
         //   pulsesCreateUser[index] = { ...pulsesCreateUser[index], questions, media: mediapulse }
         // }
 
@@ -237,21 +237,21 @@ export default {
     let { id_user, id_question, answer } = req.body;
     try {
       // resp = resp.map(({ id_question, answer }) => ({ id_user, id_question, answer }));
-     const [id]= await conexao("answer_user").insert({id_user,id_question,answer})
+      const [id] = await conexao("answer_user").insert({ id_user, id_question, answer })
 
-      return res.json({ status: true, dados: {id,id_user,id_question,answer}})
+      return res.json({ status: true, dados: { id, id_user, id_question, answer } })
     } catch (error) {
       // console.log(error)
       return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })
     }
   },
   async answer_userUpdate(req, res) {
-    let {id, id_user, id_question, answer } = req.body;
+    let { id, id_user, id_question, answer } = req.body;
     try {
       // resp = resp.map(({ id_question, answer }) => ({ id_user, id_question, answer }));
-      await conexao("answer_user").update({id_user,id_question,answer}).where({id})
+      await conexao("answer_user").update({ id_user, id_question, answer }).where({ id })
 
-      return res.json({ status: true, dados: {id,id_user,id_question,answer}})
+      return res.json({ status: true, dados: { id, id_user, id_question, answer } })
     } catch (error) {
       // console.log(error)
       return res.json({ status: false, mensage: "error pulses.answer_user=>insert" })

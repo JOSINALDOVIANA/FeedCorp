@@ -103,7 +103,7 @@ const ClimaResultado = () => {
                             <h5>{i + 1} - {q?.question}</h5>
 
                             <h5 className="text-muted tx-14">
-                                {q.users_resp.length} pessoas responderam esta pergunta
+                                Número de pessoas que responderam: {q.users_resp.length}
                             </h5>
 
                             <h5 className="text-muted card-sub-title">
