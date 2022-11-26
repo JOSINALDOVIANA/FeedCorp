@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Breadcrumb, Button, Card } from 'react-bootstrap';
+import { Breadcrumb, Button, Card, Badge } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
@@ -29,7 +29,12 @@ const ClimaResultado = () => {
     //     // return(()=>setValues({}))
     // }, [dadosrota.state])
     // // console.log(values)
-    
+    function formatData(data) {
+        const dat = new Date(data);
+        const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+        // return `${dat.getDate()} / ${dat.getMonth() < 10 ? "0" + (dat.getMonth() + 1) : dat.getMonth() + 1} / ${dat.getFullYear()}`
+        return `${dat.getDate()} de ${meses[dat.getMonth()]} de ${dat.getFullYear()}`
+    }
     return (
         <Fragment>
             {/* <!-- Page Header --> */}
@@ -39,7 +44,7 @@ const ClimaResultado = () => {
                     <Breadcrumb>
                         <Breadcrumb.Item href="#">Engajamento</Breadcrumb.Item>
                         <Breadcrumb.Item
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
                         >Clima Pulso</Breadcrumb.Item>
                         <Breadcrumb.Item active>Resultado</Breadcrumb.Item>
                     </Breadcrumb>
@@ -52,7 +57,7 @@ const ClimaResultado = () => {
                             variant="white"
                             type="button"
                             className=" btn-icon-text my-2 me-2"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/`, { state: values }) }}
                         >
                             <i className="bi bi-clipboard2-data me-2"></i> Lista
                         </Button>
@@ -61,7 +66,7 @@ const ClimaResultado = () => {
                             variant="primary"
                             type="button"
                             className="my-2 me-2 btn-icon-text"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/criar_clima_pulso`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/criar_clima_pulso`, { state: values }) }}
                         >
                             <i className="bi bi-clipboard-plus me-2"></i> Criar
                         </Button>
@@ -70,7 +75,7 @@ const ClimaResultado = () => {
                             variant="primary"
                             type="button"
                             className="my-2 btn-icon-text"
-                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso_unidade/configuracoes`, { state: values }) }}
+                            onClick={() => { navegar(`${process.env.PUBLIC_URL}/climapulso/configuracoes`, { state: values }) }}
                         >
                             <i className="bi bi-gear-fill" />
                         </Button>
@@ -82,28 +87,31 @@ const ClimaResultado = () => {
 
 
             <Card className="card custom-card">
-                <Card.Header className="pt-3 px-3 pb-2 fs-4 fw-bolder my-auto tx-white bg-primary">
-                    {values?.selectPulse?.title}
-                    <h5 className="tx-14 fw-semibold">
-                        Número de questões desta pesquisa: {values?.selectPulse?.questions?.length}
+                <Card.Header>
+                    <div className="pb-1 my-auto d-flex align-items-center">
+                        <spam className="fs-4 fw-bolder">{values?.selectPulse?.title.toUpperCase()}</spam>
+                    </div>
+                    <h5 className="tx-14 mb-2 badge bg-success me-2">Média geral deste Pulso: {values?.selectPulse?.media}</h5>
+                    <h5 className="tx-14 badge bg-info text-white">
+                        Número de questões: {values?.selectPulse?.questions?.length}
                     </h5>
                 </Card.Header>
 
                 <Card.Body>
-                    <h5 className="tx-14 mb-2">Média geral deste Pulso: {values?.selectPulse?.media}</h5>
 
                     {values?.selectPulse?.questions?.map((q, i) => (
-                        <div key={q.id}>
+                        <div key={q.id} className="example mt-1 d-flex justify-content-between px-4">
 
-                            <h5>{i + 1} - {q?.question}</h5>
+                            <div><h5>{i + 1} - {q?.question}</h5>
+                                <Badge pill className="tx-12 badge bg-primary text-white">
+                                    Respostas: {q.users_resp.length}
+                                </Badge>
+                            </div>
 
-                            <h5 className="text-muted tx-14">
-                                {q.users_resp.length} pessoas responderam esta pergunta
-                            </h5>
-
-                            <h5 className="text-muted card-sub-title">
-                                A média das respostas é de {q?.media}
-                            </h5>
+                            <div className="text-center mb-1">
+                                <h2 className="counter mb-2 tx-normal">{q?.media}</h2>
+                                <h6 className="mb-0 text-muted tx-normal">média das respostas</h6>
+                            </div>
                         </div>
                     ))}
                 </Card.Body>

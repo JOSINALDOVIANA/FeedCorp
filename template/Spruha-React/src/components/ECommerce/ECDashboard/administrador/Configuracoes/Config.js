@@ -289,7 +289,6 @@ function Settings() {
                                                 </Col>
 
                                                 <Col>
-                                                    <Form.Group className="form-group" controlid="">
                                                         <Form.Label>
                                                             Estado: <span className="tx-danger">*</span>
                                                         </Form.Label>
@@ -302,7 +301,6 @@ function Settings() {
                                                         /> */}
                                                         {/* <select id="select_state"></select> */}
 
-                                                    </Form.Group>
                                                     <Selectstate
                                                         classNamePrefix="Select2"
                                                         onChange={(e) => {
@@ -321,7 +319,7 @@ function Settings() {
 
                                             <Row>
                                                 <Col>
-                                                    <Form.Group className="form-group" controlid="">
+
                                                         <Form.Label>
                                                             Cidade: <span className="tx-danger">*</span>
                                                         </Form.Label>
@@ -333,7 +331,6 @@ function Settings() {
                                                             value={values?.company?.city.city}
                                                         /> */}
 
-                                                    </Form.Group>
                                                     <Selectstate
                                                         classNamePrefix="Select2"
                                                         onChange={(e) => { setValues(a => ({ ...a, company: { ...a.company, id_city: e.value } })) }}
