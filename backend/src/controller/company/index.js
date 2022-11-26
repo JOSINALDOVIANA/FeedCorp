@@ -12,12 +12,15 @@ export default {
             id_state,
             postcard,
             id_plan=null,
-            modules=[]        
+            modules=[],
+            address=null,
+            phone=null,
+            district=null       
         } = req.body;
 
         try {
             await conexao.transaction(async(trx)=>{
-               const id= await trx("companies").insert({namefantasy,cnpj,id_city,id_country,id_plan,id_state,postcard});
+               const id= await trx("companies").insert({namefantasy,cnpj,id_city,id_country,id_plan,id_state,postcard,address,phone,district});
                
                if(!!modules && modules.length>0){
                 let module_serial=modules.map(id_module=>({id_module,id_company:id[0]}))
