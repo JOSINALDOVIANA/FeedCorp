@@ -16,6 +16,7 @@ import questions from './controller/questions/index.js';
 import pulses from './controller/pulses/index.js';
 import cargos from "./controller/cargo/index.js"
 import  Knex  from "knex"
+import contact from './controller/contact/index.js';
 const routes=express.Router();
 
  /*
@@ -272,19 +273,25 @@ routes.get("/cargos/get",cargos.select);
 routes.delete("/cargos/del",cargos.del);
 routes.put("/cargos/update",cargos.update);
 
-routes.post("/raw",async(req,res)=>{
-const {user,password,database,sql,table}=req.body;
-const conectBD=Knex({
-    client: 'mysql',
-    connection: {
-      host : '127.0.0.1',
-      port : 3306,
-      user ,
-      password,
-      database 
-    }
-  })
-return res.json({dados:await conectBD.raw(sql)})
-})
+// routes.post("/raw",async(req,res)=>{
+// const {user,password,database,sql,table}=req.body;
+// const conectBD=Knex({
+//     client: 'mysql',
+//     connection: {
+//       host : '127.0.0.1',
+//       port : 3306,
+//       user ,
+//       password,
+//       database 
+//     }
+//   })
+// return res.json({dados:await conectBD.raw(sql)})
+// })
+// exemplo de uso no html dentro da pasta logs
+
+// -----------------contact--------------
+routes.post("/contact",contact.Insert);
+routes.get("/contact",contact.Select);
+
 
 export default routes;
