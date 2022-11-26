@@ -1,4 +1,4 @@
-import conexao from "../../database/connection";
+import conexao from "../../database/connection.js";
 
 export default {
     async Insert(req, res) {
