@@ -102,10 +102,7 @@ routes.get("/items/delete",avpr.deleteItems)// apaga um items
 // ------item_answer_user-----
 routes.post("/item_answer_user/insert",avpr.insertItem_Answer_User)// inserir valores na tabela "item_answer_user"
 routes.put("/item_answer_user/update",avpr.updateItem_Answer_User)// atualiza valores na tabela "item_answer_user", exige id
-routes.get("/item_answer_user/get",avpr.getItem_Answer_User)// busca valores na tabela "item_answer_user" exigencias descrita abaixo
-                                                                //  "id_user"=traz todas as respostas de um usuario,
-                                                                // "id_item"= traz todas as respostas para este item 
-                                                                // id = traz resposta ferente ao id retorna um unico registro
+routes.get("/item_answer_user/get",avpr.getItem_Answer_User)// busca valores na tabela "item_answer_user" exigencias descrita abaixo                                                               
 routes.delete("/item_answer_user/delete",avpr.deleteItem_Answer_User)// deleta uma resposta na tabela "item_answer_user", exige "id"
 /*#########################################################################################################*/
 
