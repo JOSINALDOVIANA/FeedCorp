@@ -4,7 +4,7 @@ import iconlight from '../../../../../assets/img/brand/icon-light.png';
 import { Link } from "react-router-dom";
 
 import { Button, Card, Col, Container, Form, Nav, Navbar, Row, Tab } from "react-bootstrap";
-import { SlicksiderTecnologias,SlicksiderClientes } from "./Landingpagedata/landingpagedata";
+import { SlicksiderTecnologias, SlicksiderClientes } from "./Landingpagedata/landingpagedata";
 import Navbar1 from "./Landingpagedata/Navbar";
 
 const Landingpage = () => {
@@ -234,11 +234,11 @@ const Landingpage = () => {
                         Avalie o desempenho de sua empresa utilizando as técnicas de avaliação mais usadas no mercado.
                         Com uma interface responsiva e amigável, de fácil uso para engajar sua empresa e atingir outros patamares!</h6>
 
-                      <Link to="https://themeforest.net/item/dashlead-bootstrap-5-admin-dashboard-template/35183671"
+                      <Link to={`${process.env.PUBLIC_URL}/login`}
                         target="_blank" className="btn ripple btn-min w-lg mb-3 me-2 btn-light"><i
                           className="fe fe-play me-2"></i> Começar
                       </Link>
-                      <Link to="https://themeforest.net/user/spruko/portfolio"
+                      <Link
                         className="btn ripple btn-min w-lg btn-outline-light mb-3 me-2"><i
                           className="fe fe-eye me-2"></i> Descubra mais
                       </Link>
@@ -311,7 +311,7 @@ const Landingpage = () => {
                           </Card>
                         </Col>
 
-                        <Col lg={3} md={12}>
+                        {/* <Col lg={3} md={12}>
                           <Card className="features main-features main-features-3 wow fadeInUp reveal revealleft"
                             data-wow-delay="0.1s">
                             <Card.Body>
@@ -331,7 +331,7 @@ const Landingpage = () => {
                               </div>
                             </Card.Body>
                           </Card>
-                        </Col>
+                        </Col> */}
 
                         {/* <Col lg={3} md={12}>
                           <Card className="features main-features main-features-4 wow fadeInUp reveal revealleft"
@@ -2759,7 +2759,7 @@ c-0.6137161,4.8149414-1.0946579,9.651413-1.4447937,14.4860229L43.0290565,232.100
                               <div className="working-content content-4">
                                 <h4 className="mb-3">Atualizações constantes</h4>
                                 <p className="title-desc text-muted">
-                                  Nosso time de desenvolvedores estão empenhados para proporcionar
+                                  Nosso time de desenvolvedores estão empenhados em proporcionar
                                   a melhor experiência para você, atualizando a plataforma e protegendo os seus dados.
                                 </p>
                                 {/* <p className="title-desc text-muted mb-0"> 
@@ -2948,7 +2948,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                     </Container>
                   </div>
 
-                  <div className="section">
+                  {/* <div className="section">
                     <Container>
                       <Row>
                         <section className="sptb demo-screen-demo" id="highlights">
@@ -2968,7 +2968,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                     a quick look at our template highlights.
                                   </Col>
                                 </Row>
-                                {/* collapse */}
+                    
                                 <Row id="grid">
                                   <Col lg={6}>
                                     <Col md={12} className="grid-item px-0">
@@ -3201,8 +3201,9 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                         </section>
                       </Row>
                     </Container>
-                  </div>
-                  <div className="bg-landing section">
+                  </div> */}
+
+                  <div className="bg-landing section" id="Planos">
                     <Container>
                       <Row>
                         <h4 className="text-center fw-semibold landing-card-header">Planos ideais para você </h4>
@@ -3231,35 +3232,33 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                           <Card.Header className="d-block text-justified pt-2">
                                             <p className="fs-18 fw-semibold mb-1">Básico</p>
                                             <p className="text-justify fw-semibold mb-1"> <span
-                                              className="fs-30 me-2">$</span><span
+                                              className="fs-30 me-2">R$</span><span
                                                 className="fs-30 me-1">39</span><span
                                                   className="fs-25"><span
                                                     className="op-0-5 text-muted text-20">/</span>
                                                 mês</span></p>
-                                            <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                              consectetur adipisicing elit. Iure quos debitis
-                                              aliquam .</p>
-                                            <p className="fs-13 mb-1 text-secondary">Billed monthly
-                                              on regular basis!</p>
+                                            <p className="fs-13 mb-1">Para empresas que busquem o feedback de seus clientes e colaboradores.</p>
+                                            {/* <p className="fs-13 mb-3 text-secondary">Billed monthly
+                                                on regular basis!</p> */}
                                           </Card.Header>
-                                          <Card.Body className="pt-2">
-                                            <ul className="text-justify pricing-body ps-0">
+                                          <Card.Body className="py-2">
+                                            <ul className="text-justify pricing-body ps-0 my-5">
                                               <li><i
                                                 className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                  2 Free</strong> Domain Name</li>
+                                                  Feedback</strong> de clientes</li>
                                               <li><i
                                                 className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                <strong>3 </strong> One-Click Apps
+                                                <strong>Feedbacks </strong> interno
                                               </li>
                                               <li className="text-muted"><i
                                                 className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                  1 </strong> Databases</li>
+                                                  Clima Pulso </strong> Pesquisa</li>
                                               <li className="text-muted"><i
                                                 className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                  Unlimited </strong> Cloud Storage</li>
+                                                  OKR - Objective Key Result </strong> Módulo</li>
                                               <li className="text-muted"><i
                                                 className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                  Money </strong> BackGuarantee</li>
+                                                  Avaliação por resultados </strong> Módulo</li>
                                               <li><i
                                                 className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-gray"></i><strong>
                                                   24h/7</strong> suporte</li>
@@ -3278,37 +3277,35 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                             <p className="fs-18 fw-semibold mb-1 pe-0">Avançado<span
                                               className="tag bg-primary text-white float-end">Oferta Limitada</span></p>
                                             <p className="text-justify fw-semibold mb-1"> <span
-                                              className="fs-30 me-2">$</span><span
+                                              className="fs-30 me-2">R$</span><span
                                                 className="fs-30 me-1">199</span><span
                                                   className="fs-25"><span
                                                     className="op-0-5 text-muted text-20">/</span>
                                                 mês</span></p>
-                                            <p className="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                              consectetur adipisicing elit. Iure quos debitis
-                                              aliquam .</p>
-                                            <p className="fs-13 mb-1 text-primary">Billed monthly on
-                                              regular basis!</p>
+                                            <p className="fs-13 mb-2">Para empresas que desejam buscar engajamento e desempenho de seus funcionários</p>
+                                            {/* <p className="fs-13 mb-1 text-primary">Billed monthly on
+                                                regular basis!</p> */}
                                           </Card.Header>
-                                          <Card.Body className="pt-2">
-                                            <ul className="text-justify pricing-body ps-0">
+                                          <Card.Body className="py-2">
+                                            <ul className="text-justify pricing-body ps-0 my-5">
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                <strong>5 Free</strong> Domain Name
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                  Feedback</strong> de clientes</li>
+                                              <li><i
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i>
+                                                <strong>Feedbacks </strong> interno
                                               </li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                </strong> One-Click Apps</li>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                  Clima Pulso </strong> Pesquisa</li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                  3 </strong> Databases</li>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                  OKR - Objective Key Result </strong> Módulo</li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                  Unlimited </strong> Cloud Storage</li>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                  Avaliação por resultados </strong> Módulo</li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                  Money </strong> BackGuarantee</li>
-                                              <li className="mb-5"><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
                                                   24h/7</strong> suporte</li>
                                             </ul>
                                           </Card.Body>
@@ -3325,36 +3322,36 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                           <Card.Header className="d-block text-justified pt-2">
                                             <p className="fs-18 fw-semibold mb-1">Regular</p>
                                             <p className="text-justify fw-semibold mb-1"> <span
-                                              className="fs-30 me-2">$</span><span
+                                              className="fs-30 me-2">R$</span><span
                                                 className="fs-30 me-1">69</span><span
                                                   className="fs-25"><span
                                                     className="op-0-5 text-muted text-20">/</span>
                                                 mês</span></p>
-                                            <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                              consectetur adipisicing elit. Iure quos debitis
-                                              aliquam .</p>
-                                            <p className="fs-13 mb-1  text-danger">Billed monthly on
-                                              regular basis!</p>
+                                            <p className="fs-13 mb-1">Para empresas que além de obter feedbacks, queiram melhorar
+                                              o clima da organização através de pesquisas</p>
+                                            {/* <p className="fs-13 mb-3  text-danger">Billed monthly on
+                                                regular basis!</p> */}
                                           </Card.Header>
-                                          <Card.Body className="pt-2">
-                                            <ul className="text-justify pricing-body ps-0">
+                                          <Card.Body className="py-2">
+                                            <ul className="text-justify pricing-body ps-0 my-5">
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                  1 Free</strong> Domain Name</li>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                  Feedback</strong> de clientes</li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                </strong> One-Click Apps</li>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i>
+                                                <strong>Feedbacks </strong> interno
+                                              </li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                  2 </strong> Databases</li>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                  Clima Pulso </strong> Pesquisa</li>
                                               <li className="text-muted"><i
-                                                className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                  Unlimited </strong> Cloud Storage</li>
+                                                className="mdi mdi-close-circle-outline p-2 fs-16 text-secondary"></i>
+                                                <strong>OKR - Objective Key Result </strong> Módulo</li>
                                               <li className="text-muted"><i
-                                                className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                  Money </strong> BackGuarantee</li>
+                                                className="mdi mdi-close-circle-outline p-2 fs-16 text-secondary"></i>
+                                                <strong>Avaliação por resultados </strong> Módulo</li>
                                               <li><i
-                                                className="mdi mdi-checkbox-marked-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
                                                   24h/7</strong> suporte</li>
                                             </ul>
                                           </Card.Body>
@@ -3375,35 +3372,33 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                             <Card.Header className="d-block text-justified pt-2">
                                               <p className="fs-18 fw-semibold mb-1">Básico</p>
                                               <p className="text-justify fw-semibold mb-1"> <span
-                                                className="fs-30 me-2">$</span><span
+                                                className="fs-30 me-2">R$</span><span
                                                   className="fs-30 me-1">399</span><span
                                                     className="fs-25"><span
                                                       className="op-0-5 text-muted text-20">/</span>
                                                   ano</span></p>
-                                              <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit. Iure quos debitis
-                                                aliquam .</p>
-                                              <p className="fs-13 mb-3 text-secondary">Billed monthly
-                                                on regular basis!</p>
+                                              <p className="fs-13 mb-1">Para empresas que busquem o feedback de seus clientes e colaboradores.</p>
+                                              {/* <p className="fs-13 mb-3 text-secondary">Billed monthly
+                                                on regular basis!</p> */}
                                             </Card.Header>
                                             <Card.Body className="py-2">
-                                              <ul className="text-justify pricing-body ps-0 mb-0">
+                                              <ul className="text-justify pricing-body ps-0 my-5">
                                                 <li><i
                                                   className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                    2 Free</strong> Domain Name</li>
+                                                    Feedback</strong> de clientes</li>
                                                 <li><i
                                                   className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                  <strong>3 </strong> One-Click Apps
+                                                  <strong>Feedbacks </strong> interno
                                                 </li>
                                                 <li className="text-muted"><i
                                                   className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                    1 </strong> Databases</li>
+                                                    Clima Pulso </strong> Pesquisa</li>
                                                 <li className="text-muted"><i
                                                   className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                    Unlimited </strong> Cloud Storage</li>
+                                                    OKR - Objective Key Result </strong> Módulo</li>
                                                 <li className="text-muted"><i
                                                   className="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                    Money </strong> BackGuarantee</li>
+                                                    Avaliação por resultados </strong> Módulo</li>
                                                 <li><i
                                                   className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-gray"></i><strong>
                                                     24h/7</strong> suporte</li>
@@ -3423,37 +3418,35 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                               <p className="fs-18 fw-semibold mb-1 pe-0">Avançado<span
                                                 className="badge bg-white text-primary float-end font-weight-normal">Oferta Limitada</span></p>
                                               <p className="text-justify fw-semibold mb-1"> <span
-                                                className="fs-30 me-2">$</span><span
+                                                className="fs-30 me-2">R$</span><span
                                                   className="fs-30 me-1">1,299</span><span
                                                     className="fs-25"><span
                                                       className="op-0-5 text-muted text-20">/</span>
                                                   ano</span></p>
-                                              <p className="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit. Iure quos debitis
-                                                aliquam .</p>
-                                              <p className="fs-13 mb-1 text-primary">Billed monthly on
-                                                regular basis!</p>
+                                              <p className="fs-13 mb-2">Para empresas que desejam buscar engajamento e desempenho de seus funcionários</p>
+                                              {/* <p className="fs-13 mb-1 text-primary">Billed monthly on
+                                                regular basis!</p> */}
                                             </Card.Header>
                                             <Card.Body className="py-2">
                                               <ul className="text-justify pricing-body ps-0 my-5">
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                  <strong>5 Free</strong> Domain Name
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-white"></i><strong>
+                                                    Feedback</strong> de clientes</li>
+                                                <li><i
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-white"></i>
+                                                  <strong>Feedbacks </strong> interno
                                                 </li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                  </strong> One-Click Apps</li>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-white"></i><strong>
+                                                    Clima Pulso </strong> Pesquisa</li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                    3 </strong> Databases</li>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-white"></i><strong>
+                                                    OKR - Objective Key Result </strong> Módulo</li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                    Unlimited </strong> Cloud Storage</li>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-white"></i><strong>
+                                                    Avaliação por resultados </strong> Módulo</li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                    Money </strong> BackGuarantee</li>
-                                                <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-white"></i><strong>
                                                     24h/7</strong> suporte</li>
                                               </ul>
                                             </Card.Body>
@@ -3474,31 +3467,31 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                                     className="fs-25"><span
                                                       className="op-0-5 text-muted text-20">/</span>
                                                   ano</span></p>
-                                              <p className="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit. Iure quos debitis
-                                                aliquam .</p>
-                                              <p className="fs-13 mb-3  text-danger">Billed monthly on
-                                                regular basis!</p>
+                                              <p className="fs-13 mb-1">Para empresas que além de obter feedbacks, queiram melhorar
+                                                o clima da organização através de pesquisas</p>
+                                              {/* <p className="fs-13 mb-3  text-danger">Billed monthly on
+                                                regular basis!</p> */}
                                             </Card.Header>
                                             <Card.Body className="py-2">
-                                              <ul className="text-justify pricing-body ps-0 mb-0">
+                                              <ul className="text-justify pricing-body ps-0 my-5">
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                    1 Free</strong> Domain Name</li>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                    Feedback</strong> de clientes</li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                  </strong> One-Click Apps</li>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i>
+                                                  <strong>Feedbacks </strong> interno
+                                                </li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                    2 </strong> Databases</li>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
+                                                    Clima Pulso </strong> Pesquisa</li>
                                                 <li className="text-muted"><i
-                                                  className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                    Unlimited </strong> Cloud Storage</li>
+                                                  className="mdi mdi-close-circle-outline p-2 fs-16 text-secondary"></i>
+                                                  <strong>OKR - Objective Key Result </strong> Módulo</li>
                                                 <li className="text-muted"><i
-                                                  className="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                    Money </strong> BackGuarantee</li>
+                                                  className="mdi mdi-close-circle-outline p-2 fs-16 text-secondary"></i>
+                                                  <strong>Avaliação por resultados </strong> Módulo</li>
                                                 <li><i
-                                                  className="mdi mdi-checkbox-marked-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                  className="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-primary"></i><strong>
                                                     24h/7</strong> suporte</li>
                                               </ul>
                                             </Card.Body>
@@ -3520,7 +3513,8 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                       </Row>
                     </Container>
                   </div>
-                  <div className="section bg-white" id="faqs">
+
+                  {/* <div className="section bg-white" id="faqs">
                     <Container>
                       <Row>
                         <h4 className="text-center fw-semibold landing-card-header">FAQ'S ?</h4>
@@ -3677,17 +3671,17 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                         </section>
                       </Row>
                     </Container>
-                  </div>
+                  </div> */}
+
                   <div className="testimonial-owl-landing section pb-0" id="Clients">
                     <Container>
                       <Row>
                         <Col md={12}>
                           <Card className="bg-transparent">
                             <Card.Body className="pt-5">
-                              <h4 className="text-center fw-semibold">Testimonials </h4>
+                              <h4 className="text-center fw-semibold">Opniões dos usuários </h4>
                               <span className="landing-title"></span>
-                              <h2 className="text-center fw-semibold text-white mb-5">What People Are
-                                Saying Sobre Our Product.</h2>
+                              <h2 className="text-center fw-semibold text-white mb-5">O que as pessoas estão dizendo de nosso produto</h2>
                               <div className="testimonial-carousel">
                                 <SlicksiderClientes />
                               </div>
@@ -3698,7 +3692,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                     </Container>
                   </div>
 
-                  <div className="section pb-0" id="Contact">
+                  {/* <div className="section pb-0" id="Contact">
                     <Container>
                       <div>
                         <Card className="reveal p-5 mb-0 ">
@@ -3838,9 +3832,9 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                         </Card>
                       </div>
                     </Container>
-                  </div>
+                  </div> */}
 
-                  <div className="demo-screen-skin bg-primary">
+                  {/* <div className="demo-screen-skin bg-primary">
                     <Container className="text-center text-white px-5 px-md-0">
                       <Row id="demo">
                         <Col lg={6}>
@@ -3867,7 +3861,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                         </Col>
                       </Row>
                     </Container>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -3888,28 +3882,27 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                         <Row>
                           <Col lg={4} sm={12} md={12} className="reveal revealleft">
                             <h6>Sobre</h6>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                              veritatis et quasi architecto beatae vitae dicta sunt
-                              explicabo.
+                            <p>Empresa especializada em propor as empresas tecnicas de avaliação de desempenho para seu crescimento e engajamento no mercado,
+                              trazendo assim, ganhos para seus colaboradores e consumidores.
                             </p>
-                            <p className="mb-5 mb-lg-2">Duis aute irure dolor in reprehenderit in voluptate
+                            {/* <p className="mb-5 mb-lg-2">Duis aute irure dolor in reprehenderit in voluptate
                               velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat .
-                            </p>
+                            </p> */}
                           </Col>
                           <Col lg={2} sm={6} md={4} className=" reveal revealleft">
-                            <h6>Pages</h6>
+                            <h6>Páginas</h6>
                             <ul className="mb-5 mb-lg-0 ps-0">
-                              <li><Link to="#">Dashboard</Link></li>
-                              <li><Link to="#">Elements</Link></li>
-                              <li><Link to="#">Forms</Link></li>
-                              <li><Link to="#">Charts</Link></li>
-                              <li><Link to="#">Tables</Link></li>
-                              <li><Link to="#">Other Pages</Link></li>
+                              <li><Link to="#">Página principal</Link></li>
+                              <li><Link to="#">Cadastro</Link></li>
+                              <li><Link to="#">Login</Link></li>
+                              <li><Link to="#">OKR</Link></li>
+                              <li><Link to="#">AVPR</Link></li>
+                              <li><Link to="#">Clima Pulso</Link></li>
+                              <li><Link to="#">Feedback dos clientes</Link></li>
                             </ul>
                           </Col>
                           <Col lg={2} sm={6} md={4} className=" reveal revealleft">
-                            <h6>Information</h6>
+                            <h6>Informações</h6>
                             <ul className="mb-5 mb-lg-0 ps-0">
                               <li><Link to="#">Nosso time</Link></li>
                               <li><Link to="#">Contate-nos</Link></li>
@@ -3920,7 +3913,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                             </ul>
                           </Col>
                           <Col lg={4} sm={12} md={4} className="reveal revealleft">
-                            <div>
+                            {/* <div>
                               <Link to="index.html"><img loading="lazy" alt="" className="logo mb-3"
                                 src={require("../../../../../assets/img/brand/logo-light.png")} /></Link>
                               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
@@ -3935,7 +3928,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                                     id="button-addon2">Submit</Button>
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
                             <div className="btn-list mt-6">
                               <Button type="Button " className=" btn-icon rounded-pill"><i
                                 className="fe fe-facebook"></i></Button>
@@ -3954,8 +3947,7 @@ C431.3,1830.2,378.4,1777.3,378.4,1712z" />
                         <Row>
                           <Col md={12} sm={12}>
                             Copyright © <span id="year"></span>
-                            <Link to="#">Spruha</Link>.Designed with <span className="fa fa-heart text-danger"></span> by
-                            <Link to="#"> Spruko </Link> All rights reserved.
+                            <Link to="#">Spruha</Link>. Feito por FeedCorp. Todos os direitos reservados
                           </Col>
                         </Row>
                       </footer>

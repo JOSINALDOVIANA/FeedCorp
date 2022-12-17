@@ -14,24 +14,29 @@ export const links = [
         text: 'Sobre',
         url: '#Sobre',
     },
-    {
-        id: 3,
-        text: 'Highlights',
-        url: '#highlights',
-    },
-    {
-        id: 5,
-        text: `Faq's`,
-        url: '#faqs',
-    },
+    // {
+    //     id: 3,
+    //     text: 'Highlights',
+    //     url: '#highlights',
+    // },
+    // {
+    //     id: 5,
+    //     text: `Faq's`,
+    //     url: '#faqs',
+    // },
     {
         id: 6,
-        text: 'Clientes',
-        url: '#Clients',
+        text: 'Planos',
+        url: '#Planos',
     },
     {
         id: 7,
-        text: 'Contato',
-        url: '#Contact',
+        text: 'Clientes',
+        url: '#Clients',
     },
+    // {
+    //     id: 8,
+    //     text: 'Contato',
+    //     url: '#Contact',
+    // },
 ]
